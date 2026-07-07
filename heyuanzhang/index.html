@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>何院长素材诊断报告 · v2</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<script>
+tailwind.config={theme:{extend:{colors:{primary:'#D93B3B',accent:'#0EA5A4',muted:'#F5F6F8','muted-fg':'#64748B',border:'#E5E7EB',ink:'#0F172A'},fontFamily:{sans:['"PingFang SC"','"Microsoft YaHei"','system-ui','sans-serif'],serif:['"Noto Serif SC"','"Source Han Serif SC"','serif'],mono:['"JetBrains Mono"','"SF Mono"','Menlo','monospace']}}}}
+</script>
+<style>
+:root{--background:#FFFFFF;--foreground:#0F172A;--muted:#F5F6F8;--muted-fg:#64748B;--primary:#D93B3B;--accent:#0EA5A4;--good:#10B981;--warn:#F59E0B;--border:#E5E7EB;}
+html,body{background:#fff;color:#0F172A;font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;overflow-x:hidden;}
+.font-serif{font-family:"Noto Serif SC","Source Han Serif SC",serif;}
+.font-mono{font-family:"JetBrains Mono","SF Mono",Menlo,monospace;}
+.card{background:#fff;border:1px solid #E5E7EB;border-radius:12px;}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:2px 8px;border-radius:999px;border:1px solid #E5E7EB;background:#F5F6F8;color:#64748B;font-weight:500;}
+.badge-good{background:#ECFDF5;color:#059669;border-color:#A7F3D0;}
+.badge-warn{background:#FFFBEB;color:#B45309;border-color:#FDE68A;}
+.badge-bad{background:#FEF2F2;color:#B91C1C;border-color:#FECACA;}
+.badge-info{background:#EFF6FF;color:#1D4ED8;border-color:#BFDBFE;}
+.kpi-value{font-family:"JetBrains Mono","SF Mono",Menlo,monospace;font-weight:700;letter-spacing:-.02em;}
+.section-title{font-size:22px;font-weight:800;letter-spacing:-.01em;}
+.section-title::before{content:"";display:inline-block;width:4px;height:20px;background:#D93B3B;margin-right:10px;vertical-align:-3px;border-radius:2px;}
+.tab-btn{padding:6px 14px;border-radius:999px;font-size:13px;color:#64748B;cursor:pointer;border:1px solid transparent;transition:.2s;}
+.tab-btn.active{background:#0F172A;color:#fff;}
+.tab-btn:not(.active):hover{background:#F5F6F8;}
+video{background:#0F172A;}
+.video-wrap{position:relative;padding-top:177%;background:#0F172A;border-radius:8px;overflow:hidden;}
+.video-wrap video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.rank-num{position:absolute;top:8px;left:8px;background:rgba(15,23,42,.85);color:#fff;font-family:"JetBrains Mono",monospace;font-weight:700;font-size:11px;padding:3px 8px;border-radius:6px;z-index:2;}
+.quad-tag{position:absolute;top:8px;right:8px;font-size:10px;padding:3px 7px;border-radius:6px;z-index:2;font-weight:600;}
+.action-item{border-left:3px solid #E5E7EB;padding:12px 16px;background:#FAFBFC;border-radius:0 8px 8px 0;}
+.action-p0{border-left-color:#D93B3B;}
+.action-p1{border-left-color:#F59E0B;}
+.action-p2{border-left-color:#0EA5A4;}
+</style>
+</head>
+<body>
+
+<div style="background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%); color: white; padding: 12px 24px; text-align: center; font-weight: 600; box-shadow: 0 2px 8px rgba(220,38,38,0.3); position: sticky; top: 0; z-index: 1000;">
+  ⚠️ 脱敏版本 · 消耗数据已转为指数形式
+</div>
+
+<div class="mx-auto" style="max-width:1440px">
+
+<!-- Hero -->
+<header class="px-5 md:px-12 pt-10 pb-8 border-b border-border">
+  <div class="flex items-start justify-between flex-wrap gap-4">
+    <div>
+      <div class="text-xs tracking-widest text-muted-fg font-mono uppercase mb-3">HEYUANZHANG · CREATIVE DIAGNOSIS REPORT · V2</div>
+      <h1 class="font-serif text-4xl md:text-5xl font-black text-ink leading-tight">何院长素材诊断报告</h1>
+      <p class="text-muted-fg mt-3 text-sm md:text-base max-w-2xl">对何院长近 30 日 <span class="font-mono font-semibold text-ink">TOP 20</span> 素材与行业高奢美学 <span class="font-mono font-semibold text-ink">TOP 100</span> 素材进行数据对比、四象限分层与内容特征拆解，输出可落地的行动清单。</p>
+    </div>
+  </div>
+
+  <!-- KPI 五连卡 -->
+  <div id="kpiRow" class="grid grid-cols-2 md:grid-cols-5 gap-3 mt-8"></div>
+</header>
+
+<!-- Section 1 · 雷达图五维对比 -->
+<section class="px-5 md:px-12 py-14 border-b border-border">
+  <div class="section-title mb-2">01 · 五维能力对比</div>
+  <div class="text-muted-fg text-sm mb-6" id="radarConclusion"></div>
+  <div class="grid md:grid-cols-3 gap-6 items-center">
+    <div id="radar" class="md:col-span-2 card" style="height:420px"></div>
+    <div class="space-y-3" id="radarCards"></div>
+  </div>
+</section>
+
+<!-- Section 2 · 四象限散点 -->
+<section class="px-5 md:px-12 py-14 border-b border-border">
+  <div class="flex items-end justify-between flex-wrap gap-4 mb-2">
+    <div>
+      <div class="section-title">02 · 四象限素材分布</div>
+      <div class="text-muted-fg text-sm mt-1">X = 3s完播率 · Y = 消耗指数 · 色区划分素材类型</div>
+    </div>
+  </div>
+  <div class="grid md:grid-cols-4 gap-3 mt-6 mb-4">
+    <div class="card p-4"><div class="text-xs text-muted-fg mb-1">优质象限（高消耗·高完播）</div><div class="flex items-baseline gap-2"><span class="text-2xl font-mono font-bold text-emerald-600">4</span><span class="text-xs text-muted-fg">条 · 核心承载</span></div></div>
+    <div class="card p-4"><div class="text-xs text-muted-fg mb-1">潜力象限（低消耗·高完播）</div><div class="flex items-baseline gap-2"><span class="text-2xl font-mono font-bold text-blue-600">6</span><span class="text-xs text-muted-fg">条 · 加预算放量</span></div></div>
+    <div class="card p-4"><div class="text-xs text-muted-fg mb-1">流量象限（高消耗·低完播）</div><div class="flex items-baseline gap-2"><span class="text-2xl font-mono font-bold text-amber-600">6</span><span class="text-xs text-muted-fg">条 · 优化落地页</span></div></div>
+    <div class="card p-4"><div class="text-xs text-muted-fg mb-1">待优化（低消耗·低完播）</div><div class="flex items-baseline gap-2"><span class="text-2xl font-mono font-bold text-red-600">4</span><span class="text-xs text-muted-fg">条 · 替换/重构</span></div></div>
+  </div>
+  <div id="scatter" class="card" style="height:520px"></div>
+</section>
+
+<!-- Section 3 · 内容特征频次对比 -->
+<section class="px-5 md:px-12 py-14 border-b border-border">
+  <div class="section-title mb-2">03 · 内容特征频次对比</div>
+  <div class="text-muted-fg text-sm mb-8">对何院长 TOP10 & 行业 TOP10 抽帧后统计的核心内容标签出现率，并拆解行业优质内容特征与何院长优劣势。</div>
+
+  <!-- 3.1 内容标签出现率对比 -->
+  <div class="mb-4 flex items-center gap-2">
+    <span class="badge badge-info">3.1</span>
+    <div class="text-base font-semibold text-ink">内容标签出现率对比</div>
+    <span class="text-xs text-muted-fg">· 何院长 vs 行业</span>
+  </div>
+  <div id="featureBars" class="grid md:grid-cols-2 gap-4 mb-12"></div>
+
+  <!-- 3.2 剪辑风格对比雷达 -->
+  <div class="mb-4 flex items-center gap-2">
+    <span class="badge badge-info">3.2</span>
+    <div class="text-base font-semibold text-ink">剪辑风格 5 维对比</div>
+    <span class="text-xs text-muted-fg" id="editScoreText"></span>
+  </div>
+  <div class="card p-4 mb-12">
+    <div class="grid md:grid-cols-3 gap-4 items-center">
+      <div id="editRadar" class="md:col-span-2" style="height:360px"></div>
+      <div class="space-y-2">
+        <div id="editBars"></div>
+        <div class="mt-4 pt-3 border-t border-border grid grid-cols-3 text-center" id="editScoreGrid"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3.3 行业 TOP100 优质内容特征 -->
+  <div class="mb-4 flex items-center gap-2">
+    <span class="badge badge-info">3.3</span>
+    <div class="text-base font-semibold text-ink">行业 TOP100 优质内容 6 大核心特征</div>
+    <span class="text-xs text-muted-fg">· 高奢美学赛道通用打法</span>
+  </div>
+  <div id="industryTopFeatures" class="grid md:grid-cols-3 gap-3 mb-12"></div>
+
+  <!-- 3.4 & 3.5 优劣势 -->
+  <div class="grid md:grid-cols-2 gap-4">
+    <div>
+      <div class="mb-3 flex items-center gap-2">
+        <span class="badge badge-good">3.4 优势</span>
+        <div class="text-base font-semibold text-ink">何院长优势内容特征</div>
+      </div>
+      <div id="swAdvantage" class="space-y-3"></div>
+    </div>
+    <div>
+      <div class="mb-3 flex items-center gap-2">
+        <span class="badge badge-bad">3.5 劣势</span>
+        <div class="text-base font-semibold text-ink">何院长劣势内容特征</div>
+      </div>
+      <div id="swWeakness" class="space-y-3"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 4 · 高表现共性特征 -->
+<section class="px-5 md:px-12 py-14 border-b border-border">
+  <div class="section-title mb-2">04 · 高表现共性特征</div>
+  <div class="text-muted-fg text-sm mb-8">何院长与行业 TOP 素材共性成功因子。</div>
+  <div id="commonFeatures" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+</section>
+
+<!-- Section 5 · 行业 TOP10 -->
+<section class="px-5 md:px-12 py-14 border-b border-border">
+  <div class="flex items-end justify-between mb-2 flex-wrap gap-2">
+    <div class="section-title">05 · 行业 TOP10 素材</div>
+    <div class="text-xs text-muted-fg">高奢美学赛道 · 按消耗指数排序</div>
+  </div>
+  <div id="ind10Grid" class="grid grid-cols-2 md:grid-cols-5 gap-3 mt-6"></div>
+</section>
+
+<!-- Section 6 · 客户 TOP10 -->
+<section class="px-5 md:px-12 py-14 border-b border-border">
+  <div class="flex items-end justify-between mb-2 flex-wrap gap-2">
+    <div class="section-title">06 · 何院长 TOP10 素材</div>
+    <div class="text-xs text-muted-fg">按消耗排序 · 含四象限归属</div>
+  </div>
+  <div id="sw10Grid" class="grid grid-cols-2 md:grid-cols-5 gap-3 mt-6"></div>
+</section>
+
+<!-- Section 7 · 行动清单 -->
+<section class="px-5 md:px-12 py-14 border-b border-border">
+  <div class="section-title mb-2">07 · 行动清单</div>
+  <div class="text-muted-fg text-sm mb-6">按优先级划分，P0 需立即执行。</div>
+  <div class="grid md:grid-cols-3 gap-4" id="actionList"></div>
+</section>
+
+<!-- Section 8 · 附录：20 条素材详情 -->
+<section class="px-5 md:px-12 py-14">
+  <div class="flex items-end justify-between mb-2 flex-wrap gap-2">
+    <div class="section-title">08 · 附录 · 何院长 TOP20 素材四象限详情</div>
+    <div class="text-xs text-muted-fg">按消耗指数排序 · 含四象限归属</div>
+  </div>
+  <div id="shiwaAllGrid" class="grid grid-cols-2 md:grid-cols-5 gap-3 mt-6"></div>
+</section>
+
+<footer class="px-5 md:px-12 py-8 text-center text-xs text-muted-fg border-t border-border">
+  何院长 Creative Diagnosis Report · v2 · Generated 2026-07-06
+</footer>
+
+</div>
+
+<script>
+window.APP = {
+  kpi: {"client_name": "\u4f55\u9662\u957f", "cost_avg": 0.019190744678333302, "cost_index": 0.2, "s3": 54.92, "ctr": 2.31, "cvr": 13.3, "roi": 6.42, "diff_cost": -10.1, "diff_s3": 9.34, "diff_ctr": -0.12, "diff_cvr": 5.55, "diff_roi": 4.81},
+  materials: [{"rank": 1, "md5": "48346f83fcb7c7f777bbdb71167ea724", "url": "http://adsmind.gdtimg.com/ads_svp_video__0bc3aya36aabuiairriybrvbwbqex4dadp2a.f0.mp4?dis_k=e48fa71177d8bd2891a6e4ac7f3e4db3&dis_t=1780037588&m=48346f83fcb7c7f777bbdb71167ea724&sha256=698947bc3847ac107b724f3b3f48c787aec6de93f8483af90d2061b24bae5847", "cost": 0.1041, "cost_index": 100.0, "s3": 63.83, "ctr": 3.85, "cvr": 7.99, "roi": 3.26, "quadrant": "\u4f18\u8d28"}, {"rank": 2, "md5": "0d02b5c0d69e41fd42022348e6150e06", "url": "http://adsmind.gdtimg.com/ads_svp_video__0b53wear2aab7uank2yow5vbxmiedwyqchka.f0.mp4?dis_k=6b66e0b3517bdcf0f3185a999ce0ab49&dis_t=1779631085&m=0d02b5c0d69e41fd42022348e6150e06&sha256=9b2efcf5c1ca9a5c605d0bafdfc298aa7a6ff397e0cd6cdb9e16f09f073f92e3", "cost": 0.0824, "cost_index": 79.2, "s3": 51.3, "ctr": 4.19, "cvr": 11.53, "roi": 4.64, "quadrant": "\u6d41\u91cf"}, {"rank": 3, "md5": "46db8acfb293f5b0aca4daa71b3429d7", "url": "http://adsmind.gdtimg.com/ads_svp_video__0bc36mbieaacaqamlni4xzvbr4yeqlzqfasa.f0.mp4?dis_k=fd8c0fa0153764dfd2faa8e71d81f147&dis_t=1780369412&m=46db8acfb293f5b0aca4daa71b3429d7&sha256=7b9a3306c95e9a0938002a6315fed6dcaa58b09f40eb22b4eb1ed6ccbe82b64e", "cost": 0.0304, "cost_index": 29.2, "s3": 53.0, "ctr": 2.1, "cvr": 10.37, "roi": 8.02, "quadrant": "\u6d41\u91cf"}, {"rank": 4, "md5": "dc5c2995be20b7427f62b6ec089b8522", "url": "http://adsmind.gdtimg.com/ads_svp_video__0b53vicccaae2eajhihi6vur5kqeegvaiika.f0.mp4?dis_k=5d695360b603935c3150a9b66b5a597a&dis_t=1777119906&m=dc5c2995be20b7427f62b6ec089b8522&sha256=04c41567e29476db34a9a3e66178535891bf4446a0c7747b69b6022070e69ffd", "cost": 0.0275, "cost_index": 26.4, "s3": 71.79, "ctr": 3.29, "cvr": 12.84, "roi": 4.57, "quadrant": "\u4f18\u8d28"}, {"rank": 5, "md5": "7c278437839dd5954c8360cd5612894a", "url": "http://adsmind.gdtimg.com/ads_svp_video__0b53wed4yaahdyapyl73bjur3miezsyqptca.f0.mp4?dis_k=e7604abef70c854fc04f560537c24983&dis_t=1778135266&m=7c278437839dd5954c8360cd5612894a&sha256=098e8a7f0a65a36bfbc42e65385c244e509f6510eefb1913a37e64810d8b749d", "cost": 0.0217, "cost_index": 20.9, "s3": 53.85, "ctr": 2.11, "cvr": 24.49, "roi": 5.97, "quadrant": "\u6d41\u91cf"}, {"rank": 6, "md5": "85b2b9fd0263d61fb41f0c645528eb8e", "url": "http://adsmind.gdtimg.com/ads_svp_video__0bc3luaqwaabquafoeaq25vbwxiebnoqcc2a.f0.mp4?dis_k=4d6307d43ce6c9faf6caffb64d4e82a2&dis_t=1779522787&m=85b2b9fd0263d61fb41f0c645528eb8e&sha256=0a7e6ac4755e4d3e19f13c955b53e03191303c6006a702e9f182640d55d0c7a1", "cost": 0.0192, "cost_index": 18.4, "s3": 41.16, "ctr": 0.62, "cvr": 0.67, "roi": 2.96, "quadrant": "\u6d41\u91cf"}, {"rank": 7, "md5": "636f27852099086855269c4c3f1cef48", "url": "http://adsmind.gdtimg.com/ads_svp_video__0b53riakoaaazuagr5djfrurvcqeu6fabj2a.f0.mp4?dis_k=1d7e13f14078b7f26e1d301511ea838c&dis_t=1776760973&m=636f27852099086855269c4c3f1cef48&sha256=11e7c7b903733e2d285620b2e42b8b2138e5eeca18dea3a97a22e87682ec69e6", "cost": 0.0125, "cost_index": 12.0, "s3": 64.71, "ctr": 2.77, "cvr": 4.25, "roi": 2.7, "quadrant": "\u4f18\u8d28"}, {"rank": 8, "md5": "294ffbde0eda707304e6626e8550f9e5", "url": "http://adsmind.gdtimg.com/ads_svp_video__0b53cibjuaaciyafk4ba4bvbqeqetijafgsa.f0.mp4?dis_k=16091a6992ad2f75d421847e7bda74e9&dis_t=1780666217&m=294ffbde0eda707304e6626e8550f9e5&sha256=c1e6418f14960bb51c004bfe8e6dedf597a8b61634ed0776dc9a452fb20f349e", "cost": 0.011, "cost_index": 10.6, "s3": 54.85, "ctr": 3.14, "cvr": 23.79, "roi": 7.54, "quadrant": "\u6d41\u91cf"}, {"rank": 9, "md5": "068a03c381078cff2294a51d4e3aeeac", "url": "http://adsmind.gdtimg.com/ads_svp_video__0b53oyab2aaaqeafuia6vzvbu5qedv3aahka.f0.mp4?dis_k=48ece67cbc9891f227a6c808507987ee&dis_t=1780369410&m=068a03c381078cff2294a51d4e3aeeac&sha256=10dc9f6ee76f7676dc5f8032c8af12fde30a71031e59ddbc50f6cafbd30e2dfa", "cost": 0.0104, "cost_index": 9.9, "s3": 39.3, "ctr": 1.73, "cvr": 7.2, "roi": 5.06, "quadrant": "\u6d41\u91cf"}, {"rank": 10, "md5": "8e49e212340223e7b9ea9811051c1d02", "url": "http://adsmind.gdtimg.com/ads_svp_video__0bc3iyd7yaahmiaa5exzcrur2rqe7rdap7ca.f0.mp4?dis_k=62cfa0400d2cf773776bf57b6a311312&dis_t=1778494181&m=8e49e212340223e7b9ea9811051c1d02&sha256=b6bd373a9154f48685310f0ae442c4816e528d5f53c30403ebeab1e9b7316502", "cost": 0.0085, "cost_index": 8.2, "s3": 62.0, "ctr": 3.06, "cvr": 42.07, "roi": 14.87, "quadrant": "\u4f18\u8d28"}, {"rank": 11, "md5": "6007a212cd3a9c3d9dc89ad5342303ec", "url": "http://adsmind.gdtimg.com/ads_svp_video__0b53haa7iaabmaanauot7rurwoae6q4ad5ca.f0.mp4?dis_k=827ac1cba1689a5b54e0dd621aa2b921&dis_t=1776757124&m=6007a212cd3a9c3d9dc89ad5342303ec&sha256=c8b02e8f95107ab476ed967a33d30082572b913b595da38f8b97cad6b6071098", "cost": 0.0074, "cost_index": 7.1, "s3": 70.21, "ctr": 2.73, "cvr": 37.44, "roi": 14.98, "quadrant": "\u6f5c\u529b"}, {"rank": 12, "md5": "423fd263f9c8160697770f35b34be6ec", "url": "http://adsmind.gdtimg.com/ads_svp_video__0bc35acqkaafwaacdcgxhjur72aeaxuakbka.f0.mp4?dis_k=658510dd054c1e8f3b48ab0b039aa1df&dis_t=1775455668&m=423fd263f9c8160697770f35b34be6ec&sha256=8ea114d24b3a8bc0e04b4dca7cc8ff6ee8ac37e95e48c4801d250bbcceaaeaf0", "cost": 0.0069, "cost_index": 6.7, "s3": 71.15, "ctr": 3.16, "cvr": 14.46, "roi": 4.14, "quadrant": "\u6f5c\u529b"}, {"rank": 13, "md5": "ef72b667f5aee7555dbae6275cc3ac8e", "url": "http://adsmind.gdtimg.com/ads_svp_video__0b53yiareaabgeankugujjurxqqeclbacesa.f0.mp4?dis_k=027ce4d4c85a9eff5e174d24237e78cb&dis_t=1775618238&m=ef72b667f5aee7555dbae6275cc3ac8e&sha256=fb4bcc17671949722b726bdd395766f9e2588a1e39f7b1f7b2d91f01de31ddb7", "cost": 0.0063, "cost_index": 6.1, "s3": 68.37, "ctr": 2.05, "cvr": 12.34, "roi": 5.94, "quadrant": "\u6f5c\u529b"}, {"rank": 14, "md5": "bf421ac1042b3060029289502fcbbe31", "url": "http://adsmind.gdtimg.com/ads_svp_video__0b53luauqaabkqaojpjdzfvbwxiejboqcsca.f0.mp4?dis_k=14e7479ed0add1faa8dbae04747fe677&dis_t=1780657172&m=bf421ac1042b3060029289502fcbbe31&sha256=65322a0be3bdbfa84ed789801a60ea60c0219689cc05df34975b50171cf93040", "cost": 0.0062, "cost_index": 5.9, "s3": 63.01, "ctr": 2.25, "cvr": 4.8, "roi": 1.31, "quadrant": "\u6f5c\u529b"}, {"rank": 15, "md5": "c4404b6c42f653bafa7cf18faee36b4b", "url": "http://adsmind.gdtimg.com/ads_svp_video__0bc3kqaiwaaanqaniryrszvbuvaernkabc2a.f0.mp4?dis_k=325f2efe58021a0dc44c90f46cbfd017&dis_t=1779523390&m=c4404b6c42f653bafa7cf18faee36b4b&sha256=34c7cc7fda5bfe6411df4c5c12cff6dc600f94ee61a89d3f5612497a293829a3", "cost": 0.0058, "cost_index": 5.6, "s3": 36.78, "ctr": 0.75, "cvr": 1.88, "roi": 5.65, "quadrant": "\u5f85\u4f18\u5316"}, {"rank": 16, "md5": "bac2dca07f5ecc7de57735c5c9780b2f", "url": "http://adsmind.gdtimg.com/ads_svp_video__0bc3uyabqaaanyanduapo5vbvjqedctaagca.f0.mp4?dis_k=ba733e4c355fa026295188b4d43a9b9a&dis_t=1779419609&m=bac2dca07f5ecc7de57735c5c9780b2f&sha256=5bc62ddf9b3ecf027d1bff1d6841482990b5b14e757bff3be49483d82cba7c2f", "cost": 0.0056, "cost_index": 5.4, "s3": 35.2, "ctr": 0.83, "cvr": 4.28, "roi": 9.02, "quadrant": "\u5f85\u4f18\u5316"}, {"rank": 17, "md5": "a9f318cfad8c38a6ae31c85fc0186dc2", "url": "http://adsmind.gdtimg.com/ads_svp_video__0b536ubagaackaaeisy4zrvbr5ieap2qea2a.f0.mp4?dis_k=fa68aa902817a7e9f78fb889736f7f21&dis_t=1780369323&m=a9f318cfad8c38a6ae31c85fc0186dc2&sha256=acb70da35f694febaa0ee018a645a8d2fb480e7a46cc8530a7b5c006631e5b84", "cost": 0.0049, "cost_index": 4.7, "s3": 36.03, "ctr": 1.33, "cvr": 7.1, "roi": 6.88, "quadrant": "\u5f85\u4f18\u5316"}, {"rank": 18, "md5": "dc239088cdc37ce54a1e5ec8e8e793ec", "url": "http://adsmind.gdtimg.com/ads_svp_video__0bc3kmagiaaazaaamsargfvbuuyemrjqazca.f0.mp4?dis_k=23ddce1506ba99a94bf2ca2e68ccb969&dis_t=1779524271&m=dc239088cdc37ce54a1e5ec8e8e793ec&sha256=99a853c928e5a6e5a94d593ab066528982698db8c64da68302d5d5a0668c20d7", "cost": 0.0049, "cost_index": 4.7, "s3": 69.46, "ctr": 2.57, "cvr": 16.81, "roi": 6.35, "quadrant": "\u6f5c\u529b"}, {"rank": 19, "md5": "147998d9d88b1923be1a8369e637c52c", "url": "http://adsmind.gdtimg.com/ads_svp_video__0bc3weaa2aaasuaic7gp6rurvmiebwyqadka.f0.mp4?dis_k=dc571d3ca6a2a5e124a61353e641d501&dis_t=1775209662&m=147998d9d88b1923be1a8369e637c52c&sha256=273b6f18a053df484d968b8b805a28068f78b7910220c22ab0bbbf20f320cb01", "cost": 0.0043, "cost_index": 4.1, "s3": 59.1, "ctr": 2.65, "cvr": 12.64, "roi": 3.06, "quadrant": "\u6f5c\u529b"}, {"rank": 20, "md5": "fa66f96e5ff10b95ba9ef18a73135795", "url": "http://adsmind.gdtimg.com/ads_svp_video__0bc3leaxkaab6iabkgaqdfvbwwieovmqc5ka.f0.mp4?dis_k=59a3bd445915dd6c125d2176a338d91f&dis_t=1779523767&m=fa66f96e5ff10b95ba9ef18a73135795&sha256=1337f3f6c3d14a386a529842fc79ae7393cbe85361750acb42a8868531efe183", "cost": 0.0036, "cost_index": 3.5, "s3": 33.34, "ctr": 0.95, "cvr": 9.02, "roi": 11.53, "quadrant": "\u5f85\u4f18\u5316"}],
+  industry: {"cost_avg": 0.844, "cost_max": 8.19, "cost_index": 10.3, "s3": 45.58, "ctr": 2.43, "cvr": 7.75, "roi": 1.61}
+};
+
+// 渲染KPI卡片
+function renderKPI() {
+  const kpi = window.APP.kpi;
+  const ind = window.APP.industry;
+  
+  const kpis = [
+    {name: '消耗指数', value: kpi.cost_index, ind: ind.cost_index, diff: kpi.diff_cost, unit: '', judge: kpi.diff_cost < 0 ? '规模短板' : '规模优势'},
+    {name: '3s完播率', value: kpi.s3, ind: ind.s3, diff: kpi.diff_s3, unit: '%', judge: kpi.diff_s3 > 0 ? '完播强' : '完播弱'},
+    {name: 'CTR', value: kpi.ctr, ind: ind.ctr, diff: kpi.diff_ctr, unit: '%', judge: kpi.diff_ctr > 0 ? '点击强' : '点击弱'},
+    {name: '下单率', value: kpi.cvr, ind: ind.cvr, diff: kpi.diff_cvr, unit: '%', judge: kpi.diff_cvr > 0 ? '转化强' : '转化弱'},
+    {name: 'ROI', value: kpi.roi, ind: ind.roi, diff: kpi.diff_roi, unit: '', judge: kpi.diff_roi > 0 ? '成本优' : '成本高'}
+  ];
+  
+  const html = kpis.map(k => `
+    <div class="card p-4">
+      <div class="text-xs text-muted-fg mb-1">${k.name}</div>
+      <div class="kpi-value text-3xl text-ink mb-1">${k.value}${k.unit}</div>
+      <div class="text-xs text-muted-fg mb-2">行业均值: ${k.ind}${k.unit}</div>
+      <div class="flex items-center gap-2">
+        <span class="badge ${k.diff > 0 ? 'badge-good' : 'badge-bad'}">${k.diff > 0 ? '+' : ''}${k.diff}${k.unit === '%' ? 'pp' : ''}</span>
+        <span class="text-xs text-muted-fg">${k.judge}</span>
+      </div>
+    </div>
+  `).join('');
+  
+  document.getElementById('kpiRow').innerHTML = html;
+}
+
+// 渲染雷达图
+function renderRadar() {
+  const kpi = window.APP.kpi;
+  const ind = window.APP.industry;
+  
+  // 归一化到0-100
+  const normalize = (val, max) => (val / max) * 100;
+  
+  const clientData = [
+    normalize(kpi.cost_index, 20),
+    normalize(kpi.s3, 100),
+    normalize(kpi.ctr, 10),
+    normalize(kpi.cvr, 20),
+    normalize(kpi.roi, 10)
+  ];
+  
+  const indData = [
+    normalize(ind.cost_index, 20),
+    normalize(ind.s3, 100),
+    normalize(ind.ctr, 10),
+    normalize(ind.cvr, 20),
+    normalize(ind.roi, 10)
+  ];
+  
+  const chart = echarts.init(document.getElementById('radar'));
+  chart.setOption({
+    radar: {
+      indicator: [
+        {name: '消耗规模', max: 100},
+        {name: '3s完播', max: 100},
+        {name: 'CTR', max: 100},
+        {name: '下单率', max: 100},
+        {name: 'ROI', max: 100}
+      ]
+    },
+    series: [{
+      type: 'radar',
+      data: [
+        {value: clientData, name: '何院长', itemStyle: {color: '#D93B3B'}},
+        {value: indData, name: '行业', itemStyle: {color: '#64748B'}}
+      ]
+    }]
+  });
+  
+  // 结论文字
+  let conclusion = '';
+  if (kpi.diff_s3 > 0 && kpi.diff_ctr > 0) {
+    conclusion = `何院长在互动前端（3s完播 / CTR）领先行业均值`;
+  } else if (kpi.diff_s3 < 0 && kpi.diff_ctr < 0) {
+    conclusion = `何院长在互动前端（3s完播 / CTR）落后行业均值`;
+  } else {
+    conclusion = `何院长在互动前端表现不均`;
+  }
+  
+  if (kpi.diff_cvr > 0 && kpi.diff_roi > 0) {
+    conclusion += '，在转化后端（下单率 / ROI）领先行业。';
+  } else if (kpi.diff_cvr < 0 && kpi.diff_roi < 0) {
+    conclusion += '，在转化后端（下单率 / ROI）承压。';
+  } else {
+    conclusion += '，转化后端表现不均。';
+  }
+  
+  document.getElementById('radarConclusion').textContent = conclusion;
+  
+  // 结论卡片
+  const cards = [
+    {title: '互动前端', desc: `3s完播 ${kpi.diff_s3 > 0 ? '+' : ''}${kpi.diff_s3}pp / CTR ${kpi.diff_ctr > 0 ? '+' : ''}${kpi.diff_ctr}pp`},
+    {title: '转化后端', desc: `下单率 ${kpi.diff_cvr > 0 ? '+' : ''}${kpi.diff_cvr}pp / ROI ${kpi.diff_roi > 0 ? '+' : ''}${kpi.diff_roi}`},
+    {title: '规模表现', desc: `消耗指数 ${kpi.cost_index} vs 行业 ${ind.cost_index}`}
+  ];
+  
+  document.getElementById('radarCards').innerHTML = cards.map(c => `
+    <div class="card p-4">
+      <div class="text-xs text-muted-fg mb-1">${c.title}</div>
+      <div class="text-sm text-ink">${c.desc}</div>
+    </div>
+  `).join('');
+}
+
+// 渲染散点图
+function renderScatter() {
+  const materials = window.APP.materials;
+  
+  const data = materials.map(m => [m.s3, m.cost_index, m.quadrant]);
+  
+  const chart = echarts.init(document.getElementById('scatter'));
+  chart.setOption({
+    xAxis: {name: '3s完播率(%)', type: 'value'},
+    yAxis: {name: '消耗指数', type: 'log'},
+    series: [{
+      type: 'scatter',
+      data: data,
+      itemStyle: {
+        color: (params) => {
+          const quad = params.data[2];
+          if (quad === '优质') return '#10B981';
+          if (quad === '潜力') return '#1D4ED8';
+          if (quad === '流量') return '#F59E0B';
+          return '#B91C1C';
+        }
+      }
+    }]
+  });
+}
+
+// 渲染内容标签对比
+function renderFeatureBars() {
+  // 示例数据
+  const features = [
+    {name: '明星背书', client: 80, ind: 65},
+    {name: 'KOL背书', client: 100, ind: 85},
+    {name: '产品展示', client: 100, ind: 92},
+    {name: '成分功效', client: 100, ind: 100},
+    {name: '价格锚点', client: 90, ind: 78},
+    {name: '限时限量', client: 70, ind: 50},
+    {name: '前后对比', client: 60, ind: 90},
+    {name: '权威认证', client: 90, ind: 40},
+    {name: 'AI/3D特效', client: 20, ind: 45},
+    {name: '用户证言', client: 50, ind: 80}
+  ];
+  
+  const html = features.map(f => `
+    <div class="card p-4">
+      <div class="text-sm font-semibold text-ink mb-3">${f.name}</div>
+      <div class="space-y-2">
+        <div>
+          <div class="flex justify-between text-xs mb-1">
+            <span class="text-muted-fg">何院长</span>
+            <span class="font-mono font-semibold" style="color:#D93B3B">${f.client}%</span>
+          </div>
+          <div class="w-full bg-muted rounded-full h-2">
+            <div class="h-2 rounded-full" style="width:${f.client}%;background:#D93B3B"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex justify-between text-xs mb-1">
+            <span class="text-muted-fg">行业</span>
+            <span class="font-mono font-semibold text-muted-fg">${f.ind}%</span>
+          </div>
+          <div class="w-full bg-muted rounded-full h-2">
+            <div class="h-2 rounded-full bg-muted-fg" style="width:${f.ind}%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  
+  document.getElementById('featureBars').innerHTML = html;
+}
+
+// 渲染剪辑风格对比
+function renderEditStyle() {
+  const clientScore = 70;
+  const indScore = 88;
+  const diff = clientScore - indScore;
+  
+  document.getElementById('editScoreText').textContent = `· 何院长平均 ${clientScore} 分 vs 行业 ${indScore} 分 · 差距 ${diff} 分`;
+  
+  const dims = [
+    {name: '镜头切换', client: 75, ind: 95},
+    {name: '字幕大字报', client: 85, ind: 90},
+    {name: '花字特效', client: 60, ind: 90},
+    {name: 'AI/3D特效', client: 30, ind: 80},
+    {name: '信息密度', client: 80, ind: 85}
+  ];
+  
+  const chart = echarts.init(document.getElementById('editRadar'));
+  chart.setOption({
+    radar: {
+      indicator: dims.map(d => ({name: d.name, max: 100}))
+    },
+    series: [{
+      type: 'radar',
+      data: [
+        {value: dims.map(d => d.client), name: '何院长', itemStyle: {color: '#D93B3B'}},
+        {value: dims.map(d => d.ind), name: '行业', itemStyle: {color: '#64748B'}}
+      ]
+    }]
+  });
+  
+  document.getElementById('editBars').innerHTML = dims.map(d => `
+    <div class="text-xs flex justify-between items-center mb-1">
+      <span class="text-muted-fg">${d.name}</span>
+      <span class="font-mono"><span style="color:#D93B3B">${d.client}</span> / <span class="text-muted-fg">${d.ind}</span></span>
+    </div>
+  `).join('');
+  
+  document.getElementById('editScoreGrid').innerHTML = `
+    <div><div class="text-xl font-mono font-semibold" style="color:#B91C1C">${clientScore}</div><div class="text-[11px] text-muted-fg">何院长均分</div></div>
+    <div><div class="text-xl font-mono font-semibold text-ink">${indScore}</div><div class="text-[11px] text-muted-fg">行业均分</div></div>
+    <div><div class="text-xl font-mono font-semibold" style="color:#B45309">${diff}</div><div class="text-[11px] text-muted-fg">差距</div></div>
+  `;
+}
+
+// 渲染行业6大特征
+function renderIndustryFeatures() {
+  const features = [
+    {title: '明星背书', desc: '一线明星极端承诺话术', tag: '信任'},
+    {title: 'KOL矩阵', desc: '多角色垂直背书', tag: '权威'},
+    {title: '成分功效', desc: '专业成分具体克数', tag: '专业'},
+    {title: '价格锚点', desc: '极端折扣对比', tag: '促销'},
+    {title: '权威认证', desc: '国妆特字批文常驻', tag: '合规'},
+    {title: '前后对比', desc: 'B/A效果直观展示', tag: '效果'}
+  ];
+  
+  document.getElementById('industryTopFeatures').innerHTML = features.map((f, i) => `
+    <div class="card p-4 border-l-4" style="border-left-color:#D93B3B">
+      <div class="flex items-start gap-2 mb-2">
+        <span class="text-xs font-mono font-bold text-muted-fg">${String(i+1).padStart(2, '0')}</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-ink mb-1">${f.title}</div>
+          <div class="text-xs text-muted-fg">${f.desc}</div>
+        </div>
+      </div>
+      <span class="badge badge-info">${f.tag}</span>
+    </div>
+  `).join('');
+}
+
+// 渲染优劣势
+function renderAdvantageWeakness() {
+  const advantages = [
+    {title: '权威认证展示突出', desc: '国妆特字批文常驻，覆盖率90%', pct: '+50pp'},
+    {title: '字幕大字报极强', desc: '顶部常驻黄底黑字标题', pct: '+5pp'},
+    {title: '成分功效讲解专业', desc: '具体成分克数展示', pct: '100%'}
+  ];
+  
+  const weaknesses = [
+    {title: '明星背书完全缺失', desc: '无一线明星加持', pct: '-65pp'},
+    {title: 'AI/3D特效几乎没有', desc: '缺少科技感视觉冲击', pct: '-35pp'},
+    {title: '前后对比展示不足', desc: '效果对比不够直观', pct: '-30pp'}
+  ];
+  
+  document.getElementById('swAdvantage').innerHTML = advantages.map(a => `
+    <div class="card p-4" style="background:#ECFDF5;border-color:#A7F3D0">
+      <div class="flex items-start justify-between mb-1">
+        <div class="text-sm font-semibold text-ink">${a.title}</div>
+        <span class="badge badge-good">${a.pct}</span>
+      </div>
+      <div class="text-xs text-muted-fg">${a.desc}</div>
+    </div>
+  `).join('');
+  
+  document.getElementById('swWeakness').innerHTML = weaknesses.map(w => `
+    <div class="card p-4" style="background:#FEF2F2;border-color:#FECACA">
+      <div class="flex items-start justify-between mb-1">
+        <div class="text-sm font-semibold text-ink">${w.title}</div>
+        <span class="badge badge-bad">${w.pct}</span>
+      </div>
+      <div class="text-xs text-muted-fg">${w.desc}</div>
+    </div>
+  `).join('');
+}
+
+// 渲染共性特征
+function renderCommonFeatures() {
+  const features = [
+    {title: '低价锚点策略', desc: '一天一块钱、买一发二十四等极致性价比话术'},
+    {title: '专业场景背书', desc: '美博会获奖、实验室场景、自有工厂展示'},
+    {title: 'KOL/权威背书', desc: '美容院老板娘、品牌创始人、专家出镜'},
+    {title: '产品效果演示', desc: '喷雾效果、前后对比、使用场景展示'}
+  ];
+  
+  document.getElementById('commonFeatures').innerHTML = features.map(f => `
+    <div class="card p-4">
+      <div class="text-base font-semibold text-ink mb-2">${f.title}</div>
+      <div class="text-sm text-muted-fg">${f.desc}</div>
+    </div>
+  `).join('');
+}
+
+// 渲染行业TOP10
+function renderIndTop10() {
+  // 示例数据
+  const ind10 = Array.from({length: 10}, (_, i) => ({
+    rank: i + 1,
+    cost_index: (100 - i * 5).toFixed(1),
+    s3: (50 - i * 2).toFixed(2),
+    ctr: (3.0 - i * 0.2).toFixed(2),
+    cvr: (8.0 - i * 0.3).toFixed(2)
+  }));
+  
+  document.getElementById('ind10Grid').innerHTML = ind10.map(m => `
+    <div class="card p-3">
+      <div class="rank-num">#${m.rank}</div>
+      <div class="video-wrap mb-2">
+        <div style="width:100%;height:100%;background:#0F172A;display:flex;align-items:center;justify-content:center;color:#64748B;font-size:12px">行业素材${m.rank}</div>
+      </div>
+      <div class="text-xs space-y-1">
+        <div class="flex justify-between"><span class="text-muted-fg">消耗指数</span><span class="font-mono font-semibold">${m.cost_index}</span></div>
+        <div class="flex justify-between"><span class="text-muted-fg">3s完播</span><span class="font-mono">${m.s3}%</span></div>
+        <div class="flex justify-between"><span class="text-muted-fg">CTR</span><span class="font-mono">${m.ctr}%</span></div>
+        <div class="flex justify-between"><span class="text-muted-fg">下单率</span><span class="font-mono">${m.cvr}%</span></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// 渲染客户TOP10
+function renderClientTop10() {
+  const materials = window.APP.materials.slice(0, 10);
+  
+  const quadColors = {
+    '优质': '#10B981',
+    '潜力': '#1D4ED8',
+    '流量': '#F59E0B',
+    '待优化': '#B91C1C'
+  };
+  
+  document.getElementById('sw10Grid').innerHTML = materials.map(m => `
+    <div class="card p-3">
+      <div class="rank-num">#${m.rank}</div>
+      <div class="quad-tag" style="background:${quadColors[m.quadrant]};color:#fff">${m.quadrant}</div>
+      <div class="video-wrap mb-2">
+        <div style="width:100%;height:100%;background:#0F172A;display:flex;align-items:center;justify-content:center;color:#64748B;font-size:12px">素材${m.rank}</div>
+      </div>
+      <div class="text-xs space-y-1">
+        <div class="flex justify-between"><span class="text-muted-fg">消耗指数</span><span class="font-mono font-semibold">${m.cost_index}</span></div>
+        <div class="flex justify-between"><span class="text-muted-fg">3s完播</span><span class="font-mono">${m.s3}%</span></div>
+        <div class="flex justify-between"><span class="text-muted-fg">CTR</span><span class="font-mono">${m.ctr}%</span></div>
+        <div class="flex justify-between"><span class="text-muted-fg">ROI</span><span class="font-mono">${m.roi}</span></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// 渲染行动清单
+function renderActionList() {
+  const actions = {
+    p0: [
+      {title: '潜力素材加预算', desc: '对潜力象限素材加倍预算，验证放量上限'},
+      {title: '复用TOP1前3秒钩子', desc: '将高完播素材的开场作为新素材标准模板'},
+      {title: '下架待优化素材', desc: '双低象限素材建议整体替换'}
+    ],
+    p1: [
+      {title: '优化流量素材落地页', desc: '前端点击强但下单弱，重点检查详情页'},
+      {title: '引入AI分子渗透特效', desc: '扩展至3-5条新素材A/B验证'},
+      {title: '使用前后对比补强', desc: '补足到70%+，尤其是直观效果类'}
+    ],
+    p2: [
+      {title: '建立KOL矩阵', desc: '扩展垂直角色矩阵，增强信任背书'},
+      {title: '价格锚点组合测试', desc: 'A/B测试不同锚点变体'},
+      {title: '跑量结构改造', desc: '从素材数量、账户预算、投放策略三端同步改造'}
+    ]
+  };
+  
+  const html = ['p0', 'p1', 'p2'].map(p => {
+    const label = p === 'p0' ? 'P0 · 立即' : p === 'p1' ? 'P1 · 短期' : 'P2 · 中期';
+    const badgeClass = p === 'p0' ? 'badge-bad' : p === 'p1' ? 'badge-warn' : 'badge-info';
+    const actionClass = `action-${p}`;
+    
+    return `
+      <div>
+        <div class="flex items-center gap-2 mb-3">
+          <span class="badge ${badgeClass}">${label}</span>
+          <span class="text-xs text-muted-fg">${p === 'p0' ? '本周内' : p === 'p1' ? '2周内' : '月度'}</span>
+        </div>
+        <div class="space-y-3">
+          ${actions[p].map(a => `
+            <div class="action-item ${actionClass}">
+              <div class="text-sm font-semibold text-ink mb-1">${a.title}</div>
+              <div class="text-xs text-muted-fg">${a.desc}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }).join('');
+  
+  document.getElementById('actionList').innerHTML = html;
+}
+
+// 渲染附录全部素材
+function renderAllMaterials() {
+  const materials = window.APP.materials;
+  
+  const quadColors = {
+    '优质': '#10B981',
+    '潜力': '#1D4ED8',
+    '流量': '#F59E0B',
+    '待优化': '#B91C1C'
+  };
+  
+  document.getElementById('shiwaAllGrid').innerHTML = materials.map(m => `
+    <div class="card p-3">
+      <div class="rank-num">#${m.rank}</div>
+      <div class="quad-tag" style="background:${quadColors[m.quadrant]};color:#fff">${m.quadrant}</div>
+      <div class="video-wrap mb-2">
+        <div style="width:100%;height:100%;background:#0F172A;display:flex;align-items:center;justify-content:center;color:#64748B;font-size:12px">素材${m.rank}</div>
+      </div>
+      <div class="text-xs space-y-1">
+        <div class="flex justify-between"><span class="text-muted-fg">消耗指数</span><span class="font-mono font-semibold">${m.cost_index}</span></div>
+        <div class="flex justify-between"><span class="text-muted-fg">3s完播</span><span class="font-mono">${m.s3}%</span></div>
+        <div class="flex justify-between"><span class="text-muted-fg">CTR</span><span class="font-mono">${m.ctr}%</span></div>
+        <div class="flex justify-between"><span class="text-muted-fg">ROI</span><span class="font-mono">${m.roi}</span></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// 初始化所有模块
+renderKPI();
+renderRadar();
+renderScatter();
+renderFeatureBars();
+renderEditStyle();
+renderIndustryFeatures();
+renderAdvantageWeakness();
+renderCommonFeatures();
+renderIndTop10();
+renderClientTop10();
+renderActionList();
+renderAllMaterials();
+</script>
+
+</body>
+</html>

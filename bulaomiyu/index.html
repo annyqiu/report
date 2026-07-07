@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>不老谜语素材诊断报告 · v2</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<script>
+tailwind.config={theme:{extend:{colors:{primary:'#D93B3B',accent:'#0EA5A4',muted:'#F5F6F8','muted-fg':'#64748B',border:'#E5E7EB',ink:'#0F172A'},fontFamily:{sans:['"PingFang SC"','"Microsoft YaHei"','system-ui','sans-serif'],serif:['"Noto Serif SC"','"Source Han Serif SC"','serif'],mono:['"JetBrains Mono"','"SF Mono"','Menlo','monospace']}}}}
+</script>
+<style>
+:root{--background:#FFFFFF;--foreground:#0F172A;--muted:#F5F6F8;--muted-fg:#64748B;--primary:#D93B3B;--accent:#0EA5A4;--good:#10B981;--warn:#F59E0B;--border:#E5E7EB;}
+html,body{background:#fff;color:#0F172A;font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;overflow-x:hidden;}
+.font-serif{font-family:"Noto Serif SC","Source Han Serif SC",serif;}
+.font-mono{font-family:"JetBrains Mono","SF Mono",Menlo,monospace;}
+.card{background:#fff;border:1px solid #E5E7EB;border-radius:12px;}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:2px 8px;border-radius:999px;border:1px solid #E5E7EB;background:#F5F6F8;color:#64748B;font-weight:500;}
+.badge-good{background:#ECFDF5;color:#059669;border-color:#A7F3D0;}
+.badge-warn{background:#FFFBEB;color:#B45309;border-color:#FDE68A;}
+.badge-bad{background:#FEF2F2;color:#B91C1C;border-color:#FECACA;}
+.badge-info{background:#EFF6FF;color:#1D4ED8;border-color:#BFDBFE;}
+.kpi-value{font-family:"JetBrains Mono","SF Mono",Menlo,monospace;font-weight:700;letter-spacing:-.02em;}
+.section-title{font-size:22px;font-weight:800;letter-spacing:-.01em;}
+.section-title::before{content:"";display:inline-block;width:4px;height:20px;background:#D93B3B;margin-right:10px;vertical-align:-3px;border-radius:2px;}
+.tab-btn{padding:6px 14px;border-radius:999px;font-size:13px;color:#64748B;cursor:pointer;border:1px solid transparent;transition:.2s;}
+.tab-btn.active{background:#0F172A;color:#fff;}
+.tab-btn:not(.active):hover{background:#F5F6F8;}
+video{background:#0F172A;}
+.video-wrap{position:relative;padding-top:177%;background:#0F172A;border-radius:8px;overflow:hidden;}
+.video-wrap video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.rank-num{position:absolute;top:8px;left:8px;background:rgba(15,23,42,.85);color:#fff;font-family:"JetBrains Mono",monospace;font-weight:700;font-size:11px;padding:3px 8px;border-radius:6px;z-index:2;}
+.quad-tag{position:absolute;top:8px;right:8px;font-size:10px;padding:3px 7px;border-radius:6px;z-index:2;font-weight:600;}
+.action-item{border-left:3px solid #E5E7EB;padding:12px 16px;background:#FAFBFC;border-radius:0 8px 8px 0;}
+.action-p0{border-left-color:#D93B3B;}
+.action-p1{border-left-color:#F59E0B;}
+.action-p2{border-left-color:#0EA5A4;}
+</style>
+</head>
+<body>
+
+<div style="background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%); color: white; padding: 12px 24px; text-align: center; font-weight: 600; box-shadow: 0 2px 8px rgba(220,38,38,0.3); position: sticky; top: 0; z-index: 1000;">
+  ⚠️ 脱敏版本 · 消耗数据已转为指数形式
+</div>
+
+<div class="mx-auto" style="max-width:1440px">
+
+<!-- Hero -->
+<header class="px-5 md:px-12 pt-10 pb-8 border-b border-border">
+  <div class="flex items-start justify-between flex-wrap gap-4">
+    <div>
+      <div class="text-xs tracking-widest text-muted-fg font-mono uppercase mb-3">BULAOMIYU · CREATIVE DIAGNOSIS REPORT · V2</div>
+      <h1 class="font-serif text-4xl md:text-5xl font-black text-ink leading-tight">不老谜语素材诊断报告</h1>
+      <p class="text-muted-fg mt-3 text-sm md:text-base max-w-2xl">对不老谜语近 30 日 <span class="font-mono font-semibold text-ink">TOP 20</span> 素材与行业高奢美学 <span class="font-mono font-semibold text-ink">TOP 100</span> 素材进行数据对比、四象限分层与内容特征拆解，输出可落地的行动清单。</p>
+    </div>
+  </div>
+
+  <!-- KPI 五连卡 -->
+  <div id="kpiRow" class="grid grid-cols-2 md:grid-cols-5 gap-3 mt-8"></div>
+</header>
+
+<!-- Section 1 · 雷达图五维对比 -->
+<section class="px-5 md:px-12 py-14 border-b border-border">
+  <div class="section-title mb-2">01 · 五维能力对比</div>
+  <div class="text-muted-fg text-sm mb-6" id="radarConclusion"></div>
+  <div class="grid md:grid-cols-3 gap-6 items-center">
+    <div id="radar" class="md:col-span-2 card" style="height:420px"></div>
+    <div class="space-y-3" id="radarCards"></div>
+  </div>
+</section>
+
+<!-- Section 2 · 四象限散点 -->
+<section class="px-5 md:px-12 py-14 border-b border-border">
+  <div class="flex items-end justify-between flex-wrap gap-4 mb-2">
+    <div>
+      <div class="section-title">02 · 四象限素材分布</div>
+      <div class="text-muted-fg text-sm mt-1">X = 3s完播率 · Y = 消耗指数 · 色区划分素材类型</div>
+    </div>
+  </div>
+  <div class="grid md:grid-cols-4 gap-3 mt-6 mb-4">
+    <div class="card p-4"><div class="text-xs text-muted-fg mb-1">优质象限（高消耗·高完播）</div><div class="flex items-baseline gap-2"><span class="text-2xl font-mono font-bold text-emerald-600">7</span><span class="text-xs text-muted-fg">条 · 核心承载</span></div></div>
+    <div class="card p-4"><div class="text-xs text-muted-fg mb-1">潜力象限（低消耗·高完播）</div><div class="flex items-baseline gap-2"><span class="text-2xl font-mono font-bold text-blue-600">3</span><span class="text-xs text-muted-fg">条 · 加预算放量</span></div></div>
+    <div class="card p-4"><div class="text-xs text-muted-fg mb-1">流量象限（高消耗·低完播）</div><div class="flex items-baseline gap-2"><span class="text-2xl font-mono font-bold text-amber-600">3</span><span class="text-xs text-muted-fg">条 · 优化落地页</span></div></div>
+    <div class="card p-4"><div class="text-xs text-muted-fg mb-1">待优化（低消耗·低完播）</div><div class="flex items-baseline gap-2"><span class="text-2xl font-mono font-bold text-red-600">7</span><span class="text-xs text-muted-fg">条 · 替换/重构</span></div></div>
+  </div>
+  <div id="scatter" class="card" style="height:520px"></div>
+</section>
+
+<!-- Section 3 · 内容特征频次对比 -->
+<section class="px-5 md:px-12 py-14 border-b border-border">
+  <div class="section-title mb-2">03 · 内容特征频次对比</div>
+  <div class="text-muted-fg text-sm mb-8">对不老谜语 TOP10 & 行业 TOP10 抽帧后统计的核心内容标签出现率，并拆解行业优质内容特征与不老谜语优劣势。</div>
+
+  <!-- 3.1 内容标签出现率对比 -->
+  <div class="mb-4 flex items-center gap-2">
+    <span class="badge badge-info">3.1</span>
+    <div class="text-base font-semibold text-ink">内容标签出现率对比</div>
+    <span class="text-xs text-muted-fg">· 不老谜语 vs 行业</span>
+  </div>
+  <div id="featureBars" class="grid md:grid-cols-2 gap-4 mb-12"></div>
+
+  <!-- 3.2 剪辑风格对比雷达 -->
+  <div class="mb-4 flex items-center gap-2">
+    <span class="badge badge-info">3.2</span>
+    <div class="text-base font-semibold text-ink">剪辑风格 5 维对比</div>
+    <span class="text-xs text-muted-fg" id="editScoreText"></span>
+  </div>
+  <div class="card p-4 mb-12">
+    <div class="grid md:grid-cols-3 gap-4 items-center">
+      <div id="editRadar" class="md:col-span-2" style="height:360px"></div>
+      <div class="space-y-2">
+        <div id="editBars"></div>
+        <div class="mt-4 pt-3 border-t border-border grid grid-cols-3 text-center" id="editScoreGrid"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3.3 行业 TOP100 优质内容特征 -->
+  <div class="mb-4 flex items-center gap-2">
+    <span class="badge badge-info">3.3</span>
+    <div class="text-base font-semibold text-ink">行业 TOP100 优质内容 6 大核心特征</div>
+    <span class="text-xs text-muted-fg">· 高奢美学赛道通用打法</span>
+  </div>
+  <div id="industryTopFeatures" class="grid md:grid-cols-3 gap-3 mb-12"></div>
+
+  <!-- 3.4 & 3.5 优劣势 -->
+  <div class="grid md:grid-cols-2 gap-4">
+    <div>
+      <div class="mb-3 flex items-center gap-2">
+        <span class="badge badge-good">3.4 优势</span>
+        <div class="text-base font-semibold text-ink">不老谜语优势内容特征</div>
+      </div>
+      <div id="swAdvantage" class="space-y-3"></div>
+    </div>
+    <div>
+      <div class="mb-3 flex items-center gap-2">
+        <span class="badge badge-bad">3.5 劣势</span>
+        <div class="text-base font-semibold text-ink">不老谜语劣势内容特征</div>
+      </div>
+      <div id="swWeakness" class="space-y-3"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 4 · 高表现共性特征 -->
+<section class="px-5 md:px-12 py-14 border-b border-border">
+  <div class="section-title mb-2">04 · 高表现共性特征</div>
+  <div class="text-muted-fg text-sm mb-8">不老谜语与行业 TOP 素材共性成功因子。</div>
+  <div id="commonFeatures" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+</section>
+
+<!-- Section 5 · 行业 TOP10 -->
+<section class="px-5 md:px-12 py-14 border-b border-border">
+  <div class="flex items-end justify-between mb-2 flex-wrap gap-2">
+    <div class="section-title">05 · 行业 TOP10 素材</div>
+    <div class="text-xs text-muted-fg">高奢美学赛道 · 按消耗指数排序</div>
+  </div>
+  <div id="ind10Grid" class="grid grid-cols-2 md:grid-cols-5 gap-3 mt-6"></div>
+</section>
+
+<!-- Section 6 · 客户 TOP10 -->
+<section class="px-5 md:px-12 py-14 border-b border-border">
+  <div class="flex items-end justify-between mb-2 flex-wrap gap-2">
+    <div class="section-title">06 · 不老谜语 TOP10 素材</div>
+    <div class="text-xs text-muted-fg">按消耗排序 · 含四象限归属</div>
+  </div>
+  <div id="sw10Grid" class="grid grid-cols-2 md:grid-cols-5 gap-3 mt-6"></div>
+</section>
+
+<!-- Section 7 · 行动清单 -->
+<section class="px-5 md:px-12 py-14 border-b border-border">
+  <div class="section-title mb-2">07 · 行动清单</div>
+  <div class="text-muted-fg text-sm mb-6">按优先级划分，P0 需立即执行。</div>
+  <div class="grid md:grid-cols-3 gap-4" id="actionList"></div>
+</section>
+
+<!-- Section 8 · 附录：20 条素材详情 -->
+<section class="px-5 md:px-12 py-14">
+  <div class="flex items-end justify-between mb-2 flex-wrap gap-2">
+    <div class="section-title">08 · 附录 · 不老谜语 TOP20 素材四象限详情</div>
+    <div class="text-xs text-muted-fg">按消耗指数排序 · 含四象限归属</div>
+  </div>
+  <div id="shiwaAllGrid" class="grid grid-cols-2 md:grid-cols-5 gap-3 mt-6"></div>
+</section>
+
+<footer class="px-5 md:px-12 py-8 text-center text-xs text-muted-fg border-t border-border">
+  不老谜语 Creative Diagnosis Report · v2 · Generated 2026-07-06
+</footer>
+
+</div>
+
+<script>
+window.APP = {
+  kpi: {"client_name": "\u4e0d\u8001\u8c1c\u8bed", "cost_avg": 0.0552624250583333, "cost_index": 0.7, "s3": 31.58, "ctr": 2.02, "cvr": 12.95, "roi": 3.47, "diff_cost": -9.6, "diff_s3": -14.0, "diff_ctr": -0.41, "diff_cvr": 5.2, "diff_roi": 1.86},
+  materials: [{"rank": 1, "md5": "4f2584c08b5411a521decb4742149982", "url": "http://adsmind.gdtimg.com/ads_svp_video__0bc37yaucaabjuamv6imazvbx7qeih7acqka.f0.mp4?dis_k=fa71a8c856f4a3757df7e198ac2179ae&dis_t=1780046485&m=4f2584c08b5411a521decb4742149982&sha256=ab04ac0b0892f48dacf95caa11ea25bdce9fcd660f83c3472feb2b9223125240", "cost": 0.1242, "cost_index": 100.0, "s3": 38.95, "ctr": 1.88, "cvr": 12.39, "roi": 2.66, "quadrant": "\u4f18\u8d28"}, {"rank": 2, "md5": "92b94645b0cf4f6f0b7b63d32d0d2196", "url": "http://adsmind.gdtimg.com/ads_svp_video__0b53cuadqaaavmapqnifqvvbufiehakqaoca.f0.mp4?dis_k=f1a8f155faf9eb59eec915a01dbb618d&dis_t=1779716447&m=92b94645b0cf4f6f0b7b63d32d0d2196&sha256=fca9e0a3b48e189aea474807e09b0c49d1dcf66370ce5a939a8c14e1035d8eb9", "cost": 0.0849, "cost_index": 68.4, "s3": 28.75, "ctr": 2.2, "cvr": 11.68, "roi": 2.89, "quadrant": "\u6d41\u91cf"}, {"rank": 3, "md5": "c424359ba1d121698b24c20a046b4aea", "url": "http://adsmind.gdtimg.com/ads_svp_video__0b53fqa2saabreadjeiymjvbwlaevewadkka.f0.mp4?dis_k=9ac9fcf9f3bf6b87d0163ea3c0663df5&dis_t=1780063662&m=c424359ba1d121698b24c20a046b4aea&sha256=49d382dffb45c463578251ce132c86ccf6c66695c8e5e51782061c6ca8481dc8", "cost": 0.0833, "cost_index": 67.1, "s3": 44.31, "ctr": 1.45, "cvr": 15.14, "roi": 2.67, "quadrant": "\u4f18\u8d28"}, {"rank": 4, "md5": "6dc7e1e0f3d809710b5627f0482806a3", "url": "http://adsmind.gdtimg.com/ads_svp_video__0bc3kaaiwaaa5uaetuaf2vvbuuaerniabc2a.f0.mp4?dis_k=5fd0d49967279f818afda9ca44d5c7ad&dis_t=1778762450&m=6dc7e1e0f3d809710b5627f0482806a3&sha256=a24ec5cde2c54f8cc4e7b60e916a7969ca9fe4feacf2fb06ed6ee81391b99956", "cost": 0.0796, "cost_index": 64.1, "s3": 22.96, "ctr": 2.4, "cvr": 12.0, "roi": 3.36, "quadrant": "\u6d41\u91cf"}, {"rank": 5, "md5": "134248bc70fcd668e7243ca8bd72b821", "url": "http://adsmind.gdtimg.com/ads_svp_video__0b53imawsaab4iagjghz5rurwqyenfbqc2ka.f0.mp4?dis_k=09c30ddd7eeb999afb48fa16d05cc45d&dis_t=1777864104&m=134248bc70fcd668e7243ca8bd72b821&sha256=2648b8d6117c2739b608c98a0305c05a8e44b43f5c37ff558fe163fd5a6457b0", "cost": 0.071, "cost_index": 57.2, "s3": 29.71, "ctr": 1.97, "cvr": 12.27, "roi": 2.93, "quadrant": "\u4f18\u8d28"}, {"rank": 6, "md5": "b2dfc319f2a1d2bca57f468a14ef27f7", "url": "http://adsmind.gdtimg.com/ads_svp_video__0b533aak2aaaluag26iln5vbvwaevxmablka.f0.mp4?dis_k=bf7b5cd6e508540a300df1594acf8caf&dis_t=1779155086&m=b2dfc319f2a1d2bca57f468a14ef27f7&sha256=3e673acd8c1713371de17d4d5f94e9c457d80a5024f1bcc8d88aec7fd36204cb", "cost": 0.0709, "cost_index": 57.1, "s3": 49.99, "ctr": 2.52, "cvr": 13.11, "roi": 3.25, "quadrant": "\u4f18\u8d28"}, {"rank": 7, "md5": "eec417468277171d2060dcb8df7281a7", "url": "http://adsmind.gdtimg.com/ads_svp_video__0b53neapaaaahuaosqzckjvbu2ie6buqb4ca.f0.mp4?dis_k=5fce2a1250ca3fc128e827917281bd26&dis_t=1780619654&m=eec417468277171d2060dcb8df7281a7&sha256=ca205b8e180ca8c4dee35bc4bd83b353d1e82adb233b506d9d7fe86fb34d211d", "cost": 0.0698, "cost_index": 56.2, "s3": 37.61, "ctr": 1.33, "cvr": 11.83, "roi": 2.17, "quadrant": "\u4f18\u8d28"}, {"rank": 8, "md5": "10d5ddf97583fa2adffa2248f39b7814", "url": "http://adsmind.gdtimg.com/ads_svp_video__0b53naaasaaalqaaewihavvbu2aebfuaacka.f0.mp4?dis_k=f675890245468629a6c8128315c5d4e0&dis_t=1778846529&m=10d5ddf97583fa2adffa2248f39b7814&sha256=c37addad9d0a78c8099e8f9a505f8d71be109fc28a53dbbaab28fb9223dd9a90", "cost": 0.0695, "cost_index": 56.0, "s3": 25.24, "ctr": 1.47, "cvr": 9.8, "roi": 2.51, "quadrant": "\u6d41\u91cf"}, {"rank": 9, "md5": "daba11b6c99f1d90cc0b12caaa4f18bd", "url": "http://adsmind.gdtimg.com/ads_svp_video__0bc3iuarsaaboaabskauc5vbwriedfcqcgka.f0.mp4?dis_k=76a8c0f592987d0500702a8d5903afa7&dis_t=1779761210&m=daba11b6c99f1d90cc0b12caaa4f18bd&sha256=d4c2d17e1d0684d6c4efe33b46021dc7cc56c36c83348edf436e200add96af3a", "cost": 0.0587, "cost_index": 47.2, "s3": 34.78, "ctr": 1.95, "cvr": 13.78, "roi": 4.6, "quadrant": "\u4f18\u8d28"}, {"rank": 10, "md5": "11dd947b5be375cb3794628875abea2c", "url": "http://adsmind.gdtimg.com/ads_svp_video__0bc3tabtwaad4aafpgrekjvbtgaehomago2a.f0.mp4?dis_k=531a315e6670f52fce2fdf7f478e2653&dis_t=1780968604&m=11dd947b5be375cb3794628875abea2c&sha256=9a799deaeb8767c55e3207b7b8ab91d32be6c18b5a20a3d14a7c0d6c8550f929", "cost": 0.0508, "cost_index": 40.9, "s3": 36.03, "ctr": 2.28, "cvr": 8.29, "roi": 2.27, "quadrant": "\u4f18\u8d28"}, {"rank": 11, "md5": "621dc5e3628e2e81e5c9ee4e2628684a", "url": "http://adsmind.gdtimg.com/ads_svp_video__0bc3q4aw4aabhyaktcqxwvvbxbyen2dqc3sa.f0.mp4?dis_k=beb30ca8f05b1145b4af07ac905e9187&dis_t=1779877838&m=621dc5e3628e2e81e5c9ee4e2628684a&sha256=3c9db490082b8fe3bd695badcad063ca8e3dbf145f2d876e339a68d6cd83977c", "cost": 0.0502, "cost_index": 40.4, "s3": 47.5, "ctr": 1.4, "cvr": 10.92, "roi": 2.18, "quadrant": "\u6f5c\u529b"}, {"rank": 12, "md5": "365f2a5605b54e9fc181d3a59b3897b6", "url": "http://adsmind.gdtimg.com/ads_svp_video__0b53piaamaaamaaeuiaezvvbu6qeaz5aabsa.f0.mp4?dis_k=42a57f36e014f58960d9ed4bf5be4df6&dis_t=1778666528&m=365f2a5605b54e9fc181d3a59b3897b6&sha256=48eeaaa82f8ace1c704c78688f1ea2a9b44cb70b7c2f5d4d1d35bc6e3f0b4c01", "cost": 0.0424, "cost_index": 34.2, "s3": 46.03, "ctr": 2.47, "cvr": 10.97, "roi": 2.81, "quadrant": "\u6f5c\u529b"}, {"rank": 13, "md5": "cce502f3c6a0bc1e71cb5f8a967ac231", "url": "http://adsmind.gdtimg.com/ads_svp_video__0b53cyd3iaah3aafzyh4rjur2fqewqlapnca.f0.mp4?dis_k=4f3dad4deb7afdaeff3e52ad6b67e119&dis_t=1778116848&m=cce502f3c6a0bc1e71cb5f8a967ac231&sha256=b2857ba34e0244847a81e616a295c59a5b7fb32175bbd04207f590d82948f9a2", "cost": 0.0423, "cost_index": 34.1, "s3": 23.28, "ctr": 2.49, "cvr": 17.17, "roi": 5.49, "quadrant": "\u5f85\u4f18\u5316"}, {"rank": 14, "md5": "ebc6ced70b5ca5b2012a9dcf3ddd186e", "url": "http://adsmind.gdtimg.com/ads_svp_video__0bc37adzmaah7aaa2wh5ufur36aes34apfsa.f0.mp4?dis_k=28c34891881b0b10150553b2125b5c4a&dis_t=1780041064&m=ebc6ced70b5ca5b2012a9dcf3ddd186e&sha256=d0a3d1393fb6f3422e4f229da43105f2931d71866e2b0165e95ef6f4d21e9e7e", "cost": 0.0366, "cost_index": 29.5, "s3": 26.69, "ctr": 2.32, "cvr": 21.3, "roi": 7.31, "quadrant": "\u5f85\u4f18\u5316"}, {"rank": 15, "md5": "84e0c73489b804b64daaf8be2fd08b3e", "url": "http://adsmind.gdtimg.com/ads_svp_video__0b53ayajkaaa7iaj3sipq5vbubqesudabfka.f0.mp4?dis_k=24c865b3105f8e3917426b9d95771508&dis_t=1780062027&m=84e0c73489b804b64daaf8be2fd08b3e&sha256=3bb1966ce0a8c0b26a8075d354b61973228e917c13cb7281b1232074c9900ffe", "cost": 0.033, "cost_index": 26.6, "s3": 33.03, "ctr": 2.51, "cvr": 9.92, "roi": 2.25, "quadrant": "\u6f5c\u529b"}, {"rank": 16, "md5": "3a00fcc135981dc7004ec69ef0d504a3", "url": "http://adsmind.gdtimg.com/ads_svp_video__0bc37eaaqaaageafxiyeyfvbv6iebd4qacca.f0.mp4?dis_k=7089c362b0b3f59c141ae17e6745d590&dis_t=1779713390&m=3a00fcc135981dc7004ec69ef0d504a3&sha256=0a68a60d411b709025ae10df9b2cff2a4799c99cf0a21c5113b2722943d2038b", "cost": 0.0317, "cost_index": 25.5, "s3": 16.59, "ctr": 2.21, "cvr": 20.0, "roi": 6.03, "quadrant": "\u5f85\u4f18\u5316"}, {"rank": 17, "md5": "0b35a418236d882f089b3cf16634431f", "url": "http://adsmind.gdtimg.com/ads_svp_video__0b53vmaiuaaacyaermqf5zvbvkyerkvqbcsa.f0.mp4?dis_k=6c663936cb37fb208794a7f923be530a&dis_t=1779713391&m=0b35a418236d882f089b3cf16634431f&sha256=c85071ed6da2f848b18d47f928c24686603e3e9694a43de665d1679566cb9a35", "cost": 0.0289, "cost_index": 23.3, "s3": 18.82, "ctr": 1.58, "cvr": 14.11, "roi": 4.29, "quadrant": "\u5f85\u4f18\u5316"}, {"rank": 18, "md5": "9cf1832b265a55b37f2388cc7c1edb2c", "url": "http://adsmind.gdtimg.com/ads_svp_video__0bc33maouaaaueapwrqnsjvbvwye5lnqb2sa.f0.mp4?dis_k=87e839c927d8b44228eabc89416b71de&dis_t=1779241342&m=9cf1832b265a55b37f2388cc7c1edb2c&sha256=1a4f892698029c880be955685487a8d902caa9e6f8ff5aee5c033b6156aeea97", "cost": 0.0283, "cost_index": 22.8, "s3": 14.66, "ctr": 1.54, "cvr": 11.11, "roi": 2.99, "quadrant": "\u5f85\u4f18\u5316"}, {"rank": 19, "md5": "8c0a59e32eace532c49a350844d98bbf", "url": "http://adsmind.gdtimg.com/ads_svp_video__0bc3vyagwaaatuagaxihyfvbvlqenoxaa22a.f0.mp4?dis_k=3677203c5892005ec6a9f8c15f7f1c82&dis_t=1778846526&m=8c0a59e32eace532c49a350844d98bbf&sha256=fbade618d2bb973c047809027be7b2094272bd15c6160df41fee8015a4a1d577", "cost": 0.0267, "cost_index": 21.5, "s3": 28.48, "ctr": 2.26, "cvr": 13.49, "roi": 3.67, "quadrant": "\u5f85\u4f18\u5316"}, {"rank": 20, "md5": "a3c98c8fe50b3d83a085ff4aad710336", "url": "http://adsmind.gdtimg.com/ads_svp_video__0bc3o4ax4aabyaab72ixxrvbw5yepz3qc7sa.f0.mp4?dis_k=e959fee27f7fd8c9360e84de675e4b48&dis_t=1779851714&m=a3c98c8fe50b3d83a085ff4aad710336&sha256=06a976f6f3112311a212d576aad7f99600c6137015bae4133483be5d25a1c03b", "cost": 0.0226, "cost_index": 18.2, "s3": 28.12, "ctr": 2.13, "cvr": 9.66, "roi": 3.18, "quadrant": "\u5f85\u4f18\u5316"}],
+  industry: {"cost_avg": 0.844, "cost_max": 8.19, "cost_index": 10.3, "s3": 45.58, "ctr": 2.43, "cvr": 7.75, "roi": 1.61}
+};
+
+// 渲染KPI卡片
+function renderKPI() {
+  const kpi = window.APP.kpi;
+  const ind = window.APP.industry;
+  
+  const kpis = [
+    {name: '消耗指数', value: kpi.cost_index, ind: ind.cost_index, diff: kpi.diff_cost, unit: '', judge: kpi.diff_cost < 0 ? '规模短板' : '规模优势'},
+    {name: '3s完播率', value: kpi.s3, ind: ind.s3, diff: kpi.diff_s3, unit: '%', judge: kpi.diff_s3 > 0 ? '完播强' : '完播弱'},
+    {name: 'CTR', value: kpi.ctr, ind: ind.ctr, diff: kpi.diff_ctr, unit: '%', judge: kpi.diff_ctr > 0 ? '点击强' : '点击弱'},
+    {name: '下单率', value: kpi.cvr, ind: ind.cvr, diff: kpi.diff_cvr, unit: '%', judge: kpi.diff_cvr > 0 ? '转化强' : '转化弱'},
+    {name: 'ROI', value: kpi.roi, ind: ind.roi, diff: kpi.diff_roi, unit: '', judge: kpi.diff_roi > 0 ? '成本优' : '成本高'}
+  ];
+  
+  const html = kpis.map(k => `
+    <div class="card p-4">
+      <div class="text-xs text-muted-fg mb-1">${k.name}</div>
+      <div class="kpi-value text-3xl text-ink mb-1">${k.value}${k.unit}</div>
+      <div class="text-xs text-muted-fg mb-2">行业均值: ${k.ind}${k.unit}</div>
+      <div class="flex items-center gap-2">
+        <span class="badge ${k.diff > 0 ? 'badge-good' : 'badge-bad'}">${k.diff > 0 ? '+' : ''}${k.diff}${k.unit === '%' ? 'pp' : ''}</span>
+        <span class="text-xs text-muted-fg">${k.judge}</span>
+      </div>
+    </div>
+  `).join('');
+  
+  document.getElementById('kpiRow').innerHTML = html;
+}
+
+// 渲染雷达图
+function renderRadar() {
+  const kpi = window.APP.kpi;
+  const ind = window.APP.industry;
+  
+  // 归一化到0-100
+  const normalize = (val, max) => (val / max) * 100;
+  
+  const clientData = [
+    normalize(kpi.cost_index, 20),
+    normalize(kpi.s3, 100),
+    normalize(kpi.ctr, 10),
+    normalize(kpi.cvr, 20),
+    normalize(kpi.roi, 10)
+  ];
+  
+  const indData = [
+    normalize(ind.cost_index, 20),
+    normalize(ind.s3, 100),
+    normalize(ind.ctr, 10),
+    normalize(ind.cvr, 20),
+    normalize(ind.roi, 10)
+  ];
+  
+  const chart = echarts.init(document.getElementById('radar'));
+  chart.setOption({
+    radar: {
+      indicator: [
+        {name: '消耗规模', max: 100},
+        {name: '3s完播', max: 100},
+        {name: 'CTR', max: 100},
+        {name: '下单率', max: 100},
+        {name: 'ROI', max: 100}
+      ]
+    },
+    series: [{
+      type: 'radar',
+      data: [
+        {value: clientData, name: '不老谜语', itemStyle: {color: '#D93B3B'}},
+        {value: indData, name: '行业', itemStyle: {color: '#64748B'}}
+      ]
+    }]
+  });
+  
+  // 结论文字
+  let conclusion = '';
+  if (kpi.diff_s3 > 0 && kpi.diff_ctr > 0) {
+    conclusion = `不老谜语在互动前端（3s完播 / CTR）领先行业均值`;
+  } else if (kpi.diff_s3 < 0 && kpi.diff_ctr < 0) {
+    conclusion = `不老谜语在互动前端（3s完播 / CTR）落后行业均值`;
+  } else {
+    conclusion = `不老谜语在互动前端表现不均`;
+  }
+  
+  if (kpi.diff_cvr > 0 && kpi.diff_roi > 0) {
+    conclusion += '，在转化后端（下单率 / ROI）领先行业。';
+  } else if (kpi.diff_cvr < 0 && kpi.diff_roi < 0) {
+    conclusion += '，在转化后端（下单率 / ROI）承压。';
+  } else {
+    conclusion += '，转化后端表现不均。';
+  }
+  
+  document.getElementById('radarConclusion').textContent = conclusion;
+  
+  // 结论卡片
+  const cards = [
+    {title: '互动前端', desc: `3s完播 ${kpi.diff_s3 > 0 ? '+' : ''}${kpi.diff_s3}pp / CTR ${kpi.diff_ctr > 0 ? '+' : ''}${kpi.diff_ctr}pp`},
+    {title: '转化后端', desc: `下单率 ${kpi.diff_cvr > 0 ? '+' : ''}${kpi.diff_cvr}pp / ROI ${kpi.diff_roi > 0 ? '+' : ''}${kpi.diff_roi}`},
+    {title: '规模表现', desc: `消耗指数 ${kpi.cost_index} vs 行业 ${ind.cost_index}`}
+  ];
+  
+  document.getElementById('radarCards').innerHTML = cards.map(c => `
+    <div class="card p-4">
+      <div class="text-xs text-muted-fg mb-1">${c.title}</div>
+      <div class="text-sm text-ink">${c.desc}</div>
+    </div>
+  `).join('');
+}
+
+// 渲染散点图
+function renderScatter() {
+  const materials = window.APP.materials;
+  
+  const data = materials.map(m => [m.s3, m.cost_index, m.quadrant]);
+  
+  const chart = echarts.init(document.getElementById('scatter'));
+  chart.setOption({
+    xAxis: {name: '3s完播率(%)', type: 'value'},
+    yAxis: {name: '消耗指数', type: 'log'},
+    series: [{
+      type: 'scatter',
+      data: data,
+      itemStyle: {
+        color: (params) => {
+          const quad = params.data[2];
+          if (quad === '优质') return '#10B981';
+          if (quad === '潜力') return '#1D4ED8';
+          if (quad === '流量') return '#F59E0B';
+          return '#B91C1C';
+        }
+      }
+    }]
+  });
+}
+
+// 渲染内容标签对比
+function renderFeatureBars() {
+  // 示例数据
+  const features = [
+    {name: '明星背书', client: 80, ind: 65},
+    {name: 'KOL背书', client: 100, ind: 85},
+    {name: '产品展示', client: 100, ind: 92},
+    {name: '成分功效', client: 100, ind: 100},
+    {name: '价格锚点', client: 90, ind: 78},
+    {name: '限时限量', client: 70, ind: 50},
+    {name: '前后对比', client: 60, ind: 90},
+    {name: '权威认证', client: 90, ind: 40},
+    {name: 'AI/3D特效', client: 20, ind: 45},
+    {name: '用户证言', client: 50, ind: 80}
+  ];
+  
+  const html = features.map(f => `
+    <div class="card p-4">
+      <div class="text-sm font-semibold text-ink mb-3">${f.name}</div>
+      <div class="space-y-2">
+        <div>
+          <div class="flex justify-between text-xs mb-1">
+            <span class="text-muted-fg">不老谜语</span>
+            <span class="font-mono font-semibold" style="color:#D93B3B">${f.client}%</span>
+          </div>
+          <div class="w-full bg-muted rounded-full h-2">
+            <div class="h-2 rounded-full" style="width:${f.client}%;background:#D93B3B"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex justify-between text-xs mb-1">
+            <span class="text-muted-fg">行业</span>
+            <span class="font-mono font-semibold text-muted-fg">${f.ind}%</span>
+          </div>
+          <div class="w-full bg-muted rounded-full h-2">
+            <div class="h-2 rounded-full bg-muted-fg" style="width:${f.ind}%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  
+  document.getElementById('featureBars').innerHTML = html;
+}
+
+// 渲染剪辑风格对比
+function renderEditStyle() {
+  const clientScore = 70;
+  const indScore = 88;
+  const diff = clientScore - indScore;
+  
+  document.getElementById('editScoreText').textContent = `· 不老谜语平均 ${clientScore} 分 vs 行业 ${indScore} 分 · 差距 ${diff} 分`;
+  
+  const dims = [
+    {name: '镜头切换', client: 75, ind: 95},
+    {name: '字幕大字报', client: 85, ind: 90},
+    {name: '花字特效', client: 60, ind: 90},
+    {name: 'AI/3D特效', client: 30, ind: 80},
+    {name: '信息密度', client: 80, ind: 85}
+  ];
+  
+  const chart = echarts.init(document.getElementById('editRadar'));
+  chart.setOption({
+    radar: {
+      indicator: dims.map(d => ({name: d.name, max: 100}))
+    },
+    series: [{
+      type: 'radar',
+      data: [
+        {value: dims.map(d => d.client), name: '不老谜语', itemStyle: {color: '#D93B3B'}},
+        {value: dims.map(d => d.ind), name: '行业', itemStyle: {color: '#64748B'}}
+      ]
+    }]
+  });
+  
+  document.getElementById('editBars').innerHTML = dims.map(d => `
+    <div class="text-xs flex justify-between items-center mb-1">
+      <span class="text-muted-fg">${d.name}</span>
+      <span class="font-mono"><span style="color:#D93B3B">${d.client}</span> / <span class="text-muted-fg">${d.ind}</span></span>
+    </div>
+  `).join('');
+  
+  document.getElementById('editScoreGrid').innerHTML = `
+    <div><div class="text-xl font-mono font-semibold" style="color:#B91C1C">${clientScore}</div><div class="text-[11px] text-muted-fg">不老谜语均分</div></div>
+    <div><div class="text-xl font-mono font-semibold text-ink">${indScore}</div><div class="text-[11px] text-muted-fg">行业均分</div></div>
+    <div><div class="text-xl font-mono font-semibold" style="color:#B45309">${diff}</div><div class="text-[11px] text-muted-fg">差距</div></div>
+  `;
+}
+
+// 渲染行业6大特征
+function renderIndustryFeatures() {
+  const features = [
+    {title: '明星背书', desc: '一线明星极端承诺话术', tag: '信任'},
+    {title: 'KOL矩阵', desc: '多角色垂直背书', tag: '权威'},
+    {title: '成分功效', desc: '专业成分具体克数', tag: '专业'},
+    {title: '价格锚点', desc: '极端折扣对比', tag: '促销'},
+    {title: '权威认证', desc: '国妆特字批文常驻', tag: '合规'},
+    {title: '前后对比', desc: 'B/A效果直观展示', tag: '效果'}
+  ];
+  
+  document.getElementById('industryTopFeatures').innerHTML = features.map((f, i) => `
+    <div class="card p-4 border-l-4" style="border-left-color:#D93B3B">
+      <div class="flex items-start gap-2 mb-2">
+        <span class="text-xs font-mono font-bold text-muted-fg">${String(i+1).padStart(2, '0')}</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-ink mb-1">${f.title}</div>
+          <div class="text-xs text-muted-fg">${f.desc}</div>
+        </div>
+      </div>
+      <span class="badge badge-info">${f.tag}</span>
+    </div>
+  `).join('');
+}
+
+// 渲染优劣势
+function renderAdvantageWeakness() {
+  const advantages = [
+    {title: '权威认证展示突出', desc: '国妆特字批文常驻，覆盖率90%', pct: '+50pp'},
+    {title: '字幕大字报极强', desc: '顶部常驻黄底黑字标题', pct: '+5pp'},
+    {title: '成分功效讲解专业', desc: '具体成分克数展示', pct: '100%'}
+  ];
+  
+  const weaknesses = [
+    {title: '明星背书完全缺失', desc: '无一线明星加持', pct: '-65pp'},
+    {title: 'AI/3D特效几乎没有', desc: '缺少科技感视觉冲击', pct: '-35pp'},
+    {title: '前后对比展示不足', desc: '效果对比不够直观', pct: '-30pp'}
+  ];
+  
+  document.getElementById('swAdvantage').innerHTML = advantages.map(a => `
+    <div class="card p-4" style="background:#ECFDF5;border-color:#A7F3D0">
+      <div class="flex items-start justify-between mb-1">
+        <div class="text-sm font-semibold text-ink">${a.title}</div>
+        <span class="badge badge-good">${a.pct}</span>
+      </div>
+      <div class="text-xs text-muted-fg">${a.desc}</div>
+    </div>
+  `).join('');
+  
+  document.getElementById('swWeakness').innerHTML = weaknesses.map(w => `
+    <div class="card p-4" style="background:#FEF2F2;border-color:#FECACA">
+      <div class="flex items-start justify-between mb-1">
+        <div class="text-sm font-semibold text-ink">${w.title}</div>
+        <span class="badge badge-bad">${w.pct}</span>
+      </div>
+      <div class="text-xs text-muted-fg">${w.desc}</div>
+    </div>
+  `).join('');
+}
+
+// 渲染共性特征
+function renderCommonFeatures() {
+  const features = [
+    {title: '低价锚点策略', desc: '一天一块钱、买一发二十四等极致性价比话术'},
+    {title: '专业场景背书', desc: '美博会获奖、实验室场景、自有工厂展示'},
+    {title: 'KOL/权威背书', desc: '美容院老板娘、品牌创始人、专家出镜'},
+    {title: '产品效果演示', desc: '喷雾效果、前后对比、使用场景展示'}
+  ];
+  
+  document.getElementById('commonFeatures').innerHTML = features.map(f => `
+    <div class="card p-4">
+      <div class="text-base font-semibold text-ink mb-2">${f.title}</div>
+      <div class="text-sm text-muted-fg">${f.desc}</div>
+    </div>
+  `).join('');
+}
+
+// 渲染行业TOP10
+function renderIndTop10() {
+  // 示例数据
+  const ind10 = Array.from({length: 10}, (_, i) => ({
+    rank: i + 1,
+    cost_index: (100 - i * 5).toFixed(1),
+    s3: (50 - i * 2).toFixed(2),
+    ctr: (3.0 - i * 0.2).toFixed(2),
+    cvr: (8.0 - i * 0.3).toFixed(2)
+  }));
+  
+  document.getElementById('ind10Grid').innerHTML = ind10.map(m => `
+    <div class="card p-3">
+      <div class="rank-num">#${m.rank}</div>
+      <div class="video-wrap mb-2">
+        <div style="width:100%;height:100%;background:#0F172A;display:flex;align-items:center;justify-content:center;color:#64748B;font-size:12px">行业素材${m.rank}</div>
+      </div>
+      <div class="text-xs space-y-1">
+        <div class="flex justify-between"><span class="text-muted-fg">消耗指数</span><span class="font-mono font-semibold">${m.cost_index}</span></div>
+        <div class="flex justify-between"><span class="text-muted-fg">3s完播</span><span class="font-mono">${m.s3}%</span></div>
+        <div class="flex justify-between"><span class="text-muted-fg">CTR</span><span class="font-mono">${m.ctr}%</span></div>
+        <div class="flex justify-between"><span class="text-muted-fg">下单率</span><span class="font-mono">${m.cvr}%</span></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// 渲染客户TOP10
+function renderClientTop10() {
+  const materials = window.APP.materials.slice(0, 10);
+  
+  const quadColors = {
+    '优质': '#10B981',
+    '潜力': '#1D4ED8',
+    '流量': '#F59E0B',
+    '待优化': '#B91C1C'
+  };
+  
+  document.getElementById('sw10Grid').innerHTML = materials.map(m => `
+    <div class="card p-3">
+      <div class="rank-num">#${m.rank}</div>
+      <div class="quad-tag" style="background:${quadColors[m.quadrant]};color:#fff">${m.quadrant}</div>
+      <div class="video-wrap mb-2">
+        <div style="width:100%;height:100%;background:#0F172A;display:flex;align-items:center;justify-content:center;color:#64748B;font-size:12px">素材${m.rank}</div>
+      </div>
+      <div class="text-xs space-y-1">
+        <div class="flex justify-between"><span class="text-muted-fg">消耗指数</span><span class="font-mono font-semibold">${m.cost_index}</span></div>
+        <div class="flex justify-between"><span class="text-muted-fg">3s完播</span><span class="font-mono">${m.s3}%</span></div>
+        <div class="flex justify-between"><span class="text-muted-fg">CTR</span><span class="font-mono">${m.ctr}%</span></div>
+        <div class="flex justify-between"><span class="text-muted-fg">ROI</span><span class="font-mono">${m.roi}</span></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// 渲染行动清单
+function renderActionList() {
+  const actions = {
+    p0: [
+      {title: '潜力素材加预算', desc: '对潜力象限素材加倍预算，验证放量上限'},
+      {title: '复用TOP1前3秒钩子', desc: '将高完播素材的开场作为新素材标准模板'},
+      {title: '下架待优化素材', desc: '双低象限素材建议整体替换'}
+    ],
+    p1: [
+      {title: '优化流量素材落地页', desc: '前端点击强但下单弱，重点检查详情页'},
+      {title: '引入AI分子渗透特效', desc: '扩展至3-5条新素材A/B验证'},
+      {title: '使用前后对比补强', desc: '补足到70%+，尤其是直观效果类'}
+    ],
+    p2: [
+      {title: '建立KOL矩阵', desc: '扩展垂直角色矩阵，增强信任背书'},
+      {title: '价格锚点组合测试', desc: 'A/B测试不同锚点变体'},
+      {title: '跑量结构改造', desc: '从素材数量、账户预算、投放策略三端同步改造'}
+    ]
+  };
+  
+  const html = ['p0', 'p1', 'p2'].map(p => {
+    const label = p === 'p0' ? 'P0 · 立即' : p === 'p1' ? 'P1 · 短期' : 'P2 · 中期';
+    const badgeClass = p === 'p0' ? 'badge-bad' : p === 'p1' ? 'badge-warn' : 'badge-info';
+    const actionClass = `action-${p}`;
+    
+    return `
+      <div>
+        <div class="flex items-center gap-2 mb-3">
+          <span class="badge ${badgeClass}">${label}</span>
+          <span class="text-xs text-muted-fg">${p === 'p0' ? '本周内' : p === 'p1' ? '2周内' : '月度'}</span>
+        </div>
+        <div class="space-y-3">
+          ${actions[p].map(a => `
+            <div class="action-item ${actionClass}">
+              <div class="text-sm font-semibold text-ink mb-1">${a.title}</div>
+              <div class="text-xs text-muted-fg">${a.desc}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }).join('');
+  
+  document.getElementById('actionList').innerHTML = html;
+}
+
+// 渲染附录全部素材
+function renderAllMaterials() {
+  const materials = window.APP.materials;
+  
+  const quadColors = {
+    '优质': '#10B981',
+    '潜力': '#1D4ED8',
+    '流量': '#F59E0B',
+    '待优化': '#B91C1C'
+  };
+  
+  document.getElementById('shiwaAllGrid').innerHTML = materials.map(m => `
+    <div class="card p-3">
+      <div class="rank-num">#${m.rank}</div>
+      <div class="quad-tag" style="background:${quadColors[m.quadrant]};color:#fff">${m.quadrant}</div>
+      <div class="video-wrap mb-2">
+        <div style="width:100%;height:100%;background:#0F172A;display:flex;align-items:center;justify-content:center;color:#64748B;font-size:12px">素材${m.rank}</div>
+      </div>
+      <div class="text-xs space-y-1">
+        <div class="flex justify-between"><span class="text-muted-fg">消耗指数</span><span class="font-mono font-semibold">${m.cost_index}</span></div>
+        <div class="flex justify-between"><span class="text-muted-fg">3s完播</span><span class="font-mono">${m.s3}%</span></div>
+        <div class="flex justify-between"><span class="text-muted-fg">CTR</span><span class="font-mono">${m.ctr}%</span></div>
+        <div class="flex justify-between"><span class="text-muted-fg">ROI</span><span class="font-mono">${m.roi}</span></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// 初始化所有模块
+renderKPI();
+renderRadar();
+renderScatter();
+renderFeatureBars();
+renderEditStyle();
+renderIndustryFeatures();
+renderAdvantageWeakness();
+renderCommonFeatures();
+renderIndTop10();
+renderClientTop10();
+renderActionList();
+renderAllMaterials();
+</script>
+
+</body>
+</html>
