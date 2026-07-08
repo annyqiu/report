@@ -78,6 +78,10 @@ table.diff-table tbody tr:hover { background:#FAFAFA; }
 </style>
 </head>
 <body>
+<div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 12px 20px; text-align: center; font-weight: 600; font-size: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000;">
+    🔒 脱敏版本 · 消耗数据已转为消耗指数
+</div>
+
 <!-- ===== HTML ===== -->
 <!-- FILE:index.html -->
 <div class="mx-auto" style="max-width:1440px;">
@@ -117,7 +121,7 @@ table.diff-table tbody tr:hover { background:#FAFAFA; }
     <div class="text-xs text-primary font-semibold tracking-wider mb-2">◆ 核心诊断</div>
     <div class="text-base md:text-lg text-foreground leading-relaxed">
       <span class="font-bold">CTR偏低是核心短板</span>——虽然前端3s完播、平均播放时长表现优异，但点击率低于大盘 0.12pp，
-      导致预估CTR降权，压缩曝光消耗上限（客户日均消耗 0.02万元 vs 行业 0.84万元）。
+      导致预估CTR降权，压缩曝光消耗上限（客户消耗指数 11.6指数 vs 行业 145.9指数）。
     </div>
   </div>
 </header>
@@ -239,17 +243,17 @@ table.diff-table tbody tr:hover { background:#FAFAFA; }
 /* ===== DATA ===== */
 /* FILE:data.js */
 window.appData = {
-  client: {消耗:0.02, CTR:2.31, CVR:13.30, "3s完播率":54.92, "10s完播率":14.56, "平均播放时长":10.34, "平均播放进度":20.65},
+  client: {消耗:11.6, CTR:2.31, CVR:13.30, "3s完播率":54.92, "10s完播率":14.56, "平均播放时长":10.34, "平均播放进度":20.65},
   industry: {消耗:0.84, CTR:2.43, CVR:7.75, "3s完播率":45.58, "10s完播率":22.87, "平均播放时长":8.92, "平均播放进度":10.48},
   kpis: [
-    {name:"日均消耗", client:"0.02", unit:"万元", industry:"0.84万元", diff:"-97.7%", good:false, icon:"trending-up"},
+    {name:"消耗指数", client:"11.6指数", unit:"", industry:"145.9指数", diff:"-92.0%", good:false, icon:"trending-up"},
     {name:"CTR 点击率", client:"2.31", unit:"%", industry:"2.43%", diff:"-0.12pp", good:false, icon:"mouse-pointer-click"},
     {name:"CVR 下单率", client:"13.30", unit:"%", industry:"7.75%", diff:"+5.55pp", good:true, icon:"shopping-cart"},
     {name:"3s完播率", client:"54.92", unit:"%", industry:"45.58%", diff:"+9.34pp", good:true, icon:"play"},
     {name:"平均播放时长", client:"10.34", unit:"秒", industry:"8.92秒", diff:"+1.42s", good:true, icon:"timer"},
   ],
   diffTable: [
-    {指标:"日均消耗", 客户:"0.02万元", 行业:"0.84万元", 差值:"-0.82万元", 差值百分比:"-97.7%", 判定:"低于大盘"},
+    {指标:"消耗指数", 客户:"11.6指数", 行业:"145.9指数", 差值:"-134.3指数", 差值百分比:"-92.0%", 判定:"低于大盘"},
     {指标:"CTR点击率", 客户:"2.31%", 行业:"2.43%", 差值:"-0.12pp", 差值百分比:"-5.1%", 判定:"低于大盘"},
     {指标:"CVR下单率", 客户:"13.30%", 行业:"7.75%", 差值:"+5.55pp", 差值百分比:"+71.6%", 判定:"优于大盘"},
     {指标:"3s完播率", 客户:"54.92%", 行业:"45.58%", 差值:"+9.34pp", 差值百分比:"+20.5%", 判定:"优于大盘"},
@@ -343,7 +347,7 @@ window.renderCharts = function(){
     {n:'平均播放时长', v:15.9},
     {n:'CTR', v:-5.1},
     {n:'10s完播率', v:-36.3},
-    {n:'日均消耗', v:-97.7},
+    {n:'消耗指数', v:-92.0},
   ];
   diff.setOption({
     tooltip:{trigger:'axis', formatter: p=>`${p[0].name}<br/>差值：${p[0].value>0?'+':''}${p[0].value}%`},
