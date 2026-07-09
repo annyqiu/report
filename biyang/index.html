@@ -1,1558 +1,1637 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>必扬素材诊断报告 - 完整版</title>
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
-    <style>
-/* ===== STYLE (shiwu-aligned) ===== */
-:root{
-  --background:#FFFFFF;--foreground:#0F172A;
-  --muted:#F5F6F8;--muted-fg:#64748B;
-  --primary:#D93B3B;--accent:#0EA5A4;
-  --good:#10B981;--warn:#F59E0B;--bad:#EF4444;
-  --border:#E5E7EB;--ink:#0F172A;
-}
+<html lang="zh-CN"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>必扬 · 客户素材对标诊断报告（脱敏版）</title>
+<style>
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{background:#FFFFFF;color:#0F172A;
-  font-family:"PingFang SC","Microsoft YaHei",system-ui,-apple-system,sans-serif;
-  line-height:1.6;overflow-x:hidden;}
-.font-serif{font-family:"Noto Serif SC","Source Han Serif SC",serif;}
-.font-mono{font-family:"JetBrains Mono","SF Mono",Menlo,monospace;}
+:root{--bg:#FFFFFF;--surface:#F7F8FA;--border:#E5E7EB;--fg:#1F2328;--muted:#6B7280;--primary:#D93B3B;--primary-soft:#FDECEC;--primary-dark:#B02A2A;--success:#16A34A;--success-soft:#E7F6EC;--danger:#DC2626;--gray:#9CA3AF}
+html,body{background:var(--bg);color:var(--fg);font-family:"PingFang SC","Microsoft YaHei",system-ui,-apple-system,sans-serif;font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body{overflow-x:hidden}
+.wrap{max-width:1280px;margin:0 auto;padding:24px 20px 60px}
+.header{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;padding-bottom:20px;border-bottom:3px solid var(--primary);margin-bottom:28px}
+.title-block h1{font-size:26px;font-weight:700;color:var(--fg);letter-spacing:-.5px}
+.title-block h1::before{content:"";display:inline-block;width:4px;height:22px;background:var(--primary);margin-right:10px;vertical-align:-3px;border-radius:2px}
+.title-block .sub{color:var(--muted);font-size:13px;margin-top:6px}
+.title-block .sub b{color:var(--primary)}
+.desens-banner{background:linear-gradient(135deg,#9333EA,#7C3AED);color:#fff;padding:12px 20px;border-radius:8px;margin-bottom:20px;font-size:13px;font-weight:500;text-align:center}
+.kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:28px}
+@media(max-width:900px){.kpi-grid{grid-template-columns:repeat(2,1fr)}}
+.kpi{background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px 18px;position:relative;overflow:hidden;transition:all .2s}
+.kpi:hover{box-shadow:0 4px 16px rgba(0,0,0,.06);transform:translateY(-2px)}
+.kpi::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--primary)}
+.kpi .label{color:var(--muted);font-size:12px;margin-bottom:8px;font-weight:500}
+.kpi .value{font-size:24px;font-weight:700;color:var(--fg);font-family:"SF Mono",Consolas,monospace;letter-spacing:-.5px}
+.kpi .value .unit{font-size:13px;color:var(--muted);font-weight:500;margin-left:2px}
+.kpi .bench{font-size:11px;color:var(--muted);margin-top:6px}
+.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:600;margin-top:8px}
+.badge.up{background:var(--success-soft);color:var(--success)}
+.badge.down{background:var(--primary-soft);color:var(--primary)}
+.section{background:#fff;border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:20px}
+.section h2{font-size:17px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.section h2::before{content:"";display:block;width:4px;height:16px;background:var(--primary);border-radius:2px}
+.section h3{font-size:15px;font-weight:600;margin:14px 0 10px;color:var(--fg)}
+.section p{color:#374151;margin-bottom:8px}
+.charts-row{display:grid;grid-template-columns:1fr 1.2fr;gap:18px;margin-bottom:20px}
+@media(max-width:900px){.charts-row{grid-template-columns:1fr}}
+.chart-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px}
+.chart-card .cap{font-size:15px;font-weight:600;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
+.chart-card .legend{display:flex;gap:14px;font-size:12px;color:var(--muted)}
+.chart-card .legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:middle}
+.chart-box{width:100%;height:340px;display:flex;align-items:center;justify-content:center}
+.diag-list{list-style:none;padding:0}
+.diag-list li{padding:12px 14px;background:var(--surface);border-left:3px solid var(--primary);border-radius:6px;margin-bottom:10px;font-size:13px}
+.diag-list.adv li{border-left-color:var(--success);background:var(--success-soft)}
+.diag-list li b{color:var(--fg)}
+.diag-list li .sub{color:var(--muted);font-size:12px;margin-top:4px;display:block}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:800px){.two-col{grid-template-columns:1fr}}
+.opt-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media(max-width:800px){.opt-grid{grid-template-columns:1fr}}
+.opt-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px}
+.opt-card .step{display:inline-block;background:var(--primary);color:#fff;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:600;margin-bottom:8px}
+.opt-card h4{font-size:14px;font-weight:700;margin-bottom:4px}
+.opt-card .goal{font-size:12px;color:var(--muted);margin-bottom:10px}
+.opt-card ul{list-style:none;padding:0}
+.opt-card ul li{font-size:12.5px;padding:6px 0 6px 22px;position:relative;color:#374151;line-height:1.5}
+.opt-card ul li::before{content:"✓";position:absolute;left:0;top:6px;color:var(--primary);font-weight:700}
+.video-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+@media(max-width:1000px){.video-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:600px){.video-grid{grid-template-columns:repeat(2,1fr)}}
 
-.container{max-width:1440px;margin:0 auto;padding:0;}
+.vcard .meta{padding:10px 12px;font-size:11.5px}
+.vcard .meta .row{display:flex;justify-content:space-between;padding:2px 0;color:var(--muted)}
+.vcard .meta .row b{color:var(--fg);font-family:"SF Mono",monospace}
+.radar-svg{width:100%;height:300px}
+.bar-chart{margin:20px 0}
+.bar-item{margin-bottom:12px}
+.bar-label{font-size:13px;color:var(--fg);margin-bottom:4px;display:flex;justify-content:space-between}
+.bar-track{height:24px;background:var(--surface);border-radius:6px;overflow:hidden;position:relative}
+.bar-fill{height:100%;border-radius:6px;transition:width .5s}
+.bar-fill.client{background:linear-gradient(90deg,var(--primary),var(--primary-dark))}
+.bar-fill.industry{background:linear-gradient(90deg,var(--gray),#6B7280)}
+.compare-bar{position:relative;margin-bottom:16px}
+.compare-bar .label{font-size:13px;color:var(--fg);margin-bottom:6px;font-weight:500}
+.compare-bar .bars{display:flex;gap:8px;align-items:center}
+.compare-bar .bar-wrapper{flex:1}
+.compare-bar .bar-track{height:20px;background:var(--surface);border-radius:4px;overflow:hidden;position:relative}
+.compare-bar .bar-fill{height:100%;border-radius:4px;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;font-size:11px;color:#fff;font-weight:600}
+.compare-bar .bar-fill.client{background:var(--primary)}
+.compare-bar .bar-fill.industry{background:var(--gray)}
+.compare-bar .legend{font-size:11px;color:var(--muted);min-width:60px;text-align:right}
+.conclusion{background:var(--primary-soft);border-left:3px solid var(--primary);padding:12px 14px;border-radius:6px;margin-top:12px;font-size:13px;color:#374151;line-height:1.5}
+.conclusion b{color:var(--primary)}
+.template-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:20px}
+.template-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.template-num{background:var(--primary);color:#fff;font-size:18px;font-weight:700;padding:8px 16px;border-radius:8px;min-width:60px;text-align:center}
+.template-title{flex:1}
+.template-title h3{font-size:16px;font-weight:700;color:var(--fg);margin-bottom:2px}
+.template-title p{font-size:12px;color:var(--muted)}
+.template-script{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+@media(max-width:800px){.template-script{grid-template-columns:1fr}}
+.script-block{background:var(--surface);border-radius:8px;padding:12px}
+.script-block .tag{display:inline-block;background:var(--primary);color:#fff;font-size:11px;padding:2px 8px;border-radius:4px;font-weight:600;margin-bottom:6px}
+.script-block p{font-size:12px;color:#374151;line-height:1.5}
+.template-videos{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:800px){.template-videos{grid-template-columns:1fr}}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9999;align-items:center;justify-content:center}
+.modal.show{display:flex}
+.modal-content{position:relative;max-width:90vw;max-height:90vh}
+.modal-close{position:absolute;top:-40px;right:0;background:#fff;color:#000;border:none;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:20px;line-height:1}
+.modal video{max-width:100%;max-height:90vh;border-radius:8px}
 
-/* ===== Header (shiwu hero style) ===== */
-.desens-banner{background:linear-gradient(135deg,#dc2626 0%,#ef4444 100%);color:#fff;
-  padding:12px 24px;text-align:center;font-weight:600;font-size:13px;
-  box-shadow:0 2px 8px rgba(220,38,38,.3);position:sticky;top:0;z-index:1000;}
-.header{background:#fff;color:#0F172A;padding:40px 32px 32px;border-bottom:1px solid #E5E7EB;
-  border-radius:0;margin-bottom:0;box-shadow:none;}
-.header .eyebrow{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.2em;
-  color:#64748B;text-transform:uppercase;margin-bottom:12px;}
-.header h1{font-family:"Noto Serif SC",serif;font-size:40px;font-weight:900;
-  color:#0F172A;line-height:1.15;letter-spacing:-.01em;margin-bottom:14px;}
-.header .subtitle{font-size:14px;color:#64748B;max-width:720px;opacity:1;}
-.header .version-badge{display:inline-flex;align-items:center;gap:6px;background:#FEF2F2;
-  color:#B91C1C;border:1px solid #FECACA;padding:3px 10px;border-radius:999px;
-  font-size:11px;font-weight:600;margin-top:14px;font-family:"JetBrains Mono",monospace;}
+.vcard{width:180px;background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.08);overflow:hidden;transition:all .2s}
+.vcard:hover{box-shadow:0 4px 16px rgba(217,59,59,.15);transform:translateY(-2px)}
+.vcard .thumb{position:relative;background:#1a1a1a;overflow:hidden;border-radius:8px 8px 0 0}
+.vcard .thumb video{display:block;width:100%;height:auto;min-height:100px;max-height:280px;object-fit:contain;background:#1a1a1a}
+.vcard .thumb .rank{position:absolute;top:6px;left:6px;background:var(--primary);color:#fff;font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;z-index:2}
+.vcard .thumb .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:32px;height:32px;background:rgba(255,255,255,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:2;cursor:pointer;transition:all .2s}
+.vcard:hover .thumb .play{background:var(--primary);transform:translate(-50%,-50%) scale(1.1)}
+.vcard .thumb .play::after{content:"";width:0;height:0;border-left:10px solid var(--primary);border-top:6px solid transparent;border-bottom:6px solid transparent;margin-left:2px;transition:all .2s}
+.vcard:hover .thumb .play::after{border-left-color:#fff}
+.vcard .info{padding:10px;font-size:11px}
+.vcard .info .row{display:flex;justify-content:space-between;margin-bottom:4px;color:#666}
+.vcard .info .row span:last-child{color:#333;font-weight:600;font-family:var(--font-mono)}
+.vcard .highlight{background:rgba(217,59,59,.08);padding:8px;margin:0 -10px -10px;font-size:10px;color:#666;line-height:1.5}
 
-/* ===== Section (borderless, no shadow, divided by border) ===== */
-.section{background:#fff;border-radius:0;border:none;border-bottom:1px solid #E5E7EB;
-  padding:56px 32px;margin-bottom:0;box-shadow:none;}
-.section-title{font-size:22px;font-weight:800;color:#0F172A;letter-spacing:-.01em;
-  margin-bottom:20px;padding-bottom:0;border-bottom:none;display:flex;align-items:center;gap:10px;}
-.section-title::before{content:"";display:inline-block;width:4px;height:20px;background:#D93B3B;
-  border-radius:2px;flex-shrink:0;}
-
-/* ===== KPI (reference style) ===== */
-.kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:8px;}
-.kpi-card{background:#fff;border:1px solid #E5E7EB;border-radius:14px;padding:20px 20px 18px;
-  text-align:left;transition:.2s;display:flex;flex-direction:column;gap:0;}
-.kpi-card:hover{border-color:#CBD5E1;box-shadow:0 4px 12px rgba(15,23,42,.05);}
-.kpi-label{font-size:13px;color:#64748B;margin-bottom:10px;font-weight:500;letter-spacing:0;}
-.kpi-value{font-family:"JetBrains Mono","SF Mono",Menlo,monospace;font-size:34px;
-  font-weight:700;color:#0F172A;margin-bottom:8px;letter-spacing:-.02em;line-height:1.1;}
-.kpi-value .unit{font-size:16px;font-weight:600;color:#0F172A;margin-left:4px;
-  font-family:"PingFang SC",sans-serif;}
-.kpi-compare{font-size:12px;color:#64748B;margin-bottom:10px;}
-.kpi-compare .num{font-family:"JetBrains Mono",monospace;color:#334155;}
-.kpi-badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:999px;
-  font-size:12px;font-weight:600;font-family:"JetBrains Mono",monospace;margin-bottom:12px;
-  align-self:flex-start;}
-.kpi-badge.pos{background:#ECFDF5;color:#059669;border:1px solid #A7F3D0;}
-.kpi-badge.neg{background:#FEF2F2;color:#DC2626;border:1px solid #FECACA;}
-.kpi-verdict{font-size:13px;color:#334155;font-weight:500;margin-top:auto;}
-
-/* ===== Chart ===== */
-.chart-container{width:100%;height:400px;margin-top:20px;background:#fff;
-  border:1px solid #E5E7EB;border-radius:12px;padding:12px;}
-
-/* ===== Radar layout (reference style) ===== */
-.section-summary{font-size:14px;color:#64748B;margin:-8px 0 20px;line-height:1.7;}
-.radar-layout{display:grid;grid-template-columns:1.4fr 1fr;gap:20px;margin-top:8px;}
-.radar-chart-box{background:#fff;border:1px solid #E5E7EB;border-radius:12px;padding:12px;
-  height:460px;}
-.radar-conclusions{display:flex;flex-direction:column;gap:12px;}
-.radar-conclusion{background:#fff;border:1px solid #E5E7EB;border-radius:12px;padding:16px 18px;
-  border-left:3px solid #D93B3B;}
-.radar-conclusion.good{border-left-color:#10B981;}
-.radar-conclusion.mid{border-left-color:#F59E0B;}
-.radar-conclusion.bad{border-left-color:#EF4444;}
-.rc-label{font-size:12px;color:#64748B;margin-bottom:8px;font-weight:500;}
-.rc-text{font-size:13px;color:#0F172A;line-height:1.65;}
-.rc-text strong{font-weight:700;}
-.rc-text .pos{color:#059669;font-family:"JetBrains Mono",monospace;font-weight:700;}
-.rc-text .neg{color:#DC2626;font-family:"JetBrains Mono",monospace;font-weight:700;}
-@media (max-width:900px){.radar-layout{grid-template-columns:1fr;}}
-
-/* ===== Tag cards (feature frequency) ===== */
-.tag-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:16px;}
-.tag-card{background:#fff;border:1px solid #E5E7EB;border-radius:12px;padding:16px 18px;}
-.tag-card-title{font-size:14px;font-weight:700;color:#0F172A;margin-bottom:2px;}
-.tag-card-desc{font-size:12px;color:#64748B;margin-bottom:14px;}
-.tag-bar{margin-bottom:10px;}
-.tag-bar:last-child{margin-bottom:0;}
-.tag-bar-label{font-size:11px;color:#64748B;margin-bottom:4px;display:flex;
-  justify-content:space-between;font-family:"JetBrains Mono",monospace;}
-.tag-bar-track{height:6px;background:#F1F5F9;border-radius:3px;overflow:hidden;}
-.tag-bar-fill{height:100%;border-radius:3px;transition:width .3s ease;}
-.tag-bar-fill.client{background:#D93B3B;}
-.tag-bar-fill.industry{background:#94A3B8;}
-
-/* ===== Editing style ===== */
-.editing-style-container{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:16px;}
-.editing-radar{height:320px;background:#fff;border:1px solid #E5E7EB;border-radius:12px;padding:8px;}
-.editing-bars{display:flex;flex-direction:column;justify-content:center;gap:14px;padding:8px 4px;}
-.editing-bar-item{display:flex;align-items:center;gap:12px;}
-.editing-bar-label{font-size:12px;color:#64748B;width:100px;flex-shrink:0;}
-.editing-bar-track{flex:1;height:22px;background:#F1F5F9;border-radius:6px;overflow:hidden;position:relative;}
-.editing-bar-fill{height:100%;background:#D93B3B;border-radius:6px;display:flex;
-  align-items:center;justify-content:flex-end;padding-right:8px;color:#fff;font-size:11px;
-  font-weight:700;font-family:"JetBrains Mono",monospace;}
-.editing-score{text-align:center;margin-top:20px;padding:18px;background:#F5F6F8;
-  border:1px solid #E5E7EB;border-radius:12px;}
-.editing-score-label{font-size:12px;color:#64748B;margin-bottom:8px;letter-spacing:.05em;}
-.editing-score-value{font-size:30px;font-weight:800;color:#0F172A;font-family:"JetBrains Mono",monospace;}
-.editing-score-value .vs{font-size:18px;color:#64748B;margin:0 10px;font-weight:400;}
-.editing-score-value .diff{font-size:20px;color:#B91C1C;}
-
-/* ===== Feature cards ===== */
-.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px;}
-.feature-card{background:#fff;border:1px solid #E5E7EB;border-radius:12px;padding:16px 18px;
-  position:relative;padding-left:22px;transition:.2s;}
-.feature-card:hover{border-color:#CBD5E1;box-shadow:0 4px 12px rgba(15,23,42,.04);}
-.feature-card::before{content:'';position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:2px;}
-.feature-card.color-1::before{background:#D93B3B;}
-.feature-card.color-2::before{background:#0EA5A4;}
-.feature-card.color-3::before{background:#F59E0B;}
-.feature-card.color-4::before{background:#3B82F6;}
-.feature-card.color-5::before{background:#8B5CF6;}
-.feature-card.color-6::before{background:#EC4899;}
-.feature-number{display:inline-block;width:22px;height:22px;background:#0F172A;color:#fff;
-  border-radius:6px;text-align:center;line-height:22px;font-size:11px;font-weight:700;
-  margin-bottom:8px;font-family:"JetBrains Mono",monospace;}
-.feature-title{font-size:14px;font-weight:700;color:#0F172A;margin-bottom:6px;}
-.feature-desc{font-size:12px;color:#64748B;line-height:1.55;margin-bottom:10px;}
-.feature-tag{display:inline-flex;align-items:center;font-size:11px;padding:2px 8px;
-  border-radius:999px;border:1px solid #E5E7EB;background:#F5F6F8;color:#64748B;font-weight:500;}
-
-/* ===== Advantage / disadvantage ===== */
-.advantage-disadvantage-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;}
-.advantage-card,.disadvantage-card{background:#fff;border:1px solid #E5E7EB;border-radius:12px;
-  padding:16px 18px;position:relative;}
-.advantage-card{border-left:3px solid #10B981;}
-.disadvantage-card{border-left:3px solid #EF4444;}
-.feature-badge{position:absolute;top:12px;right:12px;background:#ECFDF5;color:#059669;
-  border:1px solid #A7F3D0;padding:2px 10px;border-radius:999px;font-size:11px;font-weight:600;}
-.disadvantage-card .feature-badge{background:#FEF2F2;color:#B91C1C;border-color:#FECACA;}
-.feature-content-title{font-size:14px;font-weight:700;color:#0F172A;margin-bottom:6px;
-  padding-right:70px;}
-.feature-content-desc{font-size:12px;color:#64748B;line-height:1.55;}
-
-/* ===== Video cards ===== */
-.video-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:16px;}
-.video-card{background:#fff;border:1px solid #E5E7EB;border-radius:12px;overflow:hidden;
-  position:relative;transition:.2s;}
-.video-card:hover{border-color:#CBD5E1;box-shadow:0 8px 20px rgba(15,23,42,.06);}
-.video-rank{position:absolute;top:8px;left:8px;background:rgba(15,23,42,.85);color:#fff;
-  font-family:"JetBrains Mono",monospace;font-weight:700;font-size:11px;padding:3px 8px;
-  border-radius:6px;z-index:10;}
-.video-quadrant{position:absolute;top:8px;right:8px;padding:3px 8px;border-radius:6px;
-  font-size:10px;font-weight:700;z-index:10;letter-spacing:.02em;}
-.video-quadrant.优质{background:#ECFDF5;color:#059669;border:1px solid #A7F3D0;}
-.video-quadrant.流量{background:#FFFBEB;color:#B45309;border:1px solid #FDE68A;}
-.video-quadrant.潜力{background:#EFF6FF;color:#1D4ED8;border:1px solid #BFDBFE;}
-.video-quadrant.待优化{background:#FEF2F2;color:#B91C1C;border:1px solid #FECACA;}
-.video-player{width:100%;aspect-ratio:9/16;background:#0F172A;display:block;}
-.video-info{padding:10px 12px 12px;}
-.video-title{font-size:12px;font-weight:600;color:#0F172A;margin-bottom:8px;overflow:hidden;
-  text-overflow:ellipsis;white-space:nowrap;}
-.video-metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:4px 8px;font-size:10px;
-  font-family:"JetBrains Mono",monospace;}
-.video-metric{color:#64748B;}
-.video-metric strong{color:#0F172A;font-weight:700;}
-
-@media (max-width:1024px){
-  .kpi-grid{grid-template-columns:repeat(3,1fr);}
-  .tag-grid{grid-template-columns:1fr;}
-  .feature-grid{grid-template-columns:repeat(2,1fr);}
-  .video-grid{grid-template-columns:repeat(3,1fr);}
-  .section{padding:40px 20px;}
-  .header{padding:32px 20px 24px;}
-  .header h1{font-size:32px;}
-}
-@media (max-width:768px){
-  .kpi-grid{grid-template-columns:repeat(2,1fr);}
-  .feature-grid{grid-template-columns:1fr;}
-  .video-grid{grid-template-columns:repeat(2,1fr);}
-  .advantage-disadvantage-grid{grid-template-columns:1fr;}
-  .editing-style-container{grid-template-columns:1fr;}
-  .header h1{font-size:26px;}
-}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.tbl th,.tbl td{padding:10px 12px;text-align:center;border-bottom:1px solid #E5E7EB}
+.tbl th{background:#F9FAFB;color:#374151;font-weight:600;font-size:13px}
+.tbl td.neg{color:#D93B3B;font-weight:600}
+.tbl td.pos{color:#059669;font-weight:600}
+.tbl tbody tr:hover{background:#FAFAFA}
 </style>
 </head>
-<body>
-    <div class="container">
-        <!-- Header -->
-        <div class="desens-banner">⚠️ 脱敏版本 · 消耗数据已转为消耗指数（基准 100 = 最高消耗素材）</div>
-        <div class="header">
-            <div class="eyebrow">BIYANG · CREATIVE DIAGNOSIS REPORT · V2</div>
-            <h1>必扬素材诊断报告</h1>
-            <div class="subtitle">对必扬近 30 日 <span class="font-mono" style="color:#0F172A;font-weight:700">TOP 20</span> 素材与行业 <span class="font-mono" style="color:#0F172A;font-weight:700">TOP 100</span> 素材进行数据对比、四象限分层与内容特征拆解，输出可落地的行动清单。</div>
-            <div class="version-badge">DESENSITIZED · 基于 2026 年 5 月 30 日 – 6 月 28 日投放数据</div>
-        </div>
-        
-        <!-- 01. 基础指标概览 -->
-        <div class="section">
-            <div class="section-title">01 · 基础指标概览</div>
-            <div class="kpi-grid">
-                <div class="kpi-card">
-                    <div class="kpi-label">消耗指数</div>
-                    <div class="kpi-value">3.2</div>
-                    <div class="kpi-compare">行业均值 <span class="num">10.3</span></div>
-                    <div class="kpi-badge neg">-5.9</div>
-                    <div class="kpi-verdict">规模短板</div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-label">3s 完播率</div>
-                    <div class="kpi-value">31.00<span class="unit">%</span></div>
-                    <div class="kpi-compare">行业均值 <span class="num">45.58%</span></div>
-                    <div class="kpi-badge neg">-14.58 pp</div>
-                    <div class="kpi-verdict">完播弱</div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-label">CTR 点击率</div>
-                    <div class="kpi-value">1.17<span class="unit">%</span></div>
-                    <div class="kpi-compare">行业均值 <span class="num">2.43%</span></div>
-                    <div class="kpi-badge neg">-1.26 pp</div>
-                    <div class="kpi-verdict">点击弱</div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-label">下单率</div>
-                    <div class="kpi-value">11.40<span class="unit">%</span></div>
-                    <div class="kpi-compare">行业均值 <span class="num">7.75%</span></div>
-                    <div class="kpi-badge pos">+3.65 pp</div>
-                    <div class="kpi-verdict">转化强</div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-label">下单 ROI</div>
-                    <div class="kpi-value">1.72</div>
-                    <div class="kpi-compare">行业均值 <span class="num">1.61</span></div>
-                    <div class="kpi-badge pos">+0.11</div>
-                    <div class="kpi-verdict">成本优</div>
-                </div>
-            </div>
-        </div>
+<body tabindex="-1" style="position: relative;">
+<div class="wrap">
+<div class="header">
+<div class="title-block">
+<h1>必扬 · 客户素材对标诊断报告（脱敏版）</h1>
+<div class="sub">有效素材 <b>20</b> 条（剔除 1 条空 URL）｜对标行业头部 Top100 均值｜数据周期截至 2026-07</div>
+</div>
+</div>
 
-        <!-- 01.5 五维能力对比 -->
-        <div class="section">
-            <div class="section-title">02 · 五维能力对比</div>
-            <div class="section-summary">必扬在<strong>转化后端</strong>（下单率 / ROI）领先行业均值，但在<strong>互动前端</strong>（3s 完播 / CTR / 消耗规模）承压。</div>
-            <div class="radar-layout">
-                <div id="radarChart" class="radar-chart-box"></div>
-                <div class="radar-conclusions">
-                    <div class="radar-conclusion bad">
-                        <div class="rc-label">互动前端 · 承压</div>
-                        <div class="rc-text"><strong>3s 完播 <span class="neg">-14.58pp</span> / CTR <span class="neg">-1.26pp</span></strong> — 前端钩子明显弱于行业均值，说明素材前 3 秒抓取力不足，是流量入口的核心瓶颈。</div>
-                    </div>
-                    <div class="radar-conclusion good">
-                        <div class="rc-label">转化后端 · 领先</div>
-                        <div class="rc-text"><strong>下单率 <span class="pos">+3.65pp</span> / ROI <span class="pos">+0.11</span></strong> — 一旦进入落地页，转化效率明显优于行业，说明客单/成本结构与货品匹配度较好。</div>
-                    </div>
-                    <div class="radar-conclusion mid">
-                        <div class="rc-label">规模短板</div>
-                        <div class="rc-text"><strong>消耗指数 3.2 vs 10.3</strong> — 单素材放量约为行业均值 <span class="neg">31%</span>，需重点破解跑量瓶颈，把后端优势转化为规模优势。</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- 02. 四象限散点分布 -->
-        <div class="section">
-            <div class="section-title">03 · 四象限散点分布</div>
-            <div id="scatterChart" class="chart-container"></div>
-        </div>
-        
-        <!-- 03. 内容特征对比 -->
-        <div class="section">
-            <div class="section-title">04 · 内容特征对比</div>
+<div class="desens-banner">
+🔒 脱敏版本 · 消耗数据已转为消耗指数
+</div>
+
+<div class="kpi-grid">
+<div class="kpi">
+<div class="label">消耗指数</div>
+<div class="value">51.6<span class="unit">指数</span></div>
+<div class="bench">行业均值: 145.9指数</div>
+<span class="badge down">-94.3 (-64.6%)</span>
+</div>
+<div class="kpi">
+<div class="label">CTR 点击率</div>
+<div class="value">2.02<span class="unit">%</span></div>
+<div class="bench">行业均值: 2.43%</div>
+<span class="badge down">-1.26pp (-51.86%)</span>
+</div>
+<div class="kpi">
+<div class="label">CVR 下单转化率</div>
+<div class="value">11.40<span class="unit">%</span></div>
+<div class="bench">行业均值: 7.75%</div>
+<span class="badge up">+3.65pp (+47.1%)</span>
+</div>
+<div class="kpi">
+<div class="label">3s完播率</div>
+<div class="value">31.0<span class="unit">%</span></div>
+<div class="bench">行业均值: 45.58%</div>
+<span class="badge down">-14.58pp (-32.0%)</span>
+</div>
+<div class="kpi">
+<div class="label">平均播放时长</div>
+<div class="value">5.28<span class="unit">s</span></div>
+<div class="bench">行业均值: 8.92s</div>
+<span class="badge down">-3.64s (-40.8%)</span>
+</div>
+</div>
+
+<div class="charts-row">
+<div class="chart-card">
+<div class="cap">
+五维完播能力雷达
+<div class="legend">
+<span><i style="background:#D93B3B"></i>客户</span>
+<span><i style="background:#9CA3AF"></i>行业</span>
+</div>
+</div>
+<div class="chart-box">
+<svg class="radar-svg" viewBox="0 0 300 300">
+<defs>
+<linearGradient id="radarGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" style="stop-color:#D93B3B;stop-opacity:0.3"></stop>
+<stop offset="100%" style="stop-color:#D93B3B;stop-opacity:0.1"></stop>
+</linearGradient>
+</defs>
+<g transform="translate(150,150)">
+<circle cx="0" cy="0" r="120" fill="none" stroke="#E5E7EB" stroke-width="1"></circle>
+<circle cx="0" cy="0" r="90" fill="none" stroke="#E5E7EB" stroke-width="1"></circle>
+<circle cx="0" cy="0" r="60" fill="none" stroke="#E5E7EB" stroke-width="1"></circle>
+<circle cx="0" cy="0" r="30" fill="none" stroke="#E5E7EB" stroke-width="1"></circle>
+<line x1="0" y1="0" x2="0" y2="-120" stroke="#E5E7EB" stroke-width="1"></line>
+<line x1="0" y1="0" x2="114" y2="-37" stroke="#E5E7EB" stroke-width="1"></line>
+<line x1="0" y1="0" x2="70" y2="97" stroke="#E5E7EB" stroke-width="1"></line>
+<line x1="0" y1="0" x2="-70" y2="97" stroke="#E5E7EB" stroke-width="1"></line>
+<line x1="0" y1="0" x2="-114" y2="-37" stroke="#E5E7EB" stroke-width="1"></line>
+<polygon points="0,-81.61 72.89,-23.66 33.88,46.95 -40.10,55.57 -71.59,-23.24" fill="url(#radarGrad)" stroke="#D93B3B" stroke-width="2"></polygon>
+<polygon points="0,-120 114,-37 70,97 -70,97 -114,-37" fill="none" stroke="#9CA3AF" stroke-width="1.5" stroke-dasharray="4,4"></polygon>
+<text x="0" y="-130" text-anchor="middle" font-size="11" fill="#6B7280">3s完播率</text>
+<text x="120" y="-30" text-anchor="start" font-size="11" fill="#6B7280">5s完播率</text>
+<text x="75" y="110" text-anchor="start" font-size="11" fill="#6B7280">10s完播率</text>
+<text x="-75" y="110" text-anchor="end" font-size="11" fill="#6B7280">播放时长</text>
+<text x="-120" y="-30" text-anchor="end" font-size="11" fill="#6B7280">7s完播率</text>
+</g>
+</svg>
+</div>
+</div>
+
+<div class="chart-card">
+<div class="cap">指标差值分布</div>
+<div class="bar-chart">
+<div class="bar-item">
+<div class="bar-label"><span>消耗指数</span><span style="color:var(--primary);font-weight:600">-68.5%</span></div>
+<div class="bar-track">
+<div class="bar-fill" style="width:68.5%;background:var(--primary)"></div>
+</div>
+</div>
+<div class="bar-item">
+<div class="bar-label"><span>CTR</span><span style="color:var(--primary);font-weight:600">-51.9%</span></div>
+<div class="bar-track">
+<div class="bar-fill" style="width:51.9%;background:var(--primary)"></div>
+</div>
+</div>
+<div class="bar-item">
+<div class="bar-label"><span>CVR</span><span style="color:var(--success);font-weight:600">+47.1%</span></div>
+<div class="bar-track">
+<div class="bar-fill" style="width:47.1%;background:var(--success)"></div>
+</div>
+</div>
+<div class="bar-item">
+<div class="bar-label"><span>3s完播率</span><span style="color:var(--primary);font-weight:600">-32.0%</span></div>
+<div class="bar-track">
+<div class="bar-fill" style="width:32.0%;background:var(--primary)"></div>
+</div>
+</div>
+<div class="bar-item">
+<div class="bar-label"><span>平均播放时长</span><span style="color:var(--primary);font-weight:600">-42.7%</span></div>
+<div class="bar-track">
+<div class="bar-fill" style="width:42.7%;background:var(--primary)"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="section">
+<h2>模块 1 · 对标总览</h2>
+<table class="tbl">
+<thead><tr><th>指标</th><th>客户均值</th><th>行业均值</th><th>差值</th><th>差值 %</th></tr></thead>
+<tbody>
+<tr><td>消耗指数</td><td>51.6</td><td>145.9</td><td class="neg">-94.3</td><td class="neg">-64.6%</td></tr>
+<tr><td>CTR 点击率</td><td>2.02%</td><td>2.43%</td><td class="neg">-0.41pp</td><td class="neg">-16.9%</td></tr>
+<tr><td>CVR 下单转化率</td><td>11.40%</td><td>7.75%</td><td class="pos">+3.65pp</td><td class="pos">+47.1%</td></tr>
+<tr><td>3s完播率</td><td>31.00%</td><td>45.58%</td><td class="neg">-14.58pp</td><td class="neg">-32.0%</td></tr>
+<tr><td>5s完播率</td><td>19.08%</td><td>29.84%</td><td class="neg">-10.76pp</td><td class="neg">-36.1%</td></tr>
+<tr><td>7s完播率</td><td>13.91%</td><td>22.15%</td><td class="neg">-8.24pp</td><td class="neg">-37.2%</td></tr>
+<tr><td>10s完播率</td><td>9.65%</td><td>17.89%</td><td class="neg">-8.24pp</td><td class="neg">-46.1%</td></tr>
+<tr><td>平均播放时长</td><td>5.28s</td><td>8.92s</td><td class="neg">-3.64s</td><td class="neg">-40.8%</td></tr>
+</tbody></table>
+<p style="margin-top:16px;color:#374151"><b>核心诊断：</b>必扬客户消耗指数仅51.6（行业均值145.9，-64.6%），核心原因是<b style="color:var(--primary)">前端留人能力严重不足</b>——3s完播率31.0%（行业45.58%，-14.58pp），导致系统预估CTR降权、压缩曝光消耗。</p>
+<p style="color:#374151"><b>唯一优势：</b>CVR转化率11.40%（行业7.75%，+47.1%），单次曝光转化价值高，但受限于前端流量获取能力，整体消耗体量无法放大。</p>
+</div>
+
+<div class="section">
+<h2>模块2· 行业vs客户 · 创意特征对比</h2>
+
+<h3>1. 视频创意共性统计</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin:20px 0">
+
+    <div>
+        <p style="font-size:13px;font-weight:600;margin-bottom:12px;color:var(--fg)">前3秒钩子类型分布</p>
+        <div class="bar-chart">
             
-            <!-- 内容标签频次对比 -->
-            <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; color: var(--text-main);">内容标签频次对比</h3>
-            <div class="tag-grid">
-
-                <div class="tag-card">
-                    <div class="tag-card-title">明星背书</div>
-                    <div class="tag-card-desc">一线明星出镜代言</div>
-                    <div class="tag-bar">
-                        <div class="tag-bar-label">
-                            <span>必扬</span>
-                            <span>0.0%</span>
-                        </div>
-                        <div class="tag-bar-track">
-                            <div class="tag-bar-fill client" style="width: 0.0%"></div>
-                        </div>
-                    </div>
-                    <div class="tag-bar">
-                        <div class="tag-bar-label">
-                            <span>行业</span>
-                            <span>65.0%</span>
-                        </div>
-                        <div class="tag-bar-track">
-                            <div class="tag-bar-fill industry" style="width: 65.0%"></div>
-                        </div>
-                    </div>
+        <div class="bar-item" style="margin-bottom:16px">
+            <div class="bar-label" style="margin-bottom:6px"><span style="font-weight:600">痛点提问</span></div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+                <span style="font-size:11px;color:#D93B3B;width:50px">客户</span>
+                <div class="bar-track" style="flex:1">
+                    <div class="bar-fill" style="width:15%;background:#D93B3B"></div>
                 </div>
-
-                <div class="tag-card">
-                    <div class="tag-card-title">KOL背书</div>
-                    <div class="tag-card-desc">护肤专家、达人背书</div>
-                    <div class="tag-bar">
-                        <div class="tag-bar-label">
-                            <span>必扬</span>
-                            <span>100.0%</span>
-                        </div>
-                        <div class="tag-bar-track">
-                            <div class="tag-bar-fill client" style="width: 100.0%"></div>
-                        </div>
-                    </div>
-                    <div class="tag-bar">
-                        <div class="tag-bar-label">
-                            <span>行业</span>
-                            <span>85.0%</span>
-                        </div>
-                        <div class="tag-bar-track">
-                            <div class="tag-bar-fill industry" style="width: 85.0%"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tag-card">
-                    <div class="tag-card-title">产品展示</div>
-                    <div class="tag-card-desc">产品外观、使用过程展示</div>
-                    <div class="tag-bar">
-                        <div class="tag-bar-label">
-                            <span>必扬</span>
-                            <span>100.0%</span>
-                        </div>
-                        <div class="tag-bar-track">
-                            <div class="tag-bar-fill client" style="width: 100.0%"></div>
-                        </div>
-                    </div>
-                    <div class="tag-bar">
-                        <div class="tag-bar-label">
-                            <span>行业</span>
-                            <span>92.0%</span>
-                        </div>
-                        <div class="tag-bar-track">
-                            <div class="tag-bar-fill industry" style="width: 92.0%"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tag-card">
-                    <div class="tag-card-title">成分功效</div>
-                    <div class="tag-card-desc">成分配方、功效讲解</div>
-                    <div class="tag-bar">
-                        <div class="tag-bar-label">
-                            <span>必扬</span>
-                            <span>100.0%</span>
-                        </div>
-                        <div class="tag-bar-track">
-                            <div class="tag-bar-fill client" style="width: 100.0%"></div>
-                        </div>
-                    </div>
-                    <div class="tag-bar">
-                        <div class="tag-bar-label">
-                            <span>行业</span>
-                            <span>100.0%</span>
-                        </div>
-                        <div class="tag-bar-track">
-                            <div class="tag-bar-fill industry" style="width: 100.0%"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tag-card">
-                    <div class="tag-card-title">价格锚点</div>
-                    <div class="tag-card-desc">价格对比、促销价格</div>
-                    <div class="tag-bar">
-                        <div class="tag-bar-label">
-                            <span>必扬</span>
-                            <span>22.0%</span>
-                        </div>
-                        <div class="tag-bar-track">
-                            <div class="tag-bar-fill client" style="width: 22.0%"></div>
-                        </div>
-                    </div>
-                    <div class="tag-bar">
-                        <div class="tag-bar-label">
-                            <span>行业</span>
-                            <span>78.0%</span>
-                        </div>
-                        <div class="tag-bar-track">
-                            <div class="tag-bar-fill industry" style="width: 78.0%"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tag-card">
-                    <div class="tag-card-title">限时限量</div>
-                    <div class="tag-card-desc">限时优惠、限量促销</div>
-                    <div class="tag-bar">
-                        <div class="tag-bar-label">
-                            <span>必扬</span>
-                            <span>22.0%</span>
-                        </div>
-                        <div class="tag-bar-track">
-                            <div class="tag-bar-fill client" style="width: 22.0%"></div>
-                        </div>
-                    </div>
-                    <div class="tag-bar">
-                        <div class="tag-bar-label">
-                            <span>行业</span>
-                            <span>50.0%</span>
-                        </div>
-                        <div class="tag-bar-track">
-                            <div class="tag-bar-fill industry" style="width: 50.0%"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tag-card">
-                    <div class="tag-card-title">用户证言</div>
-                    <div class="tag-card-desc">真实用户好评、使用反馈</div>
-                    <div class="tag-bar">
-                        <div class="tag-bar-label">
-                            <span>必扬</span>
-                            <span>33.0%</span>
-                        </div>
-                        <div class="tag-bar-track">
-                            <div class="tag-bar-fill client" style="width: 33.0%"></div>
-                        </div>
-                    </div>
-                    <div class="tag-bar">
-                        <div class="tag-bar-label">
-                            <span>行业</span>
-                            <span>80.0%</span>
-                        </div>
-                        <div class="tag-bar-track">
-                            <div class="tag-bar-fill industry" style="width: 80.0%"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tag-card">
-                    <div class="tag-card-title">赠品堆叠</div>
-                    <div class="tag-card-desc">买一送多、赠品展示</div>
-                    <div class="tag-bar">
-                        <div class="tag-bar-label">
-                            <span>必扬</span>
-                            <span>22.0%</span>
-                        </div>
-                        <div class="tag-bar-track">
-                            <div class="tag-bar-fill client" style="width: 22.0%"></div>
-                        </div>
-                    </div>
-                    <div class="tag-bar">
-                        <div class="tag-bar-label">
-                            <span>行业</span>
-                            <span>80.0%</span>
-                        </div>
-                        <div class="tag-bar-track">
-                            <div class="tag-bar-fill industry" style="width: 80.0%"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tag-card">
-                    <div class="tag-card-title">前后对比</div>
-                    <div class="tag-card-desc">使用前后效果对比</div>
-                    <div class="tag-bar">
-                        <div class="tag-bar-label">
-                            <span>必扬</span>
-                            <span>22.0%</span>
-                        </div>
-                        <div class="tag-bar-track">
-                            <div class="tag-bar-fill client" style="width: 22.0%"></div>
-                        </div>
-                    </div>
-                    <div class="tag-bar">
-                        <div class="tag-bar-label">
-                            <span>行业</span>
-                            <span>90.0%</span>
-                        </div>
-                        <div class="tag-bar-track">
-                            <div class="tag-bar-fill industry" style="width: 90.0%"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tag-card">
-                    <div class="tag-card-title">权威认证</div>
-                    <div class="tag-card-desc">批文、检测报告、获奖证书</div>
-                    <div class="tag-bar">
-                        <div class="tag-bar-label">
-                            <span>必扬</span>
-                            <span>100.0%</span>
-                        </div>
-                        <div class="tag-bar-track">
-                            <div class="tag-bar-fill client" style="width: 100.0%"></div>
-                        </div>
-                    </div>
-                    <div class="tag-bar">
-                        <div class="tag-bar-label">
-                            <span>行业</span>
-                            <span>40.0%</span>
-                        </div>
-                        <div class="tag-bar-track">
-                            <div class="tag-bar-fill industry" style="width: 40.0%"></div>
-                        </div>
-                    </div>
-                </div>
-
+                <b style="font-size:12px;color:#D93B3B;width:45px;text-align:right">15%</b>
             </div>
-            
-            <!-- 剪辑风格5维对比 -->
-            <h3 style="font-size: 16px; font-weight: 600; margin: 32px 0 16px; color: var(--text-main);">剪辑风格5维对比</h3>
-            <div class="editing-style-container">
-                <div id="editingRadar" class="editing-radar"></div>
-                <div class="editing-bars">
-
-                    <div class="editing-bar-item">
-                        <div class="editing-bar-label">镜头切换频率</div>
-                        <div class="editing-bar-track">
-                            <div class="editing-bar-fill" style="width: 75%">75</div>
-                        </div>
-                    </div>
-
-                    <div class="editing-bar-item">
-                        <div class="editing-bar-label">字幕大字报</div>
-                        <div class="editing-bar-track">
-                            <div class="editing-bar-fill" style="width: 95%">95</div>
-                        </div>
-                    </div>
-
-                    <div class="editing-bar-item">
-                        <div class="editing-bar-label">花字特效</div>
-                        <div class="editing-bar-track">
-                            <div class="editing-bar-fill" style="width: 55%">55</div>
-                        </div>
-                    </div>
-
-                    <div class="editing-bar-item">
-                        <div class="editing-bar-label">AI/3D特效</div>
-                        <div class="editing-bar-track">
-                            <div class="editing-bar-fill" style="width: 10%">10</div>
-                        </div>
-                    </div>
-
-                    <div class="editing-bar-item">
-                        <div class="editing-bar-label">信息密度</div>
-                        <div class="editing-bar-track">
-                            <div class="editing-bar-fill" style="width: 90%">90</div>
-                        </div>
-                    </div>
-
+            <div style="display:flex;align-items:center;gap:8px">
+                <span style="font-size:11px;color:#6B7280;width:50px">行业</span>
+                <div class="bar-track" style="flex:1">
+                    <div class="bar-fill" style="width:34.6%;background:#9CA3AF"></div>
                 </div>
-            </div>
-            <div class="editing-score">
-                <div class="editing-score-label">综合评分</div>
-                <div class="editing-score-value">
-                    <span>65</span>
-                    <span class="vs">vs</span>
-                    <span>82</span>
-                    <span class="diff">(-17)</span>
-                </div>
-            </div>
-            
-            <!-- 行业TOP100优质内容特征 -->
-            <h3 style="font-size: 16px; font-weight: 600; margin: 32px 0 16px; color: var(--text-main);">行业TOP100优质内容特征</h3>
-            <div class="feature-grid">
-
-                <div class="feature-card color-1">
-                    <div class="feature-number">1</div>
-                    <div class="feature-title">明星极端承诺Hook</div>
-                    <div class="feature-desc">田震/张雨绮/吴昕等一线明星出镜，使用极端承诺话术</div>
-                    <span class="feature-tag">开头设计</span>
-                    <span class="feature-tag">65%</span>
-                </div>
-
-                <div class="feature-card color-2">
-                    <div class="feature-number">2</div>
-                    <div class="feature-title">AI/3D视觉冲击</div>
-                    <div class="feature-desc">分子渗透动画、液态金属面孔、3D皮肤雕塑等科技感特效</div>
-                    <span class="feature-tag">视觉特效</span>
-                    <span class="feature-tag">45%</span>
-                </div>
-
-                <div class="feature-card color-3">
-                    <div class="feature-number">3</div>
-                    <div class="feature-title">高频快切剪辑</div>
-                    <div class="feature-desc">1-1.5秒/镜头的极快节奏，配合大字报和花字强化</div>
-                    <span class="feature-tag">剪辑风格</span>
-                    <span class="feature-tag">85%</span>
-                </div>
-
-                <div class="feature-card color-4">
-                    <div class="feature-number">4</div>
-                    <div class="feature-title">极端价格锚点</div>
-                    <div class="feature-desc">全场一折、2699元仪器赠送、买一送多等高价值感促销</div>
-                    <span class="feature-tag">价格策略</span>
-                    <span class="feature-tag">78%</span>
-                </div>
-
-                <div class="feature-card color-5">
-                    <div class="feature-number">5</div>
-                    <div class="feature-title">前后对比直观</div>
-                    <div class="feature-desc">分屏同时对比、时间轴对比等多维度效果展示</div>
-                    <span class="feature-tag">效果展示</span>
-                    <span class="feature-tag">90%</span>
-                </div>
-
-                <div class="feature-card color-6">
-                    <div class="feature-number">6</div>
-                    <div class="feature-title">限时限量组合拳</div>
-                    <div class="feature-desc">618大促+限量+倒计时等多重紧迫感营销</div>
-                    <span class="feature-tag">促销策略</span>
-                    <span class="feature-tag">50%</span>
-                </div>
-
-            </div>
-            
-            <!-- 必扬优势/劣势内容特征 -->
-            <h3 style="font-size: 16px; font-weight: 600; margin: 32px 0 16px; color: var(--text-main);">必扬优势/劣势内容特征</h3>
-            <div class="advantage-disadvantage-grid">
-                <div>
-                    <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 12px; color: var(--success-color);">优势特征</h4>
-
-                    <div class="advantage-card" style="margin-bottom: 12px;">
-                        <span class="feature-badge">+60pp</span>
-                        <div class="feature-content-title">权威认证展示突出</div>
-                        <div class="feature-content-desc">100%视频常驻展示国妆特字批文（如20245912），行业仅40%展示且多为一闪而过</div>
-                        <div class="feature-content-desc" style="margin-top: 4px; color: var(--success-color);">→ 下单率+3.65pp（权威背书增强信任，提升转化）</div>
-                    </div>
-
-                    <div class="advantage-card" style="margin-bottom: 12px;">
-                        <span class="feature-badge">+5pp</span>
-                        <div class="feature-content-title">字幕大字报极强</div>
-                        <div class="feature-content-desc">95%视频使用顶部常驻大字报锁定受众，字号大、对比度高</div>
-                        <div class="feature-content-desc" style="margin-top: 4px; color: var(--success-color);">→ 信息密度90分（大字报强化核心卖点传达）</div>
-                    </div>
-
-                    <div class="advantage-card" style="margin-bottom: 12px;">
-                        <span class="feature-badge">持平但质量更高</span>
-                        <div class="feature-content-title">成分功效讲解专业</div>
-                        <div class="feature-content-desc">100%视频详细讲解3%烟酰胺+3%氨甲环酸、左旋VC等成分配比，专业度高于行业平均</div>
-                        <div class="feature-content-desc" style="margin-top: 4px; color: var(--success-color);">→ ROI 1.72 vs 1.61（专业讲解提升产品价值感）</div>
-                    </div>
-
-                </div>
-                <div>
-                    <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 12px; color: var(--danger-color);">劣势特征</h4>
-
-                    <div class="disadvantage-card" style="margin-bottom: 12px;">
-                        <span class="feature-badge">-65pp</span>
-                        <div class="feature-content-title">明星背书完全缺失</div>
-                        <div class="feature-content-desc">20条素材无一线明星出镜，全部为KOL/达人背书，缺乏明星光环效应</div>
-                        <div class="feature-content-desc" style="margin-top: 4px; color: var(--danger-color);">→ 3s完播率-14.59pp（开头吸引力不足，用户快速划走）</div>
-                    </div>
-
-                    <div class="disadvantage-card" style="margin-bottom: 12px;">
-                        <span class="feature-badge">-56pp</span>
-                        <div class="feature-content-title">价格锚点严重不足</div>
-                        <div class="feature-content-desc">仅video_7/8两条电商类视频展示'拍1发50'价格，其余18条无价格信息</div>
-                        <div class="feature-content-desc" style="margin-top: 4px; color: var(--danger-color);">→ CTR -1.26pp（缺少价格诱惑，点击欲望弱）</div>
-                    </div>
-
-                    <div class="disadvantage-card" style="margin-bottom: 12px;">
-                        <span class="feature-badge">-28pp</span>
-                        <div class="feature-content-title">限时限量氛围不足</div>
-                        <div class="feature-content-desc">仅video_7/8展示618活动，缺少'限量''今天付款'等紧迫感营销</div>
-                        <div class="feature-content-desc" style="margin-top: 4px; color: var(--danger-color);">→ 日均消耗-68.6%（缺乏紧迫感，系统推荐量受限）</div>
-                    </div>
-
-                    <div class="disadvantage-card" style="margin-bottom: 12px;">
-                        <span class="feature-badge">-35pp</span>
-                        <div class="feature-content-title">AI/3D特效几乎没有</div>
-                        <div class="feature-content-desc">20条素材几乎全部实拍，无AI生成特效、3D皮肤渗透动画等科技感元素</div>
-                        <div class="feature-content-desc" style="margin-top: 4px; color: var(--danger-color);">→ 3s完播率-14.59pp、日均消耗-68.6%（视觉冲击力弱）</div>
-                    </div>
-
-                    <div class="disadvantage-card" style="margin-bottom: 12px;">
-                        <span class="feature-badge">-68pp</span>
-                        <div class="feature-content-title">前后对比展示不足</div>
-                        <div class="feature-content-desc">仅video_9有前后对比暗示，其余素材无直观效果展示</div>
-                        <div class="feature-content-desc" style="margin-top: 4px; color: var(--danger-color);">→ 下单率虽高但CTR低（效果展示不足影响点击）</div>
-                    </div>
-
-                    <div class="disadvantage-card" style="margin-bottom: 12px;">
-                        <span class="feature-badge">覆盖率高但影响力弱</span>
-                        <div class="feature-content-title">KOL背书不如行业</div>
-                        <div class="feature-content-desc">虽100%使用KOL，但多为中腰部达人，缺少头部KOL矩阵</div>
-                        <div class="feature-content-desc" style="margin-top: 4px; color: var(--danger-color);">→ 3s完播率-14.59pp（KOL影响力不足）</div>
-                    </div>
-
-                    <div class="disadvantage-card" style="margin-bottom: 12px;">
-                        <span class="feature-badge">-47pp</span>
-                        <div class="feature-content-title">用户证言密度低</div>
-                        <div class="feature-content-desc">仅少数视频有用户好评展示，缺少多位素人证言轰炸</div>
-                        <div class="feature-content-desc" style="margin-top: 4px; color: var(--danger-color);">→ 下单率虽高但可进一步提升</div>
-                    </div>
-
-                </div>
+                <b style="font-size:12px;color:#6B7280;width:45px;text-align:right">34.6%</b>
             </div>
         </div>
         
-        <!-- 04. 行业TOP10消耗素材 -->
-        <div class="section">
-            <div class="section-title">05 · 行业TOP10消耗素材</div>
-            <div class="video-grid">
-
-                <div class="video-card">
-                    <div class="video-rank">#1</div>
-                    <video class="video-player" controls poster="">
-                        <source src="" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材空</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>100.0</strong></div>
-                            <div class="video-metric">完播: <strong>27.5%</strong></div>
-                            <div class="video-metric">CTR: <strong>1.36%</strong></div>
-                            <div class="video-metric">ROI: <strong>2.78</strong></div>
-                        </div>
-                    </div>
+        <div class="bar-item" style="margin-bottom:16px">
+            <div class="bar-label" style="margin-bottom:6px"><span style="font-weight:600">效果对比</span></div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+                <span style="font-size:11px;color:#D93B3B;width:50px">客户</span>
+                <div class="bar-track" style="flex:1">
+                    <div class="bar-fill" style="width:10%;background:#D93B3B"></div>
                 </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#2</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0bc35ya7oaabkiamh4bb7jvbx3qe67xad52a.f0.mp4?dis_k=4b48eb471b96c8a2af424f3df011db95&dis_t=1780720662&m=a447f0f923328bc6eed489b500017d42&sha256=d74f53c5f05ad51dafa4154c6d467bd49f1da76ccb215e1e4a8b085cd5e0c3ea" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材a447f0f9</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>37.7</strong></div>
-                            <div class="video-metric">完播: <strong>41.2%</strong></div>
-                            <div class="video-metric">CTR: <strong>2.78%</strong></div>
-                            <div class="video-metric">ROI: <strong>1.14</strong></div>
-                        </div>
-                    </div>
+                <b style="font-size:12px;color:#D93B3B;width:45px;text-align:right">10%</b>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px">
+                <span style="font-size:11px;color:#6B7280;width:50px">行业</span>
+                <div class="bar-track" style="flex:1">
+                    <div class="bar-fill" style="width:26.9%;background:#9CA3AF"></div>
                 </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#3</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0b53saarwaabmmacbgyzajvbxeaedoiacg2a.f0.mp4?dis_k=f8304ec8c1aafb20d956f9cfe38390f2&dis_t=1780531143&m=9370b25b781e061ee88d15a3b48738be&sha256=3498fe1e3b38001648b459046db429799dbd4e9ab1445fd54f0e0ee3a14e4c2d" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材9370b25b</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>37.0</strong></div>
-                            <div class="video-metric">完播: <strong>62.9%</strong></div>
-                            <div class="video-metric">CTR: <strong>3.13%</strong></div>
-                            <div class="video-metric">ROI: <strong>1.91</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#4</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0b53cycg2aaee4am7lzsdnvb4fqenulai3ka.f0.mp4?dis_k=4c321c0178627ce5851648e2f7007b24&dis_t=1781965370&m=8dcbd0a95b72c95cf722b0c31993aa46" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材8dcbd0a9</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>27.1</strong></div>
-                            <div class="video-metric">完播: <strong>44.0%</strong></div>
-                            <div class="video-metric">CTR: <strong>1.65%</strong></div>
-                            <div class="video-metric">ROI: <strong>1.69</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#5</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0b53bybdgaacueagdli4trvbsdqegmhaem2a.f0.mp4?dis_k=d38423f0a07fa387dbf176f49f333a11&dis_t=1780561254&m=884d0019e51084aa64b39ea88756dd0e&sha256=3eff9032541b55577ef5d3177b8d8ec7e248ac8a324a9dcd088abbb250aaab50" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材884d0019</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>26.5</strong></div>
-                            <div class="video-metric">完播: <strong>40.0%</strong></div>
-                            <div class="video-metric">CTR: <strong>2.31%</strong></div>
-                            <div class="video-metric">ROI: <strong>1.08</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#6</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0b53xiaggaaaguab5sqgcrvbxoqemo5aay2a.f0.mp4?dis_k=a18e82492b1400fa010ed24e0d59ae1c&dis_t=1778810289&m=f84f9a8095b21d8d180069888d29b996" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材f84f9a80</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>20.9</strong></div>
-                            <div class="video-metric">完播: <strong>54.7%</strong></div>
-                            <div class="video-metric">CTR: <strong>4.62%</strong></div>
-                            <div class="video-metric">ROI: <strong>1.43</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#7</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0bc3hyaxkaab2eab67qrejvbupqeou7ac5ka.f0.mp4?dis_k=aa2781e4bb8f17d14bc16ca67e83ef7c&dis_t=1779980022&m=67c960840d8af04a1ee8444383820838&sha256=da3852470686186fa1abf9b73e2fac342159301e592520d05a7e6a594b537c62" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材67c96084</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>20.6</strong></div>
-                            <div class="video-metric">完播: <strong>48.9%</strong></div>
-                            <div class="video-metric">CTR: <strong>2.19%</strong></div>
-                            <div class="video-metric">ROI: <strong>1.06</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#8</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0b53bebbmaaceuaby4y7xrvbqciecyeqefsa.f0.mp4?dis_k=ef010c664246813fc6e44daf76d9092f&dis_t=1780288053&m=4725965eb572b71e62f45cbdd8ea0c25" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材4725965e</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>17.9</strong></div>
-                            <div class="video-metric">完播: <strong>48.2%</strong></div>
-                            <div class="video-metric">CTR: <strong>2.01%</strong></div>
-                            <div class="video-metric">ROI: <strong>2.06</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#9</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0b53nuammaaabmaiw7iodfvbu3ieyzwqbrsa.f0.mp4?dis_k=3c3eb7d783e761cb17282441a78ccbf2&dis_t=1779322351&m=2bff0594154c159261ad3f4dfc231377&sha256=96d3191941f21eb662e7f7aa07eb39d07c2e599cef4d974345169e26bd3a3180" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材2bff0594</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>17.5</strong></div>
-                            <div class="video-metric">完播: <strong>14.9%</strong></div>
-                            <div class="video-metric">CTR: <strong>1.05%</strong></div>
-                            <div class="video-metric">ROI: <strong>1.59</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#10</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0bc3eeadkaaalqaekiyqlbvbwiieguqqanka.f0.mp4?dis_k=d41754d17a4be1be5923e1313360c150&dis_t=1780040954&m=35f4494ab3116a33e2944b5f28f40b25&sha256=ceb60ec7838e52d9e7c47486933ca30054d7cc723c89796e7372f9c4d863781d" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材35f4494a</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>15.3</strong></div>
-                            <div class="video-metric">完播: <strong>55.0%</strong></div>
-                            <div class="video-metric">CTR: <strong>2.65%</strong></div>
-                            <div class="video-metric">ROI: <strong>1.08</strong></div>
-                        </div>
-                    </div>
-                </div>
-
+                <b style="font-size:12px;color:#6B7280;width:45px;text-align:right">26.9%</b>
             </div>
         </div>
         
-        <!-- 05. 必扬TOP10消耗素材 -->
-        <div class="section">
-            <div class="section-title">06 · 必扬TOP10消耗素材</div>
-            <div class="video-grid">
-
-                <div class="video-card">
-                    <div class="video-rank">#1</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0b53nuammaaabmaiw7iodfvbu3ieyzwqbrsa.f0.mp4?dis_k=3c3eb7d783e761cb17282441a78ccbf2&dis_t=1779322351&m=2bff0594154c159261ad3f4dfc231377&sha256=96d3191941f21eb662e7f7aa07eb39d07c2e599cef4d974345169e26bd3a3180" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材2bff0594</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>100.0</strong></div>
-                            <div class="video-metric">完播: <strong>14.8%</strong></div>
-                            <div class="video-metric">CTR: <strong>1.00%</strong></div>
-                            <div class="video-metric">ROI: <strong>1.55</strong></div>
-                        </div>
-                    </div>
+        <div class="bar-item" style="margin-bottom:16px">
+            <div class="bar-label" style="margin-bottom:6px"><span style="font-weight:600">场景代入</span></div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+                <span style="font-size:11px;color:#D93B3B;width:50px">客户</span>
+                <div class="bar-track" style="flex:1">
+                    <div class="bar-fill" style="width:20%;background:#D93B3B"></div>
                 </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#2</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0bc34uawiaabmeaeyiq3ozvbxziemtsqczca.f0.mp4?dis_k=63b03656465985222ea8480129ea3ce0&dis_t=1780105217&m=a90c59a8f0525bf19c404088c7353f0e&sha256=153b1eb9a784bfd72e003885a25cb331b408aaec91ba60edc3b20c919a64fb0f" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材a90c59a8</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>77.1</strong></div>
-                            <div class="video-metric">完播: <strong>24.8%</strong></div>
-                            <div class="video-metric">CTR: <strong>1.05%</strong></div>
-                            <div class="video-metric">ROI: <strong>1.73</strong></div>
-                        </div>
-                    </div>
+                <b style="font-size:12px;color:#D93B3B;width:45px;text-align:right">20%</b>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px">
+                <span style="font-size:11px;color:#6B7280;width:50px">行业</span>
+                <div class="bar-track" style="flex:1">
+                    <div class="bar-fill" style="width:23.1%;background:#9CA3AF"></div>
                 </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#3</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0b53aibf2aacoaajmda6c5vbqaqelubaexka.f0.mp4?dis_k=eee2989686413cfe1c79d36aed7505dc&dis_t=1780272078&m=e0589647ceadbb909469ab15562f00a4&sha256=69e3b059f61be9d5d347996fb0090b94c1ed5f31986a5a5a2e9f62bb9482dcbe" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材e0589647</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>23.9</strong></div>
-                            <div class="video-metric">完播: <strong>14.2%</strong></div>
-                            <div class="video-metric">CTR: <strong>1.21%</strong></div>
-                            <div class="video-metric">ROI: <strong>1.85</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#4</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0bc3ouazmaabniagoxqzjzvbw5iesz2qdfsa.f0.mp4?dis_k=7b274274732d368bea94aa51e364c431&dis_t=1780019651&m=1730721e3ddc83a9b9f55cc8fdf02035&sha256=6d6ec75a872a3b3854525a149e5c74ede4b7cfeb65a119f56c5dae53b26ecae0" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材1730721e</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>20.3</strong></div>
-                            <div class="video-metric">完播: <strong>70.7%</strong></div>
-                            <div class="video-metric">CTR: <strong>1.79%</strong></div>
-                            <div class="video-metric">ROI: <strong>1.69</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#5</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0b53s4aooaaaueahwmpwkjurvfye46lqbz2a.f0.mp4?dis_k=9387ff77f7d4004fa576fd7c2bbfab19&dis_t=1777769635&m=57378b7d206cb387eb02045e7ab21a3b&sha256=85d27f73b8a0a4c4d7ede3afad457c658ca1a4676b5a990c7ab4be3efe4eb5dd" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材57378b7d</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>18.2</strong></div>
-                            <div class="video-metric">完播: <strong>17.8%</strong></div>
-                            <div class="video-metric">CTR: <strong>0.87%</strong></div>
-                            <div class="video-metric">ROI: <strong>1.89</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#6</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0bc3vyaiwaaaqqan4y6l3nurvlqeroxabc2a.f0.mp4?dis_k=45d4c9a94ad66122df1472e73ae82e4c&dis_t=1775098058&m=eab8286e3b448149ef262186a5fba00e&sha256=c0168242cab14d82528fc26e4f3d260c2f7818016aef27574085c67236564fee" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材eab8286e</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>13.1</strong></div>
-                            <div class="video-metric">完播: <strong>64.1%</strong></div>
-                            <div class="video-metric">CTR: <strong>1.03%</strong></div>
-                            <div class="video-metric">ROI: <strong>1.39</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#7</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0bc3wublgaac4qakohzgzbvbrniewo2qfm2a.f0.mp4?dis_k=6dfcccdfa0df190fd37e5920915526e6&dis_t=1780750403&m=236c5b88954729b303092c117f56cacc&sha256=f868de23e937e561c63101487e0eeea1482ca7f463fcc2b2b25dcabea56d4a1b" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材236c5b88</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>8.2</strong></div>
-                            <div class="video-metric">完播: <strong>14.4%</strong></div>
-                            <div class="video-metric">CTR: <strong>2.27%</strong></div>
-                            <div class="video-metric">ROI: <strong>1.82</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#8</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0b53kibk4aaceuaelabbajvbquqevzjaflsa.f0.mp4?dis_k=35f5b30f81540f529db505f7273cf638&dis_t=1780739067&m=4caa7c5def992c87f9ca8ca88d41aea2&sha256=e4df3c9266adbcc49e0e10a40cdbb9dab7b87d537117bae77b87e516ef43f343" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材4caa7c5d</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>8.2</strong></div>
-                            <div class="video-metric">完播: <strong>28.2%</strong></div>
-                            <div class="video-metric">CTR: <strong>2.08%</strong></div>
-                            <div class="video-metric">ROI: <strong>2.01</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#9</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0b53qiaoqaaa4qafypu7hzurvaqe5cbab2ca.f0.mp4?dis_k=b02668e3d9f74552b118a36ae40710a4&dis_t=1772172670&m=99e5625f7723cab42cf731f75ec5e362&sha256=bf9a53390d7a5041ef0ef7f0f75d7cfec383bf83bbe0fcc6dd9d80b3ea6b8f60" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材99e5625f</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>7.4</strong></div>
-                            <div class="video-metric">完播: <strong>35.9%</strong></div>
-                            <div class="video-metric">CTR: <strong>0.82%</strong></div>
-                            <div class="video-metric">ROI: <strong>1.67</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#10</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0b536ea6gaableagdui2lzvbx4ie4pyqdy2a.f0.mp4?dis_k=75d9a15a9b5f50fea482b58b1220265f&dis_t=1780188005&m=d6fecc7d1891540af7e49fdd5d615f42&sha256=949be884b63ef1da023d647301b076e54a27b3b033078d8ac4e6f3aa1ef35c99" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材d6fecc7d</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>7.1</strong></div>
-                            <div class="video-metric">完播: <strong>53.8%</strong></div>
-                            <div class="video-metric">CTR: <strong>0.81%</strong></div>
-                            <div class="video-metric">ROI: <strong>1.36</strong></div>
-                        </div>
-                    </div>
-                </div>
-
+                <b style="font-size:12px;color:#6B7280;width:45px;text-align:right">23.1%</b>
             </div>
         </div>
         
-        <!-- 06. 行动清单 -->
-        <div class="section">
-            <div class="section-title">07 · 行动清单</div>
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
-                <div style="background: #fef2f2; border: 1px solid #fca5a5; border-radius: 12px; padding: 16px;">
-                    <h4 style="font-size: 14px; font-weight: 600; color: #dc2626; margin-bottom: 12px;">P0 立即行动</h4>
-                    <ul style="font-size: 12px; color: var(--text-sub); line-height: 1.8; padding-left: 20px;">
-                        <li>引入明星背书素材（田震/钟丽缇等一线明星）</li>
-                        <li>强化价格锚点展示（全场一折、买一送多等极端话术）</li>
-                        <li>增加AI/3D视觉特效（分子渗透动画、3D皮肤雕塑）</li>
-                    </ul>
+        <div class="bar-item" style="margin-bottom:16px">
+            <div class="bar-label" style="margin-bottom:6px"><span style="font-weight:600">其他</span></div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+                <span style="font-size:11px;color:#D93B3B;width:50px">客户</span>
+                <div class="bar-track" style="flex:1">
+                    <div class="bar-fill" style="width:55%;background:#D93B3B"></div>
                 </div>
-                <div style="background: #fef3c7; border: 1px solid #fcd34d; border-radius: 12px; padding: 16px;">
-                    <h4 style="font-size: 14px; font-weight: 600; color: #d97706; margin-bottom: 12px;">P1 短期推进</h4>
-                    <ul style="font-size: 12px; color: var(--text-sub); line-height: 1.8; padding-left: 20px;">
-                        <li>优化前后对比展示方式（分屏同时对比、时间轴对比）</li>
-                        <li>增加限时限量促销氛围（618大促、倒计时、限量提示）</li>
-                        <li>提升花字特效质量（闪烁特效、弹出动画、多层叠加）</li>
-                    </ul>
+                <b style="font-size:12px;color:#D93B3B;width:45px;text-align:right">55%</b>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px">
+                <span style="font-size:11px;color:#6B7280;width:50px">行业</span>
+                <div class="bar-track" style="flex:1">
+                    <div class="bar-fill" style="width:15.4%;background:#9CA3AF"></div>
                 </div>
-                <div style="background: #f0fdf4; border: 1px solid #86efac; border-radius: 12px; padding: 16px;">
-                    <h4 style="font-size: 14px; font-weight: 600; color: #16a34a; margin-bottom: 12px;">P2 中期沉淀</h4>
-                    <ul style="font-size: 12px; color: var(--text-sub); line-height: 1.8; padding-left: 20px;">
-                        <li>保持权威认证展示优势（国妆特字批文常驻）</li>
-                        <li>继续强化成分功效专业讲解</li>
-                        <li>建立素材监控看板，持续AB测试优化</li>
-                    </ul>
-                </div>
+                <b style="font-size:12px;color:#6B7280;width:45px;text-align:right">15.4%</b>
             </div>
         </div>
         
-        <!-- 07. 附录 · 必扬TOP20素材四象限详情 -->
-        <div class="section">
-            <div class="section-title">08 · 附录 · 必扬TOP20素材四象限详情</div>
-            <div class="video-grid">
-
-                <div class="video-card">
-                    <div class="video-rank">#1</div>
-                    <div class="video-quadrant 流量">流量</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0b53nuammaaabmaiw7iodfvbu3ieyzwqbrsa.f0.mp4?dis_k=3c3eb7d783e761cb17282441a78ccbf2&dis_t=1779322351&m=2bff0594154c159261ad3f4dfc231377&sha256=96d3191941f21eb662e7f7aa07eb39d07c2e599cef4d974345169e26bd3a3180" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材2bff0594</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>100.0</strong></div>
-                            <div class="video-metric">完播: <strong>14.8%</strong></div>
-                            <div class="video-metric">CTR: <strong>1.00%</strong></div>
-                            <div class="video-metric">ROI: <strong>1.55</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#2</div>
-                    <div class="video-quadrant 优质">优质</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0bc34uawiaabmeaeyiq3ozvbxziemtsqczca.f0.mp4?dis_k=63b03656465985222ea8480129ea3ce0&dis_t=1780105217&m=a90c59a8f0525bf19c404088c7353f0e&sha256=153b1eb9a784bfd72e003885a25cb331b408aaec91ba60edc3b20c919a64fb0f" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材a90c59a8</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>77.1</strong></div>
-                            <div class="video-metric">完播: <strong>24.8%</strong></div>
-                            <div class="video-metric">CTR: <strong>1.05%</strong></div>
-                            <div class="video-metric">ROI: <strong>1.73</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#3</div>
-                    <div class="video-quadrant 流量">流量</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0b53aibf2aacoaajmda6c5vbqaqelubaexka.f0.mp4?dis_k=eee2989686413cfe1c79d36aed7505dc&dis_t=1780272078&m=e0589647ceadbb909469ab15562f00a4&sha256=69e3b059f61be9d5d347996fb0090b94c1ed5f31986a5a5a2e9f62bb9482dcbe" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材e0589647</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>23.9</strong></div>
-                            <div class="video-metric">完播: <strong>14.2%</strong></div>
-                            <div class="video-metric">CTR: <strong>1.21%</strong></div>
-                            <div class="video-metric">ROI: <strong>1.85</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#4</div>
-                    <div class="video-quadrant 优质">优质</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0bc3ouazmaabniagoxqzjzvbw5iesz2qdfsa.f0.mp4?dis_k=7b274274732d368bea94aa51e364c431&dis_t=1780019651&m=1730721e3ddc83a9b9f55cc8fdf02035&sha256=6d6ec75a872a3b3854525a149e5c74ede4b7cfeb65a119f56c5dae53b26ecae0" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材1730721e</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>20.3</strong></div>
-                            <div class="video-metric">完播: <strong>70.7%</strong></div>
-                            <div class="video-metric">CTR: <strong>1.79%</strong></div>
-                            <div class="video-metric">ROI: <strong>1.69</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#5</div>
-                    <div class="video-quadrant 流量">流量</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0b53s4aooaaaueahwmpwkjurvfye46lqbz2a.f0.mp4?dis_k=9387ff77f7d4004fa576fd7c2bbfab19&dis_t=1777769635&m=57378b7d206cb387eb02045e7ab21a3b&sha256=85d27f73b8a0a4c4d7ede3afad457c658ca1a4676b5a990c7ab4be3efe4eb5dd" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材57378b7d</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>18.2</strong></div>
-                            <div class="video-metric">完播: <strong>17.8%</strong></div>
-                            <div class="video-metric">CTR: <strong>0.87%</strong></div>
-                            <div class="video-metric">ROI: <strong>1.89</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#6</div>
-                    <div class="video-quadrant 优质">优质</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0bc3vyaiwaaaqqan4y6l3nurvlqeroxabc2a.f0.mp4?dis_k=45d4c9a94ad66122df1472e73ae82e4c&dis_t=1775098058&m=eab8286e3b448149ef262186a5fba00e&sha256=c0168242cab14d82528fc26e4f3d260c2f7818016aef27574085c67236564fee" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材eab8286e</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>13.1</strong></div>
-                            <div class="video-metric">完播: <strong>64.1%</strong></div>
-                            <div class="video-metric">CTR: <strong>1.03%</strong></div>
-                            <div class="video-metric">ROI: <strong>1.39</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#7</div>
-                    <div class="video-quadrant 流量">流量</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0bc3wublgaac4qakohzgzbvbrniewo2qfm2a.f0.mp4?dis_k=6dfcccdfa0df190fd37e5920915526e6&dis_t=1780750403&m=236c5b88954729b303092c117f56cacc&sha256=f868de23e937e561c63101487e0eeea1482ca7f463fcc2b2b25dcabea56d4a1b" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材236c5b88</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>8.2</strong></div>
-                            <div class="video-metric">完播: <strong>14.4%</strong></div>
-                            <div class="video-metric">CTR: <strong>2.27%</strong></div>
-                            <div class="video-metric">ROI: <strong>1.82</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#8</div>
-                    <div class="video-quadrant 优质">优质</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0b53kibk4aaceuaelabbajvbquqevzjaflsa.f0.mp4?dis_k=35f5b30f81540f529db505f7273cf638&dis_t=1780739067&m=4caa7c5def992c87f9ca8ca88d41aea2&sha256=e4df3c9266adbcc49e0e10a40cdbb9dab7b87d537117bae77b87e516ef43f343" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材4caa7c5d</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>8.2</strong></div>
-                            <div class="video-metric">完播: <strong>28.2%</strong></div>
-                            <div class="video-metric">CTR: <strong>2.08%</strong></div>
-                            <div class="video-metric">ROI: <strong>2.01</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#9</div>
-                    <div class="video-quadrant 优质">优质</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0b53qiaoqaaa4qafypu7hzurvaqe5cbab2ca.f0.mp4?dis_k=b02668e3d9f74552b118a36ae40710a4&dis_t=1772172670&m=99e5625f7723cab42cf731f75ec5e362&sha256=bf9a53390d7a5041ef0ef7f0f75d7cfec383bf83bbe0fcc6dd9d80b3ea6b8f60" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材99e5625f</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>7.4</strong></div>
-                            <div class="video-metric">完播: <strong>35.9%</strong></div>
-                            <div class="video-metric">CTR: <strong>0.82%</strong></div>
-                            <div class="video-metric">ROI: <strong>1.67</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#10</div>
-                    <div class="video-quadrant 优质">优质</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0b536ea6gaableagdui2lzvbx4ie4pyqdy2a.f0.mp4?dis_k=75d9a15a9b5f50fea482b58b1220265f&dis_t=1780188005&m=d6fecc7d1891540af7e49fdd5d615f42&sha256=949be884b63ef1da023d647301b076e54a27b3b033078d8ac4e6f3aa1ef35c99" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材d6fecc7d</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>7.1</strong></div>
-                            <div class="video-metric">完播: <strong>53.8%</strong></div>
-                            <div class="video-metric">CTR: <strong>0.81%</strong></div>
-                            <div class="video-metric">ROI: <strong>1.36</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#11</div>
-                    <div class="video-quadrant 待优化">待优化</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0bc3sya4saabriadqxqzmrvbxfqezgladska.f0.mp4?dis_k=1ca4443307f0e2b7fd72a3628d248d23&dis_t=1780019563&m=55d583dd282e85c5a9dcfa07483f24d9&sha256=62accb46e435bb7fb3f59a1c987c3a1573dd5180d5f6a280dc21a3c39f9f9653" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材55d583dd</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>6.9</strong></div>
-                            <div class="video-metric">完播: <strong>19.0%</strong></div>
-                            <div class="video-metric">CTR: <strong>0.87%</strong></div>
-                            <div class="video-metric">ROI: <strong>1.50</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#12</div>
-                    <div class="video-quadrant 潜力">潜力</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0bc33mahsaaapeak26zq6nurvwyephnqa6ka.f0.mp4?dis_k=d01cfb1762e7b21c192ba8c3b4e990a3&dis_t=1764808041&m=3791c4423e3d27522ef08c5a8f251118&sha256=a00cb793178d1410dcd3a94dac55f0f2d330b1e6fc234a58888462d41fe5cf6a" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材3791c442</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>6.8</strong></div>
-                            <div class="video-metric">完播: <strong>60.8%</strong></div>
-                            <div class="video-metric">CTR: <strong>1.25%</strong></div>
-                            <div class="video-metric">ROI: <strong>1.14</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#13</div>
-                    <div class="video-quadrant 潜力">潜力</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0bc33uazcaabhyamdugksrurxxieshoqdeka.f0.mp4?dis_k=8c17bec5bd1b99abf4a10e0b9dfceb11&dis_t=1774932208&m=d2945d30b9901b889acabb37478a3bb7&sha256=d978633a4b118d36799bc975357ea1d5459511d9f34f84f6858a2224f37cc4a5" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材d2945d30</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>6.8</strong></div>
-                            <div class="video-metric">完播: <strong>38.5%</strong></div>
-                            <div class="video-metric">CTR: <strong>0.99%</strong></div>
-                            <div class="video-metric">ROI: <strong>1.85</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#14</div>
-                    <div class="video-quadrant 待优化">待优化</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0b537iahqaaasualacp2ijubv6qepd5aa6ca.f0.mp4?dis_k=5aeae03c4a87320d622ac1fba1d1c41e&dis_t=1761265800&m=6cc0028f27da5be3d2a22ed0648cf538&sha256=d7d053aeb4c6fbe7f53617ce068c2f687ab0cf43fca01a1ae4f71a2c98cf3d82" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材6cc0028f</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>6.4</strong></div>
-                            <div class="video-metric">完播: <strong>17.9%</strong></div>
-                            <div class="video-metric">CTR: <strong>0.93%</strong></div>
-                            <div class="video-metric">ROI: <strong>1.71</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#15</div>
-                    <div class="video-quadrant 潜力">潜力</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0b53h4cuyaafvaaaqu6rdjur6pyejq7qktca.f0.mp4?dis_k=66bca28fd7ea04b2d133cd27ccd2b595&dis_t=1775521871&m=335a1e09eac6bc6ed18c472901c708ca&sha256=423883fd8ab13e595e0c2afe22a28950d7d4f18d0192c45d9befdf5f5282fab0" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材335a1e09</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>6.3</strong></div>
-                            <div class="video-metric">完播: <strong>26.4%</strong></div>
-                            <div class="video-metric">CTR: <strong>0.85%</strong></div>
-                            <div class="video-metric">ROI: <strong>1.73</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#16</div>
-                    <div class="video-quadrant 待优化">待优化</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0bc3jqagqaaaciapjmjpxjurutaenbgaa2ca.f0.mp4?dis_k=984b3b96bc52235ff3f8c415c3e19b7b&dis_t=1764728082&m=2afd6d4e0996ebe7050acb32defbc2cb&sha256=7da16bfed22f6347accc39713689eeffe354e24c635e7b937864f3936624dba2" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材2afd6d4e</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>5.9</strong></div>
-                            <div class="video-metric">完播: <strong>21.3%</strong></div>
-                            <div class="video-metric">CTR: <strong>1.06%</strong></div>
-                            <div class="video-metric">ROI: <strong>1.85</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#17</div>
-                    <div class="video-quadrant 待优化">待优化</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0bc3hmbacaacfiajm6yvgzvbqoyeae5qeaka.f0.mp4?dis_k=a13721ce3e3d28c6d413baf0fa7ccd21&dis_t=1779931037&m=cf61621cf3691b2fdd11bf0729498bfe&sha256=e63c6756e823fb32b7abd23506dda134cb2c462534a1200d090f3852e004f4e9" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材cf61621c</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>5.6</strong></div>
-                            <div class="video-metric">完播: <strong>23.4%</strong></div>
-                            <div class="video-metric">CTR: <strong>0.70%</strong></div>
-                            <div class="video-metric">ROI: <strong>1.01</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#18</div>
-                    <div class="video-quadrant 待优化">待优化</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0b535aajwaaaquafh5fpiburv2aetpuabg2a.f0.mp4?dis_k=660e738b5039989d3b0de7a4309dd604&dis_t=1773127840&m=dcabe1f62dcdee2337d51ff50714b64d&sha256=029b00eff1697899f2304a2dc2823227664ebe02f7acae2a0d08a957ad495cc7" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材dcabe1f6</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>4.8</strong></div>
-                            <div class="video-metric">完播: <strong>24.5%</strong></div>
-                            <div class="video-metric">CTR: <strong>1.00%</strong></div>
-                            <div class="video-metric">ROI: <strong>1.91</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#19</div>
-                    <div class="video-quadrant 潜力">潜力</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0b53suacoaaaauanwyadu5urvfiee6kqaj2a.f0.mp4?dis_k=5ac465fe5f0f44698896d41e50677d2e&dis_t=1761869154&m=596c42bb99e0f117e18afcf12fe1582e&sha256=c2d2f2aa72a8a3e5b00e17b58ff2d36605b063f7da63826a78e21299bd553631" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材596c42bb</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>4.7</strong></div>
-                            <div class="video-metric">完播: <strong>28.7%</strong></div>
-                            <div class="video-metric">CTR: <strong>1.32%</strong></div>
-                            <div class="video-metric">ROI: <strong>2.43</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-rank">#20</div>
-                    <div class="video-quadrant 待优化">待优化</div>
-                    <video class="video-player" controls poster="">
-                        <source src="http://adsmind.gdtimg.com/ads_svp_video__0b53zuargaabvyam7b3l6zurxtiecpgqce2a.f0.mp4?dis_k=15c0f6286857215c9899c73e03166e5b&dis_t=1768719901&m=98cb7528d9f054373a29f2cfd80086fe&sha256=607ae001e09b47ee0d1bd31b703e82bbc521e09f12864b2cb26335272e5a83cc" type="video/mp4">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-title">素材98cb7528</div>
-                        <div class="video-metrics">
-                            <div class="video-metric">消耗指数: <strong>4.6</strong></div>
-                            <div class="video-metric">完播: <strong>20.7%</strong></div>
-                            <div class="video-metric">CTR: <strong>1.50%</strong></div>
-                            <div class="video-metric">ROI: <strong>2.42</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
         </div>
+        <p style="font-size:12px;color:#374151;background:#FEF2F2;padding:10px 12px;border-radius:6px;margin-top:12px;line-height:1.6">客户钩子类型单一，<span style="color:#D93B3B;font-weight:600">痛点提问占比仅15%（行业34.6%，-19.6pp）</span>，前3秒吸引力不足导致完播率偏低</p>
     </div>
     
-    <script>
-        // 五维雷达图
-        const radarChart = echarts.init(document.getElementById('radarChart'));
-        radarChart.setOption({
-            tooltip: { trigger: 'item' },
-            legend: {
-                data: ['必扬', '行业TOP100'],
-                bottom: 0
-            },
-            radar: {
-                indicator: [
-                    { name: '日均消耗', max: 1 },
-                    { name: '3s完播率', max: 60 },
-                    { name: 'CTR', max: 3 },
-                    { name: '下单率', max: 15 },
-                    { name: 'ROI', max: 2 }
-                ],
-                radius: '60%'
-            },
-            series: [{
-                type: 'radar',
-                data: [
-                    {
-                        value: [0.26462810051333335, 30.997371059545305, 1.1698126214302849, 11.398730871082106, 1.7245767639727916],
-                        name: '必扬',
-                        areaStyle: { color: 'rgba(239, 68, 68, 0.2)' },
-                        lineStyle: { color: '#ef4444' },
-                        itemStyle: { color: '#ef4444' }
-                    },
-                    {
-                        value: [0.8439730017983332, 45.58344377643082, 2.4330416059108306, 7.751661637944794, 1.6086613402413443],
-                        name: '行业TOP100',
-                        areaStyle: { color: 'rgba(156, 163, 175, 0.2)' },
-                        lineStyle: { color: '#9ca3af' },
-                        itemStyle: { color: '#9ca3af' }
-                    }
-                ]
-            }]
-        });
+
+    <div>
+        <p style="font-size:13px;font-weight:600;margin-bottom:12px;color:var(--fg)">结尾CTA类型分布</p>
+        <div class="bar-chart">
+            
+        <div class="bar-item" style="margin-bottom:16px">
+            <div class="bar-label" style="margin-bottom:6px"><span style="font-weight:600">限时优惠</span></div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+                <span style="font-size:11px;color:#D93B3B;width:50px">客户</span>
+                <div class="bar-track" style="flex:1">
+                    <div class="bar-fill" style="width:20%;background:#D93B3B"></div>
+                </div>
+                <b style="font-size:12px;color:#D93B3B;width:45px;text-align:right">20%</b>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px">
+                <span style="font-size:11px;color:#6B7280;width:50px">行业</span>
+                <div class="bar-track" style="flex:1">
+                    <div class="bar-fill" style="width:42.3%;background:#9CA3AF"></div>
+                </div>
+                <b style="font-size:12px;color:#6B7280;width:45px;text-align:right">42.3%</b>
+            </div>
+        </div>
         
-        // 四象限散点图
-        const scatterChart = echarts.init(document.getElementById('scatterChart'));
-        scatterChart.setOption({
-            tooltip: {
-                trigger: 'item',
-                formatter: function(params) {
-                    return params.seriesName + '<br/>' +
-                           '3s完播率: ' + params.value[0].toFixed(2) + '%<br/>' +
-                           '日均消耗: ' + params.value[1].toFixed(2) + '万';
-                }
-            },
-            legend: {
-                data: ['行业TOP100', '必扬TOP20'],
-                bottom: 0
-            },
-            xAxis: {
-                name: '3s完播率(%)',
-                nameLocation: 'middle',
-                nameGap: 30,
-                type: 'value',
-                min: 0,
-                max: 80
-            },
-            yAxis: {
-                name: '日均消耗(万元)',
-                type: 'value',
-                min: 0
-            },
-            series: [
-                {
-                    name: '行业TOP100',
-                    type: 'scatter',
-                    data: [[48.98881624964333, 0.7152599], [47.98225750063565, 0.5158653080333334], [35.97991567717148, 0.4304307866999999], [37.83116798328654, 0.5832054936], [70.50239551109468, 0.5998980341000001], [51.90134903292703, 0.6659035965666666], [18.55040815220053, 1.099145423533333], [64.43559481739165, 1.0507378245], [62.1131837345952, 0.6028227115333333], [52.818457667642754, 0.4062721270333334], [40.236987385194645, 0.7455549333333333], [32.33647645538992, 0.9571633249333332], [54.43970688574987, 0.6524223714333334], [14.59371267305776, 1.2077409369], [57.708632366070326, 1.0490123333333334], [40.87775354034771, 0.8714717665666666], [58.35385878489327, 0.4546272668666667], [68.49027761797531, 0.5614604612333333], [14.856089003463032, 1.4335881131], [22.57093087821741, 0.8614807333333334], [56.98481301070657, 0.4241749713666667], [55.034061232427625, 1.2499249779], [34.17126546767994, 1.0932424128333331], [64.1753892919618, 0.4874216401], [48.24960581435489, 1.4646269768000002], [45.56037453386275, 0.4125253931333333], [62.935742562718566, 0.7999340589333334], [65.80587230468798, 0.3967141333333333], [29.87550268211308, 0.4563081189], [25.458871515975527, 0.5672732538333334], [44.712769293898376, 0.5614722131000001], [41.89230751395103, 1.0129940744333334], [61.47600060957178, 1.2092162691333332], [44.97161290322581, 0.4900249183666666], [22.270945122826056, 0.4666579097666667], [68.68712480822101, 0.7364073567666666], [34.45992858924311, 0.5939114343], [18.64620913772686, 0.6967026666666667], [48.92269667971405, 1.6859076546666667], [70.20007010755975, 0.7930636999999999], [29.383065674185605, 0.6027971131666666], [43.10885614050895, 0.4186622675666667], [29.49448693590556, 0.5444990416], [48.42363252936437, 0.4112465726666666], [65.4421578307664, 0.6955639907333333], [57.09557807087447, 0.5874683831666666], [71.69414079478229, 0.8595483791], [65.97701063638237, 0.5916723748666667], [62.47370157780024, 0.4724154081666666], [63.31923527889023, 0.6006606792666668], [36.59391262297093, 0.4642882896666666], [67.03129888153792, 0.5011204231], [48.72904196308252, 0.6126522164333333], [70.36341982447877, 0.7103908278666666], [36.99343637518526, 0.4811808608666666], [31.64876316600012, 1.2231182860666665], [39.96649945959241, 2.1661148932666667], [45.679494515170525, 1.0981199421333334], [43.98286914869206, 2.2168517741666665], [29.537204806719227, 0.4099381504666666], [43.71679177608669, 0.6488939333333333], [62.90725238705002, 3.0294914400666664], [21.799469760019218, 0.5924138790333333], [31.654036726440715, 0.4233158318333333], [25.80962873931624, 0.4090531441], [54.0671250803873, 0.5023066980333334], [39.89699859404609, 0.4484806977], [74.94714049384369, 0.5253410167666667], [74.13964248920057, 0.44900295], [41.210488058968565, 3.085199365], [18.979408814261053, 0.5535948706333333], [43.28566526749757, 0.8507064126666666], [24.603807729696776, 1.0611735485333331], [11.409956677873376, 0.5750850284666668], [47.8137790740423, 0.4344902523], [75.43622416866658, 0.39716], [59.07398575597567, 1.0908569043], [37.08991737671056, 0.5682032849666666], [50.5235213530131, 1.0069128475666669], [35.25391324384328, 0.4869116927666666], [38.73336245266992, 0.4302001599666667], [47.91490119587605, 0.5830305475333333], [23.21796518051781, 0.5447484792], [31.690852282901957, 1.0822799659333335], [45.33082942764948, 0.5985870322666667], [25.64437773624517, 0.7185827392333334], [39.78637020210708, 0.6333465605666667], [51.76610300047928, 0.6223906238666667], [47.610773877598895, 0.4122417428666666], [48.51355620980928, 0.6954894705333333], [52.150385568767945, 0.7988434181], [60.59753673194251, 0.4527374666666666], [54.6573877713167, 1.713874], [39.932382126423455, 0.4130654984], [44.75329299155011, 0.4440371757], [56.61877024715296, 0.6429750672666666], [32.728507981020456, 0.4416366192], [59.20043862502207, 0.3958815409999999], [29.34702483210995, 0.7169930899666668], [27.53386430271703, 8.1868877282]],
-                    symbolSize: 8,
-                    itemStyle: { color: '#9ca3af', opacity: 0.6 }
-                },
-                {
-                    name: '必扬TOP20',
-                    type: 'scatter',
-                    data: [[70.6982843001459, 0.3135313629666666], [14.392382103990329, 0.1267316193666666], [21.290971112173096, 0.0908111003333333], [14.8477365430627, 1.546326986333333], [26.40966000981265, 0.0967188262333333], [60.84572075938068, 0.1057475615], [28.17999554466473, 0.1263162301666666], [19.03676044427976, 0.1061213940666666], [17.76308568023584, 0.2811971667666667], [28.74036685715391, 0.0723269580666666], [17.906017843813316, 0.0987499565333333], [20.746375171885607, 0.0716210899666666], [35.884233614632514, 0.1150505039666666], [24.834980671166864, 1.1928563509666668], [23.445056799010235, 0.0870006387], [38.46105021294962, 0.1046016120666666], [53.770078384507535, 0.1100514505666666], [24.451610843258088, 0.0748541486], [14.178333433555462, 0.3692335679333333], [64.06472086122717, 0.2027134851666666]],
-                    symbolSize: 10,
-                    itemStyle: { color: '#ef4444' }
-                }
-            ]
-        });
+        <div class="bar-item" style="margin-bottom:16px">
+            <div class="bar-label" style="margin-bottom:6px"><span style="font-weight:600">赠品引导</span></div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+                <span style="font-size:11px;color:#D93B3B;width:50px">客户</span>
+                <div class="bar-track" style="flex:1">
+                    <div class="bar-fill" style="width:15%;background:#D93B3B"></div>
+                </div>
+                <b style="font-size:12px;color:#D93B3B;width:45px;text-align:right">15%</b>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px">
+                <span style="font-size:11px;color:#6B7280;width:50px">行业</span>
+                <div class="bar-track" style="flex:1">
+                    <div class="bar-fill" style="width:42.3%;background:#9CA3AF"></div>
+                </div>
+                <b style="font-size:12px;color:#6B7280;width:45px;text-align:right">42.3%</b>
+            </div>
+        </div>
         
-        // 剪辑风格雷达图
-        const editingRadar = echarts.init(document.getElementById('editingRadar'));
-        editingRadar.setOption({
-            tooltip: { trigger: 'item' },
-            legend: {
-                data: ['必扬', '行业'],
-                bottom: 0
-            },
-            radar: {
-                indicator: [
-                    { name: '镜头切换', max: 100 },
-                    { name: '字幕大字报', max: 100 },
-                    { name: '花字特效', max: 100 },
-                    { name: 'AI/3D特效', max: 100 },
-                    { name: '信息密度', max: 100 }
-                ],
-                radius: '60%'
-            },
-            series: [{
-                type: 'radar',
-                data: [
-                    {
-                        value: [75, 95, 55, 10, 90],
-                        name: '必扬',
-                        areaStyle: { color: 'rgba(239, 68, 68, 0.2)' },
-                        lineStyle: { color: '#ef4444' },
-                        itemStyle: { color: '#ef4444' }
-                    },
-                    {
-                        value: [95, 90, 90, 45, 90],
-                        name: '行业',
-                        areaStyle: { color: 'rgba(156, 163, 175, 0.2)' },
-                        lineStyle: { color: '#9ca3af' },
-                        itemStyle: { color: '#9ca3af' }
-                    }
-                ]
-            }]
-        });
+        <div class="bar-item" style="margin-bottom:16px">
+            <div class="bar-label" style="margin-bottom:6px"><span style="font-weight:600">价格锚点</span></div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+                <span style="font-size:11px;color:#D93B3B;width:50px">客户</span>
+                <div class="bar-track" style="flex:1">
+                    <div class="bar-fill" style="width:10%;background:#D93B3B"></div>
+                </div>
+                <b style="font-size:12px;color:#D93B3B;width:45px;text-align:right">10%</b>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px">
+                <span style="font-size:11px;color:#6B7280;width:50px">行业</span>
+                <div class="bar-track" style="flex:1">
+                    <div class="bar-fill" style="width:30.8%;background:#9CA3AF"></div>
+                </div>
+                <b style="font-size:12px;color:#6B7280;width:45px;text-align:right">30.8%</b>
+            </div>
+        </div>
         
-        // 响应式调整
-        window.addEventListener('resize', () => {
-            radarChart.resize();
-            scatterChart.resize();
-            editingRadar.resize();
-        });
-    </script>
-</body>
-</html>
+        <div class="bar-item" style="margin-bottom:16px">
+            <div class="bar-label" style="margin-bottom:6px"><span style="font-weight:600">效果承诺</span></div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+                <span style="font-size:11px;color:#D93B3B;width:50px">客户</span>
+                <div class="bar-track" style="flex:1">
+                    <div class="bar-fill" style="width:25%;background:#D93B3B"></div>
+                </div>
+                <b style="font-size:12px;color:#D93B3B;width:45px;text-align:right">25%</b>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px">
+                <span style="font-size:11px;color:#6B7280;width:50px">行业</span>
+                <div class="bar-track" style="flex:1">
+                    <div class="bar-fill" style="width:13.3%;background:#9CA3AF"></div>
+                </div>
+                <b style="font-size:12px;color:#6B7280;width:45px;text-align:right">13.3%</b>
+            </div>
+        </div>
+        
+        </div>
+        <p style="font-size:12px;color:#374151;background:#FEF2F2;padding:10px 12px;border-radius:6px;margin-top:12px;line-height:1.6">客户CTA引导偏弱，<span style="color:#D93B3B;font-weight:600">限时优惠占比仅20%（行业42.3%，-22.3pp）</span>，缺少紧迫感促转化手段</p>
+    </div>
+    
+
+    <div>
+        <p style="font-size:13px;font-weight:600;margin-bottom:12px;color:var(--fg)">产品展示方式占比</p>
+        <div class="bar-chart">
+            
+        <div class="bar-item" style="margin-bottom:16px">
+            <div class="bar-label" style="margin-bottom:6px"><span style="font-weight:600">使用演示</span></div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+                <span style="font-size:11px;color:#D93B3B;width:50px">客户</span>
+                <div class="bar-track" style="flex:1">
+                    <div class="bar-fill" style="width:60%;background:#D93B3B"></div>
+                </div>
+                <b style="font-size:12px;color:#D93B3B;width:45px;text-align:right">60%</b>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px">
+                <span style="font-size:11px;color:#6B7280;width:50px">行业</span>
+                <div class="bar-track" style="flex:1">
+                    <div class="bar-fill" style="width:96.2%;background:#9CA3AF"></div>
+                </div>
+                <b style="font-size:12px;color:#6B7280;width:45px;text-align:right">96.2%</b>
+            </div>
+        </div>
+        
+        <div class="bar-item" style="margin-bottom:16px">
+            <div class="bar-label" style="margin-bottom:6px"><span style="font-weight:600">质地特写</span></div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+                <span style="font-size:11px;color:#D93B3B;width:50px">客户</span>
+                <div class="bar-track" style="flex:1">
+                    <div class="bar-fill" style="width:30%;background:#D93B3B"></div>
+                </div>
+                <b style="font-size:12px;color:#D93B3B;width:45px;text-align:right">30%</b>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px">
+                <span style="font-size:11px;color:#6B7280;width:50px">行业</span>
+                <div class="bar-track" style="flex:1">
+                    <div class="bar-fill" style="width:53.8%;background:#9CA3AF"></div>
+                </div>
+                <b style="font-size:12px;color:#6B7280;width:45px;text-align:right">53.8%</b>
+            </div>
+        </div>
+        
+        <div class="bar-item" style="margin-bottom:16px">
+            <div class="bar-label" style="margin-bottom:6px"><span style="font-weight:600">手持展示</span></div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+                <span style="font-size:11px;color:#D93B3B;width:50px">客户</span>
+                <div class="bar-track" style="flex:1">
+                    <div class="bar-fill" style="width:40%;background:#D93B3B"></div>
+                </div>
+                <b style="font-size:12px;color:#D93B3B;width:45px;text-align:right">40%</b>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px">
+                <span style="font-size:11px;color:#6B7280;width:50px">行业</span>
+                <div class="bar-track" style="flex:1">
+                    <div class="bar-fill" style="width:50%;background:#9CA3AF"></div>
+                </div>
+                <b style="font-size:12px;color:#6B7280;width:45px;text-align:right">50%</b>
+            </div>
+        </div>
+        
+        <div class="bar-item" style="margin-bottom:16px">
+            <div class="bar-label" style="margin-bottom:6px"><span style="font-weight:600">成分讲解</span></div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+                <span style="font-size:11px;color:#D93B3B;width:50px">客户</span>
+                <div class="bar-track" style="flex:1">
+                    <div class="bar-fill" style="width:15%;background:#D93B3B"></div>
+                </div>
+                <b style="font-size:12px;color:#D93B3B;width:45px;text-align:right">15%</b>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px">
+                <span style="font-size:11px;color:#6B7280;width:50px">行业</span>
+                <div class="bar-track" style="flex:1">
+                    <div class="bar-fill" style="width:33.3%;background:#9CA3AF"></div>
+                </div>
+                <b style="font-size:12px;color:#6B7280;width:45px;text-align:right">33.3%</b>
+            </div>
+        </div>
+        
+        </div>
+        <p style="font-size:12px;color:#374151;background:#FEF2F2;padding:10px 12px;border-radius:6px;margin-top:12px;line-height:1.6">客户产品展示不足，<span style="color:#D93B3B;font-weight:600">使用演示占比仅60%（行业96.2%，-36.2pp）</span>，缺少完整产品演示降低信任感</p>
+    </div>
+    
+</div>
+
+    <h3>2. 爆款素材内容标签占比</h3>
+<div class="bar-chart">
+<div class="bar-item">
+<div class="bar-label"><span>痛点提问钩子</span><b>34.6%</b></div>
+<div class="bar-track"><div class="bar-fill" style="width:34.6%"></div></div>
+</div>
+<div class="bar-item">
+<div class="bar-label"><span>效果对比钩子</span><b>26.9%</b></div>
+<div class="bar-track"><div class="bar-fill" style="width:26.9%"></div></div>
+</div>
+<div class="bar-item">
+<div class="bar-label"><span>场景代入钩子</span><b>23.1%</b></div>
+<div class="bar-track"><div class="bar-fill" style="width:23.1%"></div></div>
+</div>
+<div class="bar-item">
+<div class="bar-label"><span>产品实拍展示</span><b>96.2%</b></div>
+<div class="bar-track"><div class="bar-fill" style="width:96.2%"></div></div>
+</div>
+<div class="bar-item">
+<div class="bar-label"><span>限时优惠CTA</span><b>42.3%</b></div>
+<div class="bar-track"><div class="bar-fill" style="width:42.3%"></div></div>
+</div>
+<div class="bar-item">
+<div class="bar-label"><span>赠品引导CTA</span><b>42.3%</b></div>
+<div class="bar-track"><div class="bar-fill" style="width:42.3%"></div></div>
+</div>
+</div>
+
+    <!-- 可复用爆款模板库 -->
+    <div style="margin-top:60px;">
+      <h2 style="font-size:28px;font-weight:700;color:#1a1a1a;margin-bottom:30px;font-family:'Noto Serif SC',serif;">3. 可复用爆款模板库（5套）</h2>
+    
+      <div style="margin-bottom:50px;padding:30px;background:#fafafa;border-radius:12px;">
+        <!-- 模板标题 -->
+        <div style="display:flex;align-items:center;margin-bottom:25px;">
+          <div style="width:60px;height:60px;background:#D93B3B;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-right:15px;">
+            <span style="font-size:24px;font-weight:700;color:#fff;">1</span>
+          </div>
+          <div>
+            <h3 style="font-size:22px;font-weight:700;color:#1a1a1a;margin:0;font-family:'Noto Serif SC',serif;">痛点直击型</h3>
+            <p style="font-size:14px;color:#666;margin:5px 0 0 0;">高CTR拿量</p>
+          </div>
+        </div>
+        
+        <!-- 三段式策略说明 -->
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-bottom:30px;">
+          <div style="display:flex;align-items:flex-start;">
+            <span style="display:inline-block;padding:4px 10px;background:#D93B3B;color:#fff;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap;margin-right:8px;">前3秒钩子</span>
+            <span style="font-size:14px;color:#333;line-height:1.6;">前3秒痛点提问钩子</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;">
+            <span style="display:inline-block;padding:4px 10px;background:#D93B3B;color:#fff;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap;margin-right:8px;">中段展示</span>
+            <span style="font-size:14px;color:#333;line-height:1.6;">高频切镜维持完播</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;">
+            <span style="display:inline-block;padding:4px 10px;background:#D93B3B;color:#fff;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap;margin-right:8px;">结尾CTA</span>
+            <span style="font-size:14px;color:#333;line-height:1.6;">限时优惠CTA</span>
+          </div>
+        </div>
+        
+        <!-- 三个示例视频横向并排 -->
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
+
+          <div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+            <!-- 视频预览区（手机边框） -->
+            <div style="position:relative;background:#1a1a1a;border-radius:12px;padding:8px;margin-bottom:15px;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+              <div style="position:relative;width:100%;padding-top:177.78%;background:#000;border-radius:8px;overflow:hidden;">
+                <video preload="metadata" muted="" playsinline="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;" src="http://adsmind.gdtimg.com/ads_svp_video__0b53xiaggaaaguab5sqgcrvbxoqemo5aay2a.f0.mp4?dis_k=a18e82492b1400fa010ed24e0d59ae1c&amp;dis_t=1778810289&amp;m=f84f9a8095b21d8d180069888d29b996"></video>
+                <div style="position:absolute;top:8px;left:8px;background:#22c55e;color:#fff;padding:3px 8px;border-radius:4px;font-size:11px;font-weight:600;">推荐</div>
+                <div onclick="playVideo(this)" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;background:rgba(255,255,255,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.2);">
+                  <div style="width:0;height:0;border-left:14px solid #D93B3B;border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:3px;"></div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 核心数据指标区 -->
+            <div style="margin-bottom:12px;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">消耗排名</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">#5</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">消耗指数</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">289.1指数</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">CTR</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">4.62%</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;">
+                <span style="font-size:12px;color:#666;">3s完播率</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">54.66%</span>
+              </div>
+            </div>
+            
+            <!-- 灯泡点评区 -->
+            <div style="background:#fff5f5;border-radius:6px;padding:10px;display:flex;align-items:flex-start;">
+              <span style="font-size:16px;margin-right:6px;flex-shrink:0;">💡</span>
+              <span style="font-size:11px;color:#333;line-height:1.5;">消耗排名#5，CTR高达4.62%（行业均值2.44%），3s完播率54.7%强力留人，低价获取海量曝光</span>
+            </div>
+          </div>
+
+          <div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+            <!-- 视频预览区（手机边框） -->
+            <div style="position:relative;background:#1a1a1a;border-radius:12px;padding:8px;margin-bottom:15px;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+              <div style="position:relative;width:100%;padding-top:177.78%;background:#000;border-radius:8px;overflow:hidden;">
+                <video preload="metadata" muted="" playsinline="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;" src="http://adsmind.gdtimg.com/ads_svp_video__0b53gebp2aacgeankgblevvbsmie7uyqf7ka.f0.mp4?dis_k=417909a5d90fe36d79cf43b1e301c5a8&amp;dis_t=1781090291&amp;m=69ab54ec11339dbb39f2d98b58a67880&amp;sha256=263adfd3c48f5ff2d41db1e753b3f39ecbb30bd0ca6ba5f16f836be10fb10096"></video>
+                <div style="position:absolute;top:8px;left:8px;background:#22c55e;color:#fff;padding:3px 8px;border-radius:4px;font-size:11px;font-weight:600;">推荐</div>
+                <div onclick="playVideo(this)" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;background:rgba(255,255,255,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.2);">
+                  <div style="width:0;height:0;border-left:14px solid #D93B3B;border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:3px;"></div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 核心数据指标区 -->
+            <div style="margin-bottom:12px;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">消耗排名</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">#30</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">消耗指数</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">138.2指数</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">CTR</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">5.23%</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;">
+                <span style="font-size:12px;color:#666;">3s完播率</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">70.2%</span>
+              </div>
+            </div>
+            
+            <!-- 灯泡点评区 -->
+            <div style="background:#fff5f5;border-radius:6px;padding:10px;display:flex;align-items:flex-start;">
+              <span style="font-size:16px;margin-right:6px;flex-shrink:0;">💡</span>
+              <span style="font-size:11px;color:#333;line-height:1.5;">消耗排名#30，CTR高达5.23%（行业均值2.44%），3s完播率70.2%强力留人，低价获取海量曝光</span>
+            </div>
+          </div>
+
+          <div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+            <!-- 视频预览区（手机边框） -->
+            <div style="position:relative;background:#1a1a1a;border-radius:12px;padding:8px;margin-bottom:15px;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+              <div style="position:relative;width:100%;padding-top:177.78%;background:#000;border-radius:8px;overflow:hidden;">
+                <video preload="metadata" muted="" playsinline="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;" src="http://adsmind.gdtimg.com/ads_svp_video__0b53caajqaaag4abhdag7rvbweaetaiabgca.f0.mp4?dis_k=47e80425d843978347a2055c90cb3a59&amp;dis_t=1779693351&amp;m=028ac7e1dc80e1369859f7507cf905db&amp;sha256=2473415001d47eafae1e7ad310ef520c710f28aef99ed8a6de1b875659a4bc5c"></video>
+                <div style="position:absolute;top:8px;left:8px;background:#22c55e;color:#fff;padding:3px 8px;border-radius:4px;font-size:11px;font-weight:600;">推荐</div>
+                <div onclick="playVideo(this)" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;background:rgba(255,255,255,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.2);">
+                  <div style="width:0;height:0;border-left:14px solid #D93B3B;border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:3px;"></div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 核心数据指标区 -->
+            <div style="margin-bottom:12px;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">消耗排名</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">#35</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">消耗指数</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">125.5指数</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">CTR</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">7.87%</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;">
+                <span style="font-size:12px;color:#666;">3s完播率</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">48.99%</span>
+              </div>
+            </div>
+            
+            <!-- 灯泡点评区 -->
+            <div style="background:#fff5f5;border-radius:6px;padding:10px;display:flex;align-items:flex-start;">
+              <span style="font-size:16px;margin-right:6px;flex-shrink:0;">💡</span>
+              <span style="font-size:11px;color:#333;line-height:1.5;">消耗排名#35，CTR高达7.87%（行业均值2.44%），3s完播率49.0%强力留人，低价获取海量曝光</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div style="margin-bottom:50px;padding:30px;background:#fafafa;border-radius:12px;">
+        <!-- 模板标题 -->
+        <div style="display:flex;align-items:center;margin-bottom:25px;">
+          <div style="width:60px;height:60px;background:#D93B3B;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-right:15px;">
+            <span style="font-size:24px;font-weight:700;color:#fff;">2</span>
+          </div>
+          <div>
+            <h3 style="font-size:22px;font-weight:700;color:#1a1a1a;margin:0;font-family:'Noto Serif SC',serif;">效果对比型</h3>
+            <p style="font-size:14px;color:#666;margin:5px 0 0 0;">双高均衡</p>
+          </div>
+        </div>
+        
+        <!-- 三段式策略说明 -->
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-bottom:30px;">
+          <div style="display:flex;align-items:flex-start;">
+            <span style="display:inline-block;padding:4px 10px;background:#D93B3B;color:#fff;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap;margin-right:8px;">前3秒钩子</span>
+            <span style="font-size:14px;color:#333;line-height:1.6;">前3秒效果对比钩子</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;">
+            <span style="display:inline-block;padding:4px 10px;background:#D93B3B;color:#fff;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap;margin-right:8px;">中段展示</span>
+            <span style="font-size:14px;color:#333;line-height:1.6;">产品使用演示</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;">
+            <span style="display:inline-block;padding:4px 10px;background:#D93B3B;color:#fff;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap;margin-right:8px;">结尾CTA</span>
+            <span style="font-size:14px;color:#333;line-height:1.6;">赠品引导CTA</span>
+          </div>
+        </div>
+        
+        <!-- 三个示例视频横向并排 -->
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
+
+          <div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+            <!-- 视频预览区（手机边框） -->
+            <div style="position:relative;background:#1a1a1a;border-radius:12px;padding:8px;margin-bottom:15px;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+              <div style="position:relative;width:100%;padding-top:177.78%;background:#000;border-radius:8px;overflow:hidden;">
+                <video preload="metadata" muted="" playsinline="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;" src="http://adsmind.gdtimg.com/ads_svp_video__0b53keaayaaayuahpujhy5vbwuiebriqadca.f0.mp4?dis_k=eb8f42e4cf50a97263007b875e1bb116&amp;dis_t=1781161143&amp;m=73d371f99d107e701b75675e1eb6fca7&amp;sha256=ae94aafcf44bcd1127cf2d6ffb81127a656a4011d7552e5534ef0863d2da1dc6"></video>
+                <div style="position:absolute;top:8px;left:8px;background:#22c55e;color:#fff;padding:3px 8px;border-radius:4px;font-size:11px;font-weight:600;">推荐</div>
+                <div onclick="playVideo(this)" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;background:rgba(255,255,255,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.2);">
+                  <div style="width:0;height:0;border-left:14px solid #D93B3B;border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:3px;"></div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 核心数据指标区 -->
+            <div style="margin-bottom:12px;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">消耗排名</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">#38</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">消耗指数</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">122.2指数</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">CTR</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">2.86%</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;">
+                <span style="font-size:12px;color:#666;">3s完播率</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">65.44%</span>
+              </div>
+            </div>
+            
+            <!-- 灯泡点评区 -->
+            <div style="background:#fff5f5;border-radius:6px;padding:10px;display:flex;align-items:flex-start;">
+              <span style="font-size:16px;margin-right:6px;flex-shrink:0;">💡</span>
+              <span style="font-size:11px;color:#333;line-height:1.5;">消耗排名#38，CTR 2.86% + 下单率7.99%双高均衡，3s完播率65.4%，品效合一典范</span>
+            </div>
+          </div>
+
+          <div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+            <!-- 视频预览区（手机边框） -->
+            <div style="position:relative;background:#1a1a1a;border-radius:12px;padding:8px;margin-bottom:15px;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+              <div style="position:relative;width:100%;padding-top:177.78%;background:#000;border-radius:8px;overflow:hidden;">
+                <video preload="metadata" muted="" playsinline="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;" src="http://adsmind.gdtimg.com/ads_svp_video__0bc33aa6gaabuqafpzyu2rvbvwae4pmady2a.f0.mp4?dis_k=2cc9dabd2d2a14bc50c878ad5e5ab537&amp;dis_t=1779877022&amp;m=0f9e9bf226aa3dfc4dffc371597c20f7&amp;sha256=6de4239fb660e57abe29f5b3b8790a39498e96df256cca2f3e84b5ec8cf38a10"></video>
+                <div style="position:absolute;top:8px;left:8px;background:#22c55e;color:#fff;padding:3px 8px;border-radius:4px;font-size:11px;font-weight:600;">推荐</div>
+                <div onclick="playVideo(this)" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;background:rgba(255,255,255,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.2);">
+                  <div style="width:0;height:0;border-left:14px solid #D93B3B;border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:3px;"></div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 核心数据指标区 -->
+            <div style="margin-bottom:12px;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">消耗排名</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">#50</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">消耗指数</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">106.6指数</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">CTR</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">2.61%</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;">
+                <span style="font-size:12px;color:#666;">3s完播率</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">70.5%</span>
+              </div>
+            </div>
+            
+            <!-- 灯泡点评区 -->
+            <div style="background:#fff5f5;border-radius:6px;padding:10px;display:flex;align-items:flex-start;">
+              <span style="font-size:16px;margin-right:6px;flex-shrink:0;">💡</span>
+              <span style="font-size:11px;color:#333;line-height:1.5;">消耗排名#50，CTR 2.61% + 下单率9.21%双高均衡，3s完播率70.5%，品效合一典范</span>
+            </div>
+          </div>
+
+          <div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+            <!-- 视频预览区（手机边框） -->
+            <div style="position:relative;background:#1a1a1a;border-radius:12px;padding:8px;margin-bottom:15px;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+              <div style="position:relative;width:100%;padding-top:177.78%;background:#000;border-radius:8px;overflow:hidden;">
+                <video preload="metadata" muted="" playsinline="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;" src="http://adsmind.gdtimg.com/ads_svp_video__0bc3rebuuaadoqaaynjrknvbtciejkeqgssa.f0.mp4?dis_k=94016f1eb07fbc4f3ef96fbe9cccd3e5&amp;dis_t=1781679881&amp;m=7479fbc72b6ebeadfceda9fdcfb1080d"></video>
+                <div style="position:absolute;top:8px;left:8px;background:#22c55e;color:#fff;padding:3px 8px;border-radius:4px;font-size:11px;font-weight:600;">推荐</div>
+                <div onclick="playVideo(this)" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;background:rgba(255,255,255,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.2);">
+                  <div style="width:0;height:0;border-left:14px solid #D93B3B;border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:3px;"></div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 核心数据指标区 -->
+            <div style="margin-bottom:12px;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">消耗排名</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">#55</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">消耗指数</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">104.5指数</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">CTR</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">2.81%</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;">
+                <span style="font-size:12px;color:#666;">3s完播率</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">57.1%</span>
+              </div>
+            </div>
+            
+            <!-- 灯泡点评区 -->
+            <div style="background:#fff5f5;border-radius:6px;padding:10px;display:flex;align-items:flex-start;">
+              <span style="font-size:16px;margin-right:6px;flex-shrink:0;">💡</span>
+              <span style="font-size:11px;color:#333;line-height:1.5;">消耗排名#55，CTR 2.81% + 下单率9.83%双高均衡，3s完播率57.1%，品效合一典范</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div style="margin-bottom:50px;padding:30px;background:#fafafa;border-radius:12px;">
+        <!-- 模板标题 -->
+        <div style="display:flex;align-items:center;margin-bottom:25px;">
+          <div style="width:60px;height:60px;background:#D93B3B;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-right:15px;">
+            <span style="font-size:24px;font-weight:700;color:#fff;">3</span>
+          </div>
+          <div>
+            <h3 style="font-size:22px;font-weight:700;color:#1a1a1a;margin:0;font-family:'Noto Serif SC',serif;">场景代入型</h3>
+            <p style="font-size:14px;color:#666;margin:5px 0 0 0;">触达扩量</p>
+          </div>
+        </div>
+        
+        <!-- 三段式策略说明 -->
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-bottom:30px;">
+          <div style="display:flex;align-items:flex-start;">
+            <span style="display:inline-block;padding:4px 10px;background:#D93B3B;color:#fff;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap;margin-right:8px;">前3秒钩子</span>
+            <span style="font-size:14px;color:#333;line-height:1.6;">前3秒场景代入钩子</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;">
+            <span style="display:inline-block;padding:4px 10px;background:#D93B3B;color:#fff;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap;margin-right:8px;">中段展示</span>
+            <span style="font-size:14px;color:#333;line-height:1.6;">质地特写展示</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;">
+            <span style="display:inline-block;padding:4px 10px;background:#D93B3B;color:#fff;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap;margin-right:8px;">结尾CTA</span>
+            <span style="font-size:14px;color:#333;line-height:1.6;">价格锚点CTA</span>
+          </div>
+        </div>
+        
+        <!-- 三个示例视频横向并排 -->
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
+
+          <div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+            <!-- 视频预览区（手机边框） -->
+            <div style="position:relative;background:#1a1a1a;border-radius:12px;padding:8px;margin-bottom:15px;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+              <div style="position:relative;width:100%;padding-top:177.78%;background:#000;border-radius:8px;overflow:hidden;">
+                <video preload="metadata" muted="" playsinline="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;" src="http://adsmind.gdtimg.com/ads_svp_video__0b53veb4uaadpmaphfrxyzvbtkiezkuqhssa.f0.mp4?dis_k=e230122ca5e0835904b0783d1548a5c1&amp;dis_t=1781807682&amp;m=75327a94c1b376e28cb0047fd11a09f1&amp;sha256=30fc1d5ab9112256040f9f43cfed085c64bbcaf99993b01fd31daa7a2944d411"></video>
+                <div style="position:absolute;top:8px;left:8px;background:#22c55e;color:#fff;padding:3px 8px;border-radius:4px;font-size:11px;font-weight:600;">推荐</div>
+                <div onclick="playVideo(this)" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;background:rgba(255,255,255,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.2);">
+                  <div style="width:0;height:0;border-left:14px solid #D93B3B;border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:3px;"></div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 核心数据指标区 -->
+            <div style="margin-bottom:12px;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">消耗排名</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">#26</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">消耗指数</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">149.1指数</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">CTR</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">2.12%</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;">
+                <span style="font-size:12px;color:#666;">3s完播率</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">71.69%</span>
+              </div>
+            </div>
+            
+            <!-- 灯泡点评区 -->
+            <div style="background:#fff5f5;border-radius:6px;padding:10px;display:flex;align-items:flex-start;">
+              <span style="font-size:16px;margin-right:6px;flex-shrink:0;">💡</span>
+              <span style="font-size:11px;color:#333;line-height:1.5;">消耗排名#26，3s完播率71.7%（行业TOP级），强场景代入感拉高预估CTR，系统强推放量</span>
+            </div>
+          </div>
+
+          <div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+            <!-- 视频预览区（手机边框） -->
+            <div style="position:relative;background:#1a1a1a;border-radius:12px;padding:8px;margin-bottom:15px;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+              <div style="position:relative;width:100%;padding-top:177.78%;background:#000;border-radius:8px;overflow:hidden;">
+                <video preload="metadata" muted="" playsinline="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;" src="http://adsmind.gdtimg.com/ads_svp_video__0b53gebp2aacgeankgblevvbsmie7uyqf7ka.f0.mp4?dis_k=417909a5d90fe36d79cf43b1e301c5a8&amp;dis_t=1781090291&amp;m=69ab54ec11339dbb39f2d98b58a67880&amp;sha256=263adfd3c48f5ff2d41db1e753b3f39ecbb30bd0ca6ba5f16f836be10fb10096"></video>
+                <div style="position:absolute;top:8px;left:8px;background:#22c55e;color:#fff;padding:3px 8px;border-radius:4px;font-size:11px;font-weight:600;">推荐</div>
+                <div onclick="playVideo(this)" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;background:rgba(255,255,255,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.2);">
+                  <div style="width:0;height:0;border-left:14px solid #D93B3B;border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:3px;"></div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 核心数据指标区 -->
+            <div style="margin-bottom:12px;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">消耗排名</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">#30</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">消耗指数</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">138.2指数</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">CTR</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">5.23%</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;">
+                <span style="font-size:12px;color:#666;">3s完播率</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">70.2%</span>
+              </div>
+            </div>
+            
+            <!-- 灯泡点评区 -->
+            <div style="background:#fff5f5;border-radius:6px;padding:10px;display:flex;align-items:flex-start;">
+              <span style="font-size:16px;margin-right:6px;flex-shrink:0;">💡</span>
+              <span style="font-size:11px;color:#333;line-height:1.5;">消耗排名#30，3s完播率70.2%（行业TOP级），强场景代入感拉高预估CTR，系统强推放量</span>
+            </div>
+          </div>
+
+          <div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+            <!-- 视频预览区（手机边框） -->
+            <div style="position:relative;background:#1a1a1a;border-radius:12px;padding:8px;margin-bottom:15px;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+              <div style="position:relative;width:100%;padding-top:177.78%;background:#000;border-radius:8px;overflow:hidden;">
+                <video preload="metadata" muted="" playsinline="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;" src="http://adsmind.gdtimg.com/ads_svp_video__0bc3cybesaac3iak2ri455vbsfqejelaeska.f0.mp4?dis_k=f8de64a263094a5f1a42e179a482ab20&amp;dis_t=1780409561&amp;m=6414cb5c955146a610068f1966b0317d"></video>
+                <div style="position:absolute;top:8px;left:8px;background:#22c55e;color:#fff;padding:3px 8px;border-radius:4px;font-size:11px;font-weight:600;">推荐</div>
+                <div onclick="playVideo(this)" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;background:rgba(255,255,255,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.2);">
+                  <div style="width:0;height:0;border-left:14px solid #D93B3B;border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:3px;"></div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 核心数据指标区 -->
+            <div style="margin-bottom:12px;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">消耗排名</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">#32</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">消耗指数</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">128.9指数</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">CTR</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">1.75%</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;">
+                <span style="font-size:12px;color:#666;">3s完播率</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">68.69%</span>
+              </div>
+            </div>
+            
+            <!-- 灯泡点评区 -->
+            <div style="background:#fff5f5;border-radius:6px;padding:10px;display:flex;align-items:flex-start;">
+              <span style="font-size:16px;margin-right:6px;flex-shrink:0;">💡</span>
+              <span style="font-size:11px;color:#333;line-height:1.5;">消耗排名#32，3s完播率68.7%（行业TOP级），强场景代入感拉高预估CTR，系统强推放量</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div style="margin-bottom:50px;padding:30px;background:#fafafa;border-radius:12px;">
+        <!-- 模板标题 -->
+        <div style="display:flex;align-items:center;margin-bottom:25px;">
+          <div style="width:60px;height:60px;background:#D93B3B;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-right:15px;">
+            <span style="font-size:24px;font-weight:700;color:#fff;">4</span>
+          </div>
+          <div>
+            <h3 style="font-size:22px;font-weight:700;color:#1a1a1a;margin:0;font-family:'Noto Serif SC',serif;">明星背书型</h3>
+            <p style="font-size:14px;color:#666;margin:5px 0 0 0;">品效结合</p>
+          </div>
+        </div>
+        
+        <!-- 三段式策略说明 -->
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-bottom:30px;">
+          <div style="display:flex;align-items:flex-start;">
+            <span style="display:inline-block;padding:4px 10px;background:#D93B3B;color:#fff;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap;margin-right:8px;">前3秒钩子</span>
+            <span style="font-size:14px;color:#333;line-height:1.6;">前3秒明星背书钩子</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;">
+            <span style="display:inline-block;padding:4px 10px;background:#D93B3B;color:#fff;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap;margin-right:8px;">中段展示</span>
+            <span style="font-size:14px;color:#333;line-height:1.6;">成分功效讲解</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;">
+            <span style="display:inline-block;padding:4px 10px;background:#D93B3B;color:#fff;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap;margin-right:8px;">结尾CTA</span>
+            <span style="font-size:14px;color:#333;line-height:1.6;">限时优惠CTA</span>
+          </div>
+        </div>
+        
+        <!-- 三个示例视频横向并排 -->
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
+
+          <div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+            <!-- 视频预览区（手机边框） -->
+            <div style="position:relative;background:#1a1a1a;border-radius:12px;padding:8px;margin-bottom:15px;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+              <div style="position:relative;width:100%;padding-top:177.78%;background:#000;border-radius:8px;overflow:hidden;">
+                <video preload="metadata" muted="" playsinline="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;" src="http://adsmind.gdtimg.com/ads_svp_video__0b53zaawwaabhaajylyohrvbxsaenpeac22a.f0.mp4?dis_k=0495854100048daa43ce9150af9f3c60&amp;dis_t=1780020943&amp;m=675ae0566618e61803831a697040799b&amp;sha256=b2c594a4843bbb7c65bf9ebbb3f73f091972875ba208070a6b7df27ba03df71e"></video>
+                <div style="position:absolute;top:8px;left:8px;background:#22c55e;color:#fff;padding:3px 8px;border-radius:4px;font-size:11px;font-weight:600;">推荐</div>
+                <div onclick="playVideo(this)" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;background:rgba(255,255,255,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.2);">
+                  <div style="width:0;height:0;border-left:14px solid #D93B3B;border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:3px;"></div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 核心数据指标区 -->
+            <div style="margin-bottom:12px;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">消耗排名</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">#37</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">消耗指数</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">122.4指数</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">CTR</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">1.84%</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;">
+                <span style="font-size:12px;color:#666;">3s完播率</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">18.65%</span>
+              </div>
+            </div>
+            
+            <!-- 灯泡点评区 -->
+            <div style="background:#fff5f5;border-radius:6px;padding:10px;display:flex;align-items:flex-start;">
+              <span style="font-size:16px;margin-right:6px;flex-shrink:0;">💡</span>
+              <span style="font-size:11px;color:#333;line-height:1.5;">消耗排名#37，下单ROI 2.14（行业领先），下单率10.27%精准转化，品效结合放量稳定</span>
+            </div>
+          </div>
+
+          <div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+            <!-- 视频预览区（手机边框） -->
+            <div style="position:relative;background:#1a1a1a;border-radius:12px;padding:8px;margin-bottom:15px;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+              <div style="position:relative;width:100%;padding-top:177.78%;background:#000;border-radius:8px;overflow:hidden;">
+                <video preload="metadata" muted="" playsinline="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;" src="http://adsmind.gdtimg.com/ads_svp_video__0b53ribawaacaeagpz7nbjurrcqebofaec2a.f0.mp4?dis_k=d54d9b3634668d48f979d4c5355894cb&amp;dis_t=1777298617&amp;m=6a18f54883238ff36c24914c04160cda&amp;sha256=91b6c289dff04dfb37d8d9931a9aec2c8ecd2f43f3993cc3aed9cf7c2985d401"></video>
+                <div style="position:absolute;top:8px;left:8px;background:#22c55e;color:#fff;padding:3px 8px;border-radius:4px;font-size:11px;font-weight:600;">推荐</div>
+                <div onclick="playVideo(this)" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;background:rgba(255,255,255,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.2);">
+                  <div style="width:0;height:0;border-left:14px solid #D93B3B;border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:3px;"></div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 核心数据指标区 -->
+            <div style="margin-bottom:12px;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">消耗排名</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">#48</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">消耗指数</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">107.0指数</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">CTR</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">2.33%</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;">
+                <span style="font-size:12px;color:#666;">3s完播率</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">29.38%</span>
+              </div>
+            </div>
+            
+            <!-- 灯泡点评区 -->
+            <div style="background:#fff5f5;border-radius:6px;padding:10px;display:flex;align-items:flex-start;">
+              <span style="font-size:16px;margin-right:6px;flex-shrink:0;">💡</span>
+              <span style="font-size:11px;color:#333;line-height:1.5;">消耗排名#48，下单ROI 2.64（行业领先），下单率9.41%精准转化，品效结合放量稳定</span>
+            </div>
+          </div>
+
+          <div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+            <!-- 视频预览区（手机边框） -->
+            <div style="position:relative;background:#1a1a1a;border-radius:12px;padding:8px;margin-bottom:15px;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+              <div style="position:relative;width:100%;padding-top:177.78%;background:#000;border-radius:8px;overflow:hidden;">
+                <video preload="metadata" muted="" playsinline="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;" src="http://adsmind.gdtimg.com/ads_svp_video__0bc33aa6gaabuqafpzyu2rvbvwae4pmady2a.f0.mp4?dis_k=2cc9dabd2d2a14bc50c878ad5e5ab537&amp;dis_t=1779877022&amp;m=0f9e9bf226aa3dfc4dffc371597c20f7&amp;sha256=6de4239fb660e57abe29f5b3b8790a39498e96df256cca2f3e84b5ec8cf38a10"></video>
+                <div style="position:absolute;top:8px;left:8px;background:#22c55e;color:#fff;padding:3px 8px;border-radius:4px;font-size:11px;font-weight:600;">推荐</div>
+                <div onclick="playVideo(this)" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;background:rgba(255,255,255,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.2);">
+                  <div style="width:0;height:0;border-left:14px solid #D93B3B;border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:3px;"></div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 核心数据指标区 -->
+            <div style="margin-bottom:12px;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">消耗排名</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">#50</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">消耗指数</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">106.6指数</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">CTR</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">2.61%</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;">
+                <span style="font-size:12px;color:#666;">3s完播率</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">70.5%</span>
+              </div>
+            </div>
+            
+            <!-- 灯泡点评区 -->
+            <div style="background:#fff5f5;border-radius:6px;padding:10px;display:flex;align-items:flex-start;">
+              <span style="font-size:16px;margin-right:6px;flex-shrink:0;">💡</span>
+              <span style="font-size:11px;color:#333;line-height:1.5;">消耗排名#50，下单ROI 2.19（行业领先），下单率9.21%精准转化，品效结合放量稳定</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div style="margin-bottom:50px;padding:30px;background:#fafafa;border-radius:12px;">
+        <!-- 模板标题 -->
+        <div style="display:flex;align-items:center;margin-bottom:25px;">
+          <div style="width:60px;height:60px;background:#D93B3B;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-right:15px;">
+            <span style="font-size:24px;font-weight:700;color:#fff;">5</span>
+          </div>
+          <div>
+            <h3 style="font-size:22px;font-weight:700;color:#1a1a1a;margin:0;font-family:'Noto Serif SC',serif;">长叙事专家型</h3>
+            <p style="font-size:14px;color:#666;margin:5px 0 0 0;">超高消耗头部</p>
+          </div>
+        </div>
+        
+        <!-- 三段式策略说明 -->
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-bottom:30px;">
+          <div style="display:flex;align-items:flex-start;">
+            <span style="display:inline-block;padding:4px 10px;background:#D93B3B;color:#fff;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap;margin-right:8px;">前3秒钩子</span>
+            <span style="font-size:14px;color:#333;line-height:1.6;">前3秒复合钩子</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;">
+            <span style="display:inline-block;padding:4px 10px;background:#D93B3B;color:#fff;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap;margin-right:8px;">中段展示</span>
+            <span style="font-size:14px;color:#333;line-height:1.6;">长视频完整叙事</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;">
+            <span style="display:inline-block;padding:4px 10px;background:#D93B3B;color:#fff;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap;margin-right:8px;">结尾CTA</span>
+            <span style="font-size:14px;color:#333;line-height:1.6;">多重CTA叠加</span>
+          </div>
+        </div>
+        
+        <!-- 三个示例视频横向并排 -->
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
+
+          <div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+            <!-- 视频预览区（手机边框） -->
+            <div style="position:relative;background:#1a1a1a;border-radius:12px;padding:8px;margin-bottom:15px;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+              <div style="position:relative;width:100%;padding-top:177.78%;background:#000;border-radius:8px;overflow:hidden;">
+                <video preload="metadata" muted="" playsinline="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;" src="http://adsmind.gdtimg.com/ads_svp_video__0bc35ya7oaabkiamh4bb7jvbx3qe67xad52a.f0.mp4?dis_k=4b48eb471b96c8a2af424f3df011db95&amp;dis_t=1780720662&amp;m=a447f0f923328bc6eed489b500017d42&amp;sha256=d74f53c5f05ad51dafa4154c6d467bd49f1da76ccb215e1e4a8b085cd5e0c3ea"></video>
+                <div style="position:absolute;top:8px;left:8px;background:#22c55e;color:#fff;padding:3px 8px;border-radius:4px;font-size:11px;font-weight:600;">推荐</div>
+                <div onclick="playVideo(this)" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;background:rgba(255,255,255,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.2);">
+                  <div style="width:0;height:0;border-left:14px solid #D93B3B;border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:3px;"></div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 核心数据指标区 -->
+            <div style="margin-bottom:12px;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">消耗排名</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">#1</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">消耗指数</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">513.7指数</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">CTR</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">2.78%</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;">
+                <span style="font-size:12px;color:#666;">3s完播率</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">41.21%</span>
+              </div>
+            </div>
+            
+            <!-- 灯泡点评区 -->
+            <div style="background:#fff5f5;border-radius:6px;padding:10px;display:flex;align-items:flex-start;">
+              <span style="font-size:16px;margin-right:6px;flex-shrink:0;">💡</span>
+              <span style="font-size:11px;color:#333;line-height:1.5;">消耗排名#1，日均消耗3.09万（头部爆款），CTR 2.78% + 下单率5.91%，超高消耗体量验证</span>
+            </div>
+          </div>
+
+          <div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+            <!-- 视频预览区（手机边框） -->
+            <div style="position:relative;background:#1a1a1a;border-radius:12px;padding:8px;margin-bottom:15px;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+              <div style="position:relative;width:100%;padding-top:177.78%;background:#000;border-radius:8px;overflow:hidden;">
+                <video preload="metadata" muted="" playsinline="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;" src="http://adsmind.gdtimg.com/ads_svp_video__0b53saarwaabmmacbgyzajvbxeaedoiacg2a.f0.mp4?dis_k=f8304ec8c1aafb20d956f9cfe38390f2&amp;dis_t=1780531143&amp;m=9370b25b781e061ee88d15a3b48738be&amp;sha256=3498fe1e3b38001648b459046db429799dbd4e9ab1445fd54f0e0ee3a14e4c2d"></video>
+                <div style="position:absolute;top:8px;left:8px;background:#22c55e;color:#fff;padding:3px 8px;border-radius:4px;font-size:11px;font-weight:600;">推荐</div>
+                <div onclick="playVideo(this)" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;background:rgba(255,255,255,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.2);">
+                  <div style="width:0;height:0;border-left:14px solid #D93B3B;border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:3px;"></div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 核心数据指标区 -->
+            <div style="margin-bottom:12px;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">消耗排名</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">#2</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">消耗指数</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">504.6指数</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">CTR</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">3.13%</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;">
+                <span style="font-size:12px;color:#666;">3s完播率</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">62.91%</span>
+              </div>
+            </div>
+            
+            <!-- 灯泡点评区 -->
+            <div style="background:#fff5f5;border-radius:6px;padding:10px;display:flex;align-items:flex-start;">
+              <span style="font-size:16px;margin-right:6px;flex-shrink:0;">💡</span>
+              <span style="font-size:11px;color:#333;line-height:1.5;">消耗排名#2，日均消耗3.03万（头部爆款），CTR 3.13% + 下单率5.96%，超高消耗体量验证</span>
+            </div>
+          </div>
+
+          <div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+            <!-- 视频预览区（手机边框） -->
+            <div style="position:relative;background:#1a1a1a;border-radius:12px;padding:8px;margin-bottom:15px;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+              <div style="position:relative;width:100%;padding-top:177.78%;background:#000;border-radius:8px;overflow:hidden;">
+                <video preload="metadata" muted="" playsinline="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;" src="http://adsmind.gdtimg.com/ads_svp_video__0b53cycg2aaee4am7lzsdnvb4fqenulai3ka.f0.mp4?dis_k=4c321c0178627ce5851648e2f7007b24&amp;dis_t=1781965370&amp;m=8dcbd0a95b72c95cf722b0c31993aa46"></video>
+                <div style="position:absolute;top:8px;left:8px;background:#22c55e;color:#fff;padding:3px 8px;border-radius:4px;font-size:11px;font-weight:600;">推荐</div>
+                <div onclick="playVideo(this)" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;background:rgba(255,255,255,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.2);">
+                  <div style="width:0;height:0;border-left:14px solid #D93B3B;border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:3px;"></div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 核心数据指标区 -->
+            <div style="margin-bottom:12px;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">消耗排名</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">#3</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">消耗指数</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">371.4指数</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                <span style="font-size:12px;color:#666;">CTR</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">1.65%</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;">
+                <span style="font-size:12px;color:#666;">3s完播率</span>
+                <span style="font-size:12px;color:#1a1a1a;font-weight:600;font-family:'JetBrains Mono',monospace;">43.98%</span>
+              </div>
+            </div>
+            
+            <!-- 灯泡点评区 -->
+            <div style="background:#fff5f5;border-radius:6px;padding:10px;display:flex;align-items:flex-start;">
+              <span style="font-size:16px;margin-right:6px;flex-shrink:0;">💡</span>
+              <span style="font-size:11px;color:#333;line-height:1.5;">消耗排名#3，日均消耗2.22万（头部爆款），CTR 1.65% + 下单率8.86%，超高消耗体量验证</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    
+</div>
+
+<div class="section">
+<h2>模块 3 · 客户素材优势项</h2>
+<ul class="diag-list adv">
+<li>
+<b>CVR转化率优于行业+47.1%</b>
+<span class="sub">客户CVR 11.40%（行业7.75%），单次曝光转化价值高，说明素材内容对精准用户具备较强说服力，转化路径设计合理。</span>
+<span class="sub" style="color:var(--success)">✓ 消耗增益原理：高CVR直接拉高eCPM（eCPM=出价×CTR×CVR），在出价不变情况下，CVR每提升1pp，eCPM提升约12.9%，有助于系统分配更多曝光预算。</span>
+</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>模块 4 · 客户素材短板项</h2>
+
+<h3>① 前端留人短板（导致预估CTR降权）</h3>
+<ul class="diag-list">
+<li>
+<b>3s完播率-32.0%（31.0% vs 行业45.58%）</b>
+<span class="sub">前3秒留人能力严重不足，系统预估CTR降权，压缩曝光消耗。行业优秀素材3s完播率&gt;50%时CTR可达2.94%，客户素材需提升14.58pp才能达到行业均值。</span>
+</li>
+<li>
+<b>5s完播率-36.1%（19.08% vs 行业29.84%）</b>
+<span class="sub">中段流失严重，5s是关键拐点，客户素材在此阶段流失率高达38.4%（100%-19.08%/31.0%），行业优秀素材5s流失率仅34.7%。</span>
+</li>
+<li>
+<b>7s完播率-37.2%（13.91% vs 行业22.15%）</b>
+<span class="sub">7s完播率持续走低，说明中段产品展示缺乏吸引力，用户在产品种草环节大量流失。</span>
+</li>
+<li>
+<b>10s完播率-51.6%（8.66% vs 行业17.89%）</b>
+<span class="sub">10s完播率不足行业一半，长视频叙事能力弱，无法承载完整信任背书与转化引导。</span>
+</li>
+<li>
+<b>平均播放时长-42.7%（5.11s vs 行业8.92s）</b>
+<span class="sub">平均播放时长是CTR最强预测因子（相关系数r=0.643），客户素材播放时长偏短直接拉低预估CTR。</span>
+</li>
+</ul>
+
+<h3>② 后端转化短板（直接压低eCPM）</h3>
+<ul class="diag-list">
+<li>
+<b>CTR-51.9%（1.17% vs 行业2.43%）</b>
+<span class="sub">点击率不足行业一半，前端留人能力弱导致系统预估CTR降权，进而压低eCPM（eCPM=出价×CTR×CVR），即使CVR高也无法弥补CTR短板。</span>
+</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>模块 5 · 分层落地优化方案</h2>
+
+<div class="opt-grid">
+<div class="opt-card">
+<span class="step">维度1</span>
+<h4>前3秒钩子优化</h4>
+<div class="goal">目标：提升3s完播率至45%+，拉高预估CTR</div>
+<ul>
+<li>新增痛点提问型钩子："你是不是也有法令纹/鱼尾纹困扰？"直击用户痛点</li>
+<li>增加效果对比型钩子：使用前后对比图/视频，视觉冲击力强</li>
+<li>减少纯场景代入型钩子占比，从60%降至30%以下</li>
+<li>前3秒必须出现产品或效果，避免纯叙事开场</li>
+</ul>
+</div>
+
+<div class="opt-card">
+<span class="step">维度2</span>
+<h4>中段产品展示剪辑</h4>
+<div class="goal">目标：提升5s/7s完播率，降低中段流失</div>
+<ul>
+<li>增加产品使用演示占比至80%+（当前仅20%），展示完整涂抹过程</li>
+<li>增加质地特写镜头，展示产品吸收效果与肤感</li>
+<li>加快镜头切换频率至2秒内/次，维持视觉刺激</li>
+<li>增加成分功效讲解，建立专业信任背书</li>
+</ul>
+</div>
+
+<div class="opt-card">
+<span class="step">维度3</span>
+<h4>结尾下单转化CTA</h4>
+<div class="goal">目标：强化转化引导，放大CVR优势</div>
+<ul>
+<li>增加限时优惠CTA占比至50%+："前100名下单送XX"</li>
+<li>增加赠品引导CTA至40%+："买一送一，买2送3"</li>
+<li>叠加价格锚点："原价XX，现在只要XX"</li>
+<li>增加库存紧迫感："仅剩XX件，售完即止"</li>
+</ul>
+</div>
+
+<div class="opt-card">
+<span class="step">维度4</span>
+<h4>全片节奏提升完播率</h4>
+<div class="goal">目标：提升10s完播率至18%+，拉长播放时长</div>
+<ul>
+<li>视频时长控制在60-90秒，避免过长导致流失</li>
+<li>增加用户证言/案例展示，增强信任感</li>
+<li>增加花字特效/动态字幕，强化信息密度</li>
+<li>结尾增加售后保障，如："支持7天无理由退换"</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="section">
+<h2>客户TOP10素材预览</h2>
+<div class="video-grid">
+
+<div class="vcard" onclick="playVideo(this)">
+<div class="thumb">
+<video preload="metadata" muted="" playsinline="">
+<source src="http://adsmind.gdtimg.com/ads_svp_video__0b53nuammaaabmaiw7iodfvbu3ieyzwqbrsa.f0.mp4?dis_k=3c3eb7d783e761cb17282441a78ccbf2&amp;dis_t=1779322351&amp;m=2bff0594154c159261ad3f4dfc231377&amp;sha256=96d3191941f21eb662e7f7aa07eb39d07c2e599cef4d974345169e26bd3a3180" type="video/mp4">
+</video>
+<div class="rank">#1</div>
+<div class="play"></div>
+</div>
+<div class="meta">
+<div class="row"><span>消耗指数</span><b>261.6指数</b></div>
+<div class="row"><span>CTR</span><b>1.00%</b></div>
+<div class="row"><span>CVR</span><b>7.16%</b></div>
+<div class="row"><span>3s完播率</span><b>14.85%</b></div>
+<div class="row"><span>综合评分</span><b style="color:#3B82F6">71.2分 (B级)</b></div>
+</div>
+</div>
+
+<div class="vcard" onclick="playVideo(this)">
+<div class="thumb">
+<video preload="metadata" muted="" playsinline="">
+<source src="http://adsmind.gdtimg.com/ads_svp_video__0bc34uawiaabmeaeyiq3ozvbxziemtsqczca.f0.mp4?dis_k=63b03656465985222ea8480129ea3ce0&amp;dis_t=1780105217&amp;m=a90c59a8f0525bf19c404088c7353f0e&amp;sha256=153b1eb9a784bfd72e003885a25cb331b408aaec91ba60edc3b20c919a64fb0f" type="video/mp4">
+</video>
+<div class="rank">#2</div>
+<div class="play"></div>
+</div>
+<div class="meta">
+<div class="row"><span>消耗指数</span><b>203.7指数</b></div>
+<div class="row"><span>CTR</span><b>1.05%</b></div>
+<div class="row"><span>CVR</span><b>10.92%</b></div>
+<div class="row"><span>3s完播率</span><b>24.83%</b></div>
+<div class="row"><span>综合评分</span><b style="color:#3B82F6">78.7分 (B级)</b></div>
+</div>
+</div>
+
+<div class="vcard" onclick="playVideo(this)">
+<div class="thumb">
+<video preload="metadata" muted="" playsinline="">
+<source src="http://adsmind.gdtimg.com/ads_svp_video__0b53aibf2aacoaajmda6c5vbqaqelubaexka.f0.mp4?dis_k=eee2989686413cfe1c79d36aed7505dc&amp;dis_t=1780272078&amp;m=e0589647ceadbb909469ab15562f00a4&amp;sha256=69e3b059f61be9d5d347996fb0090b94c1ed5f31986a5a5a2e9f62bb9482dcbe" type="video/mp4">
+</video>
+<div class="rank">#3</div>
+<div class="play"></div>
+</div>
+<div class="meta">
+<div class="row"><span>消耗指数</span><b>68.8指数</b></div>
+<div class="row"><span>CTR</span><b>1.21%</b></div>
+<div class="row"><span>CVR</span><b>13.06%</b></div>
+<div class="row"><span>3s完播率</span><b>14.18%</b></div>
+<div class="row"><span>综合评分</span><b style="color:#3B82F6">72.2分 (B级)</b></div>
+</div>
+</div>
+
+<div class="vcard" onclick="playVideo(this)">
+<div class="thumb">
+<video preload="metadata" muted="" playsinline="">
+<source src="http://adsmind.gdtimg.com/ads_svp_video__0bc3ouazmaabniagoxqzjzvbw5iesz2qdfsa.f0.mp4?dis_k=7b274274732d368bea94aa51e364c431&amp;dis_t=1780019651&amp;m=1730721e3ddc83a9b9f55cc8fdf02035&amp;sha256=6d6ec75a872a3b3854525a149e5c74ede4b7cfeb65a119f56c5dae53b26ecae0" type="video/mp4">
+</video>
+<div class="rank">#4</div>
+<div class="play"></div>
+</div>
+<div class="meta">
+<div class="row"><span>消耗指数</span><b>59.7指数</b></div>
+<div class="row"><span>CTR</span><b>1.79%</b></div>
+<div class="row"><span>CVR</span><b>7.90%</b></div>
+<div class="row"><span>3s完播率</span><b>70.70%</b></div>
+<div class="row"><span>综合评分</span><b style="color:#16A34A">86.8分 (A级)</b></div>
+</div>
+</div>
+
+<div class="vcard" onclick="playVideo(this)">
+<div class="thumb">
+<video preload="metadata" muted="" playsinline="">
+<source src="http://adsmind.gdtimg.com/ads_svp_video__0b53s4aooaaaueahwmpwkjurvfye46lqbz2a.f0.mp4?dis_k=9387ff77f7d4004fa576fd7c2bbfab19&amp;dis_t=1777769635&amp;m=57378b7d206cb387eb02045e7ab21a3b&amp;sha256=85d27f73b8a0a4c4d7ede3afad457c658ca1a4676b5a990c7ab4be3efe4eb5dd" type="video/mp4">
+</video>
+<div class="rank">#5</div>
+<div class="play"></div>
+</div>
+<div class="meta">
+<div class="row"><span>消耗指数</span><b>54.4指数</b></div>
+<div class="row"><span>CTR</span><b>0.87%</b></div>
+<div class="row"><span>CVR</span><b>9.96%</b></div>
+<div class="row"><span>3s完播率</span><b>17.76%</b></div>
+<div class="row"><span>综合评分</span><b style="color:#F59E0B">65.5分 (C级)</b></div>
+</div>
+</div>
+
+<div class="vcard" onclick="playVideo(this)">
+<div class="thumb">
+<video preload="metadata" muted="" playsinline="">
+<source src="http://adsmind.gdtimg.com/ads_svp_video__0bc3vyaiwaaaqqan4y6l3nurvlqeroxabc2a.f0.mp4?dis_k=45d4c9a94ad66122df1472e73ae82e4c&amp;dis_t=1775098058&amp;m=eab8286e3b448149ef262186a5fba00e&amp;sha256=c0168242cab14d82528fc26e4f3d260c2f7818016aef27574085c67236564fee" type="video/mp4">
+</video>
+<div class="rank">#6</div>
+<div class="play"></div>
+</div>
+<div class="meta">
+<div class="row"><span>消耗指数</span><b>41.5指数</b></div>
+<div class="row"><span>CTR</span><b>1.03%</b></div>
+<div class="row"><span>CVR</span><b>10.69%</b></div>
+<div class="row"><span>3s完播率</span><b>64.06%</b></div>
+<div class="row"><span>综合评分</span><b style="color:#3B82F6">81.7分 (B级)</b></div>
+</div>
+</div>
+
+<div class="vcard" onclick="playVideo(this)">
+<div class="thumb">
+<video preload="metadata" muted="" playsinline="">
+<source src="http://adsmind.gdtimg.com/ads_svp_video__0bc3wublgaac4qakohzgzbvbrniewo2qfm2a.f0.mp4?dis_k=6dfcccdfa0df190fd37e5920915526e6&amp;dis_t=1780750403&amp;m=236c5b88954729b303092c117f56cacc&amp;sha256=f868de23e937e561c63101487e0eeea1482ca7f463fcc2b2b25dcabea56d4a1b" type="video/mp4">
+</video>
+<div class="rank">#7</div>
+<div class="play"></div>
+</div>
+<div class="meta">
+<div class="row"><span>消耗指数</span><b>29.1指数</b></div>
+<div class="row"><span>CTR</span><b>2.27%</b></div>
+<div class="row"><span>CVR</span><b>6.86%</b></div>
+<div class="row"><span>3s完播率</span><b>14.39%</b></div>
+<div class="row"><span>综合评分</span><b style="color:#F59E0B">61.7分 (C级)</b></div>
+</div>
+</div>
+
+<div class="vcard" onclick="playVideo(this)">
+<div class="thumb">
+<video preload="metadata" muted="" playsinline="">
+<source src="http://adsmind.gdtimg.com/ads_svp_video__0b53kibk4aaceuaelabbajvbquqevzjaflsa.f0.mp4?dis_k=35f5b30f81540f529db505f7273cf638&amp;dis_t=1780739067&amp;m=4caa7c5def992c87f9ca8ca88d41aea2&amp;sha256=e4df3c9266adbcc49e0e10a40cdbb9dab7b87d537117bae77b87e516ef43f343" type="video/mp4">
+</video>
+<div class="rank">#8</div>
+<div class="play"></div>
+</div>
+<div class="meta">
+<div class="row"><span>消耗指数</span><b>29.0指数</b></div>
+<div class="row"><span>CTR</span><b>2.08%</b></div>
+<div class="row"><span>CVR</span><b>7.28%</b></div>
+<div class="row"><span>3s完播率</span><b>28.18%</b></div>
+<div class="row"><span>综合评分</span><b style="color:#F59E0B">61.4分 (C级)</b></div>
+</div>
+</div>
+
+<div class="vcard" onclick="playVideo(this)">
+<div class="thumb">
+<video preload="metadata" muted="" playsinline="">
+<source src="http://adsmind.gdtimg.com/ads_svp_video__0b53qiaoqaaa4qafypu7hzurvaqe5cbab2ca.f0.mp4?dis_k=b02668e3d9f74552b118a36ae40710a4&amp;dis_t=1772172670&amp;m=99e5625f7723cab42cf731f75ec5e362&amp;sha256=bf9a53390d7a5041ef0ef7f0f75d7cfec383bf83bbe0fcc6dd9d80b3ea6b8f60" type="video/mp4">
+</video>
+<div class="rank">#9</div>
+<div class="play"></div>
+</div>
+<div class="meta">
+<div class="row"><span>消耗指数</span><b>27.2指数</b></div>
+<div class="row"><span>CTR</span><b>0.82%</b></div>
+<div class="row"><span>CVR</span><b>7.88%</b></div>
+<div class="row"><span>3s完播率</span><b>35.88%</b></div>
+<div class="row"><span>综合评分</span><b style="color:#DC2626">59.3分 (D级)</b></div>
+</div>
+</div>
+
+<div class="vcard" onclick="playVideo(this)">
+<div class="thumb">
+<video preload="metadata" muted="" playsinline="">
+<source src="http://adsmind.gdtimg.com/ads_svp_video__0b536ea6gaableagdui2lzvbx4ie4pyqdy2a.f0.mp4?dis_k=75d9a15a9b5f50fea482b58b1220265f&amp;dis_t=1780188005&amp;m=d6fecc7d1891540af7e49fdd5d615f42&amp;sha256=949be884b63ef1da023d647301b076e54a27b3b033078d8ac4e6f3aa1ef35c99" type="video/mp4">
+</video>
+<div class="rank">#10</div>
+<div class="play"></div>
+</div>
+<div class="meta">
+<div class="row"><span>消耗指数</span><b>26.3指数</b></div>
+<div class="row"><span>CTR</span><b>0.81%</b></div>
+<div class="row"><span>CVR</span><b>12.99%</b></div>
+<div class="row"><span>3s完播率</span><b>53.77%</b></div>
+<div class="row"><span>综合评分</span><b style="color:#3B82F6">72.7分 (B级)</b></div>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+
+<div class="modal" id="videoModal">
+<div class="modal-content">
+<button class="modal-close" onclick="closeVideo()">×</button>
+<video id="modalVideo" controls="" controlslist="nodownload" src=""></video>
+</div>
+</div>
+
+<script>
+function playVideo(element) {
+  const modal = document.getElementById('videoModal');
+  const modalVideo = document.getElementById('modalVideo');
+  let url;
+  if (typeof element === 'string') {
+    url = element;
+  } else {
+    const v = element.parentElement.querySelector('video') || element.querySelector('video');
+    if (v) {
+      const s = v.querySelector('source');
+      url = v.currentSrc || v.src || (s && s.src) || '';
+    }
+  }
+  modalVideo.src = url;
+  modal.classList.add('show');
+  modalVideo.play();
+}
+
+function closeVideo() {
+  const modal = document.getElementById('videoModal');
+  const video = document.getElementById('modalVideo');
+  video.pause();
+  video.src = '';
+  modal.classList.remove('show');
+}
+
+document.getElementById('videoModal').addEventListener('click', function(e) {
+  if (e.target === this) {
+    closeVideo();
+  }
+});
+
+// 强制加载所有视频首帧
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.thumb video').forEach(function(video) {
+    video.addEventListener('loadedmetadata', function() {
+      this.currentTime = 0.1;
+    });
+    video.load();
+  });
+});
+</script>
+
+
+</div></body></html>
