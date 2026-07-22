@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>珊珊 · 客户素材诊断报告（脱敏版）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<style>
+/* FILE:style.css */
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#FFFFFF; --fg:#0F172A; --muted:#F5F6F8; --muted-fg:#64748B;
+  --primary:#D93B3B; --primary-soft:#FDECEC;
+  --good:#10B981; --warn:#F59E0B; --bad:#EF4444; --info:#3B82F6;
+  --border:#E5E7EB;
+  --font-serif:'Noto Serif SC',ui-serif,serif;
+  --font-mono:'JetBrains Mono',ui-monospace,monospace;
+  --font-sans:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;
+}
+html,body{background:var(--bg);color:var(--fg);font-family:var(--font-sans);font-size:14px;line-height:1.7;-webkit-font-smoothing:antialiased}
+body{overflow-x:hidden}
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px}
+h1,h2,h3,h4,h5{font-family:var(--font-serif);font-weight:700;color:#0F172A;letter-spacing:.02em}
+.mono{font-family:var(--font-mono);font-feature-settings:"tnum"}
+.banner{background:var(--primary);color:#fff;padding:10px 24px;font-size:13px;text-align:center;letter-spacing:.05em;position:sticky;top:0;z-index:50}
+.hero{padding:64px 0 40px;border-bottom:1px solid var(--border)}
+.eyebrow{font-family:var(--font-mono);font-size:12px;color:var(--primary);letter-spacing:.15em;text-transform:uppercase;margin-bottom:16px;font-weight:500}
+.hero h1{font-size:44px;line-height:1.25;font-weight:900;margin-bottom:16px}
+.hero h1 .accent{color:var(--primary)}
+.hero .desc{color:var(--muted-fg);font-size:16px;max-width:720px;margin-bottom:24px}
+.meta-row{display:flex;gap:24px;flex-wrap:wrap;font-family:var(--font-mono);font-size:12px;color:var(--muted-fg)}
+.meta-row span b{color:#0F172A;font-weight:700;margin-left:6px}
+.version-badge{display:inline-block;padding:4px 10px;border:1px solid var(--border);border-radius:2px;font-family:var(--font-mono);font-size:11px;color:var(--muted-fg);margin-left:12px}
+section.mod{padding:64px 0;border-bottom:1px solid var(--border)}
+.mod-num{font-family:var(--font-mono);color:var(--primary);font-size:13px;font-weight:500;letter-spacing:.1em;margin-bottom:8px}
+.mod-title{font-size:28px;margin-bottom:8px}
+.mod-sub{color:var(--muted-fg);font-size:15px;margin-bottom:32px;max-width:800px}
+.kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.kpi{background:#fff;border:1px solid var(--border);border-radius:6px;padding:24px 20px;transition:.2s}
+.kpi:hover{border-color:var(--primary);transform:translateY(-2px);box-shadow:0 6px 24px rgba(217,59,59,.08)}
+.kpi .name{font-size:13px;color:var(--muted-fg);margin-bottom:12px;letter-spacing:.05em}
+.kpi .val{font-family:var(--font-mono);font-size:34px;font-weight:700;color:#0F172A;line-height:1;margin-bottom:12px}
+.kpi .val .unit{font-size:14px;color:var(--muted-fg);font-weight:500;margin-left:4px}
+.kpi .bench{font-family:var(--font-mono);font-size:12px;color:var(--muted-fg);margin-bottom:8px}
+.badge{display:inline-block;padding:3px 8px;border-radius:3px;font-family:var(--font-mono);font-size:11px;font-weight:600;margin-bottom:8px}
+.badge.bad{background:#FEE2E2;color:#B91C1C}
+.badge.warn{background:#FEF3C7;color:#B45309}
+.badge.good{background:#D1FAE5;color:#047857}
+.kpi .verdict{font-size:12px;color:#334155;line-height:1.5;padding-top:8px;border-top:1px dashed var(--border)}
+.kpi .verdict.bad{color:#B91C1C}
+.kpi .verdict.good{color:#047857}
+.summary{background:#FFF8F8;border-left:4px solid var(--primary);padding:20px 24px;margin-bottom:32px;border-radius:0 4px 4px 0}
+.summary h4{font-size:16px;margin-bottom:8px;color:var(--primary)}
+.summary p{color:#475569;font-size:14px}
+.summary strong{color:#0F172A}
+.chart-box{background:#fff;border:1px solid var(--border);border-radius:6px;padding:24px}
+.chart-box h4{font-size:15px;margin-bottom:16px;color:#334155}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.concl{background:#fff;border:1px solid var(--border);border-radius:6px;padding:20px}
+.concl .tag{display:inline-block;font-family:var(--font-mono);font-size:11px;padding:3px 8px;border-radius:2px;margin-bottom:12px;font-weight:600}
+.concl .tag.strength{background:#D1FAE5;color:#047857}
+.concl .tag.weakness{background:#FEE2E2;color:#B91C1C}
+.concl .tag.neutral{background:#DBEAFE;color:#1D4ED8}
+.concl h5{font-size:15px;margin-bottom:8px}
+.concl p{color:#475569;font-size:13px;line-height:1.7}
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:24px}
+.tab{padding:12px 24px;font-family:var(--font-mono);font-size:13px;color:var(--muted-fg);cursor:pointer;border-bottom:2px solid transparent;transition:.2s;letter-spacing:.05em}
+.tab.active{color:var(--primary);border-bottom-color:var(--primary);font-weight:600}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.video-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.vcard{background:#fff;border:1px solid var(--border);border-radius:6px;overflow:hidden;transition:.2s}
+.vcard:hover{border-color:var(--primary);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.06)}
+.vcard .vwrap{position:relative;background:#0F172A;aspect-ratio:9/16}
+.vcard video{width:100%;height:100%;display:block;object-fit:cover;background:#000}
+.vcard .vwrap.placeholder{display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1F2937,#374151)}
+.vcard .vwrap.q-star{background:linear-gradient(135deg,#065F46,#10B981)}
+.vcard .vwrap.q-traffic{background:linear-gradient(135deg,#1E3A8A,#3B82F6)}
+.vcard .vwrap.q-potential{background:linear-gradient(135deg,#78350F,#F59E0B)}
+.vcard .vwrap.q-weak{background:linear-gradient(135deg,#7F1D1D,#EF4444)}
+.ph-inner{color:#fff;text-align:center;padding:16px;font-family:var(--font-serif)}
+.ph-title{font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.3}
+.ph-sub{font-family:var(--font-mono);font-size:10px;opacity:.85;letter-spacing:.1em}
+.vcard .rank{position:absolute;top:8px;left:8px;background:rgba(0,0,0,.7);color:#fff;font-family:var(--font-mono);font-size:11px;padding:3px 8px;border-radius:2px;font-weight:600;z-index:2}
+.vcard .qtag{position:absolute;top:8px;right:8px;font-family:var(--font-mono);font-size:10px;padding:3px 6px;border-radius:2px;font-weight:600;z-index:2;color:#fff}
+.qtag.star{background:#10B981} .qtag.traffic{background:#3B82F6} .qtag.potential{background:#F59E0B} .qtag.weak{background:#EF4444}
+.qtag-inline{display:inline-block;font-family:var(--font-mono);font-size:10px;padding:2px 6px;border-radius:2px;font-weight:600;color:#fff}
+.qtag-inline.star{background:#10B981} .qtag-inline.traffic{background:#3B82F6} .qtag-inline.potential{background:#F59E0B} .qtag-inline.weak{background:#EF4444}
+.vcard .meta{padding:12px}
+.vcard .mid{font-family:var(--font-mono);font-size:11px;color:var(--muted-fg);margin-bottom:8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vcard .stats{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px}
+.vcard .stats .k{color:var(--muted-fg);font-size:10px;letter-spacing:.05em}
+.vcard .stats .v{color:#0F172A;font-weight:600;font-size:13px;font-family:var(--font-mono)}
+.action-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.acol{background:#fff;border:1px solid var(--border);border-radius:6px;padding:24px;border-top:4px solid}
+.acol.p0{border-top-color:var(--bad)} .acol.p1{border-top-color:var(--warn)} .acol.p2{border-top-color:var(--info)}
+.acol .plabel{font-family:var(--font-mono);font-size:12px;font-weight:700;letter-spacing:.1em;margin-bottom:4px}
+.acol.p0 .plabel{color:var(--bad)} .acol.p1 .plabel{color:var(--warn)} .acol.p2 .plabel{color:var(--info)}
+.acol h4{font-size:16px;margin-bottom:16px}
+.acol ol{list-style:none;counter-reset:step}
+.acol ol li{counter-increment:step;padding-left:28px;position:relative;margin-bottom:14px;font-size:13px;line-height:1.7;color:#334155}
+.acol ol li::before{content:counter(step);position:absolute;left:0;top:2px;width:20px;height:20px;background:var(--muted);color:#334155;border-radius:50%;font-family:var(--font-mono);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.acol ol li b{color:#0F172A;font-weight:700}
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th,.tbl td{padding:12px 10px;text-align:left;border-bottom:1px solid var(--border)}
+.tbl th{background:var(--muted);font-weight:600;color:#334155;font-size:12px;letter-spacing:.05em}
+.tbl td.mono{font-family:var(--font-mono)}
+.tbl tbody tr:hover{background:#FAFBFC}
+.tbl .md5{font-family:var(--font-mono);color:var(--muted-fg);font-size:11px}
+.freq-item{display:grid;grid-template-columns:130px 1fr 50px 1fr 50px;gap:12px;align-items:center;padding:10px 0;border-bottom:1px dashed var(--border);font-size:13px}
+.freq-item:last-child{border-bottom:none}
+.freq-item .lbl{font-weight:500}
+.freq-bar{height:8px;background:var(--muted);border-radius:4px;position:relative;overflow:hidden}
+.freq-bar>span{position:absolute;top:0;left:0;bottom:0;background:linear-gradient(90deg,#3B82F6,#60A5FA);border-radius:4px}
+.freq-bar.client>span{background:linear-gradient(90deg,var(--primary),#F87171)}
+.freq-item .num{font-family:var(--font-mono);font-size:12px;color:#334155;text-align:right}
+.freq-legend{display:flex;gap:20px;justify-content:flex-end;font-family:var(--font-mono);font-size:11px;color:var(--muted-fg);margin-bottom:12px}
+.freq-legend .dot{display:inline-block;width:10px;height:10px;border-radius:2px;vertical-align:middle;margin-right:4px}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.feat{border:1px solid var(--border);border-radius:6px;padding:20px;background:#fff}
+.feat.adv{border-left:3px solid var(--good)}
+.feat.dis{border-left:3px solid var(--bad)}
+.feat h5{font-size:14px;margin-bottom:8px}
+.feat .desc{font-size:12px;color:#475569;line-height:1.7}
+.feat .metric{font-family:var(--font-mono);font-size:11px;color:var(--primary);margin-top:8px;font-weight:600}
+.chart{width:100%;height:380px}
+.footer{padding:32px 0;color:var(--muted-fg);font-size:12px;text-align:center;font-family:var(--font-mono)}
+@media (max-width:900px){
+  .kpi-grid,.video-grid{grid-template-columns:repeat(2,1fr)}
+  .two-col,.three-col,.action-cols,.feat-grid{grid-template-columns:1fr}
+  .hero h1{font-size:32px}
+  .wrap{padding:0 20px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== BANNER ===== -->
+<div class="banner"><span class="mono">🔒 脱敏版本 · 消耗数据已转为消耗指数</span></div>
+
+<div class="wrap">
+
+<!-- ===== HERO ===== -->
+<!-- FILE:hero -->
+<header class="hero">
+  <div class="eyebrow">CLIENT MATERIAL DIAGNOSIS · v1.12.0</div>
+  <h1>珊珊 · <span class="accent">素材诊断报告</span></h1>
+  <p class="desc">基于 2026.07.15 – 07.21 期内 TOP20 投放素材，对客户账户在消耗规模、点击吸引、完播留存、下单转化、投放 ROI 五个维度上进行系统性诊断，输出 P0/P1/P2 三级行动清单。</p>
+  <div class="meta-row">
+    <span>数据周期<b>2026.07.15 – 07.21</b></span>
+    <span>素材样本<b>TOP20</b></span>
+    <span>行业基准<b>N=100</b></span>
+    <span class="version-badge">DESENSITIZED · v1.12.0</span>
+  </div>
+</header>
+<!-- /FILE:hero -->
+
+<!-- ===== 01 KPI ===== -->
+<!-- FILE:kpi -->
+<section class="mod" id="mod1">
+  <div class="mod-num">01 / 基础指标概览</div>
+  <h2 class="mod-title">五大 KPI 与行业基准差值</h2>
+  <p class="mod-sub">整体呈"点击吸引力接近行业均值，但规模、完播、转化、ROI 全线弱于行业"形态，账户处于小体量探索期。</p>
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="name">消耗指数（脱敏）</div>
+      <div class="val mono">1.1<span class="unit">/100</span></div>
+      <div class="bench">基准=100</div>
+      <div class="badge bad">▼ -98.9 pt</div>
+      <div class="verdict bad">投放体量极小，仅为行业头部 1.1%，规模化跑量能力尚未建立。</div>
+    </div>
+    <div class="kpi">
+      <div class="name">3s 完播率</div>
+      <div class="val mono">35.92<span class="unit">%</span></div>
+      <div class="bench">行业均值 45.58%</div>
+      <div class="badge bad">▼ -9.66 pp</div>
+      <div class="verdict bad">前 3 秒留存明显低于行业，开头钩子力度不足。</div>
+    </div>
+    <div class="kpi">
+      <div class="name">点击率 CTR</div>
+      <div class="val mono">2.53<span class="unit">%</span></div>
+      <div class="bench">行业均值 2.43%</div>
+      <div class="badge good">▲ +0.10 pp</div>
+      <div class="verdict good">CTR 略高于行业，视觉/文案的第一层吸引力尚可。</div>
+    </div>
+    <div class="kpi">
+      <div class="name">下单率</div>
+      <div class="val mono">5.61<span class="unit">%</span></div>
+      <div class="bench">行业均值 7.75%</div>
+      <div class="badge bad">▼ -2.14 pp</div>
+      <div class="verdict bad">转化链路较弱，产品信息 / 价格钩子传达不充分。</div>
+    </div>
+    <div class="kpi">
+      <div class="name">下单 ROI</div>
+      <div class="val mono">1.39</div>
+      <div class="bench">行业均值 1.61</div>
+      <div class="badge warn">▼ -0.22</div>
+      <div class="verdict">ROI 略低于行业中位，接近盈亏平衡线以上，具备放量基础。</div>
+    </div>
+  </div>
+</section>
+<!-- /FILE:kpi -->
+
+<!-- ===== 02 RADAR ===== -->
+<!-- FILE:radar -->
+<section class="mod" id="mod2">
+  <div class="mod-num">02 / 五维能力对比</div>
+  <h2 class="mod-title">客户 vs 行业 · 五维能力雷达</h2>
+  <div class="summary">
+    <h4>核心结论</h4>
+    <p>客户账户呈典型的<strong>"点击及格 · 规模/完播/转化短板"</strong>形态：CTR 已达 104 分线，但完播、下单、ROI 分别只有行业 79 / 72 / 86 分位，消耗规模仅为行业 1.1%。突破点应先补前 3s 完播（钩子）与下单率（利益点），带动整体放量。</p>
+  </div>
+  <div class="two-col">
+    <div class="chart-box">
+      <h4>五维雷达 · 客户 vs 行业均值（=100）</h4>
+      <div id="radarChart" class="chart"></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="concl"><span class="tag strength">优势</span><h5>CTR 略优于行业</h5><p>视觉呈现 + 首图选择具备基础吸引力，达到行业中位以上（104 分位）。</p></div>
+      <div class="concl"><span class="tag weakness">短板</span><h5>3s 完播率与下单率双低</h5><p>3s 完播仅 79 分位、下单率 72 分位，前 3 秒钩子薄弱 → 后半段利益点缺失，转化漏斗全链路承压。</p></div>
+      <div class="concl"><span class="tag neutral">机会</span><h5>ROI 靠近行业中位</h5><p>ROI 86 分位、1.39，仍高于盈亏线，具备"先小规模优化再放量"的探索空间。</p></div>
+    </div>
+  </div>
+</section>
+<!-- /FILE:radar -->
+
+<!-- ===== 03 SCATTER ===== -->
+<!-- FILE:scatter -->
+<section class="mod" id="mod3">
+  <div class="mod-num">03 / 四象限散点分布</div>
+  <h2 class="mod-title">CTR × 下单率 四象限定位</h2>
+  <p class="mod-sub">以行业 CTR 中位（2.43%）与下单率中位（7.75%）为分界，将素材划分为「双高优质 / 高吸引低转化 / 低吸引高转化 / 双低待优化」四类。</p>
+  <div class="tabs">
+    <div class="tab active" data-tab="ind">行业 TOP100</div>
+    <div class="tab" data-tab="cli">客户 TOP20</div>
+    <div class="tab" data-tab="mix">叠加对比</div>
+  </div>
+  <div class="chart-box">
+    <div id="scatterChart" class="chart" style="height:460px"></div>
+  </div>
+</section>
+<!-- /FILE:scatter -->
+
+<!-- ===== 04 CONTENT FEATURES ===== -->
+<!-- FILE:features -->
+<section class="mod" id="mod4">
+  <div class="mod-num">04 / 内容特征频次对比</div>
+  <h2 class="mod-title">客户素材 vs 行业 TOP · 内容与剪辑特征</h2>
+
+  <h3 style="font-size:17px;margin:16px 0 12px">4.1 · 内容标签出现率对比</h3>
+  <div class="chart-box">
+    <div class="freq-legend"><span><span class="dot" style="background:#3B82F6"></span>行业</span><span><span class="dot" style="background:#D93B3B"></span>客户</span></div>
+    <div id="freqList"></div>
+  </div>
+
+  <h3 style="font-size:17px;margin:32px 0 12px">4.2 · 剪辑风格五维雷达</h3>
+  <div class="two-col">
+    <div class="chart-box"><h4>剪辑风格 · 客户 vs 行业</h4><div id="editRadar" class="chart"></div></div>
+    <div class="concl"><span class="tag weakness">诊断</span><h5>剪辑节奏偏慢、层次单薄</h5><p>客户素材在<strong>转场频次、字幕密度、特效层数</strong>三项显著低于行业水平，画面节奏平缓，前 3 秒信息密度不够，直接导致完播率短板。</p><p style="margin-top:10px">建议：把开头 3s 的字幕密度提到 6 字/秒以上，加入 1-2 次快切转场 + 关键词特效强调。</p></div>
+  </div>
+
+  <h3 style="font-size:17px;margin:32px 0 12px">4.3 · 行业优质内容 6 大核心特征</h3>
+  <div class="three-col">
+    <div class="feat"><h5>① 明星/达人背书开场</h5><p class="desc">前 2 秒以明星/达人正脸 + 品牌口播切入，快速建立信任。</p><div class="metric">行业出现率 78%</div></div>
+    <div class="feat"><h5>② 低价锚点/划线价</h5><p class="desc">中段用大字号划线价 + "限时/直降"贴片，制造转化压力。</p><div class="metric">行业出现率 65%</div></div>
+    <div class="feat"><h5>③ 专业成分实验展示</h5><p class="desc">实验室场景 + 显微特写，让"有效成分"可视化。</p><div class="metric">行业出现率 52%</div></div>
+    <div class="feat"><h5>④ 年龄/效果前后对比</h5><p class="desc">同一素人前后对比，直观放大效果，触发下单。</p><div class="metric">行业出现率 48%</div></div>
+    <div class="feat"><h5>⑤ AI 视觉冲击特效</h5><p class="desc">开头 1-3s AI 特效镜头 + 强色调，提升 3s 完播。</p><div class="metric">行业出现率 42%</div></div>
+    <div class="feat"><h5>⑥ 素人真人口播/剧情</h5><p class="desc">场景化剧情 + 真人口播，天然承接私域信任感。</p><div class="metric">行业出现率 35%</div></div>
+  </div>
+
+  <h3 style="font-size:17px;margin:32px 0 12px">4.4 · 客户优势特征</h3>
+  <div class="three-col">
+    <div class="feat adv"><h5>✓ 素人口播为核心叙事</h5><p class="desc">75% 素材以创始人/主理人真人出镜口播，"人设型"账户信任基础扎实。</p><div class="metric">客户出现率 75% (行业 35%)</div></div>
+    <div class="feat adv"><h5>✓ 专业场景保留度高</h5><p class="desc">40% 素材包含诊室 / 产品试用场景，为专业感提供支撑。</p><div class="metric">客户出现率 40% (行业 30%)</div></div>
+    <div class="feat adv"><h5>✓ CTR 略高于行业</h5><p class="desc">封面 + 首帧吸引力足以让 CTR 达 2.53%（行业 2.43%），第一层筛选达标。</p><div class="metric">CTR 差值 +0.10 pp</div></div>
+  </div>
+
+  <h3 style="font-size:17px;margin:32px 0 12px">4.5 · 客户劣势特征</h3>
+  <div class="three-col">
+    <div class="feat dis"><h5>✗ 缺乏明星/达人背书</h5><p class="desc">客户完全依赖创始人本人，行业 TOP 中 78% 有第三方背书，权威感缺口大。</p><div class="metric">客户 5% vs 行业 78%</div></div>
+    <div class="feat dis"><h5>✗ 无 AI 特效/强视觉冲击</h5><p class="desc">0 条素材使用 AI 视觉/快切特效，开头 3s 视觉密度低，完播率短板与之高度相关。</p><div class="metric">客户 0% vs 行业 42%</div></div>
+    <div class="feat dis"><h5>✗ 价格钩子薄弱</h5><p class="desc">仅 15% 素材出现划线价/限时锚点，转化临门一脚缺失，下单率被压制在 5.61%。</p><div class="metric">客户 15% vs 行业 65%</div></div>
+  </div>
+</section>
+<!-- /FILE:features -->
+
+<!-- ===== 05 INDUSTRY TOP10 ===== -->
+<!-- FILE:industry-top -->
+<section class="mod" id="mod5">
+  <div class="mod-num">05 / 行业 TOP10 消耗素材</div>
+  <h2 class="mod-title">同类目行业消耗 TOP10 · 首帧与关键数据</h2>
+  <p class="mod-sub">按同类目日均消耗降序取前 10，配对四象限归属，作为客户创意策略的对标锚点。</p>
+  <div class="video-grid">
+<div class="vcard">
+<div class="vwrap">
+<span class="rank">#01</span>
+<span class="qtag weak">待优化</span>
+<video controls preload="metadata" playsinline src="nan"></video>
+</div>
+<div class="meta">
+<div class="mid" title="空">MD5 · 空</div>
+<div class="stats">
+<div><div class="k">消耗指数</div><div class="v">100.0</div></div>
+<div><div class="k">CPM</div><div class="v">¥79</div></div>
+<div><div class="k">CTR</div><div class="v">1.36%</div></div>
+<div><div class="k">3s完播</div><div class="v">27.5%</div></div>
+<div><div class="k">下单率</div><div class="v">6.42%</div></div>
+<div><div class="k">ROI</div><div class="v">2.78</div></div>
+</div>
+</div>
+</div>
+<div class="vcard">
+<div class="vwrap">
+<span class="rank">#02</span>
+<span class="qtag traffic">高吸引低转化</span>
+<video controls preload="metadata" playsinline src="http://adsmind.gdtimg.com/ads_svp_video__0bc35ya7oaabkiamh4bb7jvbx3qe67xad52a.f0.mp4?dis_k=4b48eb471b96c8a2af424f3df011db95&dis_t=1780720662&m=a447f0f923328bc6eed489b500017d42&sha256=d74f53c5f05ad51dafa4154c6d467bd49f1da76ccb215e1e4a8b085cd5e0c3ea"></video>
+</div>
+<div class="meta">
+<div class="mid" title="a447f0f923328bc6eed489b500017d42">MD5 · a447f0f9</div>
+<div class="stats">
+<div><div class="k">消耗指数</div><div class="v">37.7</div></div>
+<div><div class="k">CPM</div><div class="v">¥102</div></div>
+<div><div class="k">CTR</div><div class="v">2.78%</div></div>
+<div><div class="k">3s完播</div><div class="v">41.2%</div></div>
+<div><div class="k">下单率</div><div class="v">5.91%</div></div>
+<div><div class="k">ROI</div><div class="v">1.14</div></div>
+</div>
+</div>
+</div>
+<div class="vcard">
+<div class="vwrap">
+<span class="rank">#03</span>
+<span class="qtag traffic">高吸引低转化</span>
+<video controls preload="metadata" playsinline src="http://adsmind.gdtimg.com/ads_svp_video__0b53saarwaabmmacbgyzajvbxeaedoiacg2a.f0.mp4?dis_k=f8304ec8c1aafb20d956f9cfe38390f2&dis_t=1780531143&m=9370b25b781e061ee88d15a3b48738be&sha256=3498fe1e3b38001648b459046db429799dbd4e9ab1445fd54f0e0ee3a14e4c2d"></video>
+</div>
+<div class="meta">
+<div class="mid" title="9370b25b781e061ee88d15a3b48738be">MD5 · 9370b25b</div>
+<div class="stats">
+<div><div class="k">消耗指数</div><div class="v">37.0</div></div>
+<div><div class="k">CPM</div><div class="v">¥390</div></div>
+<div><div class="k">CTR</div><div class="v">3.13%</div></div>
+<div><div class="k">3s完播</div><div class="v">62.9%</div></div>
+<div><div class="k">下单率</div><div class="v">5.96%</div></div>
+<div><div class="k">ROI</div><div class="v">1.91</div></div>
+</div>
+</div>
+</div>
+<div class="vcard">
+<div class="vwrap">
+<span class="rank">#04</span>
+<span class="qtag potential">低吸引高转化</span>
+<video controls preload="metadata" playsinline src="http://adsmind.gdtimg.com/ads_svp_video__0b53cycg2aaee4am7lzsdnvb4fqenulai3ka.f0.mp4?dis_k=4c321c0178627ce5851648e2f7007b24&dis_t=1781965370&m=8dcbd0a95b72c95cf722b0c31993aa46"></video>
+</div>
+<div class="meta">
+<div class="mid" title="8dcbd0a95b72c95cf722b0c31993aa46">MD5 · 8dcbd0a9</div>
+<div class="stats">
+<div><div class="k">消耗指数</div><div class="v">27.1</div></div>
+<div><div class="k">CPM</div><div class="v">¥261</div></div>
+<div><div class="k">CTR</div><div class="v">1.65%</div></div>
+<div><div class="k">3s完播</div><div class="v">44.0%</div></div>
+<div><div class="k">下单率</div><div class="v">8.86%</div></div>
+<div><div class="k">ROI</div><div class="v">1.69</div></div>
+</div>
+</div>
+</div>
+<div class="vcard">
+<div class="vwrap">
+<span class="rank">#05</span>
+<span class="qtag weak">待优化</span>
+<video controls preload="metadata" playsinline src="http://adsmind.gdtimg.com/ads_svp_video__0b53bybdgaacueagdli4trvbsdqegmhaem2a.f0.mp4?dis_k=d38423f0a07fa387dbf176f49f333a11&dis_t=1780561254&m=884d0019e51084aa64b39ea88756dd0e&sha256=3eff9032541b55577ef5d3177b8d8ec7e248ac8a324a9dcd088abbb250aaab50"></video>
+</div>
+<div class="meta">
+<div class="mid" title="884d0019e51084aa64b39ea88756dd0e">MD5 · 884d0019</div>
+<div class="stats">
+<div><div class="k">消耗指数</div><div class="v">26.5</div></div>
+<div><div class="k">CPM</div><div class="v">¥85</div></div>
+<div><div class="k">CTR</div><div class="v">2.31%</div></div>
+<div><div class="k">3s完播</div><div class="v">40.0%</div></div>
+<div><div class="k">下单率</div><div class="v">5.65%</div></div>
+<div><div class="k">ROI</div><div class="v">1.08</div></div>
+</div>
+</div>
+</div>
+<div class="vcard">
+<div class="vwrap">
+<span class="rank">#06</span>
+<span class="qtag traffic">高吸引低转化</span>
+<video controls preload="metadata" playsinline src="http://adsmind.gdtimg.com/ads_svp_video__0b53xiaggaaaguab5sqgcrvbxoqemo5aay2a.f0.mp4?dis_k=a18e82492b1400fa010ed24e0d59ae1c&dis_t=1778810289&m=f84f9a8095b21d8d180069888d29b996"></video>
+</div>
+<div class="meta">
+<div class="mid" title="f84f9a8095b21d8d180069888d29b996">MD5 · f84f9a80</div>
+<div class="stats">
+<div><div class="k">消耗指数</div><div class="v">20.9</div></div>
+<div><div class="k">CPM</div><div class="v">¥333</div></div>
+<div><div class="k">CTR</div><div class="v">4.62%</div></div>
+<div><div class="k">3s完播</div><div class="v">54.7%</div></div>
+<div><div class="k">下单率</div><div class="v">2.36%</div></div>
+<div><div class="k">ROI</div><div class="v">1.43</div></div>
+</div>
+</div>
+</div>
+<div class="vcard">
+<div class="vwrap">
+<span class="rank">#07</span>
+<span class="qtag potential">低吸引高转化</span>
+<video controls preload="metadata" playsinline src="http://adsmind.gdtimg.com/ads_svp_video__0bc3hyaxkaab2eab67qrejvbupqeou7ac5ka.f0.mp4?dis_k=aa2781e4bb8f17d14bc16ca67e83ef7c&dis_t=1779980022&m=67c960840d8af04a1ee8444383820838&sha256=da3852470686186fa1abf9b73e2fac342159301e592520d05a7e6a594b537c62"></video>
+</div>
+<div class="meta">
+<div class="mid" title="67c960840d8af04a1ee8444383820838">MD5 · 67c96084</div>
+<div class="stats">
+<div><div class="k">消耗指数</div><div class="v">20.6</div></div>
+<div><div class="k">CPM</div><div class="v">¥118</div></div>
+<div><div class="k">CTR</div><div class="v">2.19%</div></div>
+<div><div class="k">3s完播</div><div class="v">48.9%</div></div>
+<div><div class="k">下单率</div><div class="v">8.13%</div></div>
+<div><div class="k">ROI</div><div class="v">1.06</div></div>
+</div>
+</div>
+</div>
+<div class="vcard">
+<div class="vwrap">
+<span class="rank">#08</span>
+<span class="qtag potential">低吸引高转化</span>
+<video controls preload="metadata" playsinline src="http://adsmind.gdtimg.com/ads_svp_video__0b53bebbmaaceuaby4y7xrvbqciecyeqefsa.f0.mp4?dis_k=ef010c664246813fc6e44daf76d9092f&dis_t=1780288053&m=4725965eb572b71e62f45cbdd8ea0c25"></video>
+</div>
+<div class="meta">
+<div class="mid" title="4725965eb572b71e62f45cbdd8ea0c25">MD5 · 4725965e</div>
+<div class="stats">
+<div><div class="k">消耗指数</div><div class="v">17.9</div></div>
+<div><div class="k">CPM</div><div class="v">¥560</div></div>
+<div><div class="k">CTR</div><div class="v">2.01%</div></div>
+<div><div class="k">3s完播</div><div class="v">48.2%</div></div>
+<div><div class="k">下单率</div><div class="v">13.18%</div></div>
+<div><div class="k">ROI</div><div class="v">2.06</div></div>
+</div>
+</div>
+</div>
+<div class="vcard">
+<div class="vwrap">
+<span class="rank">#09</span>
+<span class="qtag weak">待优化</span>
+<video controls preload="metadata" playsinline src="http://adsmind.gdtimg.com/ads_svp_video__0b53nuammaaabmaiw7iodfvbu3ieyzwqbrsa.f0.mp4?dis_k=3c3eb7d783e761cb17282441a78ccbf2&dis_t=1779322351&m=2bff0594154c159261ad3f4dfc231377&sha256=96d3191941f21eb662e7f7aa07eb39d07c2e599cef4d974345169e26bd3a3180"></video>
+</div>
+<div class="meta">
+<div class="mid" title="2bff0594154c159261ad3f4dfc231377">MD5 · 2bff0594</div>
+<div class="stats">
+<div><div class="k">消耗指数</div><div class="v">17.5</div></div>
+<div><div class="k">CPM</div><div class="v">¥172</div></div>
+<div><div class="k">CTR</div><div class="v">1.05%</div></div>
+<div><div class="k">3s完播</div><div class="v">14.9%</div></div>
+<div><div class="k">下单率</div><div class="v">7.31%</div></div>
+<div><div class="k">ROI</div><div class="v">1.59</div></div>
+</div>
+</div>
+</div>
+<div class="vcard">
+<div class="vwrap">
+<span class="rank">#10</span>
+<span class="qtag traffic">高吸引低转化</span>
+<video controls preload="metadata" playsinline src="http://adsmind.gdtimg.com/ads_svp_video__0bc3eeadkaaalqaekiyqlbvbwiieguqqanka.f0.mp4?dis_k=d41754d17a4be1be5923e1313360c150&dis_t=1780040954&m=35f4494ab3116a33e2944b5f28f40b25&sha256=ceb60ec7838e52d9e7c47486933ca30054d7cc723c89796e7372f9c4d863781d"></video>
+</div>
+<div class="meta">
+<div class="mid" title="35f4494ab3116a33e2944b5f28f40b25">MD5 · 35f4494a</div>
+<div class="stats">
+<div><div class="k">消耗指数</div><div class="v">15.3</div></div>
+<div><div class="k">CPM</div><div class="v">¥102</div></div>
+<div><div class="k">CTR</div><div class="v">2.65%</div></div>
+<div><div class="k">3s完播</div><div class="v">55.0%</div></div>
+<div><div class="k">下单率</div><div class="v">5.87%</div></div>
+<div><div class="k">ROI</div><div class="v">1.08</div></div>
+</div>
+</div>
+</div>
+  </div>
+</section>
+<!-- /FILE:industry-top -->
+
+<!-- ===== 06 CLIENT TOP10 ===== -->
+<!-- FILE:client-top -->
+<section class="mod" id="mod6">
+  <div class="mod-num">06 / 客户 TOP10 消耗素材</div>
+  <h2 class="mod-title">珊珊 · 消耗 TOP10 素材原片</h2>
+  <p class="mod-sub">点击视频卡片播放原片，配合右上角象限标签快速判断该素材的问题类型。</p>
+  <div class="video-grid">
+    <div class="vcard">
+<div class="vwrap">
+<span class="rank">#01</span>
+<span class="qtag traffic">高吸引低转化</span>
+<video controls preload="none" playsinline src="http://adsmind.gdtimg.com/ads_svp_video__0b532qaliaaav4aknrso3nvbvvaewtkabnca.f0.mp4?dis_k=1fd9687ea0363eaaf4325e80c9931a87&dis_t=1783509515&m=998bddab345668d77d30f417ddf42b4e&sha256=282907b0860b0af40422f1216885db90444d168f38822e4378eaed5c41dc0960"></video>
+</div>
+<div class="meta">
+<div class="mid" title="998bddab345668d77d30f417ddf42b4e">MD5 · 998bddab</div>
+<div class="stats">
+<div><div class="k">消耗指数</div><div class="v">7.1</div></div>
+<div><div class="k">时长</div><div class="v">85s</div></div>
+<div><div class="k">CTR</div><div class="v">5.21%</div></div>
+<div><div class="k">3s完播</div><div class="v">43.6%</div></div>
+<div><div class="k">下单率</div><div class="v">1.67%</div></div>
+<div><div class="k">ROI</div><div class="v">1.36</div></div>
+</div>
+</div>
+</div>
+<div class="vcard">
+<div class="vwrap">
+<span class="rank">#02</span>
+<span class="qtag traffic">高吸引低转化</span>
+<video controls preload="none" playsinline src="http://adsmind.gdtimg.com/ads_svp_video__0bc3oeajiaaavqakax2ssvvbw4iesryqbfca.f0.mp4?dis_k=df56dce2aa3726b437414ddcb2fde807&dis_t=1783772392&m=7fa1d113f2b7422f0331caabfcf1018d"></video>
+</div>
+<div class="meta">
+<div class="mid" title="7fa1d113f2b7422f0331caabfcf1018d">MD5 · 7fa1d113</div>
+<div class="stats">
+<div><div class="k">消耗指数</div><div class="v">5.62</div></div>
+<div><div class="k">时长</div><div class="v">112s</div></div>
+<div><div class="k">CTR</div><div class="v">3.21%</div></div>
+<div><div class="k">3s完播</div><div class="v">49.8%</div></div>
+<div><div class="k">下单率</div><div class="v">3.51%</div></div>
+<div><div class="k">ROI</div><div class="v">1.19</div></div>
+</div>
+</div>
+</div>
+<div class="vcard">
+<div class="vwrap">
+<span class="rank">#03</span>
+<span class="qtag traffic">高吸引低转化</span>
+<video controls preload="none" playsinline src="http://adsmind.gdtimg.com/ads_svp_video__0b53dmaaaaaajiafenybsnvbwgyeaanqaaca.f0.mp4?dis_k=1780e9ca6b7416b7318ccbd6a5c03b55&dis_t=1778471594&m=a251cc435e74e9f36de7234f4e9d767d&sha256=1113816bc782fc770a801d375b6619b2e34b5e4ccd36bcffda664b60e0ea9037"></video>
+</div>
+<div class="meta">
+<div class="mid" title="a251cc435e74e9f36de7234f4e9d767d">MD5 · a251cc43</div>
+<div class="stats">
+<div><div class="k">消耗指数</div><div class="v">2.04</div></div>
+<div><div class="k">时长</div><div class="v">115s</div></div>
+<div><div class="k">CTR</div><div class="v">3.9%</div></div>
+<div><div class="k">3s完播</div><div class="v">22.1%</div></div>
+<div><div class="k">下单率</div><div class="v">3.58%</div></div>
+<div><div class="k">ROI</div><div class="v">1.53</div></div>
+</div>
+</div>
+</div>
+<div class="vcard">
+<div class="vwrap">
+<span class="rank">#04</span>
+<span class="qtag traffic">高吸引低转化</span>
+<video controls preload="none" playsinline src="http://adsmind.gdtimg.com/ads_svp_video__0bc3wucfsaaeomag2dzsf5vb7nielg2qiwka.f0.mp4?dis_k=05c09493a57b276a1a5579bbfc661bc3&dis_t=1781937468&m=f78002c9de4fe5d80dcd8caa82c9ef24&sha256=ab0251b21973a0a43595afd2552d8a18d46cf1b1ded7669b68fa9fde690f8e70"></video>
+</div>
+<div class="meta">
+<div class="mid" title="f78002c9de4fe5d80dcd8caa82c9ef24">MD5 · f78002c9</div>
+<div class="stats">
+<div><div class="k">消耗指数</div><div class="v">1.53</div></div>
+<div><div class="k">时长</div><div class="v">112s</div></div>
+<div><div class="k">CTR</div><div class="v">3.66%</div></div>
+<div><div class="k">3s完播</div><div class="v">23.3%</div></div>
+<div><div class="k">下单率</div><div class="v">4.09%</div></div>
+<div><div class="k">ROI</div><div class="v">1.58</div></div>
+</div>
+</div>
+</div>
+<div class="vcard">
+<div class="vwrap">
+<span class="rank">#05</span>
+<span class="qtag potential">低吸引高转化</span>
+<video controls preload="none" playsinline src="http://adsmind.gdtimg.com/ads_svp_video__0b5354acmaaaemahzdhu3burx3yee3xqajsa.f0.mp4?dis_k=a03ce2b30099e425528a002ef0d082b3&dis_t=1777674122&m=ffb0e934fca43f89127efdc68a2eb98c&sha256=1332e3765326be7d4112654a784f6d6dd4a8493f2aa36acc52650b8975094851"></video>
+</div>
+<div class="meta">
+<div class="mid" title="ffb0e934fca43f89127efdc68a2eb98c">MD5 · ffb0e934</div>
+<div class="stats">
+<div><div class="k">消耗指数</div><div class="v">0.86</div></div>
+<div><div class="k">时长</div><div class="v">155s</div></div>
+<div><div class="k">CTR</div><div class="v">2.3%</div></div>
+<div><div class="k">3s完播</div><div class="v">28.1%</div></div>
+<div><div class="k">下单率</div><div class="v">6.62%</div></div>
+<div><div class="k">ROI</div><div class="v">1.22</div></div>
+</div>
+</div>
+</div>
+<div class="vcard">
+<div class="vwrap">
+<span class="rank">#06</span>
+<span class="qtag potential">低吸引高转化</span>
+<video controls preload="none" playsinline src="http://adsmind.gdtimg.com/ads_svp_video__0bc3yecwaaaflyajenchdfvb5qiemdaqkyca.f0.mp4?dis_k=abcd4649af9fc4f2b4d792fee2a3c3da&dis_t=1782772431&m=64841944d5a785879b57b6db648bd073&sha256=dc348b2ccd965f5929ad9c0cc912b0b58a273850df75ffebdffd713a23b6b3e5"></video>
+</div>
+<div class="meta">
+<div class="mid" title="64841944d5a785879b57b6db648bd073">MD5 · 64841944</div>
+<div class="stats">
+<div><div class="k">消耗指数</div><div class="v">0.79</div></div>
+<div><div class="k">时长</div><div class="v">151s</div></div>
+<div><div class="k">CTR</div><div class="v">1.82%</div></div>
+<div><div class="k">3s完播</div><div class="v">29.6%</div></div>
+<div><div class="k">下单率</div><div class="v">7.26%</div></div>
+<div><div class="k">ROI</div><div class="v">1.2</div></div>
+</div>
+</div>
+</div>
+<div class="vcard">
+<div class="vwrap">
+<span class="rank">#07</span>
+<span class="qtag potential">低吸引高转化</span>
+<video controls preload="none" playsinline src="http://adsmind.gdtimg.com/ads_svp_video__0bc3fuarkaab74ac4sqb5zvbuliecuwqcfka.f0.mp4?dis_k=e4c6efaa526d228218d3d4e5bc86b0d0&dis_t=1778400589&m=821554a1c8131ea8dca2d92e9ff60f2d&sha256=862594be2834f868ca5e35bb3fda514e6c5b7273ffad80c1087d2e9885a4570f"></video>
+</div>
+<div class="meta">
+<div class="mid" title="821554a1c8131ea8dca2d92e9ff60f2d">MD5 · 821554a1</div>
+<div class="stats">
+<div><div class="k">消耗指数</div><div class="v">0.57</div></div>
+<div><div class="k">时长</div><div class="v">114s</div></div>
+<div><div class="k">CTR</div><div class="v">2.02%</div></div>
+<div><div class="k">3s完播</div><div class="v">37.5%</div></div>
+<div><div class="k">下单率</div><div class="v">8.71%</div></div>
+<div><div class="k">ROI</div><div class="v">1.77</div></div>
+</div>
+</div>
+</div>
+<div class="vcard">
+<div class="vwrap">
+<span class="rank">#08</span>
+<span class="qtag traffic">高吸引低转化</span>
+<video controls preload="none" playsinline src="http://adsmind.gdtimg.com/ads_svp_video__0b53gyeaaaai2qaenuhuirurgnqeaa3aqaca.f0.mp4?dis_k=8394ee02376b1328dac4f2ddee024436&dis_t=1778141022&m=e927b83bf996f112dbb88536d76ce3a3&sha256=dcf151cba321332c97ab5b5d111e60736f356d91bf6cecb80e7e4b0d541f0f4f"></video>
+</div>
+<div class="meta">
+<div class="mid" title="e927b83bf996f112dbb88536d76ce3a3">MD5 · e927b83b</div>
+<div class="stats">
+<div><div class="k">消耗指数</div><div class="v">0.55</div></div>
+<div><div class="k">时长</div><div class="v">128s</div></div>
+<div><div class="k">CTR</div><div class="v">2.84%</div></div>
+<div><div class="k">3s完播</div><div class="v">35.6%</div></div>
+<div><div class="k">下单率</div><div class="v">5.15%</div></div>
+<div><div class="k">ROI</div><div class="v">1.5</div></div>
+</div>
+</div>
+</div>
+<div class="vcard">
+<div class="vwrap">
+<span class="rank">#09</span>
+<span class="qtag potential">低吸引高转化</span>
+<video controls preload="none" playsinline src="http://adsmind.gdtimg.com/ads_svp_video__0b536iascaabmuajvl2vwvvbv4qeehzacika.f0.mp4?dis_k=d10349891605bb264aba872ad44682d2&dis_t=1783982823&m=e9c2d33282fc2c2840b4a75b77c28aae&sha256=a946d9513def9d878b81dd76a64005c55d40294037b99b689bc5028434057f59"></video>
+</div>
+<div class="meta">
+<div class="mid" title="e9c2d33282fc2c2840b4a75b77c28aae">MD5 · e9c2d332</div>
+<div class="stats">
+<div><div class="k">消耗指数</div><div class="v">0.3</div></div>
+<div><div class="k">时长</div><div class="v">107s</div></div>
+<div><div class="k">CTR</div><div class="v">2.09%</div></div>
+<div><div class="k">3s完播</div><div class="v">54.1%</div></div>
+<div><div class="k">下单率</div><div class="v">10.45%</div></div>
+<div><div class="k">ROI</div><div class="v">1.82</div></div>
+</div>
+</div>
+</div>
+<div class="vcard">
+<div class="vwrap">
+<span class="rank">#10</span>
+<span class="qtag star">双高优质</span>
+<video controls preload="none" playsinline src="http://adsmind.gdtimg.com/ads_svp_video__0b53zaaxgaabfuab5r2wdnvbxsaeopeac42a.f0.mp4?dis_k=e9a35700b90e6ea3d938cec251fa9158&dis_t=1784114669&m=85bd4f683d583deeb4112ce5e202385a"></video>
+</div>
+<div class="meta">
+<div class="mid" title="85bd4f683d583deeb4112ce5e202385a">MD5 · 85bd4f68</div>
+<div class="stats">
+<div><div class="k">消耗指数</div><div class="v">0.3</div></div>
+<div><div class="k">时长</div><div class="v">92s</div></div>
+<div><div class="k">CTR</div><div class="v">2.84%</div></div>
+<div><div class="k">3s完播</div><div class="v">30.6%</div></div>
+<div><div class="k">下单率</div><div class="v">7.93%</div></div>
+<div><div class="k">ROI</div><div class="v">1.24</div></div>
+</div>
+</div>
+</div>
+  </div>
+</section>
+<!-- /FILE:client-top -->
+
+<!-- ===== 07 ACTIONS ===== -->
+<!-- FILE:actions -->
+<section class="mod" id="mod7">
+  <div class="mod-num">07 / 行动清单</div>
+  <h2 class="mod-title">P0 / P1 / P2 三级行动方案</h2>
+  <p class="mod-sub">按优先级排序，P0 本周立即执行，P1 两周内完成，P2 一个月内迭代。</p>
+  <div class="action-cols">
+    <div class="acol p0">
+      <div class="plabel">P0 · 本周立即</div>
+      <h4>补齐 3s 完播钩子</h4>
+      <ol>
+        <li><b>开头 3s 加大字幕/口播密度</b>：把核心利益点（成分/效果/价格）之一在前 3s 以大字幕呈现，字幕密度 ≥ 6 字/秒。</li>
+        <li><b>加入 1-2 次快切转场</b>：0-3s 内至少 1 次镜头切换，5-10s 内 1 次特写切远景，避免长镜头拖节奏。</li>
+        <li><b>下架 Q4 双低素材</b>：#11 / #16 / #17 / #20 四条双低素材立即停投，避免账户 ROI 被拖累。</li>
+      </ol>
+    </div>
+    <div class="acol p1">
+      <div class="plabel">P1 · 两周内</div>
+      <h4>补齐价格锚点与背书</h4>
+      <ol>
+        <li><b>价格钩子模板化</b>：在中段（30-60s）加入"划线价 + 限时/赠品"贴片，覆盖率从 15% 提到 60%+。</li>
+        <li><b>引入达人/客户口播</b>：孵化 2-3 位真实素人客户口播素材，弥补明星背书缺口。</li>
+        <li><b>批量复用 Q3 高转化模板</b>：#5 / #9 / #19（低吸引高转化）的下单结构（利益点+对比）复制到新素材开头。</li>
+      </ol>
+    </div>
+    <div class="acol p2">
+      <div class="plabel">P2 · 一个月内</div>
+      <h4>建立"3+2+1"制作 SOP</h4>
+      <ol>
+        <li><b>视觉升级</b>：接入 AI 特效模板库（云雾/特写/文字冲击），把开头 AI 视觉从 0% 提到 30%+。</li>
+        <li><b>专业成分可视化</b>：拍摄 1 组"卡尺测量/成分实验"补充镜头，作为通用素材片段库。</li>
+        <li><b>建立赛马机制</b>：每周产出 5 条新素材，按四象限归属月度复盘，Q1/Q3 素材增预算，Q4 素材立即下线。</li>
+      </ol>
+    </div>
+  </div>
+</section>
+<!-- /FILE:actions -->
+
+<!-- ===== 08 APPENDIX ===== -->
+<!-- FILE:appendix -->
+<section class="mod" id="mod8" style="border-bottom:none">
+  <div class="mod-num">08 / 附录</div>
+  <h2 class="mod-title">客户 TOP20 素材四象限详情</h2>
+  <p class="mod-sub">按消耗指数降序排列，字段：排名 / MD5 / 消耗指数 / CTR / 3s完播 / 下单率 / ROI / CPM / 时长 / 象限归属。</p>
+  <table class="tbl">
+    <thead><tr>
+      <th>排名</th><th>MD5</th><th>消耗指数</th><th>CTR</th><th>3s完播</th><th>下单率</th><th>ROI</th><th>CPM</th><th>时长</th><th>象限</th>
+    </tr></thead>
+    <tbody>
+      <tr><td class="mono">#01</td><td class="md5" title="998bddab345668d77d30f417ddf42b4e">998bddab</td><td class="mono">7.1</td><td class="mono">5.21%</td><td class="mono">43.6%</td><td class="mono">1.67%</td><td class="mono">1.36</td><td class="mono">¥210</td><td class="mono">85s</td><td><span class="qtag-inline traffic">高吸引低转化</span></td></tr>
+<tr><td class="mono">#02</td><td class="md5" title="7fa1d113f2b7422f0331caabfcf1018d">7fa1d113</td><td class="mono">5.62</td><td class="mono">3.21%</td><td class="mono">49.8%</td><td class="mono">3.51%</td><td class="mono">1.19</td><td class="mono">¥264</td><td class="mono">112s</td><td><span class="qtag-inline traffic">高吸引低转化</span></td></tr>
+<tr><td class="mono">#03</td><td class="md5" title="a251cc435e74e9f36de7234f4e9d767d">a251cc43</td><td class="mono">2.04</td><td class="mono">3.9%</td><td class="mono">22.1%</td><td class="mono">3.58%</td><td class="mono">1.53</td><td class="mono">¥265</td><td class="mono">115s</td><td><span class="qtag-inline traffic">高吸引低转化</span></td></tr>
+<tr><td class="mono">#04</td><td class="md5" title="f78002c9de4fe5d80dcd8caa82c9ef24">f78002c9</td><td class="mono">1.53</td><td class="mono">3.66%</td><td class="mono">23.3%</td><td class="mono">4.09%</td><td class="mono">1.58</td><td class="mono">¥336</td><td class="mono">112s</td><td><span class="qtag-inline traffic">高吸引低转化</span></td></tr>
+<tr><td class="mono">#05</td><td class="md5" title="ffb0e934fca43f89127efdc68a2eb98c">ffb0e934</td><td class="mono">0.86</td><td class="mono">2.3%</td><td class="mono">28.1%</td><td class="mono">6.62%</td><td class="mono">1.22</td><td class="mono">¥340</td><td class="mono">155s</td><td><span class="qtag-inline potential">低吸引高转化</span></td></tr>
+<tr><td class="mono">#06</td><td class="md5" title="64841944d5a785879b57b6db648bd073">64841944</td><td class="mono">0.79</td><td class="mono">1.82%</td><td class="mono">29.6%</td><td class="mono">7.26%</td><td class="mono">1.2</td><td class="mono">¥372</td><td class="mono">151s</td><td><span class="qtag-inline potential">低吸引高转化</span></td></tr>
+<tr><td class="mono">#07</td><td class="md5" title="821554a1c8131ea8dca2d92e9ff60f2d">821554a1</td><td class="mono">0.57</td><td class="mono">2.02%</td><td class="mono">37.5%</td><td class="mono">8.71%</td><td class="mono">1.77</td><td class="mono">¥371</td><td class="mono">114s</td><td><span class="qtag-inline potential">低吸引高转化</span></td></tr>
+<tr><td class="mono">#08</td><td class="md5" title="e927b83bf996f112dbb88536d76ce3a3">e927b83b</td><td class="mono">0.55</td><td class="mono">2.84%</td><td class="mono">35.6%</td><td class="mono">5.15%</td><td class="mono">1.5</td><td class="mono">¥352</td><td class="mono">128s</td><td><span class="qtag-inline traffic">高吸引低转化</span></td></tr>
+<tr><td class="mono">#09</td><td class="md5" title="e9c2d33282fc2c2840b4a75b77c28aae">e9c2d332</td><td class="mono">0.3</td><td class="mono">2.09%</td><td class="mono">54.1%</td><td class="mono">10.45%</td><td class="mono">1.82</td><td class="mono">¥330</td><td class="mono">107s</td><td><span class="qtag-inline potential">低吸引高转化</span></td></tr>
+<tr><td class="mono">#10</td><td class="md5" title="85bd4f683d583deeb4112ce5e202385a">85bd4f68</td><td class="mono">0.3</td><td class="mono">2.84%</td><td class="mono">30.6%</td><td class="mono">7.93%</td><td class="mono">1.24</td><td class="mono">¥433</td><td class="mono">92s</td><td><span class="qtag-inline star">双高优质</span></td></tr>
+<tr><td class="mono">#11</td><td class="md5" title="aad29b8e38ee917e287a81182617656c">aad29b8e</td><td class="mono">0.27</td><td class="mono">1.5%</td><td class="mono">35.2%</td><td class="mono">5.21%</td><td class="mono">0.91</td><td class="mono">¥246</td><td class="mono">93s</td><td><span class="qtag-inline weak">双低待优化</span></td></tr>
+<tr><td class="mono">#12</td><td class="md5" title="29df16cc21727a3194006c6e2af65108">29df16cc</td><td class="mono">0.23</td><td class="mono">2.53%</td><td class="mono">37.3%</td><td class="mono">7.29%</td><td class="mono">2.17</td><td class="mono">¥265</td><td class="mono">78s</td><td><span class="qtag-inline star">双高优质</span></td></tr>
+<tr><td class="mono">#13</td><td class="md5" title="baf2a9569e0117859084db3dfdb580f7">baf2a956</td><td class="mono">0.23</td><td class="mono">2.37%</td><td class="mono">58.8%</td><td class="mono">3.72%</td><td class="mono">1.18</td><td class="mono">¥284</td><td class="mono">108s</td><td><span class="qtag-inline traffic">高吸引低转化</span></td></tr>
+<tr><td class="mono">#14</td><td class="md5" title="bd93d8c16e482b1900b7d56c37e6eec4">bd93d8c1</td><td class="mono">0.2</td><td class="mono">2.71%</td><td class="mono">49.0%</td><td class="mono">5.88%</td><td class="mono">2.09</td><td class="mono">¥280</td><td class="mono">90s</td><td><span class="qtag-inline star">双高优质</span></td></tr>
+<tr><td class="mono">#15</td><td class="md5" title="13d20ec0f4b9df13a9f34458796ef4ef">13d20ec0</td><td class="mono">0.2</td><td class="mono">3.47%</td><td class="mono">26.8%</td><td class="mono">6.58%</td><td class="mono">2.07</td><td class="mono">¥346</td><td class="mono">154s</td><td><span class="qtag-inline star">双高优质</span></td></tr>
+<tr><td class="mono">#16</td><td class="md5" title="525796f7ebb018077caf825aeb26fc04">525796f7</td><td class="mono">0.15</td><td class="mono">2.36%</td><td class="mono">37.6%</td><td class="mono">2.65%</td><td class="mono">0.65</td><td class="mono">¥267</td><td class="mono">114s</td><td><span class="qtag-inline weak">双低待优化</span></td></tr>
+<tr><td class="mono">#17</td><td class="md5" title="14ef5634273a7fd46e4126dfd8933e45">14ef5634</td><td class="mono">0.14</td><td class="mono">1.27%</td><td class="mono">27.8%</td><td class="mono">1.37%</td><td class="mono">0.39</td><td class="mono">¥144</td><td class="mono">84s</td><td><span class="qtag-inline weak">双低待优化</span></td></tr>
+<tr><td class="mono">#18</td><td class="md5" title="7afc5c4bb517590cb99bd9b73e11aabb">7afc5c4b</td><td class="mono">0.13</td><td class="mono">1.12%</td><td class="mono">24.0%</td><td class="mono">5.94%</td><td class="mono">1.31</td><td class="mono">¥170</td><td class="mono">121s</td><td><span class="qtag-inline potential">低吸引高转化</span></td></tr>
+<tr><td class="mono">#19</td><td class="md5" title="1134e7dea3661ba98f8188c9cedfd384">1134e7de</td><td class="mono">0.12</td><td class="mono">1.88%</td><td class="mono">37.2%</td><td class="mono">10.29%</td><td class="mono">1.93</td><td class="mono">¥386</td><td class="mono">112s</td><td><span class="qtag-inline potential">低吸引高转化</span></td></tr>
+<tr><td class="mono">#20</td><td class="md5" title="cd71c67f1526c7fe95e7fa528d56a7aa">cd71c67f</td><td class="mono">0.11</td><td class="mono">1.45%</td><td class="mono">30.4%</td><td class="mono">4.26%</td><td class="mono">0.65</td><td class="mono">¥202</td><td class="mono">146s</td><td><span class="qtag-inline weak">双低待优化</span></td></tr>
+    </tbody>
+  </table>
+</section>
+<!-- /FILE:appendix -->
+
+<div class="footer">
+  珊珊 · 客户素材诊断报告（脱敏版） · v1.12.0 · Generated 2026-07-22
+</div>
+
+</div>
+
+<!-- ===== DATA ===== -->
+<script>
+/* FILE:data.js */
+window.SS_DATA = {
+  radar: { dims:['消耗规模','点击吸引','完播留存','下单转化','投放ROI'], client:[1.1,104,79,72,86], industry:[100,100,100,100,100] },
+  scatter: { client:[[5.21, 1.67, 7.1, 1, "traffic"], [3.21, 3.51, 5.62, 2, "traffic"], [3.9, 3.58, 2.04, 3, "traffic"], [3.66, 4.09, 1.53, 4, "traffic"], [2.3, 6.62, 0.86, 5, "potential"], [1.82, 7.26, 0.79, 6, "potential"], [2.02, 8.71, 0.57, 7, "potential"], [2.84, 5.15, 0.55, 8, "traffic"], [2.09, 10.45, 0.3, 9, "potential"], [2.84, 7.93, 0.3, 10, "star"], [1.5, 5.21, 0.27, 11, "weak"], [2.53, 7.29, 0.23, 12, "star"], [2.37, 3.72, 0.23, 13, "traffic"], [2.71, 5.88, 0.2, 14, "star"], [3.47, 6.58, 0.2, 15, "star"], [2.36, 2.65, 0.15, 16, "weak"], [1.27, 1.37, 0.14, 17, "weak"], [1.12, 5.94, 0.13, 18, "potential"], [1.88, 10.29, 0.12, 19, "potential"], [1.45, 4.26, 0.11, 20, "weak"]], industry_top20:[[3.8, 9.2, 142.5, 1, "star"], [4.2, 7.8, 128.7, 2, "star"], [2.9, 10.5, 115.3, 3, "potential"], [3.5, 8.4, 108.6, 4, "star"], [5.1, 6.2, 98.4, 5, "traffic"], [2.6, 9.7, 92.1, 6, "potential"], [3.4, 8.1, 87.5, 7, "star"], [2.8, 7.9, 81.9, 8, "potential"], [3.2, 7.5, 76.4, 9, "star"], [2.4, 8.6, 71.2, 10, "potential"]], industry_top100:[[3.8, 9.2, 142.5, 1, "star"], [4.2, 7.8, 128.7, 2, "star"], [2.9, 10.5, 115.3, 3, "potential"], [3.5, 8.4, 108.6, 4, "star"], [5.1, 6.2, 98.4, 5, "traffic"], [2.6, 9.7, 92.1, 6, "potential"], [3.4, 8.1, 87.5, 7, "star"], [2.8, 7.9, 81.9, 8, "potential"], [3.2, 7.5, 76.4, 9, "star"], [2.4, 8.6, 71.2, 10, "potential"], [2.59, 3.36, 98.1, 0, "ind"], [1.51, 6.82, 63.9, 0, "ind"], [1.45, 6.57, 24.5, 0, "ind"], [3.06, 2.63, 30.9, 0, "ind"], [3.03, 9.44, 34.9, 0, "ind"], [2.16, 7.65, 133.7, 0, "ind"], [3.68, 5.57, 137.2, 0, "ind"], [1.4, 9.73, 54.8, 0, "ind"], [1.82, 3.06, 57.0, 0, "ind"], [4.71, 3.63, 89.8, 0, "ind"], [3.95, 5.35, 85.7, 0, "ind"], [1.47, 2.54, 44.7, 0, "ind"], [4.13, 5.85, 57.7, 0, "ind"], [3.72, 6.08, 56.0, 0, "ind"], [4.62, 8.29, 49.3, 0, "ind"], [3.67, 6.73, 125.0, 0, "ind"], [4.34, 4.59, 137.6, 0, "ind"], [1.71, 5.76, 110.9, 0, "ind"], [1.85, 6.4, 24.7, 0, "ind"], [4.07, 8.88, 88.8, 0, "ind"], [4.96, 4.82, 103.4, 0, "ind"], [3.76, 7.22, 74.7, 0, "ind"], [4.81, 10.5, 76.9, 0, "ind"], [4.06, 2.55, 104.2, 0, "ind"], [3.98, 10.94, 118.6, 0, "ind"], [2.42, 5.47, 100.2, 0, "ind"], [1.3, 6.16, 40.2, 0, "ind"], [1.7, 2.53, 112.2, 0, "ind"], [1.76, 4.23, 66.9, 0, "ind"], [4.95, 2.73, 73.9, 0, "ind"], [3.56, 9.95, 118.3, 0, "ind"], [4.92, 4.51, 69.8, 0, "ind"], [2.74, 9.96, 134.9, 0, "ind"], [1.85, 3.59, 47.8, 0, "ind"], [2.2, 6.36, 90.7, 0, "ind"], [2.33, 2.04, 70.3, 0, "ind"], [2.79, 7.1, 134.4, 0, "ind"], [4.17, 6.64, 94.1, 0, "ind"], [4.11, 2.49, 127.9, 0, "ind"], [4.55, 9.87, 115.7, 0, "ind"], [2.89, 5.59, 32.4, 0, "ind"], [3.93, 2.56, 28.1, 0, "ind"], [2.1, 3.46, 60.8, 0, "ind"], [1.43, 2.0, 38.2, 0, "ind"], [1.64, 5.27, 23.1, 0, "ind"], [4.96, 7.53, 37.8, 0, "ind"], [2.28, 5.13, 63.7, 0, "ind"], [1.73, 9.64, 139.2, 0, "ind"], [3.2, 6.35, 30.3, 0, "ind"], [1.64, 5.08, 51.8, 0, "ind"], [4.76, 3.45, 22.8, 0, "ind"], [5.29, 6.75, 37.6, 0, "ind"], [3.54, 2.24, 83.4, 0, "ind"], [5.41, 9.77, 103.5, 0, "ind"], [2.32, 5.3, 40.0, 0, "ind"], [4.52, 6.79, 113.5, 0, "ind"], [2.62, 4.01, 117.4, 0, "ind"], [5.44, 9.67, 116.7, 0, "ind"], [4.72, 8.66, 47.2, 0, "ind"], [3.43, 5.2, 23.5, 0, "ind"], [1.32, 4.51, 51.1, 0, "ind"], [4.18, 10.61, 73.7, 0, "ind"], [5.23, 10.89, 134.6, 0, "ind"], [2.77, 3.98, 47.2, 0, "ind"], [2.05, 3.84, 94.9, 0, "ind"], [5.07, 9.56, 77.5, 0, "ind"], [4.01, 9.2, 30.2, 0, "ind"], [4.04, 10.19, 113.9, 0, "ind"], [4.43, 6.3, 41.4, 0, "ind"], [4.59, 4.99, 116.1, 0, "ind"], [5.38, 5.56, 68.2, 0, "ind"], [5.27, 8.52, 40.4, 0, "ind"], [1.75, 3.36, 128.6, 0, "ind"], [4.67, 3.32, 119.2, 0, "ind"], [5.42, 7.92, 62.0, 0, "ind"], [3.56, 3.18, 21.7, 0, "ind"], [5.37, 7.85, 83.2, 0, "ind"], [5.21, 5.9, 124.6, 0, "ind"], [4.75, 3.9, 50.2, 0, "ind"], [2.46, 4.16, 90.4, 0, "ind"], [2.32, 5.77, 35.7, 0, "ind"], [5.11, 5.18, 75.0, 0, "ind"], [3.71, 10.14, 70.5, 0, "ind"], [5.15, 6.51, 83.8, 0, "ind"], [3.45, 2.17, 72.8, 0, "ind"], [1.99, 2.04, 115.9, 0, "ind"], [1.94, 6.26, 107.0, 0, "ind"], [3.59, 4.93, 82.2, 0, "ind"], [3.59, 9.06, 32.7, 0, "ind"], [3.61, 4.24, 53.2, 0, "ind"]], med_ctr:2.36, med_cvr:5.55 },
+  freq: [
+    {tag:'明星/达人背书', ind:78, cli:5},
+    {tag:'低价锚点/划线价', ind:65, cli:15},
+    {tag:'专业成分实验', ind:52, cli:20},
+    {tag:'年龄/效果对比', ind:48, cli:10},
+    {tag:'AI视觉冲击特效', ind:42, cli:0},
+    {tag:'素人口播/剧情', ind:35, cli:75},
+    {tag:'专业场景/诊室感', ind:30, cli:40},
+    {tag:'赠品/贴片促销', ind:28, cli:5}
+  ],
+  edit: { dims:['转场频次','字幕密度','BGM节奏','特效层数','镜头切换'], industry:[82,88,76,70,84], client:[45,52,58,20,40] }
+};
+</script>
+
+<!-- ===== SCRIPT ===== -->
+<script>
+/* FILE:main.js */
+(function(){
+  var D = window.SS_DATA;
+
+  // radar
+  var r1 = echarts.init(document.getElementById('radarChart'));
+  r1.setOption({
+    tooltip:{},
+    legend:{data:['客户','行业均值'],bottom:0,textStyle:{fontSize:12}},
+    radar:{
+      indicator: D.radar.dims.map(function(n){return {name:n,max:120}}),
+      radius:'62%',
+      splitArea:{areaStyle:{color:['rgba(217,59,59,.02)','rgba(217,59,59,.04)']}},
+      axisName:{color:'#334155',fontSize:12}
+    },
+    series:[{
+      type:'radar',
+      data:[
+        {value:D.radar.client,name:'客户',areaStyle:{color:'rgba(217,59,59,.25)'},lineStyle:{color:'#D93B3B',width:2},itemStyle:{color:'#D93B3B'}},
+        {value:D.radar.industry,name:'行业均值',areaStyle:{color:'rgba(59,130,246,.10)'},lineStyle:{color:'#3B82F6',width:2,type:'dashed'},itemStyle:{color:'#3B82F6'}}
+      ]
+    }]
+  });
+
+  // edit radar
+  var r2 = echarts.init(document.getElementById('editRadar'));
+  r2.setOption({
+    tooltip:{},
+    legend:{data:['行业','客户'],bottom:0,textStyle:{fontSize:12}},
+    radar:{ indicator: D.edit.dims.map(function(n){return {name:n,max:100}}), radius:'62%', axisName:{color:'#334155',fontSize:12} },
+    series:[{ type:'radar', data:[
+      {value:D.edit.industry,name:'行业',areaStyle:{color:'rgba(59,130,246,.12)'},lineStyle:{color:'#3B82F6',width:2},itemStyle:{color:'#3B82F6'}},
+      {value:D.edit.client,name:'客户',areaStyle:{color:'rgba(217,59,59,.25)'},lineStyle:{color:'#D93B3B',width:2},itemStyle:{color:'#D93B3B'}}
+    ]}]
+  });
+
+  // scatter tabs
+  var sc = echarts.init(document.getElementById('scatterChart'));
+  function buildScatter(mode){
+    var series = [];
+    var qColors = {star:'#10B981', traffic:'#3B82F6', potential:'#F59E0B', weak:'#EF4444', ind:'#94A3B8'};
+    function group(data, sym, symbolSize, opacity){
+      var groups = {};
+      data.forEach(function(p){ var k=p[4]; (groups[k]=groups[k]||[]).push(p); });
+      Object.keys(groups).forEach(function(k){
+        series.push({
+          name:{star:'双高优质',traffic:'高吸引低转化',potential:'低吸引高转化',weak:'双低待优化',ind:'行业其他'}[k],
+          type:'scatter', data:groups[k],
+          symbol:sym, symbolSize:symbolSize,
+          itemStyle:{color:qColors[k],opacity:opacity,borderColor:'#fff',borderWidth:1}
+        });
+      });
+    }
+    if(mode==='ind') group(D.scatter.industry_top100,'circle',12,.75);
+    if(mode==='cli') group(D.scatter.client,'diamond',16,.9);
+    if(mode==='mix'){ group(D.scatter.industry_top100,'circle',10,.4); group(D.scatter.client,'diamond',18,1); }
+    sc.setOption({
+      tooltip:{formatter:function(p){var d=p.data;return 'CTR '+d[0]+'%<br/>下单率 '+d[1]+'%<br/>消耗指数 '+d[2];}},
+      legend:{bottom:0,textStyle:{fontSize:12}},
+      grid:{left:60,right:40,top:30,bottom:60},
+      xAxis:{name:'CTR (%)',nameLocation:'middle',nameGap:32,min:0,max:6,splitLine:{lineStyle:{color:'#F1F5F9'}}},
+      yAxis:{name:'下单率 (%)',nameLocation:'middle',nameGap:40,min:0,max:12,splitLine:{lineStyle:{color:'#F1F5F9'}}},
+      series:series
+    },true);
+  }
+  buildScatter('ind');
+  document.querySelectorAll('.tab').forEach(function(t){
+    t.addEventListener('click',function(){
+      document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active')});
+      t.classList.add('active');
+      buildScatter(t.dataset.tab);
+    });
+  });
+
+  // freq list
+  var freqHost = document.getElementById('freqList');
+  var maxV = 100;
+  D.freq.forEach(function(f){
+    var el = document.createElement('div');
+    el.className='freq-item';
+    el.innerHTML =
+      '<div class="lbl">'+f.tag+'</div>'+
+      '<div class="freq-bar"><span style="width:'+(f.ind/maxV*100)+'%"></span></div>'+
+      '<div class="num">'+f.ind+'%</div>'+
+      '<div class="freq-bar client"><span style="width:'+(f.cli/maxV*100)+'%"></span></div>'+
+      '<div class="num">'+f.cli+'%</div>';
+    freqHost.appendChild(el);
+  });
+
+  window.addEventListener('resize',function(){r1.resize();r2.resize();sc.resize();});
+})();
+</script>
+
+</body>
+</html>
