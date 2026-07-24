@@ -5,134 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>广告投放报告中心</title>
 <style>
-  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif; background: #f4f6f9; margin: 0; padding: 32px 20px; color: #333; }
-  .container { max-width: 680px; margin: 0 auto; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Microsoft YaHei", sans-serif; background: #f4f6f9; margin: 0; padding: 32px 20px; color: #333; }
+  .container { max-width: 480px; margin: 0 auto; }
   h1 { font-size: 22px; color: #2563eb; margin: 0 0 8px; }
-  .subtitle { color: #888; font-size: 13px; margin: 0 0 32px; }
-  .customer-block { background: white; border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
-  .customer-name { font-size: 17px; font-weight: 700; color: #1e293b; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
-  .customer-name::before { content: ''; width: 4px; height: 18px; background: #2563eb; border-radius: 2px; }
-  .report-section { margin-bottom: 12px; }
-  .report-section:last-child { margin-bottom: 0; }
-  .section-title { font-size: 12px; color: #64748b; font-weight: 600; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
-  .report-link { display: inline-flex; align-items: center; padding: 6px 12px; background: #f1f5f9; border-radius: 6px; text-decoration: none; color: #334155; font-size: 13px; margin-right: 8px; margin-bottom: 4px; transition: background 0.15s; }
-  .report-link:hover { background: #e2e8f0; }
-  .report-link .date { color: #94a3b8; font-size: 11px; margin-left: 6px; }
-  .no-report { font-size: 12px; color: #cbd5e1; padding: 4px 0; }
-  .footer { text-align: center; color: #94a3b8; font-size: 11px; margin-top: 32px; }
-  @media (max-width: 500px) { body { padding: 16px 12px; } .customer-block { padding: 14px 16px; } }
+  .subtitle { color: #888; font-size: 13px; margin: 0 0 28px; }
+  .list { display: flex; flex-direction: column; gap: 8px; }
+  a { display: flex; align-items: center; padding: 14px 20px; background: white; border-radius: 8px; text-decoration: none; color: #334155; font-size: 15px; font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: background 0.15s; }
+  a:hover { background: #e8ecf4; }
+  .arrow { color: #94a3b8; margin-left: auto; font-size: 14px; }
+  .footer { text-align: center; color: #94a3b8; font-size: 11px; margin-top: 28px; }
 </style>
 </head>
 <body>
 <div class="container">
   <h1>广告投放报告中心</h1>
-  <p class="subtitle">按客户查看最新复盘报告与素材诊断报告</p>
-
-  <!-- 拾伍 -->
-  <div class="customer-block">
-    <div class="customer-name">拾伍</div>
-    <div class="report-section">
-      <div class="section-title">客户复盘报告</div>
-      <a class="report-link" href="shiwu/0722/">复盘报告<span class="date">07.22</span></a>
-    </div>
-    <div class="report-section">
-      <div class="section-title">素材诊断报告</div>
-      <span class="no-report">暂无报告</span>
-    </div>
+  <p class="subtitle">点击客户名称查看报告</p>
+  <div class="list">
+    <a href="shiwu/">拾伍<span class="arrow">→</span></a>
+    <a href="shanshan/">珊珊<span class="arrow">→</span></a>
+    <a href="dilanxiangren/">帝蘭香仁<span class="arrow">→</span></a>
+    <a href="biyang/">必扬<span class="arrow">→</span></a>
+    <a href="shunwei/">顺为<span class="arrow">→</span></a>
+    <a href="ziyoulang/">自由狼<span class="arrow">→</span></a>
+    <a href="bulaomiyu/">不老谜语<span class="arrow">→</span></a>
+    <a href="heyuanzhang/">何院长<span class="arrow">→</span></a>
   </div>
-
-  <!-- 顺为 -->
-  <div class="customer-block">
-    <div class="customer-name">顺为</div>
-    <div class="report-section">
-      <div class="section-title">客户复盘报告</div>
-      <span class="no-report">暂无报告</span>
-    </div>
-    <div class="report-section">
-      <div class="section-title">素材诊断报告</div>
-      <a class="report-link" href="shunwei/">素材诊断<span class="date">查看 →</span></a>
-    </div>
-  </div>
-
-  <!-- 必扬 -->
-  <div class="customer-block">
-    <div class="customer-name">必扬</div>
-    <div class="report-section">
-      <div class="section-title">客户复盘报告</div>
-      <span class="no-report">暂无报告</span>
-    </div>
-    <div class="report-section">
-      <div class="section-title">素材诊断报告</div>
-      <a class="report-link" href="biyang/">素材诊断<span class="date">查看 →</span></a>
-    </div>
-  </div>
-
-  <!-- 自由狼 -->
-  <div class="customer-block">
-    <div class="customer-name">自由狼</div>
-    <div class="report-section">
-      <div class="section-title">客户复盘报告</div>
-      <span class="no-report">暂无报告</span>
-    </div>
-    <div class="report-section">
-      <div class="section-title">素材诊断报告</div>
-      <a class="report-link" href="ziyoulang/">素材诊断<span class="date">查看 →</span></a>
-    </div>
-  </div>
-
-  <!-- 不老谜语 -->
-  <div class="customer-block">
-    <div class="customer-name">不老谜语</div>
-    <div class="report-section">
-      <div class="section-title">客户复盘报告</div>
-      <span class="no-report">暂无报告</span>
-    </div>
-    <div class="report-section">
-      <div class="section-title">素材诊断报告</div>
-      <a class="report-link" href="bulaomiyu/">素材诊断<span class="date">查看 →</span></a>
-    </div>
-  </div>
-
-  <!-- 何院长 -->
-  <div class="customer-block">
-    <div class="customer-name">何院长</div>
-    <div class="report-section">
-      <div class="section-title">客户复盘报告</div>
-      <span class="no-report">暂无报告</span>
-    </div>
-    <div class="report-section">
-      <div class="section-title">素材诊断报告</div>
-      <a class="report-link" href="heyuanzhang/">素材诊断<span class="date">查看 →</span></a>
-    </div>
-  </div>
-
-  <!-- 珊珊 -->
-  <div class="customer-block">
-    <div class="customer-name">珊珊</div>
-    <div class="report-section">
-      <div class="section-title">客户复盘报告</div>
-      <a class="report-link" href="shanshan/0723/">复盘报告<span class="date">07.23</span></a>
-    </div>
-    <div class="report-section">
-      <div class="section-title">素材诊断报告</div>
-      <a class="report-link" href="shanshan/sucai/0723/">素材诊断<span class="date">07.23</span></a>
-    </div>
-  </div>
-
-  <!-- 帝蘭香仁 -->
-  <div class="customer-block">
-    <div class="customer-name">帝蘭香仁</div>
-    <div class="report-section">
-      <div class="section-title">客户复盘报告</div>
-      <a class="report-link" href="dilanxiangren/0723/">复盘报告<span class="date">07.23</span></a>
-    </div>
-    <div class="report-section">
-      <div class="section-title">素材诊断报告</div>
-      <a class="report-link" href="dilanxiangren/sucai/0723/">素材诊断<span class="date">07.23</span></a>
-    </div>
-  </div>
-
-  <p class="footer">报告生成时间：2026-07-23</p>
+  <p class="footer">每个客户页面内展示投放复盘报告 &amp; 素材诊断报告</p>
 </div>
 </body>
 </html>
