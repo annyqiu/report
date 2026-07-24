@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>雪宝 · 客户素材诊断报告（脱敏版）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<style>
+:root{
+  --bg:#FFFFFF;--fg:#0F172A;--muted:#F5F6F8;--muted-fg:#64748B;
+  --primary:#D93B3B;--good:#10B981;--info:#1D4ED8;--warn:#F59E0B;--bad:#B91C1C;
+  --border:#E5E7EB;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);
+  font-family:'Inter','Noto Serif SC',system-ui,sans-serif;overflow-x:hidden}
+.font-serif{font-family:'Noto Serif SC',serif}
+.font-mono{font-family:'JetBrains Mono',monospace}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.banner{position:sticky;top:0;z-index:50;background:var(--primary);color:#fff;
+  text-align:center;padding:8px 12px;font-size:13px;letter-spacing:.05em}
+.hero{padding:64px 0 40px;border-bottom:1px solid var(--border)}
+.eyebrow{color:var(--primary);font-family:'JetBrains Mono',monospace;
+  font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:600}
+h1.title{font-family:'Noto Serif SC',serif;font-weight:900;
+  font-size:clamp(32px,5vw,56px);line-height:1.15;margin:14px 0 12px;letter-spacing:-.01em}
+.subtitle{color:var(--muted-fg);font-size:16px;max-width:720px;line-height:1.7}
+.meta-row{display:flex;flex-wrap:wrap;gap:24px;margin-top:24px;
+  color:var(--muted-fg);font-size:13px;font-family:'JetBrains Mono',monospace}
+.meta-row .k{color:var(--fg);font-weight:600;margin-left:6px}
+.version{display:inline-block;padding:4px 10px;border:1px solid var(--primary);
+  color:var(--primary);border-radius:999px;font-size:11px;letter-spacing:.1em;
+  font-family:'JetBrains Mono',monospace;margin-top:16px}
+section.mod{padding:64px 0;border-bottom:1px solid var(--border)}
+.mod-head{display:flex;align-items:baseline;gap:16px;margin-bottom:32px}
+.mod-idx{font-family:'JetBrains Mono',monospace;color:var(--primary);
+  font-size:14px;font-weight:700;letter-spacing:.15em}
+.mod-title{font-family:'Noto Serif SC',serif;font-size:28px;font-weight:700}
+.mod-sub{color:var(--muted-fg);font-size:14px;margin-left:auto}
+/* KPI */
+.kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+@media(max-width:900px){.kpi-grid{grid-template-columns:repeat(2,1fr)}}
+.kpi{border:1px solid var(--border);border-radius:12px;padding:20px;
+  background:#fff;transition:all .2s;display:flex;flex-direction:column;gap:8px}
+.kpi:hover{border-color:var(--primary);transform:translateY(-2px);
+  box-shadow:0 8px 24px -12px rgba(217,59,59,.25)}
+.kpi .lab{color:var(--muted-fg);font-size:12px;letter-spacing:.05em}
+.kpi .val{font-family:'JetBrains Mono',monospace;font-size:32px;font-weight:700;color:var(--fg);line-height:1}
+.kpi .ind{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted-fg)}
+.kpi .badge{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;
+  border-radius:6px;font-size:11px;font-weight:600;font-family:'JetBrains Mono',monospace;width:fit-content}
+.badge.up{background:rgba(16,185,129,.1);color:var(--good)}
+.badge.down{background:rgba(217,59,59,.1);color:var(--primary)}
+.badge.flat{background:var(--muted);color:var(--muted-fg)}
+.kpi .verdict{font-size:12px;color:var(--fg);padding-top:8px;border-top:1px dashed var(--border);margin-top:4px}
+/* summary */
+.summary-box{background:var(--muted);border-left:3px solid var(--primary);
+  padding:24px 28px;border-radius:0 8px 8px 0;line-height:1.9;font-size:15px}
+.summary-box strong{color:var(--primary);font-weight:700}
+/* bars */
+.bar-list{display:flex;flex-direction:column;gap:14px}
+.bar-row{display:grid;grid-template-columns:120px 1fr 90px;gap:12px;align-items:center}
+@media(max-width:700px){.bar-row{grid-template-columns:100px 1fr 70px}}
+.bar-row .lbl{font-size:14px;font-weight:500}
+.bar-track{position:relative;height:28px;background:#F5F6F8;border-radius:4px;overflow:hidden}
+.bar-ind{position:absolute;left:0;top:0;bottom:0;background:#64748B;opacity:.65}
+.bar-cus{position:absolute;left:0;top:0;bottom:0;background:var(--primary)}
+.bar-row .vals{font-family:'JetBrains Mono',monospace;font-size:12px;text-align:right;color:var(--muted-fg)}
+.bar-row .vals .c{color:var(--primary);font-weight:700}
+.legend{display:flex;gap:20px;font-size:12px;color:var(--muted-fg);margin-bottom:20px}
+.legend .dot{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:6px;vertical-align:middle}
+/* cards */
+.card-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+@media(max-width:1000px){.card-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.card-grid{grid-template-columns:1fr}}
+.feat-card{border-radius:10px;padding:18px;border:1px solid;display:flex;flex-direction:column;gap:8px}
+.feat-card.good{background:rgba(16,185,129,.06);border-color:rgba(16,185,129,.3)}
+.feat-card.bad{background:rgba(217,59,59,.05);border-color:rgba(217,59,59,.25)}
+.feat-card .fno{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700}
+.feat-card.good .fno{color:var(--good)}
+.feat-card.bad .fno{color:var(--primary)}
+.feat-card .ft{font-weight:700;font-size:16px;font-family:'Noto Serif SC',serif}
+.feat-card .fd{font-size:13px;color:var(--muted-fg);line-height:1.6}
+/* actions */
+.act-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:900px){.act-grid{grid-template-columns:1fr}}
+.act-col{border:1px solid var(--border);border-radius:12px;padding:24px;background:#fff}
+.act-col .tag{display:inline-block;padding:4px 10px;border-radius:4px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.1em}
+.act-col.p0 .tag{background:var(--primary);color:#fff}
+.act-col.p1 .tag{background:var(--warn);color:#fff}
+.act-col.p2 .tag{background:var(--info);color:#fff}
+.act-col h3{font-family:'Noto Serif SC',serif;font-size:20px;margin:12px 0 6px}
+.act-col .st{color:var(--muted-fg);font-size:12px;margin-bottom:16px}
+.act-col ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px}
+.act-col li{display:flex;gap:10px;font-size:14px;line-height:1.6;padding-left:0}
+.act-col li::before{content:"→";color:var(--primary);font-weight:700;flex-shrink:0}
+.chart-box{height:420px;width:100%}
+footer{padding:40px 0 60px;text-align:center;color:var(--muted-fg);font-size:12px}
+</style>
+</head>
+<body>
+
+<div class="banner">脱敏版本 · 消耗数据已转为消耗指数</div>
+
+<div class="container">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="eyebrow">Client Material Diagnostic Report</div>
+  <h1 class="title">雪宝 · 素材诊断报告</h1>
+  <p class="subtitle">基于近 30 天 TOP20 素材数据，从核心 KPI、五维能力、内容标签、剪辑风格四个维度对比行业基准，输出优势沉淀与短板改进建议。</p>
+  <div class="meta-row">
+    <span>客户<span class="k">雪宝</span></span>
+    <span>周期<span class="k">近 30 天</span></span>
+    <span>样本<span class="k">TOP 20</span></span>
+    <span>行业基准<span class="k">护肤 TOP 100</span></span>
+  </div>
+  <div class="version">V4 · DESENSITIZED</div>
+</section>
+
+<!-- 01 KPI -->
+<section class="mod">
+  <div class="mod-head">
+    <span class="mod-idx">01</span>
+    <span class="mod-title">核心指标概览</span>
+    <span class="mod-sub">Client vs Industry Benchmark</span>
+  </div>
+  <div class="kpi-grid" id="kpi-grid"></div>
+</section>
+
+<!-- 02 五维能力 -->
+<section class="mod">
+  <div class="mod-head">
+    <span class="mod-idx">02</span>
+    <span class="mod-title">五维能力结论</span>
+    <span class="mod-sub">Capability Summary</span>
+  </div>
+  <div class="summary-box">
+    雪宝在<strong>转化后端</strong>（下单率 +2.62pp / ROI +1.06）及<strong>消耗规模</strong>（指数 34.6，行业 3.4×）显著领先行业；
+    但在<strong>互动前端</strong>（3s 完播 / CTR）与行业基本持平，
+    <strong>内容丰富度</strong>（明星背书 / 权威认证 / 前后对比等素材类型）存在明显短板。
+  </div>
+</section>
+
+<!-- 03 内容标签覆盖率 -->
+<section class="mod">
+  <div class="mod-head">
+    <span class="mod-idx">03</span>
+    <span class="mod-title">内容标签覆盖率对比</span>
+    <span class="mod-sub">Content Tag Coverage · 10 Tags</span>
+  </div>
+  <div class="legend">
+    <span><span class="dot" style="background:#64748B;opacity:.65"></span>行业均值</span>
+    <span><span class="dot" style="background:#D93B3B"></span>雪宝</span>
+  </div>
+  <div class="bar-list" id="bar-list"></div>
+</section>
+
+<!-- 04 剪辑风格雷达 -->
+<section class="mod">
+  <div class="mod-head">
+    <span class="mod-idx">04</span>
+    <span class="mod-title">剪辑风格五维分析</span>
+    <span class="mod-sub">Editing Style Radar</span>
+  </div>
+  <div id="radar" class="chart-box"></div>
+</section>
+
+<!-- 05 优势 -->
+<section class="mod">
+  <div class="mod-head">
+    <span class="mod-idx">05</span>
+    <span class="mod-title">客户优势特征</span>
+    <span class="mod-sub">Top 5 Strengths</span>
+  </div>
+  <div class="card-grid" id="good-cards"></div>
+</section>
+
+<!-- 06 劣势 -->
+<section class="mod">
+  <div class="mod-head">
+    <span class="mod-idx">06</span>
+    <span class="mod-title">客户劣势特征</span>
+    <span class="mod-sub">Top 5 Gaps</span>
+  </div>
+  <div class="card-grid" id="bad-cards"></div>
+</section>
+
+<!-- 07 行动清单 -->
+<section class="mod">
+  <div class="mod-head">
+    <span class="mod-idx">07</span>
+    <span class="mod-title">行动清单</span>
+    <span class="mod-sub">Action Roadmap</span>
+  </div>
+  <div class="act-grid" id="act-grid"></div>
+</section>
+
+<footer>
+  <div>雪宝 · 素材诊断报告（脱敏版） · V4</div>
+  <div style="margin-top:6px">Powered by ECharts · Noto Serif SC / JetBrains Mono</div>
+</footer>
+
+</div>
+
+<script>
+/* ===== DATA ===== */
+window.XB_DATA = {
+  kpi:[
+    {lab:"消耗指数",cus:"34.6",ind:"10.3",delta:"+24.3",dir:"up",verdict:"消耗领先"},
+    {lab:"3s完播率",cus:"44.27%",ind:"45.58%",delta:"-1.31pp",dir:"flat",verdict:"完播略弱"},
+    {lab:"CTR",cus:"2.34%",ind:"2.43%",delta:"-0.09pp",dir:"flat",verdict:"点击持平"},
+    {lab:"下单率",cus:"10.37%",ind:"7.75%",delta:"+2.62pp",dir:"up",verdict:"转化强"},
+    {lab:"ROI",cus:"2.67",ind:"1.61",delta:"+1.06",dir:"up",verdict:"ROI领先"}
+  ],
+  tags:[
+    ["KOL背书",100,85],["产品展示",100,95],["场景演示",100,75],["痛点放大",100,80],
+    ["价格锚点",80,90],["明星背书",0,65],["权威认证",0,55],["赠品堆叠",0,70],
+    ["前后对比",0,90],["用户证言",0,60]
+  ],
+  radar:{
+    dims:["镜头切换","字幕大字报","花字特效","AI/3D特效","信息密度"],
+    cus:[75,87,40,13,85],
+    ind:[80,85,65,45,80]
+  },
+  good:[
+    {t:"消耗规模领先",d:"消耗指数 34.6，是行业均值的 3.4 倍"},
+    {t:"转化效率突出",d:"下单率 10.37%，高于行业 2.62pp"},
+    {t:"ROI 优秀",d:"ROI 2.67，高于行业 66%"},
+    {t:"KOL 内容矩阵完善",d:"KOL 背书 100% 覆盖"},
+    {t:"场景演示到位",d:"场景演示 100% 覆盖"}
+  ],
+  bad:[
+    {t:"明星背书缺失",d:"覆盖率 0%，行业 65%"},
+    {t:"权威认证不足",d:"覆盖率 0%，行业 55%"},
+    {t:"前后对比空白",d:"覆盖率 0%，行业 90%"},
+    {t:"特效运用薄弱",d:"AI/3D 特效 13 分，行业 45 分"},
+    {t:"赠品堆叠缺失",d:"覆盖率 0%，行业 70%"}
+  ],
+  actions:[
+    {p:"P0",cls:"p0",title:"立即执行",sub:"0–2 周",items:[
+      "引入明星 / 代言人背书素材","制作前后对比类素材"]},
+    {p:"P1",cls:"p1",title:"短期落地",sub:"2–6 周",items:[
+      "增加权威认证展示","提升花字特效运用","补充赠品堆叠内容"]},
+    {p:"P2",cls:"p2",title:"中期建设",sub:"6–12 周",items:[
+      "探索 AI / 3D 特效应用","优化完播率提升策略"]}
+  ]
+};
+
+/* ===== MAIN ===== */
+document.addEventListener('DOMContentLoaded',()=>{
+  const D=window.XB_DATA;
+
+  // KPI
+  document.getElementById('kpi-grid').innerHTML = D.kpi.map(k=>{
+    const cls = k.dir==='up'?'up':(k.dir==='down'?'down':'flat');
+    const arrow = k.dir==='up'?'▲':(k.dir==='down'?'▼':'●');
+    return `<div class="kpi">
+      <div class="lab">${k.lab}</div>
+      <div class="val">${k.cus}</div>
+      <div class="ind">行业 ${k.ind}</div>
+      <div class="badge ${cls}">${arrow} ${k.delta}</div>
+      <div class="verdict">${k.verdict}</div>
+    </div>`;
+  }).join('');
+
+  // Bars
+  const maxV = 100;
+  document.getElementById('bar-list').innerHTML = D.tags.map(([lab,cus,ind])=>{
+    return `<div class="bar-row">
+      <div class="lbl">${lab}</div>
+      <div class="bar-track">
+        <div class="bar-ind" style="width:${ind}%"></div>
+        <div class="bar-cus" style="width:${cus}%;mix-blend-mode:multiply"></div>
+      </div>
+      <div class="vals"><span class="c">${cus}%</span> / ${ind}%</div>
+    </div>`;
+  }).join('');
+
+  // Radar
+  const radar = echarts.init(document.getElementById('radar'));
+  radar.setOption({
+    tooltip:{},
+    legend:{data:['雪宝','行业均值'],bottom:0,textStyle:{fontFamily:'Inter'}},
+    radar:{
+      indicator:D.radar.dims.map(n=>({name:n,max:100})),
+      splitNumber:5,
+      axisName:{color:'#0F172A',fontSize:13,fontWeight:500,fontFamily:'Noto Serif SC'},
+      splitLine:{lineStyle:{color:'#E5E7EB'}},
+      splitArea:{areaStyle:{color:['rgba(245,246,248,.4)','rgba(255,255,255,0)']}},
+      axisLine:{lineStyle:{color:'#E5E7EB'}}
+    },
+    series:[{
+      type:'radar',
+      data:[
+        {value:D.radar.cus,name:'雪宝',
+          areaStyle:{color:'rgba(217,59,59,.25)'},
+          lineStyle:{color:'#D93B3B',width:2},
+          itemStyle:{color:'#D93B3B'}},
+        {value:D.radar.ind,name:'行业均值',
+          areaStyle:{color:'rgba(100,116,139,.15)'},
+          lineStyle:{color:'#64748B',width:2,type:'dashed'},
+          itemStyle:{color:'#64748B'}}
+      ]
+    }]
+  });
+
+  // Good / Bad
+  document.getElementById('good-cards').innerHTML = D.good.map((c,i)=>`
+    <div class="feat-card good">
+      <div class="fno">GOOD · 0${i+1}</div>
+      <div class="ft">${c.t}</div>
+      <div class="fd">${c.d}</div>
+    </div>`).join('');
+  document.getElementById('bad-cards').innerHTML = D.bad.map((c,i)=>`
+    <div class="feat-card bad">
+      <div class="fno">GAP · 0${i+1}</div>
+      <div class="ft">${c.t}</div>
+      <div class="fd">${c.d}</div>
+    </div>`).join('');
+
+  // Actions
+  document.getElementById('act-grid').innerHTML = D.actions.map(a=>`
+    <div class="act-col ${a.cls}">
+      <span class="tag">${a.p}</span>
+      <h3>${a.title}</h3>
+      <div class="st">${a.sub}</div>
+      <ul>${a.items.map(x=>`<li>${x}</li>`).join('')}</ul>
+    </div>`).join('');
+
+  window.addEventListener('resize',()=>radar.resize());
+});
+</script>
+</body>
+</html>
