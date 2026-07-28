@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>玫瑰颂 素材诊断报告</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #D93B3B;
+            --primary-light: #FEE2E2;
+            --green: #10B981;
+            --green-light: #D1FAE5;
+            --blue: #1D4ED8;
+            --blue-light: #DBEAFE;
+            --amber: #F59E0B;
+            --amber-light: #FEF3C7;
+            --red: #B91C1C;
+            --red-light: #FEE2E2;
+            --gray-50: #F9FAFB;
+            --gray-100: #F3F4F6;
+            --gray-200: #E5E7EB;
+            --gray-600: #4B5563;
+            --gray-800: #1F2937;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Noto Serif SC', serif; background: var(--gray-50); color: var(--gray-800); line-height: 1.6; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        
+        .desensitized-banner {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 8px;
+            font-size: 14px;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #1F2937 0%, #374151 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 8px; }
+        .hero .subtitle { color: #9CA3AF; font-size: 14px; letter-spacing: 2px; }
+        
+        .wrap { max-width: 1280px; margin: 0 auto; padding: 40px 20px; }
+        
+        .section { margin-bottom: 48px; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--primary);
+        }
+        .section-number {
+            background: var(--primary);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .section-title { font-size: 1.5rem; font-weight: 600; }
+        
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+        }
+        .kpi-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid var(--gray-200);
+        }
+        .kpi-label { font-size: 14px; color: var(--gray-600); margin-bottom: 8px; }
+        .kpi-value { font-size: 2rem; font-weight: 700; color: var(--primary); margin-bottom: 8px; }
+        .kpi-compare { font-size: 12px; color: var(--gray-600); margin-bottom: 4px; }
+        .kpi-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .kpi-badge.positive { background: var(--green-light); color: var(--green); }
+        .kpi-badge.negative { background: var(--red-light); color: var(--red); }
+        .kpi-verdict { font-size: 12px; color: var(--gray-600); margin-top: 8px; }
+        
+        .radar-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            align-items: center;
+        }
+        .chart-container { background: white; border-radius: 12px; padding: 24px; border: 1px solid var(--gray-200); }
+        .chart { height: 400px; }
+        .conclusion-cards { display: flex; flex-direction: column; gap: 12px; }
+        .conclusion-card {
+            padding: 16px;
+            border-radius: 8px;
+            border-left: 4px solid;
+        }
+        .conclusion-card.warning { background: var(--amber-light); border-color: var(--amber); }
+        .conclusion-card.success { background: var(--green-light); border-color: var(--green); }
+        .conclusion-card.danger { background: var(--red-light); border-color: var(--red); }
+        
+        .summary-text {
+            background: var(--gray-100);
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+        
+        .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .feature-card {
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+        }
+        .feature-card.advantage { background: var(--green-light); border-color: var(--green); }
+        .feature-card.disadvantage { background: var(--red-light); border-color: var(--red); }
+        .feature-card h4 { font-size: 16px; margin-bottom: 8px; }
+        .feature-card p { font-size: 14px; color: var(--gray-600); }
+        
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+        }
+        .video-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--gray-200);
+        }
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 177.78%;
+            background: #000;
+        }
+        .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .video-info { padding: 12px; }
+        .video-info .metrics { display: flex; flex-wrap: wrap; gap: 8px; font-size: 11px; }
+        .video-info .metric { background: var(--gray-100); padding: 2px 6px; border-radius: 4px; }
+        .quadrant-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            color: white;
+            margin-top: 8px;
+        }
+        .quadrant-tag.q1 { background: var(--green); }
+        .quadrant-tag.q2 { background: var(--blue); }
+        .quadrant-tag.q3 { background: var(--amber); }
+        .quadrant-tag.q4 { background: var(--red); }
+        
+        .action-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .action-column { background: white; border-radius: 12px; padding: 20px; border: 1px solid var(--gray-200); }
+        .action-column h4 {
+            padding: 8px 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
+        .action-column.p0 h4 { background: var(--red-light); color: var(--red); }
+        .action-column.p1 h4 { background: var(--blue-light); color: var(--blue); }
+        .action-column.p2 h4 { background: var(--gray-100); color: var(--gray-600); }
+        .action-item { padding: 12px 0; border-bottom: 1px solid var(--gray-100); font-size: 14px; }
+        .action-item:last-child { border-bottom: none; }
+        
+        .footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--gray-600);
+            font-size: 14px;
+            border-top: 1px solid var(--gray-200);
+            margin-top: 40px;
+        }
+        
+        .tab-container {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        .tab-btn {
+            padding: 8px 16px;
+            border: 1px solid var(--gray-200);
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="desensitized-banner">
+        🔒 脱敏版本 · 消耗数据已转为消耗指数
+    </div>
+    
+    <div class="hero">
+        <h1>玫瑰颂 素材诊断报告</h1>
+        <div class="subtitle">MEIGUISONG · CREATIVE DIAGNOSIS REPORT · V2</div>
+    </div>
+    
+    <div class="wrap">
+        <!-- 01 基础指标概览 -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">01</div>
+                <h2 class="section-title">基础指标概览</h2>
+            </div>
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-label">消耗指数</div>
+                    <div class="kpi-value mono">0.6</div>
+                    <div class="kpi-compare">行业均值: 10.3</div>
+                    <div class="kpi-badge negative">-9.7</div>
+                    <div class="kpi-verdict">规模受限</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">3s完播率</div>
+                    <div class="kpi-value mono">35.86%</div>
+                    <div class="kpi-compare">行业均值: 45.58%</div>
+                    <div class="kpi-badge negative">-9.72pp</div>
+                    <div class="kpi-verdict">完播弱</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">点击率 CTR</div>
+                    <div class="kpi-value mono">2.34%</div>
+                    <div class="kpi-compare">行业均值: 2.43%</div>
+                    <div class="kpi-badge negative">-0.10pp</div>
+                    <div class="kpi-verdict">点击持平</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">下单率</div>
+                    <div class="kpi-value mono">7.17%</div>
+                    <div class="kpi-compare">行业均值: 7.75%</div>
+                    <div class="kpi-badge negative">-0.58pp</div>
+                    <div class="kpi-verdict">转化持平</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">ROI</div>
+                    <div class="kpi-value mono">2.59</div>
+                    <div class="kpi-compare">行业均值: 1.61</div>
+                    <div class="kpi-badge positive">+0.98</div>
+                    <div class="kpi-verdict">成本优</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 02 五维能力对比 -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">02</div>
+                <h2 class="section-title">五维能力对比</h2>
+            </div>
+            <div class="summary-text">
+                玫瑰颂在<strong>ROI成本控制</strong>（+0.98）表现优秀，但在<strong>消耗规模</strong>（消耗指数仅0.62）和<strong>3s完播率</strong>（-9.72pp）存在明显短板，需优化前端留人能力。
+            </div>
+            <div class="radar-section">
+                <div id="radarChart" class="chart"></div>
+                <div class="conclusion-cards">
+                    <div class="conclusion-card danger">
+                        <h4>🔴 规模短板</h4>
+                        <p>消耗指数0.62，仅为行业的6%，跑量能力严重不足</p>
+                    </div>
+                    <div class="conclusion-card warning">
+                        <h4>⚠️ 完播弱</h4>
+                        <p>3s完播率35.86%，低于行业9.72pp，前3秒Hook需优化</p>
+                    </div>
+                    <div class="conclusion-card success">
+                        <h4>✅ ROI优势</h4>
+                        <p>ROI 2.59，高于行业61%，转化效率突出</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 03 四象限散点分布 -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">03</div>
+                <h2 class="section-title">四象限散点分布</h2>
+            </div>
+            <div class="chart-container">
+                <div class="tab-container">
+                    <button class="tab-btn active" onclick="switchScatter('industry')">行业TOP100</button>
+                    <button class="tab-btn" onclick="switchScatter('client')">玫瑰颂TOP20</button>
+                    <button class="tab-btn" onclick="switchScatter('overlay')">叠加对比</button>
+                </div>
+                <div id="scatterChart" class="chart"></div>
+            </div>
+        </div>
+        
+        <!-- 04 内容特征频次对比 -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">04</div>
+                <h2 class="section-title">内容特征频次对比</h2>
+            </div>
+            
+            <h3 style="margin: 24px 0 16px; font-size: 1.1rem;">4.1 内容标签出现率对比</h3>
+            <div class="chart-container">
+                <div id="labelChart" class="chart"></div>
+            </div>
+            
+            <h3 style="margin: 24px 0 16px; font-size: 1.1rem;">4.2 剪辑风格 5 维对比</h3>
+            <div class="chart-container">
+                <div id="styleRadarChart" class="chart"></div>
+            </div>
+            
+            <h3 style="margin: 24px 0 16px; font-size: 1.1rem;">4.3 行业 TOP100 优质内容核心特征</h3>
+            <div class="feature-grid">
+                <div class="feature-card" style="background: #FFF7ED; border-color: #F59E0B;">
+                    <h4>🌟 明星背书 65%</h4>
+                    <p>一线明星代言，前2秒正脸出镜，建立信任感</p>
+                </div>
+                <div class="feature-card" style="background: #FFF7ED; border-color: #F59E0B;">
+                    <h4>💰 价格锚点 78%</h4>
+                    <p>划线价+赠品贴片，促销信息完整，转化驱动强</p>
+                </div>
+                <div class="feature-card" style="background: #FFF7ED; border-color: #F59E0B;">
+                    <h4>📊 前后对比 90%</h4>
+                    <p>强视觉对比，效果可视化，说服力强</p>
+                </div>
+                <div class="feature-card" style="background: #FFF7ED; border-color: #F59E0B;">
+                    <h4>🎁 赠品堆叠 85%</h4>
+                    <p>多件套装展示，价值感强，降低决策门槛</p>
+                </div>
+                <div class="feature-card" style="background: #FFF7ED; border-color: #F59E0B;">
+                    <h4>💬 用户证言 72%</h4>
+                    <p>UGC真实评价，社交证明，增强可信度</p>
+                </div>
+                <div class="feature-card" style="background: #FFF7ED; border-color: #F59E0B;">
+                    <h4>🎬 高频快切 85%</h4>
+                    <p>1-1.5秒/镜头，节奏紧凑，留人能力强</p>
+                </div>
+            </div>
+            
+            <h3 style="margin: 24px 0 16px; font-size: 1.1rem;">4.4 玫瑰颂优势特征</h3>
+            <div class="feature-grid">
+                <div class="feature-card advantage">
+                    <h4>✅ ROI 2.59</h4>
+                    <p>vs 行业1.61（+61%），转化效率显著高于行业，成本控制优秀</p>
+                </div>
+                <div class="feature-card advantage">
+                    <h4>✅ 产品展示 100%</h4>
+                    <p>vs 行业95%（+5pp），产品展示完整，功效讲解清晰</p>
+                </div>
+                <div class="feature-card advantage">
+                    <h4>✅ KOL背书 85%</h4>
+                    <p>vs 行业45%（+40pp），KOL背书覆盖率高，专业度强</p>
+                </div>
+            </div>
+            
+            <h3 style="margin: 24px 0 16px; font-size: 1.1rem;">4.5 玫瑰颂劣势特征</h3>
+            <div class="feature-grid">
+                <div class="feature-card disadvantage">
+                    <h4>❌ 明星背书 0%</h4>
+                    <p>vs 行业65%（-65pp），完全缺失明星流量加持，拉新能力受限</p>
+                </div>
+                <div class="feature-card disadvantage">
+                    <h4>❌ 前后对比 40%</h4>
+                    <p>vs 行业90%（-50pp），效果可视化不足，说服力弱</p>
+                </div>
+                <div class="feature-card disadvantage">
+                    <h4>❌ 赠品堆叠 15%</h4>
+                    <p>vs 行业85%（-70pp），促销氛围不足，价值感弱</p>
+                </div>
+                <div class="feature-card disadvantage">
+                    <h4>❌ AI/3D特效 25分</h4>
+                    <p>vs 行业45分（-20分），视觉科技感不足，吸引力弱</p>
+                </div>
+                <div class="feature-card disadvantage">
+                    <h4>❌ 权威认证 20%</h4>
+                    <p>vs 行业40%（-20pp），官方背书展示不足，专业度弱</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 05 行业TOP10消耗素材 -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">05</div>
+                <h2 class="section-title">行业 TOP10 消耗素材</h2>
+            </div>
+            <div class="video-grid">
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="nan" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#1 行业素材</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 100.0</span>
+                            <span class="metric">完播: 27.5%</span>
+                            <span class="metric">CTR: 1.36%</span>
+                            <span class="metric">ROI: 2.78</span>
+                        </div>
+                        <span class="quadrant-tag q3">流量</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0bc35ya7oaabkiamh4bb7jvbx3qe67xad52a.f0.mp4?dis_k=4b48eb471b96c8a2af424f3df011db95&dis_t=1780720662&m=a447f0f923328bc6eed489b500017d42&sha256=d74f53c5f05ad51dafa4154c6d467bd49f1da76ccb215e1e4a8b085cd5e0c3ea" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#2 行业素材</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 37.7</span>
+                            <span class="metric">完播: 41.2%</span>
+                            <span class="metric">CTR: 2.78%</span>
+                            <span class="metric">ROI: 1.14</span>
+                        </div>
+                        <span class="quadrant-tag q3">流量</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0b53saarwaabmmacbgyzajvbxeaedoiacg2a.f0.mp4?dis_k=f8304ec8c1aafb20d956f9cfe38390f2&dis_t=1780531143&m=9370b25b781e061ee88d15a3b48738be&sha256=3498fe1e3b38001648b459046db429799dbd4e9ab1445fd54f0e0ee3a14e4c2d" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#3 行业素材</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 37.0</span>
+                            <span class="metric">完播: 62.9%</span>
+                            <span class="metric">CTR: 3.13%</span>
+                            <span class="metric">ROI: 1.91</span>
+                        </div>
+                        <span class="quadrant-tag q1">优质</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0b53cycg2aaee4am7lzsdnvb4fqenulai3ka.f0.mp4?dis_k=4c321c0178627ce5851648e2f7007b24&dis_t=1781965370&m=8dcbd0a95b72c95cf722b0c31993aa46" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#4 行业素材</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 27.1</span>
+                            <span class="metric">完播: 44.0%</span>
+                            <span class="metric">CTR: 1.65%</span>
+                            <span class="metric">ROI: 1.69</span>
+                        </div>
+                        <span class="quadrant-tag q3">流量</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0b53bybdgaacueagdli4trvbsdqegmhaem2a.f0.mp4?dis_k=d38423f0a07fa387dbf176f49f333a11&dis_t=1780561254&m=884d0019e51084aa64b39ea88756dd0e&sha256=3eff9032541b55577ef5d3177b8d8ec7e248ac8a324a9dcd088abbb250aaab50" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#5 行业素材</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 26.4</span>
+                            <span class="metric">完播: 40.0%</span>
+                            <span class="metric">CTR: 2.31%</span>
+                            <span class="metric">ROI: 1.08</span>
+                        </div>
+                        <span class="quadrant-tag q3">流量</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0b53xiaggaaaguab5sqgcrvbxoqemo5aay2a.f0.mp4?dis_k=a18e82492b1400fa010ed24e0d59ae1c&dis_t=1778810289&m=f84f9a8095b21d8d180069888d29b996" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#6 行业素材</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 20.9</span>
+                            <span class="metric">完播: 54.7%</span>
+                            <span class="metric">CTR: 4.62%</span>
+                            <span class="metric">ROI: 1.43</span>
+                        </div>
+                        <span class="quadrant-tag q1">优质</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0bc3hyaxkaab2eab67qrejvbupqeou7ac5ka.f0.mp4?dis_k=aa2781e4bb8f17d14bc16ca67e83ef7c&dis_t=1779980022&m=67c960840d8af04a1ee8444383820838&sha256=da3852470686186fa1abf9b73e2fac342159301e592520d05a7e6a594b537c62" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#7 行业素材</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 20.6</span>
+                            <span class="metric">完播: 48.9%</span>
+                            <span class="metric">CTR: 2.19%</span>
+                            <span class="metric">ROI: 1.06</span>
+                        </div>
+                        <span class="quadrant-tag q1">优质</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0b53bebbmaaceuaby4y7xrvbqciecyeqefsa.f0.mp4?dis_k=ef010c664246813fc6e44daf76d9092f&dis_t=1780288053&m=4725965eb572b71e62f45cbdd8ea0c25" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#8 行业素材</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 17.9</span>
+                            <span class="metric">完播: 48.2%</span>
+                            <span class="metric">CTR: 2.01%</span>
+                            <span class="metric">ROI: 2.06</span>
+                        </div>
+                        <span class="quadrant-tag q1">优质</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0b53nuammaaabmaiw7iodfvbu3ieyzwqbrsa.f0.mp4?dis_k=3c3eb7d783e761cb17282441a78ccbf2&dis_t=1779322351&m=2bff0594154c159261ad3f4dfc231377&sha256=96d3191941f21eb662e7f7aa07eb39d07c2e599cef4d974345169e26bd3a3180" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#9 行业素材</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 17.5</span>
+                            <span class="metric">完播: 14.9%</span>
+                            <span class="metric">CTR: 1.05%</span>
+                            <span class="metric">ROI: 1.59</span>
+                        </div>
+                        <span class="quadrant-tag q3">流量</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0bc3eeadkaaalqaekiyqlbvbwiieguqqanka.f0.mp4?dis_k=d41754d17a4be1be5923e1313360c150&dis_t=1780040954&m=35f4494ab3116a33e2944b5f28f40b25&sha256=ceb60ec7838e52d9e7c47486933ca30054d7cc723c89796e7372f9c4d863781d" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#10 行业素材</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 15.3</span>
+                            <span class="metric">完播: 55.0%</span>
+                            <span class="metric">CTR: 2.65%</span>
+                            <span class="metric">ROI: 1.08</span>
+                        </div>
+                        <span class="quadrant-tag q1">优质</span>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+        
+        <!-- 06 客户TOP10素材 -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">06</div>
+                <h2 class="section-title">玫瑰颂 TOP10 素材</h2>
+            </div>
+            <div class="video-grid">
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0bc3w4cgwaae6eahge6dzzur5nyeno3qi22a.f0.mp4?dis_k=43012bceece54a3e39d596a3f44e27fa&dis_t=1774942994&m=29b11b74c998cc03c16d92e024c271e7&sha256=255f51e0d379ff80ad15d0c026c036536cfa7b52f6e35016956736ba73305c23" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#1 玫瑰颂素材</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 2.4</span>
+                            <span class="metric">完播: 71.7%</span>
+                            <span class="metric">CTR: 2.60%</span>
+                            <span class="metric">ROI: 2.23</span>
+                        </div>
+                        <span class="quadrant-tag q2">潜力</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0b53piaf4aaacqabukykuvvbu6qelz5aaxsa.f0.mp4?dis_k=9423b564879147545754ab51356fa65e&dis_t=1779057782&m=41bbf4accc9ebc51d1b3eebafb4476ab&sha256=f46721b158679fccfa76ef304663108ba93c03e5141b21ebc449d891355a1ec5" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#2 玫瑰颂素材</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 2.1</span>
+                            <span class="metric">完播: 44.2%</span>
+                            <span class="metric">CTR: 2.73%</span>
+                            <span class="metric">ROI: 3.25</span>
+                        </div>
+                        <span class="quadrant-tag q4">待优化</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0b53xeb5eaadsaab7m56szurtoie2k4qhusa.f0.mp4?dis_k=abefe47a16738c3b8eba761206fe36b5&dis_t=1775005261&m=0668a47a2c12c6e12a11c4db706ab8e5&sha256=e6e0e91ae261abbdce30eedc1b5afd1543c28280bcad44559fe63d1de4022006" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#3 玫瑰颂素材</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 1.4</span>
+                            <span class="metric">完播: 49.2%</span>
+                            <span class="metric">CTR: 2.80%</span>
+                            <span class="metric">ROI: 2.87</span>
+                        </div>
+                        <span class="quadrant-tag q2">潜力</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0b53uqaj6aaapuafhzf5sjurvjaet6sabh2a.f0.mp4?dis_k=e155224ff34442ce364dc2b34f4a18fd&dis_t=1775005293&m=caf3a8344ab7bde284c508cfddfc9df7&sha256=baa03e7ca8266c4d92fb2d032264faccc2332451c67357e157957128b6ccc613" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#4 玫瑰颂素材</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 0.8</span>
+                            <span class="metric">完播: 61.8%</span>
+                            <span class="metric">CTR: 2.47%</span>
+                            <span class="metric">ROI: 2.97</span>
+                        </div>
+                        <span class="quadrant-tag q2">潜力</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0bc3kaadoaaaeqac3ezbqbvbuuaeg5iaan2a.f0.mp4?dis_k=fd8dcceaa2cffbb103b17561a3925661&dis_t=1780554555&m=28f34d7e09333947e27b9d6176bcc04c&sha256=4c4087cb2d56b38c76b0f2ac47a01a749897620a9be3f8ea5ab087393b5ce9fd" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#5 玫瑰颂素材</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 0.7</span>
+                            <span class="metric">完播: 17.5%</span>
+                            <span class="metric">CTR: 1.35%</span>
+                            <span class="metric">ROI: 2.40</span>
+                        </div>
+                        <span class="quadrant-tag q4">待优化</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0b53aaavcaablyabf5ypnrvbwaaekeaacuka.f0.mp4?dis_k=1be3e2853c779c3ef47aa5f947550126&dis_t=1779319654&m=cff3343830666c4f5db281a8ddfbaf82" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#6 玫瑰颂素材</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 0.7</span>
+                            <span class="metric">完播: 30.0%</span>
+                            <span class="metric">CTR: 1.20%</span>
+                            <span class="metric">ROI: 2.86</span>
+                        </div>
+                        <span class="quadrant-tag q4">待优化</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0b53mmaa6aaacqabafif2vvbuyyeb5rqad2a.f0.mp4?dis_k=9d0ceedbf632bdb37ae5268a26917ef5&dis_t=1778720659&m=bb014cc7c926da21e960d2fe02c04727&sha256=d57d5d6477cefe2d6c924378a2727dba94ae4b7c4567c88c56f35fc29ebb9446" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#7 玫瑰颂素材</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 0.7</span>
+                            <span class="metric">完播: 43.4%</span>
+                            <span class="metric">CTR: 2.26%</span>
+                            <span class="metric">ROI: 2.40</span>
+                        </div>
+                        <span class="quadrant-tag q4">待优化</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0bc36iazwaabzqajhzebpzurx4qetpzadg2a.f0.mp4?dis_k=b62032f934c0098b9005705e4745f15d&dis_t=1778662505&m=6b3f9221b1b4b5c6ec67caa46bcb8d22&sha256=95765f0acf524b2e92112c4a14627982ec6644dc479f861086a7a813c09a8114" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#8 玫瑰颂素材</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 0.6</span>
+                            <span class="metric">完播: 68.0%</span>
+                            <span class="metric">CTR: 3.66%</span>
+                            <span class="metric">ROI: 3.83</span>
+                        </div>
+                        <span class="quadrant-tag q2">潜力</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0bc3umah6aaaemadxyakwfvbviyep6rqa72a.f0.mp4?dis_k=7f56d26c080834325a9a27ef49971040&dis_t=1779057816&m=f1a5e93903271f9fcde2748e150e501a&sha256=0e481105a52fd1c036e1a5cc35cd2bc8cb660c1a8d558633fcec8eaeafbd71de" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#9 玫瑰颂素材</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 0.4</span>
+                            <span class="metric">完播: 14.1%</span>
+                            <span class="metric">CTR: 0.92%</span>
+                            <span class="metric">ROI: 2.13</span>
+                        </div>
+                        <span class="quadrant-tag q4">待优化</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0bc3zebiwaacleah65jlsjvbrsierpeqfc2a.f0.mp4?dis_k=2c457dec8a826220486fb2231cf86b26&dis_t=1781134497&m=263ad17c06af32144fd44ee11b8f0a0d&sha256=5d27a1995e9971535f4c51c87dd7bf85162ec63818cadbe384598408ec450a58" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#10 玫瑰颂素材</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 0.4</span>
+                            <span class="metric">完播: 34.1%</span>
+                            <span class="metric">CTR: 3.86%</span>
+                            <span class="metric">ROI: 3.04</span>
+                        </div>
+                        <span class="quadrant-tag q4">待优化</span>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+        
+        <!-- 07 行动清单 -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">07</div>
+                <h2 class="section-title">行动清单</h2>
+            </div>
+            <div class="action-grid">
+                <div class="action-column p0">
+                    <h4>🔴 P0 立即执行</h4>
+                    <div class="action-item">优化前3秒Hook设计，提升完播率（当前35.86%，目标45%+）</div>
+                    <div class="action-item">增加明星背书素材（当前0%→目标30%+），借力明星流量破圈</div>
+                    <div class="action-item">补充前后对比展示（当前40%→目标70%+），强化效果可视化</div>
+                </div>
+                <div class="action-column p1">
+                    <h4>🔵 P1 短期优化</h4>
+                    <div class="action-item">增加赠品堆叠素材（当前15%→目标60%+），提升价值感</div>
+                    <div class="action-item">提升AI/3D特效使用（当前25分→目标45+），增强视觉冲击</div>
+                    <div class="action-item">增加权威认证展示（当前20%→目标40%+），提升专业度</div>
+                </div>
+                <div class="action-column p2">
+                    <h4>⚪ P2 中期规划</h4>
+                    <div class="action-item">建立A/B测试机制，持续优化素材结构</div>
+                    <div class="action-item">拓展KOL矩阵，增加内容多样性</div>
+                    <div class="action-item">沉淀高ROI素材模板，规模化复制</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 08 附录·TOP20详情 -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">08</div>
+                <h2 class="section-title">附录·玫瑰颂 TOP20 四象限详情</h2>
+            </div>
+            <div class="video-grid">
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0bc3w4cgwaae6eahge6dzzur5nyeno3qi22a.f0.mp4?dis_k=43012bceece54a3e39d596a3f44e27fa&dis_t=1774942994&m=29b11b74c998cc03c16d92e024c271e7&sha256=255f51e0d379ff80ad15d0c026c036536cfa7b52f6e35016956736ba73305c23" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#1</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 2.4</span>
+                            <span class="metric">完播: 71.7%</span>
+                            <span class="metric">ROI: 2.23</span>
+                        </div>
+                        <span class="quadrant-tag q2">潜力</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0b53piaf4aaacqabukykuvvbu6qelz5aaxsa.f0.mp4?dis_k=9423b564879147545754ab51356fa65e&dis_t=1779057782&m=41bbf4accc9ebc51d1b3eebafb4476ab&sha256=f46721b158679fccfa76ef304663108ba93c03e5141b21ebc449d891355a1ec5" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#2</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 2.1</span>
+                            <span class="metric">完播: 44.2%</span>
+                            <span class="metric">ROI: 3.25</span>
+                        </div>
+                        <span class="quadrant-tag q4">待优化</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0b53xeb5eaadsaab7m56szurtoie2k4qhusa.f0.mp4?dis_k=abefe47a16738c3b8eba761206fe36b5&dis_t=1775005261&m=0668a47a2c12c6e12a11c4db706ab8e5&sha256=e6e0e91ae261abbdce30eedc1b5afd1543c28280bcad44559fe63d1de4022006" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#3</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 1.4</span>
+                            <span class="metric">完播: 49.2%</span>
+                            <span class="metric">ROI: 2.87</span>
+                        </div>
+                        <span class="quadrant-tag q2">潜力</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0b53uqaj6aaapuafhzf5sjurvjaet6sabh2a.f0.mp4?dis_k=e155224ff34442ce364dc2b34f4a18fd&dis_t=1775005293&m=caf3a8344ab7bde284c508cfddfc9df7&sha256=baa03e7ca8266c4d92fb2d032264faccc2332451c67357e157957128b6ccc613" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#4</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 0.8</span>
+                            <span class="metric">完播: 61.8%</span>
+                            <span class="metric">ROI: 2.97</span>
+                        </div>
+                        <span class="quadrant-tag q2">潜力</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0bc3kaadoaaaeqac3ezbqbvbuuaeg5iaan2a.f0.mp4?dis_k=fd8dcceaa2cffbb103b17561a3925661&dis_t=1780554555&m=28f34d7e09333947e27b9d6176bcc04c&sha256=4c4087cb2d56b38c76b0f2ac47a01a749897620a9be3f8ea5ab087393b5ce9fd" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#5</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 0.7</span>
+                            <span class="metric">完播: 17.5%</span>
+                            <span class="metric">ROI: 2.40</span>
+                        </div>
+                        <span class="quadrant-tag q4">待优化</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0b53aaavcaablyabf5ypnrvbwaaekeaacuka.f0.mp4?dis_k=1be3e2853c779c3ef47aa5f947550126&dis_t=1779319654&m=cff3343830666c4f5db281a8ddfbaf82" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#6</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 0.7</span>
+                            <span class="metric">完播: 30.0%</span>
+                            <span class="metric">ROI: 2.86</span>
+                        </div>
+                        <span class="quadrant-tag q4">待优化</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0b53mmaa6aaacqabafif2vvbuyyeb5rqad2a.f0.mp4?dis_k=9d0ceedbf632bdb37ae5268a26917ef5&dis_t=1778720659&m=bb014cc7c926da21e960d2fe02c04727&sha256=d57d5d6477cefe2d6c924378a2727dba94ae4b7c4567c88c56f35fc29ebb9446" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#7</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 0.7</span>
+                            <span class="metric">完播: 43.4%</span>
+                            <span class="metric">ROI: 2.40</span>
+                        </div>
+                        <span class="quadrant-tag q4">待优化</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0bc36iazwaabzqajhzebpzurx4qetpzadg2a.f0.mp4?dis_k=b62032f934c0098b9005705e4745f15d&dis_t=1778662505&m=6b3f9221b1b4b5c6ec67caa46bcb8d22&sha256=95765f0acf524b2e92112c4a14627982ec6644dc479f861086a7a813c09a8114" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#8</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 0.6</span>
+                            <span class="metric">完播: 68.0%</span>
+                            <span class="metric">ROI: 3.83</span>
+                        </div>
+                        <span class="quadrant-tag q2">潜力</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0bc3umah6aaaemadxyakwfvbviyep6rqa72a.f0.mp4?dis_k=7f56d26c080834325a9a27ef49971040&dis_t=1779057816&m=f1a5e93903271f9fcde2748e150e501a&sha256=0e481105a52fd1c036e1a5cc35cd2bc8cb660c1a8d558633fcec8eaeafbd71de" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#9</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 0.4</span>
+                            <span class="metric">完播: 14.1%</span>
+                            <span class="metric">ROI: 2.13</span>
+                        </div>
+                        <span class="quadrant-tag q4">待优化</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0bc3zebiwaacleah65jlsjvbrsierpeqfc2a.f0.mp4?dis_k=2c457dec8a826220486fb2231cf86b26&dis_t=1781134497&m=263ad17c06af32144fd44ee11b8f0a0d&sha256=5d27a1995e9971535f4c51c87dd7bf85162ec63818cadbe384598408ec450a58" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#10</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 0.4</span>
+                            <span class="metric">完播: 34.1%</span>
+                            <span class="metric">ROI: 3.04</span>
+                        </div>
+                        <span class="quadrant-tag q4">待优化</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0bc3wuagiaaa2mam7aah2fvbvniems2qazca.f0.mp4?dis_k=f7ec0d3231cb9ee489698e3a29cc558f&dis_t=1779605871&m=93f7254dbed5f32b9dcfe2fc984d3e25&sha256=fef30e376e418c35314d6b14e9d3e32eb0d388b14af92a556f7a959f63bdd635" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#11</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 0.3</span>
+                            <span class="metric">完播: 27.5%</span>
+                            <span class="metric">ROI: 1.34</span>
+                        </div>
+                        <span class="quadrant-tag q4">待优化</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0b53bqaqqaabviaesqapojvbwdaebagaccca.f0.mp4?dis_k=893025f457986d0dc5af40e9c6dbec19&dis_t=1779319213&m=9b7a7609a9d154e45e8e5adf8e09778b" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#12</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 0.3</span>
+                            <span class="metric">完播: 20.1%</span>
+                            <span class="metric">ROI: 3.06</span>
+                        </div>
+                        <span class="quadrant-tag q4">待优化</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0b53cmarkaabwuafijipm5vbweyecujqcfka.f0.mp4?dis_k=4b170904f61ca8b793b2f4e5c71f2bf6&dis_t=1779319213&m=189aeb7c4d22cc6516a78afdd2878204" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#13</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 0.3</span>
+                            <span class="metric">完播: 28.1%</span>
+                            <span class="metric">ROI: 2.52</span>
+                        </div>
+                        <span class="quadrant-tag q4">待优化</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0b53hqcw2aaffmaej4oz2rur4paenu6ak3ka.f0.mp4?dis_k=eb8a1059cf1388b528056e192bf97363&dis_t=1776036128" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#14</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 0.2</span>
+                            <span class="metric">完播: 56.7%</span>
+                            <span class="metric">ROI: 2.94</span>
+                        </div>
+                        <span class="quadrant-tag q2">潜力</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0bc32yaemaaap4aiumv5mnurvvqei3laarsa.f0.mp4?dis_k=ad774b1a24cdd1c3a264f46930e84b8c&dis_t=1775005292&m=f416423719d050cd52a2571a5fcd8afc&sha256=e53e095359a0b85353257eb5a777865f498806e490baae66b65d07888928c063" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#15</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 0.2</span>
+                            <span class="metric">完播: 19.7%</span>
+                            <span class="metric">ROI: 3.27</span>
+                        </div>
+                        <span class="quadrant-tag q4">待优化</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0b53gya5gaabteacoyizu5vbwnqe2m3adu2a.f0.mp4?dis_k=b7113d2fb0519c032617b578099c40b9&dis_t=1780020406&m=605ab61cdb179f54d27fd9cc2fda722c&sha256=f8c9e09fa2abc6b1fc830c27720c6e2f89689a5163172edfd3e60cbaebf99e11" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#16</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 0.2</span>
+                            <span class="metric">完播: 23.7%</span>
+                            <span class="metric">ROI: 2.20</span>
+                        </div>
+                        <span class="quadrant-tag q4">待优化</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0bc3aqaqqaab7malmdyowbvbwbaebacaccca.f0.mp4?dis_k=2c7fea946e92176f9a1c8f195e6eae3f&dis_t=1779849263&m=40f68616c82cccbb65655c1e4f376c02&sha256=c1ff0d8a0124c85315ee3eef4799d66b258977cdbe846ed5d97dc0fc358282a8" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#17</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 0.2</span>
+                            <span class="metric">完播: 19.4%</span>
+                            <span class="metric">ROI: 2.32</span>
+                        </div>
+                        <span class="quadrant-tag q4">待优化</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0bc3jqabeaaafiaf6477jrurutaecjgaaesa.f0.mp4?dis_k=62e0723b5ca771963407d0dcf4bfb419&dis_t=1778339183&m=a8fabb58bab79cbcf9e0bbd41ba06215" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#18</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 0.2</span>
+                            <span class="metric">完播: 29.2%</span>
+                            <span class="metric">ROI: 2.82</span>
+                        </div>
+                        <span class="quadrant-tag q4">待优化</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0b53iubdmaacqqac7brd5zvbqriegzcqensa.f0.mp4?dis_k=bb3dd47f4e9bfbba71b75358360d753b&dis_t=1780554184&m=3b7618b29a9094dfcfc669ef64559805" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#19</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 0.2</span>
+                            <span class="metric">完播: 21.9%</span>
+                            <span class="metric">ROI: 2.39</span>
+                        </div>
+                        <span class="quadrant-tag q4">待优化</span>
+                    </div>
+                </div>
+    
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="http://adsmind.gdtimg.com/ads_svp_video__0bc37mahuaaacuahkvkdnjvbv6yepl5qa6sa.f0.mp4?dis_k=e51c088075fd33dfaea5bdaebe5f42d9&dis_t=1782779896&m=db392269d0bcde537f3b5bebf39af1ce&sha256=b2818f952a754e10144be0f0486db8e42043b3d35d69fdfcfa854cc87fbd81fc" preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>
+                    </div>
+                    <div class="video-info">
+                        <div style="font-weight: 600; margin-bottom: 8px;">#20</div>
+                        <div class="metrics">
+                            <span class="metric">消耗指数: 0.1</span>
+                            <span class="metric">完播: 37.0%</span>
+                            <span class="metric">ROI: 0.88</span>
+                        </div>
+                        <span class="quadrant-tag q4">待优化</span>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>玫瑰颂 · 素材诊断报告 · 脱敏版</p>
+        <p>生成日期: 2026-07-28</p>
+    </div>
+    
+    <script>
+        // 全局变量
+        var radarChart, scatterChart, labelChart, styleRadarChart;
+        var scatterData = {
+            industry: [[27.53, 8.19], [41.21, 3.09], [62.91, 3.03], [43.98, 2.22], [39.97, 2.17], [54.66, 1.71], [48.92, 1.69], [48.25, 1.46], [14.86, 1.43], [55.03, 1.25]],
+            client: [[71.68, 0.19], [44.18, 0.17], [49.23, 0.11], [61.80, 0.06], [17.53, 0.06], [29.96, 0.06], [43.35, 0.06], [68.01, 0.05], [14.07, 0.03], [34.14, 0.03], [27.49, 0.03], [20.06, 0.02], [28.11, 0.02], [56.69, 0.02], [19.66, 0.02], [23.72, 0.02], [19.43, 0.02], [29.20, 0.02], [21.95, 0.02], [36.99, 0.01]]
+        };
+        
+        // 切换散点图
+        function switchScatter(type, evt) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            if (evt && evt.target) {
+                evt.target.classList.add('active');
+            } else {
+                document.querySelector('.tab-btn').classList.add('active');
+            }
+            
+            var series = [];
+            if (type === 'industry') {
+                series = [{ name: '行业TOP100', type: 'scatter', symbolSize: 12, data: scatterData.industry, itemStyle: { color: '#9CA3AF' } }];
+            } else if (type === 'client') {
+                series = [{ name: '玫瑰颂TOP20', type: 'scatter', symbolSize: 12, data: scatterData.client, itemStyle: { color: '#D93B3B' } }];
+            } else {
+                series = [
+                    { name: '行业TOP100', type: 'scatter', symbolSize: 10, data: scatterData.industry, itemStyle: { color: '#9CA3AF' } },
+                    { name: '玫瑰颂TOP20', type: 'scatter', symbolSize: 12, data: scatterData.client, itemStyle: { color: '#D93B3B' } }
+                ];
+            }
+            
+            scatterChart.setOption({
+                tooltip: { trigger: 'item', formatter: function(p) { return p.seriesName + '<br/>3s完播率: ' + p.data[0].toFixed(1) + '%<br/>消耗指数: ' + p.data[1].toFixed(2); } },
+                legend: { data: series.map(s => s.name), bottom: 0 },
+                grid: { left: '10%', right: '10%', bottom: '15%', top: '10%', containLabel: true },
+                xAxis: { type: 'value', name: '3s完播率(%)', min: 0, max: 80, splitLine: { show: true } },
+                yAxis: { type: 'log', name: '消耗指数', min: 0.01, max: 10, splitLine: { show: true } },
+                series: series
+            }, true);
+        }
+        
+        // 页面加载完成后初始化所有图表
+        window.onload = function() {
+            // 五维雷达图
+            radarChart = echarts.init(document.getElementById('radarChart'));
+            radarChart.setOption({
+                color: ['#D93B3B', '#9CA3AF'],
+                legend: { data: ['玫瑰颂', '行业均值'], bottom: 0 },
+                radar: {
+                    indicator: [
+                        { name: '消耗规模', max: 100 },
+                        { name: '3s完播率', max: 100 },
+                        { name: 'CTR', max: 100 },
+                        { name: '下单率', max: 100 },
+                        { name: 'ROI', max: 100 }
+                    ]
+                },
+                series: [{
+                    type: 'radar',
+                    data: [
+                        { value: [3, 39, 48, 46, 80], name: '玫瑰颂', areaStyle: { opacity: 0.3 } },
+                        { value: [50, 50, 50, 50, 50], name: '行业均值', areaStyle: { opacity: 0.1 } }
+                    ]
+                }]
+            });
+            
+            // 四象限散点图
+            scatterChart = echarts.init(document.getElementById('scatterChart'));
+            switchScatter('industry');
+            
+            // 内容标签柱状图
+            labelChart = echarts.init(document.getElementById('labelChart'));
+            labelChart.setOption({
+                color: ['#D93B3B', '#9CA3AF'],
+                tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+                legend: { data: ['玫瑰颂', '行业TOP100'], bottom: 0 },
+                grid: { left: '3%', right: '4%', bottom: '15%', top: '10%', containLabel: true },
+                xAxis: { type: 'category', data: ['KOL背书', '产品展示', '场景演示', '痛点放大', '价格锚点', '明星背书', '权威认证', '赠品堆叠', '前后对比', '用户证言'], axisLabel: { rotate: 30 } },
+                yAxis: { type: 'value', max: 100, axisLabel: { formatter: '{value}%' } },
+                series: [
+                    { name: '玫瑰颂', type: 'bar', barGap: '10%', data: [85, 100, 75, 80, 60, 0, 20, 15, 40, 30] },
+                    { name: '行业TOP100', type: 'bar', data: [45, 95, 60, 70, 78, 65, 40, 85, 90, 72] }
+                ]
+            });
+            
+            // 剪辑风格雷达图
+            styleRadarChart = echarts.init(document.getElementById('styleRadarChart'));
+            styleRadarChart.setOption({
+                color: ['#D93B3B', '#9CA3AF'],
+                legend: { data: ['玫瑰颂', '行业均值'], bottom: 0 },
+                radar: {
+                    indicator: [
+                        { name: '镜头切换', max: 100 },
+                        { name: '字幕大字报', max: 100 },
+                        { name: '花字特效', max: 100 },
+                        { name: 'AI/3D特效', max: 100 },
+                        { name: '信息密度', max: 100 }
+                    ]
+                },
+                series: [{
+                    type: 'radar',
+                    data: [
+                        { value: [75, 80, 60, 25, 85], name: '玫瑰颂', areaStyle: { opacity: 0.3 } },
+                        { value: [85, 90, 80, 45, 85], name: '行业均值', areaStyle: { opacity: 0.1 } }
+                    ]
+                }]
+            });
+            
+            // 窗口resize事件
+            window.addEventListener('resize', function() {
+                radarChart && radarChart.resize();
+                scatterChart && scatterChart.resize();
+                labelChart && labelChart.resize();
+                styleRadarChart && styleRadarChart.resize();
+            });
+        };
+    </script>
+</body>
+</html>
