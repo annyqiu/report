@@ -38,7 +38,8 @@ h1{font-size:28px; font-weight:700;}
 .kpi .dv{font-size:10.5px; color:var(--muted);}
 .insight{display:flex; align-items:flex-start; gap:9px; background:#fff7ec; border:1px solid #ffe3c2; border-left:3px solid var(--white); border-radius:8px; padding:9px 13px; font-size:13px; line-height:1.6; color:#4a3f2a;}
 .insight-tag{flex:none; font-size:11px; font-weight:700; color:#fff; background:var(--white); border-radius:5px; padding:2px 8px; letter-spacing:1px; margin-top:1px;}
-.zhuge{font-size:12.5px; line-height:1.6; color:#3c385a; background:#f4f1fe; border-left:3px solid var(--brand); border-radius:8px; padding:9px 13px; margin-top:2px;}
+.zhuge{display:flex; align-items:flex-start; gap:9px; font-size:12.5px; line-height:1.6; color:#3c385a; background:#f4f1fe; border-left:3px solid var(--brand); border-radius:8px; padding:9px 13px; margin-top:2px;}
+.zhuge-tag{flex:none; font-size:11px; font-weight:700; color:#fff; background:var(--brand); border-radius:5px; padding:2px 8px; letter-spacing:1px; margin-top:1px;}
 .infra{display:flex; flex-direction:column; gap:8px;}
 .ir{display:flex; align-items:center; justify-content:space-between; background:#faf9ff; border-radius:10px; padding:10px 14px;}
 .ir-name{font-size:13px; font-weight:700; color:#3c385a;}
@@ -117,8 +118,6 @@ h1{font-size:28px; font-weight:700;}
       <div class="metrics"><div class="m"><div class="m-name">CTR<span class="m-tip">点击率</span></div><div class="m-main">2.93%</div><div class="m-sub"><span>3.61%</span> <span class="chg down">-18.8%</span></div></div><div class="m"><div class="m-name">CVR<span class="m-tip">下单率</span></div><div class="m-main">2.17%</div><div class="m-sub"><span>2.16%</span> <span class="chg up">+0.3%</span></div></div><div class="m"><div class="m-name">出价<span class="m-tip">目标出价</span></div><div class="m-main">306.4元</div><div class="m-sub"><span>307.5元</span> <span class="chg down">-0.4%</span></div></div><div class="m"><div class="m-name">下单单价<span class="m-tip">客单价</span></div><div class="m-main">710.0元</div><div class="m-sub"><span>484.8元</span> <span class="chg up">+46.5%</span></div></div><div class="m"><div class="m-name">ROI<span class="m-tip">下单ROI</span></div><div class="m-main">1.69</div><div class="m-sub"><span>1.37</span> <span class="chg up">+23.1%</span></div></div></div>
       <div class="sec-label">七夕关键运营动作</div>
       <div class="acts"><div class="act"><span class="act-k">明星</span><span class="act-v">1个明星</span></div><div class="act"><span class="act-k">主播形式</span><span class="act-v">TOP主播</span></div><div class="act"><span class="act-k">七夕组货</span><span class="act-v">是</span></div><div class="act"><span class="act-k">组货类型</span><span class="act-v">双SKU囤货装（日常价SKU+囤货装SKU）</span></div><div class="act"><span class="act-k">七夕装修</span><span class="act-v">是</span></div></div>
-      <div class="sec-label">组货策略小结</div>
-      <div class="zhuge">双SKU囤货装，12g装1瓶259元，108g囤货装拍大加赠1960元</div>
       <div class="sec-label">素材案例</div>
       <div class="media-case">
         <div class="media-item" data-case="1">
@@ -139,6 +138,7 @@ h1{font-size:28px; font-weight:700;}
         <div class="live-col">
           <div class="live-box" data-case="1" data-slot="组货截图"><img src="assets/郑明明-组货截图.jpg" alt="郑明明 直播间组货截图"></div>
           <div class="live-cap">直播间组货截图</div>
+          <div class="live-desc">双SKU囤货装，12g1瓶259元，108g囤货装拍大加赠1960元</div>
         </div>
       </div>
     </div>
@@ -158,8 +158,6 @@ h1{font-size:28px; font-weight:700;}
       <div class="metrics"><div class="m"><div class="m-name">CTR<span class="m-tip">点击率</span></div><div class="m-main">2.27%</div><div class="m-sub"><span>2.27%</span> <span class="chg flat">+0.0%</span></div></div><div class="m"><div class="m-name">CVR<span class="m-tip">下单率</span></div><div class="m-main">6.67%</div><div class="m-sub"><span>4.97%</span> <span class="chg up">+34.3%</span></div></div><div class="m"><div class="m-name">出价<span class="m-tip">目标出价</span></div><div class="m-main">48.5元</div><div class="m-sub"><span>49.4元</span> <span class="chg down">-1.7%</span></div></div><div class="m"><div class="m-name">下单单价<span class="m-tip">客单价</span></div><div class="m-main">60.2元</div><div class="m-sub"><span>60.2元</span> <span class="chg down">-0.1%</span></div></div><div class="m"><div class="m-name">ROI<span class="m-tip">下单ROI</span></div><div class="m-main">1.03</div><div class="m-sub"><span>1.04</span> <span class="chg down">-0.7%</span></div></div></div>
       <div class="sec-label">七夕关键运营动作</div>
       <div class="acts"><div class="act"><span class="act-k">明星</span><span class="act-v">目前无也没谈</span></div><div class="act"><span class="act-k">主播形式</span><span class="act-v">普通主播</span></div><div class="act"><span class="act-k">七夕组货</span><span class="act-v">是</span></div><div class="act"><span class="act-k">组货类型</span><span class="act-v">日常价+七夕限时加赠品</span></div><div class="act"><span class="act-k">七夕装修</span><span class="act-v">是</span></div></div>
-      <div class="sec-label">组货策略小结</div>
-      <div class="zhuge">日常价+七夕限时价赠品，59.9元拍1发4→拍1发5（3正装+2赠品）</div>
       <div class="sec-label">素材案例</div>
       <div class="media-case">
         <div class="media-item" data-case="2">
@@ -180,6 +178,7 @@ h1{font-size:28px; font-weight:700;}
         <div class="live-col">
           <div class="live-box" data-case="2" data-slot="组货截图"><img src="assets/抖嘉-组货截图.jpg" alt="抖嘉 直播间组货截图"></div>
           <div class="live-cap">直播间组货截图</div>
+          <div class="live-desc">日常价+七夕限时价赠品，59.9元拍1发4→拍1发5（3正装+2赠品）</div>
         </div>
       </div>
     </div>
@@ -199,8 +198,6 @@ h1{font-size:28px; font-weight:700;}
       <div class="metrics"><div class="m"><div class="m-name">CTR<span class="m-tip">点击率</span></div><div class="m-main">1.72%</div><div class="m-sub"><span>1.66%</span> <span class="chg up">+3.4%</span></div></div><div class="m"><div class="m-name">CVR<span class="m-tip">下单率</span></div><div class="m-main">3.28%</div><div class="m-sub"><span>3.37%</span> <span class="chg down">-2.9%</span></div></div><div class="m"><div class="m-name">出价<span class="m-tip">目标出价</span></div><div class="m-main">241.1元</div><div class="m-sub"><span>154.0元</span> <span class="chg up">+56.6%</span></div></div><div class="m"><div class="m-name">下单单价<span class="m-tip">客单价</span></div><div class="m-main">536.6元</div><div class="m-sub"><span>332.9元</span> <span class="chg up">+61.2%</span></div></div><div class="m"><div class="m-name">ROI<span class="m-tip">下单ROI</span></div><div class="m-main">2.39</div><div class="m-sub"><span>1.99</span> <span class="chg up">+20.1%</span></div></div></div>
       <div class="sec-label">七夕关键运营动作</div>
       <div class="acts"><div class="act"><span class="act-k">明星</span><span class="act-v">目前无但在谈</span></div><div class="act"><span class="act-k">主播形式</span><span class="act-v">TOP主播,IP主播本人进播</span></div><div class="act"><span class="act-k">七夕组货</span><span class="act-v">是</span></div><div class="act"><span class="act-k">组货类型</span><span class="act-v">双SKU囤货装（日常价SKU+囤货装SKU）</span></div><div class="act"><span class="act-k">七夕装修</span><span class="act-v">是</span></div></div>
-      <div class="sec-label">组货策略小结</div>
-      <div class="zhuge">双SKU囤货装，日常299，大促增加598囤货装+全店满赠</div>
       <div class="sec-label">素材案例</div>
       <div class="media-case">
         <div class="media-item" data-case="3">
@@ -221,6 +218,7 @@ h1{font-size:28px; font-weight:700;}
         <div class="live-col">
           <div class="live-box" data-case="3" data-slot="组货截图"><img src="assets/必扬-组货截图.jpg" alt="必扬 直播间组货截图"></div>
           <div class="live-cap">直播间组货截图</div>
+          <div class="live-desc">双SKU囤货装，日常299，大促增加598囤货装+全店满赠</div>
         </div>
       </div>
     </div>
@@ -240,8 +238,6 @@ h1{font-size:28px; font-weight:700;}
       <div class="metrics"><div class="m"><div class="m-name">CTR<span class="m-tip">点击率</span></div><div class="m-main">1.53%</div><div class="m-sub"><span>0.97%</span> <span class="chg up">+57.7%</span></div></div><div class="m"><div class="m-name">CVR<span class="m-tip">下单率</span></div><div class="m-main">4.13%</div><div class="m-sub"><span>6.66%</span> <span class="chg down">-38.0%</span></div></div><div class="m"><div class="m-name">出价<span class="m-tip">目标出价</span></div><div class="m-main">101.7元</div><div class="m-sub"><span>114.9元</span> <span class="chg down">-11.5%</span></div></div><div class="m"><div class="m-name">下单单价<span class="m-tip">客单价</span></div><div class="m-main">241.0元</div><div class="m-sub"><span>201.3元</span> <span class="chg up">+19.7%</span></div></div><div class="m"><div class="m-name">ROI<span class="m-tip">下单ROI</span></div><div class="m-main">1.83</div><div class="m-sub"><span>1.43</span> <span class="chg up">+27.9%</span></div></div></div>
       <div class="sec-label">七夕关键运营动作</div>
       <div class="acts"><div class="act"><span class="act-k">明星</span><span class="act-v">2个明星</span></div><div class="act"><span class="act-k">主播形式</span><span class="act-v">TOP主播,总裁进播</span></div><div class="act"><span class="act-k">七夕组货</span><span class="act-v">是</span></div><div class="act"><span class="act-k">组货类型</span><span class="act-v">日常价+七夕限时加赠品</span></div><div class="act"><span class="act-k">七夕装修</span><span class="act-v">是</span></div></div>
-      <div class="sec-label">组货策略小结</div>
-      <div class="zhuge">日常价+七夕限时赠品，加赠化妆包</div>
       <div class="sec-label">素材案例</div>
       <div class="media-case">
         <div class="media-item" data-case="4">
@@ -262,6 +258,7 @@ h1{font-size:28px; font-weight:700;}
         <div class="live-col">
           <div class="live-box" data-case="4" data-slot="组货截图"><img src="assets/花西子-组货截图.jpg" alt="花西子 直播间组货截图"></div>
           <div class="live-cap">直播间组货截图</div>
+          <div class="live-desc">日常价+七夕限时赠品，加赠化妆包</div>
         </div>
       </div>
     </div>
@@ -281,8 +278,6 @@ h1{font-size:28px; font-weight:700;}
       <div class="metrics"><div class="m"><div class="m-name">CTR<span class="m-tip">点击率</span></div><div class="m-main">2.55%</div><div class="m-sub"><span>2.66%</span> <span class="chg down">-3.9%</span></div></div><div class="m"><div class="m-name">CVR<span class="m-tip">下单率</span></div><div class="m-main">2.69%</div><div class="m-sub"><span>3.54%</span> <span class="chg down">-23.9%</span></div></div><div class="m"><div class="m-name">出价<span class="m-tip">目标出价</span></div><div class="m-main">204.4元</div><div class="m-sub"><span>240.0元</span> <span class="chg down">-14.8%</span></div></div><div class="m"><div class="m-name">下单单价<span class="m-tip">客单价</span></div><div class="m-main">375.8元</div><div class="m-sub"><span>253.7元</span> <span class="chg up">+48.1%</span></div></div><div class="m"><div class="m-name">ROI<span class="m-tip">下单ROI</span></div><div class="m-main">1.71</div><div class="m-sub"><span>1.42</span> <span class="chg up">+19.9%</span></div></div></div>
       <div class="sec-label">七夕关键运营动作</div>
       <div class="acts"><div class="act"><span class="act-k">明星</span><span class="act-v">目前无但在谈</span></div><div class="act"><span class="act-k">主播形式</span><span class="act-v">TOP主播</span></div><div class="act"><span class="act-k">七夕组货</span><span class="act-v">是</span></div><div class="act"><span class="act-k">组货类型</span><span class="act-v">双SKU囤货装（日常价SKU+囤货装SKU）</span></div><div class="act"><span class="act-k">七夕装修</span><span class="act-v">是</span></div></div>
-      <div class="sec-label">组货策略小结</div>
-      <div class="zhuge">双SKU囤货装，日常399，大促增加699囤货装</div>
       <div class="sec-label">素材案例</div>
       <div class="media-case">
         <div class="media-item" data-case="5">
@@ -303,6 +298,7 @@ h1{font-size:28px; font-weight:700;}
         <div class="live-col">
           <div class="live-box" data-case="5" data-slot="组货截图"><img src="assets/拾伍-组货截图.jpg" alt="拾伍 直播间组货截图"></div>
           <div class="live-cap">直播间组货截图</div>
+          <div class="live-desc">双SKU囤货装，日常399，大促增加699囤货装</div>
         </div>
       </div>
     </div>
@@ -322,8 +318,6 @@ h1{font-size:28px; font-weight:700;}
       <div class="metrics"><div class="m"><div class="m-name">CTR<span class="m-tip">点击率</span></div><div class="m-main">2.37%</div><div class="m-sub"><span>1.96%</span> <span class="chg up">+20.7%</span></div></div><div class="m"><div class="m-name">CVR<span class="m-tip">下单率</span></div><div class="m-main">3.52%</div><div class="m-sub"><span>8.12%</span> <span class="chg down">-56.6%</span></div></div><div class="m"><div class="m-name">出价<span class="m-tip">目标出价</span></div><div class="m-main">113.6元</div><div class="m-sub"><span>85.1元</span> <span class="chg up">+33.5%</span></div></div><div class="m"><div class="m-name">下单单价<span class="m-tip">客单价</span></div><div class="m-main">179.9元</div><div class="m-sub"><span>104.0元</span> <span class="chg up">+73.1%</span></div></div><div class="m"><div class="m-name">ROI<span class="m-tip">下单ROI</span></div><div class="m-main">1.79</div><div class="m-sub"><span>1.51</span> <span class="chg up">+18.3%</span></div></div></div>
       <div class="sec-label">七夕关键运营动作</div>
       <div class="acts"><div class="act"><span class="act-k">明星</span><span class="act-v">≥3个明星</span></div><div class="act"><span class="act-k">主播形式</span><span class="act-v">IP主播本人进播,总裁进播</span></div><div class="act"><span class="act-k">七夕组货</span><span class="act-v">是</span></div><div class="act"><span class="act-k">组货类型</span><span class="act-v">七夕特供礼盒or套装</span></div><div class="act"><span class="act-k">七夕装修</span><span class="act-v">是</span></div></div>
-      <div class="sec-label">组货策略小结</div>
-      <div class="zhuge">七夕特供礼盒</div>
       <div class="sec-label">素材案例</div>
       <div class="media-case">
         <div class="media-item" data-case="6">
@@ -344,6 +338,7 @@ h1{font-size:28px; font-weight:700;}
         <div class="live-col">
           <div class="live-box" data-case="6" data-slot="组货截图"><img src="assets/百雀羚-组货截图.jpg" alt="百雀羚 直播间组货截图"></div>
           <div class="live-cap">直播间组货截图</div>
+          <div class="live-desc">七夕特供礼盒</div>
         </div>
       </div>
     </div>
@@ -363,8 +358,6 @@ h1{font-size:28px; font-weight:700;}
       <div class="metrics"><div class="m"><div class="m-name">CTR<span class="m-tip">点击率</span></div><div class="m-main">2.24%</div><div class="m-sub"><span>2.10%</span> <span class="chg up">+6.5%</span></div></div><div class="m"><div class="m-name">CVR<span class="m-tip">下单率</span></div><div class="m-main">7.09%</div><div class="m-sub"><span>7.08%</span> <span class="chg up">+0.2%</span></div></div><div class="m"><div class="m-name">出价<span class="m-tip">目标出价</span></div><div class="m-main">146.8元</div><div class="m-sub"><span>127.2元</span> <span class="chg up">+15.4%</span></div></div><div class="m"><div class="m-name">下单单价<span class="m-tip">客单价</span></div><div class="m-main">292.1元</div><div class="m-sub"><span>285.2元</span> <span class="chg up">+2.4%</span></div></div><div class="m"><div class="m-name">ROI<span class="m-tip">下单ROI</span></div><div class="m-main">2.07</div><div class="m-sub"><span>1.93</span> <span class="chg up">+6.9%</span></div></div></div>
       <div class="sec-label">七夕关键运营动作</div>
       <div class="acts"><div class="act"><span class="act-k">明星</span><span class="act-v">≥3个明星</span></div><div class="act"><span class="act-k">主播形式</span><span class="act-v">TOP主播,总裁进播,达人直播</span></div><div class="act"><span class="act-k">七夕组货</span><span class="act-v">是</span></div><div class="act"><span class="act-k">组货类型</span><span class="act-v">七夕特供礼盒or套装</span></div><div class="act"><span class="act-k">七夕装修</span><span class="act-v">是</span></div></div>
-      <div class="sec-label">组货策略小结</div>
-      <div class="zhuge">七夕特供礼盒</div>
       <div class="sec-label">素材案例</div>
       <div class="media-case">
         <div class="media-item" data-case="7">
@@ -385,6 +378,7 @@ h1{font-size:28px; font-weight:700;}
         <div class="live-col">
           <div class="live-box" data-case="7" data-slot="组货截图"><img src="assets/谷雨-组货截图.jpg" alt="谷雨 直播间组货截图"></div>
           <div class="live-cap">直播间组货截图</div>
+          <div class="live-desc">七夕特供礼盒</div>
         </div>
       </div>
     </div>
@@ -404,8 +398,6 @@ h1{font-size:28px; font-weight:700;}
       <div class="metrics"><div class="m"><div class="m-name">CTR<span class="m-tip">点击率</span></div><div class="m-main">1.93%</div><div class="m-sub"><span>2.91%</span> <span class="chg down">-33.6%</span></div></div><div class="m"><div class="m-name">CVR<span class="m-tip">下单率</span></div><div class="m-main">10.87%</div><div class="m-sub"><span>6.78%</span> <span class="chg up">+60.4%</span></div></div><div class="m"><div class="m-name">出价<span class="m-tip">目标出价</span></div><div class="m-main">76.7元</div><div class="m-sub"><span>62.3元</span> <span class="chg up">+22.9%</span></div></div><div class="m"><div class="m-name">下单单价<span class="m-tip">客单价</span></div><div class="m-main">97.5元</div><div class="m-sub"><span>77.2元</span> <span class="chg up">+26.3%</span></div></div><div class="m"><div class="m-name">ROI<span class="m-tip">下单ROI</span></div><div class="m-main">2.22</div><div class="m-sub"><span>2.08</span> <span class="chg up">+6.8%</span></div></div></div>
       <div class="sec-label">七夕关键运营动作</div>
       <div class="acts"><div class="act"><span class="act-k">明星</span><span class="act-v">≥3个明星</span></div><div class="act"><span class="act-k">主播形式</span><span class="act-v">总裁进播</span></div><div class="act"><span class="act-k">七夕组货</span><span class="act-v">是</span></div><div class="act"><span class="act-k">组货类型</span><span class="act-v">七夕特供礼盒or套装</span></div><div class="act"><span class="act-k">七夕装修</span><span class="act-v">是</span></div></div>
-      <div class="sec-label">组货策略小结</div>
-      <div class="zhuge">七夕特供礼盒</div>
       <div class="sec-label">素材案例</div>
       <div class="media-case">
         <div class="media-item" data-case="8">
@@ -426,6 +418,7 @@ h1{font-size:28px; font-weight:700;}
         <div class="live-col">
           <div class="live-box" data-case="8" data-slot="组货截图"><img src="assets/自然堂-组货截图.jpg" alt="自然堂 直播间组货截图"></div>
           <div class="live-cap">直播间组货截图</div>
+          <div class="live-desc">七夕特供礼盒</div>
         </div>
       </div>
     </div>
