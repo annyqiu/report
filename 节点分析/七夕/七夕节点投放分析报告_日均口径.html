@@ -102,12 +102,17 @@ tbody tr:hover{background:#faf9ff;}
       <h2><span class="num">1</span>核心增长客群与链路<span class="tag">日均口径</span></h2>
       <div class="desc">分别按「校正客群」「行一客群」两套口径测算，并拆解「商品消费链路」维度，识别节点放量的核心增长来源。均为日均消耗。</div>
       <div class="insight"><b>结论：</b>
+        <div style="margin:6px 0 4px;"><b>① 分链路结论：</b></div>
         <ul>
           <li><b>直播</b>是绝对主力链路，两期日均消耗均超 430 万，日均增量 +102.6 万、增幅 +23.5%，贡献约 <b>59%</b> 的节点日均增量。</li>
           <li><b>加粉</b>链路增幅最快（+92.3%，日均 33.2→63.8 万），是节点期间最激进的获客抓手，但其 ROI 仅 0.26，属「烧钱换粉」策略。</li>
           <li><b>小店</b>链路稳健放量（+38.3%），ROI 达 2.03，是「质效双优」的增量来源。</li>
           <li><b>CID、直购</b>逆势下滑（−9.4%、−4.1%），受节点直播/小店分流影响。</li>
-          <li>客群口径上，<b>白牌</b>无论哪种口径都是日均增量的绝对贡献者（校正口径增量 96.7 万 &gt; 品牌 78 万），但增速上「行一口径」下品牌明显领先（+42.4% vs +16.3%），详见分析 3。</li>
+        </ul>
+        <div style="margin:6px 0 4px;"><b>② 分客群结论：</b></div>
+        <ul>
+          <li><b>校正口径下白牌是日均增量主力</b>（白牌 +96.7 万 vs 品牌 +78.0 万），但<b>行一口径下品牌已反超</b>（品牌 +112.5 万 vs 白牌 +62.2 万）——品牌节点放量更猛。</li>
+          <li>但从增速看品牌全面领先：<b>行一口径品牌 +42.4% vs 白牌 +16.3%</b>，校正口径品牌 +34.5% vs 白牌 +23.0%——<span class="hl">品牌靠「提价 + 组货」实现高增长，白牌主要靠「走量 + 加粉」</span>，详见分析 3。</li>
         </ul>
       </div>
       <div class="grid3" style="grid-template-columns: 1fr 1fr 1.6fr;">
@@ -319,23 +324,23 @@ function init(){
   chart('c1',{tooltip:{trigger:'axis'},legend:{data:['平销期日均','七夕期日均','增幅'],top:0,left:0,textStyle:{fontSize:11}},grid:{left:55,right:20,top:48,bottom:30},
     xAxis:{type:'category',data:k1.map(x=>x.客群),axisTick:{alignWithLabel:true}},yAxis:{type:'value',name:'日均消耗(万)',nameLocation:'middle',nameGap:32},
     series:[
-      {name:'平销期日均',type:'bar',data:k1.map(x=>x.平销期日均消耗),itemStyle:{color:'#c9c2f0'},barWidth:28,barGap:'30%'},
-      {name:'七夕期日均',type:'bar',data:k1.map(x=>x.七夕日均消耗),itemStyle:{color:BRAND},barWidth:28},
+      {name:'平销期日均',type:'bar',data:k1.map(x=>x.平销期日均消耗),itemStyle:{color:'#c9c2f0'},barWidth:28,barGap:'30%',label:{show:true,position:'top',fontSize:11,formatter:function(p){return p.value.toFixed(0);}}},
+      {name:'七夕期日均',type:'bar',data:k1.map(x=>x.七夕日均消耗),itemStyle:{color:BRAND},barWidth:28,label:{show:true,position:'top',fontSize:11,formatter:function(p){return p.value.toFixed(0);}}},
       {name:'增幅',type:'line',data:k1.map(x=>x['增幅%']),lineStyle:{color:UP,width:2},itemStyle:{color:UP},label:{show:true,formatter:function(p){return pct(p.value);}}}
     ]});
   chart('c2',{tooltip:{trigger:'axis'},legend:{data:['平销期日均','七夕期日均','增幅'],top:0,left:0,textStyle:{fontSize:11}},grid:{left:55,right:20,top:48,bottom:30},
     xAxis:{type:'category',data:k2.map(x=>x.客群),axisTick:{alignWithLabel:true}},yAxis:{type:'value',name:'日均消耗(万)',nameLocation:'middle',nameGap:32},
     series:[
-      {name:'平销期日均',type:'bar',data:k2.map(x=>x.平销期日均消耗),itemStyle:{color:'#c9c2f0'},barWidth:28,barGap:'30%'},
-      {name:'七夕期日均',type:'bar',data:k2.map(x=>x.七夕日均消耗),itemStyle:{color:BRAND},barWidth:28},
+      {name:'平销期日均',type:'bar',data:k2.map(x=>x.平销期日均消耗),itemStyle:{color:'#c9c2f0'},barWidth:28,barGap:'30%',label:{show:true,position:'top',fontSize:11,formatter:function(p){return p.value.toFixed(0);}}},
+      {name:'七夕期日均',type:'bar',data:k2.map(x=>x.七夕日均消耗),itemStyle:{color:BRAND},barWidth:28,label:{show:true,position:'top',fontSize:11,formatter:function(p){return p.value.toFixed(0);}}},
       {name:'增幅',type:'line',data:k2.map(x=>x['增幅%']),lineStyle:{color:UP,width:2},itemStyle:{color:UP},label:{show:true,formatter:function(p){return pct(p.value);}}}
     ]});
   var lk=A1['链路'];
   chart('c3',{tooltip:{trigger:'axis'},legend:{data:['平销期日均','七夕期日均','增幅'],top:0,left:0,textStyle:{fontSize:11}},grid:{left:55,right:55,top:48,bottom:30},
     xAxis:{type:'category',data:lk.map(x=>x.链路),axisTick:{alignWithLabel:true}},yAxis:[{type:'value',name:'日均消耗(万)',nameLocation:'middle',nameGap:32},{type:'value',name:'增幅%',nameLocation:'middle',nameGap:32,splitLine:{show:false}}],
     series:[
-      {name:'平销期日均',type:'bar',data:lk.map(x=>x.平销期日均消耗),itemStyle:{color:'#c9c2f0'},barWidth:18,barGap:'25%'},
-      {name:'七夕期日均',type:'bar',data:lk.map(x=>x.七夕日均消耗),itemStyle:{color:BRAND},barWidth:18},
+      {name:'平销期日均',type:'bar',data:lk.map(x=>x.平销期日均消耗),itemStyle:{color:'#c9c2f0'},barWidth:18,barGap:'25%',label:{show:true,position:'top',fontSize:11,formatter:function(p){return p.value>=1?p.value.toFixed(0):'';}}},
+      {name:'七夕期日均',type:'bar',data:lk.map(x=>x.七夕日均消耗),itemStyle:{color:BRAND},barWidth:18,label:{show:true,position:'top',fontSize:11,formatter:function(p){return p.value>=1?p.value.toFixed(0):'';}}},
       {name:'增幅',type:'line',yAxisIndex:1,data:lk.map(x=>x['增幅%']),lineStyle:{color:UP,width:2},itemStyle:{color:UP},label:{show:true,formatter:function(p){return pct(p.value);}}}
     ]});
   chart('c4',{tooltip:{trigger:'axis'},legend:{data:['平销期日均','七夕期日均']},grid:{left:55,right:20,top:40,bottom:30},
