@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>七夕重点客户案例</title>
+<style>
+:root{
+  --bg:#f6f5fb; --card:#ffffff; --ink:#232135; --sub:#6b6785; --line:#e8e6f2;
+  --brand:#6c5ce7; --white:#ff9f43; --up:#e64545; --down:#1fa56f; --muted:#a09bb8;
+  --radius:14px; --shadow:0 4px 18px rgba(60,50,120,.07);
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; background:var(--bg); color:var(--ink); line-height:1.6; padding:0 0 60px;}
+.wrap{max-width:1120px; margin:0 auto; padding:0 24px;}
+header{background:linear-gradient(135deg,#5f4bd6 0%,#8f7cf0 55%,#d478c8 100%); color:#fff; padding:40px 0 36px; margin-bottom:26px;}
+header .wrap{display:flex; flex-direction:column; gap:8px;}
+.badge{display:inline-block; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35); padding:4px 14px; border-radius:20px; font-size:13px; letter-spacing:1px; width:fit-content;}
+h1{font-size:28px; font-weight:700;}
+.subtitle{font-size:14px; opacity:.92;}
+.meta{font-size:12.5px; opacity:.85;}
+.grid{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+@media(max-width:860px){.grid{grid-template-columns:1fr;}}
+.customer{background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:22px 24px; display:flex; flex-direction:column; gap:14px;}
+.cust-head{display:flex; align-items:center; gap:10px;}
+.cust-idx{display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:8px; background:var(--brand); color:#fff; font-size:14px; font-weight:700; flex:none;}
+.cust-name{font-size:19px; font-weight:800;}
+.khq{font-size:12px; padding:3px 10px; border-radius:6px; font-weight:700;}
+.khq.brand{background:#efeafe; color:var(--brand);}
+.khq.white{background:#fff1e0; color:#d97a00;}
+.sec-label{font-size:12.5px; color:var(--sub); font-weight:700; letter-spacing:1px; border-left:3px solid var(--brand); padding-left:8px; margin-top:2px;}
+.kpis{display:grid; grid-template-columns:repeat(5,1fr); gap:10px;}
+.kpi{background:#faf9ff; border-radius:10px; padding:12px 12px; text-align:center;}
+.kpi .lb{font-size:11.5px; color:var(--sub);}
+.kpi .vl{font-size:20px; font-weight:800; margin:4px 0 1px;}
+.kpi .vl i{font-style:normal; font-size:12px; font-weight:600; color:var(--sub);}
+.kpi .vl.up{color:var(--up);}
+.kpi .dv{font-size:10.5px; color:var(--muted);}
+.infra{display:flex; flex-direction:column; gap:8px;}
+.ir{display:flex; align-items:center; justify-content:space-between; background:#faf9ff; border-radius:10px; padding:10px 14px;}
+.ir-name{font-size:13px; font-weight:700; color:#3c385a;}
+.ir-vals{display:flex; align-items:center; gap:8px; font-size:13.5px;}
+.ir-vals .p0{color:var(--muted);}
+.ir-vals .arr{color:var(--muted);}
+.ir-vals .p1{font-weight:700;}
+.chg{font-weight:700; font-size:12.5px; padding:2px 8px; border-radius:6px;}
+.chg.up{color:var(--up); background:#fdeeee;}
+.chg.down{color:var(--down); background:#e8f7f0;}
+.chg.flat{color:var(--muted); background:#f0eefb;}
+.metrics{display:grid; grid-template-columns:repeat(5,1fr); gap:10px;}
+.m{background:#faf9ff; border-radius:10px; padding:10px 10px; text-align:center;}
+.m-name{font-size:12px; font-weight:700; color:#3c385a;}
+.m-tip{display:block; font-size:10px; color:var(--muted); font-weight:400;}
+.m-main{font-size:17px; font-weight:800; margin:3px 0 1px;}
+.m-sub{font-size:11.5px; color:var(--muted); display:flex; flex-direction:column; align-items:center; gap:1px;}
+.m-sub .chg{margin-top:2px;}
+.acts{display:flex; flex-wrap:wrap; gap:8px;}
+.act{display:flex; align-items:center; gap:6px; background:#f0eefb; border-radius:8px; padding:5px 10px; font-size:12.5px;}
+.act-k{color:var(--sub); font-weight:600;}
+.act-v{font-weight:700; color:#3c385a;}
+.note{font-size:12px; color:var(--muted); margin-top:22px; background:var(--card); border-radius:var(--radius); padding:14px 18px; box-shadow:var(--shadow);}
+/* ---- 素材案例 & 直播间截图 ---- */
+.media-case{display:flex; flex-direction:column; gap:10px;}
+.media-item{display:flex; gap:14px; align-items:center; background:#faf9ff; border-radius:10px; padding:12px;}
+.media-thumb{width:96px; height:170px; flex:none; border-radius:8px; overflow:hidden; background:#eeeaf9; display:flex; align-items:center; justify-content:center;}
+.media-thumb img{width:100%; height:100%; object-fit:cover; display:block;}
+.media-info{display:flex; flex-direction:column; gap:8px; flex:1; min-width:0;}
+.media-title{font-size:13px; font-weight:700; color:#3c385a;}
+.media-play{display:inline-flex; align-items:center; gap:8px; background:var(--brand); color:#fff; padding:8px 14px; border-radius:8px; font-size:13px; font-weight:600; text-decoration:none; width:fit-content; cursor:pointer; border:none;}
+.media-play:hover{filter:brightness(1.06);}
+.play-ico{font-size:11px;}
+.live-shots{display:flex; gap:16px; align-items:flex-start;}
+.live-col{flex:1; display:flex; flex-direction:column; gap:6px; align-items:center; min-width:0;}
+.live-cap{font-size:12px; color:var(--sub); font-weight:700;}
+.live-box{width:100%; aspect-ratio:9/16; border-radius:10px; overflow:hidden; background:#faf9ff; display:flex; align-items:center; justify-content:center;}
+.live-box img{width:100%; height:100%; object-fit:cover; display:block;}
+.ph{border:1.5px dashed #d5cfea;}
+.ph-txt{font-size:12px; color:var(--muted); text-align:center; line-height:1.7;}
+.ph-txt i{font-style:normal; font-size:11px; opacity:.8;}
+/* 视频弹窗 */
+.vmodal{display:none; position:fixed; inset:0; background:rgba(20,16,40,.72); z-index:999; align-items:center; justify-content:center; padding:24px;}
+.vmodal.show{display:flex;}
+.vmodal-inner{position:relative; width:min(860px,92vw); background:#000; border-radius:12px; overflow:hidden; box-shadow:0 12px 40px rgba(0,0,0,.4);}
+.vmodal video{width:100%; display:block; aspect-ratio:16/9; background:#000;}
+.vmodal-close{position:absolute; top:10px; right:10px; width:32px; height:32px; border-radius:50%; border:none; background:rgba(255,255,255,.22); color:#fff; font-size:18px; cursor:pointer; line-height:1;}
+.vmodal-close:hover{background:rgba(255,255,255,.4);}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <span class="badge">视频号广告 · 本土美妆 · 节点案例</span>
+    <h1>七夕重点客户案例集</h1>
+    <div class="subtitle">8 家重点客户的七夕投放全景拆解 · 日均口径</div>
+    <div class="meta">平销期 7.1–8.3（34天）｜ 七夕活动期 8.13–8.19（7天）｜ 七夕当天 8.19 ｜ 生成日期 2026-08-20</div>
+  </div>
+</header>
+<div class="wrap">
+  <div class="grid">
+
+    <div class="customer">
+      <div class="cust-head">
+        <span class="cust-idx">1</span>
+        <span class="cust-name">郑明明</span>
+        <span class="khq white">白牌</span>
+      </div>
+      <div class="sec-label">核心消耗</div>
+      <div class="kpis"><div class="kpi"><div class="lb">平销期日均</div><div class="vl ">32.89<i>万</i></div><div class="dv">7.1–8.3 日均</div></div><div class="kpi"><div class="lb">七夕周期日均</div><div class="vl ">67.71<i>万</i></div><div class="dv">8.13–8.19 日均</div></div><div class="kpi"><div class="lb">七夕当天日耗</div><div class="vl ">104.54<i>万</i></div><div class="dv">8.19 当天</div></div><div class="kpi"><div class="lb">七夕膨胀系数</div><div class="vl up">2.06<i>x</i></div><div class="dv">七夕日均÷平销日均</div></div><div class="kpi"><div class="lb">bigday膨胀系数</div><div class="vl up">3.18<i>x</i></div><div class="dv">当天日耗÷平销日均</div></div></div>
+      <div class="sec-label">广告基建（日均）</div>
+      <div class="infra"><div class="ir"><div class="ir-name">有消耗广告数</div><div class="ir-vals"><span class="p0">1,145.5</span><span class="arr">→</span><span class="p1">1,454.1</span><span class="chg up">+26.9%</span></div></div><div class="ir"><div class="ir-name">创意唯一性ID数</div><div class="ir-vals"><span class="p0">5,794.4</span><span class="arr">→</span><span class="p1">8,447.3</span><span class="chg up">+45.8%</span></div></div></div>
+      <div class="sec-label">广告指标</div>
+      <div class="metrics"><div class="m"><div class="m-name">CTR<span class="m-tip">点击率</span></div><div class="m-main">2.93%</div><div class="m-sub"><span>3.61%</span> <span class="chg down">-18.8%</span></div></div><div class="m"><div class="m-name">CVR<span class="m-tip">下单率</span></div><div class="m-main">2.17%</div><div class="m-sub"><span>2.16%</span> <span class="chg up">+0.3%</span></div></div><div class="m"><div class="m-name">出价<span class="m-tip">目标出价</span></div><div class="m-main">306.4元</div><div class="m-sub"><span>307.5元</span> <span class="chg down">-0.4%</span></div></div><div class="m"><div class="m-name">下单单价<span class="m-tip">客单价</span></div><div class="m-main">710.0元</div><div class="m-sub"><span>484.8元</span> <span class="chg up">+46.5%</span></div></div><div class="m"><div class="m-name">ROI<span class="m-tip">下单ROI</span></div><div class="m-main">1.69</div><div class="m-sub"><span>1.37</span> <span class="chg up">+23.1%</span></div></div></div>
+      <div class="sec-label">七夕关键运营动作</div>
+      <div class="acts"><div class="act"><span class="act-k">明星</span><span class="act-v">1个明星</span></div><div class="act"><span class="act-k">主播形式</span><span class="act-v">TOP主播</span></div><div class="act"><span class="act-k">七夕组货</span><span class="act-v">是</span></div><div class="act"><span class="act-k">组货类型</span><span class="act-v">双SKU囤货装（日常价SKU+囤货装SKU）</span></div><div class="act"><span class="act-k">七夕装修</span><span class="act-v">是</span></div></div>
+      <div class="sec-label">素材案例</div>
+      <div class="media-case">
+        <div class="media-item" data-case="1">
+          <div class="media-thumb"><img src="assets/郑明明-首帧.jpg" alt="郑明明 素材首帧"></div>
+          <div class="media-info">
+            <div class="media-title">素材案例 · 视频</div>
+            <a class="media-play" href="#" data-video-src="http://1050.njnovazone.svp.tencent-cloud.com/encfile?encurl=aHR0cDovL2Fkc21pbmQuZ2R0aW1nLmNvbS9hZHNfc3ZwX3ZpZGVvX18wYmMzemlhYWlhYWFuZWFqbno3NWhqdXJ2c3FlYXRmYWFiY2EuZjIwLm1wND9kaXNfaz0yNjczYmFkNzVkMTg3Mjk0NWEwZjZhNDVhM2RlNTU4MyZkaXNfdD0xNzc4MjI1ODQyJm09ZDQyMGM3OTg4YjAwNWVjZDQzMzYxYTk5M2E0MDM5YjYmc2hhMjU2PTAyZjA4NDMzODk4OTBlNTc1MGM5MTgzNDAyMGY0ZjIyOTgzZGNhOGIyZWVhYTc4ODc4N2JjNjcxZWE2ZDYyMWImeC1vYmplY3QtcHJvY2Vzcz1obHMvbTN1OA==&expiration=1787318634625&salt=1390635464&sign=d3aefec2e61e6056&bizid=1050&m=d59520845559cd5e62bf4902929b38b3" onclick="openVideo(this);return false;"><span class="play-ico">▶</span> 素材案例视频（点击自动播放）</a>
+          </div>
+        </div>
+      </div>
+      <div class="sec-label">直播间截图</div>
+      <div class="live-shots">
+        <div class="live-col">
+          <div class="live-box" data-case="1" data-slot="直播间截图"><img src="assets/郑明明-直播间截图.jpg" alt="郑明明 直播间截图"></div>
+          <div class="live-cap">直播间截图</div>
+        </div>
+        <div class="live-col">
+          <div class="live-box" data-case="1" data-slot="组货截图"><img src="assets/郑明明-组货截图.jpg" alt="郑明明 直播间组货截图"></div>
+          <div class="live-cap">直播间组货截图</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="customer">
+      <div class="cust-head">
+        <span class="cust-idx">2</span>
+        <span class="cust-name">抖嘉</span>
+        <span class="khq white">白牌</span>
+      </div>
+      <div class="sec-label">核心消耗</div>
+      <div class="kpis"><div class="kpi"><div class="lb">平销期日均</div><div class="vl ">7.64<i>万</i></div><div class="dv">7.1–8.3 日均</div></div><div class="kpi"><div class="lb">七夕周期日均</div><div class="vl ">22.27<i>万</i></div><div class="dv">8.13–8.19 日均</div></div><div class="kpi"><div class="lb">七夕当天日耗</div><div class="vl ">52.72<i>万</i></div><div class="dv">8.19 当天</div></div><div class="kpi"><div class="lb">七夕膨胀系数</div><div class="vl up">2.92<i>x</i></div><div class="dv">七夕日均÷平销日均</div></div><div class="kpi"><div class="lb">bigday膨胀系数</div><div class="vl up">6.90<i>x</i></div><div class="dv">当天日耗÷平销日均</div></div></div>
+      <div class="sec-label">广告基建（日均）</div>
+      <div class="infra"><div class="ir"><div class="ir-name">有消耗广告数</div><div class="ir-vals"><span class="p0">1,049.6</span><span class="arr">→</span><span class="p1">1,986.0</span><span class="chg up">+89.2%</span></div></div><div class="ir"><div class="ir-name">创意唯一性ID数</div><div class="ir-vals"><span class="p0">2,301.3</span><span class="arr">→</span><span class="p1">4,291.4</span><span class="chg up">+86.5%</span></div></div></div>
+      <div class="sec-label">广告指标</div>
+      <div class="metrics"><div class="m"><div class="m-name">CTR<span class="m-tip">点击率</span></div><div class="m-main">2.27%</div><div class="m-sub"><span>2.27%</span> <span class="chg flat">+0.0%</span></div></div><div class="m"><div class="m-name">CVR<span class="m-tip">下单率</span></div><div class="m-main">6.67%</div><div class="m-sub"><span>4.97%</span> <span class="chg up">+34.3%</span></div></div><div class="m"><div class="m-name">出价<span class="m-tip">目标出价</span></div><div class="m-main">48.5元</div><div class="m-sub"><span>49.4元</span> <span class="chg down">-1.7%</span></div></div><div class="m"><div class="m-name">下单单价<span class="m-tip">客单价</span></div><div class="m-main">60.2元</div><div class="m-sub"><span>60.2元</span> <span class="chg down">-0.1%</span></div></div><div class="m"><div class="m-name">ROI<span class="m-tip">下单ROI</span></div><div class="m-main">1.03</div><div class="m-sub"><span>1.04</span> <span class="chg down">-0.7%</span></div></div></div>
+      <div class="sec-label">七夕关键运营动作</div>
+      <div class="acts"><div class="act"><span class="act-k">明星</span><span class="act-v">目前无也没谈</span></div><div class="act"><span class="act-k">主播形式</span><span class="act-v">普通主播</span></div><div class="act"><span class="act-k">七夕组货</span><span class="act-v">是</span></div><div class="act"><span class="act-k">组货类型</span><span class="act-v">日常价+七夕限时加赠品</span></div><div class="act"><span class="act-k">七夕装修</span><span class="act-v">是</span></div></div>
+      <div class="sec-label">素材案例</div>
+      <div class="media-case">
+        <div class="media-item" data-case="2">
+          <div class="media-thumb"><img src="assets/抖嘉-首帧.jpg" alt="抖嘉 素材首帧"></div>
+          <div class="media-info">
+            <div class="media-title">素材案例 · 视频</div>
+            <a class="media-play" href="#" data-video-src="http://1050.njnovazone.svp.tencent-cloud.com/encfile?encurl=aHR0cDovL2Fkc21pbmQuZ2R0aW1nLmNvbS9hZHNfc3ZwX3ZpZGVvX18wYmMzY3Fhb3VhYWF1eWFveDVsNzN6dmJ1ZmFlNWlrYWIyc2EuZjIwLm1wND9kaXNfaz1iNDM0ZWExZDRjMWVjOTRlNzc2OWZhYTc0MmRhYTE1YyZkaXNfdD0xNzg2NzM1MjU1Jm09M2M1OTZmNjM4NGI1NzUyYzlkYzBmOGRhYWFmZDE5NTQmc2hhMjU2PWY4NmExMzAzZjAwNmQyMmM3OTU3NjRjNTFiOTdlMDJmNmJlNjk4ZjIyM2U5Y2E5OTJjOGU4ZDU0ZmEzODg4OTMmeC1vYmplY3QtcHJvY2Vzcz1obHMvbTN1OA==&expiration=1787316698312&salt=1316427461&sign=312a6e08cfec429f&bizid=1050&m=4d660c1fde2a25eec90ee9b8c02c08f1" onclick="openVideo(this);return false;"><span class="play-ico">▶</span> 素材案例视频（点击自动播放）</a>
+          </div>
+        </div>
+      </div>
+      <div class="sec-label">直播间截图</div>
+      <div class="live-shots">
+        <div class="live-col">
+          <div class="live-box" data-case="2" data-slot="直播间截图"><img src="assets/抖嘉-直播间截图.jpg" alt="抖嘉 直播间截图"></div>
+          <div class="live-cap">直播间截图</div>
+        </div>
+        <div class="live-col">
+          <div class="live-box" data-case="2" data-slot="组货截图"><img src="assets/抖嘉-组货截图.jpg" alt="抖嘉 直播间组货截图"></div>
+          <div class="live-cap">直播间组货截图</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="customer">
+      <div class="cust-head">
+        <span class="cust-idx">3</span>
+        <span class="cust-name">必扬</span>
+        <span class="khq brand">品牌</span>
+      </div>
+      <div class="sec-label">核心消耗</div>
+      <div class="kpis"><div class="kpi"><div class="lb">平销期日均</div><div class="vl ">11.36<i>万</i></div><div class="dv">7.1–8.3 日均</div></div><div class="kpi"><div class="lb">七夕周期日均</div><div class="vl ">20.51<i>万</i></div><div class="dv">8.13–8.19 日均</div></div><div class="kpi"><div class="lb">七夕当天日耗</div><div class="vl ">80.44<i>万</i></div><div class="dv">8.19 当天</div></div><div class="kpi"><div class="lb">七夕膨胀系数</div><div class="vl up">1.81<i>x</i></div><div class="dv">七夕日均÷平销日均</div></div><div class="kpi"><div class="lb">bigday膨胀系数</div><div class="vl up">7.08<i>x</i></div><div class="dv">当天日耗÷平销日均</div></div></div>
+      <div class="sec-label">广告基建（日均）</div>
+      <div class="infra"><div class="ir"><div class="ir-name">有消耗广告数</div><div class="ir-vals"><span class="p0">828.0</span><span class="arr">→</span><span class="p1">914.0</span><span class="chg up">+10.4%</span></div></div><div class="ir"><div class="ir-name">创意唯一性ID数</div><div class="ir-vals"><span class="p0">4,378.0</span><span class="arr">→</span><span class="p1">5,359.1</span><span class="chg up">+22.4%</span></div></div></div>
+      <div class="sec-label">广告指标</div>
+      <div class="metrics"><div class="m"><div class="m-name">CTR<span class="m-tip">点击率</span></div><div class="m-main">1.72%</div><div class="m-sub"><span>1.66%</span> <span class="chg up">+3.4%</span></div></div><div class="m"><div class="m-name">CVR<span class="m-tip">下单率</span></div><div class="m-main">3.28%</div><div class="m-sub"><span>3.37%</span> <span class="chg down">-2.9%</span></div></div><div class="m"><div class="m-name">出价<span class="m-tip">目标出价</span></div><div class="m-main">241.1元</div><div class="m-sub"><span>154.0元</span> <span class="chg up">+56.6%</span></div></div><div class="m"><div class="m-name">下单单价<span class="m-tip">客单价</span></div><div class="m-main">536.6元</div><div class="m-sub"><span>332.9元</span> <span class="chg up">+61.2%</span></div></div><div class="m"><div class="m-name">ROI<span class="m-tip">下单ROI</span></div><div class="m-main">2.39</div><div class="m-sub"><span>1.99</span> <span class="chg up">+20.1%</span></div></div></div>
+      <div class="sec-label">七夕关键运营动作</div>
+      <div class="acts"><div class="act"><span class="act-k">明星</span><span class="act-v">目前无但在谈</span></div><div class="act"><span class="act-k">主播形式</span><span class="act-v">TOP主播,IP主播本人进播</span></div><div class="act"><span class="act-k">七夕组货</span><span class="act-v">是</span></div><div class="act"><span class="act-k">组货类型</span><span class="act-v">日常价+七夕限时加赠品</span></div><div class="act"><span class="act-k">七夕装修</span><span class="act-v">是</span></div></div>
+      <div class="sec-label">素材案例</div>
+      <div class="media-case">
+        <div class="media-item" data-case="3">
+          <div class="media-thumb"><img src="assets/必扬-首帧.jpg" alt="必扬 素材首帧"></div>
+          <div class="media-info">
+            <div class="media-title">素材案例 · 视频</div>
+            <a class="media-play" href="#" data-video-src="http://1050.gznovazone.svp.tencent-cloud.com/encfile?encurl=aHR0cDovL2Fkc21pbmQuZ2R0aW1nLmNvbS9hZHNfc3ZwX3ZpZGVvX18wYjUzYWVhcmVhYWJ6bWFlNzd0N2RydmJ3YWllY2lhcWNlc2EuZjIwLm1wND9kaXNfaz1kZGRhZGYzNzNjYmZkMWZmYmYxMjEwNDI4ODAzYmZiOCZkaXNfdD0xNzg2NjY2NjMxJm09ZmI3NDYyZjVkOWMwNTUxZmM5MTE2N2QwNWQ4ZTQzNjQmc2hhMjU2PTQzODkzMzViZDFiODk0YzQ5NDQ5ODU3OGFhNmQ3ODcyZTQ0MmE0MTcxZGQzZTRlZGIyMmU5MDM3YjFiZTkxNWQmeC1vYmplY3QtcHJvY2Vzcz1obHMvbTN1OA==&expiration=1787316698312&salt=4245341694&sign=0fd3082fc6733045&bizid=1050&m=75787ff369ee123e2aefec7e1f30f25b" onclick="openVideo(this);return false;"><span class="play-ico">▶</span> 素材案例视频（点击自动播放）</a>
+          </div>
+        </div>
+      </div>
+      <div class="sec-label">直播间截图</div>
+      <div class="live-shots">
+        <div class="live-col">
+          <div class="live-box" data-case="3" data-slot="直播间截图"><img src="assets/必扬-直播间截图.jpg" alt="必扬 直播间截图"></div>
+          <div class="live-cap">直播间截图</div>
+        </div>
+        <div class="live-col">
+          <div class="live-box" data-case="3" data-slot="组货截图"><img src="assets/必扬-组货截图.jpg" alt="必扬 直播间组货截图"></div>
+          <div class="live-cap">直播间组货截图</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="customer">
+      <div class="cust-head">
+        <span class="cust-idx">4</span>
+        <span class="cust-name">花西子</span>
+        <span class="khq brand">品牌</span>
+      </div>
+      <div class="sec-label">核心消耗</div>
+      <div class="kpis"><div class="kpi"><div class="lb">平销期日均</div><div class="vl ">3.80<i>万</i></div><div class="dv">7.1–8.3 日均</div></div><div class="kpi"><div class="lb">七夕周期日均</div><div class="vl ">12.61<i>万</i></div><div class="dv">8.13–8.19 日均</div></div><div class="kpi"><div class="lb">七夕当天日耗</div><div class="vl ">24.61<i>万</i></div><div class="dv">8.19 当天</div></div><div class="kpi"><div class="lb">七夕膨胀系数</div><div class="vl up">3.32<i>x</i></div><div class="dv">七夕日均÷平销日均</div></div><div class="kpi"><div class="lb">bigday膨胀系数</div><div class="vl up">6.47<i>x</i></div><div class="dv">当天日耗÷平销日均</div></div></div>
+      <div class="sec-label">广告基建（日均）</div>
+      <div class="infra"><div class="ir"><div class="ir-name">有消耗广告数</div><div class="ir-vals"><span class="p0">57.5</span><span class="arr">→</span><span class="p1">78.1</span><span class="chg up">+35.8%</span></div></div><div class="ir"><div class="ir-name">创意唯一性ID数</div><div class="ir-vals"><span class="p0">992.6</span><span class="arr">→</span><span class="p1">1,337.4</span><span class="chg up">+34.7%</span></div></div></div>
+      <div class="sec-label">广告指标</div>
+      <div class="metrics"><div class="m"><div class="m-name">CTR<span class="m-tip">点击率</span></div><div class="m-main">1.53%</div><div class="m-sub"><span>0.97%</span> <span class="chg up">+57.7%</span></div></div><div class="m"><div class="m-name">CVR<span class="m-tip">下单率</span></div><div class="m-main">4.13%</div><div class="m-sub"><span>6.66%</span> <span class="chg down">-38.0%</span></div></div><div class="m"><div class="m-name">出价<span class="m-tip">目标出价</span></div><div class="m-main">101.7元</div><div class="m-sub"><span>114.9元</span> <span class="chg down">-11.5%</span></div></div><div class="m"><div class="m-name">下单单价<span class="m-tip">客单价</span></div><div class="m-main">241.0元</div><div class="m-sub"><span>201.3元</span> <span class="chg up">+19.7%</span></div></div><div class="m"><div class="m-name">ROI<span class="m-tip">下单ROI</span></div><div class="m-main">1.83</div><div class="m-sub"><span>1.43</span> <span class="chg up">+27.9%</span></div></div></div>
+      <div class="sec-label">七夕关键运营动作</div>
+      <div class="acts"><div class="act"><span class="act-k">明星</span><span class="act-v">2个明星</span></div><div class="act"><span class="act-k">主播形式</span><span class="act-v">TOP主播,总裁进播</span></div><div class="act"><span class="act-k">七夕组货</span><span class="act-v">是</span></div><div class="act"><span class="act-k">组货类型</span><span class="act-v">日常价+七夕限时加赠品</span></div><div class="act"><span class="act-k">七夕装修</span><span class="act-v">是</span></div></div>
+      <div class="sec-label">素材案例</div>
+      <div class="media-case">
+        <div class="media-item" data-case="4">
+          <div class="media-thumb"><img src="assets/花西子-首帧.jpg" alt="花西子 素材首帧"></div>
+          <div class="media-info">
+            <div class="media-title">素材案例 · 视频</div>
+            <a class="media-play" href="#" data-video-src="http://1050.njnovazone.svp.tencent-cloud.com/encfile?encurl=aHR0cDovL2Fkc21pbmQuZ2R0aW1nLmNvbS9hZHNfc3ZwX3ZpZGVvX18wYmMzbGVhNDJhYWI3aWFuZXJ0NHFudmJ3d2llenZtcWR0a2EuZjIwLm1wND9kaXNfaz02NGVhMzc3N2VmMGEwZmNhMjgzMDRhZjM3N2ZhNjMwOCZkaXNfdD0xNzg2NTg1MDAyJm09YzUzMGU3ZmM5YzAzMGZhZTkyMGQ4MGRlNTdlNWNlNzcmeC1vYmplY3QtcHJvY2Vzcz1obHMvbTN1OA==&expiration=1787316698312&salt=1805672811&sign=865b5abb201efde2&bizid=1050&m=16577244dc0d3838d32db4026b267e7e" onclick="openVideo(this);return false;"><span class="play-ico">▶</span> 素材案例视频（点击自动播放）</a>
+          </div>
+        </div>
+      </div>
+      <div class="sec-label">直播间截图</div>
+      <div class="live-shots">
+        <div class="live-col">
+          <div class="live-box" data-case="4" data-slot="直播间截图"><img src="assets/花西子-直播间截图.jpg" alt="花西子 直播间截图"></div>
+          <div class="live-cap">直播间截图</div>
+        </div>
+        <div class="live-col">
+          <div class="live-box" data-case="4" data-slot="组货截图"><img src="assets/花西子-组货截图.jpg" alt="花西子 直播间组货截图"></div>
+          <div class="live-cap">直播间组货截图</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="customer">
+      <div class="cust-head">
+        <span class="cust-idx">5</span>
+        <span class="cust-name">拾伍</span>
+        <span class="khq white">白牌</span>
+      </div>
+      <div class="sec-label">核心消耗</div>
+      <div class="kpis"><div class="kpi"><div class="lb">平销期日均</div><div class="vl ">10.12<i>万</i></div><div class="dv">7.1–8.3 日均</div></div><div class="kpi"><div class="lb">七夕周期日均</div><div class="vl ">12.67<i>万</i></div><div class="dv">8.13–8.19 日均</div></div><div class="kpi"><div class="lb">七夕当天日耗</div><div class="vl ">31.01<i>万</i></div><div class="dv">8.19 当天</div></div><div class="kpi"><div class="lb">七夕膨胀系数</div><div class="vl up">1.25<i>x</i></div><div class="dv">七夕日均÷平销日均</div></div><div class="kpi"><div class="lb">bigday膨胀系数</div><div class="vl up">3.06<i>x</i></div><div class="dv">当天日耗÷平销日均</div></div></div>
+      <div class="sec-label">广告基建（日均）</div>
+      <div class="infra"><div class="ir"><div class="ir-name">有消耗广告数</div><div class="ir-vals"><span class="p0">597.4</span><span class="arr">→</span><span class="p1">753.6</span><span class="chg up">+26.2%</span></div></div><div class="ir"><div class="ir-name">创意唯一性ID数</div><div class="ir-vals"><span class="p0">2,374.1</span><span class="arr">→</span><span class="p1">2,842.3</span><span class="chg up">+19.7%</span></div></div></div>
+      <div class="sec-label">广告指标</div>
+      <div class="metrics"><div class="m"><div class="m-name">CTR<span class="m-tip">点击率</span></div><div class="m-main">2.55%</div><div class="m-sub"><span>2.66%</span> <span class="chg down">-3.9%</span></div></div><div class="m"><div class="m-name">CVR<span class="m-tip">下单率</span></div><div class="m-main">2.69%</div><div class="m-sub"><span>3.54%</span> <span class="chg down">-23.9%</span></div></div><div class="m"><div class="m-name">出价<span class="m-tip">目标出价</span></div><div class="m-main">204.4元</div><div class="m-sub"><span>240.0元</span> <span class="chg down">-14.8%</span></div></div><div class="m"><div class="m-name">下单单价<span class="m-tip">客单价</span></div><div class="m-main">375.8元</div><div class="m-sub"><span>253.7元</span> <span class="chg up">+48.1%</span></div></div><div class="m"><div class="m-name">ROI<span class="m-tip">下单ROI</span></div><div class="m-main">1.71</div><div class="m-sub"><span>1.42</span> <span class="chg up">+19.9%</span></div></div></div>
+      <div class="sec-label">七夕关键运营动作</div>
+      <div class="acts"><div class="act"><span class="act-k">明星</span><span class="act-v">目前无但在谈</span></div><div class="act"><span class="act-k">主播形式</span><span class="act-v">TOP主播</span></div><div class="act"><span class="act-k">七夕组货</span><span class="act-v">是</span></div><div class="act"><span class="act-k">组货类型</span><span class="act-v">双SKU囤货装（日常价SKU+囤货装SKU）</span></div><div class="act"><span class="act-k">七夕装修</span><span class="act-v">是</span></div></div>
+      <div class="sec-label">素材案例</div>
+      <div class="media-case">
+        <div class="media-item" data-case="5">
+          <div class="media-thumb"><img src="assets/拾伍-首帧.jpg" alt="拾伍 素材首帧"></div>
+          <div class="media-info">
+            <div class="media-title">素材案例 · 视频</div>
+            <a class="media-play" href="#" data-video-src="http://1050.gznovazone.svp.tencent-cloud.com/encfile?encurl=aHR0cDovL2Fkc21pbmQuZ2R0aW1nLmNvbS9hZHNfc3ZwX3ZpZGVvX18wYjUzbmVhcGthYWE0NGFuZ2J0N3lmdmJ1MmllNnZ1cWI1a2EuZjIwLm1wND9kaXNfaz03ZmU3NTY3ODM5YzcwNzE2ZjJlNDJjMjE4Njc4NTI5YiZkaXNfdD0xNzg2ODk5MDc0Jm09MjAxODhjMzVjYjFhMWE5OTE1ZDQ4MTNmNWJhOTZhMDEmc2hhMjU2PWY2MjAzOWMzOTE4NTQwNTc1NzM4NDVlMmJjZGRiZmI3MTAxNGEyOWMyMzI0MjU2Y2Q0YjU1NDM1ODYyY2QwZmEmeC1vYmplY3QtcHJvY2Vzcz1obHMvbTN1OA==&expiration=1787320670600&salt=2441345050&sign=a7e25599f039d4d4&bizid=1050&m=028ea2b316e2408861b7a515ab295c9e" onclick="openVideo(this);return false;"><span class="play-ico">▶</span> 素材案例视频（点击自动播放）</a>
+          </div>
+        </div>
+      </div>
+      <div class="sec-label">直播间截图</div>
+      <div class="live-shots">
+        <div class="live-col">
+          <div class="live-box" data-case="5" data-slot="直播间截图"><img src="assets/拾伍-直播间截图.jpg" alt="拾伍 直播间截图"></div>
+          <div class="live-cap">直播间截图</div>
+        </div>
+        <div class="live-col">
+          <div class="live-box" data-case="5" data-slot="组货截图"><img src="assets/拾伍-组货截图.jpg" alt="拾伍 直播间组货截图"></div>
+          <div class="live-cap">直播间组货截图</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="customer">
+      <div class="cust-head">
+        <span class="cust-idx">6</span>
+        <span class="cust-name">百雀羚</span>
+        <span class="khq brand">品牌</span>
+      </div>
+      <div class="sec-label">核心消耗</div>
+      <div class="kpis"><div class="kpi"><div class="lb">平销期日均</div><div class="vl ">4.24<i>万</i></div><div class="dv">7.1–8.3 日均</div></div><div class="kpi"><div class="lb">七夕周期日均</div><div class="vl ">10.92<i>万</i></div><div class="dv">8.13–8.19 日均</div></div><div class="kpi"><div class="lb">七夕当天日耗</div><div class="vl ">32.08<i>万</i></div><div class="dv">8.19 当天</div></div><div class="kpi"><div class="lb">七夕膨胀系数</div><div class="vl up">2.57<i>x</i></div><div class="dv">七夕日均÷平销日均</div></div><div class="kpi"><div class="lb">bigday膨胀系数</div><div class="vl up">7.56<i>x</i></div><div class="dv">当天日耗÷平销日均</div></div></div>
+      <div class="sec-label">广告基建（日均）</div>
+      <div class="infra"><div class="ir"><div class="ir-name">有消耗广告数</div><div class="ir-vals"><span class="p0">287.0</span><span class="arr">→</span><span class="p1">1,113.9</span><span class="chg up">+288.1%</span></div></div><div class="ir"><div class="ir-name">创意唯一性ID数</div><div class="ir-vals"><span class="p0">1,517.6</span><span class="arr">→</span><span class="p1">3,297.0</span><span class="chg up">+117.3%</span></div></div></div>
+      <div class="sec-label">广告指标</div>
+      <div class="metrics"><div class="m"><div class="m-name">CTR<span class="m-tip">点击率</span></div><div class="m-main">2.37%</div><div class="m-sub"><span>1.96%</span> <span class="chg up">+20.7%</span></div></div><div class="m"><div class="m-name">CVR<span class="m-tip">下单率</span></div><div class="m-main">3.52%</div><div class="m-sub"><span>8.12%</span> <span class="chg down">-56.6%</span></div></div><div class="m"><div class="m-name">出价<span class="m-tip">目标出价</span></div><div class="m-main">113.6元</div><div class="m-sub"><span>85.1元</span> <span class="chg up">+33.5%</span></div></div><div class="m"><div class="m-name">下单单价<span class="m-tip">客单价</span></div><div class="m-main">179.9元</div><div class="m-sub"><span>104.0元</span> <span class="chg up">+73.1%</span></div></div><div class="m"><div class="m-name">ROI<span class="m-tip">下单ROI</span></div><div class="m-main">1.79</div><div class="m-sub"><span>1.51</span> <span class="chg up">+18.3%</span></div></div></div>
+      <div class="sec-label">七夕关键运营动作</div>
+      <div class="acts"><div class="act"><span class="act-k">明星</span><span class="act-v">≥3个明星</span></div><div class="act"><span class="act-k">主播形式</span><span class="act-v">IP主播本人进播,总裁进播</span></div><div class="act"><span class="act-k">七夕组货</span><span class="act-v">是</span></div><div class="act"><span class="act-k">组货类型</span><span class="act-v">七夕特供礼盒or套装</span></div><div class="act"><span class="act-k">七夕装修</span><span class="act-v">是</span></div></div>
+      <div class="sec-label">素材案例</div>
+      <div class="media-case">
+        <div class="media-item" data-case="6">
+          <div class="media-thumb"><img src="assets/百雀羚-首帧.jpg" alt="百雀羚 素材首帧"></div>
+          <div class="media-info">
+            <div class="media-title">素材案例 · 视频</div>
+            <a class="media-play" href="#" data-video-src="http://1051.njnovazone.svp.tencent-cloud.com/encfile?encurl=aHR0cDovL2Fkc21pbmQuZ2R0aW1nLmNvbS9hZHNfc3ZwX3ZpZGVvX18wYmMzcWFhdmlhYWI0ZWFkcG5tYmtudmJ2YWFla3NhYWN2Y2EuZjIwLm1wND9kaXNfaz04YjU1NTlhYThjMjFkYTc0ODYwYTc0MWExZGY3YjVjYSZkaXNfdD0xNzg2Nzk4OTYzJm09YTQ4NWQ4MGMxNzU0YTE4MjEzNDM1ZjdjMWRmZGVlY2EmeC1vYmplY3QtcHJvY2Vzcz1obHMvbTN1OA==&expiration=1787320690303&salt=1327825434&sign=fa28fde4ba4112e4&bizid=1051&m=f2e926328f463c836842a3f576c530b2" onclick="openVideo(this);return false;"><span class="play-ico">▶</span> 素材案例视频（点击自动播放）</a>
+          </div>
+        </div>
+      </div>
+      <div class="sec-label">直播间截图</div>
+      <div class="live-shots">
+        <div class="live-col">
+          <div class="live-box" data-case="6" data-slot="直播间截图"><img src="assets/百雀羚-直播间截图.jpg" alt="百雀羚 直播间截图"></div>
+          <div class="live-cap">直播间截图</div>
+        </div>
+        <div class="live-col">
+          <div class="live-box" data-case="6" data-slot="组货截图"><img src="assets/百雀羚-组货截图.jpg" alt="百雀羚 直播间组货截图"></div>
+          <div class="live-cap">直播间组货截图</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="customer">
+      <div class="cust-head">
+        <span class="cust-idx">7</span>
+        <span class="cust-name">谷雨</span>
+        <span class="khq brand">品牌</span>
+      </div>
+      <div class="sec-label">核心消耗</div>
+      <div class="kpis"><div class="kpi"><div class="lb">平销期日均</div><div class="vl ">51.65<i>万</i></div><div class="dv">7.1–8.3 日均</div></div><div class="kpi"><div class="lb">七夕周期日均</div><div class="vl ">82.09<i>万</i></div><div class="dv">8.13–8.19 日均</div></div><div class="kpi"><div class="lb">七夕当天日耗</div><div class="vl ">123.93<i>万</i></div><div class="dv">8.19 当天</div></div><div class="kpi"><div class="lb">七夕膨胀系数</div><div class="vl up">1.59<i>x</i></div><div class="dv">七夕日均÷平销日均</div></div><div class="kpi"><div class="lb">bigday膨胀系数</div><div class="vl up">2.40<i>x</i></div><div class="dv">当天日耗÷平销日均</div></div></div>
+      <div class="sec-label">广告基建（日均）</div>
+      <div class="infra"><div class="ir"><div class="ir-name">有消耗广告数</div><div class="ir-vals"><span class="p0">1,228.9</span><span class="arr">→</span><span class="p1">1,474.3</span><span class="chg up">+20.0%</span></div></div><div class="ir"><div class="ir-name">创意唯一性ID数</div><div class="ir-vals"><span class="p0">8,031.3</span><span class="arr">→</span><span class="p1">10,979.3</span><span class="chg up">+36.7%</span></div></div></div>
+      <div class="sec-label">广告指标</div>
+      <div class="metrics"><div class="m"><div class="m-name">CTR<span class="m-tip">点击率</span></div><div class="m-main">2.24%</div><div class="m-sub"><span>2.10%</span> <span class="chg up">+6.5%</span></div></div><div class="m"><div class="m-name">CVR<span class="m-tip">下单率</span></div><div class="m-main">7.09%</div><div class="m-sub"><span>7.08%</span> <span class="chg up">+0.2%</span></div></div><div class="m"><div class="m-name">出价<span class="m-tip">目标出价</span></div><div class="m-main">146.8元</div><div class="m-sub"><span>127.2元</span> <span class="chg up">+15.4%</span></div></div><div class="m"><div class="m-name">下单单价<span class="m-tip">客单价</span></div><div class="m-main">292.1元</div><div class="m-sub"><span>285.2元</span> <span class="chg up">+2.4%</span></div></div><div class="m"><div class="m-name">ROI<span class="m-tip">下单ROI</span></div><div class="m-main">2.07</div><div class="m-sub"><span>1.93</span> <span class="chg up">+6.9%</span></div></div></div>
+      <div class="sec-label">七夕关键运营动作</div>
+      <div class="acts"><div class="act"><span class="act-k">明星</span><span class="act-v">≥3个明星</span></div><div class="act"><span class="act-k">主播形式</span><span class="act-v">TOP主播,总裁进播,达人直播</span></div><div class="act"><span class="act-k">七夕组货</span><span class="act-v">是</span></div><div class="act"><span class="act-k">组货类型</span><span class="act-v">七夕特供礼盒or套装</span></div><div class="act"><span class="act-k">七夕装修</span><span class="act-v">是</span></div></div>
+      <div class="sec-label">素材案例</div>
+      <div class="media-case">
+        <div class="media-item" data-case="7">
+          <div class="media-thumb"><img src="assets/谷雨-首帧.jpg" alt="谷雨 素材首帧"></div>
+          <div class="media-info">
+            <div class="media-title">素材案例 · 视频</div>
+            <a class="media-play" href="#" data-video-src="http://1051.gznovazone.svp.tencent-cloud.com/encfile?encurl=aHR0cDovL2Fkc21pbmQuZ2R0aW1nLmNvbS9hZHNfc3ZwX3ZpZGVvX18wYjUzd21henFhYWJweWFnbWt0MjRidmJ2bXlldGN6cWRnY2EuZjIwLm1wND9kaXNfaz0yYTU2MWMzODIwZTAwOTBkYjVmNjAyMzA0ODZlNTg0NiZkaXNfdD0xNzg2NTExMDYzJm09ZjA4MWE5MTRlMDkyYTI0YTFkOGY3NDIwYjQxOGVjYWYmeC1vYmplY3QtcHJvY2Vzcz1obHMvbTN1OA==&expiration=1787316698312&salt=2415684786&sign=af44d272b5eb71e5&bizid=1051&m=ff7a25dce21ec8827c9c57718e4f871f" onclick="openVideo(this);return false;"><span class="play-ico">▶</span> 素材案例视频（点击自动播放）</a>
+          </div>
+        </div>
+      </div>
+      <div class="sec-label">直播间截图</div>
+      <div class="live-shots">
+        <div class="live-col">
+          <div class="live-box" data-case="7" data-slot="直播间截图"><img src="assets/谷雨-直播间截图.jpg" alt="谷雨 直播间截图"></div>
+          <div class="live-cap">直播间截图</div>
+        </div>
+        <div class="live-col">
+          <div class="live-box" data-case="7" data-slot="组货截图"><img src="assets/谷雨-组货截图.jpg" alt="谷雨 直播间组货截图"></div>
+          <div class="live-cap">直播间组货截图</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="customer">
+      <div class="cust-head">
+        <span class="cust-idx">8</span>
+        <span class="cust-name">自然堂</span>
+        <span class="khq brand">品牌</span>
+      </div>
+      <div class="sec-label">核心消耗</div>
+      <div class="kpis"><div class="kpi"><div class="lb">平销期日均</div><div class="vl ">8.45<i>万</i></div><div class="dv">7.1–8.3 日均</div></div><div class="kpi"><div class="lb">七夕周期日均</div><div class="vl ">15.89<i>万</i></div><div class="dv">8.13–8.19 日均</div></div><div class="kpi"><div class="lb">七夕当天日耗</div><div class="vl ">33.72<i>万</i></div><div class="dv">8.19 当天</div></div><div class="kpi"><div class="lb">七夕膨胀系数</div><div class="vl up">1.88<i>x</i></div><div class="dv">七夕日均÷平销日均</div></div><div class="kpi"><div class="lb">bigday膨胀系数</div><div class="vl up">3.99<i>x</i></div><div class="dv">当天日耗÷平销日均</div></div></div>
+      <div class="sec-label">广告基建（日均）</div>
+      <div class="infra"><div class="ir"><div class="ir-name">有消耗广告数</div><div class="ir-vals"><span class="p0">1,269.9</span><span class="arr">→</span><span class="p1">1,488.9</span><span class="chg up">+17.2%</span></div></div><div class="ir"><div class="ir-name">创意唯一性ID数</div><div class="ir-vals"><span class="p0">1,458.3</span><span class="arr">→</span><span class="p1">2,186.1</span><span class="chg up">+49.9%</span></div></div></div>
+      <div class="sec-label">广告指标</div>
+      <div class="metrics"><div class="m"><div class="m-name">CTR<span class="m-tip">点击率</span></div><div class="m-main">1.93%</div><div class="m-sub"><span>2.91%</span> <span class="chg down">-33.6%</span></div></div><div class="m"><div class="m-name">CVR<span class="m-tip">下单率</span></div><div class="m-main">10.87%</div><div class="m-sub"><span>6.78%</span> <span class="chg up">+60.4%</span></div></div><div class="m"><div class="m-name">出价<span class="m-tip">目标出价</span></div><div class="m-main">76.7元</div><div class="m-sub"><span>62.3元</span> <span class="chg up">+22.9%</span></div></div><div class="m"><div class="m-name">下单单价<span class="m-tip">客单价</span></div><div class="m-main">97.5元</div><div class="m-sub"><span>77.2元</span> <span class="chg up">+26.3%</span></div></div><div class="m"><div class="m-name">ROI<span class="m-tip">下单ROI</span></div><div class="m-main">2.22</div><div class="m-sub"><span>2.08</span> <span class="chg up">+6.8%</span></div></div></div>
+      <div class="sec-label">七夕关键运营动作</div>
+      <div class="acts"><div class="act"><span class="act-k">明星</span><span class="act-v">≥3个明星</span></div><div class="act"><span class="act-k">主播形式</span><span class="act-v">总裁进播</span></div><div class="act"><span class="act-k">七夕组货</span><span class="act-v">是</span></div><div class="act"><span class="act-k">组货类型</span><span class="act-v">七夕特供礼盒or套装</span></div><div class="act"><span class="act-k">七夕装修</span><span class="act-v">是</span></div></div>
+      <div class="sec-label">素材案例</div>
+      <div class="media-case">
+        <div class="media-item" data-case="8">
+          <div class="media-thumb"><img src="assets/自然堂-首帧.jpg" alt="自然堂 素材首帧"></div>
+          <div class="media-info">
+            <div class="media-title">素材案例 · 视频</div>
+            <a class="media-play" href="#" data-video-src="http://1050.gznovazone.svp.tencent-cloud.com/encfile?encurl=aHR0cDovL2Fkc21pbmQuZ2R0aW1nLmNvbS9hZHNfc3ZwX3ZpZGVvX18wYjUzbHVhMzJhYWJ5ZWFqajcyMjI1dmJ3eGlleHZvcWRwa2EuZjIwLm1wND9kaXNfaz04MTRhOTU0NzVlODhkYWY0OTAzN2YxNDViMDZlZGYzYSZkaXNfdD0xNzg0MzU5ODgxJm09MzZmZDQ3Mjk5MTkwZGI4NjFjYTQyMmI4ODMyZGNlNGQmc2hhMjU2PWYyYjY3ZmU0YjViZTY2ZmFhYmZjNzUyODkxYTgzNzI5NTc2NmMwMDE5YjllNmE3NjQ2NzgwZTk1NjY5MTAyODMmeC1vYmplY3QtcHJvY2Vzcz1obHMvbTN1OA==&expiration=1787318947580&salt=4056658939&sign=c7f8b8a1b4476e55&bizid=1050&m=9ab81b62f1a3ad46716cff9b9bbe0742" onclick="openVideo(this);return false;"><span class="play-ico">▶</span> 素材案例视频（点击自动播放）</a>
+          </div>
+        </div>
+      </div>
+      <div class="sec-label">直播间截图</div>
+      <div class="live-shots">
+        <div class="live-col">
+          <div class="live-box" data-case="8" data-slot="直播间截图"><img src="assets/自然堂-直播间截图.jpg" alt="自然堂 直播间截图"></div>
+          <div class="live-cap">直播间截图</div>
+        </div>
+        <div class="live-col">
+          <div class="live-box" data-case="8" data-slot="组货截图"><img src="assets/自然堂-组货截图.jpg" alt="自然堂 直播间组货截图"></div>
+          <div class="live-cap">直播间组货截图</div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  <div class="note">
+    口径说明：膨胀系数 = 七夕周期日均（或七夕当天日耗）÷ 平销期日均；涨跌比例 =（七夕 − 平销）÷ 平销。广告基建为「有消耗广告数 / 创意唯一性ID数」的日均值；广告指标中 CTR、CVR（下单率）、出价为消耗加权，下单单价按成交链路（直播+小店+直购+CID）测算，ROI 为消耗加权（Σ消耗×ROI÷Σ消耗）。数据来源：《7.1-8.19-所有客户分天.xlsx》《七夕重点客户名单.xlsx》。
+  </div>
+</div>
+<div class="vmodal" id="videoModal">
+  <div class="vmodal-inner">
+    <button class="vmodal-close" onclick="closeVideo()">×</button>
+    <video id="modalVideo" controls autoplay playsinline></video>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.15"></script>
+<script>
+var hlsInstance = null;
+function openVideo(el){
+  var src = el.getAttribute('data-video-src');
+  if(!src){ alert('视频链接未配置'); return; }
+  var v = document.getElementById('modalVideo');
+  document.getElementById('videoModal').classList.add('show');
+  // m3u8 处理
+  if(src.indexOf('.m3u8') > -1 && window.Hls && !v.canPlayType('application/vnd.apple.mpegurl')){
+    if(hlsInstance){ hlsInstance.destroy(); }
+    hlsInstance = new Hls();
+    hlsInstance.loadSource(src);
+    hlsInstance.attachMedia(v);
+    hlsInstance.on(Hls.Events.MANIFEST_PARSED, function(){ v.play(); });
+  } else {
+    v.src = src;
+    v.play();
+  }
+}
+function closeVideo(){
+  var v = document.getElementById('modalVideo');
+  v.pause();
+  if(hlsInstance){ hlsInstance.destroy(); hlsInstance = null; }
+  v.removeAttribute('src');
+  v.load();
+  document.getElementById('videoModal').classList.remove('show');
+}
+document.getElementById('videoModal').addEventListener('click', function(e){
+  if(e.target === this){ closeVideo(); }
+});
+</script>
+</body>
+</html>
