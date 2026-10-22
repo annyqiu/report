@@ -1,0 +1,864 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>华大 · 竞价广告复盘（10.05–10.18）</title><style>
+:root{
+  --blue:#2B5CE6;--blue-d:#1B3FA8;--ink:#0F172A;--ink2:#334155;--muted:#64748B;
+  --line:#E6EBF3;--bg:#F4F6FA;--green:#0E9F6E;--red:#DC2626;--amber:#D97706;--violet:#7C5CF0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif;
+  font-size:14px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:0 26px}
+
+/* hero */
+.hero{background:linear-gradient(135deg,#111C4E 0%,#2B5CE6 58%,#1B3FA8 100%);color:#fff;padding:40px 0 34px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-80px;top:-120px;width:420px;height:420px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.16),rgba(255,255,255,0) 68%)}
+.hero h1{font-size:29px;font-weight:800;letter-spacing:.4px;line-height:1.3}
+.hero .meta{margin-top:9px;font-size:13px;color:rgba(255,255,255,.78)}
+.hero .meta i{font-style:normal;color:#fff;font-weight:700}
+.hero .tags{margin-top:20px;display:flex;flex-wrap:wrap;gap:9px}
+.hero .tag{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:8px;
+  padding:8px 13px;font-size:12.5px;color:rgba(255,255,255,.92)}
+.hero .tag b{font-size:16px;font-weight:800;color:#fff;margin:0 3px;letter-spacing:.3px}
+.hero .tag b.g{color:#7EF0C4}
+
+/* section */
+.sec{margin-top:34px}
+.sec-h{display:flex;align-items:center;gap:11px;margin-bottom:6px}
+.sec-h .n{width:28px;height:28px;border-radius:9px;background:var(--blue);color:#fff;font-size:13px;font-weight:800;
+  display:flex;align-items:center;justify-content:center;flex:none}
+.sec-h h2{font-size:19px;font-weight:800;letter-spacing:.3px}
+.sec-h .hint{margin-left:auto;font-size:12px;color:var(--muted)}
+.take{background:linear-gradient(90deg,#EEF3FF,#F7F9FF 70%,#fff);border-left:4px solid var(--blue);
+  border-radius:0 10px 10px 0;padding:13px 18px;font-size:13.8px;color:#1E2A45;line-height:1.72;margin:12px 0 18px}
+.take b{color:var(--blue-d)}
+.take .warn{color:var(--red);font-weight:800}
+.take .good{color:var(--green);font-weight:800}
+
+/* card */
+.card{background:#fff;border-radius:14px;padding:22px 24px;margin-bottom:16px;
+  box-shadow:0 1px 2px rgba(16,24,40,.05),0 8px 24px -18px rgba(16,24,40,.28)}
+.card-h{display:flex;align-items:baseline;gap:10px;margin-bottom:14px}
+.card-h h3{font-size:15.5px;font-weight:800}
+.card-h span{font-size:12px;color:var(--muted)}
+
+/* KPI */
+.kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.kpi{background:#F8FAFF;border:1px solid #E7EDFA;border-radius:11px;padding:14px 15px}
+.kpi-l{font-size:12px;color:var(--muted);font-weight:600}
+.kpi-v{font-size:25px;font-weight:800;color:var(--blue-d);line-height:1.25;margin-top:3px;letter-spacing:.2px}
+.kpi-v small{font-size:12px;font-weight:600;color:var(--muted);margin-left:2px}
+.kpi-d{font-size:12px;font-weight:700;margin-top:5px}
+.kpi-d.pos{color:var(--green)} .kpi-d.neg{color:var(--red)}
+.kpi-s{color:var(--muted);font-weight:500;margin-left:6px}
+
+/* 链路卡 */
+.lane{border:1px solid var(--line);border-radius:13px;padding:18px 20px;margin-top:12px;background:#fff}
+.lane-top{display:flex;align-items:center;gap:12px;margin-bottom:4px}
+.lane-top .dot{width:9px;height:9px;border-radius:50%;background:var(--blue)}
+.lane-top h4{font-size:15px;font-weight:800}
+.lane-top .badge{font-size:11px;font-weight:800;border-radius:6px;padding:2px 8px}
+.badge.pass{color:#0B7A55;background:#E6F7F0;border:1px solid #BFE9D8}
+.badge.risk{color:#9B1C1C;background:#FEF0F0;border:1px solid #FBD5D5}
+.lane .sub{font-size:12px;color:var(--muted);margin-bottom:12px}
+
+/* ROI 达标条 */
+.goal{margin-top:14px}
+.goal-t{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:7px}
+.goal-t b{color:var(--ink);font-weight:800}
+.goal-bar{position:relative;height:12px;background:#EEF2F9;border-radius:8px;overflow:visible}
+.goal-bar i{position:absolute;left:0;top:0;bottom:0;border-radius:8px;background:linear-gradient(90deg,#7BA0F5,#2B5CE6)}
+.goal-bar i.ok{background:linear-gradient(90deg,#34C08B,#0E9F6E)}
+.goal-mark{position:absolute;top:-5px;bottom:-5px;width:2px;background:#DC2626;border-radius:2px}
+.goal-mark span{position:absolute;top:-19px;left:50%;transform:translateX(-50%);font-size:10.5px;color:#DC2626;white-space:nowrap;font-weight:700}
+
+/* 对比条 */
+.cmp{margin-bottom:14px}
+.cmp:last-child{margin-bottom:0}
+.cmp-title{font-size:12.8px;font-weight:700;color:var(--ink2);margin-bottom:6px}
+.cmp-title em{font-style:normal;font-size:11.5px;color:var(--muted);font-weight:600;margin-left:8px}
+.cmp-row{display:flex;align-items:center;gap:9px;margin-bottom:5px}
+.cmp-tag{font-size:10.5px;font-weight:800;color:var(--muted);width:28px;flex:none}
+.cmp-tag.me{color:var(--blue)}
+.track{flex:1;height:11px;background:#F1F4FA;border-radius:6px;overflow:hidden}
+.fill{display:block;height:100%;border-radius:6px}
+.fill.me{background:linear-gradient(90deg,#6E93F2,#2B5CE6)}
+.fill.bm{background:#D7DEEA}
+.fill.bad{background:linear-gradient(90deg,#F28B82,#DC2626)}
+.fill.good{background:linear-gradient(90deg,#5BD3A6,#0E9F6E)}
+.cmp-val{width:66px;text-align:right;font-size:12.5px;font-weight:800;color:var(--ink)}
+.cmp-val.dim{color:var(--muted);font-weight:600}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+
+/* 堆叠条 */
+.stack{margin-top:4px}
+.stack-bar{display:flex;height:34px;border-radius:8px;overflow:hidden;border:1px solid #EFF2F8}
+.stack-bar i{display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:800;color:#fff;
+  border-right:2px solid #fff;white-space:nowrap;overflow:hidden}
+.stack-bar i:last-child{border-right:none}
+.stack-lab{font-size:12px;font-weight:700;color:var(--ink2);margin:14px 0 6px;display:flex;justify-content:space-between}
+.legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:11px;font-size:11.5px;color:var(--muted)}
+.legend span{display:flex;align-items:center;gap:5px}
+.legend em{width:9px;height:9px;border-radius:3px;display:inline-block}
+
+/* 大数字对比 */
+.bignum{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.bn{border:1px solid var(--line);border-radius:11px;padding:13px 14px;background:#FCFDFF}
+.bn-l{font-size:11.5px;color:var(--muted);font-weight:600}
+.bn-v{font-size:21px;font-weight:800;color:var(--ink);margin-top:3px}
+.bn-v small{font-size:11.5px;color:var(--muted);font-weight:600;margin-left:3px}
+.bn-x{font-size:11.5px;font-weight:700;margin-top:3px}
+.bn-x.neg{color:var(--red)} .bn-x.pos{color:var(--green)}
+
+/* note */
+.note{display:flex;gap:10px;padding:12px 14px;border-radius:10px;font-size:12.8px;line-height:1.7;margin-top:14px}
+.note .ico{font-weight:900;flex:none}
+.note.red{background:#FEF4F4;border:1px solid #F9DADA;color:#8F1D1D}
+.note.green{background:#F1FBF6;border:1px solid #CDEEDD;color:#0B5E43}
+.note.blue{background:#F3F6FF;border:1px solid #DEE7FB;color:#1E3A8A}
+.note.amber{background:#FFFAF0;border:1px solid #F8E6C2;color:#7C4A03}
+.note b{font-weight:800}
+
+/* 直播间卡 */
+.rooms{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+.room{border:1px solid var(--line);border-radius:12px;padding:15px 16px;background:linear-gradient(180deg,#FBFCFE,#fff)}
+.room-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
+.room-h b{font-size:14px}
+.room-h .rk{font-size:10.5px;font-weight:800;color:#fff;background:#94A3B8;border-radius:5px;padding:1px 6px}
+.room-h .rk.t1{background:var(--blue)}
+.room-v{font-size:22px;font-weight:800;color:var(--ink)}
+.room-v small{font-size:11.5px;color:var(--muted);font-weight:600;margin-left:2px}
+.room-d{font-size:11.5px;font-weight:700;margin-top:2px}
+.room-d.pos{color:var(--green)} .room-d.neg{color:var(--red)}
+.room-m{margin-top:10px;padding-top:9px;border-top:1px dashed #E8EDF6;display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
+.room-m b{color:var(--ink);font-weight:800}
+
+/* 商品条 */
+.pbar{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+.pbar .nm{width:150px;font-size:12.5px;font-weight:600;color:var(--ink2);flex:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pbar .tr{flex:1;height:16px;background:#F2F5FA;border-radius:5px;overflow:hidden}
+.pbar .tr i{display:block;height:100%;border-radius:5px;background:linear-gradient(90deg,#7FA3F4,#2B5CE6)}
+.pbar .vv{width:104px;text-align:right;font-size:12px;color:var(--muted);flex:none}
+.pbar .vv b{color:var(--ink);font-weight:800}
+
+/* 能力行 */
+.cap{display:grid;grid-template-columns:120px 1fr 190px;gap:14px;align-items:center;padding:11px 0;border-bottom:1px solid #F1F4F9}
+.cap:last-child{border-bottom:none}
+.cap .nm{font-size:13px;font-weight:800}
+.cap .nm em{display:block;font-style:normal;font-size:11px;color:var(--muted);font-weight:600;margin-top:2px}
+.cap .roi{display:flex;gap:8px;justify-content:flex-end;font-size:12px}
+.pill{font-size:11.5px;font-weight:800;border-radius:6px;padding:2px 8px;white-space:nowrap}
+.pill.g{color:#0B7A55;background:#E6F7F0}
+.pill.r{color:#9B1C1C;background:#FEF0F0}
+.pill.b{color:#1E40AF;background:#EEF3FF}
+.pill.n{color:#475569;background:#F1F5F9}
+
+/* 表格 */
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{background:#F4F7FD;color:#3B4A66;font-weight:800;font-size:11.8px;text-align:left;padding:9px 10px;border-bottom:1px solid #E1E8F4}
+td{padding:9px 10px;border-bottom:1px solid #F1F4F9;color:var(--ink2)}
+tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+td b{color:var(--ink);font-weight:800}
+.drill{margin-top:13px;border-top:1px dashed #DCE3F0;padding-top:12px}
+.drill summary{cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:7px;font-size:12.2px;font-weight:800;color:#1B3FA8;background:#EEF3FE;border:1px solid #D5E0F7;border-radius:20px;padding:7px 16px;user-select:none}
+.drill summary::-webkit-details-marker{display:none}
+.drill summary:after{content:"▾";font-size:10px}
+.drill[open] summary:after{content:"▴"}
+.drill-body{margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.droom{border:1px solid #E1E8F4;border-radius:10px;background:#F8FAFD;padding:13px 15px}
+.droom .dh{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.droom .dh b{font-size:13.5px;color:#0F172A}
+.droom .dh span{font-size:11px;font-weight:800;color:#64748B}
+.droom table.mini{margin-top:8px}
+.dnote{font-size:11.8px;line-height:1.62;color:#334155;margin-top:9px;font-weight:600}
+.tbl-wrap{overflow-x:auto}
+table.mini th{padding:6px 8px;font-size:11px}
+table.mini td{padding:6px 8px;font-size:11.8px}
+.pri{font-size:11px;font-weight:800;border-radius:5px;padding:2px 7px;color:#fff}
+.pri.p0{background:#DC2626} .pri.p1{background:#D97706} .pri.p2{background:#64748B}
+
+details{margin-top:12px;border-top:1px dashed var(--line);padding-top:10px}
+summary{cursor:pointer;font-size:12.5px;font-weight:800;color:var(--blue-d);list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"▸ ";font-size:11px}
+details[open] summary::before{content:"▾ "}
+.footer{text-align:center;color:#94A3B8;font-size:11.5px;padding:34px 0 44px}
+@media (max-width:900px){.two-col,.kpi-grid,.bignum,.rooms{grid-template-columns:1fr}}
+</style></head><body>
+<div class="hero"><div class="wrap">
+  <h1>华大 · 竞价广告复盘</h1>
+  <div class="meta">复盘周期 <i>10.05–10.18</i>（14 天）　｜　对比 <i>09.21–10.04</i>（14 天）　｜　考核 ROI <i>1.8</i>　｜　链路 直播 · 小店直购</div>
+  <div class="tags">
+    <span class="tag">直播日均 <b>9.04</b> 万 <b class="g">+101%</b></span>
+    <span class="tag">直播 ROI <b>1.89</b> <b class="g">+8%</b></span>
+    <span class="tag">小店日均 <b>2.96</b> 万 <b class="g">+24%</b></span>
+    <span class="tag">小店 ROI <b>2.45</b> <b class="g">+19%</b></span>
+  </div>
+</div></div>
+<div class="wrap">
+<div class="sec">
+  <div class="sec-h"><span class="n">00</span><h2>一句话结论</h2><span class="hint">先看这三条，再看后面</span></div>
+  <div class="take">这轮是<b>「放量但效率没掉」</b>的一次：直播日均消耗翻倍（+101%），ROI 反而涨到 1.89（+8%），站稳考核线 1.8；小店靠下单率 +149% 把 ROI 拉到 2.45（+19%）。但<span class="warn">两个长尾商品退款偏高</span>——精华水 53.03%、紧致礼盒 42.86%，合计只占小店消耗约 18%，主力品贴近大盘，不动摇基本盘。</div>
+
+  <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr)">
+    <div class="kpi" style="background:#F3FBF7;border-color:#CFEDDF">
+      <div class="kpi-l">最大的成绩</div>
+      <div style="font-size:13.5px;font-weight:800;color:#0B6B4C;margin-top:6px;line-height:1.6">直播翻倍放量、ROI 不降反升</div>
+      <div style="font-size:12.2px;color:#3F6B5B;margin-top:6px;line-height:1.65">消耗 4.50→9.04 万/日，ROI 1.76→1.89；小店下单率 0.34%→0.86%（+149%）</div>
+    </div>
+    <div class="kpi" style="background:#FEF6F6;border-color:#F7D9D9">
+      <div class="kpi-l">最大的风险</div>
+      <div style="font-size:13.5px;font-weight:800;color:#9B1C1C;margin-top:6px;line-height:1.6">长尾商品退款偏高</div>
+      <div style="font-size:12.2px;color:#7C3B3B;margin-top:6px;line-height:1.65">精华水 53.03%、紧致礼盒 42.86% 均为低消耗长尾品（合计占小店消耗约 18%）；主力品 15.22% 贴近大盘 12.16%；差评率 11.11%（大盘 8.06%）需盯</div>
+    </div>
+    <div class="kpi" style="background:#FFFAF1;border-color:#F6E3BF">
+      <div class="kpi-l">最硬的短板</div>
+      <div style="font-size:13.5px;font-weight:800;color:#8A5205;margin-top:6px;line-height:1.6">素材与基建都只有标杆零头</div>
+      <div style="font-size:12.2px;color:#7A5A28;margin-top:6px;line-height:1.65">5s 完播 18.08% vs 32.12%，点击率 1.16% vs 2.01%，广告 81 条 vs 305 条</div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px;display:flex;align-items:center;gap:18px;flex-wrap:wrap">
+    <div style="font-size:12px;font-weight:800;color:var(--muted);letter-spacing:.5px">策略路径</div>
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <span class="pill r" style="padding:5px 11px">P0 排退款 · 控差评</span><span style="color:#C4CCDA">→</span>
+      <span class="pill" style="color:#8A5205;background:#FDF1DC;padding:5px 11px">P1 提素材 · 补基建 · 抢机会版位</span><span style="color:#C4CCDA">→</span>
+      <span class="pill n" style="padding:5px 11px">P2 放大潜客优投 · 创意优投</span>
+    </div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-h"><span class="n">01</span><h2>双链路成绩单</h2><span class="hint">10.05–10.18 日均 vs 09.21–10.04 日均</span></div>
+  <div class="take">直播是<b>「量翻倍、效率略升」</b>：消耗 +101%、ROI +8%、下单成本还降了 7%；小店是<b>「转化修好、量价齐升」</b>：下单率从 0.34% 拉到 0.86%，ROI 2.45。两条链路都在考核线 1.8 之上，<span class="good">放量的底子还在</span>。</div>
+
+  <div class="lane">
+    <div class="lane-top"><span class="dot"></span><h4>直播链路</h4><span class="badge pass">ROI 1.89 · 达标</span></div>
+    <div class="sub">日均消耗 9.04 万（+101%）　下单成本 609 元（-7%）　客单价 1,153 元（+1%）</div>
+    <div class="kpi-grid">
+      
+      <div class="kpi">
+        <div class="kpi-l">日均消耗</div>
+        <div class="kpi-v">9.04<small>万</small></div>
+        <div class="kpi-d pos">▲ +101%</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-l">下单 ROI</div>
+        <div class="kpi-v">1.89<small></small></div>
+        <div class="kpi-d pos">▲ +8%</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-l">下单成本</div>
+        <div class="kpi-v">609<small>元</small></div>
+        <div class="kpi-d pos">▼ -7%</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-l">客单价</div>
+        <div class="kpi-v">1,153<small>元</small></div>
+        <div class="kpi-d pos">▲ +1%</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-l">点击率</div>
+        <div class="kpi-v">1.66<small>%</small></div>
+        <div class="kpi-d pos">▲ +27%</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-l">竞价 CPM</div>
+        <div class="kpi-v">252<small>元</small></div>
+        <div class="kpi-d neg">▲ +24%</div>
+      </div>
+    </div>
+    <div class="goal">
+      <div class="goal-t"><span>ROI 距考核线 1.8</span><span>达标余量 <b>+0.09</b></span></div>
+      <div class="goal-bar"><i class="ok" style="width:75.6%"></i><span class="goal-mark" style="left:72%"><span>考核 1.8</span></span></div>
+    </div>
+    <div class="note blue"><span class="ico">i</span><span><b>CPM +24%，与点击率 +27%、下单率 +4% 同向：</b>CPM 由出价、点击率、下单率共同决定，高 CPM 代表广告竞争力上行、素材端接得住。出价 580 元仍低于「客单价 1,153÷1.8＝<b>641 元</b>」的合理上限，还有约 61 元的提价空间。</span></div>
+  </div>
+
+  <div class="lane">
+    <div class="lane-top"><span class="dot" style="background:var(--violet)"></span><h4>小店直购链路</h4><span class="badge pass">ROI 2.45 · 优秀</span></div>
+    <div class="sub">日均消耗 2.96 万（+24%）　下单成本 411 元（-8%）　客单价 1,006 元（+9%）</div>
+    <div class="kpi-grid">
+      
+      <div class="kpi">
+        <div class="kpi-l">日均消耗</div>
+        <div class="kpi-v">2.96<small>万</small></div>
+        <div class="kpi-d pos">▲ +24%</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-l">下单 ROI</div>
+        <div class="kpi-v">2.45<small></small></div>
+        <div class="kpi-d pos">▲ +19%</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-l">下单率</div>
+        <div class="kpi-v">0.86<small>%</small></div>
+        <div class="kpi-d pos">▲ +149%</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-l">下单成本</div>
+        <div class="kpi-v">411<small>元</small></div>
+        <div class="kpi-d pos">▼ -8%</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-l">点击率</div>
+        <div class="kpi-v">1.91<small>%</small></div>
+        <div class="kpi-d neg">▼ -7%</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-l">出价</div>
+        <div class="kpi-v">423<small>元</small></div>
+        <div class="kpi-d pos">▲ +6%</div>
+      </div>
+    </div>
+    <div class="note blue"><span class="ico">i</span><span><b>ROI 2.45 是小店的历史高位，但结构要看清：</b>下单率翻了 2.5 倍是主因，点击率却掉了 7%。合理出价上限＝1,006÷1.8＝<b>559 元</b>，当前 423 元偏低，有 136 元提价空间——出价空间可用——退款集中在两个长尾商品（详见 04，合计占消耗约 18%，不动基本盘）。口径：小店链路<b>仅统计美妆商品</b>，挂耳咖啡等非美妆品（0.02 万/日、占比约 0.7%）已剔除，美妆加权 ROI 仍为 2.45。</span></div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-h"><span class="n">02</span><h2>直播：三个直播间，增量几乎全在主号</h2><span class="hint">分直播间 · 本周期 vs 上周期</span></div>
+  <div class="take">主号华大集团商城吃掉 <b>78% 的消耗</b>，也是唯一「放量 + ROI 正增长」的直播间；韶初泌语量翻了 2.5 倍，CPM 涨到 398 元（+44%），是三间里<b>广告竞争力最强</b>的一间；华大甄选 ROI 回落 23%，是唯一效率下滑的。</div>
+
+  <div class="card">
+    <div class="rooms">
+      <div class="room">
+        <div class="room-h"><b>华大集团商城</b><span class="rk t1">主号</span></div>
+        <div class="room-v">7.02<small>万/日</small></div>
+        <div class="room-d pos">▲ +91%　占 78%</div>
+        <div class="room-m"><span>ROI <b>1.98</b>（+7%）</span><span>CPM <b>235</b>（+13%）</span></div>
+      </div>
+      <div class="room">
+        <div class="room-h"><b>韶初泌语</b><span class="rk">二号</span></div>
+        <div class="room-v">1.57<small>万/日</small></div>
+        <div class="room-d pos">▲ +151%　占 17%</div>
+        <div class="room-m"><span>ROI <b>1.56</b>（+42%）</span><span>CPM <b>398</b>（+44%）</span></div>
+      </div>
+      <div class="room">
+        <div class="room-h"><b>华大甄选</b><span class="rk">三号</span></div>
+        <div class="room-v">0.45<small>万/日</small></div>
+        <div class="room-d pos">▲ +133%　占 5%</div>
+        <div class="room-m"><span>ROI <b>1.69</b>（-23%）</span><span>CPM <b>217</b>（+137%）</span></div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px">
+      <div class="pbar"><span class="nm">华大集团商城</span><span class="tr"><i style="width:100%"></i></span><span class="vv"><b>7.02 万</b> · ROI 1.98</span></div>
+      <div class="pbar"><span class="nm">韶初泌语</span><span class="tr"><i style="width:22.4%"></i></span><span class="vv"><b>1.57 万</b> · ROI 1.56</span></div>
+      <div class="pbar"><span class="nm">华大甄选</span><span class="tr"><i style="width:6.4%"></i></span><span class="vv"><b>0.45 万</b> · ROI 1.69</span></div>
+    </div>
+
+    <div class="note blue"><span class="ico">i</span><span><b>韶初泌语 CPM 398 元（主号 235 元的 1.7 倍）——高 CPM 代表广告竞争力高：</b>CPM 由出价、点击率、下单率共同决定，高不等于流量贵。量翻 2.5 倍的同时，ROI 从 1.09 修到 1.56（+42%）、下单成本从 1,079 降到 770 元，抢量能力与转化效率同步上行，放量节奏可延续；ROI 1.56 距考核线 1.8 还差 0.24，下一步让效率先达标、再继续放量。</span></div>
+    <div class="note red" style="margin-top:10px"><span class="ico">!</span><span><b>华大甄选 ROI -23%：</b>问题在承接不在流量，需回看直播间话术与货盘。</span></div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-h"><span class="n">03</span><h2>直播：和标杆差在哪</h2><span class="hint">华大集团商城 vs 标杆同行</span></div>
+  <div class="take">差距<b>不在效率，在「量」和「内容」</b>：ROI 1.98 只比标杆低 0.09，但<span class="warn">广告只有 81 条（标杆 305）</span>、<span class="warn">5s 完播 18.08%（标杆 32.12%）</span>。换句话说，同样的钱你能跑出接近的效率，却没有足够的广告位和好素材去承接更大的量。</div>
+
+  <div class="card">
+    <div class="card-h"><h3>3.1　流量结构：钱花在哪，机会在哪</h3><span>消耗占比（%）</span></div>
+    <div class="stack-lab"><span>华大集团商城</span></div><div class="stack-bar"><i style="width:57.58%;background:#2B5CE6">57%</i><i style="width:17.17%;background:#7C5CF0">17%</i><i style="width:15.15%;background:#D97706">15%</i><i style="width:4.04%;background:#0E9F6E">4%</i><i style="width:6.06%;background:#5AA9F0">6%</i></div>
+    <div class="stack-lab"><span>标杆视频号</span></div><div class="stack-bar"><i style="width:69.70%;background:#2B5CE6">69%</i><i style="width:3.03%;background:#7C5CF0"></i><i style="width:5.05%;background:#D97706">5%</i><i style="width:10.10%;background:#0E9F6E">10%</i><i style="width:12.12%;background:#5AA9F0">12%</i></div>
+    <div class="legend"><span><em style="background:#2B5CE6"></em>视频号</span><span><em style="background:#7C5CF0"></em>朋友圈</span><span><em style="background:#D97706"></em>公众号</span><span><em style="background:#0E9F6E"></em>平台与内容</span><span><em style="background:#5AA9F0"></em>小程序</span></div>
+    <div class="tbl-wrap" style="margin-top:14px"><table>
+      <thead><tr><th>分流量</th><th class="num">华大占比</th><th class="num">华大 ROI</th><th class="num">华大日耗*</th><th class="num">标杆占比</th><th class="num">标杆 ROI</th><th style="width:190px">判定</th></tr></thead>
+      <tbody>
+        <tr><td><b>视频号</b></td><td class="num"><b>57%</b></td><td class="num">1.96</td><td class="num">4.00</td><td class="num">69%</td><td class="num">2.09</td><td><span class="pill n">基本盘 · 保持</span></td></tr>
+        <tr><td><b>朋友圈</b></td><td class="num"><b>17%</b></td><td class="num"><b style="color:#DC2626">1.68</b></td><td class="num">1.19</td><td class="num">3%</td><td class="num">2.18</td><td><span class="pill r">ROI 全场最低 · 收仓</span></td></tr>
+        <tr><td><b>公众号</b></td><td class="num"><b>15%</b></td><td class="num"><b style="color:#0B7A55">2.27</b></td><td class="num">1.05</td><td class="num">5%</td><td class="num">2.42</td><td><span class="pill b">ROI 高于整体 · 维持</span></td></tr>
+        <tr><td><b>平台与内容</b></td><td class="num"><b>4%</b></td><td class="num"><b style="color:#0B7A55">2.13</b></td><td class="num">0.28</td><td class="num">10%</td><td class="num">1.79</td><td><span class="pill g">机会流量 · 补到 10%</span></td></tr>
+        <tr><td><b>小程序</b></td><td class="num"><b>6%</b></td><td class="num"><b style="color:#0B7A55">2.25</b></td><td class="num">0.42</td><td class="num">12%</td><td class="num">1.99</td><td><span class="pill g">机会流量 · 补到 12%</span></td></tr>
+        <tr><td>移动联盟</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td><span class="pill n">未投</span></td></tr>
+      </tbody>
+    </table></div>
+    <div style="font-size:11px;color:#8A94A6;margin-top:7px">* 华大日耗（万/日）按「整体日均消耗 7.02 万 × 各分流量占比」推算。机会流量判定口径：占比 &lt; 10% 且 ROI 高于华大整体 1.98。</div>
+    <div class="note blue" style="margin-top:12px"><span class="ico">i</span><span><b>两个明确的增量位：</b>平台与内容只投了 4%（标杆 10%，ROI 2.13，日耗仅 0.28 万），小程序只投了 6%（标杆 12%，ROI 2.25）——都是「占比低、ROI 高于整体」的机会流量，用单投 3.0 广告补齐最直接。<b>反过来，朋友圈投到 17%（标杆 3%），ROI 只有 1.68，是全场最低</b>，属于该收的仓位。另两个直播间同样有此结构：韶初泌语小程序占 4%（ROI 2.39）、华大甄选平台占 1%（ROI 2.75），补位逻辑一致。</span></div>
+    <details class="drill"><summary>下钻其他直播间 · 2号 韶初泌语 / 3号 华大甄选</summary>
+<div class="drill-body">
+<div class="droom">
+  <div class="dh"><b>2号 · 韶初泌语</b><span>1.57 万/日 · ROI 1.56</span></div>
+  <table class="mini"><thead><tr><th>分流量</th><th class="num">占比</th><th class="num">ROI</th></tr></thead><tbody>
+    <tr><td>视频号</td><td class="num">76%</td><td class="num">1.60</td></tr>
+    <tr><td>朋友圈</td><td class="num">4%</td><td class="num">1.80</td></tr>
+    <tr><td>公众号</td><td class="num">9%</td><td class="num">1.53</td></tr>
+    <tr><td>平台与内容</td><td class="num">1%</td><td class="num"><b style="color:#DC2626">0.09</b></td></tr>
+    <tr><td>小程序</td><td class="num">4%</td><td class="num"><b style="color:#0B7A55">2.39</b></td></tr>
+  </tbody></table>
+  <div class="dnote"><b>机会位：</b>小程序 4%（ROI 2.39）与朋友圈 4%（1.80）占比低、效率高于本间整体 1.56，单投 3.0 广告补位；<b>平台与内容 1%（ROI 0.09）先收掉</b>。</div>
+</div>
+<div class="droom">
+  <div class="dh"><b>3号 · 华大甄选</b><span>0.45 万/日 · ROI 1.69</span></div>
+  <table class="mini"><thead><tr><th>分流量</th><th class="num">占比</th><th class="num">ROI</th></tr></thead><tbody>
+    <tr><td>视频号</td><td class="num">75%</td><td class="num">1.82</td></tr>
+    <tr><td>朋友圈</td><td class="num">9%</td><td class="num"><b style="color:#DC2626">1.14</b></td></tr>
+    <tr><td>公众号</td><td class="num">8%</td><td class="num">1.24</td></tr>
+    <tr><td>平台与内容</td><td class="num">1%</td><td class="num"><b style="color:#0B7A55">2.75</b></td></tr>
+    <tr><td>小程序</td><td class="num">5%</td><td class="num">1.70</td></tr>
+  </tbody></table>
+  <div class="dnote"><b>机会位：</b>平台与内容 1%（ROI 2.75）占比最低、效率最高，优先补位；朋友圈 9%（1.14）与公众号 8%（1.24）低于本间整体 1.69，建议收仓——<b>这间 ROI -23% 的主因仍在承接（话术/货盘），流量侧同步把低效仓位收一收</b>。</div>
+</div>
+</div></details>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><h3>3.2　基建：广告数只有标杆的 1/4</h3><span>华大集团商城 vs 标杆同行</span></div>
+    <div class="bignum">
+      <div class="bn"><div class="bn-l">项目&广告数</div><div class="bn-v">81 <small>vs 305</small></div><div class="bn-x neg">-73%　缺口 224 条</div></div>
+      <div class="bn"><div class="bn-l">新广告占比</div><div class="bn-v">5% <small>vs 12%</small></div><div class="bn-x neg">-58%　建议 10%+</div></div>
+      <div class="bn"><div class="bn-l">创意指纹数</div><div class="bn-v">2,708 <small>vs 14,568</small></div><div class="bn-x neg">-81%</div></div>
+      <div class="bn"><div class="bn-l">账户数</div><div class="bn-v">13 <small>vs 4</small></div><div class="bn-x pos">+225%　账户不少，广告不够</div></div>
+    </div>
+    <div class="note amber"><span class="ico">!</span><span><b>矛盾点很典型：账户开了 13 个（标杆 4 个），广告却只有 81 条。</b>说明问题不是「没账户」，而是每个账户里的广告没铺开。把账户数优势转成广告量，是最不依赖素材质量的一步增量。<b>4+m 重复广告占比 5%，优于标杆 10%</b>，这条不用动。</span></div>
+    <details class="drill"><summary>下钻其他直播间 · 2号 韶初泌语 / 3号 华大甄选</summary>
+<div class="drill-body">
+<div class="droom">
+  <div class="dh"><b>2号 · 韶初泌语</b><span>vs 标杆</span></div>
+  <table class="mini"><thead><tr><th>基建指标</th><th class="num">韶初泌语</th><th class="num">标杆</th></tr></thead><tbody>
+    <tr><td>项目&amp;广告数</td><td class="num"><b>21</b></td><td class="num">305</td></tr>
+    <tr><td>账户数</td><td class="num">4</td><td class="num">4</td></tr>
+    <tr><td>新广告占比</td><td class="num">11%</td><td class="num">12%</td></tr>
+    <tr><td>创意指纹数</td><td class="num">872</td><td class="num">14,568</td></tr>
+    <tr><td>指纹条均消耗</td><td class="num">252 元</td><td class="num">376 元</td></tr>
+    <tr><td>4+m 重复广告占比</td><td class="num"><b style="color:#0B7A55">1%</b></td><td class="num">10%</td></tr>
+  </tbody></table>
+  <div class="dnote">广告量三间最薄（21 条），但 4+m 重复 1%、新广告占比 11% 已对齐标杆节奏——<b>量少质不差，扩广告数是第一增量</b>，账户数不用加。</div>
+</div>
+<div class="droom">
+  <div class="dh"><b>3号 · 华大甄选</b><span>vs 标杆</span></div>
+  <table class="mini"><thead><tr><th>基建指标</th><th class="num">华大甄选</th><th class="num">标杆</th></tr></thead><tbody>
+    <tr><td>项目&amp;广告数</td><td class="num"><b>27</b></td><td class="num">305</td></tr>
+    <tr><td>账户数</td><td class="num">7</td><td class="num">4</td></tr>
+    <tr><td>新广告占比</td><td class="num">8%</td><td class="num">12%</td></tr>
+    <tr><td>创意指纹数</td><td class="num">872</td><td class="num">14,568</td></tr>
+    <tr><td>指纹条均消耗</td><td class="num"><b style="color:#DC2626">72 元</b></td><td class="num">376 元</td></tr>
+    <tr><td>开播天数</td><td class="num">11 天</td><td class="num">14 天</td></tr>
+  </tbody></table>
+  <div class="dnote">指纹条均 72 元仅约标杆的 19%，素材跑量能力最弱；开播还少 3 天——<b>先补开播天数与广告数，再谈效率</b>。</div>
+</div>
+</div></details>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><h3>3.3　素材：前 3 秒留不住人，直接拖垮点击</h3><span>华大集团商城 vs 标杆同行</span></div>
+    <div class="two-col">
+      <div>
+        
+    <div class="cmp">
+      <div class="cmp-title">5s 完播率<em>差 14.0pct</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">华大</span>
+        <div class="track"><i class="fill me" style="width:56.3%"></i></div>
+        <span class="cmp-val">18.08%</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
+        <span class="cmp-val dim">32.12%</span>
+      </div>
+    </div>
+    <div class="cmp">
+      <div class="cmp-title">点击率 CTR<em>差 0.85pct</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">华大</span>
+        <div class="track"><i class="fill me" style="width:57.7%"></i></div>
+        <span class="cmp-val">1.16%</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
+        <span class="cmp-val dim">2.01%</span>
+      </div>
+    </div>
+    <div class="cmp">
+      <div class="cmp-title">平均播放时长<em>差 4.68s</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">华大</span>
+        <div class="track"><i class="fill me" style="width:52.9%"></i></div>
+        <span class="cmp-val">5.26s</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
+        <span class="cmp-val dim">9.94s</span>
+      </div>
+    </div>
+      </div>
+      <div>
+        
+    <div class="cmp">
+      <div class="cmp-title">CVR（点击→下单）<em>差 4.74pct</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">华大</span>
+        <div class="track"><i class="fill me" style="width:60.2%"></i></div>
+        <span class="cmp-val">7.17%</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
+        <span class="cmp-val dim">11.91%</span>
+      </div>
+    </div>
+    <div class="cmp">
+      <div class="cmp-title">CTCVR<em>差 12.85pct</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">华大</span>
+        <div class="track"><i class="fill me" style="width:35.1%"></i></div>
+        <span class="cmp-val">6.95%</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
+        <span class="cmp-val dim">19.80%</span>
+      </div>
+    </div>
+    <div class="cmp">
+      <div class="cmp-title">平均素材时长<em>只有标杆一半</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">华大</span>
+        <div class="track"><i class="fill me" style="width:53.4%"></i></div>
+        <span class="cmp-val">57.78s</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
+        <span class="cmp-val dim">108.26s</span>
+      </div>
+    </div>
+      </div>
+    </div>
+    <div class="note red"><span class="ico">!</span><span><b>指标是连锁的：</b>素材只有 57.78s（标杆 108.26s），5s 完播掉到 18.08%，前端留不住人 → 点击率 1.16% → CTCVR 6.95%（标杆 19.80%）。<b>先把素材时长拉到 60s+、重构前 5 秒钩子</b>，点击率才有机会从 1.16% 往 2% 走；这一步不做，补再多广告也只是把低效素材再跑一遍。</span></div>
+    <div class="cmp-title" style="margin-top:14px">素材类型结构 · 华大直播链路整体</div>
+    <table class="mini">
+      <thead><tr><th>素材类型</th><th class="num">华大 · 消耗占比</th><th class="num">华大 · 下单ROI</th><th class="num">华大 · 有消耗创意指纹数</th><th class="num">大盘 · 消耗占比</th><th class="num">大盘 · 下单ROI</th></tr></thead>
+      <tbody>
+        <tr><td>竖版视频</td><td class="num">92%</td><td class="num">1.85</td><td class="num">2861 个</td><td class="num">94%</td><td class="num">1.79</td></tr>
+        <tr><td>实时画面</td><td class="num">6%</td><td class="num">2.19</td><td class="num">75 个</td><td class="num">4%</td><td class="num">2.45</td></tr>
+        <tr><td>横版视频</td><td class="num">2%</td><td class="num"><b style="color:#0B7A55">2.69</b></td><td class="num">283 个</td><td class="num">1%</td><td class="num">1.77</td></tr>
+        <tr><td>原生动态</td><td class="num">1%</td><td class="num">2.39</td><td class="num">190 个</td><td class="num">1%</td><td class="num">2.37</td></tr>
+      </tbody>
+    </table>
+    <div class="note blue" style="margin-top:10px"><span class="ico">i</span><span><b>增量机会在两个低仓位高效率类型：</b>横版视频 ROI 2.69 为四类最高（大盘 1.77），占比仅 2%、283 个创意指纹；实时画面 ROI 2.19 高于竖版 1.85，占比 6% 已超大盘 4%、仅 75 个创意指纹——两者均有提占比空间。原生动态 ROI 2.39 与大盘 2.37 持平，但 190 个创意指纹只跑出 1% 消耗，单条跑量能力弱，先优化素材再扩仓位；竖版 92% 是基本盘（ROI 1.85，略优于大盘 1.79），维持。</span></div>
+    <details class="drill"><summary>下钻其他直播间 · 2号 韶初泌语 / 3号 华大甄选</summary>
+<div class="drill-body">
+<div class="droom">
+  <div class="dh"><b>2号 · 韶初泌语</b><span>竖版 97%（1.56）· 实时画面 3%（1.25）· 原生 0%（1.73）· 横版 0%</span></div>
+  <table class="mini"><thead><tr><th>素材指标</th><th class="num">韶初泌语</th><th class="num">标杆</th></tr></thead><tbody>
+    <tr><td>5s 完播率</td><td class="num"><b style="color:#DC2626">10.67%</b></td><td class="num">32.12%</td></tr>
+    <tr><td>点击率</td><td class="num">1.17%</td><td class="num">2.01%</td></tr>
+    <tr><td>CVR（点击→下单）</td><td class="num">6.45%</td><td class="num">11.91%</td></tr>
+    <tr><td>CTCVR</td><td class="num">7.09%</td><td class="num">19.80%</td></tr>
+    <tr><td>平均播放时长</td><td class="num">3.67s</td><td class="num">9.94s</td></tr>
+    <tr><td>平均素材时长</td><td class="num"><b style="color:#DC2626">43.02s</b></td><td class="num">108.26s</td></tr>
+  </tbody></table>
+  <div class="dnote">素材时长 43s 三间最短、5s 完播 10.67% 钩子最弱，<b>素材是这间的效率短板</b>；实时画面 ROI 1.25 低于竖版 1.56，仓位先收、集中做竖版；原生动态 8 条广告 ROI 1.73 但消耗 0，不作扩量依据。</div>
+</div>
+<div class="droom">
+  <div class="dh"><b>3号 · 华大甄选</b><span>竖版 75%（1.50）· 原生 12%（2.80）· 实时画面 10%（1.87）· 横版 3%（1.53）</span></div>
+  <table class="mini"><thead><tr><th>素材指标</th><th class="num">华大甄选</th><th class="num">标杆</th></tr></thead><tbody>
+    <tr><td>5s 完播率</td><td class="num"><b style="color:#DC2626">9.90%</b></td><td class="num">32.12%</td></tr>
+    <tr><td>点击率</td><td class="num">1.08%</td><td class="num">2.01%</td></tr>
+    <tr><td>CVR（点击→下单）</td><td class="num">5.40%</td><td class="num">11.91%</td></tr>
+    <tr><td>CTCVR</td><td class="num">5.39%</td><td class="num">19.80%</td></tr>
+    <tr><td>平均播放时长</td><td class="num">3.63s</td><td class="num">9.94s</td></tr>
+    <tr><td>平均素材时长</td><td class="num"><b style="color:#DC2626">41.23s</b></td><td class="num">108.26s</td></tr>
+  </tbody></table>
+  <div class="dnote">素材各指标与韶初同档、均弱于主号，<b>先把素材时长从 41s 拉到 60s+</b>；原生动态 ROI 2.80 为四类最高（占 12%）、实时画面 1.87 也高于竖版 1.50——素材总量不足时，高 ROI 类型仓位可兜底。</div>
+</div>
+</div></details>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><h3>3.4　直播间承接：人进来了，但没下单</h3><span>华大集团商城 vs 标杆同行</span></div>
+    <div class="two-col">
+      <div>
+    <div class="cmp">
+      <div class="cmp-title">人均观看时长<em>优于标杆</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">华大</span>
+        <div class="track"><i class="fill me" style="width:100.0%"></i></div>
+        <span class="cmp-val">108s</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:94.4%"></i></div>
+        <span class="cmp-val dim">102s</span>
+      </div>
+    </div>
+    <div class="cmp">
+      <div class="cmp-title">直播间观看率<em>差 12.2pct</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">华大</span>
+        <div class="track"><i class="fill me" style="width:86.9%"></i></div>
+        <span class="cmp-val">81.19%</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
+        <span class="cmp-val dim">93.38%</span>
+      </div>
+    </div></div>
+      <div>
+    <div class="cmp">
+      <div class="cmp-title">商品点击率<em>差 5.9pct</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">华大</span>
+        <div class="track"><i class="fill me" style="width:93.1%"></i></div>
+        <span class="cmp-val">79.30%</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
+        <span class="cmp-val dim">85.21%</span>
+      </div>
+    </div>
+    <div class="cmp">
+      <div class="cmp-title">直播间下单率<em>差 4.0pct</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">华大</span>
+        <div class="track"><i class="fill me" style="width:73.3%"></i></div>
+        <span class="cmp-val">11.11%</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
+        <span class="cmp-val dim">15.15%</span>
+      </div>
+    </div></div>
+    </div>
+    <div class="note amber"><span class="ico">!</span><span>人均观看 108s 比标杆还长 6%，说明<b>人留得住</b>；卡点在「看→点商品→下单」两段：商品点击率低 5.9pct、下单率低 4.0pct。<b>优先改货盘讲解顺序与促销机制，不是加流量。</b></span></div>
+    <details class="drill"><summary>下钻其他直播间 · 2号 韶初泌语 / 3号 华大甄选</summary>
+<div class="drill-body">
+<div class="droom">
+  <div class="dh"><b>2号 · 韶初泌语</b><span>开播 14 天 · 与标杆持平</span></div>
+  <table class="mini"><thead><tr><th>承接指标</th><th class="num">韶初泌语</th><th class="num">标杆</th></tr></thead><tbody>
+    <tr><td>人均观看时长</td><td class="num">96s</td><td class="num">102s</td></tr>
+    <tr><td>直播间观看率</td><td class="num">89.38%</td><td class="num">93.38%</td></tr>
+    <tr><td>商品点击率</td><td class="num">76.34%</td><td class="num">85.21%</td></tr>
+    <tr><td>直播间下单率</td><td class="num"><b style="color:#DC2626">9.45%</b></td><td class="num">15.15%</td></tr>
+  </tbody></table>
+  <div class="dnote">观看与留存接近标杆，卡点与主号一致在「看→点商品→下单」：<b>下单率 9.45% 差标杆 5.7pct，优先改货盘讲解顺序与促销机制</b>。</div>
+</div>
+<div class="droom">
+  <div class="dh"><b>3号 · 华大甄选</b><span>开播仅 11 天 · 少 3 天</span></div>
+  <table class="mini"><thead><tr><th>承接指标</th><th class="num">华大甄选</th><th class="num">标杆</th></tr></thead><tbody>
+    <tr><td>人均观看时长</td><td class="num">91s</td><td class="num">102s</td></tr>
+    <tr><td>直播间观看率</td><td class="num">79.18%</td><td class="num">93.38%</td></tr>
+    <tr><td>商品点击率</td><td class="num"><b style="color:#DC2626">69.09%</b></td><td class="num">85.21%</td></tr>
+    <tr><td>直播间下单率</td><td class="num"><b style="color:#DC2626">9.77%</b></td><td class="num">15.15%</td></tr>
+  </tbody></table>
+  <div class="dnote">承接链各环节差距都比另两间大：商品点击率差 16.1pct、下单率差 5.4pct——<b>对应 02 板块「问题在承接不在流量」的判断，回看这间的话术与货盘</b>；开播天数先补齐到 14 天。</div>
+</div>
+</div></details>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><h3>3.5　退款与店铺三率：退款全面占优，差评率需盯</h3><span>直播链路</span></div>
+    <div class="two-col">
+      <div>
+        <div class="cmp-title">直播退款率 · 24 小时 / 3 天 / 14 天　<em>越低越好</em></div>
+        <table class="mini">
+          <thead><tr><th>退款窗口</th><th class="num">华大</th><th class="num">直播大盘</th><th class="num">差距</th></tr></thead>
+          <tbody>
+            <tr><td>24 小时</td><td class="num"><b>7.55%</b></td><td class="num">15.92%</td><td class="num"><b style="color:#0B7A55">优 8.37pct</b></td></tr>
+            <tr><td>3 天</td><td class="num"><b>9.24%</b></td><td class="num">19.36%</td><td class="num"><b style="color:#0B7A55">优 10.12pct</b></td></tr>
+            <tr><td>14 天</td><td class="num"><b>12.12%</b></td><td class="num">26.93%</td><td class="num"><b style="color:#0B7A55">优 14.81pct</b></td></tr>
+          </tbody>
+        </table>
+        <div class="note green" style="margin-top:12px"><span class="ico">✓</span><span><b>三个窗口全面优于大盘，且环比均在改善</b>（-28% / -17% / -5%）；分直播间 14 日退款：集团商城 12.16%、韶初泌语 14.74%、华大甄选 4.00%，全部低于大盘。</span></div>
+        <div class="note blue" style="margin-top:10px"><span class="ico">i</span><span><b>各窗口优化手段：</b>① 24 小时＝「下单即退」——直播间话术与实物规格保持一致，下单后 1h 内客服确认订单、拦截冲动下单；② 3 天＝「收货即退」——48h 内发货、加固包装，发货后主动触达使用指引；③ 14 天＝「用后即退」——7 日节点主动回访，功效预期在详情页前置说明。直播三窗口已优于大盘，以上作为保持动作执行。</span></div>
+      </div>
+      <div>
+        <div class="cmp-title">店铺三率　<em>越低越好</em></div>
+        <table class="mini">
+          <thead><tr><th>三率</th><th class="num">集团企业店</th><th class="num">韶初泌语店</th><th class="num">大盘</th></tr></thead>
+          <tbody>
+            <tr><td>差评率</td><td class="num"><b style="color:#DC2626">11.11%</b></td><td class="num">—</td><td class="num">8.06%</td></tr>
+            <tr><td>品退率</td><td class="num"><b style="color:#0B7A55">0.10%</b></td><td class="num"><b style="color:#0B7A55">0.18%</b></td><td class="num">0.20%</td></tr>
+            <tr><td>纠纷率</td><td class="num"><b style="color:#0B7A55">0.17%</b></td><td class="num">—</td><td class="num">0.21%</td></tr>
+            <tr><td>14日CCR</td><td class="num"><b style="color:#0B7A55">1.52%</b></td><td class="num"><b style="color:#0B7A55">1.10%</b></td><td class="num">1.95%</td></tr>
+          </tbody>
+        </table>
+        <div class="note red" style="margin-top:12px"><span class="ico">!</span><span><b>三率里只有差评率超标：集团企业店 11.11%，高于大盘 3.05pct。</b>虽然只来自 1 单差评（有效评论仅 2 条），但样本小意味着<b>再来 1 单差评就会继续恶化</b>；品退率、纠纷率、CCR 均优于大盘，属于要盯的合规风险点而非全面恶化。</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-h"><span class="n">04</span><h2>小店：一根柱子撑起大盘，长尾退款按窗口修</h2><span class="hint">分商品 · 本周期</span></div>
+  <div class="take">抗皱粉状精华一个商品占 <b>66% 消耗</b>，ROI 2.50 还是五个主力商品里最高的——这是小店的发动机；退款压力集中在<span class="warn">两个长尾商品</span>——精华水（占消耗 17%）53.03%、紧致礼盒（占 1%）42.86%，主力粉状精华 15.22% 贴近小店大盘 12.16%，链路基本盘健康。</div>
+
+  <div class="card">
+    <div class="card-h"><h3>4.1　商品结构：钱花在哪，效率如何</h3><span>日均消耗（万）· 括号内为 ROI</span></div>
+    <div class="pbar"><span class="nm">抗皱粉状精华 / 冻干精华</span><span class="tr"><i style="width:100%"></i></span><span class="vv"><b>1.95 万</b> · ROI 2.50</span></div>
+    <div class="pbar"><span class="nm">抗皱精华水</span><span class="tr"><i style="width:25.6%"></i></span><span class="vv"><b>0.50 万</b> · ROI 2.47</span></div>
+    <div class="pbar"><span class="nm">修护礼盒装</span><span class="tr"><i style="width:8.7%"></i></span><span class="vv"><b>0.17 万</b> · ROI 2.47</span></div>
+    <div class="pbar"><span class="nm">滋养面霜</span><span class="tr"><i style="width:6.7%"></i></span><span class="vv"><b>0.13 万</b> · ROI 2.23</span></div>
+    <div class="pbar"><span class="nm">抗皱乳液</span><span class="tr"><i style="width:6.7%"></i></span><span class="vv"><b>0.13 万</b> · ROI 1.92</span></div>
+    <div class="note blue" style="margin-top:16px"><span class="ico">i</span><span><b>结构风险：</b>66% 的消耗压在单一商品上，粉状精华一停，小店大盘立刻腰斩。次主力抗皱精华水虽然 ROI 2.47 不差，但<b>消耗环比 -48%</b>、退款 53%，短期不能接盘。<b>修护礼盒（+76%）和滋养面霜</b>是唯二还在正增长的小商品，可优先给量试跑。</span></div>
+    <div class="cmp-title" style="margin-top:14px">小店素材类型结构（美妆口径）</div>
+    <table class="mini">
+      <thead><tr><th>素材类型</th><th class="num">华大 · 消耗占比</th><th class="num">华大 · 下单ROI</th><th class="num">小店大盘 · 占比</th><th class="num">大盘 · ROI</th></tr></thead>
+      <tbody>
+        <tr><td>竖版视频</td><td class="num">74%</td><td class="num">2.43</td><td class="num">96%</td><td class="num">2.33</td></tr>
+        <tr><td>原生动态</td><td class="num"><b style="color:#0B7A55">23%</b></td><td class="num"><b style="color:#0B7A55">2.61</b></td><td class="num">3%</td><td class="num">2.41</td></tr>
+        <tr><td>横版视频</td><td class="num">2%</td><td class="num">1.90</td><td class="num">1%</td><td class="num">2.65</td></tr>
+      </tbody>
+    </table>
+    <div class="note blue" style="margin-top:10px"><span class="ico">i</span><span><b>原生动态是小店被低估的效率位：</b>占比 23% 远超小店大盘 3%，ROI 2.61 还高于竖版 2.43——精华水（34% · 2.69）、粉状精华（23% · 2.64）、修护礼盒（30% · 2.26）都在用，可继续扩；横版 ROI 1.90 低于大盘 2.65、占比仅 2%，维持观察即可（实时画面 2407 仅直播链路，小店不统计）。</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><h3>4.2　退款：主力品贴近大盘，压力在两个长尾商品</h3><span>14 日退款率 · 小店大盘 12.16%</span></div>
+    <div style="font-size:12px;font-weight:800;color:var(--muted);margin-bottom:8px">小店大盘三窗口基准：24 小时 11.62% · 3 天 9.78% · 14 天 12.16%（分商品仅有 14 日口径）</div>
+    <div class="pbar"><span class="nm">抗皱粉状精华 <i style="font-style:normal;color:var(--muted);font-weight:600">占消耗 66%</i></span><span class="tr"><i style="width:28.7%;background:linear-gradient(90deg,#86C5A4,#2F9E63)"></i></span><span class="vv"><b style="color:#0B7A55">15.22%</b> · 主力品</span></div>
+    <div class="pbar"><span class="nm">抗皱精华水 <i style="font-style:normal;color:var(--muted);font-weight:600">占消耗 17%</i></span><span class="tr"><i style="width:100%;background:linear-gradient(90deg,#F1998F,#DC2626)"></i></span><span class="vv"><b style="color:#DC2626;font-size:13px">53.03%</b> · 长尾</span></div>
+    <div class="pbar"><span class="nm">紧致礼盒装 <i style="font-style:normal;color:var(--muted);font-weight:600">占消耗 1%</i></span><span class="tr"><i style="width:80.8%;background:linear-gradient(90deg,#F5C07A,#D97706)"></i></span><span class="vv"><b style="color:#B45309">42.86%</b> · 长尾</span></div>
+    <div class="pbar"><span class="nm">小店大盘</span><span class="tr"><i style="width:22.9%;background:#CBD5E1"></i></span><span class="vv">12.16%</span></div>
+    <div class="note green"><span class="ico">✓</span><span><b>基本盘健康：主力品退款与大盘基本持平。</b>粉状精华占小店消耗 66%，14 日退款 15.22% vs 小店大盘 12.16%；高退款的精华水（占 17%）、紧致礼盒（占 1%）合计消耗不足两成，属<b>长尾商品的局部问题</b>，不改变链路 ROI 2.45、店铺三率全绿的基本盘——<b>不必为退款暂停链路放量</b>。</span></div>
+    <div class="note amber" style="margin-top:10px"><span class="ico">!</span><span><b>长尾品按窗口修：</b>① 24 小时（下单即退）——核对精华水详情页/直播间话术的规格口径，未发货订单 24h 内客服拦截挽单；② 3 天（收货即退）——检查发货时效与包装，发货后主动推送使用指引；③ 14 天（用后即退）——按退款原因拆（质量/功效/售后），7 日内主动回访。消耗占比低，修复与素材、基建并行推进即可。</span></div>
+    <div class="note green" style="margin-top:10px"><span class="ico">✓</span><span><b>店铺三率反而是全绿的，这个反差就是线索：</b>各商品差评率均为 0%（小店大盘 8.90%），品退率（大盘 0.12%）、纠纷率（大盘 0.11%）华大均无超标，唯粉状精华 14 日 CCR 2.08% 略高于大盘 1.25%。<b>差评比大盘干净、退款却是大盘 4.4 倍</b>——问题不在商品口碑，在售后兑现与预期管理，修详情页/话术比换货盘更对症。</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><h3>4.3　素材：点击率只有标杆一半，但内部有答案</h3><span>抗皱粉状精华 vs 标杆商品</span></div>
+    <div class="two-col">
+      <div>
+    <div class="cmp">
+      <div class="cmp-title">点击率 CTR<em>差 1.68pct</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">华大</span>
+        <div class="track"><i class="fill me" style="width:48.8%"></i></div>
+        <span class="cmp-val">1.60%</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
+        <span class="cmp-val dim">3.28%</span>
+      </div>
+    </div>
+    <div class="cmp">
+      <div class="cmp-title">5s 完播率<em>差 2.51pct</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">华大</span>
+        <div class="track"><i class="fill me" style="width:88.8%"></i></div>
+        <span class="cmp-val">19.89%</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
+        <span class="cmp-val dim">22.40%</span>
+      </div>
+    </div></div>
+      <div>
+    <div class="cmp">
+      <div class="cmp-title">CVR（点击→下单）<em>基本持平</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">华大</span>
+        <div class="track"><i class="fill me" style="width:96.6%"></i></div>
+        <span class="cmp-val">7.50%</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
+        <span class="cmp-val dim">7.76%</span>
+      </div>
+    </div>
+    <div class="cmp">
+      <div class="cmp-title">平均播放时长<em>差 2.91s</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">华大</span>
+        <div class="track"><i class="fill me" style="width:60.1%"></i></div>
+        <span class="cmp-val">4.39s</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
+        <span class="cmp-val dim">7.30s</span>
+      </div>
+    </div></div>
+    </div>
+    <div class="note green"><span class="ico">✓</span><span><b>好消息：转化（CVR 7.50%）已经追平标杆，差的只有「点进来」这一步。</b>美妆内部其实已有答案——<b>修护礼盒点击率 2.20%</b>，比主品粉状精华（1.60%）高近四成，说明同样的投放逻辑下，钩子做对了点击率就能上去。把修护礼盒的前 3 秒结构复用到主品上，是成本最低的一次测试。</span></div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-h"><span class="n">05</span><h2>产品能力：两个「小仓位、高 ROI」的放大器</h2><span class="hint">本周期 · 占消耗比为各能力在对应链路内的占比</span></div>
+  <div class="take">潜客优投和创意优投都是<b>「开得少、但一开就更好」</b>：直播主号潜客 ROI 2.19（未开启 1.99）、创意优投 2.44（未开启 1.95），仓位却只有 9% 和 11%。<span class="good">这是确定性最高的加量方向</span>——不用改素材、不用加预算，只是把预算挪到更会转化的产品上。</div>
+
+  <div class="card">
+    <div class="card-h"><h3>5.1　直播链路</h3><span>智投 / 潜客优投 / 创意优投</span></div>
+    <div class="cap">
+      <div class="nm">智投广告<em>已是主力仓位</em></div>
+      <div class="cmp-row" style="margin:0"><div class="track"><i class="fill me" style="width:56%"></i></div></div>
+      <div class="roi"><span class="pill b">占 56%</span><span class="pill g">ROI 2.00</span><span class="pill n">3.0 广告 1.96</span></div>
+    </div>
+    <div class="cap">
+      <div class="nm">潜客优投<em>正向 · 仓位偏轻</em></div>
+      <div class="cmp-row" style="margin:0"><div class="track"><i class="fill me" style="width:9%"></i></div></div>
+      <div class="roi"><span class="pill n">占 9%</span><span class="pill g">ROI 2.19</span><span class="pill r">未开启 1.99</span></div>
+    </div>
+    <div class="cap">
+      <div class="nm">创意优投<em>正向 · 仓位偏轻</em></div>
+      <div class="cmp-row" style="margin:0"><div class="track"><i class="fill me" style="width:11%"></i></div></div>
+      <div class="roi"><span class="pill n">占 11%</span><span class="pill g">ROI 2.44</span><span class="pill r">未开启 1.95</span></div>
+    </div>
+    <div class="note blue"><span class="ico">i</span><span><b>三者的分工很清楚：</b>智投负责基本盘（占 56%、ROI 2.00），潜客优投负责拉新客（占 9%、ROI 2.19），创意优投负责提素材效率（占 11%、ROI 2.44）。<b>建议潜客 9%→15%、创意 11%→20%</b>，逐步加、按周看 ROI 是否守住 2.0。</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><h3>5.2　小店链路</h3><span>智投占比已很高，创意优投完全没开</span></div>
+    <div class="cap">
+      <div class="nm">智投广告<em>占比 76%</em></div>
+      <div class="cmp-row" style="margin:0"><div class="track"><i class="fill me" style="width:76%"></i></div></div>
+      <div class="roi"><span class="pill b">占 76%</span><span class="pill g">ROI 2.53</span><span class="pill n">3.0 广告 2.41</span></div>
+    </div>
+    <div class="cap">
+      <div class="nm">潜客优投<em>占 29%</em></div>
+      <div class="cmp-row" style="margin:0"><div class="track"><i class="fill me" style="width:29%"></i></div></div>
+      <div class="roi"><span class="pill n">占 29%</span><span class="pill g">ROI 2.50</span><span class="pill r">未开启 2.36</span></div>
+    </div>
+    <div class="cap">
+      <div class="nm">创意优投<em>全部商品未开启</em></div>
+      <div class="cmp-row" style="margin:0"><div class="track"><i class="fill" style="width:1%;background:#E2E8F0"></i></div></div>
+      <div class="roi"><span class="pill n">占 0%</span><span class="pill n">大盘使用率 35%</span></div>
+    </div>
+    <div class="note amber"><span class="ico">!</span><span><b>小店是「智投吃满、优投空白」的结构：</b>智投已占 76%（大盘 58%），再往上加边际有限；创意优投却一个都没开。<b>先给粉状精华 TOP3 素材开创意优投试跑</b>，投入小、可回退，比继续加智投更值得试。</span></div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-h"><span class="n">06</span><h2>下次怎么做：一页纸行动清单</h2><span class="hint">按优先级排序，每条都对应上面的数据</span></div>
+  <div class="take">只有 7 件事，按顺序做：<b>先止血（退款、差评），再补量（素材、广告、机会版位），最后放大已经被验证的放大器（潜客、创意优投）</b>。退款集中在低消耗长尾品，不阻塞补量节奏，与素材、基建并行处理即可。</div>
+
+  <div class="card">
+    <div class="tbl-wrap"><table>
+      <thead><tr><th style="width:64px;white-space:nowrap">优先级</th><th style="width:190px">动作</th><th>依据（本周期数据）</th><th style="width:250px">目标 / 做法</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pri p0">P0</span></td><td><b>排查小店长尾商品退款</b></td><td>精华水 14 日退款 <b>53.03%</b>（占消耗 17%）、紧致礼盒 <b>42.86%</b>（占 1%）；主力品 15.22% 贴近大盘 12.16%</td><td>低消耗长尾品不阻塞放量：按窗口拆退款原因，优先改详情页/话术＋客服拦截挽单，与素材、基建并行</td></tr>
+        <tr><td><span class="pri p0">P0</span></td><td><b>控集团企业店差评</b></td><td>差评率 <b>11.11%</b>，高于大盘 8.06%；有效评论仅 2 条，样本极小</td><td>逐单回访差评原因，优化商品质量与售后；每周盯一次差评率</td></tr>
+        <tr><td><span class="pri p1">P1</span></td><td><b>提素材质量</b></td><td>5s 完播 <b>18.08%</b>（标杆 32.12%）、点击率 <b>1.16%</b>（标杆 2.01%）、素材时长 57.78s（标杆 108.26s）</td><td>时长拉到 60s+，重构前 3 秒钩子；点击率目标 2.0%+</td></tr>
+        <tr><td><span class="pri p1">P1</span></td><td><b>补广告基建</b></td><td>广告 <b>81 条</b>（标杆 305，-73%）；账户 13 个却只有 81 条广告；新广告占比 5%</td><td>广告扩到 300+，新广告占比提到 10%+；把 13 个账户的余量铺满</td></tr>
+        <tr><td><span class="pri p1">P1</span></td><td><b>抢机会版位</b></td><td>平台与内容 4%（标杆 10%，ROI 2.13）、小程序 6%（标杆 12%，ROI 2.25）；朋友圈 17% 但 ROI 仅 1.68</td><td>平台→10%+、小程序→12%+，用单投 3.0 广告；朋友圈收仓</td></tr>
+        <tr><td><span class="pri p2">P2</span></td><td><b>放大潜客优投</b></td><td>直播占 9%、ROI <b>2.19</b>（未开启 1.99）；小店占 29%、ROI 2.50</td><td>直播 9%→15%，按周看 ROI 是否守住 2.0</td></tr>
+        <tr><td><span class="pri p2">P2</span></td><td><b>放大创意优投</b></td><td>直播占 11%、ROI <b>2.44</b>（未开启 1.95）；小店全部未开启</td><td>直播 11%→20%；小店先给粉状精华 TOP3 素材开</td></tr>
+      </tbody>
+    </table></div>
+
+    <details>
+      <summary>展开：期望出价测算与关键口径</summary>
+      <div style="margin-top:12px;font-size:12.8px;line-height:1.9;color:#334155">
+        <b>期望出价</b>＝下单单价 ÷ 考核 ROI（1.8）：<br>
+        · 直播：1,153 ÷ 1.8 ＝ <b>641 元</b>，当前出价 580 元（低 61 元，有提价空间）<br>
+        · 小店：1,006 ÷ 1.8 ＝ <b>559 元</b>，当前出价 423 元（低 136 元；退款集中在低消耗长尾品，不阻塞出价放宽）<br><br>
+        <b>口径</b>：本周期 10.05–10.18（14 天），上周期 09.21–10.04（14 天），全部为日均口径；ROI 为下单 ROI；标杆为行业标杆客户同期数据；退款率为下单后 N 个自然日累计退款占比；小店链路仅统计美妆商品（挂耳咖啡等非美妆品已剔除）。
+      </div>
+    </details>
+  </div>
+</div>
+
+<div class="footer">数据来源：AMS 经营数仓　｜　复盘周期 2026-10-05 ~ 2026-10-18　｜　报告重构于 2026-10-22</div>
+</div></body></html>
