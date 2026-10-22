@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>华大 · 节点大场复盘报告</title>
+<style>:root{--bg:#f4f6f9;--card:#fff;--text:#1e293b;--sub:#64748b;--accent:#2563eb;--accent-l:#eff6ff;
+--border:#e2e8f0;--th-bg:#f1f5f9;--th-text:#334155;--th-border:#cbd5e1;
+--up:#059669;--down:#dc2626;--gold:#b45309;--sh:0 1px 3px rgba(0,0,0,.06)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg)}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Microsoft YaHei','PingFang SC',sans-serif;
+font-size:14px;color:var(--text);line-height:1.55;padding:0 26px 56px;max-width:1440px;margin:0 auto}
+h1{font-size:26px;font-weight:700;color:var(--accent);text-align:center;padding:26px 0 8px;letter-spacing:.5px}
+h1::after{content:'';display:block;width:64px;height:3px;background:var(--accent);margin:10px auto 0;border-radius:2px}
+.sub-title{text-align:center;color:var(--sub);font-size:13px;margin-bottom:18px}
+.params{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:14px 22px;margin:6px 0 26px;
+box-shadow:var(--sh);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px 26px}
+.params .param-item{font-size:12.5px}
+.params .param-label{color:var(--sub);font-weight:500}
+.params .param-value{color:var(--text);font-weight:700}
+h2{font-size:17px;font-weight:700;color:#fff;margin:30px 0 0;padding:11px 16px;background:var(--accent);border-radius:8px 8px 0 0}
+h2::before{content:'';display:inline-block;width:4px;height:15px;background:#fff;border-radius:2px;margin-right:8px;vertical-align:-2px}
+h3{font-size:13.5px;font-weight:600;color:var(--accent);margin:0;padding:12px 16px 10px;background:var(--card);
+border-left:3px solid var(--accent);border-top:1px solid var(--border);border-right:1px solid var(--border)}
+.banner{background:linear-gradient(135deg,#f0f7ff,#e8f1ff);border-left:4px solid var(--accent);border-radius:8px;
+padding:18px 24px;margin:16px 0 10px;font-size:13.5px;line-height:1.9;box-shadow:var(--sh)}
+.banner b.k{color:#b45309;font-weight:700}
+.banner .lead{font-size:15px;font-weight:700;line-height:1.7;margin-bottom:10px;display:block}
+.banner .blk{margin-top:10px}
+.banner .blk .tag{display:inline-block;background:var(--accent);color:#fff;font-size:11.5px;font-weight:700;
+padding:2px 8px;border-radius:4px;margin-right:8px;vertical-align:1px}
+.banner .blk .tag.warn{background:#b45309}
+.banner .blk .tag.ok{background:var(--up)}
+.banner ol,.banner ul{margin:6px 0 0 34px}
+.banner li{margin:3px 0}
+.conclusion{background:var(--accent-l);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;
+padding:10px 16px;margin:0 0 22px;font-size:13px;line-height:1.8}
+.conclusion::before{content:'结论  ';font-weight:700;color:#fff;background:var(--accent);border-radius:3px;
+padding:1px 6px;margin-right:6px;font-size:11.5px}
+.conclusion.warn{background:#fffbeb;border-left-color:#b45309}
+.conclusion.warn::before{background:#b45309}
+.conclusion.ok{background:#f0fdf4;border-left-color:var(--up)}
+.conclusion.ok::before{background:var(--up)}
+.table-wrap{background:var(--card);border:1px solid var(--border);border-top:none;border-radius:0 0 8px 8px;
+overflow:auto;box-shadow:var(--sh);margin:0 0 22px}
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:12px}
+th{background:var(--th-bg);color:var(--th-text);padding:9px 6px;text-align:center;font-weight:600;
+font-size:11.5px;border-bottom:2px solid var(--th-border);white-space:nowrap}
+td{padding:8px 6px;text-align:center;border-bottom:1px solid var(--border);font-variant-numeric:tabular-nums;color:var(--text)}
+tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#f8fafc}
+td.left{text-align:left;padding-left:14px}
+td.hl{font-weight:700;color:#1d4ed8;background:#f5f9ff}
+tr.node td{background:#fffdf5}
+tr.sum td{background:#f8fafc;font-weight:700}
+span.up{color:var(--up);font-weight:700}
+span.down{color:var(--down);font-weight:700}
+span.flat{color:var(--sub);font-weight:600}
+.kpi-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:0 0 22px}
+.kpi-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px 14px 10px;
+box-shadow:var(--sh);border-top:3px solid var(--accent)}
+.kpi-card.up{border-top-color:var(--up)}
+.kpi-card.down{border-top-color:var(--down)}
+.kpi-label{font-size:11px;color:var(--sub);margin-bottom:4px;font-weight:500}
+.kpi-value{font-size:21px;font-weight:700;line-height:1.2}
+.kpi-sub{font-size:10.5px;color:var(--sub);margin-top:4px}
+.chart-card{background:var(--card);border:1px solid var(--border);border-top:none;border-radius:0 0 8px 8px;
+box-shadow:var(--sh);padding:8px 10px 4px;margin:0 0 22px;overflow:hidden}
+.legend{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;font-size:11.5px;color:var(--sub);padding:2px 0 8px}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.bars{display:grid;grid-template-columns:repeat(auto-fit,minmax(600px,1fr));gap:14px;padding:16px 20px 20px}
+.bar-box{border:1px solid var(--border);border-radius:8px;padding:12px 14px}
+.bar-title{font-size:12px;font-weight:700;color:var(--th-text);margin-bottom:10px}
+.bar-row{display:flex;align-items:center;gap:8px;margin:7px 0;font-size:11.5px}
+.bar-row .nm{width:96px;color:var(--sub);flex:none;font-size:11.5px}
+.bar-track{flex:1;display:block;background:#f1f5f9;border-radius:3px;height:16px;position:relative;overflow:hidden}
+.bar-fill{display:block;height:100%;border-radius:3px;min-width:2px}
+.bar-row .vl{width:56px;text-align:right;font-weight:700;flex:none;font-variant-numeric:tabular-nums;font-size:11.5px}
+.tip{font-size:11.5px;color:var(--sub);padding:0 18px 14px;line-height:1.7}
+.summary-box{background:var(--card);border:1px solid var(--border);border-radius:8px;box-shadow:var(--sh);
+padding:18px 24px;margin:0 0 22px;font-size:13px;line-height:1.9}
+.summary-box h4{font-size:13px;color:var(--accent);margin:14px 0 6px}
+.summary-box h4:first-child{margin-top:0}
+.summary-box ol{margin-left:20px}
+.summary-box li{margin:4px 0}
+table.todo{table-layout:fixed}
+.todo td{text-align:left;padding:10px 12px;line-height:1.7}
+.todo td.p{font-weight:700;color:#b45309;white-space:nowrap;text-align:center}
+td.camp{font-weight:700;background:#f8fafc;vertical-align:middle}
+.camp-sub{color:#94a3b8;font-size:10.5px;font-weight:500}
+.stage{color:#94a3b8;font-size:10.5px;font-weight:500}
+.mut{color:#b8c2cc;font-size:10px;font-weight:500}
+.tagpill{display:inline-block;border-radius:3px;font-size:10.5px;font-weight:700;padding:1px 6px;margin-left:4px}
+.tagpill.on{background:#dcfce7;color:#15803d}
+.tagpill.off{background:#f1f5f9;color:#94a3b8}
+.tagpill.dead{background:#fef3c7;color:#b45309}
+.foot{text-align:center;color:#94a3b8;font-size:11.5px;margin-top:26px;line-height:1.8}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0 0 22px}
+.three .box{background:var(--card);border:1px solid var(--border);border-radius:8px;box-shadow:var(--sh);padding:14px 16px}
+.three .box h5{font-size:12.5px;color:var(--accent);margin-bottom:8px;font-weight:700}
+.three .box p{font-size:12.5px;color:#475569;line-height:1.75}
+.three .box .big{font-size:20px;font-weight:700;color:#1d4ed8;display:block;margin-bottom:2px}
+.formula{background:var(--card);border:1px solid var(--border);border-radius:8px;box-shadow:var(--sh);
+padding:14px 18px 12px;margin:0 0 22px;text-align:center;font-size:13.5px;font-weight:600;color:#334155}
+.formula b{color:#1d4ed8;font-size:17px;font-weight:700;margin:0 3px}
+.formula .op{color:#94a3b8;margin:0 10px;font-weight:400}
+.formula .sub{display:block;font-size:11.5px;color:var(--sub);font-weight:400;margin-top:8px;line-height:1.7}
+
+/* ---- 结论要点化 ---- */
+ul.cl{list-style:none;margin:5px 0 0!important;padding:0}
+ul.cl li{position:relative;padding-left:15px;margin:5px 0;line-height:1.72}
+ul.cl li:before{content:'';position:absolute;left:1px;top:8px;width:5px;height:5px;border-radius:50%;background:#2563eb}
+ul.cl li b{color:#0f172a}
+.conclusion .h{font-weight:700;color:#0f172a}
+.conclusion.ok ul.cl li:before{background:var(--up)}
+.conclusion.warn ul.cl li:before{background:var(--gold)}
+.banner ul.cl li:before{background:var(--gold)}
+.banner ul.cl li{line-height:1.75}
+/* ---- 重点列 / 重点行 ---- */
+th.key{background:#dbeafe;color:#1d4ed8;border-bottom:2px solid #93c5fd}
+td.key{background:#f5f9ff}
+.warnlab{color:var(--gold);font-weight:700}
+</style></head><body>
+
+<h1>华大 · 节点大场复盘报告</h1>
+<div class="sub-title">618 / 七夕 / 中秋 / 国庆 / 双11首周 · 五节六场 × 平日基线 × 小店活动归因 × 双11 剩余 24 天活动玩法 ｜ 数据窗口 2026.05.18 — 10.20</div>
+
+<div class="params">
+<div class="param-item"><span class="param-label">数据窗口：</span><span class="param-value">2026.05.18 — 10.20（156 天）</span></div>
+<div class="param-item"><span class="param-label">节点大场：</span><span class="param-value">6 场 / 34 天（21.8%）</span></div>
+<div class="param-item"><span class="param-label">大场口径：</span><span class="param-value">按平台电商节点日期（618 / 七夕 / 中秋 / 国庆 / 双11）</span></div>
+<div class="param-item"><span class="param-label">对比链路：</span><span class="param-value">微信视频号推广 + 商品推广</span></div>
+<div class="param-item"><span class="param-label">小店活动：</span><span class="param-value">618 满减、双11 满减（均为 B 类混资）</span></div>
+<div class="param-item"><span class="param-label">数据说明：</span><span class="param-value">潜客优投 7.3 起可查；3s 完播 7 月起可查</span></div>
+</div>
+
+<h2>Part 0：报告总览</h2>
+<div class="banner">
+<span class="lead">节点 = 2.1 倍日常：单价不动、单量翻倍；决定一场能做多大的，是有没有报上平台满减。</span>
+<div class="blk"><span class="tag">核心结论</span>
+<ul class="cl">
+<li><b>节点 = 2.1 倍日常</b>：34 天占 21.8% 天数，贡献 36.9% 消耗、38.3% GMV；日均 11.24 万 vs 平日 5.36 万，成本 509 vs 503 元。</li>
+<li><b>量来自 eCPM 与拿量</b>：广告数只 +1.4%，eCPM +30%、单条广告拿量 +59%，两者撑起 2.1 倍。</li>
+<li><b>活动决定上限</b>：618 活动期日均 12.15 万、双11 首周 16.04 万；没活动的七夕、中秋、国庆只有 5.85 / 8.16 / 8.92 万。</li>
+<li><b>活动最直接的收益是转化</b>：活动商品下单率 5.00% / 2.90% / 3.96%，三场全面高于非活动的 4.64% / 2.22% / 3.30%。</li>
+</ul></div>
+<div class="blk"><span class="tag ok">最大亮点</span>
+<ul class="cl">
+<li><b>618 爆发期效率最高</b>：ROI 2.35、成本 420 元（全周期最低）、下单率 4.90%，日均 12.16 万。</li>
+<li><b>双11 首周量价齐升</b>：日均 16.04 万（平日 3.0 倍）、单量 297 单/日、下单率 3.95%（+1.3pt）、单价 1124 元，成本只涨 7.6%。</li>
+<li><b>商品推广效率更高</b>：ROI 2.15 vs 1.91，3s 完播 57% vs 37%，占比 29%。</li>
+</ul></div>
+<div class="blk"><span class="tag warn">下一步：双11 剩余 24 天</span>
+<ul class="cl">
+<li><b>活动报满</b>：满减 + 大场激励 + 主播分享券三项全报，11.1 / 11.9 / 11.11 三场直播大场单独提报。</li>
+<li><b>供给拉到 900 条/日</b>：618 爆发 985 条做到 ROI 2.35，双11 首周 755 条只有 2.08。</li>
+<li><b>创意优投回 15%</b>：双11 首周只有 3.1%，是六场最低，出价却比 618 爆发高 11%。</li>
+<li><b>出价不追高</b>：守 480-510；6.18 出价 447 元拿到 ROI 2.52，七夕 574 元只有 1.90。</li>
+<li><b>11.11 配量</b>：广告 1200 条、潜客优投 65%、3s 完播 43%。</li>
+</ul></div>
+</div>
+
+<h2>Part 1：整体大盘</h2>
+<h3>1.1：全周期概览</h3>
+<div class="kpi-cards"><div class="kpi-card "><div class="kpi-label">日均消耗</div><div class="kpi-value">6.64 万</div><div class="kpi-sub">节点 11.24 / 平日 5.36</div></div><div class="kpi-card "><div class="kpi-label">下单单价</div><div class="kpi-value">999 元</div><div class="kpi-sub">节点 1047 / 平日 971</div></div><div class="kpi-card "><div class="kpi-label">下单成本</div><div class="kpi-value">505 元</div><div class="kpi-sub">节点 509 / 平日 503</div></div><div class="kpi-card up"><div class="kpi-label">下单 ROI</div><div class="kpi-value">1.98</div><div class="kpi-sub">节点 2.06 / 平日 1.93</div></div><div class="kpi-card up"><div class="kpi-label">下单率</div><div class="kpi-value">3.07%</div><div class="kpi-sub">节点 3.74% / 平日 2.67%</div></div><div class="kpi-card "><div class="kpi-label">商品推广占比</div><div class="kpi-value">29%</div><div class="kpi-sub">视频号推广 71% / 商品推广 29%</div></div></div>
+<div class="table-wrap"><table style="table-layout:fixed">
+<thead><tr><th style="width:18%">期间</th><th style="width:9%">天数</th><th class="key" style="width:11%">日均消耗（万）</th><th style="width:9%">单价</th><th style="width:9%">成本</th><th style="width:9%">ROI</th><th style="width:8%">ctr</th><th style="width:9%">下单率</th><th style="width:9%">CTCVR</th><th>创意指纹</th></tr></thead>
+<tbody>
+<tr><td class="left">全周期</td><td>156</td><td class="hl">6.64</td><td>999</td><td>505</td><td>1.98</td><td>1.77%</td><td>3.07%</td><td>4.81‱</td><td>1852</td></tr>
+<tr><td class="left">平日</td><td>122</td><td>5.36</td><td>971</td><td>503</td><td>1.93</td><td>1.86%</td><td>2.67%</td><td>4.87‱</td><td>1738</td></tr>
+<tr class="node"><td class="left"><b>节点 6 场</b></td><td>34</td><td class="hl">11.24</td><td>1047</td><td>509</td><td>2.06</td><td>1.62%</td><td>3.74%</td><td>4.71‱</td><td>2264</td></tr>
+</tbody></table></div>
+<div class="conclusion"><span class="h">节点用 21.8% 的天数做了 36.9% 的消耗。</span>
+<ul class="cl">
+<li>全周期 1036.4 万消耗、20531 单、GMV 2050.7 万，ROI 1.98。</li>
+<li>节点 ROI 2.06 高于平日 1.93：量涨的同时效率没掉。</li>
+</ul></div>
+
+<h3>1.2：双链路对比</h3>
+<div class="table-wrap"><table style="table-layout:fixed">
+<thead><tr><th style="width:17%">链路</th><th style="width:9%">日均消耗</th><th style="width:7%">占比</th><th style="width:8%">单价</th><th style="width:7%">成本</th><th class="key" style="width:7%">ROI</th><th style="width:7%">ctr</th><th style="width:8%">下单率</th><th style="width:8%">3s</th><th style="width:7%">广告</th><th style="width:9%">创意指纹</th><th>出价</th></tr></thead>
+<tbody><tr><td class='left'><b>微信视频号推广</b>（直播）</td><td>4.73</td><td>71%</td><td>1088</td><td>570</td><td class='hl'>1.91</td><td>1.59%</td><td>3.30%</td><td>36.9%</td><td>653</td><td>1578</td><td>518</td></tr><tr><td class='left'><b>商品推广</b>（小店直购）</td><td>1.91</td><td>29%</td><td>847</td><td>394</td><td class='hl'>2.15</td><td>2.21%</td><td>2.48%</td><td>57.0%</td><td>115</td><td>275</td><td>321</td></tr></tbody></table></div>
+<div class="conclusion ok"><span class="h">商品推广是效率更高的一条腿。</span>
+<ul class="cl">
+<li>用 29% 的消耗拿到更高 ROI：2.15 vs 视频号 1.91，成本 394 vs 570 元。</li>
+<li>素材端也更稳：3s 完播 57% vs 37%，ctr 2.21% vs 1.59%。</li>
+<li>动作：占比提到 35-40%，优先在活动节点放。</li>
+</ul></div>
+
+<h2>Part 2：节点大场效果</h2>
+<h3>2.1：日消耗与下单单价（156 天）</h3>
+<div class="chart-card">
+<div class="legend"><span><i style="background:#93b4f7"></i>平日消耗</span><span><i style="background:#f59e0b"></i>节点日消耗</span><span><i style="background:#1d4ed8;border-radius:50%"></i>下单单价</span><span><i style="background:#fef3c7;border:1px solid #fcd34d"></i>节点窗口</span></div>
+<svg viewBox="0 0 1280 430" width="100%" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,PingFang SC,sans-serif"><rect x="245.4" y="26" width="52.4" height="352" fill="#fef3c7" opacity=".55"/><rect x="297.7" y="26" width="22.5" height="352" fill="#fef3c7" opacity=".55"/><rect x="724.3" y="26" width="37.4" height="352" fill="#fef3c7" opacity=".55"/><rect x="1031.2" y="26" width="22.5" height="352" fill="#fef3c7" opacity=".55"/><rect x="1076.1" y="26" width="52.4" height="352" fill="#fef3c7" opacity=".55"/><rect x="1158.4" y="26" width="67.4" height="352" fill="#fef3c7" opacity=".55"/><line x1="62" y1="378.0" x2="1222" y2="378.0" stroke="#e8edf4" stroke-width="1"/><text x="54" y="381.5" font-size="10" fill="#94a3b8" text-anchor="end">0</text><line x1="62" y1="290.0" x2="1222" y2="290.0" stroke="#e8edf4" stroke-width="1"/><text x="54" y="293.5" font-size="10" fill="#94a3b8" text-anchor="end">7</text><line x1="62" y1="202.0" x2="1222" y2="202.0" stroke="#e8edf4" stroke-width="1"/><text x="54" y="205.5" font-size="10" fill="#94a3b8" text-anchor="end">14</text><line x1="62" y1="114.0" x2="1222" y2="114.0" stroke="#e8edf4" stroke-width="1"/><text x="54" y="117.5" font-size="10" fill="#94a3b8" text-anchor="end">21</text><line x1="62" y1="26.0" x2="1222" y2="26.0" stroke="#e8edf4" stroke-width="1"/><text x="54" y="29.5" font-size="10" fill="#94a3b8" text-anchor="end">28</text><text x="1230" y="381.5" font-size="10" fill="#94a3b8">600</text><text x="1230" y="280.9" font-size="10" fill="#94a3b8">800</text><text x="1230" y="180.4" font-size="10" fill="#94a3b8">1000</text><text x="1230" y="79.8" font-size="10" fill="#94a3b8">1200</text><rect x="59.7" y="241.1" width="4.6" height="136.9" fill="#93b4f7" rx="1"/><rect x="67.2" y="224.4" width="4.6" height="153.6" fill="#93b4f7" rx="1"/><rect x="74.7" y="234.1" width="4.6" height="143.9" fill="#93b4f7" rx="1"/><rect x="82.1" y="243.1" width="4.6" height="134.9" fill="#93b4f7" rx="1"/><rect x="89.6" y="260.4" width="4.6" height="117.6" fill="#93b4f7" rx="1"/><rect x="97.1" y="232.8" width="4.6" height="145.2" fill="#93b4f7" rx="1"/><rect x="104.6" y="302.9" width="4.6" height="75.1" fill="#93b4f7" rx="1"/><rect x="112.1" y="299.0" width="4.6" height="79.0" fill="#93b4f7" rx="1"/><rect x="119.6" y="313.3" width="4.6" height="64.7" fill="#93b4f7" rx="1"/><rect x="127.0" y="329.9" width="4.6" height="48.1" fill="#93b4f7" rx="1"/><rect x="134.5" y="337.2" width="4.6" height="40.8" fill="#93b4f7" rx="1"/><rect x="142.0" y="344.0" width="4.6" height="34.0" fill="#93b4f7" rx="1"/><rect x="149.5" y="343.2" width="4.6" height="34.8" fill="#93b4f7" rx="1"/><rect x="157.0" y="323.5" width="4.6" height="54.5" fill="#93b4f7" rx="1"/><rect x="164.5" y="320.3" width="4.6" height="57.7" fill="#93b4f7" rx="1"/><rect x="172.0" y="317.3" width="4.6" height="60.7" fill="#93b4f7" rx="1"/><rect x="179.4" y="314.1" width="4.6" height="63.9" fill="#93b4f7" rx="1"/><rect x="186.9" y="279.7" width="4.6" height="98.3" fill="#93b4f7" rx="1"/><rect x="194.4" y="298.2" width="4.6" height="79.8" fill="#93b4f7" rx="1"/><rect x="201.9" y="287.5" width="4.6" height="90.5" fill="#93b4f7" rx="1"/><rect x="209.4" y="306.5" width="4.6" height="71.5" fill="#93b4f7" rx="1"/><rect x="216.9" y="291.7" width="4.6" height="86.3" fill="#93b4f7" rx="1"/><rect x="224.3" y="303.0" width="4.6" height="75.0" fill="#93b4f7" rx="1"/><rect x="231.8" y="259.2" width="4.6" height="118.8" fill="#93b4f7" rx="1"/><rect x="239.3" y="258.7" width="4.6" height="119.3" fill="#93b4f7" rx="1"/><rect x="246.8" y="295.6" width="4.6" height="82.4" fill="#f59e0b" rx="1"/><rect x="254.3" y="281.6" width="4.6" height="96.4" fill="#f59e0b" rx="1"/><rect x="261.8" y="303.3" width="4.6" height="74.7" fill="#f59e0b" rx="1"/><rect x="269.2" y="274.8" width="4.6" height="103.2" fill="#f59e0b" rx="1"/><rect x="276.7" y="220.2" width="4.6" height="157.8" fill="#f59e0b" rx="1"/><rect x="284.2" y="155.6" width="4.6" height="222.4" fill="#f59e0b" rx="1"/><rect x="291.7" y="44.6" width="4.6" height="333.4" fill="#f59e0b" rx="1"/><rect x="299.2" y="146.5" width="4.6" height="231.5" fill="#f59e0b" rx="1"/><rect x="306.7" y="247.8" width="4.6" height="130.2" fill="#f59e0b" rx="1"/><rect x="314.1" y="282.5" width="4.6" height="95.5" fill="#f59e0b" rx="1"/><rect x="321.6" y="305.8" width="4.6" height="72.2" fill="#93b4f7" rx="1"/><rect x="329.1" y="288.6" width="4.6" height="89.4" fill="#93b4f7" rx="1"/><rect x="336.6" y="308.9" width="4.6" height="69.1" fill="#93b4f7" rx="1"/><rect x="344.1" y="303.1" width="4.6" height="74.9" fill="#93b4f7" rx="1"/><rect x="351.6" y="334.4" width="4.6" height="43.6" fill="#93b4f7" rx="1"/><rect x="359.0" y="337.9" width="4.6" height="40.1" fill="#93b4f7" rx="1"/><rect x="366.5" y="335.9" width="4.6" height="42.1" fill="#93b4f7" rx="1"/><rect x="374.0" y="345.4" width="4.6" height="32.6" fill="#93b4f7" rx="1"/><rect x="381.5" y="336.7" width="4.6" height="41.3" fill="#93b4f7" rx="1"/><rect x="389.0" y="332.7" width="4.6" height="45.3" fill="#93b4f7" rx="1"/><rect x="396.5" y="328.8" width="4.6" height="49.2" fill="#93b4f7" rx="1"/><rect x="404.0" y="334.5" width="4.6" height="43.5" fill="#93b4f7" rx="1"/><rect x="411.4" y="331.8" width="4.6" height="46.2" fill="#93b4f7" rx="1"/><rect x="418.9" y="344.6" width="4.6" height="33.4" fill="#93b4f7" rx="1"/><rect x="426.4" y="351.4" width="4.6" height="26.6" fill="#93b4f7" rx="1"/><rect x="433.9" y="355.6" width="4.6" height="22.4" fill="#93b4f7" rx="1"/><rect x="441.4" y="351.6" width="4.6" height="26.4" fill="#93b4f7" rx="1"/><rect x="448.9" y="352.1" width="4.6" height="25.9" fill="#93b4f7" rx="1"/><rect x="456.3" y="297.1" width="4.6" height="80.9" fill="#93b4f7" rx="1"/><rect x="463.8" y="354.0" width="4.6" height="24.0" fill="#93b4f7" rx="1"/><rect x="471.3" y="358.0" width="4.6" height="20.0" fill="#93b4f7" rx="1"/><rect x="478.8" y="354.5" width="4.6" height="23.5" fill="#93b4f7" rx="1"/><rect x="486.3" y="354.5" width="4.6" height="23.5" fill="#93b4f7" rx="1"/><rect x="493.8" y="359.1" width="4.6" height="18.9" fill="#93b4f7" rx="1"/><rect x="501.2" y="355.3" width="4.6" height="22.7" fill="#93b4f7" rx="1"/><rect x="508.7" y="353.2" width="4.6" height="24.8" fill="#93b4f7" rx="1"/><rect x="516.2" y="349.3" width="4.6" height="28.7" fill="#93b4f7" rx="1"/><rect x="523.7" y="354.2" width="4.6" height="23.8" fill="#93b4f7" rx="1"/><rect x="531.2" y="358.3" width="4.6" height="19.7" fill="#93b4f7" rx="1"/><rect x="538.7" y="349.1" width="4.6" height="28.9" fill="#93b4f7" rx="1"/><rect x="546.1" y="342.5" width="4.6" height="35.5" fill="#93b4f7" rx="1"/><rect x="553.6" y="344.1" width="4.6" height="33.9" fill="#93b4f7" rx="1"/><rect x="561.1" y="341.1" width="4.6" height="36.9" fill="#93b4f7" rx="1"/><rect x="568.6" y="329.4" width="4.6" height="48.6" fill="#93b4f7" rx="1"/><rect x="576.1" y="343.2" width="4.6" height="34.8" fill="#93b4f7" rx="1"/><rect x="583.6" y="339.9" width="4.6" height="38.1" fill="#93b4f7" rx="1"/><rect x="591.0" y="346.8" width="4.6" height="31.2" fill="#93b4f7" rx="1"/><rect x="598.5" y="352.8" width="4.6" height="25.2" fill="#93b4f7" rx="1"/><rect x="606.0" y="320.1" width="4.6" height="57.9" fill="#93b4f7" rx="1"/><rect x="613.5" y="301.9" width="4.6" height="76.1" fill="#93b4f7" rx="1"/><rect x="621.0" y="258.5" width="4.6" height="119.5" fill="#93b4f7" rx="1"/><rect x="628.5" y="224.3" width="4.6" height="153.7" fill="#93b4f7" rx="1"/><rect x="636.0" y="253.9" width="4.6" height="124.1" fill="#93b4f7" rx="1"/><rect x="643.4" y="319.1" width="4.6" height="58.9" fill="#93b4f7" rx="1"/><rect x="650.9" y="176.2" width="4.6" height="201.8" fill="#93b4f7" rx="1"/><rect x="658.4" y="329.9" width="4.6" height="48.1" fill="#93b4f7" rx="1"/><rect x="665.9" y="293.2" width="4.6" height="84.8" fill="#93b4f7" rx="1"/><rect x="673.4" y="288.6" width="4.6" height="89.4" fill="#93b4f7" rx="1"/><rect x="680.9" y="304.0" width="4.6" height="74.0" fill="#93b4f7" rx="1"/><rect x="688.3" y="334.6" width="4.6" height="43.4" fill="#93b4f7" rx="1"/><rect x="695.8" y="333.0" width="4.6" height="45.0" fill="#93b4f7" rx="1"/><rect x="703.3" y="337.2" width="4.6" height="40.8" fill="#93b4f7" rx="1"/><rect x="710.8" y="356.8" width="4.6" height="21.2" fill="#93b4f7" rx="1"/><rect x="718.3" y="345.4" width="4.6" height="32.6" fill="#93b4f7" rx="1"/><rect x="725.8" y="327.1" width="4.6" height="50.9" fill="#f59e0b" rx="1"/><rect x="733.2" y="308.0" width="4.6" height="70.0" fill="#f59e0b" rx="1"/><rect x="740.7" y="319.2" width="4.6" height="58.8" fill="#f59e0b" rx="1"/><rect x="748.2" y="313.1" width="4.6" height="64.9" fill="#f59e0b" rx="1"/><rect x="755.7" y="254.9" width="4.6" height="123.1" fill="#f59e0b" rx="1"/><rect x="763.2" y="265.4" width="4.6" height="112.6" fill="#93b4f7" rx="1"/><rect x="770.7" y="286.9" width="4.6" height="91.1" fill="#93b4f7" rx="1"/><rect x="778.1" y="271.4" width="4.6" height="106.6" fill="#93b4f7" rx="1"/><rect x="785.6" y="299.5" width="4.6" height="78.5" fill="#93b4f7" rx="1"/><rect x="793.1" y="270.7" width="4.6" height="107.3" fill="#93b4f7" rx="1"/><rect x="800.6" y="306.0" width="4.6" height="72.0" fill="#93b4f7" rx="1"/><rect x="808.1" y="272.0" width="4.6" height="106.0" fill="#93b4f7" rx="1"/><rect x="815.6" y="305.9" width="4.6" height="72.1" fill="#93b4f7" rx="1"/><rect x="823.0" y="338.1" width="4.6" height="39.9" fill="#93b4f7" rx="1"/><rect x="830.5" y="359.8" width="4.6" height="18.2" fill="#93b4f7" rx="1"/><rect x="838.0" y="361.6" width="4.6" height="16.4" fill="#93b4f7" rx="1"/><rect x="845.5" y="364.5" width="4.6" height="13.5" fill="#93b4f7" rx="1"/><rect x="853.0" y="298.8" width="4.6" height="79.2" fill="#93b4f7" rx="1"/><rect x="860.5" y="295.4" width="4.6" height="82.6" fill="#93b4f7" rx="1"/><rect x="868.0" y="323.2" width="4.6" height="54.8" fill="#93b4f7" rx="1"/><rect x="875.4" y="293.3" width="4.6" height="84.7" fill="#93b4f7" rx="1"/><rect x="882.9" y="231.5" width="4.6" height="146.5" fill="#93b4f7" rx="1"/><rect x="890.4" y="207.4" width="4.6" height="170.6" fill="#93b4f7" rx="1"/><rect x="897.9" y="284.0" width="4.6" height="94.0" fill="#93b4f7" rx="1"/><rect x="905.4" y="308.4" width="4.6" height="69.6" fill="#93b4f7" rx="1"/><rect x="912.9" y="261.1" width="4.6" height="116.9" fill="#93b4f7" rx="1"/><rect x="920.3" y="258.4" width="4.6" height="119.6" fill="#93b4f7" rx="1"/><rect x="927.8" y="273.5" width="4.6" height="104.5" fill="#93b4f7" rx="1"/><rect x="935.3" y="286.9" width="4.6" height="91.1" fill="#93b4f7" rx="1"/><rect x="942.8" y="309.9" width="4.6" height="68.1" fill="#93b4f7" rx="1"/><rect x="950.3" y="308.7" width="4.6" height="69.3" fill="#93b4f7" rx="1"/><rect x="957.8" y="323.7" width="4.6" height="54.3" fill="#93b4f7" rx="1"/><rect x="965.2" y="318.9" width="4.6" height="59.1" fill="#93b4f7" rx="1"/><rect x="972.7" y="341.4" width="4.6" height="36.6" fill="#93b4f7" rx="1"/><rect x="980.2" y="331.6" width="4.6" height="46.4" fill="#93b4f7" rx="1"/><rect x="987.7" y="275.5" width="4.6" height="102.5" fill="#93b4f7" rx="1"/><rect x="995.2" y="307.6" width="4.6" height="70.4" fill="#93b4f7" rx="1"/><rect x="1002.7" y="307.4" width="4.6" height="70.6" fill="#93b4f7" rx="1"/><rect x="1010.1" y="316.9" width="4.6" height="61.1" fill="#93b4f7" rx="1"/><rect x="1017.6" y="315.0" width="4.6" height="63.0" fill="#93b4f7" rx="1"/><rect x="1025.1" y="300.3" width="4.6" height="77.7" fill="#93b4f7" rx="1"/><rect x="1032.6" y="263.3" width="4.6" height="114.7" fill="#f59e0b" rx="1"/><rect x="1040.1" y="275.1" width="4.6" height="102.9" fill="#f59e0b" rx="1"/><rect x="1047.6" y="287.8" width="4.6" height="90.2" fill="#f59e0b" rx="1"/><rect x="1055.0" y="306.7" width="4.6" height="71.3" fill="#93b4f7" rx="1"/><rect x="1062.5" y="314.3" width="4.6" height="63.7" fill="#93b4f7" rx="1"/><rect x="1070.0" y="325.2" width="4.6" height="52.8" fill="#93b4f7" rx="1"/><rect x="1077.5" y="263.6" width="4.6" height="114.4" fill="#f59e0b" rx="1"/><rect x="1085.0" y="280.9" width="4.6" height="97.1" fill="#f59e0b" rx="1"/><rect x="1092.5" y="232.8" width="4.6" height="145.2" fill="#f59e0b" rx="1"/><rect x="1100.0" y="287.5" width="4.6" height="90.5" fill="#f59e0b" rx="1"/><rect x="1107.4" y="263.2" width="4.6" height="114.8" fill="#f59e0b" rx="1"/><rect x="1114.9" y="292.5" width="4.6" height="85.5" fill="#f59e0b" rx="1"/><rect x="1122.4" y="241.0" width="4.6" height="137.0" fill="#f59e0b" rx="1"/><rect x="1129.9" y="253.9" width="4.6" height="124.1" fill="#93b4f7" rx="1"/><rect x="1137.4" y="308.2" width="4.6" height="69.8" fill="#93b4f7" rx="1"/><rect x="1144.9" y="321.3" width="4.6" height="56.7" fill="#93b4f7" rx="1"/><rect x="1152.3" y="322.0" width="4.6" height="56.0" fill="#93b4f7" rx="1"/><rect x="1159.8" y="167.4" width="4.6" height="210.6" fill="#f59e0b" rx="1"/><rect x="1167.3" y="151.6" width="4.6" height="226.4" fill="#f59e0b" rx="1"/><rect x="1174.8" y="141.2" width="4.6" height="236.8" fill="#f59e0b" rx="1"/><rect x="1182.3" y="178.8" width="4.6" height="199.2" fill="#f59e0b" rx="1"/><rect x="1189.8" y="147.1" width="4.6" height="230.9" fill="#f59e0b" rx="1"/><rect x="1197.2" y="162.8" width="4.6" height="215.2" fill="#f59e0b" rx="1"/><rect x="1204.7" y="225.1" width="4.6" height="152.9" fill="#f59e0b" rx="1"/><rect x="1212.2" y="197.7" width="4.6" height="180.3" fill="#f59e0b" rx="1"/><rect x="1219.7" y="215.4" width="4.6" height="162.6" fill="#f59e0b" rx="1"/><polyline points="62.0,160.5 69.5,168.2 77.0,177.6 84.5,154.8 91.9,189.8 99.4,172.4 106.9,148.7 114.4,163.8 121.9,154.9 129.4,278.2 136.8,173.8 144.3,246.3 151.8,262.2 159.3,190.1 166.8,308.4 174.3,217.7 181.7,213.0 189.2,193.7 196.7,223.8 204.2,228.3 211.7,223.1 219.2,241.9 226.6,263.1 234.1,173.4 241.6,166.1 249.1,214.6 256.6,183.6 264.1,159.4 271.5,162.0 279.0,197.5 286.5,233.1 294.0,152.4 301.5,180.7 309.0,138.9 316.5,170.3 323.9,176.8 331.4,207.8 338.9,188.4 346.4,182.8 353.9,176.7 361.4,166.1 368.8,155.5 376.3,189.2 383.8,117.4 391.3,228.3 398.8,234.7 406.3,80.0 413.7,129.6 421.2,149.5 428.7,125.0 436.2,233.8 443.7,164.8 451.2,233.7 458.6,294.9 466.1,149.1 473.6,119.9 481.1,103.4 488.6,118.5 496.1,151.7 503.5,135.4 511.0,147.7 518.5,150.6 526.0,93.8 533.5,154.1 541.0,163.9 548.5,172.9 555.9,226.2 563.4,197.6 570.9,211.2 578.4,187.6 585.9,77.5 593.4,151.4 600.8,161.1 608.3,244.0 615.8,273.5 623.3,331.0 630.8,315.2 638.3,312.7 645.7,215.7 653.2,307.9 660.7,201.8 668.2,173.7 675.7,307.4 683.2,198.5 690.6,248.2 698.1,184.6 705.6,164.1 713.1,107.2 720.6,280.8 728.1,195.6 735.5,245.4 743.0,221.0 750.5,187.5 758.0,134.2 765.5,158.0 773.0,177.2 780.5,128.6 787.9,174.0 795.4,146.2 802.9,210.5 810.4,162.4 817.9,156.7 825.4,167.6 832.8,188.1 840.3,343.7 847.8,340.7 855.3,195.4 862.8,182.2 870.3,180.4 877.7,233.1 885.2,177.3 892.7,160.1 900.2,141.0 907.7,165.7 915.2,109.6 922.6,156.6 930.1,134.9 937.6,165.0 945.1,170.9 952.6,209.0 960.1,142.6 967.5,155.5 975.0,148.8 982.5,105.2 990.0,122.1 997.5,107.9 1005.0,113.0 1012.5,116.5 1019.9,86.0 1027.4,140.5 1034.9,167.0 1042.4,192.7 1049.9,162.9 1057.4,128.2 1064.8,143.7 1072.3,159.2 1079.8,125.6 1087.3,165.8 1094.8,230.3 1102.3,111.3 1109.7,163.0 1117.2,105.9 1124.7,151.5 1132.2,153.4 1139.7,159.4 1147.2,207.4 1154.6,167.9 1162.1,118.1 1169.6,96.3 1177.1,135.4 1184.6,113.3 1192.1,116.0 1199.5,112.9 1207.0,123.8 1214.5,94.5 1222.0,122.8" fill="none" stroke="#1d4ed8" stroke-width="1.9" stroke-linejoin="round"/><text x="282.8" y="17" font-size="10.5" fill="#b45309" text-anchor="middle" font-weight="700">618 爆发·返场</text><text x="743.0" y="17" font-size="10.5" fill="#b45309" text-anchor="middle" font-weight="700">七夕</text><text x="1042.4" y="17" font-size="10.5" fill="#b45309" text-anchor="middle" font-weight="700">中秋</text><text x="1102.3" y="17" font-size="10.5" fill="#b45309" text-anchor="middle" font-weight="700">国庆</text><text x="1192.1" y="17" font-size="10.5" fill="#b45309" text-anchor="middle" font-weight="700">双11</text><text x="62.0" y="396" font-size="10.5" fill="#64748b" text-anchor="middle">5月</text><text x="166.8" y="396" font-size="10.5" fill="#64748b" text-anchor="middle">6月</text><text x="391.3" y="396" font-size="10.5" fill="#64748b" text-anchor="middle">7月</text><text x="623.3" y="396" font-size="10.5" fill="#64748b" text-anchor="middle">8月</text><text x="855.3" y="396" font-size="10.5" fill="#64748b" text-anchor="middle">9月</text><text x="1079.8" y="396" font-size="10.5" fill="#64748b" text-anchor="middle">10月</text><line x1="62" y1="378" x2="1222" y2="378" stroke="#cbd5e1" stroke-width="1.2"/><text x="54" y="18" font-size="10" fill="#94a3b8" text-anchor="end">万元</text><text x="1230" y="18" font-size="10" fill="#94a3b8">元</text></svg>
+</div>
+<div class="conclusion"><span class="h">节点放的是量，不是价。</span>
+<ul class="cl">
+<li>六个窗口都有清楚的消耗台阶：窗口内从预热一路抬到末日，双11 首周 9 天日均 16.04 万，单日峰值 26.52 万。</li>
+<li>同一条单价线始终在 900-1100 元之间横着走，没有跟着消耗抬起来。</li>
+</ul></div>
+
+<h3>2.2：节点 vs 平日</h3>
+<div class="table-wrap"><table style="table-layout:fixed">
+<thead><tr><th style="width:16%">期间</th><th class="key" style="width:11%">日均消耗（万）</th><th style="width:11%">日均单量（单）</th><th style="width:9%">下单单价</th><th style="width:9%">下单成本</th><th style="width:9%">下单 ROI</th><th style="width:9%">ctr</th><th class="key" style="width:9%">下单率</th><th>3s 完播</th></tr></thead>
+<tbody>
+<tr><td class="left">平日（122 天）</td><td>5.36</td><td>107</td><td>971</td><td>503</td><td>1.93</td><td>1.86%</td><td>2.67%</td><td>45.2%</td></tr>
+<tr class="node"><td class="left"><b>节点（34 天）</b></td><td class="hl">11.24</td><td class="hl">221</td><td>1047</td><td>509</td><td>2.06</td><td>1.62%</td><td class="hl">3.74%</td><td>40.3%</td></tr>
+<tr class="sum"><td class="left">变化</td><td><span class="up">+109.5%</span></td><td><span class="up">+107.0%</span></td><td><span class="up">+7.7%</span></td><td><span class="up">+1.2%</span></td><td><span class="up">+6.5%</span></td><td><span class="down">-13.0%</span></td><td><span class="up">+1.1pt</span></td><td><span class="down">-4.9pt</span></td></tr>
+</tbody></table></div>
+<div class="conclusion"><span class="h">单量翻倍，效率还小涨。</span>
+<ul class="cl">
+<li><b>量</b>：日均 11.24 万（2.09 倍），单量 107 → 221 单/日；单价只 +7.7%、成本只 +1.2%。</li>
+<li><b>转化</b>：下单率 2.67% → 3.74%（+1.07pt），ROI 1.93 → 2.06，是这轮唯一大幅改善的指标。</li>
+<li><b>素材</b>：ctr 1.86% → 1.62%、3s 完播 45.2% → 40.3%，节点日的素材吸引力没跟上，前 3 秒抓不住人。</li>
+<li><b>三个动作</b>：出价只跟涨（+6.6% 到 480 元）；主推款与新素材节点前上架；大促素材单独做前 3 秒钩子。</li>
+</ul></div>
+
+<h3>2.3：2.1 倍消耗是怎么来的</h3>
+<div class="three">
+<div class="box"><span class="big">1.01×</span><h5>有效基建</h5><p>广告 766 → 777 条/日；创意指纹 1738 → 2264 个/日（+30%）</p></div>
+<div class="box"><span class="big">1.30×</span><h5>广告竞争力 eCPM</h5><p>出价 +6.6%、下单率 +1.07pt、ctr -13.0%，合计 +30%</p></div>
+<div class="box"><span class="big">1.59×</span><h5>单广告拿量</h5><p>单广告日均消耗 70 → 145 元，同样数量的广告拿到两倍曝光</p></div>
+</div>
+<div class="formula"><b>2.09×</b> 日均消耗<span class="op">=</span><b>1.01×</b> 有效基建<span class="op">×</span><b>1.30×</b> eCPM<span class="op">×</span><b>1.59×</b> 单广告拿量<span class="sub">eCPM = 出价 × 点击率 × 下单率；eco 分由 3 秒完播率与平均播放时长决定（本窗口平均播放时长缺失，以 3s 完播率作代理）。单广告拿量 = 日均消耗倍数 ÷ 广告数倍数 ÷ eCPM 倍数。</span></div>
+<div class="table-wrap"><table style="table-layout:fixed">
+<thead><tr><th style="width:14%">归因层</th><th style="width:26%">指标</th><th style="width:14%">平日</th><th style="width:14%">节点</th><th class="key" style="width:13%">变化</th><th>判断</th></tr></thead>
+<tbody>
+<tr><td rowspan="3" class="camp">有效基建</td><td class="left">有消耗广告数（条/日）</td><td>766</td><td>777</td><td><span class="up">+1.4%</span></td><td class="left">几乎没加</td></tr>
+<tr><td class="left">有消耗创意指纹数（个/日）</td><td>1738</td><td class="hl">2264</td><td><span class="up">+30.3%</span></td><td class="left">唯一真涨的一项</td></tr>
+<tr><td class="left">单广告挂的创意数（个）</td><td>2.27</td><td>2.91</td><td><span class="up">+28.5%</span></td><td class="left">靠加素材，不是加广告</td></tr>
+<tr><td rowspan="4" class="camp">竞争力<br/>eCPM</td><td class="left">目标出价（元）</td><td>450</td><td>480</td><td><span class="up">+6.6%</span></td><td class="left">跟着节点小幅上调</td></tr>
+<tr><td class="left">ctr</td><td>1.86%</td><td>1.62%</td><td><span class="down">-13.0%</span></td><td class="left">素材吸引力偏弱，点击率下滑</td></tr>
+<tr><td class="left">下单率</td><td>2.67%</td><td class="hl">3.74%</td><td><span class="up">+1.1pt</span></td><td class="left">最大贡献项</td></tr>
+<tr><td class="left">eCPM 指数（平日=100）</td><td>100</td><td class="hl">130</td><td><span class="up">+29.9%</span></td><td class="left">竞争力整体抬升</td></tr>
+<tr><td rowspan="1" class="camp">eco 分</td><td class="left">3s 完播率</td><td>45.2%</td><td>40.3%</td><td><span class="down">-4.9pt</span></td><td class="left">唯一退步项</td></tr>
+<tr><td rowspan="1" class="camp">拿量</td><td class="left">单广告日均消耗（元）</td><td>70</td><td class="hl">145</td><td><span class="up">+106.6%</span></td><td class="left">单条广告拿到的曝光翻倍</td></tr>
+</tbody></table></div>
+<div class="conclusion"><span class="h">2.1 倍里，广告数只贡献 1.4%。</span>
+<ul class="cl">
+<li><b>撑起量的是两个变量</b>：eCPM 指数 +30%（下单率 +40% 占绝大部分，出价只 +6.6%）与单条广告拿量 +59%。</li>
+<li><b>短板在 eco 分</b>：3s 完播 45.2% → 40.3%，是唯一退步项。</li>
+<li><b>本质</b>：这轮吃的是节点流量红利，不是素材变强，窗口一过就回平日水位。</li>
+<li><b>两条动作</b>：大场前广告建到 1000 条/日、创意指纹 3000 个/日；3 秒钩子补上，eco 分回升 1pt 同等出价就能多拿曝光。</li>
+</ul></div>
+
+<h3>2.4：六场横向对比</h3>
+<div class="table-wrap"><table style="table-layout:fixed">
+<thead><tr><th style="width:16%">节点</th><th class="key" style="width:11%">日均消耗（万）</th><th style="width:9%">vs 平日</th><th class="key" style="width:9%">ROI</th><th style="width:9%">下单率</th><th style="width:8%">3s</th><th style="width:9%">广告数</th><th style="width:10%">创意指纹</th><th>活动商品</th></tr></thead>
+<tbody><tr><td class='left'><b>618爆发期</b><br/><span class='camp-sub'>6.12-6.18</span></td><td class='hl'>12.16</td><td>2.27×</td><td class='key'>2.35</td><td>4.90%</td><td>—</td><td>985</td><td>1942</td><td>72%</td></tr><tr><td class='left'><b>618返场期</b><br/><span class='camp-sub'>6.19-6.21</span></td><td class='hl'>12.12</td><td>2.26×</td><td class='key'>1.96</td><td>2.75%</td><td>—</td><td>1125</td><td>2166</td><td>78%</td></tr><tr><td class='left'><b>七夕</b><br/><span class='camp-sub'>8.15-8.19</span></td><td class='hl'>5.85</td><td>1.09×</td><td class='key'>1.90</td><td>3.07%</td><td>37%</td><td>1070</td><td>2309</td><td>—</td></tr><tr><td class='left'><b>中秋</b><br/><span class='camp-sub'>9.25-9.27</span></td><td class='hl'>8.16</td><td>1.52×</td><td class='key'>1.89</td><td>2.17%</td><td>48%</td><td>475</td><td>2215</td><td>0%</td></tr><tr><td class='left'><b>国庆</b><br/><span class='camp-sub'>10.1-10.7</span></td><td class='hl'>8.92</td><td>1.66×</td><td class='key'>1.81</td><td>3.21%</td><td>44%</td><td>367</td><td>1625</td><td>—</td></tr><tr><td class='left'><b>双11首周</b><br/><span class='camp-sub'>10.12-10.20</span></td><td class='hl'>16.04</td><td>2.99×</td><td class='key'>2.08</td><td>3.95%</td><td>38%</td><td>755</td><td>3037</td><td>98%</td></tr></tbody></table></div>
+<div class="conclusion"><span class="h">活动决定上限，素材供给决定吃多满。</span>
+<ul class="cl">
+<li><b>活动决定上限</b>：有活动的三场（12.16 / 12.12 / 16.04 万）全部 12 万以上；没活动的三场（5.85 / 8.16 / 8.92）全部 9 万以下。</li>
+<li><b>供给决定吃多满</b>：双11 755 条 / 3037 个 → 16.04 万；国庆只有 367 / 1625，单广告已跑到 243 元，是供给不够，不是跑不动。</li>
+<li><b>最优模板是 618 爆发</b>：ROI 2.35、成本 420 元、下单率 4.90%，活动 + 985 条广告 + 低出价三件事同时成立。</li>
+</ul></div>
+<div class="table-wrap"><table style="table-layout:fixed">
+<thead><tr><th style="width:16%">节点</th><th style="width:44%">这一场做对了什么</th><th>下一场怎么调</th></tr></thead>
+<tbody>
+<tr><td class="left"><b>618 爆发期</b></td><td class="left">活动 + 985 条广告 + 出价 453 元，ROI 六场最优</td><td class="left">照抄，前 2 天把广告建满</td></tr>
+<tr><td class="left"><b>618 返场期</b></td><td class="left">承接爆发余温，日均仍有 12.12 万</td><td class="left">ROI 跌破 1.9 就减 30% 预算</td></tr>
+<tr><td class="left"><b>七夕</b></td><td class="left">广告 1070 条铺得最宽</td><td class="left">收到 600-700 条，做厚单条预算</td></tr>
+<tr><td class="left"><b>中秋</b></td><td class="left">3s 48.3%、商品推广 48% 双高</td><td class="left">广告 475 → 700 条，再补一个满减</td></tr>
+<tr><td class="left"><b>国庆</b></td><td class="left">单广告 243 元六场最高，已跑满</td><td class="left">广告 367 → 700、创意 1625 → 2500</td></tr>
+<tr><td class="left"><b>双11 首周</b></td><td class="left">活动商品 98%，日均 16.04 万最高</td><td class="left">补 3s 素材，创意优投回 15%</td></tr>
+</tbody></table></div>
+
+<h3>2.5：节点节奏（预热 → 首日 → 末日 → 后 2 天）</h3>
+<div class="table-wrap"><table style="table-layout:fixed">
+<thead><tr><th style="width:22%">节点</th><th style="width:15%">预热 2 天</th><th class="key" style="width:15%">首日</th><th class="key" style="width:15%">末日</th><th style="width:15%">后 2 天</th><th>末日÷首日</th></tr></thead>
+<tbody><tr><td class='left'><b>618爆发期</b><br/><span class='camp-sub'>6.12-6.18</span></td><td class=''>9.47</td><td class='key'>6.55</td><td class='key'>26.52</td><td class=''>14.39</td><td>4.05×</td></tr><tr><td class='left'><b>618返场期</b><br/><span class='camp-sub'>6.19-6.21</span></td><td class='key'>22.11<span class='mut'>*</span></td><td class='key'>18.41</td><td class='key'>7.60</td><td class=''>6.43</td><td>0.41×</td></tr><tr><td class='left'><b>七夕</b><br/><span class='camp-sub'>8.15-8.19</span></td><td class=''>2.14</td><td class='key'>4.05</td><td class='key'>9.80</td><td class=''>8.10</td><td>2.42×</td></tr><tr><td class='left'><b>中秋</b><br/><span class='camp-sub'>9.25-9.27</span></td><td class=''>5.60</td><td class='key'>9.13</td><td class='key'>7.17</td><td class=''>5.37</td><td>0.79×</td></tr><tr><td class='left'><b>国庆</b><br/><span class='camp-sub'>10.1-10.7</span></td><td class=''>4.64</td><td class='key'>9.10</td><td class='key'>10.90</td><td class=''>7.71</td><td>1.20×</td></tr><tr><td class='left'><b>双11首周</b><br/><span class='camp-sub'>10.12-10.20</span></td><td class=''>4.48</td><td class='key'>16.75</td><td class='key'>12.93</td><td class=''>—</td><td>0.77×</td></tr></tbody></table></div>
+<div class="conclusion"><span class="h">预热决定首日，预算别全押末日。</span>
+<ul class="cl">
+<li><b>首日能不能顶上去，看预热</b>：中秋 112%、双11 104%、国庆 102% 首日就到节点水位；618 爆发只有 54%、七夕 69%，要从中段往上爬。</li>
+<li><b>量押在末日</b>：618 爆发末日 26.52 万（首日 6.55 万的 4.0 倍）；返场与中秋反过来，首日打完就衰减。预算按首日 ≥100%、末日 ≤180% 配比。</li>
+<li><b>后 2 天还有余温</b>：七夕 8.10 万、国庆 7.71 万（平日 1.5 / 1.4 倍），末日晚别一次全停，留 20%-30% 承接。</li>
+</ul></div>
+<div class="tip">单位：万元/日。* 618 返场的预热两天（6.17-6.18）落在爆发期内，数值含爆发日。后 2 天为节点结束后第 1-2 天，双11 首周后段已超出数据窗口。</div>
+
+<h2>Part 3：消耗结构</h2>
+<h3>3.1：产品能力使用情况</h3>
+<div class="table-wrap"><table style="table-layout:fixed">
+<thead><tr><th style="width:22%">能力</th><th>平日</th><th>节点</th><th>618爆发</th><th>618返场</th><th>七夕</th><th>中秋</th><th>国庆</th><th class="key">双11首周</th></tr></thead>
+<tbody><tr><td class='left'>专场放量消耗占比</td><td>1.1%</td><td>2.6%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>1.6%</td><td>7.7%</td><td class='key'>3.3%</td></tr><tr><td class='left'>智投消耗占比</td><td>77.3%</td><td>70.4%</td><td>81.2%</td><td>86.5%</td><td>58.2%</td><td>92.0%</td><td>78.6%</td><td class='key'>55.3%</td></tr><tr><td class='left'>创意优投消耗占比</td><td>20.3%</td><td>13.8%</td><td>29.3%</td><td>36.3%</td><td>13.2%</td><td>9.4%</td><td>6.1%</td><td class='key'>3.1%</td></tr><tr><td class='left'>潜客优投覆盖（7.3 起）</td><td>44.4%</td><td>43.8%</td><td>—</td><td>—</td><td>15.8%</td><td>48.3%</td><td>57.6%</td><td class='key'>42.7%</td></tr><tr><td class='left'>新广告占比</td><td>4.5%</td><td>4.8%</td><td>6.9%</td><td>0.7%</td><td>3.5%</td><td>9.6%</td><td>1.6%</td><td class='key'>5.6%</td></tr></tbody></table></div>
+<div class="conclusion warn"><span class="h">大促期间反而在“去产品化”。</span>
+<ul class="cl">
+<li><b>工具越到大促越被抽走</b>：智投 77% → 70%，创意优投 20% → 14%，双11 首周创意优投只剩 3.1%。</li>
+<li><b>潜客优投整体持平</b>：44% → 44%，但分场差异大——国庆 58%、中秋 48%，七夕只有 16%。</li>
+<li><b>动作</b>：大促期创意优投守 15% 以上、智投 65% 以上，别靠自然流量硬扛。</li>
+</ul></div>
+
+<h3>3.2：分节点链路结构</h3>
+<div class="table-wrap"><table style="table-layout:fixed">
+<thead><tr><th style="width:14%">节点</th><th style="width:15%">视频号推广（万/日）</th><th style="width:15%">商品推广（万/日）</th><th class="key" style="width:11%">商品推广占比</th><th style="width:12%">视频号 ROI</th><th style="width:12%">商品 ROI</th><th style="width:10%">视频号 3s</th><th>商品 3s</th></tr></thead>
+<tbody><tr><td class='left'><b>618爆发期</b></td><td>8.6</td><td>3.6</td><td class='hl'>29%</td><td>2.30</td><td>2.46</td><td>—</td><td>—</td></tr><tr><td class='left'><b>618返场期</b></td><td>9.2</td><td>2.9</td><td class='hl'>24%</td><td>1.92</td><td>2.09</td><td>—</td><td>—</td></tr><tr><td class='left'><b>七夕</b></td><td>5.7</td><td>0.1</td><td class='hl'>2%</td><td>1.89</td><td>2.45</td><td>37%</td><td>43%</td></tr><tr><td class='left'><b>中秋</b></td><td>4.2</td><td>3.9</td><td class='hl'>48%</td><td>1.79</td><td>1.99</td><td>35%</td><td>62%</td></tr><tr><td class='left'><b>国庆</b></td><td>6.4</td><td>2.5</td><td class='hl'>28%</td><td>1.71</td><td>2.08</td><td>36%</td><td>64%</td></tr><tr><td class='left'><b>双11首周</b></td><td>11.8</td><td>4.3</td><td class='hl'>27%</td><td>1.93</td><td>2.49</td><td>33%</td><td>53%</td></tr></tbody></table></div>
+<div class="conclusion"><span class="h">商品推广越高的场次，效率越稳。</span>
+<ul class="cl">
+<li>中秋 48%、618 爆发 29%、国庆 28% 的场次，ROI 都在 1.8 以上。</li>
+<li>七夕只有 2.5%，等于单腿走路，是它没起量的直接原因。</li>
+<li>动作：活动节点优先放商品推广，占比目标 35-40%。</li>
+</ul></div>
+
+<h2>Part 4：小店活动 × 节点</h2>
+<h3>4.1：活动窗口与参与情况</h3>
+<div class="table-wrap"><table style="table-layout:fixed">
+<thead><tr><th style="width:24%">活动</th><th style="width:20%">生效窗口</th><th style="width:8%">天数</th><th style="width:12%">期间累计(万)</th><th class="key" style="width:10%">期间日均</th><th style="width:8%">单价</th><th style="width:7%">ROI</th><th>活动商品占比</th></tr></thead>
+<tbody><tr><td class='left'>618满减（B类·混资）</td><td>06.12 — 06.21</td><td>10</td><td>121.5</td><td class='hl'>12.2</td><td>995</td><td>2.23</td><td>74%</td></tr><tr><td class='left'>双11满减（B类·混资）</td><td>10.12 — 11.15</td><td>9</td><td>144.4</td><td class='hl'>16.0</td><td>1124</td><td>2.08</td><td>98%</td></tr><tr><td class='left'>金秋节满减（未参加）</td><td>09.04 — 09.27</td><td>24</td><td>165.8</td><td class='hl'>6.9</td><td>1045</td><td>1.91</td><td>0%</td></tr></tbody></table></div>
+<div class="conclusion"><span class="h">5 个月只跑了 2 个活动。</span>
+<ul class="cl">
+<li><b>报了的两场</b>：618 满减（6.12-6.21，10 天 121.5 万）、双11 满减（10.12-10.20，9 天 144.4 万），都是 B 类混资，期间日均 12.15 / 16.04 万。</li>
+<li><b>没报的一场</b>：金秋节（9.4-9.27，含中秋）24 天未参加，日均只有 6.91 万，不到活动期的一半。</li>
+<li><b>不在可报范围</b>：国庆（10.1-10.7）平台未组织满减活动。</li>
+</ul></div>
+
+<h3>4.2：逐节点活动商品 vs 非活动商品</h3>
+<div class="table-wrap"><table style="table-layout:fixed">
+<thead><tr><th style="width:14%">节点</th><th style="width:9%">活动占比</th><th style="width:11%">活动消耗(万)</th><th style="width:10%">活动单价</th><th class="key" style="width:11%">活动下单率</th><th style="width:11%">非活动消耗(万)</th><th style="width:10%">非活动单价</th><th>非活动下单率</th></tr></thead>
+<tbody><tr><td class='left'><b>618爆发期</b></td><td class='hl'>72%</td><td>61.2</td><td>1029</td><td class='hl'>5.00%</td><td>24.0</td><td>890</td><td>4.64%</td></tr><tr><td class='left'><b>618返场期</b></td><td class='hl'>78%</td><td>28.5</td><td>1038</td><td class='hl'>2.90%</td><td>7.9</td><td>976</td><td>2.22%</td></tr><tr><td class='left'><b>双11首周</b></td><td class='hl'>98%</td><td>142.1</td><td>1131</td><td class='hl'>3.96%</td><td>2.2</td><td>753</td><td>3.30%</td></tr></tbody></table></div>
+<div class="conclusion ok"><span class="h">活动最直接的收益是转化效率。</span>
+<ul class="cl">
+<li><b>下单率全面领先</b>：618 爆发 5.00% vs 4.64%（+0.36pt）、返场 2.90% vs 2.22%（+0.67pt）、双11 3.96% vs 3.30%（+0.65pt）。</li>
+<li><b>量也在活动商品上</b>：占节点消耗 72% / 78% / 98%，活动商品承接了节点的主要放量。</li>
+<li><b>单价同步更高</b>：双11 活动商品 1131 元、非活动 753 元，节点整体单价 1124 元，为六场最高。</li>
+</ul></div>
+
+<h2>Part 5：双11 剩余 24 天的活动玩法</h2>
+<div class="banner">
+<div class="blk"><span class="tag">设计逻辑</span>双11 首周已经验证两件事——<b>活动商品下单率 3.96%</b>（非活动 3.30%）、<b>单日出量能到 18.83 万</b>。剩下 24 天不换模型，只补三个短板：<b>后段活动热度退潮时把量接住</b>、<b>把 618 爆发那套产品配置搬回来</b>、<b>11.11 的供给提前一天建好</b>。</div>
+<div class="blk"><span class="tag warn">当前进度</span>平台满减已于 <b>10.12</b> 生效、<b>11.15</b> 截止，现在处在「11.11 抢先购」阶段。<b>越早报满减、越早吃到商品扶持；11.1 与 11.11 两场的提报别等临期。</b></div>
+</div>
+
+<h3>5.1：平台活动与扶持，按顺序报（漏一项丢一档）</h3>
+<div class="table-wrap"><table style="table-layout:fixed">
+<thead><tr><th style="width:11%">类别</th><th style="width:24%">项目</th><th>华大怎么做</th><th class="key" style="width:17%">时间</th></tr></thead>
+<tbody><tr><td rowspan='5' class='camp'>平台活动</td><td class='left'><b>跨店满减（1000-120 档）</b></td><td class='left'>客单 1124 元，1000-120 正好跨档；活动商品覆盖守 90% 以上</td><td class='key'>11.15 截止</td></tr><tr><td class='left'><b>直播大场 + 跃迁激励</b></td><td class='left'>单场 GMV 过 10 万即可，华大日均 GMV 33.3 万；11.1 / 11.9 / 11.11 三场都报</td><td class='key'>每场单独提报</td></tr><tr><td class='left'><b>主播分享券</b></td><td class='left'>报大场通过后生成入口，开播前 2h 私域群 + 朋友圈推</td><td class='key'>需先报大场</td></tr><tr><td class='left'><b>3 单挑战</b></td><td class='left'>单场 2h 内 3 单，华大日均 297 单，好过</td><td class='key'>贴片 + 话术</td></tr><tr><td class='left'><b>天降红包</b></td><td class='left'>平台圈选自动参与，贴片提示红包到账</td><td class='key'>无需报名</td></tr><tr><td rowspan='4' class='camp'>平台扶持</td><td class='left'><b>微广商品扶持</b></td><td class='left'>主推品提报满减即自动获得，全资 / 混资都算</td><td class='key'>随满减报名</td></tr><tr><td class='left'><b>PCAD 流量扶持</b></td><td class='left'>3.0 广告投 PCAD 版位（单投 / 通投 / 智投均可），需横版素材</td><td class='key'>11.1 前备 5-8 条</td></tr><tr><td class='left'><b>原生广告激励</b></td><td class='left'>全库智选原生开启，或定选视频号主页视频</td><td class='key'>找行业经理报名</td></tr><tr><td class='left'><b>全店托管</b></td><td class='left'>小店推商品 → 全店托管，含满减品可加码</td><td class='key'>CPA 结算需开白</td></tr></tbody></table></div>
+<div class="conclusion ok"><span class="h">报满活动是这 24 天里性价比最高的一件事。</span>
+<ul class="cl">
+<li><b>顺序</b>：先报满减（带微广商品扶持），再报大场激励与主播分享券，后两项报齐才能叠到下一档；PCAD 与原生 11.1 前备 5-8 条横版。</li>
+<li><b>三场直播大场</b>：11.1 开门红、11.9 冲刺、11.11 正日各报一场；华大日均 GMV 33.3 万，10 万的标准稳过。</li>
+<li><b>档位按客单选</b>：单价 1124 元，主推 1000-120 档；活动商品覆盖守 90% 以上，双11 首周已是 98%。</li>
+<li><b>后段要靠活动接住</b>：双11 前 6 天日均 17.49 万、后 3 天 13.15 万，同期广告与创意都在加，掉的是下单率 4.48% → 2.52%。</li>
+</ul></div>
+
+<h3>5.2：广告侧配套，把活动量接住</h3>
+<div class="table-wrap"><table style="table-layout:fixed">
+<thead><tr><th style="width:24%">项目</th><th style="width:18%">双11 首周现状</th><th class="key" style="width:24%">剩余 24 天要求</th><th>动作</th></tr></thead>
+<tbody><tr><td class='left'>有消耗广告数</td><td>755 条/日</td><td class='key'>900 条/日，正日 1200</td><td class='left'>6.18 单日靠 1228 条做到 26.52 万</td></tr><tr><td class='left'>有消耗创意指纹数</td><td>3037 个/日</td><td class='key'>3500 个/日，正日 3800</td><td class='left'>与广告数同步涨，单广告挂创意守 4 个以上</td></tr><tr><td class='left'>创意优投消耗占比</td><td>3.1%</td><td class='key'>≥15%</td><td class='left'>618 两场 29.3% / 36.3% 是六场最高</td></tr><tr><td class='left'>智投消耗占比</td><td>55.3%</td><td class='key'>≥70%</td><td class='left'>618 爆发 81.2%</td></tr><tr><td class='left'>潜客优投覆盖</td><td>42.7%</td><td class='key'>全程 ≥40%，正日 ≥65%</td><td class='left'>10.15 曾掉到 24.6%</td></tr><tr><td class='left'>专场放量消耗占比</td><td>3.3%</td><td class='key'>正日 ≥8%</td><td class='left'>历史最好国庆 7.7%</td></tr><tr><td class='left'>视频 3 秒完播率</td><td>38.2%</td><td class='key'>≥43%</td><td class='left'>中秋 48.3%、国庆 43.7%</td></tr></tbody></table></div>
+<div class="conclusion warn"><span class="h">把 618 爆发那套产品配置搬回来。</span>
+<ul class="cl">
+<li><b>618 爆发</b>：广告 985 条、创意优投 29.3%、智投 81.2%、出价 453 元 → ROI 2.35、下单率 4.90%。</li>
+<li><b>双11 首周</b>：广告 755 条、创意优投 3.1%、智投 55.3%、出价 504 元 → ROI 2.08、下单率 3.95%。</li>
+<li><b>缺的不是预算，是产品与供给</b>：创意优投 3.1% 是六场最低，出价却比 618 爆发高 11%。</li>
+<li><b>正日清单</b>：广告 1200 条、创意优投 15%、潜客优投 65%、专场放量 8%、3s 完播 43%。</li>
+</ul></div>
+
+<h3>5.3：人货场三件套</h3>
+<div class="three">
+<div class="box"><h5>人 · 11.9-11.11 主播轻升级</h5><p>贴片 + 话术做 <b>大促专场主播</b>升级，讲清「满减怎么叠、券后多少」，话术以<b>讲量不讲抬价</b>为原则。主播与话术升级要在 <b>11.9 前</b>完成，11.11 当天是升级期最关键的曝光位。</p></div>
+<div class="box"><h5>货 · 券叠在活动商品上</h5><p>主推品 <b>100% 提报</b>跨店满减，按单价 1124 元选 <b>1000-120 档</b>；好店商家走全资（平台 100% 出资），无好店走混资（出资 6.25%）。活动商品覆盖守 <b>90% 以上</b>，双11 首周已是 98%。</p></div>
+<div class="box"><h5>场 · 主题分周期换</h5><p>10 月用 <b>「11.11 抢先购」</b>，11.1-11.11 换 <b>「11.11 限时购」</b>，11.12 起换 <b>「返场」</b>。贴片固定挂满减 + 平台补贴 + 券后价，统一换官方双11 活动贴片。</p></div>
+</div>
+<div class="table-wrap"><table class="plan" style="table-layout:fixed">
+<thead><tr><th style="width:20%">玩法</th><th style="width:34%">怎么做</th><th>华大用在哪一段</th></tr></thead>
+<tbody>
+<tr><td class="left">主播分享券</td><td class="left">开播前 2h 在私域群 / 朋友圈推专属券二维码；直播中贴片引导「搜索口令领专属券」</td><td class="left">11.9-11.11 全用，正日开场前一轮私域预热</td></tr>
+<tr><td class="left">3 单挑战</td><td class="left">贴片「本场满 3 单享大额现金券」，讲三单进度</td><td class="left">11.4-11.8 平推期用来拉单客交易次数</td></tr>
+<tr><td class="left">大场激励 + 跃迁激励</td><td class="left">每场大场单独提报，GMV 破里程碑继续加码</td><td class="left">11.1 / 11.9 / 11.11 三场</td></tr>
+</tbody></table></div>
+<div class="conclusion"><span class="h">券要叠在活动商品上才转得动。</span>
+<ul class="cl">
+<li><b>活动商品是载体</b>：活动商品下单率 3.96%、非活动 3.30%，券只挂在活动商品上才有叠加效果。</li>
+<li><b>平推期最需要动作</b>：11.4-11.8 既没有开门红的流量也没有正日的热度，靠 3 单挑战与主播分享券维持单量。</li>
+<li><b>返场别空过</b>：11.12 当天就接，正日余温还在——618 返场首日（6.19）还有 18.41 万。</li>
+</ul></div>
+
+<h2>Part 6：小结与 to do</h2>
+<div class="summary-box">
+<h4>一句话总结</h4>
+<ul class="cl">
+<li><b>模型</b>：低客单、高频次，节点靠单量放大，单价基本不动。</li>
+<li><b>量从哪来</b>：eCPM +30% 与单条拿量 +59%，广告数几乎没加——吃的是节点流量红利。</li>
+<li><b>怎么变成能力</b>：活动报满 + 大场前把广告与创意建够 + 补 3 秒钩子。</li>
+</ul>
+<h4>三个判断</h4>
+<ul class="cl">
+<li><b>活动决定上限</b>：活动期日均 12-16 万，没活动的节点只有 5.9-8.9 万。</li>
+<li><b>素材供给决定能吃多满</b>：双11 755 条 / 3037 个 → 16.04 万；国庆 367 / 1625 → 8.92 万。</li>
+<li><b>转化效率是活动最直接的收益</b>：活动商品下单率比非活动高 0.36-0.68pt，三场无一例外。</li>
+</ul>
+</div>
+<div class="table-wrap"><table class="todo" style="table-layout:fixed">
+<thead><tr><th style="width:7%">优先级</th><th style="width:55%">动作</th><th>目标</th></tr></thead>
+<tbody>
+<tr><td class="p">P0</td><td>平台满减能报就报：金秋节（9.4-9.27）这类窗口别再空过</td><td>活动期日均 12 万+</td></tr>
+<tr><td class="p">P0</td><td>双11 剩余 24 天：活动商品覆盖守 90% 以上，11.1 / 11.9 / 11.11 三场直播大场单独提报</td><td>活动商品覆盖 90%+</td></tr>
+<tr><td class="p">P1</td><td>大场前 3 天建供给：广告 900 条/日、创意指纹 3500 个/日、创意优投 ≥15%</td><td>大场日均 12 万+</td></tr>
+<tr><td class="p">P1</td><td>商品推广占比 29% → 35-40%，优先在活动节点放</td><td>日均多 0.5-0.8 万</td></tr>
+<tr><td class="p">P1</td><td>大促素材前 3 秒单独做钩子，不复用平播素材</td><td>3s 37% → 43%</td></tr>
+<tr><td class="p">P2</td><td>没有平台活动的节点别抬价换量（七夕出价 574 元六场最高）</td><td>单广告 55 → 100 元+</td></tr>
+</tbody></table></div>
+
+<div class="foot">数据来源：华大 2026.05.18-10.20 分天投放数据（两段合并：5.18-7.2 与 7.3-10.20，重叠期消耗一致）。<br/>
+指标按消耗加权聚合；下单单价 = 下单 GMV / 下单次数，下单成本 = 消耗 / 下单次数；消耗一律按日均。潜客优投自 7.3 起有数据、3s 完播自 7 月起有数据，618 段不纳入这两项。<br/>
+小店活动口径：平台满减券（B 类）在 6.12-6.21 代表 618 满减、混资；金秋节（9.4-9.27）华大未参加；金秋大促（B 类）在 10.12-11.15 代表双11 满减、混资。国庆平台未组织满减活动。<br/>
+双11 剩余 24 天的配量与出价，以 618 爆发、双11 首周两场实测为参照。</div>
+
+</body></html>
