@@ -6,12 +6,15 @@
 <title>广告投放报告中心</title>
 <style>
   body { font-family: -apple-system, BlinkMacSystemFont, "Microsoft YaHei", sans-serif; background: #f4f6f9; margin: 0; padding: 32px 20px; color: #333; }
-  .container { max-width: 480px; margin: 0 auto; }
+  .container { max-width: 900px; margin: 0 auto; }
   h1 { font-size: 22px; color: #2563eb; margin: 0 0 8px; }
-  .subtitle { color: #888; font-size: 13px; margin: 0 0 28px; }
+  .subtitle { color: #888; font-size: 13px; margin: 0 0 20px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+  .grid a { display: flex; align-items: center; justify-content: center; padding: 14px 12px; background: white; border-radius: 8px; text-decoration: none; color: #334155; font-size: 15px; font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: background 0.15s; }
+  .grid a:hover { background: #e8ecf4; }
   .list { display: flex; flex-direction: column; gap: 8px; }
-  a { display: flex; align-items: center; padding: 14px 20px; background: white; border-radius: 8px; text-decoration: none; color: #334155; font-size: 15px; font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: background 0.15s; }
-  a:hover { background: #e8ecf4; }
+  .list a { display: flex; align-items: center; padding: 14px 20px; background: white; border-radius: 8px; text-decoration: none; color: #334155; font-size: 15px; font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: background 0.15s; }
+  .list a:hover { background: #e8ecf4; }
   .arrow { color: #94a3b8; margin-left: auto; font-size: 14px; }
   .footer { text-align: center; color: #94a3b8; font-size: 11px; margin-top: 28px; }
 </style>
@@ -20,33 +23,33 @@
 <div class="container">
   <h1>广告投放报告中心</h1>
   <p class="subtitle">点击客户名称查看报告</p>
-  <div class="list">
-    <a href="shiwu/">拾伍<span class="arrow">→</span></a>
-    <a href="shanshan/">珊珊<span class="arrow">→</span></a>
-    <a href="dilanxiangren/">帝蘭香仁<span class="arrow">→</span></a>
-    <a href="biyang/">必扬<span class="arrow">→</span></a>
-    <a href="shunwei/">顺为<span class="arrow">→</span></a>
-    <a href="ziyoulang/">自由狼<span class="arrow">→</span></a>
-    <a href="bulaomiyu/">不老谜语<span class="arrow">→</span></a>
-    <a href="heyuanzhang/">何院长<span class="arrow">→</span></a>
-      <a href="xuebao/">雪宝<span class="arrow">→</span></a>
-      <a href="doujia/">抖嘉<span class="arrow">→</span></a>
-      <a href="amin/">阿敏<span class="arrow">→</span></a>
-      <a href="dilan/">帝蘭<span class="arrow">→</span></a>
-      <a href="guangyao/">广药白云山<span class="arrow">→</span></a>
-      <a href="meiguisong/">玫瑰颂<span class="arrow">→</span></a>
-      <a href="meixi/">美溪<span class="arrow">→</span></a>
-      <a href="xiangren/">香仁<span class="arrow">→</span></a>
-      <a href="ziyouren/">自由人美妆<span class="arrow">→</span></a>
-      <a href="redian/">热典传媒<span class="arrow">→</span></a>
-      <a href="wangyi/">网逸科技<span class="arrow">→</span></a>
-      <a href="qiyu/">启昱<span class="arrow">→</span></a>
-      <a href="xinran/">欣然奥格美<span class="arrow">→</span></a>
-      <a href="huada/">华大<span class="arrow">→</span></a>
-      <a href="yituan/">蚁团美妆2025<span class="arrow">→</span></a>
-      <a href="aiposha/">艾珀莎护肤<span class="arrow">→</span></a>
-      <a href="chuangcai/">创彩<span class="arrow">→</span></a>
-      <a href="qingyan/">倾颜<span class="arrow">→</span></a>
+  <div class="grid">
+    <a href="shiwu/">拾伍</a>
+    <a href="shanshan/">珊珊</a>
+    <a href="dilanxiangren/">帝蘭香仁</a>
+    <a href="biyang/">必扬</a>
+    <a href="shunwei/">顺为</a>
+    <a href="ziyoulang/">自由狼</a>
+    <a href="bulaomiyu/">不老谜语</a>
+    <a href="heyuanzhang/">何院长</a>
+    <a href="xuebao/">雪宝</a>
+    <a href="doujia/">抖嘉</a>
+    <a href="amin/">阿敏</a>
+    <a href="dilan/">帝蘭</a>
+    <a href="guangyao/">广药白云山</a>
+    <a href="meiguisong/">玫瑰颂</a>
+    <a href="meixi/">美溪</a>
+    <a href="xiangren/">香仁</a>
+    <a href="ziyouren/">自由人美妆</a>
+    <a href="redian/">热典传媒</a>
+    <a href="wangyi/">网逸科技</a>
+    <a href="qiyu/">启昱</a>
+    <a href="xinran/">欣然奥格美</a>
+    <a href="huada/">华大</a>
+    <a href="yituan/">蚁团美妆2025</a>
+    <a href="aiposha/">艾珀莎护肤</a>
+    <a href="chuangcai/">创彩</a>
+    <a href="qingyan/">倾颜</a>
   </div>
   <p class="subtitle" style="margin-top:28px">行业报告</p>
   <div class="list">
