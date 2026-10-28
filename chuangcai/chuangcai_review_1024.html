@@ -110,6 +110,8 @@ body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSys
 .pbar .tr i{display:block;height:100%;border-radius:5px;background:linear-gradient(90deg,#7FA3F4,#2B5CE6)}
 .pbar .vv{width:104px;text-align:right;font-size:12px;color:var(--muted);flex:none}
 .pbar .vv b{color:var(--ink);font-weight:800}
+.pbar.wide .nm{width:300px}
+.pbar.wide .vv{width:170px}
 .cap{display:grid;grid-template-columns:120px 1fr 190px;gap:14px;align-items:center;padding:11px 0;border-bottom:1px solid #F1F4F9}
 .cap:last-child{border-bottom:none}
 .cap .nm{font-size:13px;font-weight:800}
@@ -201,7 +203,7 @@ details[open] summary::before{content:"▾ "}
 <div class="wrap">
 <div class="sec">
   <div class="sec-h"><span class="n">00</span><h2>一句话结论</h2><span class="hint">先看这三条，再看后面</span></div>
-  <div class="take">这轮是<b>「双链路放量、ROI 双双未回本」</b>的一次：直播 +147%（主号抗皱草本护肤从 0.09 万拉到 3.50 万）、小店 +54%，ROI 0.89（-4%）/ 0.95（-6%）都还在 1 以下。缺口定位到四处：<span class="warn">直播间「点商品」环节</span>（商品点击率 48.59% vs 标杆 62.76%，素材 CVR 因此低 21%，拆解见 3.4 漏斗）；<span class="warn">小店素材前端点击</span>（点击率低慕可 42%）＋四个商品退款高于大盘；<span class="warn">广告重复度</span>（直播 4+m 39%、小店主力品 42%）压住放量天花板；<span class="warn">二号直播间退款失控</span>（14 日 84.94%）。双链路环比均上涨，<b>下一周期日耗目标＝本周期 ×1.3，即 14.78 万/日</b>（直播 4.91 · 小店 9.87，当前 11.37）。</div>
+  <div class="take">这轮是<b>「双链路放量、ROI 双双未回本」</b>的一次：直播 +147%（主号抗皱草本护肤从 0.09 万拉到 3.50 万）、小店 +54%，ROI 0.89（-4%）/ 0.95（-6%）都还在 1 以下。缺口定位到四处：<span class="warn">直播间「点商品」环节</span>（商品点击率 48.59% vs 标杆 62.76%，素材 CVR 因此低 21%，拆解见 3.4 漏斗）；<span class="warn">小店素材前端点击</span>（点击率低慕可 42%）＋五个商品 14 日退款全部高于小店大盘 12.58%；<span class="warn">广告重复度</span>（直播 4+m 39%、小店主力品 42%）压住放量天花板；<span class="warn">二号直播间退款失控</span>（14 日 84.94%）。双链路环比均上涨，<b>下一周期日耗目标＝本周期 ×1.3，即 14.78 万/日</b>（直播 4.91 · 小店 9.87，当前 11.37）。</div>
 
   <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr)">
     <div class="kpi" style="background:#F3FBF7;border-color:#CFEDDF">
@@ -310,7 +312,7 @@ details[open] summary::before{content:"▾ "}
         <div class="kpi-d neg">▲ +5%</div>
       </div>
     </div>
-    <div class="note amber"><span class="ico">!</span><span><b>小店素材对标慕可前端吸引力仍有差距（点击率 3.09% vs 5.37%），但 ROI 卡在 1 以下的主因是退款不是素材：</b>四个商品 14 日退款高于小店大盘 17.93%（详见 4.1），其中主力眼膜 22.25%；郑多燕黄芪 17.30% 已低于大盘。退款每降 1pct，ROI 修复直接可见。<b>小店日耗目标 9.87 万/日（当前 7.59），放量与压退款要同步做</b>。</span></div>
+    <div class="note amber"><span class="ico">!</span><span><b>小店素材对标慕可前端吸引力仍有差距（点击率 3.09% vs 5.37%），但 ROI 卡在 1 以下的主因是退款不是素材：</b>五个商品 14 日退款全部高于小店大盘 12.58%（详见 4.1），其中主力眼膜 13476 单 22.25% 样本充足。退款每降 1pct，ROI 修复直接可见。<b>小店日耗目标 9.87 万/日（当前 7.59），放量与压退款要同步做</b>。</span></div>
   </div>
 </div>
 <div class="tabbar"><button class="tabbtn active" onclick="showTab('tab-live',this)">直播链路<em>日均 3.78 万（+147%）· ROI 0.89 · 日耗目标 4.91 万/日</em></button><button class="tabbtn" onclick="showTab('tab-shop',this)">小店直购链路<em>日均 7.59 万（+54%）· ROI 0.95 · 日耗目标 9.87 万/日</em></button></div><div class="tabpanel" id="tab-live">
@@ -548,12 +550,13 @@ details[open] summary::before{content:"▾ "}
         <table class="mini">
           <thead><tr><th>退款窗口</th><th class="num">创彩整体</th><th class="num">主号</th><th class="num">二号</th><th class="num">直播大盘</th></tr></thead>
           <tbody>
+            <tr><td style="color:#8A94A6">总下单次数</td><td class="num" style="color:#8A94A6">9299</td><td class="num" style="color:#8A94A6">8688</td><td class="num" style="color:#8A94A6">611</td><td class="num" style="color:#8A94A6">—</td></tr>
             <tr><td>24 小时</td><td class="num"><b style="color:#DC2626">20.25%</b></td><td class="num">19.98%</td><td class="num">24.06%</td><td class="num">16.17%</td></tr>
             <tr><td>3 天</td><td class="num"><b style="color:#DC2626">25.35%</b></td><td class="num">24.01%</td><td class="num"><b style="color:#DC2626">44.35%</b></td><td class="num">19.61%</td></tr>
             <tr><td>14 天</td><td class="num"><b style="color:#DC2626">30.79%</b></td><td class="num"><b style="color:#0B7A55">26.98%</b></td><td class="num"><b style="color:#DC2626">84.94%</b></td><td class="num">27.85%</td></tr>
           </tbody>
         </table>
-        <div class="note red" style="margin-top:12px"><span class="ico">!</span><span><b>整体三窗口高于大盘，但主号与二号是两个世界：</b>主号 14 日 26.98% 低于大盘 27.85%、环比大幅改善（-25%），放量同时退款在收敛；<b>二号 14 日 84.94%、30 日 90.83%，且环比仍在恶化</b>（+103% / +109%）——该间消耗仅占 7%，属局部失控，先拆退款原因（话术/货盘/售后）、修复前不重启放量。</span></div>
+        <div class="note red" style="margin-top:12px"><span class="ico">!</span><span><b>整体三窗口高于大盘，但主号与二号是两个世界：</b>主号 8688 单、14 日 26.98% 低于大盘 27.85%、环比大幅改善（-25%），样本充足、放量同时退款在收敛；<b>二号 611 单、14 日 84.94%、30 日 90.83%，环比仍在恶化</b>（+103% / +109%）——611 单的样本量已足以排除统计波动，这是真实失控而非小样本噪音；该间消耗仅占 7%，属局部失控，先拆退款原因（话术/货盘/售后）、修复前不重启放量。</span></div>
         <div class="note blue" style="margin-top:10px"><span class="ico">i</span><span><b>各窗口优化手段：</b>① 24 小时＝「下单即退」——直播间话术与实物规格保持一致，下单后 1h 内客服确认订单、拦截冲动下单；② 3 天＝「收货即退」——48h 内发货、加固包装，发货后主动触达使用指引；③ 14 天＝「用后即退」——7 日节点主动回访，功效预期在详情页前置说明。</span></div>
       </div>
       <div>
@@ -599,17 +602,17 @@ details[open] summary::before{content:"▾ "}
 
 <div class="sec">
   <div class="sec-h"><span class="n">04</span><h2>小店：素材全面领先，退款拖住 ROI</h2><span class="hint">分商品 · 本周期</span></div>
-  <div class="take">小店 7.59 万/日，五个商品里<b>眼膜单品类占 89%</b>（5 个眼膜类商品合计 6.7 万）；素材对标慕可<span class="warn">前端吸引力有差距</span>（点击率低 42%、CTCVR 低 39%），<span class="warn">且四个商品 14 日退款高于小店大盘 17.93%</span>——这是 ROI 卡在 1 以下的两个直接原因。<b>小店日耗目标 9.87 万/日（×1.3），增量 2.28 万优先给唯一破 1 的烟酰胺面霜与转优的郑多燕黄芪</b>。</div>
+  <div class="take">小店 7.59 万/日，五个商品里<b>眼膜单品类占 89%</b>（5 个眼膜类商品合计 6.7 万）；素材对标慕可<span class="warn">前端吸引力有差距</span>（点击率低 42%、CTCVR 低 39%），<span class="warn">且五个商品 14 日退款全部高于小店大盘 12.58%</span>——这是 ROI 卡在 1 以下的两个直接原因。<b>小店日耗目标 9.87 万/日（×1.3），增量 2.28 万优先给唯一 ROI 破 1 的烟酰胺面霜，但其退款 29.59% 恶化最快，放量与压退款必须同步</b>。</div>
 
   <div class="card">
-    <div class="card-h"><h3>4.1　退款：四个商品高于大盘，郑多燕黄芪已转优</h3><span>14 日退款率 · 小店大盘 17.93%</span></div>
-    <div class="pbar"><span class="nm">烟酰胺祛斑面霜 <i style="font-style:normal;color:var(--muted);font-weight:600">占消耗 8%</i></span><span class="tr"><i style="width:100%;background:linear-gradient(90deg,#F1998F,#DC2626)"></i></span><span class="vv"><b style="color:#DC2626">29.59%</b> · 恶化最快</span></div>
-    <div class="pbar"><span class="nm">郑多燕/DYZ胜肽眼膜 <i style="font-style:normal;color:var(--muted);font-weight:600">占消耗 13%</i></span><span class="tr"><i style="width:86.6%;background:linear-gradient(90deg,#F1998F,#DC2626)"></i></span><span class="vv"><b style="color:#DC2626">25.67%</b></span></div>
-    <div class="pbar"><span class="nm">淡化细纹/抗皱眼膜 <i style="font-style:normal;color:var(--muted);font-weight:600">占消耗 9%</i></span><span class="tr"><i style="width:82%;background:linear-gradient(90deg,#F5C07A,#D97706)"></i></span><span class="vv"><b style="color:#B45309">24.29%</b></span></div>
-    <div class="pbar"><span class="nm">眼膜 <i style="font-style:normal;color:var(--muted);font-weight:600">占消耗 66%</i></span><span class="tr"><i style="width:75.2%;background:linear-gradient(90deg,#F5C07A,#D97706)"></i></span><span class="vv"><b style="color:#B45309">22.25%</b> · 主力品</span></div>
-    <div class="pbar"><span class="nm">郑多燕/DYZ水光精华霜 <i style="font-style:normal;color:var(--muted);font-weight:600">占消耗 3%</i></span><span class="tr"><i style="width:58.5%;background:linear-gradient(90deg,#86C5A4,#2F9E63)"></i></span><span class="vv"><b style="color:#0B7A55">17.30%</b> · 已转优</span></div>
-    <div class="pbar"><span class="nm">小店大盘</span><span class="tr"><i style="width:60.6%;background:#CBD5E1"></i></span><span class="vv">17.93%</span></div>
-    <div class="note red"><span class="ico">!</span><span><b>与长尾型退款不同，这是主力品级别的全链路课题：</b>占 66% 消耗的眼膜退款 22.25%，四个商品高于大盘 17.93%；郑多燕黄芪 17.30% 已低于大盘（新上品，继续观察）。退款每压降 1pct，ROI 修复直接可见。<b>按窗口拆：</b>① 24 小时（下单即退）——核对详情页与素材话术的规格/功效口径，未发货订单客服拦截；② 3 天（收货即退）——48h 发货与包装加固；③ 14 天（用后即退）——按退款原因分层回访，功效预期前置说明。</span></div>
+    <div class="card-h"><h3>4.1　退款：五个商品全部高于大盘，主力眼膜 13476 单样本充足</h3><span>14 日退款率 · 小店大盘 12.58%</span></div>
+    <div class="pbar wide"><span class="nm">烟酰胺祛斑面霜 <i style="font-style:normal;color:var(--muted);font-weight:600">占消耗 8% · 2220 单</i></span><span class="tr"><i style="width:100%;background:linear-gradient(90deg,#F1998F,#DC2626)"></i></span><span class="vv"><b style="color:#DC2626">29.59%</b> · 恶化最快</span></div>
+    <div class="pbar wide"><span class="nm">郑多燕/DYZ胜肽眼膜 <i style="font-style:normal;color:var(--muted);font-weight:600">占消耗 13% · 2906 单</i></span><span class="tr"><i style="width:86.7%;background:linear-gradient(90deg,#F1998F,#DC2626)"></i></span><span class="vv"><b style="color:#DC2626">25.67%</b></span></div>
+    <div class="pbar wide"><span class="nm">淡化细纹/抗皱眼膜 <i style="font-style:normal;color:var(--muted);font-weight:600">占消耗 9% · 1832 单</i></span><span class="tr"><i style="width:82.1%;background:linear-gradient(90deg,#F5C07A,#D97706)"></i></span><span class="vv"><b style="color:#B45309">24.29%</b></span></div>
+    <div class="pbar wide"><span class="nm">眼膜 <i style="font-style:normal;color:var(--muted);font-weight:600">占消耗 66% · 13476 单</i></span><span class="tr"><i style="width:75.2%;background:linear-gradient(90deg,#F5C07A,#D97706)"></i></span><span class="vv"><b style="color:#B45309">22.25%</b> · 主力品</span></div>
+    <div class="pbar wide"><span class="nm">郑多燕/DYZ水光精华霜 <i style="font-style:normal;color:var(--muted);font-weight:600">占消耗 3% · 445 单</i></span><span class="tr"><i style="width:58.5%;background:linear-gradient(90deg,#F5C07A,#D97706)"></i></span><span class="vv"><b style="color:#B45309">17.30%</b> · 新上品样本中等</span></div>
+    <div class="pbar wide"><span class="nm">小店大盘</span><span class="tr"><i style="width:42.5%;background:#CBD5E1"></i></span><span class="vv">12.58%</span></div>
+    <div class="note red"><span class="ico">!</span><span><b>与长尾型退款不同，这是主力品级别的全链路课题：</b>占 66% 消耗的眼膜 13476 单、退款 22.25%，样本充足、高于大盘 12.58% 近 10pct 是可信的系统性问题；烟酰胺祛斑面霜 2220 单环比 +78% 恶化最快；郑多燕/DYZ水光精华霜 17.30% 仍高于大盘，但为新上品、445 单样本中等，下周期看走向再定级。退款每压降 1pct，ROI 修复直接可见。<b>按窗口拆：</b>① 24 小时（下单即退）——核对详情页与素材话术的规格/功效口径，未发货订单客服拦截；② 3 天（收货即退）——48h 发货与包装加固；③ 14 天（用后即退）——按退款原因分层回访，功效预期前置说明。</span></div>
     <div class="note amber" style="margin-top:10px"><span class="ico">!</span><span><b>退款修复不阻塞结构优化：</b>拓品（面霜线）、降广告重复、公众号机会位与退款修复并行推进；退款监控以周为粒度，主力眼膜 14 日退款先压回 20% 以内。</span></div>
   </div>
 
@@ -752,8 +755,8 @@ details[open] summary::before{content:"▾ "}
     <div class="tbl-wrap"><table>
       <thead><tr><th style="width:64px;white-space:nowrap">优先级</th><th style="width:190px">动作</th><th>依据（本周期数据）</th><th style="width:250px">目标 / 做法</th></tr></thead>
       <tbody>
-        <tr><td><span class="pri p0">P0</span></td><td><b>二号间止血</b></td><td>专注草本护肤 14 日退款 <b>84.94%</b>、30 日 90.83%，环比仍恶化（+103%/+109%）；消耗仅占直播 7%</td><td>暂停该间放量，拆退款原因（话术/货盘/售后）；修复后小仓位重启</td></tr>
-        <tr><td><span class="pri p0">P0</span></td><td><b>全链路退款修复</b></td><td>小店四个商品 14 日退款高于大盘 17.93%（烟酰胺祛斑面霜 <b>29.59%</b>、主力眼膜 22.25%），郑多燕黄芪 17.30% 已转优；直播 24h 20.25% 高于大盘 4.08pct</td><td>规格口径对齐＋1h 客服拦截＋48h 发货；主力眼膜 14 日先压回 20% 以内</td></tr>
+        <tr><td><span class="pri p0">P0</span></td><td><b>二号间止血</b></td><td>专注草本护肤 611 单、14 日退款 <b>84.94%</b>、30 日 90.83%，环比仍恶化（+103%/+109%）；样本充足非统计波动；消耗仅占直播 7%</td><td>暂停该间放量，拆退款原因（话术/货盘/售后）；修复后小仓位重启</td></tr>
+        <tr><td><span class="pri p0">P0</span></td><td><b>全链路退款修复</b></td><td>小店五个商品 14 日退款全部高于大盘 12.58%（烟酰胺祛斑面霜 2220 单 <b>29.59%</b> 恶化最快、主力眼膜 13476 单 22.25%）；直播 24h 20.25% 高于大盘 4.08pct</td><td>规格口径对齐＋1h 客服拦截＋48h 发货；主力眼膜 14 日先压回 20% 以内</td></tr>
         <tr><td><span class="pri p0">P0</span></td><td><b>控润紫系店铺差评</b></td><td>润紫系差评率 <b>17.65%–30.00%</b>（大盘 7.75%）、CCR 最高 <b>6.16%</b>（大盘 2.09%）</td><td>逐单回访差评原因；订单优先导向口碑好的玉柔系店铺</td></tr>
         <tr><td><span class="pri p1">P1</span></td><td><b>降广告重复</b></td><td>直播 4+m 重复 <b>39%</b>（标杆 19%）、小店眼膜 <b>42%</b>；营销对象数仅 1</td><td>用直播间商品表达多绑定不同商品 ID；4+m 压回 20% 以内</td></tr>
         <tr><td><span class="pri p1">P1</span></td><td><b>补直播基建 + 扩机会位</b></td><td>广告 383 条 vs 标杆 703（-46%）、指纹条均 214 元 vs 2380；公众号 3% · ROI <b>0.99</b> 全场最高、小程序 43% · ROI 0.91</td><td>广告补到 600+；单投公众号版位的 3.0 广告补位；小程序继续加仓（标杆 67%）——<b>支撑直播冲 4.91 万/日</b></td></tr>

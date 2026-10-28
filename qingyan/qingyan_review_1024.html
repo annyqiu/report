@@ -163,18 +163,19 @@ details[open] summary::before{content:"▾ "}
 .lane-banner span{font-size:12.5px;font-weight:600;opacity:.92}
 .lane-banner.b-blue{background:linear-gradient(135deg,#1B3FA8,#2B5CE6)}
 .lane-banner.b-violet{background:linear-gradient(135deg,#5436BE,#7C5CF0)}
-.funnel{display:flex;align-items:stretch;gap:7px;margin:6px 0 2px}
+.funnel{display:flex;align-items:stretch;gap:12px;margin:6px 0 2px}
 .fstage{flex:none;width:88px;background:#EEF3FE;border:1px solid #D9E3F8;border-radius:10px;
   display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 4px;
-  font-size:12px;font-weight:800;color:#1E3A8A;text-align:center;line-height:1.4}
-.fstep{flex:1;min-width:0;background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 12px;position:relative}
-.fstep::before{content:"▸";position:absolute;left:-8px;top:50%;transform:translateY(-50%);color:#9DB4F0;font-size:12px}
-.fstep .fnm{font-size:12px;font-weight:800;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.fstep .fnm em{font-style:normal;font-size:10px;color:var(--muted);font-weight:600;margin-left:5px}
-.fstep .fvals{display:flex;align-items:baseline;gap:7px;margin-top:3px;flex-wrap:nowrap}
-.fstep .fme{font-size:15.5px;font-weight:800;color:var(--blue-d);white-space:nowrap}
-.fstep .fbm{font-size:11px;color:var(--muted);font-weight:600;white-space:nowrap}
-.fstep .fvd{margin-left:auto;font-size:10.5px;font-weight:800;border-radius:5px;padding:2px 8px;white-space:nowrap;align-self:center}
+  font-size:12px;font-weight:800;color:#1E3A8A;text-align:center;line-height:1.4;position:relative}
+.fstage:not(:last-child)::after{content:"▸";position:absolute;right:-15px;top:50%;transform:translateY(-50%);
+  color:#9DB4F0;font-size:13px;font-weight:900;z-index:1}
+.fstep{flex:1;min-width:0;background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 12px;overflow:hidden}
+.fstep .fnm{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:800;color:var(--ink2);white-space:nowrap}
+.fstep .fformula{font-size:10px;color:var(--muted);font-weight:600;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fstep .fvals{display:flex;align-items:baseline;gap:8px;margin-top:3px;white-space:nowrap}
+.fstep .fme{font-size:15.5px;font-weight:800;color:var(--blue-d)}
+.fstep .fbm{font-size:11px;color:var(--muted);font-weight:600}
+.fvd{margin-left:auto;font-size:10.5px;font-weight:800;border-radius:5px;padding:2px 8px;white-space:nowrap;flex:none}
 .fvd.ok{color:#0B7A55;background:#E6F7F0}
 .fvd.gap{color:#9B1C1C;background:#FEF0F0}
 .fstep.gap{border-color:#F2B8B8;background:#FFFBFB}
@@ -538,26 +539,26 @@ details[open] summary::before{content:"▾ "}
 </div>
 
 <div class="sec">
-  <div class="sec-h"><span class="n">04</span><h2>退款与店铺三率：主力品全优于大盘，长尾盯 24h 窗口</h2><span class="hint">小店链路</span></div>
-  <div class="take">主力面霜 14 日退款 <b>13.60%</b>、烟酰胺美白祛斑霜 13.64%、QINGYAN精华 11.82%——<span class="good">三个主力品全部优于小店大盘 17.93%</span>；四个长尾品只有 24 小时口径（19.88%–21.03%），压力集中在「下单即退」窗口。店铺侧多家差评率高于大盘，需逐店盯。退款基本盘健康，<b>放量冲 21.60 万/日时不会被退款反噬</b>，但长尾品 24h 窗口要在放量前先修。</div>
+  <div class="sec-h"><span class="n">04</span><h2>退款与店铺三率：主力品接近大盘、基本盘健康，长尾盯 24h 窗口</h2><span class="hint">小店链路</span></div>
+  <div class="take">主力面霜 30469 单、14 日退款 <b>13.25%</b> 贴着小店大盘 12.58%（高 0.67pct）；烟酰胺美白祛斑霜 10.96%、QINGYAN精华 11.82% <span class="good">优于大盘</span>；长尾品压力集中在「下单即退」窗口，但其中保湿（428 单）、肌肽（311 单）样本小、置信度低。店铺侧多家差评率高于大盘，需逐店盯。退款基本盘健康，<b>放量冲 21.60 万/日时不会被退款反噬</b>，长尾品 24h 窗口在放量前先修。</div>
 
   <div class="card">
     <div class="two-col">
       <div>
         <div class="cmp-title">商品退款率 · 24 小时 / 14 天　<em>越低越好</em></div>
         <table class="mini">
-          <thead><tr><th>商品</th><th class="num">24 小时</th><th class="num">14 天</th><th class="num">14天 vs 大盘</th></tr></thead>
+          <thead><tr><th>商品</th><th class="num">总下单</th><th class="num">24 小时</th><th class="num">14 天</th><th class="num">14天 vs 大盘</th></tr></thead>
           <tbody>
-            <tr><td><b>倾颜/QINGYAN面霜</b></td><td class="num">8.51%</td><td class="num"><b style="color:#0B7A55">13.60%</b></td><td class="num"><b style="color:#0B7A55">优 4.33pct</b></td></tr>
-            <tr><td>烟酰胺美白祛斑霜</td><td class="num">9.44%</td><td class="num"><b style="color:#0B7A55">13.64%</b></td><td class="num"><b style="color:#0B7A55">优 4.29pct</b></td></tr>
-            <tr><td>倾颜/QINGYAN精华</td><td class="num">8.04%</td><td class="num"><b style="color:#0B7A55">11.82%</b></td><td class="num"><b style="color:#0B7A55">优 6.11pct</b></td></tr>
-            <tr><td>抗皱精华液（长尾）</td><td class="num"><b style="color:#DC2626">19.88%</b></td><td class="num">—*</td><td class="num">—</td></tr>
-            <tr><td>保湿精华液（长尾）</td><td class="num"><b style="color:#DC2626">21.03%</b></td><td class="num">—*</td><td class="num">—</td></tr>
-            <tr><td><b>小店大盘</b></td><td class="num"><b>12.41%</b></td><td class="num"><b>17.93%</b></td><td class="num">—</td></tr>
+            <tr><td><b>倾颜/QINGYAN面霜</b></td><td class="num">30469</td><td class="num">8.51%</td><td class="num"><b style="color:#B45309">13.25%</b></td><td class="num"><b style="color:#B45309">高 0.67pct · 接近大盘</b></td></tr>
+            <tr><td>烟酰胺美白祛斑霜</td><td class="num">7182</td><td class="num">9.44%</td><td class="num"><b style="color:#0B7A55">10.96%</b></td><td class="num"><b style="color:#0B7A55">优 1.62pct</b></td></tr>
+            <tr><td>倾颜/QINGYAN精华</td><td class="num">846</td><td class="num">8.04%</td><td class="num"><b style="color:#0B7A55">11.82%</b></td><td class="num"><b style="color:#0B7A55">优 0.76pct</b></td></tr>
+            <tr><td>抗皱精华液（长尾）</td><td class="num">1836</td><td class="num"><b style="color:#DC2626">19.88%</b></td><td class="num">—*</td><td class="num">—</td></tr>
+            <tr><td>保湿精华液（长尾）</td><td class="num">428</td><td class="num"><b style="color:#DC2626">21.03%</b></td><td class="num">—*</td><td class="num">小样本</td></tr>
+            <tr><td><b>小店大盘</b></td><td class="num">—</td><td class="num"><b>11.78%</b></td><td class="num"><b>12.58%</b></td><td class="num">—</td></tr>
           </tbody>
         </table>
-        <div style="font-size:11px;color:#8A94A6;margin-top:6px">* 长尾品为 CID 链路口径、仅有 24 小时数据（CID 大盘 24 小时 10.99%）。小店大盘三窗口：24 小时 12.41% · 3 天 14.04% · 14 天 17.93%。</div>
-        <div class="note green" style="margin-top:10px"><span class="ico">✓</span><span><b>基本盘健康：占 64% 消耗的主力面霜与两个次主力全部优于大盘 17.93%</b>。四个长尾品（抗皱精华 19.88%、保湿精华 21.03%、肌肽修护 20.90%、祛斑霜 11.60%）合计消耗不足一成、均高于 CID 大盘 24h 10.99%，属<b>局部问题</b>——压力集中在 24 小时窗口：核对素材话术与详情页规格口径，未发货订单 24h 内客服拦截挽单。</span></div>
+        <div style="font-size:11px;color:#8A94A6;margin-top:6px">* 长尾品为 CID 链路口径、仅有 24 小时数据（CID 大盘 24 小时 10.99%）。小店大盘两窗口：24 小时 11.78% · 14 天 12.58%。</div>
+        <div class="note green" style="margin-top:10px"><span class="ico">✓</span><span><b>基本盘健康：占 64% 消耗的主力面霜 30469 单贴着大盘线（13.25% vs 12.58%），两个次主力优于大盘</b>，样本均充足、结论可信。长尾品分两档：<b>抗皱精华 1836 单、24h 19.88% 样本中等，可信偏高</b>；保湿精华 428 单、肌肽修护 311 单小样本置信度低，先观察不过度反应；祛斑霜 11.60%、烟酰胺美白面霜 10.79% 与 CID 大盘基本接近。长尾合计消耗不足一成、均高于 CID 大盘 24h 10.99%，属<b>局部问题</b>——压力集中在 24 小时窗口：核对素材话术与详情页规格口径，未发货订单 24h 内客服拦截挽单。</span></div>
       </div>
       <div>
         <div class="cmp-title">店铺三率　<em>越低越好</em></div>
@@ -612,7 +613,7 @@ details[open] summary::before{content:"▾ "}
       <thead><tr><th style="width:64px;white-space:nowrap">优先级</th><th style="width:190px">动作</th><th>依据（本周期数据）</th><th style="width:250px">目标 / 做法</th></tr></thead>
       <tbody>
         <tr><td><span class="pri p0">P0</span></td><td><b>控店铺差评率</b></td><td>五家店铺差评率 <b>13.95%–24.15%</b>（小店大盘 8.23%）；柒司界 CCR 32.48%（101 单小样本异常）</td><td>头部两家逐单回访差评原因；柒司界单独处理；复用哒灏倾（5.63%）的商品与售后配置</td></tr>
-        <tr><td><span class="pri p0">P0</span></td><td><b>控长尾品 24h 退款</b></td><td>抗皱精华 <b>19.88%</b>、保湿精华 <b>21.03%</b>（CID 大盘 24h 10.99%）；主力面霜 13.60% 优于小店大盘 17.93%</td><td>素材话术与详情页规格口径对齐＋未发货订单 24h 客服拦截；长尾合计不足一成，局部处理</td></tr>
+        <tr><td><span class="pri p0">P0</span></td><td><b>控长尾品 24h 退款</b></td><td>抗皱精华 1836 单、<b>19.88%</b> 样本中等可信（CID 大盘 24h 10.99%）；保湿精华 428 单 <b>21.03%</b> 小样本先观察；主力面霜 30469 单 13.25%、仅高于小店大盘 12.58% 0.67pct</td><td>素材话术与详情页规格口径对齐＋未发货订单 24h 客服拦截；长尾合计不足一成，局部处理</td></tr>
         <tr><td><span class="pri p1">P1</span></td><td><b>消耗结构回视频号</b></td><td>面霜视频号仅 <b>23%</b>（标杆 69%，ROI 1.56 与整体持平）；小程序 71% 单版位依赖（标杆 14%）</td><td>单投视频号版位的 3.0 广告逐步补位，视频号占比提到 40%+（30–65% 为宜）——<b>视频号是 21.60 万/日目标的第一增量位</b></td></tr>
         <tr><td><span class="pri p1">P1</span></td><td><b>降广告重复 · 提素材密度</b></td><td>4+m 重复 <b>45%</b>（标杆 32%）；广告 2064 条 vs 标杆 212，指纹条均 108 vs 179；点击率 <b>3.21%</b>（标杆 5.37%）；新广告占比 35% 超区间</td><td>商品表达多绑定商品 ID 降重复；放缓上新、TOP 素材前 3 秒结构模板化复用；不再加广告数</td></tr>
         <tr><td><span class="pri p1">P1</span></td><td><b>商品 SPU 聚拢迁移</b></td><td>4 个实际投放商品仅 <b>1 个</b> SPU 已聚拢：CID 祛斑面霜最优 SPU 占比仅 <b>26%</b>（散在 5 SPU · 53 个 DPA 名称）、抗皱精华 65%、小店面霜 84%；三个最优 SPU 下 DPA 名称 9 / 9 / 11 个均超 5 个</td><td>分散量分 2–3 批迁入各品最优 SPU（面霜→3630862113112058175 · 祛斑面霜→3215512742024527679 · 抗皱精华→9104355055506457833），商品库同步收敛到统一 ID</td></tr>
