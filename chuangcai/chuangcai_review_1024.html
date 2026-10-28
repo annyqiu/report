@@ -149,12 +149,47 @@ summary::-webkit-details-marker{display:none}
 summary::before{content:"▸ ";font-size:11px}
 details[open] summary::before{content:"▾ "}
 .footer{text-align:center;color:#94A3B8;font-size:11.5px;padding:34px 0 44px}
+.tabbar{display:flex;gap:12px;margin-top:34px}
+.tabbtn{flex:1;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:14px 20px;text-align:left;
+  font-size:15px;font-weight:800;color:var(--ink2);cursor:pointer;display:flex;flex-direction:column;gap:4px;
+  box-shadow:0 1px 2px rgba(16,24,40,.05);transition:border-color .15s,box-shadow .15s;font-family:inherit}
+.tabbtn em{font-style:normal;font-size:11.5px;font-weight:600;color:var(--muted)}
+.tabbtn:hover{border-color:#9DB4F0}
+.tabbtn.active{border-color:var(--blue);background:linear-gradient(135deg,#F0F4FF,#FFFFFF);color:var(--blue-d);
+  box-shadow:0 8px 22px -12px rgba(43,92,230,.5)}
+.tabbtn.active em{color:var(--blue)}
+.lane-banner{border-radius:13px;padding:16px 24px;margin-top:34px;display:flex;align-items:baseline;gap:16px;color:#fff;flex-wrap:wrap}
+.lane-banner b{font-size:17.5px;font-weight:800;letter-spacing:.6px}
+.lane-banner span{font-size:12.5px;font-weight:600;opacity:.92}
+.lane-banner.b-blue{background:linear-gradient(135deg,#1B3FA8,#2B5CE6)}
+.lane-banner.b-violet{background:linear-gradient(135deg,#5436BE,#7C5CF0)}
+.funnel{display:flex;align-items:stretch;gap:12px;margin:6px 0 2px}
+.fstage{flex:none;width:88px;background:#EEF3FE;border:1px solid #D9E3F8;border-radius:10px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 4px;
+  font-size:12px;font-weight:800;color:#1E3A8A;text-align:center;line-height:1.4;position:relative}
+.fstage:not(:last-child)::after{content:"▸";position:absolute;right:-15px;top:50%;transform:translateY(-50%);
+  color:#9DB4F0;font-size:13px;font-weight:900;z-index:1}
+.fstep{flex:1;min-width:0;background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 12px;overflow:hidden}
+.fstep .fnm{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:800;color:var(--ink2);white-space:nowrap}
+.fstep .fformula{font-size:10px;color:var(--muted);font-weight:600;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fstep .fvals{display:flex;align-items:baseline;gap:8px;margin-top:3px;white-space:nowrap}
+.fstep .fme{font-size:15.5px;font-weight:800;color:var(--blue-d)}
+.fstep .fbm{font-size:11px;color:var(--muted);font-weight:600}
+.fvd{margin-left:auto;font-size:10.5px;font-weight:800;border-radius:5px;padding:2px 8px;white-space:nowrap;flex:none}
+.fvd.ok{color:#0B7A55;background:#E6F7F0}
+.fvd.gap{color:#9B1C1C;background:#FEF0F0}
+.fstep.gap{border-color:#F2B8B8;background:#FFFBFB}
+.fchain{font-size:12px;color:var(--ink2);background:#F7F9FE;border:1px dashed #D5E0F5;border-radius:8px;
+  padding:9px 14px;margin-top:13px;font-weight:600;line-height:1.75}
+.fchain b{color:var(--blue-d)}
+.fchain .gap{color:var(--red);font-weight:800}
 @media (max-width:900px){.two-col,.kpi-grid,.bignum,.rooms{grid-template-columns:1fr}}
 </style></head><body>
 <div class="hero"><div class="wrap">
   <h1>创彩 · 竞价广告复盘</h1>
   <div class="meta">复盘周期 <i>10.11–10.24</i>（14 天）　｜　对比 <i>09.27–10.10</i>（14 天）　｜　链路 直播 · 小店直购</div>
   <div class="tags">
+    <span class="tag">总日均 <b>11.37</b> 万 <b class="g">+76%</b></span>
     <span class="tag">直播日均 <b>3.78</b> 万 <b class="g">+147%</b></span>
     <span class="tag">直播 ROI <b>0.89</b> <b>▼4%</b></span>
     <span class="tag">小店日均 <b>7.59</b> 万 <b class="g">+54%</b></span>
@@ -166,13 +201,13 @@ details[open] summary::before{content:"▾ "}
 <div class="wrap">
 <div class="sec">
   <div class="sec-h"><span class="n">00</span><h2>一句话结论</h2><span class="hint">先看这三条，再看后面</span></div>
-  <div class="take">这轮是<b>「双链路放量、效率微降」</b>的一次：直播 +147%（主号抗皱草本护肤从 0.09 万拉到 3.50 万）、小店 +54%，ROI 分别 0.89（-4%）/ 0.95（-6%）。转化端不虚——<span class="good">直播间下单率与标杆打平、小店素材 CVR 与标杆持平</span>；真正拖住 ROI 的是<span class="warn">广告重复度</span>（直播 4+m 39%、小店主力品 42%，均高于 20% 健康线）与<span class="warn">二号直播间退款失控</span>（14 日 84.94%）。双链路环比均上涨，<b>下一周期日耗目标＝本周期 ×1.3，即 14.78 万/日</b>（直播 4.91 · 小店 9.87，当前 11.37）。</div>
+  <div class="take">这轮是<b>「双链路放量、ROI 双双未回本」</b>的一次：直播 +147%（主号抗皱草本护肤从 0.09 万拉到 3.50 万）、小店 +54%，ROI 0.89（-4%）/ 0.95（-6%）都还在 1 以下。缺口定位到四处：<span class="warn">直播间「点商品」环节</span>（商品点击率 48.59% vs 标杆 62.76%，素材 CVR 因此低 21%，拆解见 3.4 漏斗）；<span class="warn">小店素材前端点击</span>（点击率低慕可 42%）＋四个商品退款高于大盘；<span class="warn">广告重复度</span>（直播 4+m 39%、小店主力品 42%）压住放量天花板；<span class="warn">二号直播间退款失控</span>（14 日 84.94%）。双链路环比均上涨，<b>下一周期日耗目标＝本周期 ×1.3，即 14.78 万/日</b>（直播 4.91 · 小店 9.87，当前 11.37）。</div>
 
   <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr)">
     <div class="kpi" style="background:#F3FBF7;border-color:#CFEDDF">
       <div class="kpi-l">最大的成绩</div>
-      <div style="font-size:13.5px;font-weight:800;color:#0B6B4C;margin-top:6px;line-height:1.6">双链路放量，转化端接得住</div>
-      <div style="font-size:12.2px;color:#3F6B5B;margin-top:6px;line-height:1.65">主号直播 0.09→3.50 万/日（+3995%）、ROI 0.89（+5%）；直播间下单率 21.58% 与标杆打平；小店素材 CVR 10.46% 与标杆（慕可）持平</div>
+      <div style="font-size:13.5px;font-weight:800;color:#0B6B4C;margin-top:6px;line-height:1.6">主号放量 40 倍，效率没塌</div>
+      <div style="font-size:12.2px;color:#3F6B5B;margin-top:6px;line-height:1.65">主号直播 0.09→3.50 万/日（+3995%）、ROI 0.89（+5%）；小店 +54%、下单率 +11%——量放得出来也接得住，问题在 ROI 未回本，缺口定位见 3.4 / 4.2</div>
     </div>
     <div class="kpi" style="background:#FEF6F6;border-color:#F7D9D9">
       <div class="kpi-l">最大的风险</div>
@@ -275,9 +310,10 @@ details[open] summary::before{content:"▾ "}
         <div class="kpi-d neg">▲ +5%</div>
       </div>
     </div>
-    <div class="note amber"><span class="ico">!</span><span><b>小店素材对标慕可前端吸引力仍有差距（点击率 3.09% vs 5.37%），但 ROI 卡在 1 以下的主因是退款不是素材：</b>四个商品 14 日退款高于小店大盘 17.93%（详见 4.2），其中主力眼膜 22.25%；郑多燕黄芪 17.30% 已低于大盘。退款每降 1pct，ROI 修复直接可见。<b>小店日耗目标 9.87 万/日（当前 7.59），放量与压退款要同步做</b>。</span></div>
+    <div class="note amber"><span class="ico">!</span><span><b>小店素材对标慕可前端吸引力仍有差距（点击率 3.09% vs 5.37%），但 ROI 卡在 1 以下的主因是退款不是素材：</b>四个商品 14 日退款高于小店大盘 17.93%（详见 4.1），其中主力眼膜 22.25%；郑多燕黄芪 17.30% 已低于大盘。退款每降 1pct，ROI 修复直接可见。<b>小店日耗目标 9.87 万/日（当前 7.59），放量与压退款要同步做</b>。</span></div>
   </div>
 </div>
+<div class="tabbar"><button class="tabbtn active" onclick="showTab('tab-live',this)">直播链路<em>日均 3.78 万（+147%）· ROI 0.89 · 日耗目标 4.91 万/日</em></button><button class="tabbtn" onclick="showTab('tab-shop',this)">小店直购链路<em>日均 7.59 万（+54%）· ROI 0.95 · 日耗目标 9.87 万/日</em></button></div><div class="tabpanel" id="tab-live">
 
 <div class="sec">
   <div class="sec-h"><span class="n">02</span><h2>直播：量全部换挡到主号</h2><span class="hint">分直播间 · 本周期 vs 上周期</span></div>
@@ -310,7 +346,7 @@ details[open] summary::before{content:"▾ "}
 
 <div class="sec">
   <div class="sec-h"><span class="n">03</span><h2>直播：和标杆差在哪</h2><span class="hint">抗皱草本护肤 vs 标杆直播间</span></div>
-  <div class="take">创彩的差距<b>不在素材、不在承接，在「素材跑量能力」</b>：点击率 3.74% 高于标杆 13%、下单率 21.58% 与标杆打平；<span class="warn">但指纹条均消耗 214 元只有标杆的 9%</span>（2380 元），4+m 重复 39% 高于标杆 19%——同样的素材水平，跑不出标杆的量。<b>把单条跑量能力补上来，直播才有底气从 3.78 万冲 4.91 万/日</b>。</div>
+  <div class="take">创彩直播的差距拆成两处：<b>承接侧卡在「点商品」环节</b>（商品点击率 48.59% vs 标杆 62.76%，素材 CVR 因此低 21%，见 3.4 漏斗）；<b>基建侧卡在「素材跑量能力」</b>——<span class="warn">指纹条均消耗 214 元只有标杆的 9%</span>（2380 元），4+m 重复 39% 高于标杆 19%，素材水平不输但同样的素材跑不出标杆的量。<b>把单条跑量能力补上来、点商品环节修起来，直播才有底气从 3.78 万冲 4.91 万/日</b>。</div>
 
   <div class="card">
     <div class="card-h"><h3>3.1　流量结构：钱花在哪，机会在哪</h3><span>消耗占比（%）</span></div>
@@ -371,7 +407,7 @@ details[open] summary::before{content:"▾ "}
   </div>
 
   <div class="card">
-    <div class="card-h"><h3>3.3　素材：吸引力不输标杆，差在点击后转化</h3><span>抗皱草本护肤 vs 标杆直播间</span></div>
+    <div class="card-h"><h3>3.3　素材：前端追平标杆，唯一缺口是 CVR 低 21%</h3><span>抗皱草本护肤 vs 标杆直播间</span></div>
     <div class="two-col">
       <div>
         
@@ -458,7 +494,7 @@ details[open] summary::before{content:"▾ "}
     </div>
       </div>
     </div>
-    <div class="note blue"><span class="ico">i</span><span><b>素材前端（点击、完播）已经追平甚至反超标杆</b>，唯一差距在 CVR（点击→下单 9.37% vs 11.88%）——用户点进来之后的转化弱 21%。结合承接端下单率与标杆打平来看，CVR 短板更多在素材后段（卖点排布、价格锚点）而非直播间，<b>把 TOP 素材的后半段结构对照标杆拆一遍</b>。</span></div>
+    <div class="note blue"><span class="ico">i</span><span><b>素材端能做的都已追平或反超标杆</b>：点击率 3.74%（高 13%）、5s 完播与播放时长不落后，CTCVR 30.15% 也基本持平——<b>唯一缺口是 CVR（点击→下单 9.37% vs 11.88%，低 21%）</b>。这一段发生在用户点进直播间之后：经 3.4 漏斗三段拆解，缺口定位在直播间「点商品」环节（商品点击率低 14.2pct），不在素材后段、也不在下单环节——<b>直播 ROI 0.89 未回本的素材侧没有额外失分，修复抓手在承接侧（3.4）与退款（3.5）</b>。</span></div>
     <div class="cmp-title" style="margin-top:14px">素材类型结构 · 抗皱草本护肤</div>
     <table class="mini">
       <thead><tr><th>素材类型</th><th class="num">创彩 · 消耗占比</th><th class="num">创彩 · 下单ROI</th><th class="num">创彩 · 项目&广告数</th><th class="num">大盘 · 消耗占比</th><th class="num">大盘 · 下单ROI</th></tr></thead>
@@ -479,70 +515,16 @@ details[open] summary::before{content:"▾ "}
     <tr><td>CVR（点击→下单）</td><td class="num">9.32%</td><td class="num">11.88%</td></tr>
     <tr><td>平均素材时长</td><td class="num">96.90s</td><td class="num">104.28s</td></tr>
   </tbody></table>
-  <div class="dnote">点击率 4.20% 高于标杆 27%，素材前端不差；CVR 9.32% 与主号同样弱于标杆 21%——<b>卖点排布与价格锚点的后半段结构是两间共性课题</b>。</div>
+  <div class="dnote">点击率 4.20% 高于标杆 27%，素材前端不差；CVR 9.32% 弱于标杆 21%——与主号同源：<b>缺口在直播间「点商品」环节</b>（商品点击率 49.69% vs 标杆 62.76%，漏斗拆解见 3.4），两间统一改讲解节奏与选品前置。</div>
 </div>
 </div></details>
   </div>
 
   <div class="card">
-    <div class="card-h"><h3>3.4　直播间承接：下单率打平标杆，停留时长差四成</h3><span>抗皱草本护肤 vs 标杆直播间</span></div>
-    <div class="two-col">
-      <div>
-    <div class="cmp">
-      <div class="cmp-title">直播间下单率<em>高于标杆 1%</em></div>
-      <div class="cmp-row">
-        <span class="cmp-tag me">创彩</span>
-        <div class="track"><i class="fill me" style="width:100.0%"></i></div>
-        <span class="cmp-val">21.58%</span>
-      </div>
-      <div class="cmp-row">
-        <span class="cmp-tag bm">标杆</span>
-        <div class="track"><i class="fill bm" style="width:98.7%"></i></div>
-        <span class="cmp-val dim">21.30%</span>
-      </div>
-    </div>
-    <div class="cmp">
-      <div class="cmp-title">商品点击率<em>差 14.2pct</em></div>
-      <div class="cmp-row">
-        <span class="cmp-tag me">创彩</span>
-        <div class="track"><i class="fill me" style="width:77.4%"></i></div>
-        <span class="cmp-val">48.59%</span>
-      </div>
-      <div class="cmp-row">
-        <span class="cmp-tag bm">标杆</span>
-        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
-        <span class="cmp-val dim">62.76%</span>
-      </div>
-    </div></div>
-      <div>
-    <div class="cmp">
-      <div class="cmp-title">直播间观看率<em>持平</em></div>
-      <div class="cmp-row">
-        <span class="cmp-tag me">创彩</span>
-        <div class="track"><i class="fill me" style="width:100.0%"></i></div>
-        <span class="cmp-val">89.35%</span>
-      </div>
-      <div class="cmp-row">
-        <span class="cmp-tag bm">标杆</span>
-        <div class="track"><i class="fill bm" style="width:99.5%"></i></div>
-        <span class="cmp-val dim">88.90%</span>
-      </div>
-    </div>
-    <div class="cmp">
-      <div class="cmp-title">人均观看时长<em>差 63s</em></div>
-      <div class="cmp-row">
-        <span class="cmp-tag me">创彩</span>
-        <div class="track"><i class="fill me" style="width:61.6%"></i></div>
-        <span class="cmp-val">101s</span>
-      </div>
-      <div class="cmp-row">
-        <span class="cmp-tag bm">标杆</span>
-        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
-        <span class="cmp-val dim">164s</span>
-      </div>
-    </div></div>
-    </div>
-    <div class="note amber"><span class="ico">!</span><span>下单率已与标杆打平，<b>转化不是问题</b>；两处差距都在「逛」的深度：人均观看时长 101s（标杆 164s，短 38%）、商品点击率 48.59%（低 14.2pct）。<b>用户停留不够久、点商品动机不够强</b>——优化讲解节奏（留人钩子每 15 分钟一轮）与选品前置，不是加流量。</span></div>
+    <div class="card-h"><h3>3.4　直播间转化漏斗：CVR 缺口定位在「点商品」环节</h3><span>对 3.3 CVR（点击→下单 9.37% vs 11.88%）的三段拆解 · 抗皱草本护肤 vs 标杆直播间</span></div>
+    <div class="funnel"><div class="fstage">广告点击</div><div class="fstep"><div class="fnm">直播观看率<span class="fvd ok">无缺口</span></div><div class="fformula">＝ 直播间观看 ÷ 广告点击</div><div class="fvals"><span class="fme">89.35%</span><span class="fbm">标杆 88.90%</span></div></div><div class="fstage">直播间观看</div><div class="fstep gap"><div class="fnm">商品点击率<span class="fvd gap">差 14.2pct · 主要缺口</span></div><div class="fformula">＝ 商品点击 ÷ 直播间观看</div><div class="fvals"><span class="fme">48.59%</span><span class="fbm">标杆 62.76%</span></div></div><div class="fstage">商品点击</div><div class="fstep"><div class="fnm">直播间下单率<span class="fvd ok">末段无缺口</span></div><div class="fformula">＝ 直播间下单 ÷ 商品点击</div><div class="fvals"><span class="fme">21.58%</span><span class="fbm">标杆 21.30%</span></div></div><div class="fstage">直播间下单</div></div>
+    <div class="fchain">链式相乘：89.35% × 48.59% × 21.58% ＝ <b>CVR 9.37%</b>；标杆 88.90% × 62.76% × 21.30% ＝ 11.88%——<span class="gap">CVR 低 21% 的缺口全部来自「点商品」一段</span>，进直播间与下单两段没有拉开差距。</div>
+    <div class="note amber"><span class="ico">!</span><span><b>用户进了直播间，却不愿点开商品：</b>商品点击率 48.59%（标杆 62.76%，低 14.2pct），配合人均观看时长 101s（标杆 164s，短 38%）——停留不够久、点商品动机不够强。<b>这是直播 ROI 0.89 修复到 1 以内在承接侧的定位点</b>：优化讲解节奏（留人钩子每 15 分钟一轮）、选品前置与挂链顺序，不是加流量。</span></div>
     <details class="drill"><summary>下钻二号直播间 · 专注草本护肤</summary>
 <div class="drill-body">
 <div class="droom">
@@ -553,7 +535,7 @@ details[open] summary::before{content:"▾ "}
     <tr><td>商品点击率</td><td class="num"><b style="color:#DC2626">49.69%</b></td><td class="num">62.76%</td></tr>
     <tr><td>直播间下单率</td><td class="num"><b style="color:#0B7A55">21.56%</b></td><td class="num">21.30%</td></tr>
   </tbody></table>
-  <div class="dnote">与主号同款画像：下单率打平标杆、卡「停留时长 + 商品点击」——<b>两间统一改一版讲解节奏（留人钩子每 15 分钟一轮）与选品前置</b>。</div>
+  <div class="dnote">与主号同款画像：<b>缺口在「停留时长 + 商品点击」</b>（商品点击率 49.69% vs 标杆 62.76%、人均观看 98s vs 164s）——<b>两间统一改一版讲解节奏（留人钩子每 15 分钟一轮）与选品前置</b>。</div>
 </div>
 </div></details>
   </div>
@@ -592,21 +574,106 @@ details[open] summary::before{content:"▾ "}
       </div>
     </div>
   </div>
+
+  <div class="card">
+    <div class="card-h"><h3>3.6　产品能力 · 直播链路</h3><span>创意优投 / 智投 / 潜客优投 · 主号抗皱草本护肤</span></div>
+    <div class="cap">
+      <div class="nm">创意优投<em>已上量 · 成本达成</em></div>
+      <div class="cmp-row" style="margin:0"><div class="track"><i class="fill me" style="width:55%"></i></div></div>
+      <div class="roi"><span class="pill b">占 55%</span><span class="pill n">ROI 0.88</span><span class="pill n">未开启 0.89</span></div>
+    </div>
+    <div class="cap">
+      <div class="nm">智投广告<em>占比低于大盘 58%</em></div>
+      <div class="cmp-row" style="margin:0"><div class="track"><i class="fill me" style="width:47%"></i></div></div>
+      <div class="roi"><span class="pill b">占 47%</span><span class="pill n">ROI 0.89</span><span class="pill n">3.0 广告 0.90</span></div>
+    </div>
+    <div class="cap">
+      <div class="nm">潜客优投<em>未开启</em></div>
+      <div class="cmp-row" style="margin:0"><div class="track"><i class="fill" style="width:1%;background:#E2E8F0"></i></div></div>
+      <div class="roi"><span class="pill n">占 0%</span><span class="pill n">建议尝试开启</span></div>
+    </div>
+    <div class="note blue"><span class="ico">i</span><span><b>三件事：</b>① 创意优投成本已达成，可降原始出价 3–5% 后建优投项目、提价 5–10% 观察效率；② 智投占比 47% 低于大盘 58%，转化与 3.0 持平（0.89 vs 0.90），维持并观察；③ 潜客优投对自身高潜力、同行高潜力、同品高潜力人群分人群加价——<b>先给主号 TOP 素材项目开 10% 仓位试跑</b>。</span></div>
+  </div>
 </div>
+</div><div class="tabpanel" id="tab-shop" style="display:none">
 
 <div class="sec">
   <div class="sec-h"><span class="n">04</span><h2>小店：素材全面领先，退款拖住 ROI</h2><span class="hint">分商品 · 本周期</span></div>
-  <div class="take">小店 7.59 万/日，五个商品里<b>眼膜单品类占 89%</b>（5 个眼膜类商品合计 6.7 万）；素材对标慕可<span class="warn">前端吸引力有差距</span>（点击率低 42%、CTCVR 低 39%，仅 CVR 打平），<span class="warn">且四个商品 14 日退款高于小店大盘 17.93%</span>——这是 ROI 卡在 1 以下的两个直接原因。<b>小店日耗目标 9.87 万/日（×1.3），增量 2.28 万优先给唯一破 1 的烟酰胺面霜与转优的郑多燕黄芪</b>。</div>
+  <div class="take">小店 7.59 万/日，五个商品里<b>眼膜单品类占 89%</b>（5 个眼膜类商品合计 6.7 万）；素材对标慕可<span class="warn">前端吸引力有差距</span>（点击率低 42%、CTCVR 低 39%），<span class="warn">且四个商品 14 日退款高于小店大盘 17.93%</span>——这是 ROI 卡在 1 以下的两个直接原因。<b>小店日耗目标 9.87 万/日（×1.3），增量 2.28 万优先给唯一破 1 的烟酰胺面霜与转优的郑多燕黄芪</b>。</div>
 
   <div class="card">
-    <div class="card-h"><h3>4.1　商品结构：钱花在哪，效率如何</h3><span>日均消耗（万）· 括号内为 ROI</span></div>
-    <div class="pbar"><span class="nm">眼膜</span><span class="tr"><i style="width:100%"></i></span><span class="vv"><b>5.02 万</b> · ROI 0.96</span></div>
-    <div class="pbar"><span class="nm">郑多燕/DYZ胜肽眼膜</span><span class="tr"><i style="width:19.7%"></i></span><span class="vv"><b>0.99 万</b> · ROI 0.85</span></div>
-    <div class="pbar"><span class="nm">淡化细纹/抗皱紧致眼膜</span><span class="tr"><i style="width:13.5%"></i></span><span class="vv"><b>0.68 万</b> · ROI 0.96</span></div>
-    <div class="pbar"><span class="nm">烟酰胺祛斑面霜</span><span class="tr"><i style="width:12%"></i></span><span class="vv"><b>0.60 万</b> · ROI 1.06</span></div>
-    <div class="pbar"><span class="nm">郑多燕/DYZ水光精华霜</span><span class="tr"><i style="width:4%"></i></span><span class="vv"><b>0.20 万</b> · ROI 0.82</span></div>
-    <div class="note blue" style="margin-top:16px"><span class="ico">i</span><span><b>结构动作：</b>① <b>烟酰胺祛斑面霜是唯一 ROI 破 1 的主力品</b>（1.06，消耗 +5%），可优先加量；② 郑多燕系两个品在快速放量（+115% / 新上），量增期盯住退款与 CVR；③ 眼膜单品类占 89%，品类集中——面霜类（1.06）已验证跑得动，可作为第二条品类线培育。基建上眼膜广告 349 条已是标杆（212 条）的 1.6 倍，但 4+m 重复 42%（标杆 32%）、新广告占比 48% 超出 10–30% 建议区间——<b>量够了，结构要修</b>。</span></div>
-    <div class="cmp-title" style="margin-top:14px">小店素材类型结构 · 眼膜</div>
+    <div class="card-h"><h3>4.1　退款：四个商品高于大盘，郑多燕黄芪已转优</h3><span>14 日退款率 · 小店大盘 17.93%</span></div>
+    <div class="pbar"><span class="nm">烟酰胺祛斑面霜 <i style="font-style:normal;color:var(--muted);font-weight:600">占消耗 8%</i></span><span class="tr"><i style="width:100%;background:linear-gradient(90deg,#F1998F,#DC2626)"></i></span><span class="vv"><b style="color:#DC2626">29.59%</b> · 恶化最快</span></div>
+    <div class="pbar"><span class="nm">郑多燕/DYZ胜肽眼膜 <i style="font-style:normal;color:var(--muted);font-weight:600">占消耗 13%</i></span><span class="tr"><i style="width:86.6%;background:linear-gradient(90deg,#F1998F,#DC2626)"></i></span><span class="vv"><b style="color:#DC2626">25.67%</b></span></div>
+    <div class="pbar"><span class="nm">淡化细纹/抗皱眼膜 <i style="font-style:normal;color:var(--muted);font-weight:600">占消耗 9%</i></span><span class="tr"><i style="width:82%;background:linear-gradient(90deg,#F5C07A,#D97706)"></i></span><span class="vv"><b style="color:#B45309">24.29%</b></span></div>
+    <div class="pbar"><span class="nm">眼膜 <i style="font-style:normal;color:var(--muted);font-weight:600">占消耗 66%</i></span><span class="tr"><i style="width:75.2%;background:linear-gradient(90deg,#F5C07A,#D97706)"></i></span><span class="vv"><b style="color:#B45309">22.25%</b> · 主力品</span></div>
+    <div class="pbar"><span class="nm">郑多燕/DYZ水光精华霜 <i style="font-style:normal;color:var(--muted);font-weight:600">占消耗 3%</i></span><span class="tr"><i style="width:58.5%;background:linear-gradient(90deg,#86C5A4,#2F9E63)"></i></span><span class="vv"><b style="color:#0B7A55">17.30%</b> · 已转优</span></div>
+    <div class="pbar"><span class="nm">小店大盘</span><span class="tr"><i style="width:60.6%;background:#CBD5E1"></i></span><span class="vv">17.93%</span></div>
+    <div class="note red"><span class="ico">!</span><span><b>与长尾型退款不同，这是主力品级别的全链路课题：</b>占 66% 消耗的眼膜退款 22.25%，四个商品高于大盘 17.93%；郑多燕黄芪 17.30% 已低于大盘（新上品，继续观察）。退款每压降 1pct，ROI 修复直接可见。<b>按窗口拆：</b>① 24 小时（下单即退）——核对详情页与素材话术的规格/功效口径，未发货订单客服拦截；② 3 天（收货即退）——48h 发货与包装加固；③ 14 天（用后即退）——按退款原因分层回访，功效预期前置说明。</span></div>
+    <div class="note amber" style="margin-top:10px"><span class="ico">!</span><span><b>退款修复不阻塞结构优化：</b>拓品（面霜线）、降广告重复、公众号机会位与退款修复并行推进；退款监控以周为粒度，主力眼膜 14 日退款先压回 20% 以内。</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><h3>4.2　素材：点击率低慕可 42%，是 ROI 未回本的前端缺口</h3><span>眼膜 vs 标杆商品（慕可·微希/WIS）</span></div>
+    <div class="two-col">
+      <div>
+    <div class="cmp">
+      <div class="cmp-title">点击率 CTR<em>低于标杆 42%</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">创彩</span>
+        <div class="track"><i class="fill me" style="width:57.5%"></i></div>
+        <span class="cmp-val">3.09%</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
+        <span class="cmp-val dim">5.37%</span>
+      </div>
+    </div>
+    <div class="cmp">
+      <div class="cmp-title">5s 完播率<em>低于标杆 10%</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">创彩</span>
+        <div class="track"><i class="fill me" style="width:90.1%"></i></div>
+        <span class="cmp-val">29.93%</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
+        <span class="cmp-val dim">33.23%</span>
+      </div>
+    </div></div>
+      <div>
+    <div class="cmp">
+      <div class="cmp-title">CVR（点击→下单）<em>非失分点</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">创彩</span>
+        <div class="track"><i class="fill me" style="width:100.0%"></i></div>
+        <span class="cmp-val">10.46%</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:98.8%"></i></div>
+        <span class="cmp-val dim">10.33%</span>
+      </div>
+    </div>
+    <div class="cmp">
+      <div class="cmp-title">CTCVR<em>低于标杆 39%</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">创彩</span>
+        <div class="track"><i class="fill me" style="width:61.0%"></i></div>
+        <span class="cmp-val">28.30%</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
+        <span class="cmp-val dim">46.42%</span>
+      </div>
+    </div></div>
+    </div>
+    <div class="note red"><span class="ico">!</span><span><b>小店 ROI 0.95 未回本，素材侧的失分定位在前端：</b>点击率 3.09%（慕可 5.37%，低 42%）进池量被卡在第一关，5s 完播 29.93%（低 10%）留人也在损耗；点进来之后的转化环节（CVR 10.46%）没有额外失分。素材时长 104.19s 与慕可 99.05s 同在 60s+ 建议区间，<b>问题不在长度在前 5 秒钩子与封面</b>——与直播链路同一课题（直播点击率 1.98% 环比 -42%），<b>两条链路共用一套钩子重构方案</b>：TOP 素材前 3 秒结构模板化、封面承诺与正片卖点对齐。</span></div>
+
+    <div class="cmp-title" style="margin-top:14px">素材类型结构 · 眼膜（小店链路）</div>
     <table class="mini">
       <thead><tr><th>素材类型</th><th class="num">创彩 · 消耗占比</th><th class="num">创彩 · 下单ROI</th><th class="num">创彩 · 项目&广告数</th><th class="num">小店大盘 · 占比</th><th class="num">大盘 · ROI</th></tr></thead>
       <tbody>
@@ -615,8 +682,10 @@ details[open] summary::before{content:"▾ "}
       </tbody>
     </table>
     <div style="font-size:11px;color:#8A94A6;margin-top:7px">横版 18 条广告消耗 0.00 万，不作为扩量依据。实时画面（2407）仅直播链路存在，小店不统计。</div>
+  </div>
 
-    <div class="cmp-title" style="margin-top:14px">小店链路 · 商品结构与聚拢<em>实际投放商品口径 · 按 DPA 商品名称相似聚类</em></div>
+  <div class="card">
+    <div class="card-h"><h3>4.3　商品结构与聚拢：眼膜组占 61% 未聚拢</h3><span>实际投放商品口径 · 按 DPA 商品名称相似聚类</span></div>
     <div class="note amber" style="margin-top:10px"><span class="ico">!</span><span><b>眼膜组占 61% 但未聚拢：</b>4 个 SPU 并行，最优 SPU 仅占 67%（判定线 90%）；烟酰胺祛斑面霜创意重复度 61% 为链路最高。商品侧这轮要修的是「<b>聚拢 + 降重复</b>」。</span></div>
     <div class="tbl-wrap" style="margin-top:10px"><table class="mini">
       <thead><tr><th>实际投放商品</th><th class="num">日均消耗(万)</th><th class="num">消耗占比</th><th class="num">环比</th><th class="num">下单ROI</th><th class="num">计价率</th><th class="num">基建数（占比）</th><th class="num">SPU数</th><th class="num">DPA名称数</th></tr></thead>
@@ -650,108 +719,11 @@ details[open] summary::before{content:"▾ "}
       </tbody>
     </table></div>
     <div class="note blue" style="margin-top:10px"><span class="ico">i</span><span><b>迁移动作：</b>① 眼膜把分散量从郑多燕抚纹眼膜、淡化细纹眼膜 SPU 迁入 <b>5215006730416434897</b>（占 67% · 环比 +85.4% · 计价率 1.09 贴近 1），一次迁移即可过 90% 判定线；② 烟酰胺祛斑面霜与郑多燕黄芪已聚拢 100%，维持最优 SPU 不动；③ 创意重复度 61% 的烟酰胺祛斑面霜优先补新素材降重复。建议分 2 批滚动迁移，每批观察 ROI 无回落再继续。</span></div>
+    <div class="note blue" style="margin-top:10px"><span class="ico">i</span><span><b>结构动作：</b>① <b>烟酰胺祛斑面霜是唯一 ROI 破 1 的主力品</b>（1.06，消耗 +5%），可优先加量；② 郑多燕系两个品在快速放量（+115% / 新上），量增期盯住退款与 CVR；③ 眼膜单品类占 89%，品类集中——面霜类（1.06）已验证跑得动，可作为第二条品类线培育。基建上眼膜广告 349 条已是标杆（212 条）的 1.6 倍，但 4+m 重复 42%（标杆 32%）、新广告占比 48% 超出 10–30% 建议区间——<b>量够了，结构要修</b>。</span></div>
   </div>
 
   <div class="card">
-    <div class="card-h"><h3>4.2　退款：四个商品高于大盘，郑多燕黄芪已转优</h3><span>14 日退款率 · 小店大盘 17.93%</span></div>
-    <div class="pbar"><span class="nm">烟酰胺祛斑面霜 <i style="font-style:normal;color:var(--muted);font-weight:600">占消耗 8%</i></span><span class="tr"><i style="width:100%;background:linear-gradient(90deg,#F1998F,#DC2626)"></i></span><span class="vv"><b style="color:#DC2626">29.59%</b> · 恶化最快</span></div>
-    <div class="pbar"><span class="nm">郑多燕/DYZ胜肽眼膜 <i style="font-style:normal;color:var(--muted);font-weight:600">占消耗 13%</i></span><span class="tr"><i style="width:86.6%;background:linear-gradient(90deg,#F1998F,#DC2626)"></i></span><span class="vv"><b style="color:#DC2626">25.67%</b></span></div>
-    <div class="pbar"><span class="nm">淡化细纹/抗皱眼膜 <i style="font-style:normal;color:var(--muted);font-weight:600">占消耗 9%</i></span><span class="tr"><i style="width:82%;background:linear-gradient(90deg,#F5C07A,#D97706)"></i></span><span class="vv"><b style="color:#B45309">24.29%</b></span></div>
-    <div class="pbar"><span class="nm">眼膜 <i style="font-style:normal;color:var(--muted);font-weight:600">占消耗 66%</i></span><span class="tr"><i style="width:75.2%;background:linear-gradient(90deg,#F5C07A,#D97706)"></i></span><span class="vv"><b style="color:#B45309">22.25%</b> · 主力品</span></div>
-    <div class="pbar"><span class="nm">郑多燕/DYZ水光精华霜 <i style="font-style:normal;color:var(--muted);font-weight:600">占消耗 3%</i></span><span class="tr"><i style="width:58.5%;background:linear-gradient(90deg,#86C5A4,#2F9E63)"></i></span><span class="vv"><b style="color:#0B7A55">17.30%</b> · 已转优</span></div>
-    <div class="pbar"><span class="nm">小店大盘</span><span class="tr"><i style="width:60.6%;background:#CBD5E1"></i></span><span class="vv">17.93%</span></div>
-    <div class="note red"><span class="ico">!</span><span><b>与长尾型退款不同，这是主力品级别的全链路课题：</b>占 66% 消耗的眼膜退款 22.25%，四个商品高于大盘 17.93%；郑多燕黄芪 17.30% 已低于大盘（新上品，继续观察）。退款每压降 1pct，ROI 修复直接可见。<b>按窗口拆：</b>① 24 小时（下单即退）——核对详情页与素材话术的规格/功效口径，未发货订单客服拦截；② 3 天（收货即退）——48h 发货与包装加固；③ 14 天（用后即退）——按退款原因分层回访，功效预期前置说明。</span></div>
-    <div class="note amber" style="margin-top:10px"><span class="ico">!</span><span><b>退款修复不阻塞结构优化：</b>拓品（面霜线）、降广告重复、公众号机会位与退款修复并行推进；退款监控以周为粒度，主力眼膜 14 日退款先压回 20% 以内。</span></div>
-  </div>
-
-  <div class="card">
-    <div class="card-h"><h3>4.3　素材：转化端打平，前端吸引力对标慕可仍有差距</h3><span>眼膜 vs 标杆商品（慕可·微希/WIS）</span></div>
-    <div class="two-col">
-      <div>
-    <div class="cmp">
-      <div class="cmp-title">点击率 CTR<em>低于标杆 42%</em></div>
-      <div class="cmp-row">
-        <span class="cmp-tag me">创彩</span>
-        <div class="track"><i class="fill me" style="width:57.5%"></i></div>
-        <span class="cmp-val">3.09%</span>
-      </div>
-      <div class="cmp-row">
-        <span class="cmp-tag bm">标杆</span>
-        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
-        <span class="cmp-val dim">5.37%</span>
-      </div>
-    </div>
-    <div class="cmp">
-      <div class="cmp-title">5s 完播率<em>低于标杆 10%</em></div>
-      <div class="cmp-row">
-        <span class="cmp-tag me">创彩</span>
-        <div class="track"><i class="fill me" style="width:90.1%"></i></div>
-        <span class="cmp-val">29.93%</span>
-      </div>
-      <div class="cmp-row">
-        <span class="cmp-tag bm">标杆</span>
-        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
-        <span class="cmp-val dim">33.23%</span>
-      </div>
-    </div></div>
-      <div>
-    <div class="cmp">
-      <div class="cmp-title">CVR（点击→下单）<em>与标杆打平</em></div>
-      <div class="cmp-row">
-        <span class="cmp-tag me">创彩</span>
-        <div class="track"><i class="fill me" style="width:100.0%"></i></div>
-        <span class="cmp-val">10.46%</span>
-      </div>
-      <div class="cmp-row">
-        <span class="cmp-tag bm">标杆</span>
-        <div class="track"><i class="fill bm" style="width:98.8%"></i></div>
-        <span class="cmp-val dim">10.33%</span>
-      </div>
-    </div>
-    <div class="cmp">
-      <div class="cmp-title">CTCVR<em>低于标杆 39%</em></div>
-      <div class="cmp-row">
-        <span class="cmp-tag me">创彩</span>
-        <div class="track"><i class="fill me" style="width:61.0%"></i></div>
-        <span class="cmp-val">28.30%</span>
-      </div>
-      <div class="cmp-row">
-        <span class="cmp-tag bm">标杆</span>
-        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
-        <span class="cmp-val dim">46.42%</span>
-      </div>
-    </div></div>
-    </div>
-    <div class="note red"><span class="ico">!</span><span><b>转化力与标杆打平，缺口全在前端吸引力：</b>CVR 10.46% vs 10.33% 打平，但点击率 3.09%（低 42%）、5s 完播 29.93%（低 10%）、CTCVR 28.30%（低 39%）——素材时长 104.19s 与标杆 99.05s 同在 60s+ 建议区间，<b>问题不在长度在前 5 秒钩子与封面</b>。与直播链路同一课题（直播点击率 1.98% 环比 -42%），<b>两条链路共用一套钩子重构方案</b>：TOP 素材前 3 秒结构模板化、封面承诺与正片卖点对齐。</span></div>
-  </div>
-</div>
-
-<div class="sec">
-  <div class="sec-h"><span class="n">05</span><h2>产品能力：优投已开但效率平，潜客优投全空白</h2><span class="hint">本周期 · 占消耗比为各能力在对应链路内的占比</span></div>
-  <div class="take">创彩是少数<b>创意优投已上量</b>的客户（直播 55%、小店眼膜 26%），但当前 ROI 与未开启基本持平——按「成本达成」处理：<b>降 3–5% 出价观察效率</b>。<span class="good">潜客优投两链路全空白</span>（大盘几乎 100% 正向、头部商家 10–15% 消耗由它带来），是下一个确定性试跑点——也是冲 14.78 万/日目标过程中「不加价的放量」手段。</div>
-
-  <div class="card">
-    <div class="card-h"><h3>5.1　直播链路 · 主号抗皱草本护肤</h3><span>智投 / 潜客优投 / 创意优投</span></div>
-    <div class="cap">
-      <div class="nm">创意优投<em>已上量 · 成本达成</em></div>
-      <div class="cmp-row" style="margin:0"><div class="track"><i class="fill me" style="width:55%"></i></div></div>
-      <div class="roi"><span class="pill b">占 55%</span><span class="pill n">ROI 0.88</span><span class="pill n">未开启 0.89</span></div>
-    </div>
-    <div class="cap">
-      <div class="nm">智投广告<em>占比低于大盘 58%</em></div>
-      <div class="cmp-row" style="margin:0"><div class="track"><i class="fill me" style="width:47%"></i></div></div>
-      <div class="roi"><span class="pill b">占 47%</span><span class="pill n">ROI 0.89</span><span class="pill n">3.0 广告 0.90</span></div>
-    </div>
-    <div class="cap">
-      <div class="nm">潜客优投<em>未开启</em></div>
-      <div class="cmp-row" style="margin:0"><div class="track"><i class="fill" style="width:1%;background:#E2E8F0"></i></div></div>
-      <div class="roi"><span class="pill n">占 0%</span><span class="pill n">建议尝试开启</span></div>
-    </div>
-    <div class="note blue"><span class="ico">i</span><span><b>三件事：</b>① 创意优投成本已达成，可降原始出价 3–5% 后建优投项目、提价 5–10% 观察效率；② 智投占比 47% 低于大盘 58%，转化与 3.0 持平（0.89 vs 0.90），维持并观察；③ 潜客优投对自身高潜力、同行高潜力、同品高潜力人群分人群加价——<b>先给主号 TOP 素材项目开 10% 仓位试跑</b>。</span></div>
-  </div>
-
-  <div class="card">
-    <div class="card-h"><h3>5.2　小店链路</h3><span>郑多燕眼膜智投正向，潜客全空白</span></div>
+    <div class="card-h"><h3>4.4　产品能力 · 小店链路</h3><span>郑多燕眼膜智投正向，潜客全空白</span></div>
     <div class="cap">
       <div class="nm">智投广告<em>眼膜 17% · 郑多燕 83%</em></div>
       <div class="cmp-row" style="margin:0"><div class="track"><i class="fill me" style="width:17%"></i></div></div>
@@ -770,10 +742,11 @@ details[open] summary::before{content:"▾ "}
     <div class="note amber"><span class="ico">!</span><span><b>小店智投结构分化：</b>郑多燕眼膜智投占比 83% 且 ROI 0.87 优于 3.0 的 0.78（正向），眼膜智投仅 17%、转化略低（0.95 vs 0.97）——<b>把郑多燕的智投打法复制到眼膜</b>；潜客优投全空白，优先给眼膜（占 66% 消耗）开试跑。</span></div>
   </div>
 </div>
+</div>
 
 <div class="sec">
-  <div class="sec-h"><span class="n">06</span><h2>下次怎么做：一页纸行动清单</h2><span class="hint">按优先级排序，每条都对应上面的数据</span></div>
-  <div class="take">8 件事按顺序做：<b>先止血（二号间退款、全链路退款、润紫系店铺），再修结构（降广告重复、补基建、扩机会位、眼膜 SPU 聚拢），最后放大器（潜客优投开跑、优投降价微调）</b>。主号与小店素材端都很健康，这轮的增量钥匙在「结构」不在「内容」——<b>日耗目标：本周期 ×1.3 ＝ 14.78 万/日（直播 4.91 · 小店 9.87，当前 11.37）</b>。</div>
+  <div class="sec-h"><span class="n">05</span><h2>下次怎么做：一页纸行动清单</h2><span class="hint">按优先级排序，每条都对应上面的数据</span></div>
+  <div class="take">9 件事按顺序做：<b>先止血（二号间退款、全链路退款、润紫系店铺），再修结构（降广告重复、补基建、扩机会位、提直播间点商品、眼膜 SPU 聚拢），最后放大器（潜客优投开跑、优投降价微调）</b>。主号与小店素材端都很健康，这轮的增量钥匙在「结构」不在「内容」——<b>日耗目标：本周期 ×1.3 ＝ 14.78 万/日（直播 4.91 · 小店 9.87，当前 11.37）</b>。</div>
 
   <div class="card">
     <div class="tbl-wrap"><table>
@@ -784,6 +757,7 @@ details[open] summary::before{content:"▾ "}
         <tr><td><span class="pri p0">P0</span></td><td><b>控润紫系店铺差评</b></td><td>润紫系差评率 <b>17.65%–30.00%</b>（大盘 7.75%）、CCR 最高 <b>6.16%</b>（大盘 2.09%）</td><td>逐单回访差评原因；订单优先导向口碑好的玉柔系店铺</td></tr>
         <tr><td><span class="pri p1">P1</span></td><td><b>降广告重复</b></td><td>直播 4+m 重复 <b>39%</b>（标杆 19%）、小店眼膜 <b>42%</b>；营销对象数仅 1</td><td>用直播间商品表达多绑定不同商品 ID；4+m 压回 20% 以内</td></tr>
         <tr><td><span class="pri p1">P1</span></td><td><b>补直播基建 + 扩机会位</b></td><td>广告 383 条 vs 标杆 703（-46%）、指纹条均 214 元 vs 2380；公众号 3% · ROI <b>0.99</b> 全场最高、小程序 43% · ROI 0.91</td><td>广告补到 600+；单投公众号版位的 3.0 广告补位；小程序继续加仓（标杆 67%）——<b>支撑直播冲 4.91 万/日</b></td></tr>
+        <tr><td><span class="pri p1">P1</span></td><td><b>提直播间点商品转化</b></td><td>商品点击率 <b>48.59%</b>（标杆 62.76%，低 14.2pct）、人均观看 101s（标杆 164s，短 38%）——素材 CVR 低 21% 的缺口全部来自此段（3.4 漏斗）</td><td>讲解节奏加留人钩子（每 15 分钟一轮）、高转化商品前置讲、挂链顺序优化——<b>直播 ROI 0.89 修复到 1 以内的承接侧抓手</b></td></tr>
         <tr><td><span class="pri p1">P1</span></td><td><b>眼膜 SPU 聚拢迁移</b></td><td>眼膜组 4 个 SPU 并行、最优仅占 67%；郑多燕抚纹眼膜 SPU 环比 +80.7% 仍在分散放量</td><td>分散量迁入 <b>5215006730416434897</b>（环比 +85.4%）；烟酰胺面霜与郑多燕黄芪已聚拢、维持</td></tr>
         <tr><td><span class="pri p2">P2</span></td><td><b>潜客优投开跑</b></td><td>两链路全空白；大盘几乎 100% 正向、头部商家 10–15% 消耗由潜客优投带来</td><td>主号与小店眼膜各开 10% 仓位试跑，按周看 ROI</td></tr>
         <tr><td><span class="pri p2">P2</span></td><td><b>优投降价微调</b></td><td>直播创意优投 55% · ROI 0.88 vs 未开启 0.89；小店眼膜 26% · 0.93 vs 0.96</td><td>成本已达成：降原始出价 3–5% 建优投项目提价 5–10%，观察效率</td></tr>
@@ -804,4 +778,13 @@ details[open] summary::before{content:"▾ "}
 </div>
 
 <div class="footer">数据来源：AMS 经营数仓　｜　复盘周期 2026-10-11 ~ 2026-10-24　｜　报告重构于 2026-10-27</div>
-</div></body></html>
+</div>
+<script>
+function showTab(id,btn){
+  document.querySelectorAll('.tabpanel').forEach(function(p){p.style.display='none'});
+  document.getElementById(id).style.display='block';
+  document.querySelectorAll('.tabbtn').forEach(function(b){b.classList.remove('active')});
+  btn.classList.add('active');
+}
+</script>
+</body></html>

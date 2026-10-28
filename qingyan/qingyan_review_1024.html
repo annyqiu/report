@@ -149,13 +149,46 @@ summary::-webkit-details-marker{display:none}
 summary::before{content:"▸ ";font-size:11px}
 details[open] summary::before{content:"▾ "}
 .footer{text-align:center;color:#94A3B8;font-size:11.5px;padding:34px 0 44px}
+.tabbar{display:flex;gap:12px;margin-top:34px}
+.tabbtn{flex:1;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:14px 20px;text-align:left;
+  font-size:15px;font-weight:800;color:var(--ink2);cursor:pointer;display:flex;flex-direction:column;gap:4px;
+  box-shadow:0 1px 2px rgba(16,24,40,.05);transition:border-color .15s,box-shadow .15s;font-family:inherit}
+.tabbtn em{font-style:normal;font-size:11.5px;font-weight:600;color:var(--muted)}
+.tabbtn:hover{border-color:#9DB4F0}
+.tabbtn.active{border-color:var(--blue);background:linear-gradient(135deg,#F0F4FF,#FFFFFF);color:var(--blue-d);
+  box-shadow:0 8px 22px -12px rgba(43,92,230,.5)}
+.tabbtn.active em{color:var(--blue)}
+.lane-banner{border-radius:13px;padding:16px 24px;margin-top:34px;display:flex;align-items:baseline;gap:16px;color:#fff;flex-wrap:wrap}
+.lane-banner b{font-size:17.5px;font-weight:800;letter-spacing:.6px}
+.lane-banner span{font-size:12.5px;font-weight:600;opacity:.92}
+.lane-banner.b-blue{background:linear-gradient(135deg,#1B3FA8,#2B5CE6)}
+.lane-banner.b-violet{background:linear-gradient(135deg,#5436BE,#7C5CF0)}
+.funnel{display:flex;align-items:stretch;gap:7px;margin:6px 0 2px}
+.fstage{flex:none;width:88px;background:#EEF3FE;border:1px solid #D9E3F8;border-radius:10px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 4px;
+  font-size:12px;font-weight:800;color:#1E3A8A;text-align:center;line-height:1.4}
+.fstep{flex:1;min-width:0;background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 12px;position:relative}
+.fstep::before{content:"▸";position:absolute;left:-8px;top:50%;transform:translateY(-50%);color:#9DB4F0;font-size:12px}
+.fstep .fnm{font-size:12px;font-weight:800;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fstep .fnm em{font-style:normal;font-size:10px;color:var(--muted);font-weight:600;margin-left:5px}
+.fstep .fvals{display:flex;align-items:baseline;gap:7px;margin-top:3px;flex-wrap:nowrap}
+.fstep .fme{font-size:15.5px;font-weight:800;color:var(--blue-d);white-space:nowrap}
+.fstep .fbm{font-size:11px;color:var(--muted);font-weight:600;white-space:nowrap}
+.fstep .fvd{margin-left:auto;font-size:10.5px;font-weight:800;border-radius:5px;padding:2px 8px;white-space:nowrap;align-self:center}
+.fvd.ok{color:#0B7A55;background:#E6F7F0}
+.fvd.gap{color:#9B1C1C;background:#FEF0F0}
+.fstep.gap{border-color:#F2B8B8;background:#FFFBFB}
+.fchain{font-size:12px;color:var(--ink2);background:#F7F9FE;border:1px dashed #D5E0F5;border-radius:8px;
+  padding:9px 14px;margin-top:13px;font-weight:600;line-height:1.75}
+.fchain b{color:var(--blue-d)}
+.fchain .gap{color:var(--red);font-weight:800}
 @media (max-width:900px){.two-col,.kpi-grid,.bignum,.rooms{grid-template-columns:1fr}}
 </style></head><body>
 <div class="hero"><div class="wrap">
   <h1>倾颜 · 竞价广告复盘</h1>
   <div class="meta">复盘周期 <i>10.11–10.24</i>（14 天）　｜　对比 <i>09.27–10.10</i>（14 天）　｜　链路 小店直购 + CID（小店 8.4 万 · 77% ／ CID 2.6 万 · 23%）</div>
   <div class="tags">
-    <span class="tag">小店日均 <b>10.98</b> 万 <b>▼49%</b></span>
+    <span class="tag">总日均 <b>10.98</b> 万 <b>▼49%</b></span>
     <span class="tag">小店 ROI <b>1.57</b> <b>▼4%</b></span>
     <span class="tag">商品数 <b>8</b> 个 · ROI 全在 1.39–1.72</span>
     <span class="tag">SPU 聚拢 <b class="g">1/4</b> · CID 祛斑面霜最优仅 <b>26%</b></span>
@@ -240,34 +273,11 @@ details[open] summary::before{content:"▾ "}
 </div>
 
 <div class="sec">
-  <div class="sec-h"><span class="n">02</span><h2>商品：效率均衡缺量，聚拢度待修</h2><span class="hint">2.1 全量视角 · 2.2–2.4 分链路（实际投放商品口径）</span></div>
-  <div class="take">主力<b>倾颜/QINGYAN面霜</b>占 64% 消耗（7.04 万，-54%），ROI 1.57；八个商品 ROI 全部落在 1.39–1.72 窄带——<b>没有拖后腿的品，也没有能扛量的第二极</b>。两个正增长小商品（ROI 1.67 / 1.72）是最现成的接量候选。分链路看（2.2–2.4）：<b>小店 96% 押在 QINGYAN面霜、CID 靠祛斑面霜（-66%）与抗皱精华撑着</b>；更关键的是聚拢度——<span class="warn">4 个实际投放商品只有 1 个 SPU 已聚拢，CID 祛斑面霜最优 SPU 仅占 26%，消耗散在 5 个 SPU、53 个 DPA 名称上</span>。<b>分链路日耗目标：小店子链路恢复至 16.10 万/日、CID 恢复至 5.49 万/日</b>，聚拢迁移是回补前的必修课。</div>
+  <div class="sec-h"><span class="n">02</span><h2>商品：效率均衡缺量，聚拢度待修</h2><span class="hint">2.1–2.3 分链路（实际投放商品口径）</span></div>
+  <div class="take">主力<b>倾颜/QINGYAN面霜</b>占 64% 消耗（7.04 万，-54%），ROI 1.57；八个商品 ROI 全部落在 1.39–1.72 窄带——<b>没有拖后腿的品，也没有能扛量的第二极</b>。两个正增长小商品（ROI 1.67 / 1.72）是最现成的接量候选。分链路看（2.1–2.3）：<b>小店 96% 押在 QINGYAN面霜、CID 靠祛斑面霜（-66%）与抗皱精华撑着</b>；更关键的是聚拢度——<span class="warn">4 个实际投放商品只有 1 个 SPU 已聚拢，CID 祛斑面霜最优 SPU 仅占 26%，消耗散在 5 个 SPU、53 个 DPA 名称上</span>。<b>分链路日耗目标：小店子链路恢复至 16.10 万/日、CID 恢复至 5.49 万/日</b>，聚拢迁移是回补前的必修课。</div>
 
   <div class="card">
-    <div class="card-h"><h3>2.1　商品结构（全量视角）：钱花在哪，效率如何</h3><span>小店 + CID 合并 · 日均消耗（万）· 括号内为 ROI 与环比</span></div>
-    <div class="pbar"><span class="nm">倾颜/QINGYAN面霜</span><span class="tr"><i style="width:100%"></i></span><span class="vv"><b>7.04 万</b> · ROI 1.57</span></div>
-    <div class="pbar"><span class="nm">倾颜烟酰胺美白祛斑霜</span><span class="tr"><i style="width:22.9%"></i></span><span class="vv"><b>1.61 万</b> · ROI 1.61</span></div>
-    <div class="pbar"><span class="nm">抗皱精华液/肌底液</span><span class="tr"><i style="width:9.8%"></i></span><span class="vv"><b>0.69 万</b> · ROI 1.54</span></div>
-    <div class="pbar"><span class="nm">祛斑面霜</span><span class="tr"><i style="width:8.2%"></i></span><span class="vv"><b>0.58 万</b> · ROI 1.51</span></div>
-    <div class="pbar"><span class="nm">烟酰胺美白面霜</span><span class="tr"><i style="width:5.5%"></i></span><span class="vv"><b>0.39 万</b> · ROI 1.54</span></div>
-    <div class="pbar"><span class="nm">倾颜/QINGYAN精华液</span><span class="tr"><i style="width:4.1%"></i></span><span class="vv"><b>0.29 万</b> · ROI 1.67</span></div>
-    <div class="pbar"><span class="nm">保湿精华液/肌底液</span><span class="tr"><i style="width:2.4%"></i></span><span class="vv"><b>0.17 万</b> · ROI 1.39</span></div>
-    <div class="pbar"><span class="nm">肌肽修护精华液</span><span class="tr"><i style="width:1.6%"></i></span><span class="vv"><b>0.11 万</b> · ROI 1.72</span></div>
-    <div class="note blue" style="margin-top:16px"><span class="ico">i</span><span><b>结构动作：</b>① 面霜 -54% 的量去哪了——先查是素材衰退还是预算收缩（新广告占比 35% 偏高、4+m 重复 45%，素材结构先修）；② <b>QINGYAN精华（+66%）与肌肽修护（+125%）逆势放量且 ROI 高于主力</b>，给到 0.5–1 万/日仓位验证承接力；③ 祛斑面霜 -59% 收缩最狠，ROI 1.51 不差，可小仓位回补测试需求弹性。</span></div>
-    <div class="cmp-title" style="margin-top:14px">小店素材类型结构 · 倾颜/QINGYAN面霜</div>
-    <table class="mini">
-      <thead><tr><th>素材类型</th><th class="num">倾颜 · 消耗占比</th><th class="num">倾颜 · 下单ROI</th><th class="num">倾颜 · 项目&广告数</th><th class="num">小店大盘 · 占比</th><th class="num">大盘 · ROI</th></tr></thead>
-      <tbody>
-        <tr><td>竖版视频</td><td class="num">100%</td><td class="num">1.57</td><td class="num">2551 条</td><td class="num">95%</td><td class="num">2.00</td></tr>
-        <tr><td>横版视频</td><td class="num">0%</td><td class="num">1.50</td><td class="num">105 条</td><td class="num">1%</td><td class="num">2.63</td></tr>
-        <tr><td>原生动态</td><td class="num">未投</td><td class="num">—</td><td class="num">0 条</td><td class="num">4%</td><td class="num"><b style="color:#0B7A55">2.53</b></td></tr>
-      </tbody>
-    </table>
-    <div class="note blue" style="margin-top:10px"><span class="ico">i</span><span><b>小店大盘原生动态 ROI 2.53 高于竖版 2.00，倾颜还没投过</b>——拿 2-3 条广告小仓位试投原生动态，验证跑量后再谈占比；横版 105 条广告只跑出 1.50 的 ROI，低于竖版，维持不扩。</span></div>
-  </div>
-
-  <div class="card">
-    <div class="card-h"><h3>2.2　小店链路 · 商品结构</h3><span>实际投放商品口径 · 按 DPA 商品名称相似聚类 · 日均 8.4 万（占 77%）</span></div>
+    <div class="card-h"><h3>2.1　小店链路 · 商品结构</h3><span>实际投放商品口径 · 按 DPA 商品名称相似聚类 · 日均 8.4 万（占 77%）</span></div>
     <div class="note amber"><span class="ico">!</span><span>消耗高度集中在<b>倾颜/QINGYAN面霜</b>（96%），其环比 <b style="color:#DC2626">-48.7%</b> 是全盘缩量的主因；另一在投商品<b>倾颜/QINGYAN精华液/肌底液</b>逆势 <b style="color:#0E9F6E">+65.7%</b>（ROI 1.67）——结构在向高 ROI 商品迁移，但体量太小还补不上缺口。</span></div>
     <div class="tbl-wrap" style="margin-top:12px"><table class="mini">
       <thead><tr><th>实际投放商品</th><th class="num">日均消耗(万)</th><th class="num">消耗占比</th><th class="num">环比</th><th class="num">下单ROI</th><th class="num">计价率</th><th class="num">基建数（占比）</th><th class="num">SPU数</th><th class="num">DPA名称数</th></tr></thead>
@@ -276,11 +286,11 @@ details[open] summary::before{content:"▾ "}
         <tr><td>倾颜/QINGYAN精华液/肌底液</td><td class="num">0.3</td><td class="num">3%</td><td class="num"><b style="color:#0E9F6E">+65.7%</b></td><td class="num">1.67</td><td class="num"><b style="color:#DC2626">1.23</b></td><td class="num">129（6%）</td><td class="num">1</td><td class="num">4</td></tr>
       </tbody>
     </table></div>
-    <div style="font-size:11px;color:#8A94A6;margin-top:7px">实际投放商品＝DPA 商品名称相似聚类的商品组，ROI／计价率为组内消耗加权；基建数＝有消耗项目&广告 ID（跨天去重）组内加总，占比分母为小店链路合计 2177（同一广告可投多个 SPU，各行占比之和可超 100%）；计价率 0.8–1.2 为合理区间，越贴近 1 越好。与 2.1 全量口径的聚类方式不同，数值不可直接对比。小店链路整体：8.4 万（-47.3%）· ROI 1.59 · 4+m 重复 45% · 创意重复度最高 45%。</div>
+    <div style="font-size:11px;color:#8A94A6;margin-top:7px">实际投放商品＝DPA 商品名称相似聚类的商品组，ROI／计价率为组内消耗加权；基建数＝有消耗项目&广告 ID（跨天去重）组内加总，占比分母为小店链路合计 2177（同一广告可投多个 SPU，各行占比之和可超 100%）；计价率 0.8–1.2 为合理区间，越贴近 1 越好。与全量分商品口径的聚类方式不同，数值不可直接对比。小店链路整体：8.4 万（-47.3%）· ROI 1.59 · 4+m 重复 45% · 创意重复度最高 45%。</div>
   </div>
 
   <div class="card">
-    <div class="card-h"><h3>2.3　CID 链路 · 商品结构</h3><span>实际投放商品口径 · CID 日均 2.6 万（占 23%）</span></div>
+    <div class="card-h"><h3>2.2　CID 链路 · 商品结构</h3><span>实际投放商品口径 · CID 日均 2.6 万（占 23%）</span></div>
     <div class="note amber"><span class="ico">!</span><span>消耗集中在 2 个实际投放商品：<b>祛斑面霜</b>（58%，环比 <b style="color:#DC2626">-66.0%</b>）、<b>抗皱精华液/肌底液</b>（42%，-8.3%）；祛斑面霜的 -66% 是链路缩量的主要拖累，抗皱精华相对稳。</span></div>
     <div class="tbl-wrap" style="margin-top:12px"><table class="mini">
       <thead><tr><th>实际投放商品</th><th class="num">日均消耗(万)</th><th class="num">消耗占比</th><th class="num">环比</th><th class="num">下单ROI</th><th class="num">计价率</th><th class="num">基建数（占比）</th><th class="num">SPU数</th><th class="num">DPA名称数</th></tr></thead>
@@ -289,11 +299,11 @@ details[open] summary::before{content:"▾ "}
         <tr><td>抗皱精华液/肌底液</td><td class="num">1.1</td><td class="num">42%</td><td class="num"><b style="color:#DC2626">-8.3%</b></td><td class="num">1.52</td><td class="num"><b style="color:#DC2626">1.25</b></td><td class="num">391（45%）</td><td class="num">4</td><td class="num">17</td></tr>
       </tbody>
     </table></div>
-    <div style="font-size:11px;color:#8A94A6;margin-top:7px">口径同 2.2，基建占比分母为 CID 链路合计 861。CID 链路整体：2.6 万（-53.5%）· ROI 1.52 · 创意重复度最高 42%。抗皱精华与小店链路共用部分 SPU，是缩量中的相对稳定项。</div>
+    <div style="font-size:11px;color:#8A94A6;margin-top:7px">口径同 2.1，基建占比分母为 CID 链路合计 861。CID 链路整体：2.6 万（-53.5%）· ROI 1.52 · 创意重复度最高 42%。抗皱精华与小店链路共用部分 SPU，是缩量中的相对稳定项。</div>
   </div>
 
   <div class="card">
-    <div class="card-h"><h3>2.4　商品聚拢判断：4 个实际投放商品，只有 1 个已聚拢</h3><span>判定口径：最优 SPU 组内消耗占比 ≥ 90% 为已聚拢 · 分小店 / CID 链路</span></div>
+    <div class="card-h"><h3>2.3　商品聚拢判断：4 个实际投放商品，只有 1 个已聚拢</h3><span>判定口径：最优 SPU 组内消耗占比 ≥ 90% 为已聚拢 · 分小店 / CID 链路</span></div>
     <div class="note red"><span class="ico">!</span><span><b>聚拢是这轮商品侧最值得修的结构问题。</b>小店 2 个商品里 QINGYAN精华液已聚拢（100%）、面霜未聚拢（最优 SPU 84%）；<b>CID 2 个商品全部未聚拢</b>——祛斑面霜最优 SPU 仅占 <b>26%</b>，1.1 万/日散在其余 4 个 SPU 上；且 CID 两个最优 SPU 下 DPA 名称 9 个、11 个（&gt;5 即为分散），同一素材跑在多个商品 ID 上，商品表达分散会稀释参竞与数据积累。</span></div>
     <div class="tbl-wrap" style="margin-top:12px"><table class="mini">
       <thead><tr><th>链路</th><th>实际投放商品</th><th class="num">日均消耗(万)</th><th class="num">SPU数</th><th class="num">最优SPU占比</th><th>判定</th><th>建议动作</th></tr></thead>
@@ -513,6 +523,17 @@ details[open] summary::before{content:"▾ "}
       </div>
     </div>
     <div class="note red"><span class="ico">!</span><span><b>素材时长已与标杆持平（99.54s vs 99.05s），不需要加长；</b>差距全在密度——点击率低 40%、完播低 22%、CTCVR 低 56%。<b>重构前 5 秒钩子与卖点信息密度</b>，把 TOP 素材的前 3 秒结构做成模板复用到新广告，比继续铺广告数有效。肌肽修护（5s 完播 21.04% 偏弱但 ROI 1.72 最高）说明「后段转化力」已验证，缺的是前端吸引力。</span></div>
+
+    <div class="cmp-title" style="margin-top:14px">小店素材类型结构 · 倾颜/QINGYAN面霜</div>
+    <table class="mini">
+      <thead><tr><th>素材类型</th><th class="num">倾颜 · 消耗占比</th><th class="num">倾颜 · 下单ROI</th><th class="num">倾颜 · 项目&广告数</th><th class="num">小店大盘 · 占比</th><th class="num">大盘 · ROI</th></tr></thead>
+      <tbody>
+        <tr><td>竖版视频</td><td class="num">100%</td><td class="num">1.57</td><td class="num">2551 条</td><td class="num">95%</td><td class="num">2.00</td></tr>
+        <tr><td>横版视频</td><td class="num">0%</td><td class="num">1.50</td><td class="num">105 条</td><td class="num">1%</td><td class="num">2.63</td></tr>
+        <tr><td>原生动态</td><td class="num">未投</td><td class="num">—</td><td class="num">0 条</td><td class="num">4%</td><td class="num"><b style="color:#0B7A55">2.53</b></td></tr>
+      </tbody>
+    </table>
+    <div class="note blue" style="margin-top:10px"><span class="ico">i</span><span><b>小店大盘原生动态 ROI 2.53 高于竖版 2.00，倾颜还没投过</b>——拿 2-3 条广告小仓位试投原生动态，验证跑量后再谈占比；横版 105 条广告只跑出 1.50 的 ROI，低于竖版，维持不扩。</span></div>
   </div>
 </div>
 
@@ -607,7 +628,7 @@ details[open] summary::before{content:"▾ "}
         <b>出价与 ROI 现状</b>：<br>
         · 小店：出价 32 元、客单价 53 元、计价率 1.15——ROI 1.57 为八品均衡水平，量修复期优先守 ROI 1.5+<br>
         <b>日耗目标</b>：环比下跌，目标＝恢复上周期水平——小店子链路 16.10 万/日 + CID 5.49 万/日，合计 <b>21.60 万/日</b>（当前 10.98 万/日）；守线 ROI 1.5+<br><br>
-        <b>口径</b>：本周期 10.11–10.24（14 天），上周期 09.27–10.10（14 天），全部为日均口径；ROI 为下单 ROI；倾颜为小店直购 + CID 双商品链路（小店 8.4 万 · 77% ／ CID 2.6 万 · 23%，无直播链路消耗），报告主体指标为全量口径，商品结构 2.2–2.4 按链路拆分。实际投放商品＝DPA 商品名称相似聚类的商品组，与 2.1 全量分商品口径不同，数值不可直接对比；SPU 聚拢判定＝最优 SPU 组内消耗占比 ≥ 90%，最优 SPU 下 DPA 名称 &gt; 5 个视为商品表达分散；计价率 0.8–1.2 为合理区间。标杆为 V5 报告指定客户同期数据；退款率为下单后 N 个自然日累计退款占比；机会流量判定＝占比 &lt; 10% 且 ROI 高于本链路整体。
+        <b>口径</b>：本周期 10.11–10.24（14 天），上周期 09.27–10.10（14 天），全部为日均口径；ROI 为下单 ROI；倾颜为小店直购 + CID 双商品链路（小店 8.4 万 · 77% ／ CID 2.6 万 · 23%，无直播链路消耗），报告主体指标为全量口径，商品结构按链路拆分（2.1–2.3）。实际投放商品＝DPA 商品名称相似聚类的商品组，与全量分商品口径的聚类方式不同，数值不可直接对比；SPU 聚拢判定＝最优 SPU 组内消耗占比 ≥ 90%，最优 SPU 下 DPA 名称 &gt; 5 个视为商品表达分散；计价率 0.8–1.2 为合理区间。标杆为 V5 报告指定客户同期数据；退款率为下单后 N 个自然日累计退款占比；机会流量判定＝占比 &lt; 10% 且 ROI 高于本链路整体。
       </div>
     </details>
   </div>
