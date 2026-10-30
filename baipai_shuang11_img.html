@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>白牌美妆双11 · 直播+小店直购双链路 · 广告消耗破百万</title>
+<style>
+
+:root{
+  --bg:#f6f5fb; --card:#ffffff; --ink:#232135; --sub:#6b6785; --line:#e8e6f2;
+  --brand:#6c5ce7; --orange:#ff9f43; --up:#e64545; --down:#1fa56f; --muted:#a09bb8;
+  --radius:14px; --shadow:0 4px 18px rgba(60,50,120,.07);
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; background:var(--bg); color:var(--ink); line-height:1.6; padding:0 0 60px;}
+.wrap{max-width:1120px; margin:0 auto; padding:0;}
+header{background:linear-gradient(135deg,#5f4bd6 0%,#8f7cf0 55%,#d478c8 100%); color:#fff; padding:40px 26px 36px; margin-bottom:26px;}
+header .wrap{display:flex; flex-direction:column; gap:8px;}
+.badge{display:inline-block; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35); padding:4px 14px; border-radius:20px; font-size:17.5px; letter-spacing:1px; width:fit-content;}
+h1{font-size:28px; font-weight:700;}
+.subtitle{font-size:19px; opacity:.92;}
+.meta{font-size:17px; opacity:.85;}
+.grid{display:grid; grid-template-columns:1fr; gap:22px;}
+.customer{background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:22px 26px; display:flex; flex-direction:column; gap:14px;}
+.cust-head{display:flex; align-items:center; gap:12px;}
+.cust-idx{display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; border-radius:9px; background:var(--brand); color:#fff; font-size:18.5px; font-weight:800;}
+.card-title{font-size:21px; font-weight:800; letter-spacing:.5px;}
+.khq{font-size:16.5px; font-weight:700; padding:3px 11px; border-radius:14px; letter-spacing:1px;}
+.khq.white{background:#f0f3ff; color:#5a6cd6; border:1px solid #d8defc;}
+.khq.brand{background:#fff4ec; color:#d08036; border:1px solid #ffe0c0;}
+.cust-name{font-size:18.5px; color:var(--sub); font-weight:700; margin-left:auto; display:flex; align-items:center; gap:8px;}
+.insight{display:flex; align-items:flex-start; gap:9px; background:#fff7ec; border:1px solid #ffe3c2; border-left:3px solid var(--orange); border-radius:9px; padding:10px 14px; font-size:18px; font-weight:600; color:#4a4030;}
+.insight-tag{flex:none; font-size:15.5px; font-weight:800; color:#fff; background:var(--orange); border-radius:5px; padding:2px 8px; letter-spacing:1px; margin-top:2px;}
+.kpi-row{display:grid; grid-template-columns:repeat(4,1fr); gap:10px;}
+.kpi{display:flex; flex-direction:column; gap:3px; background:#faf9ff; border:1px solid #eeecfa; border-radius:10px; padding:10px 12px;}
+.kpi.hl{background:#eef0fe; border:1px solid #d5d8f8;}
+.kpi .lb{font-size:15.5px; color:var(--sub);}
+.kpi .vl{font-size:23px; font-weight:800; color:var(--ink);}
+.kpi .vl i{font-size:16.5px; font-style:normal; margin-left:2px; color:var(--sub); font-weight:600;}
+.chart-box{background:#faf9ff; border:1px solid #eeecfa; border-radius:10px; padding:10px 12px 4px;}
+.chart-cap{font-size:16.5px; color:var(--sub); font-weight:700; margin-bottom:4px; letter-spacing:.5px;}
+.comp-box{background:#faf9ff; border:1px solid #eeecfa; border-radius:10px; padding:10px 12px 12px;}
+.stackbar{display:flex; height:36px; border-radius:8px; overflow:hidden; margin-top:6px;}
+.seg{display:flex; align-items:center; justify-content:center; color:#fff; font-size:17px; font-weight:700; letter-spacing:.5px; white-space:nowrap;}
+.pt-list{list-style:none; display:flex; flex-direction:column; gap:8px;}
+.pt-list li{font-size:18.5px; color:#4a4763; background:#f7f5ff; border-radius:8px; padding:8px 12px; line-height:1.65;}
+.pt-list li b{color:var(--brand); font-weight:800; margin-right:2px;}
+
+footer{margin-top:26px; text-align:center; font-size:16.5px; color:var(--muted);}
+
+.card-title{font-size:21px;}
+
+.card-title{font-size:21px;}
+
+.module{background:#fff; border-radius:var(--radius); box-shadow:var(--shadow); padding:24px 26px; margin-bottom:22px;}
+.m-head{display:flex; align-items:center; gap:12px; padding-bottom:14px; border-bottom:2px solid #f2f0fa; margin-bottom:18px;}
+.m-no{width:34px; height:34px; border-radius:10px; background:linear-gradient(135deg,#6c5ce7,#9b8cf5); color:#fff; font-size:20px; font-weight:800; display:flex; align-items:center; justify-content:center; flex:0 0 auto;}
+.m-title{font-size:23px; font-weight:800; letter-spacing:.5px;}
+.m-note{margin-left:auto; font-size:17px; color:var(--sub);}
+.m-lead{font-size:17.5px; color:#4a4763; background:#f7f5ff; border-radius:9px; padding:10px 14px; margin-bottom:16px; line-height:1.7;}
+.sub-head{font-size:22px; font-weight:800; color:#3b3757; margin:18px 0 10px; display:flex; align-items:center; gap:8px;}
+.sub-head::before{content:""; width:4px; height:15px; border-radius:2px; background:var(--brand);}
+.cmp-row{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+.cmp{background:#faf9ff; border:1px solid #eeecfa; border-radius:12px; padding:14px 16px 12px;}
+.cmp-t{font-size:17.5px; font-weight:800; color:#3b3757; margin-bottom:10px;}
+.cmp-note{margin-top:9px; font-size:16px; color:var(--sub); line-height:1.7;}
+.cmp-note b{color:#3b3757;}
+.ring-wrap{display:flex; align-items:center; gap:16px;}
+.ring-legend{font-size:17px; color:#4a4763; line-height:2.1;}
+.ring-legend i{display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:7px;}
+.ring-legend b{color:#6c5ce7;}
+.hero-num{font-size:46px; font-weight:800; color:#6c5ce7; line-height:1.1; margin:0 0 4px;}
+.hero-num i{font-size:18.5px; color:var(--sub); font-style:normal; font-weight:700; margin-left:3px;}
+.hero-cap{font-size:16.5px; color:var(--sub); margin-bottom:12px;}
+.ratio-row{display:flex; align-items:center; gap:10px; margin-bottom:9px;}
+.ratio-lab{flex:0 0 58px; font-size:17px; font-weight:700; color:#6b6785;}
+.ratio-track{flex:1; height:28px; background:#f4f2fb; border-radius:7px; overflow:hidden;}
+.ratio-fill{height:100%; background:linear-gradient(90deg,#6c5ce7,#9b8cf5); border-radius:7px;}
+.ratio-fill.base{background:#c9c3e6;}
+.grid2{display:grid; grid-template-columns:1fr; gap:18px;}
+.tier{border:1px solid #eeecfa; border-radius:12px; background:#fbfaff; padding:14px 16px;}
+.tier-h{font-size:20.5px; font-weight:800; color:#fff; background:linear-gradient(90deg,#6c5ce7,#9b8cf5); display:inline-block; padding:4px 13px; border-radius:8px; margin-bottom:11px;}
+.tier-row{display:flex; gap:10px; margin-bottom:8px; font-size:17.5px; line-height:1.75;}
+.tier-k{flex:0 0 78px; font-weight:700; color:#6b6785; white-space:nowrap;}
+.tier-v{flex:1; color:#232135;}
+.tier-v b{color:var(--brand);}
+.tool-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:16px;}
+.tool{border:1px solid #eeecfa; border-radius:12px; background:#fbfaff; padding:14px 16px;}
+.tool-tag{display:inline-block; font-size:16px; font-weight:800; color:#fff; background:#6c5ce7; border-radius:6px; padding:2px 9px; letter-spacing:.5px;}
+.tool.t2 .tool-tag{background:#1fa56f;}
+.tool.t3 .tool-tag{background:#ff9f43;}
+.tool-name{font-size:22px; font-weight:800; margin:8px 0 6px;}
+.tool-desc{font-size:17.5px; color:#4a4763; line-height:1.7;}
+.tbl-x{width:100%; border-collapse:collapse; font-size:18px;}
+.tbl-x th, .tbl-x td{border:1px solid #eeecfa; padding:9px 12px; line-height:1.6; text-align:left; vertical-align:top;}
+.tbl-x th{background:#faf9ff; font-weight:800; color:#3b3757;}
+.tbl-x td.dim{background:#faf9ff; font-weight:700; color:#6b6785; white-space:nowrap;}
+.tbl-x b{color:var(--brand);}
+.plat{display:inline-block; font-size:16px; padding:2px 7px; border-radius:6px; background:#f3f0fb; color:#4c3e6b; border:1px solid #e6dff5; margin:2px 3px 0 0;}
+.tip-list{list-style:none; display:flex; flex-direction:column; gap:8px; flex:1; justify-content:space-between;}
+.tip-list li{font-size:18px; color:#4a4763; background:#f7f5ff; border-radius:8px; padding:9px 13px; line-height:1.7;}
+.tip-list li b{color:var(--brand); font-weight:800; margin-right:2px;}
+.tips-wrap{display:flex; gap:18px; align-items:stretch;}
+.tips-img{flex:0 0 50%;}
+.tips-img img{width:100%; border-radius:10px; border:1px solid #eeecfa; display:block;}
+.cap-note{margin-top:14px; font-size:16px; color:var(--sub); text-align:center; line-height:1.7;}
+.cap-note b{color:#3b3757;}
+
+.hero-wrap{border:2px solid #d3cdf0; border-radius:16px; padding:8px; background:linear-gradient(135deg,#f7f4ff 0%,#ffffff 62%); margin-bottom:22px;}
+.hero-ribbon{font-size:17.5px!important;display:inline-block; background:linear-gradient(90deg,#6c5ce7,#9b8cf5); color:#fff; font-size:16.5px; font-weight:800; letter-spacing:1px; padding:4px 13px; border-radius:8px; margin:6px 0 10px 12px;}
+.hero-wrap .card-title{font-size:20px;}
+.hero-wrap .kpi .vl{font-size:25px;}
+.hero-wrap .insight{font-size:18px;}
+.e-strip{display:grid; grid-template-columns:1fr; gap:10px; padding:0; margin:0 0 12px;}
+.e-col{background:#faf9ff; border:1px solid #eeecfa; border-radius:10px; padding:11px 14px; white-space:nowrap; overflow:hidden;}
+.e-k{font-size:19px; font-weight:800; color:#6b6785; margin-bottom:8px; letter-spacing:.5px;}
+.e-chip{display:inline-block; font-size:15.5px; font-weight:700; color:#6c5ce7; background:#eef0fe; border:1px solid #d5d8f8; border-radius:8px; padding:4px 8px; margin:0 5px 5px 0;}
+.e-chip.alt{color:#12805a; background:#e9faf1; border-color:#c6edd9;}
+
+.card-title{white-space:nowrap;}
+.hero-wrap .card-title{font-size:18.5px; letter-spacing:0;}
+.grid2 .card-title{font-size:15.5px; letter-spacing:0;}
+.chart-note{margin-top:3px; font-size:16px; color:var(--muted); text-align:right; letter-spacing:.3px;}
+
+.tool-flag{display:inline-block; font-size:15.5px; font-weight:800; color:#c0392b; background:#fdecea; border:1px solid #f6d5d5; border-radius:6px; padding:2px 8px; margin-left:6px;}
+.cpa-scope{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px;}
+.scope-col{border-radius:10px; padding:11px 15px; font-size:17.5px; line-height:1.95;}
+.scope-col.ok{background:#eefaf3; border:1px solid #c6edd9;}
+.scope-col.no{background:#fdf1f1; border:1px solid #f6d5d5;}
+.scope-h{font-size:19.5px; font-weight:800; margin-bottom:5px;}
+.scope-col.ok .scope-h{color:#12805a;}
+.scope-col.no .scope-h{color:#c0392b;}
+
+.tbl-x td.na{color:var(--muted); text-align:center;}
+.tbl-x td.num{font-weight:800; color:#232135; text-align:center;}
+.m4-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:16px;}
+.tbl-x.cmp3 th:nth-child(2), .tbl-x.cmp3 td:nth-child(2){background:#f4f1ff;}
+.tbl-x.cmp3 th:nth-child(3), .tbl-x.cmp3 td:nth-child(3){background:#eefaf3;}
+.tbl-x.cmp3 th:nth-child(4), .tbl-x.cmp3 td:nth-child(4){background:#fff5ea;}
+.tbl-x.cmp3 th, .tbl-x.cmp3 td{vertical-align:middle;}
+.tbl-x.cmp3 th:nth-child(2){color:#5a45d6;} .tbl-x.cmp3 th:nth-child(3){color:#12805a;} .tbl-x.cmp3 th:nth-child(4){color:#c07018;}
+.tip-list{display:grid; gap:12px; margin:0; padding:0; list-style:none;}
+.tip-list.cols2{grid-template-columns:1fr;}
+.tip-list.grid2{grid-template-columns:1fr 1fr;}
+.tip-list li{display:block; background:#f7f5ff; border-radius:10px; padding:13px 16px; font-size:17.5px; color:#4a4763; line-height:1.78;}
+.tip-list li b{color:#5a45d6; font-weight:800; margin-right:7px; white-space:nowrap;}
+
+.c-body{display:grid; grid-template-columns:634px 1fr; gap:16px; align-items:stretch;}
+.c-left,.c-right{display:flex; flex-direction:column; gap:12px; min-width:0;}
+.c-right .chart-box{padding:10px 10px 6px; flex:1 1 auto; display:flex; flex-direction:column; justify-content:center;}
+.tool.t1{background:#f4f1ff; border-color:#ded6fb;}
+.tool.t2{background:#eefaf3; border-color:#c6edd9;}
+.tool.t3{background:#fff5ea; border-color:#ffe0c0;}
+.tool{position:relative; padding-left:20px;}
+.tool::before{content:""; position:absolute; left:0; top:0; bottom:0; width:5px; border-radius:12px 0 0 12px;}
+.tool.t1::before{background:#6c5ce7;}
+.tool.t2::before{background:#1fa56f;}
+.tool.t3::before{background:#ff9f43;}
+.tool.t1 .tool-name{color:#5a45d6;}
+.tool.t2 .tool-name{color:#12805a;}
+.tool.t3 .tool-name{color:#c07018;}
+.tips-wrap{display:block;}
+.tips-wrap .tip-list + .tip-list{margin-top:12px;}
+.m4-col{min-width:0;}
+.m4-col .sub-head{margin-top:0;}
+.m4-grid .tbl-x{font-size:17.5px;}
+.m4-grid .tbl-x th, .m4-grid .tbl-x td{padding:8px 8px;}
+
+
+.qr-sec{margin-top:24px; background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow);
+  padding:20px 28px; display:flex; align-items:center; justify-content:center; gap:34px;}
+.qr-txt{text-align:left;}
+.qr-title{font-size:21px; font-weight:800; color:var(--ink); letter-spacing:.5px; line-height:1.45;}
+.qr-sub{margin-top:6px; font-size:16px; color:var(--sub); line-height:1.6;}
+.qr-img{width:158px; flex:0 0 158px; display:block; border-radius:8px;}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <span class="badge">白牌美妆 · 双11增长指南 · 第二期</span>
+    <h1 style="font-size:26px; font-weight:800; letter-spacing:.5px;">白牌美妆双 11，如何利用"直播 + 小店直购"双链路，实现广告消耗破百万？</h1>
+    <div class="subtitle">多链路已成行业趋势 → 双 11 白牌美妆多链路优秀案例 → 直播商家如何快速拓展小店直购链路 → 基建标准</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="module">
+    <div class="m-head">
+      <div class="m-no">1</div>
+      <div class="m-title">多链路已成为行业趋势</div>
+      <div class="m-note">来源：行业趋势文档 · 六-2）多链路并行，全人群覆盖</div>
+    </div>
+
+    <div class="m-lead">短直双开已成大盘趋势：<b>75%+ 的商家投放 2 个以上链路</b>，双链路商家的单客消耗能力可达单链路的 <b>4 倍以上</b>。</div>
+    <div class="cmp-row">
+      <div class="cmp">
+        <div class="cmp-t">日耗结构：短直双开占大盘 3/4</div>
+        <div class="ring-wrap">
+          <svg viewBox="0 0 160 160" width="150" height="150" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="80" cy="80" r="64" fill="none" stroke="#f0eef8" stroke-width="26"/>
+            <circle cx="80" cy="80" r="64" fill="none" stroke="#6c5ce7" stroke-width="26" stroke-dasharray="301.6 402.1" stroke-dashoffset="0" transform="rotate(-90 80 80)"/>
+            <circle cx="80" cy="80" r="64" fill="none" stroke="#a09bb8" stroke-width="26" stroke-dasharray="76.4 402.1" stroke-dashoffset="-301.6" transform="rotate(-90 80 80)"/>
+            <circle cx="80" cy="80" r="64" fill="none" stroke="#dcd8ee" stroke-width="26" stroke-dasharray="24.1 402.1" stroke-dashoffset="-378.0" transform="rotate(-90 80 80)"/>
+            <text x="80" y="84" text-anchor="middle" font-size="34" font-weight="800" fill="#6c5ce7">75%</text>
+            <text x="80" y="103" text-anchor="middle" font-size="11.5" fill="#6b6785">短直双开</text>
+          </svg>
+          <div class="ring-legend">
+            <div><i style="background:#6c5ce7"></i><b>短直双开</b>　75%</div>
+            <div><i style="background:#a09bb8"></i>单投直播　19%</div>
+            <div><i style="background:#dcd8ee"></i>其他链路　6%</div>
+          </div>
+        </div>
+        
+      </div>
+      <div class="cmp">
+        <div class="cmp-t">单客规模：双链路 vs 单链路</div>
+        <div class="hero-num">4.2<i>倍</i></div>
+        <div class="hero-cap">以单投直播 = 1x 为基准</div>
+        <div class="ratio-row"><span class="ratio-lab">短直双开</span><div class="ratio-track"><div class="ratio-fill" style="width:84%"></div></div></div>
+        <div class="ratio-row"><span class="ratio-lab">单投直播</span><div class="ratio-track"><div class="ratio-fill base" style="width:20%"></div></div></div>
+        <div class="cmp-note">链路并行不是分散预算，而是把<b>单客消耗天花板</b>整体抬上去</div>
+      </div>
+    </div>
+    <div class="cap-note">结论：要冲百万消耗，直播之外必须补上<b>小店直购</b>这条链路</div>
+
+  </div>
+
+  <div class="module">
+    <div class="m-head">
+      <div class="m-no">2</div>
+      <div class="m-title">双 11 白牌美妆多链路优秀案例</div>
+      <div class="m-note">全域通类 · 全店托管 CPA 类，各 2 个案例</div>
+    </div>
+
+
+    <div class="m-lead">标杆案例看「双链路 × 多产品」跑出的最大盘；其余案例按产品分两类、各取 2 个：全店托管 CPA 类看小店直购链路的起量与投产，全域通类看直播与直购的爆量能力。消耗均为日均口径（D1 = 开投首日）。</div>
+
+    <div class="hero-wrap">
+      <div class="hero-ribbon">多链路标杆案例 · 规模突破</div>
+<div class="customer"><div class="cust-head">
+    <span class="cust-idx">A</span>
+    <span class="card-title">白牌美妆A，通过“直播+小店直购”双链路并行，“ADQ智投+3.0+全域通”齐发，日耗峰值破120W</span>
+  </div><div class="c-body"><div class="c-left"><div class="insight"><span class="insight-tag">案例亮点</span>全域通直播 + 全域通直购保转化效果，ADQ 智投 + 3.0 拉高整体投放规模，多链路多产品组合峰值单日冲上 120 万</div><div class="kpi-row"><div class="kpi"><div class="lb">日均消耗</div><div class="vl">60<i>万</i></div></div><div class="kpi hl"><div class="lb">峰值日耗</div><div class="vl">120<i>万</i></div></div><div class="kpi"><div class="lb">期间ROI</div><div class="vl">1.8<i></i></div></div><div class="kpi"><div class="lb">下单单价</div><div class="vl">630<i>元</i></div></div></div><div class="e-strip">
+        <div class="e-col">
+          <div class="e-k">双链路并行</div>
+          <span class="e-chip">直播链路</span><span class="e-chip">小店直购链路</span>
+        </div>
+        <div class="e-col">
+          <div class="e-k">多产品并行</div>
+          <span class="e-chip alt">ADQ 智投 + 3.0 · 拉规模</span><span class="e-chip alt">全域通直播 · 保转化</span><span class="e-chip alt">全域通直购 · 保转化</span>
+        </div>
+      </div><ul class="pt-list"><li><b>【全域通保转化】</b>全域通直播 + 全域通直购（CPA 扣费）期间 ROI 2.0、高于整体 1.8，贡献 35% 消耗，双形态稳住投产底盘</li><li><b>【智投+3.0 拉规模】</b>ADQ 智投 + 3.0 广告拉高整体投放规模、冲高消耗天花板，期间消耗占比 65%</li></ul></div><div class="c-right"><div class="chart-box"><div class="chart-cap">日消耗曲线（万元 · D1-D10（起量至峰值段））</div><svg viewBox="0 0 340 250" width="100%" height="250" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g6c5ce7" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6c5ce7" stop-opacity=".28"/><stop offset="1" stop-color="#6c5ce7" stop-opacity=".03"/></linearGradient><linearGradient id="gff9f43" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff9f43" stop-opacity=".28"/><stop offset="1" stop-color="#ff9f43" stop-opacity=".03"/></linearGradient></defs><polygon points="10.0,222 10.0,222.0 10.0,151.9 42.9,172.3 75.8,180.3 108.6,177.5 141.6,53.9 174.4,52.5 207.4,99.7 240.2,105.3 273.1,114.0 306.0,125.1 306.0,222.0 306.0,222" fill="url(#g6c5ce7)" opacity=".9"/><polygon points="10.0,222 10.0,222.0 10.0,216.2 42.9,216.4 75.8,216.4 108.6,219.6 141.6,215.6 174.4,206.2 207.4,192.1 240.2,189.9 273.1,193.5 306.0,198.0 306.0,222.0 306.0,222" fill="url(#gff9f43)" opacity=".9"/><polyline points="10.0,151.9 42.9,172.3 75.8,180.3 108.6,177.5 141.6,53.9 174.4,52.5 207.4,99.7 240.2,105.3 273.1,114.0 306.0,125.1" fill="none" stroke="#6c5ce7" stroke-width="2.4"/><polyline points="10.0,216.2 42.9,216.4 75.8,216.4 108.6,219.6 141.6,215.6 174.4,206.2 207.4,192.1 240.2,189.9 273.1,193.5 306.0,198.0" fill="none" stroke="#ff9f43" stroke-width="2.4"/><circle cx="174.4" cy="52.5" r="4.5" fill="#e64545"/><line x1="10.0" y1="222.0" x2="306.0" y2="222.0" stroke="#e8e6f2" stroke-dasharray="3,3"/><text x="310.9" y="226.0" font-size="12" fill="#a09bb8">0</text><line x1="10.0" y1="124.0" x2="306.0" y2="124.0" stroke="#e8e6f2" stroke-dasharray="3,3"/><text x="310.9" y="128.0" font-size="12" fill="#a09bb8">60</text><line x1="10.0" y1="26.0" x2="306.0" y2="26.0" stroke="#e8e6f2" stroke-dasharray="3,3"/><text x="310.9" y="30.0" font-size="12" fill="#a09bb8">120</text><text x="15.9" y="242" font-size="12" fill="#a09bb8" text-anchor="middle">D1</text><text x="141.6" y="242" font-size="12" fill="#a09bb8" text-anchor="middle">D5</text><text x="306.0" y="242" font-size="12" fill="#a09bb8" text-anchor="middle">D10</text><text x="174.4" y="41.5" font-size="13" fill="#e64545" font-weight="700" text-anchor="middle">D6 110万</text></svg><div class="chart-note">紫色为直播链路、橙色为小店链路</div></div><div class="comp-box"><div class="chart-cap">峰值日 D6 三线共振 · 单日 120 万构成</div><div class="stackbar"><div class="seg" style="flex:35; background:#6c5ce7;">全域通 35%</div><div class="seg" style="flex:40; background:#ff9f43;">ADQ智投 40%</div><div class="seg" style="flex:25; background:#1fa56f;">3.0 25%</div></div></div></div></div></div>
+    </div>
+
+    <div class="sub-head">全店托管 CPA 案例</div>
+    <div class="grid2">
+<div class="customer"><div class="cust-head">
+    <span class="cust-idx">B</span>
+    <span class="card-title">全店托管 CPA × 小店直购 ｜ 峰值 14 万/日 · ROI 1.8</span>
+  </div><div class="c-body"><div class="c-left"><div class="insight"><span class="insight-tag">案例亮点</span>全店托管 CPA 首投 7 天冲上峰值 14 万/日，起量期日均 6 万、ROI 稳定 1.7+</div><div class="kpi-row"><div class="kpi"><div class="lb">日均消耗</div><div class="vl">6<i>万</i></div></div><div class="kpi hl"><div class="lb">峰值日耗</div><div class="vl">14<i>万</i></div></div><div class="kpi"><div class="lb">期间ROI</div><div class="vl">1.8<i></i></div></div><div class="kpi"><div class="lb">下单单价</div><div class="vl">38<i>元</i></div></div></div><ul class="pt-list"><li><b>【快速起量】</b>D1 开投首日即 6 万，D6 冲上峰值 14 万，单日突破 5000 单</li><li><b>【投产稳定】</b>起量段 ROI 1.8，日度 ROI 稳定在 1.7-1.8，CPA 扣费模式下投产波动小</li><li><b>【链路拓展】</b>全店托管成为小店直购链路新增量引擎，占该客户小店直购消耗比例超过 30%</li></ul></div><div class="c-right"><div class="chart-box"><div class="chart-cap">日消耗曲线（万元 · D1-D7（首投至峰值））</div><svg viewBox="0 0 340 250" width="100%" height="250" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g6c5ce7" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6c5ce7" stop-opacity=".28"/><stop offset="1" stop-color="#6c5ce7" stop-opacity=".03"/></linearGradient></defs><polygon points="10.0,222 10.0,222.0 10.0,141.1 59.4,158.7 108.6,186.2 158.0,170.1 207.4,104.4 256.6,26.0 306.0,195.0 306.0,222.0 306.0,222" fill="url(#g6c5ce7)" opacity=".9"/><polyline points="10.0,141.1 59.4,158.7 108.6,186.2 158.0,170.1 207.4,104.4 256.6,26.0 306.0,195.0" fill="none" stroke="#6c5ce7" stroke-width="2.4"/><circle cx="256.6" cy="26.0" r="4.5" fill="#e64545"/><line x1="10.0" y1="222.0" x2="306.0" y2="222.0" stroke="#e8e6f2" stroke-dasharray="3,3"/><text x="310.9" y="226.0" font-size="12" fill="#a09bb8">0</text><line x1="10.0" y1="124.0" x2="306.0" y2="124.0" stroke="#e8e6f2" stroke-dasharray="3,3"/><text x="310.9" y="128.0" font-size="12" fill="#a09bb8">7</text><line x1="10.0" y1="26.0" x2="306.0" y2="26.0" stroke="#e8e6f2" stroke-dasharray="3,3"/><text x="310.9" y="30.0" font-size="12" fill="#a09bb8">14</text><text x="15.9" y="242" font-size="12" fill="#a09bb8" text-anchor="middle">D1</text><text x="158.0" y="242" font-size="12" fill="#a09bb8" text-anchor="middle">D4</text><text x="306.0" y="242" font-size="12" fill="#a09bb8" text-anchor="middle">D7</text><text x="256.6" y="15.0" font-size="13" fill="#e64545" font-weight="700" text-anchor="middle">D6 14万</text></svg></div></div></div></div>
+<div class="customer"><div class="cust-head">
+    <span class="cust-idx">C</span>
+    <span class="card-title">全店托管 CPA × 小店直购 ｜ 千元高客单 · 峰值 6 万/日 · ROI 2.3</span>
+  </div><div class="c-body"><div class="c-left"><div class="insight"><span class="insight-tag">案例亮点</span>千元高客单商品通过全店托管 CPA 跑通小店直购链路，小店段 ROI 2.3 为双链路最优</div><div class="kpi-row"><div class="kpi"><div class="lb">日均消耗</div><div class="vl">3<i>万</i></div></div><div class="kpi hl"><div class="lb">峰值日耗</div><div class="vl">6<i>万</i></div></div><div class="kpi"><div class="lb">期间ROI</div><div class="vl">2.3<i></i></div></div><div class="kpi"><div class="lb">下单单价</div><div class="vl">1090<i>元</i></div></div></div><ul class="pt-list"><li><b>【投产最优】</b>小店直购 ROI 稳定 2.3+，突破高客单直购瓶颈</li><li><b>【放量节奏】</b>D1-D9 低位铺垫，D10 起加速爬升，D17 冲上峰值 6 万</li><li><b>【增量来源】</b>加投全店托管后，该客户小店直购链路整体规模提升 46%，全店托管贡献小店直购消耗超 30%，是规模增量主抓手</li></ul></div><div class="c-right"><div class="chart-box"><div class="chart-cap">日消耗曲线（万元 · D1-D18（铺量至峰值））</div><svg viewBox="0 0 340 250" width="100%" height="250" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g6c5ce7" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6c5ce7" stop-opacity=".28"/><stop offset="1" stop-color="#6c5ce7" stop-opacity=".03"/></linearGradient></defs><polygon points="10.0,222 10.0,222.0 10.0,93.5 27.4,145.4 44.8,171.5 62.2,186.1 79.6,136.0 97.1,116.9 114.5,49.0 131.9,177.2 149.3,67.9 166.7,160.3 184.1,157.9 201.5,163.9 218.9,188.2 236.4,157.2 253.8,196.4 271.2,39.6 288.6,26.0 306.0,42.5 306.0,222.0 306.0,222" fill="url(#g6c5ce7)" opacity=".9"/><polyline points="10.0,93.5 27.4,145.4 44.8,171.5 62.2,186.1 79.6,136.0 97.1,116.9 114.5,49.0 131.9,177.2 149.3,67.9 166.7,160.3 184.1,157.9 201.5,163.9 218.9,188.2 236.4,157.2 253.8,196.4 271.2,39.6 288.6,26.0 306.0,42.5" fill="none" stroke="#6c5ce7" stroke-width="2.4"/><circle cx="288.6" cy="26.0" r="4.5" fill="#e64545"/><line x1="10.0" y1="222.0" x2="306.0" y2="222.0" stroke="#e8e6f2" stroke-dasharray="3,3"/><text x="310.9" y="226.0" font-size="12" fill="#a09bb8">0</text><line x1="10.0" y1="124.0" x2="306.0" y2="124.0" stroke="#e8e6f2" stroke-dasharray="3,3"/><text x="310.9" y="128.0" font-size="12" fill="#a09bb8">3</text><line x1="10.0" y1="26.0" x2="306.0" y2="26.0" stroke="#e8e6f2" stroke-dasharray="3,3"/><text x="310.9" y="30.0" font-size="12" fill="#a09bb8">6</text><text x="15.9" y="242" font-size="12" fill="#a09bb8" text-anchor="middle">D1</text><text x="149.3" y="242" font-size="12" fill="#a09bb8" text-anchor="middle">D9</text><text x="306.0" y="242" font-size="12" fill="#a09bb8" text-anchor="middle">D18</text><text x="288.6" y="15.0" font-size="13" fill="#e64545" font-weight="700" text-anchor="middle">D17 6万</text></svg></div></div></div></div>
+    </div>
+
+    <div class="sub-head">全域通案例</div>
+    <div class="grid2">
+<div class="customer"><div class="cust-head">
+    <span class="cust-idx">D</span>
+    <span class="card-title">全域通 × 直播 ｜ 峰值 39 万/日 · ROI 2.2</span>
+  </div><div class="c-body"><div class="c-left"><div class="insight"><span class="insight-tag">案例亮点</span>全域通直播起量 7 天日均 19 万，峰值 39 万/日，高投放强度下 ROI 稳定 2.2</div><div class="kpi-row"><div class="kpi"><div class="lb">日均消耗</div><div class="vl">19<i>万</i></div></div><div class="kpi hl"><div class="lb">峰值日耗</div><div class="vl">39<i>万</i></div></div><div class="kpi"><div class="lb">期间ROI</div><div class="vl">2.2<i></i></div></div><div class="kpi"><div class="lb">下单单价</div><div class="vl">630<i>元</i></div></div></div><ul class="pt-list"><li><b>【起量节奏】</b>D1 开投日均 9 万，D5 跳至 30 万，D6 达峰 39 万</li><li><b>【投放深度】</b>峰值日 145 条广告、69 个智投项目同时在线，全域通批量拿量能力可见</li><li><b>【投产健康】</b>起量段 ROI 2.2，高投放强度下投产未失守</li></ul></div><div class="c-right"><div class="chart-box"><div class="chart-cap">日消耗曲线（万元 · D1-D7（首投至峰值））</div><svg viewBox="0 0 340 250" width="100%" height="250" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g6c5ce7" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6c5ce7" stop-opacity=".28"/><stop offset="1" stop-color="#6c5ce7" stop-opacity=".03"/></linearGradient></defs><polygon points="10.0,222 10.0,222.0 10.0,175.9 59.4,167.6 108.6,179.0 158.0,183.9 207.4,68.8 256.6,26.0 306.0,101.9 306.0,222.0 306.0,222" fill="url(#g6c5ce7)" opacity=".9"/><polyline points="10.0,175.9 59.4,167.6 108.6,179.0 158.0,183.9 207.4,68.8 256.6,26.0 306.0,101.9" fill="none" stroke="#6c5ce7" stroke-width="2.4"/><circle cx="256.6" cy="26.0" r="4.5" fill="#e64545"/><line x1="10.0" y1="222.0" x2="306.0" y2="222.0" stroke="#e8e6f2" stroke-dasharray="3,3"/><text x="310.9" y="226.0" font-size="12" fill="#a09bb8">0</text><line x1="10.0" y1="124.0" x2="306.0" y2="124.0" stroke="#e8e6f2" stroke-dasharray="3,3"/><text x="310.9" y="128.0" font-size="12" fill="#a09bb8">19.5</text><line x1="10.0" y1="26.0" x2="306.0" y2="26.0" stroke="#e8e6f2" stroke-dasharray="3,3"/><text x="310.9" y="30.0" font-size="12" fill="#a09bb8">39</text><text x="15.9" y="242" font-size="12" fill="#a09bb8" text-anchor="middle">D1</text><text x="158.0" y="242" font-size="12" fill="#a09bb8" text-anchor="middle">D4</text><text x="306.0" y="242" font-size="12" fill="#a09bb8" text-anchor="middle">D7</text><text x="256.6" y="15.0" font-size="13" fill="#e64545" font-weight="700" text-anchor="middle">D6 39万</text></svg></div></div></div></div>
+<div class="customer"><div class="cust-head">
+    <span class="cust-idx">E</span>
+    <span class="card-title">全域通 × 小店直购 × 双11满减 ｜ 峰值 30 万/日 · ROI 2.5</span>
+  </div><div class="c-body"><div class="c-left"><div class="insight"><span class="insight-tag">案例亮点</span>全域通 × 小店直购 × 双 11 满减活动三重叠加，活动生效日单日爆量 30 万，峰后 3 天 ROI 爬升至 2.7</div><div class="kpi-row"><div class="kpi"><div class="lb">日均消耗</div><div class="vl">5<i>万</i></div></div><div class="kpi hl"><div class="lb">峰值日耗</div><div class="vl">30<i>万</i></div></div><div class="kpi"><div class="lb">期间ROI</div><div class="vl">2.5<i></i></div></div><div class="kpi"><div class="lb">下单单价</div><div class="vl">1400<i>元</i></div></div></div><ul class="pt-list"><li><b>【活动生效】</b>起量日为商家双 11 满减活动生效日，全域通 × 小店直购 × 活动三重叠加</li><li><b>【单日爆量】</b>双11满减活动生效，带动高客单直购起量，单日突破30万消耗</li><li><b>【高客单打法】</b>下单单价 1400 元，全域通直购承接高客单商品</li></ul></div><div class="c-right"><div class="chart-box"><div class="chart-cap">日消耗曲线（万元 · D1-D9（峰前 6 天 + 峰后 3 天））</div><svg viewBox="0 0 340 250" width="100%" height="250" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g6c5ce7" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6c5ce7" stop-opacity=".28"/><stop offset="1" stop-color="#6c5ce7" stop-opacity=".03"/></linearGradient></defs><polygon points="10.0,222 10.0,222.0 10.0,221.1 47.0,222.0 84.0,221.8 121.0,221.6 158.0,220.7 195.0,26.0 232.0,197.5 269.0,183.0 306.0,217.5 306.0,222.0 306.0,222" fill="url(#g6c5ce7)" opacity=".9"/><polyline points="10.0,221.1 47.0,222.0 84.0,221.8 121.0,221.6 158.0,220.7 195.0,26.0 232.0,197.5 269.0,183.0 306.0,217.5" fill="none" stroke="#6c5ce7" stroke-width="2.4"/><circle cx="195.0" cy="26.0" r="4.5" fill="#e64545"/><line x1="10.0" y1="222.0" x2="306.0" y2="222.0" stroke="#e8e6f2" stroke-dasharray="3,3"/><text x="310.9" y="226.0" font-size="12" fill="#a09bb8">0</text><line x1="10.0" y1="124.0" x2="306.0" y2="124.0" stroke="#e8e6f2" stroke-dasharray="3,3"/><text x="310.9" y="128.0" font-size="12" fill="#a09bb8">15</text><line x1="10.0" y1="26.0" x2="306.0" y2="26.0" stroke="#e8e6f2" stroke-dasharray="3,3"/><text x="310.9" y="30.0" font-size="12" fill="#a09bb8">30</text><text x="15.9" y="242" font-size="12" fill="#a09bb8" text-anchor="middle">D1</text><text x="158.0" y="242" font-size="12" fill="#a09bb8" text-anchor="middle">D5</text><text x="306.0" y="242" font-size="12" fill="#a09bb8" text-anchor="middle">D9</text><text x="195.0" y="15.0" font-size="13" fill="#e64545" font-weight="700" text-anchor="middle">D6 30万</text></svg></div></div></div></div>
+    </div>
+  </div>
+
+  <div class="module">
+    <div class="m-head">
+      <div class="m-no">3</div>
+      <div class="m-title">直播商家如何快速拓展小店直购链路？</div>
+      <div class="m-note">分档打法 × 3 大工具 × 投放技巧 × 基建标准</div>
+    </div>
+
+    <div class="sub-head">先定打法：按客单价分档，选并行链路与工具组合</div>
+    <div class="cmp-row">
+      <div class="tier">
+        <div class="tier-h">客单 &lt; 200 元</div>
+        <div class="tier-row"><span class="tier-k">并行链路</span><span class="tier-v"><b>直播</b> + <b>小店直购</b>；其中客单 &lt; 100 元的商品，再加投 <b>CID-拼多多</b></span></div>
+        <div class="tier-row"><span class="tier-k">推荐工具</span><span class="tier-v"><b>ADQ 全店托管 CPA</b>、<b>全域通</b>、<b>ADQ 智投 + 3.0</b> —— 可一同起盘开投</span></div>
+      </div>
+      <div class="tier">
+        <div class="tier-h">客单 &gt; 200 元</div>
+        <div class="tier-row"><span class="tier-k">并行链路</span><span class="tier-v"><b>直播</b> + <b>小店直购</b></span></div>
+        <div class="tier-row"><span class="tier-k">推荐工具</span><span class="tier-v">直播链路：<b>全域通</b>、<b>ADQ 智投 + 3.0</b><br>小店直购：先用 <b>ADQ 全店托管 CPA + 全域通</b> 起盘直购测品，起量商品通过 <b>ADQ 智投 + 3.0</b> 放大规模</span></div>
+      </div>
+    </div>
+
+    <div class="sub-head">再看工具：3 个工具分别解决什么问题</div>
+    <div class="tool-grid">
+      <div class="tool t1">
+        <span class="tool-tag">工具 1</span>
+        <div class="tool-name">ADQ 全店托管<span class="tool-flag">CPA 需先开白</span></div>
+        <div class="tool-desc"><b>CPA 保转化</b>：一个项目托管全店商品，系统智能推荐，支持 ROI / 净成交 ROI 出价。</div>
+      </div>
+      <div class="tool t2">
+        <span class="tool-tag">工具 2</span>
+        <div class="tool-name">全域通</div>
+        <div class="tool-desc"><b>CPA 保转化</b>：微信小店后台直接投放，CPA 结算无转化不扣费，起量门槛低、投产稳。</div>
+      </div>
+      <div class="tool t3">
+        <span class="tool-tag">工具 3</span>
+        <div class="tool-name">ADQ 智投 + 3.0 单投小店</div>
+        <div class="tool-desc"><b>扩规模</b>：多账户、多主体、多版位、多基建同时抢量，冲高消耗天花板。</div>
+      </div>
+    </div>
+    <table class="tbl-x cmp3">
+      <tr><th style="width:96px">维度</th><th>工具 1 · ADQ 全店托管</th><th>工具 2 · 全域通</th><th>工具 3 · ADQ 智投 + 3.0 单投小店</th></tr>
+      <tr><td class="dim">入口</td><td>ADQ → 智投 → <b>全店托管</b></td><td>微信小店 → <b>小店投放</b></td><td>ADQ → 智投 / 3.0 → 链路选择 <b>小店</b></td></tr>
+      <tr><td class="dim">支持链路</td><td><b>小店</b></td><td><b>直播</b>、<b>小店</b></td><td><b>直播</b>、<b>小店</b>、<b>短直双开</b></td></tr>
+      <tr><td class="dim">结算方式</td><td><b>OCPX</b> 与 <b>CPA</b> 两种，CPA 需开白；CPA 广告支持 ROI 出价、净成交 ROI 出价两种模式</td><td><b>CPA 结算</b>，无转化不扣费</td><td><b>OCPX</b> 结算，支持下单、ROI、净成交 ROI 等多种优化目标</td></tr>
+      <tr><td class="dim">投放流量</td><td>腾讯全版位通投<span class="plat">视频号</span><span class="plat">朋友圈</span><span class="plat">公众号</span><span class="plat">小程序</span><span class="plat">PCAD</span><span class="plat">优量汇</span></td><td>腾讯全版位通投<span class="plat">视频号</span><span class="plat">朋友圈</span><span class="plat">公众号</span><span class="plat">小程序</span><span class="plat">PCAD</span><span class="plat">优量汇</span></td><td>腾讯全版位均支持，可单投 / 通投 / 智投灵活选择<span class="plat">视频号</span><span class="plat">朋友圈</span><span class="plat">公众号</span><span class="plat">小程序</span><span class="plat">PCAD</span><span class="plat">优量汇</span></td></tr>
+      <tr><td class="dim">投放模式</td><td>智投</td><td>智投</td><td>智投、3.0 竞价广告</td></tr>
+      <tr><td class="dim">特点</td><td>ADQ 账户内操作，同一店铺可<b>多账户</b>、<b>多主体</b>投放</td><td>小店后台操作，有动销后即出现投放入口；<b>一个店铺一个户</b></td><td>ADQ 账户内操作，同一个店铺支持<b>多个账户</b>、<b>多个主体</b>投放</td></tr>
+    </table>
+    <div class="cap-note">保转化用 <b>CPA（工具 1 / 2）</b>，扩规模用 <b>ADQ 智投 + 3.0 单投小店（工具 3）</b>；两者结算方式不同，可并行跑量</div>
+
+    <div class="sub-head">最后上手：每个工具的具体投放技巧</div>
+
+    <div class="sub-head" style="font-size:22px">工具 1 · ADQ 全店托管（CPA 需先开白）</div>
+    <div class="tips-wrap">
+      <ul class="tip-list">
+        <li><b>【利好政策】</b>使用 ADQ 全店托管能力，即可<b>自动生效腾飞扶持</b>；<b>基建越多 → 扶持越多</b></li>
+        <li><b>【开白与结算】</b>CPA 结算需<b>先开白</b>，建议选 <b>1-2 个主体</b>开白；单主体最长支持 <b>90 天内</b>按 CPA 结算，到期可换其他主体重新开白（未开白 / 到期后按正常 OCPX 结算）</li>
+      </ul>
+      <ul class="tip-list grid2">
+        <li><b>【提升项目数】</b>一个账户 × 一个店铺，最多创建 <b>2 个项目</b>（净成交 ROI、ROI 出价各一条）；如需增加项目数，可增加<b>账户数</b>或<b>店铺数</b></li>
+        <li><b>【提升创意数】</b>全店托管通过<b>全库智选</b>自动拉取账户 / 同业务单元内素材；也可对效果潜力商品<b>自行添加素材</b></li>
+        <li><b>【出价设置】</b>CPA 结算方式下，建议无需预留成本波动空间，直接按<b>真实考核 ROI 底线</b>设置，以获得最优出价能力</li>
+        <li><b>【操作路径】</b>项目列表 → 投放场景【全店托管】→ 扩增投放【+ 素材】</li>
+      </ul>
+    </div>
+
+    <div class="cpa-scope">
+      <div class="scope-col ok">
+        <div class="scope-h">✓ 支持 CPA 结算（托管对象 = 微信小店店铺）</div>
+        <div>推商品 - 全店托管 = 微信小店店铺</div>
+        <div>全店托管 - 微信小店店铺 = 微信小店店铺</div>
+      </div>
+      <div class="scope-col no">
+        <div class="scope-h">✗ 不支持 CPA 结算（托管对象 = 微信小店商品）</div>
+        <div>推商品 - 手动选品 = 微信小店商品</div>
+        <div>全店托管 - 微信小店商品 = 微信小店商品</div>
+      </div>
+    </div>
+    <div class="cap-note" style="text-align:left">CPA 目前只对托管「<b>微信小店店铺</b>」的项目生效；托管对象是「微信小店商品」的项目按 OCPX 结算</div>
+
+    <div class="sub-head" style="font-size:19px">基建标准 · 按日耗档位</div>
+    <div class="cmp-note" style="margin-bottom:8px">基建规模与日耗强相关，下表取各档位<b>中位数</b>，作为起盘与加量的参照线</div>
+    <table class="tbl-x">
+      <tr><th>日耗档位</th><th>账户数</th><th>项目数</th><th>创意数</th><th>日新项目</th><th>日新创意</th></tr>
+      <tr><td class="dim">&lt; 1 万</td><td class="num">6</td><td class="num">6</td><td class="num">24</td><td class="num">0</td><td class="num">700</td></tr>
+      <tr><td class="dim">1-3 万</td><td class="num">23</td><td class="num">24</td><td class="num">147</td><td class="num">0</td><td class="num">1200</td></tr>
+      <tr><td class="dim">≥ 3 万</td><td class="num">36</td><td class="num">38</td><td class="num">163</td><td class="num">0</td><td class="num">1500</td></tr>
+    </table>
+    <div class="cmp-note" style="margin-top:10px">受「一个账户 × 一个店铺最多 2 个项目」限制，项目数靠<b>加账户数 / 加店铺数</b>抬升，而非每日新建项目；日常主要靠<b>日更创意</b>（700 - 1500 条/日）维持跑量</div>
+
+    <div class="sub-head" style="font-size:22px">工具 2 · 全域通</div>
+    <ul class="tip-list cols2">
+      <li><b>【开投时机】</b>商品<b>有动销后</b>即出现投放入口，先跑通单品动销再开投，避免无转化数据冷启动</li>
+      <li><b>【投产口径】</b>CPA 结算无转化不扣费，适合作为小店直购的<b>保转化底盘</b>，与工具 3 并行承接不同出价目标</li>
+    </ul>
+
+    <div class="sub-head" style="font-size:19px">基建标准 · 按日耗档位（单店铺口径）</div>
+    <table class="tbl-x">
+      <tr><th>日耗档位</th><th>项目数</th><th>创意数</th><th>日新项目</th><th>日新创意</th></tr>
+      <tr><td class="dim">&lt; 1 万</td><td class="num">1</td><td class="num">11</td><td class="num">0</td><td class="num">8</td></tr>
+      <tr><td class="dim">1-5 万</td><td class="num">10</td><td class="num">26</td><td class="num">0</td><td class="num">12</td></tr>
+      <tr><td class="dim">5-15 万</td><td class="num">95</td><td class="num">200</td><td class="num">22</td><td class="num">2500</td></tr>
+      <tr><td class="dim">&gt; 15 万</td><td class="num">113</td><td class="num">279</td><td class="num">25</td><td class="num">3100</td></tr>
+    </table>
+    <div class="cmp-note" style="margin-top:10px">5 万以上档位才进入<b>日更项目</b>节奏（22 - 25 个/日）并配大规模创意更新；5 万以上档位还需<b>多加店铺</b>，单店铺难以承接该规模；低日耗档位项目数个位数即可，先跑通再扩</div>
+    <div class="cap-note" style="text-align:left">账户数 / 项目数 = 当日<b>有消耗</b>的账户与智投项目数；创意数 = 当日有消耗的<b>创意指纹数（TID 级）</b>；日新项目 / 日新创意 = 当日<b>新建</b>数；全域通按「一个店铺」合并直播 + 直购口径统计</div>
+
+    <div class="sub-head" style="font-size:22px">工具 3 · ADQ 智投 + 3.0 单投小店</div>
+    <ul class="tip-list cols2">
+      <li><b>【五多抢量】</b>通过 <b>多账户</b> · <b>多出价方式</b> · <b>多版位</b> · <b>多广告基建</b> · <b>多产品能力</b> 提升拿量规模</li>
+      <li><b>【账户与主体】</b>同一个店铺支持多个账户、多个主体并行投放，先铺账户与主体数，再谈单账户放量</li>
+      <li><b>【版位选择】</b>视频号为主战场，朋友圈 / 公众号 / 小程序 / PCAD / 优量汇做增量补充，通投与单投搭配测试</li>
+    </ul>
+
+  </div>
+
+
+
+  <div class="qr-sec">
+    <div class="qr-txt">
+      <div class="qr-title">更多双11投放技巧，扫码查看</div>
+      <div class="qr-sub">本土美妆行业 · 26 年双 11 大促实战指南</div>
+    </div>
+    <img class="qr-img" src="assets/qrcode_shuang11.png" alt="扫码查看更多双11投放技巧">
+  </div>
+
+</div>
+</body>
+</html>
