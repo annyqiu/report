@@ -50,6 +50,16 @@
   .go::after { content: "→"; transition: transform .18s ease; }
   .card:hover .go::after { transform: translateX(4px); }
   .tip { margin-top: 34px; text-align: center; font-size: 12px; color: rgba(255,255,255,.7); line-height: 1.8; }
+  .sec-title { margin: 38px 0 14px; font-size: 14px; font-weight: 800; letter-spacing: 1px; color: #FFE7A3;
+               display: flex; align-items: center; gap: 10px; }
+  .sec-title::before { content: ""; width: 4px; height: 14px; border-radius: 2px; background: #FFC94D; }
+  .links { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+  .links a { display: flex; align-items: center; gap: 10px; padding: 14px 18px; border-radius: 10px;
+             text-decoration: none; background: rgba(255,255,255,.13); border: 1px solid rgba(255,255,255,.26);
+             color: #fff; font-size: 14px; font-weight: 600; transition: background .16s ease, transform .16s ease; }
+  .links a:hover { background: rgba(255,255,255,.24); transform: translateY(-2px); }
+  .links .lk { margin-left: auto; font-size: 13px; color: rgba(255,255,255,.75); }
+  .links .sub2 { display: block; font-size: 11.5px; font-weight: 500; color: rgba(255,255,255,.68); margin-top: 3px; }
 </style>
 </head>
 <body>
@@ -81,6 +91,26 @@
       <h2>【总览】双11玩法总览</h2>
       <p class="desc">扶持信息 / 平台活动政策 / 人货场必做 / 广告操盘必做，四块一次讲清。</p>
       <span class="go">查看报告</span>
+    </a>
+  </div>
+
+  <p class="sec-title">近期重点产品资讯</p>
+  <div class="links">
+    <a href="https://doc.weixin.qq.com/sheet/e3_AJEAHQZzACkCNn40SBhYoQHWpQiAN?scode=AJEAIQdfAAoTasEW26AJEAHQZzACk&amp;tab=r0c4lb" target="_blank" rel="noopener">
+      <span>效果对比审核放宽<span class="sub2">最新审核规则放宽说明（腾讯文档）</span></span><span class="lk">↗</span>
+    </a>
+  </div>
+
+  <p class="sec-title">行业重点资料</p>
+  <div class="links">
+    <a href="https://doc.weixin.qq.com/sheet/e3_AHcAaAaDACcCNCY1SMQTYScqmoYd2?scode=AJEAIQdfAAoo0QeDTcAHcAaAaDACc&amp;tab=BB08J2" target="_blank" rel="noopener">
+      <span>素材周报<span class="sub2">腾讯文档 · 在线表格</span></span><span class="lk">↗</span>
+    </a>
+    <a href="https://doc.weixin.qq.com/smartsheet/s3_AJEAHQZzACkCNJ01WUQYFRoy35Ipm?scode=AJEAIQdfAAoKCoUG0VAJEAHQZzACk&amp;tab=tHAxl9" target="_blank" rel="noopener">
+      <span>大盘数据<span class="sub2">腾讯文档 · 智能表格</span></span><span class="lk">↗</span>
+    </a>
+    <a href="https://doc.weixin.qq.com/sheet/e3_AHcAaAaDACcCN2G0i3bLATH2s7zth?scode=AJEAIQdfAAo0GBSsdvAHcAaAaDACc&amp;tab=BB08J2" target="_blank" rel="noopener">
+      <span>产品能力<span class="sub2">腾讯文档 · 在线表格</span></span><span class="lk">↗</span>
     </a>
   </div>
 
