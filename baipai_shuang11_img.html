@@ -173,6 +173,17 @@ footer{margin-top:26px; text-align:center; font-size:16.5px; color:var(--muted);
 .qr-title{font-size:21px; font-weight:800; color:var(--ink); letter-spacing:.5px; line-height:1.45;}
 .qr-sub{margin-top:6px; font-size:16px; color:var(--sub); line-height:1.6;}
 .qr-img{width:158px; flex:0 0 158px; display:block; border-radius:8px;}
+.shop-pick{margin-top:14px; background:#fff7ec; border:2px solid #ffc27a; border-radius:14px;
+  padding:18px 22px 16px; box-shadow:0 4px 16px rgba(255,150,60,.10);}
+.sp-head{font-size:22px; font-weight:800; color:#b35300; margin-bottom:12px; display:flex; align-items:center; gap:10px;}
+.sp-head::before{content:""; width:6px; height:22px; border-radius:3px; background:#ff9f43;}
+.sp-list{list-style:none; margin:0; padding:0; display:grid; gap:10px;}
+.sp-list li{display:grid; grid-template-columns:28px 1fr; gap:11px; align-items:start;
+  background:#fffdf8; border:1px solid #ffe3c2; border-radius:10px; padding:12px 15px;}
+.sp-n{width:28px; height:28px; border-radius:50%; background:#ff9f43; color:#fff; font-size:15px; font-weight:800;
+  display:flex; align-items:center; justify-content:center;}
+.sp-t{font-size:18.5px; font-weight:800; color:#8a4200; line-height:1.55;}
+.sp-d{margin-top:3px; font-size:17.5px; color:#5c4a35; line-height:1.72;}
 </style>
 </head>
 <body>
@@ -298,6 +309,15 @@ footer{margin-top:26px; text-align:center; font-size:16.5px; color:var(--muted);
         <div class="tier-row"><span class="tier-k">并行链路</span><span class="tier-v"><b>直播</b> + <b>小店直购</b></span></div>
         <div class="tier-row"><span class="tier-k">推荐工具</span><span class="tier-v">直播链路：<b>全域通</b>、<b>ADQ 智投 + 3.0</b><br>小店直购：先用 <b>ADQ 全店托管 CPA + 全域通</b> 起盘直购测品，起量商品通过 <b>ADQ 智投 + 3.0</b> 放大规模</span></div>
       </div>
+    </div>
+
+    <div class="shop-pick">
+      <div class="sp-head">挑选适合店铺投放</div>
+      <ol class="sp-list">
+        <li><span class="sp-n">1</span><div><div class="sp-t">优先选择「好店」投放小店直购</div><div class="sp-d">好店具备双 11 全资补贴资格、三率护航等，可降低处罚概率</div></div></li>
+        <li><span class="sp-n">2</span><div><div class="sp-t">重点维护店铺三率，三率不得高于均值</div><div class="sp-d">品退率 0.1%、差评率 6%、纠纷率 0.3%；高于行业均值，会依据高出水平导致广告被限流处罚、无法投广</div></div></li>
+        <li><span class="sp-n">3</span><div><div class="sp-t">小店链路三率处罚无法投广时，可通过更换链接重新投广</div><div class="sp-d">但建议优先维护三率，三率长期不达标会升级为店铺处罚</div></div></li>
+      </ol>
     </div>
 
     <div class="sub-head">再看工具：3 个工具分别解决什么问题</div>
