@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="IuaDz4xTUczKCyAeBhADOk">
+<head data-page-node-id="ID1Ydibffq3JRB4VE1bIEj">
+<meta charset="UTF-8" data-page-node-id="2urvnz2Ewk4aQvmMQ8DE7K">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="6tU8kZAEJhHxQ3eUL5qNyp">
+<title>白牌美妆商家，如何借助双11满减活动，获得2倍GMV增长？</title>
+<style>
+  :root{
+    --ink:#241A0C; --ink2:#4A3A21; --ink3:#8B7551; --line:#EADCC0;
+    --bg:#FBF3E2; --card:#FFFDF7;
+    --blue:#7E5109; --orange:#C98A16; --gray:#C0AE85;
+    --up:#1C9A57; --down:#E5484D;
+    --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);font-family:var(--font);color:var(--ink);line-height:1.65;
+       -webkit-font-smoothing:antialiased;padding:0 0 80px}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+
+  header{background:linear-gradient(135deg,#3C2A07 0%,#6A4A0E 55%,#7E5A10 100%);color:#fff;
+      padding:64px 0 60px;margin-bottom:30px}
+  header h1{font-size:40px;font-weight:600;letter-spacing:-.015em;line-height:1.32;max-width:920px}
+  header h1 .hl{color:#F7DE9B}
+  header h1 .nb{white-space:nowrap}
+
+  section{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:30px 24px 28px;margin-bottom:22px}
+  h2.modttl{font-size:23px;font-weight:600;letter-spacing:-.01em;display:flex;align-items:center;gap:12px;margin-bottom:8px}
+  h2.modttl .bar{display:inline-block;width:4px;height:22px;border-radius:2px;background:var(--blue);flex:0 0 auto}
+  .modsub{font-size:12.5px;color:var(--ink3);margin-bottom:18px;padding-left:16px}
+
+  .summary{border-left:3px solid var(--blue);background:#FCF5E4;padding:16px 20px;border-radius:0 5px 5px 0;
+      font-size:14px;color:var(--ink2);line-height:1.85;margin:6px 0 22px}
+  .summary b{color:var(--ink);font-weight:600}
+  .summary .hl{color:var(--blue);font-weight:600}
+  .summary .hl2{color:#C08A1E;font-weight:600}
+
+  .cases{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:6px;align-items:stretch}
+  .casecard{border:1px solid var(--line);border-radius:6px;padding:15px 16px 13px;background:#fff;
+      display:flex;flex-direction:column}
+  .chead2{display:flex;align-items:baseline;justify-content:space-between;gap:8px;flex-wrap:wrap;
+      padding-bottom:7px;border-bottom:1px solid var(--line)}
+  h3.casettl{font-size:13.5px;font-weight:600;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  h3.casettl .cl{color:var(--blue);font-weight:700;font-size:15.5px;letter-spacing:.02em}
+  .aovline{font-size:10.5px;color:var(--ink3);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .aovline b{font-weight:600;font-size:10px}
+  .aovline b.hi{color:#7E5109}
+  .aovline b.lo{color:#C08A1E}
+  .kind{font-size:10.5px;color:#fff;background:var(--blue);padding:1px 7px;border-radius:3px;font-weight:600}
+  .gmvline{font-size:11.5px;color:var(--ink3);padding-top:7px}
+  .gmvline b{font-size:15px;font-weight:700;color:#C08A1E;letter-spacing:-.01em;
+      font-variant-numeric:tabular-nums;margin-left:2px}
+
+  .case-body{display:flex;align-items:stretch;gap:12px;margin-top:6px;flex:1}
+  .metrics{flex:0 0 166px;display:flex;flex-direction:column;justify-content:center}
+  .grp{padding-top:0}
+  .grp+.grp{padding-top:8px}
+  .gh{font-size:9px;letter-spacing:.04em;color:var(--ink3);font-weight:600;padding-bottom:3px;
+      border-bottom:1px solid var(--line)}
+  .row{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:4.5px 0;border-bottom:1px dashed #F4EAD2}
+  .row:last-child{border-bottom:none}
+  .row .k{font-size:10.6px;color:var(--ink2);line-height:1.4}
+  .row .v{font-size:13px;font-weight:600;letter-spacing:-.01em;font-variant-numeric:tabular-nums;line-height:1.2}
+  .g{color:var(--up)}
+  .r{color:var(--down)}
+
+  .chartbox{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center}
+  svg{display:block;width:100%;height:auto;overflow:visible}
+  .ax{font-size:8px;fill:#9C8660}
+  .tlab{font-size:8.4px;fill:#9C8660}
+  .tlab.on{fill:#7E5109;font-weight:600}
+
+  .part{margin-top:22px}
+  .part+.part{margin-top:34px}
+  .phead{display:flex;align-items:center;gap:11px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+  .pno{flex:0 0 auto;width:24px;height:24px;border-radius:4px;background:var(--blue);color:#fff;
+      font-size:12.5px;font-weight:600;display:flex;align-items:center;justify-content:center}
+  .phead h3{font-size:16.5px;font-weight:600;letter-spacing:-.01em}
+
+  .fcard{border:1px solid var(--line);border-radius:6px;padding:22px 24px 20px;margin-top:14px}
+  .fcard.first{margin-top:16px}
+  .fhead{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:12px}
+  .fhead b{font-size:15px;font-weight:600;color:var(--ink)}
+  .chip{font-size:10.5px;font-weight:600;letter-spacing:.4px;color:#fff;
+      background:linear-gradient(135deg,#C98A16,#8A5A0C);border-radius:999px;padding:2px 8px}
+  .chip.est{background:#F2E6C8;color:#7A6435}
+  .ful{display:flex;flex-direction:column;gap:9px}
+  .fli{position:relative;padding-left:14px;font-size:13.2px;color:var(--ink2);line-height:1.75}
+  .fli:before{content:"";position:absolute;left:0;top:10px;width:5px;height:5px;border-radius:50%;background:#D8C49A}
+  .fli b{color:var(--ink);font-weight:600}
+  .fhl{background:#FBF2DC;border-left:3px solid var(--blue);border-radius:0 4px 4px 0;
+      padding:9px 13px;font-size:13px;color:var(--ink2);margin-bottom:10px}
+  .fhl b{color:var(--blue);font-weight:600}
+  .fnote{margin-top:11px;background:#FFF9EC;border:1px solid #EFDCB6;border-radius:5px;
+      padding:9px 13px;font-size:12.3px;color:#6E4A16;line-height:1.65}
+  .fnote b{font-weight:600}
+
+  .sub2{margin:13px 0 8px;font-size:12.5px;color:var(--ink3)}
+  .sub2 .lk{font-size:11px;color:#C08A1E;background:#FBF0D8;border-radius:3px;padding:1px 6px;margin-right:7px;font-weight:600}
+  .opts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .opt{border:1px solid var(--line);border-radius:5px;padding:11px 13px;background:#FFFCF3}
+  .ob{display:inline-block;font-size:10.5px;font-weight:600;color:#fff;background:#7E5109;
+      border-radius:3px;padding:1px 7px;margin-bottom:6px}
+  .ob.mid{background:#9C8760}
+  .ob.low{background:#C0AE85}
+  .ot{display:block;font-size:12.2px;color:var(--ink2);line-height:1.7}
+
+  .pick{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:4px}
+  .pick div{border:1px solid #E8D9B4;background:#FCF5E4;border-radius:5px;padding:10px 13px;
+      font-size:13px;color:var(--ink2);text-align:center}
+  .pick div b{color:var(--blue);font-weight:700;margin-right:5px}
+
+  .build{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:2px}
+  .bi{border:1px solid var(--line);border-radius:5px;padding:11px 13px;background:#FFFCF3}
+  .bi b{display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:3px}
+  .bi span{font-size:11.8px;color:var(--ink3);line-height:1.6}
+
+  .frowR{display:grid;grid-template-columns:1.85fr 1fr;gap:14px;margin-top:14px;align-items:stretch}
+  .frowR>.fcard{margin-top:0}
+  .fcol{display:flex;flex-direction:column;gap:12px;min-width:0}
+  .fcol>.fcard{margin-top:0;display:flex;flex-direction:column;padding:16px 16px 14px}
+  .fcol>.fcard:last-child{flex:1}
+  .fcol>.fcard .fhead b{font-size:13.2px;line-height:1.45}
+  .fcol>.fcard .ful{margin-top:8px}
+  .fcol>.fcard .fli{font-size:11.8px;line-height:1.72;padding-left:11px}
+  .fcol>.fcard .shot{width:100%;margin-top:auto}
+  .fcol>.fcard .shotcap{font-size:10.4px;line-height:1.6;margin-top:8px}
+  .frowR>.fcard .shot{width:78%;margin:18px auto 0}
+  .frowR>.fcard .shotcap{margin-top:10px}
+  .quote{margin-top:14px;padding:10px 12px;background:#FBF3E2;border-left:3px solid #D6AE6A;
+      border-radius:0 4px 4px 0;font-size:11.6px;line-height:1.7;color:#6E4A16}
+  .frow2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:14px;align-items:stretch}
+  .frow2>.fcard{margin-top:0;display:flex;flex-direction:column}
+  .frow2>.fcard .fhead b{font-size:14.2px}
+  .frow2>.fcard .fli{font-size:12.5px;line-height:1.7}
+  .frow2>.fcard .fhl{font-size:12.4px}
+  .frow2>.fcard .shot{width:100%;margin-top:auto}
+  .frow2>.fcard .fnote{margin-top:9px}
+  .frow2>.fcard .shotcap{font-size:10.8px}
+  .shot{margin:14px auto 0;width:46%;border-radius:8px;overflow:hidden;border:1px solid var(--line);
+      background:#F8F2E2;box-shadow:0 6px 18px rgba(90,62,10,.10)}
+  .shot img{display:block;width:100%;height:auto}
+  .shotcap{margin-top:8px;font-size:11.5px;color:var(--ink3);line-height:1.6;text-align:center}
+
+  footer{text-align:center;font-size:11.5px;color:#A08A62;margin-top:26px}
+
+  /* ---------- 完整文档二维码 ---------- */
+  .cta{position:relative;overflow:hidden;margin-top:24px;border-radius:14px;padding:22px 30px;
+      display:flex;align-items:center;gap:30px;
+      background:linear-gradient(118deg,#5E3B03 0%,#8C600A 46%,#B5871A 100%);}
+  .cta::after{content:"";position:absolute;right:-60px;bottom:-90px;width:230px;height:230px;
+      border-radius:50%;background:rgba(255,255,255,.07)}
+  .cta::before{content:"";position:absolute;left:210px;top:-80px;width:160px;height:160px;
+      border-radius:50%;background:rgba(255,255,255,.05)}
+  .cta .qwrap{position:relative;z-index:1;flex:0 0 auto;width:178px;height:178px;border-radius:11px;
+      background:#FFFDF7;padding:8px;box-shadow:0 8px 20px rgba(8,16,32,.28),0 0 0 1px rgba(255,255,255,.35)}
+  .cta .qwrap img{display:block;width:100%;height:100%}
+  .cta .ct{position:relative;z-index:1;flex:1;min-width:0}
+  .cta .ctt{font-size:21px;font-weight:800;letter-spacing:.5px;color:#FFFDF7;line-height:1.25}
+  .cta .cts{display:inline-block;margin-top:9px;font-size:12px;font-weight:800;letter-spacing:2px;
+      color:#5E3B03;background:#FFE9AE;border-radius:999px;padding:4px 14px}
+  .cta .ctp{margin-top:10px;font-size:12.5px;line-height:1.7;color:rgba(255,255,255,.76);max-width:660px}
+  @media(max-width:1120px){
+    .frowR{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:980px){
+    .cases{grid-template-columns:1fr}
+    .frowR{grid-template-columns:1fr}
+    .metrics{flex:0 0 200px}
+    .opts,.build,.pick{grid-template-columns:1fr} .shot{width:100%}
+  }
+  @media(max-width:600px){
+    .case-body{flex-direction:column} .metrics{flex:1 1 auto}
+  }
+</style>
+</head>
+<body data-page-node-id="PVi1FyZ3f7CLrtKuQeQEaz">
+
+<header data-page-node-id="EAa8090cUMnLh7yYCevzTZ">
+  <div class="wrap" data-page-node-id="1h9R41uc0PF815vve9TGFq">
+    <h1 data-page-node-id="dcqeI8OQ32kudVCvY7i3Qt">白牌美妆商家，如何借助双11满减活动，<span class="nb" data-page-node-id="Hsxoj7vBeTLx9H9F7HWGqV">获得<span class="hl" data-page-node-id="dQRYYXcMFEYpJu3CcBJGQp">2 倍 GMV</span>增长？</span></h1>
+  </div>
+</header>
+
+<div class="wrap" data-page-node-id="duks2G1Zvp3PNh1B1LtmCQ">
+
+<section data-page-node-id="15oODB0VW98DBKj06FBL9t">
+  <h2 class="modttl" data-page-node-id="o5YE87OqL7aiPeHTAbAPK6"><span class="bar" data-page-node-id="LuURRfRwjZ2g0KJXnR4Mtj"></span>白牌美妆双11首轮优秀案例</h2>
+
+  <div class="summary" data-page-node-id="hAFqp7EIiTd6lwH1iHrynK">
+    双11首周，白牌美妆，多商家通过双11满减活动，带动 <span class="hl" data-page-node-id="X4HzVveyT0sCqPUNUQAM1X">GMV 增长 2 倍+</span>；报名满减商家，获得 <b data-page-node-id="9eNTcRiDaNWtumF4zEEdAG">5 大增益</b>：
+    <span class="hl" data-page-node-id="IjYtShFKgZxWCZMQCNzRZg">消耗增益</span>（+59%～+298%）、<span class="hl" data-page-node-id="sOd8IDAqAZd3CwCR7lZO2P">下单率增益</span>（+11%～+147%）、<span class="hl" data-page-node-id="s0wssbXS7so6KbBv8CeVu6">GMV 增益</span>（+37%～+315%），
+    同时叠加 <span class="hl2" data-page-node-id="uZp2k3RdqS8cpDc8at8RbL">平台补贴金</span>（6~12%）、<span class="hl2" data-page-node-id="PEORz6v4mLzEd2t0ulFcLW">广告腾飞金补贴</span>（扶持增量 20~30%），
+    商家实际让利成本仅 <b data-page-node-id="QtoSngBCrVRMJMDfnn0kri">0~5%</b>；<b data-page-node-id="mEClawTLcPpXS5Llny7GUA">200 元以下中低客单商家、200 元以上中高客单商家</b>，报名满减，均呈现显著正向收益。
+  </div>
+<div class="cases" data-page-node-id="zHmzbNmM83ujUW6zGvhN5B">
+<div class="casecard" data-page-node-id="5KGVzczLdh1fqRm3fXWkxV">
+  <div class="chead2" data-page-node-id="05Awqon4w6gzKVSftMbAIc">
+    <h3 class="casettl" data-page-node-id="CpS30jav2SaZC1myP0aKLo">案例 <b class="cl" data-page-node-id="MraMBhKWSMIT07cuF1wUSI">A</b> · 全资</h3>
+    <div class="aovline" data-page-node-id="M8U9CAvq0KZBadCQg7Zzwg">客单价 654 元 · <b class="hi" data-page-node-id="ifiHtA8wifr7ongMUoEvSY">中高客单</b></div>
+  </div>
+  <div class="gmvline" data-page-node-id="DdhGveUvbcjgi1xjSNPPtu">单日广告 GMV 突破 <b data-page-node-id="m9h9fTaQMjaiXR2hIf5wEh">160 万</b></div>
+  <div class="case-body" data-page-node-id="TaxsM0vIST4K8x1rxUJB0J">
+    <div class="metrics" data-page-node-id="Y465JaVQq0cd12P5HcZgdH">
+      <div class="grp" data-page-node-id="HTni2p7RRMq412f2h2aJB3">
+        <div class="gh" data-page-node-id="cHKyQOtrHWBULe8u3Rf6Sg">商家活动成本</div>
+        <div class="row" data-page-node-id="x0GWIj4GPLIYMdkTPiJhBG"><span class="k" data-page-node-id="i29A6FShZAZFzvgcjP6qeM">实际满减订单占比</span><b class="v" data-page-node-id="ElH4YlQ0o6oI7QfXFxW0cN">61%</b></div>
+        <div class="row" data-page-node-id="gRMzBekBux9Uu4lxcDZpIq"><span class="k" data-page-node-id="mCTRthLDEeO1NhRhI9lMih">商家实际让利成本占比</span><b class="v" data-page-node-id="BRUKFWNXdFyu75g6rQPFbd">0%</b></div>
+      </div>
+      <div class="grp" data-page-node-id="nJTt7SjRnTIiZZGN7jUMTP">
+        <div class="gh" data-page-node-id="4zq5PUiL3JYbVYFE4R8Af5">商家活动收益</div><div class="row" data-page-node-id="6O6WzKOmmON4NKDNq1CT2Y"><span class="k" data-page-node-id="3Sz1K4FkSTRJGNgL21qoCQ">日均消耗涨幅</span><b class="v g" data-page-node-id="y3Izf7Pocgb3HkCFBiboQM">+97%</b></div><div class="row" data-page-node-id="ZPxvoLxJeJc1rMcjvE16WJ"><span class="k" data-page-node-id="lNZIj2I8BYjhwls5pnHgXO">日均 GMV 涨幅</span><b class="v g" data-page-node-id="gMSFzNg2xgFMhuWuF7ZEcA">+124%</b></div><div class="row" data-page-node-id="2Ook8kjRUauKLa1GMYEl00"><span class="k" data-page-node-id="1pgfHZ7i6OmEf1XotH0ULk">下单率</span><b class="v g" data-page-node-id="WFXpVz965FspLey1Eh5l6a">+147%</b></div><div class="row" data-page-node-id="2KDlTayylkD9FDP0wGo2i5"><span class="k" data-page-node-id="LZKWAydkTHZe99KBcE8A7d">下单 ROI</span><b class="v g" data-page-node-id="nvHx59xuz6OYr6Hl8UURNh">+9%</b></div><div class="row" data-page-node-id="mqz8PLG6GlHyU8yQdEHgYR"><span class="k" data-page-node-id="3RIw9D5CUKmLKYgqzxgaTx">扶持带来额外增量</span><b class="v" data-page-node-id="VyX8R9X1WyCTqa4aWBrgAX">37%</b></div>
+      </div>
+    </div>
+    <div class="chartbox" data-page-node-id="nzWwgjCG5ID03jEj9ISASS">
+      <div id="cA" data-page-node-id="CTNRzJlSZCtGYJiVGaOWSQ"></div>
+    </div>
+  </div>
+</div>
+<div class="casecard" data-page-node-id="qz7Hohl1r2c0s4VljgpAX8">
+  <div class="chead2" data-page-node-id="OUsT4UffwrSlix8Sejz46a">
+    <h3 class="casettl" data-page-node-id="7Q5reFD22CWnmbTg7WFQ9z">案例 <b class="cl" data-page-node-id="e6YgZztsBBTXGSgjGslqUa">B</b> · 全资</h3>
+    <div class="aovline" data-page-node-id="WFkWVP3Ilqmgf9vJ2wsdDq">客单价 1,144 元 · <b class="hi" data-page-node-id="bEfMemF8IpgEzJm1pjcNlp">中高客单</b></div>
+  </div>
+  <div class="gmvline" data-page-node-id="SQOgXCBqj9FW5mDWuEZZBf">日均消耗增幅 <b data-page-node-id="jjABGaahBZUbTKzg6oIAzo">3 倍</b></div>
+  <div class="case-body" data-page-node-id="OERZ8CChbILXIZD09XtTmX">
+    <div class="metrics" data-page-node-id="c7gaMgrSQcFENawSkz6C0v">
+      <div class="grp" data-page-node-id="PFpfdQRJvVg73gOwY8XyVP">
+        <div class="gh" data-page-node-id="7EBk1qq0QVaTBGAdPgqroV">商家活动成本</div>
+        <div class="row" data-page-node-id="VAb0jjBJV9qZGLonVdylB3"><span class="k" data-page-node-id="Zs2kWUbc9bqNu942S20dbj">实际满减订单占比</span><b class="v" data-page-node-id="JTeM5ErhHk9BG5jgt6cgOO">11%</b></div>
+        <div class="row" data-page-node-id="s8jyJ1JkN5cebYxBjxDupl"><span class="k" data-page-node-id="3j1xCKpII0Mn6vjTMWSOFJ">商家实际让利成本占比</span><b class="v" data-page-node-id="9NMEDH8xMbusBRrCU08FZE">0%</b></div>
+      </div>
+      <div class="grp" data-page-node-id="EefNzSCbhrZxuAzEy4OPal">
+        <div class="gh" data-page-node-id="mOMAfYJVVUxIp6jy1RBXIQ">商家活动收益</div><div class="row" data-page-node-id="KUan0wLgc5eJ6u4yVbt1At"><span class="k" data-page-node-id="cDOo6dGlUC5YvITAiuHT4H">日均消耗涨幅</span><b class="v g" data-page-node-id="HfFWR2hJ5qSCK9WySPh2uM">+298%</b></div><div class="row" data-page-node-id="pChuMGinGeWdkNxzByucsI"><span class="k" data-page-node-id="e7rzFaDCAumkoJg0Epg4rG">日均 GMV 涨幅</span><b class="v g" data-page-node-id="DqPPQTq6gbVBlkpMWmzMxa">+315%</b></div><div class="row" data-page-node-id="IGohVW9RvOVD5OrSSQf5AD"><span class="k" data-page-node-id="wUl4YNN2CYYl2XRXYKKvMr">下单率</span><b class="v g" data-page-node-id="aKMc5qLy6xGKZBxIKQ8tlN">+16%</b></div><div class="row" data-page-node-id="mPaShQB98DhCrffKd3EjaU"><span class="k" data-page-node-id="6HOJfM60Qgy9yPqpFC2w7U">下单 ROI</span><b class="v g" data-page-node-id="UIsp3HgZgecmDAE3KBSwF8">+4%</b></div><div class="row" data-page-node-id="kV2AP9l47Fw3NmL1B7nV6O"><span class="k" data-page-node-id="ttI1s3QYAJtr9bRd0ZZCGl">扶持带来额外增量</span><b class="v" data-page-node-id="EnwXEo6dIBLEuCSaaPaYjP">30%</b></div>
+      </div>
+    </div>
+    <div class="chartbox" data-page-node-id="DZEP1r3MeGecEgLcXcB9jD">
+      <div id="cB" data-page-node-id="vOv8Oabjv8zIEHsZwANGOs"></div>
+    </div>
+  </div>
+</div>
+<div class="casecard" data-page-node-id="Bmf6xD2RXSOwG4V9wrn94F">
+  <div class="chead2" data-page-node-id="K4kBDpEgOp2RclZLzjcbuo">
+    <h3 class="casettl" data-page-node-id="RxGiVMWQHpfjv3pGKVoQeg">案例 <b class="cl" data-page-node-id="yblXcGkGZGvcYZlvebZAwc">C</b> · 混资</h3>
+    <div class="aovline" data-page-node-id="yBNIE1FEsc7TrheY9ucdji">客单价 1,130 元 · <b class="hi" data-page-node-id="Si1i08Um4Svy0uSCKI3pE2">中高客单</b></div>
+  </div>
+  <div class="gmvline" data-page-node-id="KAjkkCYcHLSBSkrIBjqI7q">广告 GMV 增幅 <b data-page-node-id="QbSmkKeyIHGATwHChEPZ1W">2.7 倍</b></div>
+  <div class="case-body" data-page-node-id="XVIAnWQ8zZGDfgB62SP7Xq">
+    <div class="metrics" data-page-node-id="synSBC3fC2dfKiZKgKXZ7W">
+      <div class="grp" data-page-node-id="aUsbC2Bet2amHdfpTya40K">
+        <div class="gh" data-page-node-id="dxcK0tHqXtulqf9Lp99YRf">商家活动成本</div>
+        <div class="row" data-page-node-id="ccWMyyg395NJvOxc78Mmh5"><span class="k" data-page-node-id="sM9sfL4ur8ktzNqZxTF1WD">实际满减订单占比</span><b class="v" data-page-node-id="7YGTvqObfCMoHugsolbRTJ">83%</b></div>
+        <div class="row" data-page-node-id="8VFH09puoXAkglLiNYGjUj"><span class="k" data-page-node-id="p16qU8eAZpZv7tEU1HzmtU">商家实际让利成本占比</span><b class="v" data-page-node-id="KSokw5HVGjiBlXYyFIJSqz">5%</b></div>
+      </div>
+      <div class="grp" data-page-node-id="4vFaLbUAbeVRPImWKrbQjB">
+        <div class="gh" data-page-node-id="t6G8wzLAhAn1mJXXpSR3ju">商家活动收益</div><div class="row" data-page-node-id="fGuOT9jJ3aucy8KKNy51dk"><span class="k" data-page-node-id="yJXEHErRudw4LcvIcUb3HG">日均消耗涨幅</span><b class="v g" data-page-node-id="JVO7eqDGk2J2DhZK6N24uI">+185%</b></div><div class="row" data-page-node-id="DcK2sedCqp1AeMfHpOWkl7"><span class="k" data-page-node-id="vAMBfdEJAcrxVvICSkYFIU">日均 GMV 涨幅</span><b class="v g" data-page-node-id="CstBf666drzFcMYECF1qiP">+268%</b></div><div class="row" data-page-node-id="b2rHhK5jx0HKWiQHZOgw0f"><span class="k" data-page-node-id="QOMomSD6uxrtLHNmq9e73t">下单率</span><b class="v g" data-page-node-id="ouqO11JPXoA1nbKMxxjotk">+83%</b></div><div class="row" data-page-node-id="yQCecAsFyV8uDt121UCK5C"><span class="k" data-page-node-id="BwAxnV6i9QbI4MhGt0q7HS">下单 ROI</span><b class="v g" data-page-node-id="iQNGglvFE9MPTBBnjyEM0K">+29%</b></div><div class="row" data-page-node-id="M07Hbc6AulzIVTr3cDdwo6"><span class="k" data-page-node-id="8u9b1uIFWSpZjTqDnBOPMs">扶持带来额外增量</span><b class="v" data-page-node-id="W2Bf5ebJIRFCnYne6Jw8G5">32%</b></div>
+      </div>
+    </div>
+    <div class="chartbox" data-page-node-id="aDrIPo1QBKyjSCE4WykQUH">
+      <div id="cC" data-page-node-id="zCNZeM7GsbpEdz1VycEPxY"></div>
+    </div>
+  </div>
+</div>
+<div class="casecard" data-page-node-id="qEjDd88JttPndynTY5BbRh">
+  <div class="chead2" data-page-node-id="bUHWJGwL9IDhiAAnD35RZB">
+    <h3 class="casettl" data-page-node-id="osLeMTjjed4jLpAjlXgMET">案例 <b class="cl" data-page-node-id="OHKiAlKHYzuTiin587CBIW">D</b> · 混资</h3>
+    <div class="aovline" data-page-node-id="i2Yr7YC9PnZju2RAy8IT57">客单价 70 元 · <b class="lo" data-page-node-id="Bmxw0apFzTcbTYDfSTQDAU">中低客单</b></div>
+  </div>
+  <div class="gmvline" data-page-node-id="AZFXTsRDexlBeBdKhc92Xs">单日订单量破 <b data-page-node-id="FFi0MGqzEug0l9nSpB15GF">12,000 单</b></div>
+  <div class="case-body" data-page-node-id="C3MoQaDKuMRRWIrwiwjEp4">
+    <div class="metrics" data-page-node-id="yZQFanurqci0hPJkS2Vkr1">
+      <div class="grp" data-page-node-id="sNkD1qGLbUyEHgdKZZVMcc">
+        <div class="gh" data-page-node-id="ZbYwJZhrdVxr6fdDOtxrWM">商家活动成本</div>
+        <div class="row" data-page-node-id="v7W4Po6gsAYzF2mvf4FiiK"><span class="k" data-page-node-id="ofJJeGsUYCYGlYuaYEfioB">实际满减订单占比</span><b class="v" data-page-node-id="leuY1QmS9MHSaO1JX0WYvf">4%</b></div>
+        <div class="row" data-page-node-id="m06SfKlEyrk9y0dDhChG9J"><span class="k" data-page-node-id="PaWStOVyB9FkNPvEDEIz5d">商家实际让利成本占比</span><b class="v" data-page-node-id="GHUK91P6fAHVW9GyDeh1QI">&lt;1%</b></div>
+      </div>
+      <div class="grp" data-page-node-id="mN3glk3AVreCCaAFk6cqUn">
+        <div class="gh" data-page-node-id="trtNfAK3wfsnL1WBoqjODk">商家活动收益</div><div class="row" data-page-node-id="z6a3rKXnRJqaCng9S0wvoG"><span class="k" data-page-node-id="bZKrAuNzQ2dHqfVLHzpNRs">日均消耗涨幅</span><b class="v g" data-page-node-id="VADTzEFCYkE6Qw7IHyhhq1">+59%</b></div><div class="row" data-page-node-id="hjz5WEPmrHcIz0ojevIRLc"><span class="k" data-page-node-id="HDcNqwqas7FPzZrs0cOuyh">日均 GMV 涨幅</span><b class="v g" data-page-node-id="BLomj76f0nylAYreTKqNPT">+37%</b></div><div class="row" data-page-node-id="nuLdAl6WUTDkpgaTucVr0B"><span class="k" data-page-node-id="SQhB68wHCzgvjnWH9zeW6z">下单率</span><b class="v g" data-page-node-id="FgYPbBLtw4eCvzyP8PTumV">+11%</b></div><div class="row" data-page-node-id="LWx5YDV5zaet8ABWD3KRn2"><span class="k" data-page-node-id="p0K12GEqj0dCdp0hwKjg60">扶持带来额外增量</span><b class="v" data-page-node-id="ZbcMiak4UErikcQ6Z86UY4">30%</b></div>
+      </div>
+    </div>
+    <div class="chartbox" data-page-node-id="grdUrKK2OEZyDGYREmHCrS">
+      <div id="cD" data-page-node-id="eEZ0MF1twq1mIbMwnhDFXh"></div>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+
+<section data-page-node-id="t4jEFubsjUlbPQle6hE37d">
+  <h2 class="modttl" data-page-node-id="91y8hMeoxFdsvR4zBItJEs"><span class="bar" data-page-node-id="GcHktDi5IxcjauLhn0ic1s"></span>已报活动，如何获得更大效果提升？</h2>
+  <div class="modsub" data-page-node-id="NF3cqgptz5C8fkyDxCrGA2">两部分 · 货：4 项动作　｜　场：6 项动作</div>
+  <div class="summary" data-page-node-id="3p9agwq2jVhlwJeNmMgtdG">
+    报名只是拿到入场券。真正把满减变成增量的是两件事：<b data-page-node-id="CawmkTkRnWy1RmFKwOziOO">一是货</b>，投广商品必须报进满减、并把广告基建堆够，才能同时吃到<span class="hl" data-page-node-id="T3H4Sc448bBvaeGjNfwIB6">满减转化</span>和<span class="hl" data-page-node-id="zCAsd2JBPq2hOWRfQ1zcNA">平台扶持</span>；
+    <b data-page-node-id="AUogFAXXMMX60JDtqPN4CX">二是场</b>，从外层素材到直播间话术，全链路把满减讲清楚、把优惠算给用户，才能接住流量。
+  </div>
+
+<div class="part" data-page-node-id="HUmu67Y8i0uQ19ZNqTX9S7">
+  <div class="phead" data-page-node-id="dZrOxlgIvNgukDAOckLeHl"><span class="pno" data-page-node-id="lplCcMQuu4wAO7bLl28GmV">一</span><h3 data-page-node-id="DGMrqZXTmJOsxQqDFF8BID">货：投广商品报平台满减，广告基建同步加码</h3></div>
+
+  <div class="fcard" data-page-node-id="JaDDBH2vfhBT7FbVHxIq24">
+    <div class="fhead" data-page-node-id="HvTPHaxKmMbiVVEiO5bqKz"><b data-page-node-id="e56I7DvNBjL2MCyDLVqyBl">1）投广商品报平台满减</b><span class="chip new" data-page-node-id="LojpqlFEiv5vvDn0pcqHce">收益最高</span><span class="chip est" data-page-node-id="7vBIVVbGto0KWIwuD18g2p">收益参考 618 经验</span></div>
+    <div class="fhl" data-page-node-id="PkpRawIt7JCf7Erq3COmNw">投广商品提报双11平台满减后，<b data-page-node-id="dBWrmowRxZ8UQj94vEuM7m">广告自动获得平台扶持</b> —— 满减带转化、扶持补成本，一份动作两份收益</div>
+    <div class="ful" data-page-node-id="d2ndA6A7S2g0bvVbD2ZrW4">
+      <div class="fli" data-page-node-id="ISEWOG8fvMV1xko1ehFdzS">不论<b data-page-node-id="aXVl8Xrv8WteVMrtJYf0Xd">全资 or 混资</b>，投广商品报满减均可获得<b data-page-node-id="e3ZjV1bTjKPC80C4DdwHSH">下单率、ROI、GMV、消耗</b>四方面综合增长；<b data-page-node-id="8oLvjAOsikcVTBoKOqwAWL">先主推品、再逐步扩到全店</b></div>
+      <div class="fli" data-page-node-id="vC3PCmsdxbKlmc598uVASs"><b data-page-node-id="eZxZL0oDe660Uqtl2VOYec">好店商家</b>：投广商品 <b data-page-node-id="htVP3e6g2h4Z5vOAuQOXyi">100% 提报</b>本次双11活动，可获至少 <b data-page-node-id="nzbLhuVTv4l0Mu7GPD0LgB">30% 消耗提升、50%+ GMV 提升、5%+ ROI 提升</b></div>
+      <div class="fli" data-page-node-id="gyjmU29noU0KuQ2RJRkQqp"><b data-page-node-id="EOREPFTf2VNIeggQxQRgbE">无好店</b>：至少<b data-page-node-id="sXRKF9WZxNxrEl6E208ifB">主推品提报</b>，混资商家最高出资 <b data-page-node-id="vRCaCSBfWeBFu8RyhUBWfv">6.25%</b> 成本</div>
+    </div>
+    <div class="sub2" data-page-node-id="pICRPwW9s2xlba4mjMw5qi"><span class="lk" data-page-node-id="GxnB3vKgTQfhPGqW5xp0Qm">非好店提报技巧 · 3 选 1</span>按投入从高到低，任选其一</div>
+    <div class="opts" data-page-node-id="NH85dxfPHajXyn8f4AQNTc">
+      <div class="opt" data-page-node-id="nYGW9xALgh0CCludlPDzZO"><span class="ob" data-page-node-id="yQVKsV9watdrOR9I7VbNKf">① 最优选择</span><span class="ot" data-page-node-id="S23t61D7SG1scPuXwndwQj"><b data-page-node-id="DM7RnRtmA9De708XmApG5g">真实报混资</b> —— 出资 6.25% 成本，换 30%+ GMV 增长</span></div>
+      <div class="opt" data-page-node-id="DevOCBIjlj5x0YCPfLgdnf"><span class="ob mid" data-page-node-id="PPaH3noV6JDCpUkejVya4m">② 折中选择</span><span class="ot" data-page-node-id="c0i6dpHejFZs61uUySPlq9"><b data-page-node-id="0ib17MarBOJ5GsXx0Meis5">主推品换新 SKU 改价后再报混资</b> —— 新建链接并设店铺券，调券额与售价后再报（有概率报名不通过，需测试）</span></div>
+      <div class="opt" data-page-node-id="etwxq6Hl6opaOVM9wP5KTB"><span class="ob low" data-page-node-id="9gnWWfh8PBGAISMoNnAJFI">③ 最低选择</span><span class="ot" data-page-node-id="AaGGyEUiobSrnUN8oJSNnX"><b data-page-node-id="X77FQh3tvBbP6Yb0CIHk9S">副品报混资</b> —— 至少副品报名，先拿到大场激励、主播分享券</span></div>
+    </div>
+  </div>
+
+  <div class="fcard" data-page-node-id="iJJbBy04M1MjjPhWN0YFAo">
+    <div class="fhead" data-page-node-id="M5vx5bu9dzsLCj1b0600yr"><b data-page-node-id="NkhQw1yHkCFWZGeUlnbhJX">2）围绕满减门槛做组货</b><span class="chip" data-page-node-id="uRYZgu0gA191fo5LweDAVp">3 选 1</span></div>
+    <div class="ful" data-page-node-id="tJ5oQAnhse1iHwJlTE2OaF">
+      <div class="fli" data-page-node-id="XCNq1ceFqjgPUY2rMCeeEZ">满减门槛是 <b data-page-node-id="YvRrT4xZWOPpavuxZzOsRB">满 200 减 25 / 满 400 减 50 / 满 1000 减 120</b>，组货要让客单<b data-page-node-id="ev8dhB3287yGVFihMiCN8f">自然落到门槛上</b>，而不是让用户硬凑</div>
+    </div>
+    <div class="pick" data-page-node-id="V6RdFEEk72mSKUSYcBppfR">
+      <div data-page-node-id="3yLohRYCASla9JOvDTwqMM"><b data-page-node-id="HHKVHrYidOODXgvDcBE9LM">①</b>双 SKU 囤货装</div>
+      <div data-page-node-id="ZFXmXOYnJBbvRE31Cc40F1"><b data-page-node-id="CyO3pJAnBYBZGj0IlPKzQB">②</b>限时加赠</div>
+      <div data-page-node-id="sEZHEauQHKk9xNg9KzYVKM"><b data-page-node-id="QfPBY0rXykCI017gwpObcA">③</b>礼盒 / 套装</div>
+    </div>
+    <div class="fnote" data-page-node-id="86ojoS6BPkptEbnQCrwXaT">组货与投广商品一致 —— 报满减的商品才有扶持，囤货装、礼盒优先挂到投广商品上</div>
+  </div>
+
+  <div class="fcard" data-page-node-id="yRE0TK2GA3TAiwl1GKMQAC">
+    <div class="fhead" data-page-node-id="xcx6XBB5W8xruFwDZW6ZDU"><b data-page-node-id="aKPOdOz5oLo1AXjUU2m7zN">3）每场直播都提报其他双11平台活动</b><span class="chip" data-page-node-id="v9qmHWuoXsAzI3tQVXOLnZ">每场均报</span></div>
+    <div class="ful" data-page-node-id="FdHbapLsL701aqGGTdzwin">
+      <div class="fli" data-page-node-id="m9UyPUsJP0emXHAE8LVKvF">大促期间<b data-page-node-id="hv2rEioq9m8x7vAjQVXNKT">每场直播均提报</b>以下活动，与满减叠加使用</div>
+    </div>
+    <div class="pick" data-page-node-id="XFCHVoYAxPmscKwK7B873c">
+      <div data-page-node-id="FY9Hq0OWAZVFAHU7lawSsv"><b data-page-node-id="wVCo58xB4cDZ682fmGB23W">①</b>大场激励</div>
+      <div data-page-node-id="WUvf6gYs5vdkfjmoPA2SeD"><b data-page-node-id="rHLrngPEN3yKIcSvMGoNsD">②</b>主播分享券</div>
+      <div data-page-node-id="49TG5ca7Z5ABPDUqMhK57z"><b data-page-node-id="rTzHc0OIdNWX5HDQFyiZML">③</b>3 单挑战</div>
+    </div>
+    <div class="fnote" data-page-node-id="HJi5Ps3HeEOG8o1nl2PPsF"><b data-page-node-id="CXXb2XSHWs3qI9LmGx57My">主播分享券 100% 由平台出资</b>，商家无需承担券成本；需 3 个活动均报名才可使用</div>
+  </div>
+
+  <div class="fcard" data-page-node-id="ajkbMmzfk9BUERrH95RDw1">
+    <div class="fhead" data-page-node-id="oDNGJySf5jaeRbcDChL7aI"><b data-page-node-id="TC7rZfHwFm296QnjL0HQSk">4）投广商品广告基建，决定扶持能放大多少</b><span class="chip est" data-page-node-id="7ncSLjUAXP8z7NbpPn4Wg0">扶持期考核</span></div>
+    <div class="fli" style="margin-bottom:9px" data-page-node-id="7NqMOLVkiSdsShCURZb7fA">扶持不是固定发放，<b data-page-node-id="TZ4sQ6Uf1rZndsbznBAyy4">基建达标才能拿到足额扶持</b>；同样的预算，基建越足、扶持越多</div>
+    <div class="build" data-page-node-id="Rp3KJ1OtMLRZAyEnbcH5kW">
+      <div class="bi" data-page-node-id="MnlgRqmwvNkDbbGuIvQMxa"><b data-page-node-id="x08W3WyYzTVHV1qQltq9jC">商品表达广告 ≥20 条</b><span data-page-node-id="eHCCFjsKVu41jCkbSh3MO9">单直播间，且表达商品数 ≥2 个</span></div>
+      <div class="bi" data-page-node-id="EPOeWZcUdXYlComCzyIrMx"><b data-page-node-id="oMw0rBniwbHRILLMJO0T2C">创意指纹数 +20%</b><span data-page-node-id="p9J01eEwxADQNFiU4i4AD9">扶持期间相对日常提升</span></div>
+      <div class="bi" data-page-node-id="FdVSCWkO0fJqirkMbTcVab"><b data-page-node-id="qh80uVHjC1mBerBerBM6j1">全库智选 &amp; 原生托管 ≥30%</b><span data-page-node-id="QWtPGyg1E76JZTxOyDUQ8J">AIGC 开启率 ≥30%、潜客优投 ≥30%</span></div>
+      <div class="bi" data-page-node-id="qwJDT0CNspvkniCgfrkwSX"><b data-page-node-id="ewLBsiMd4x5UN5PsPjB6YM">直播实时画面直投</b><span data-page-node-id="OFqknHVGpdKdHa6uqVKyET">单投、通投均可，用直播商品表达能力多建不同广告，多拿扶持</span></div>
+      <div class="bi" data-page-node-id="Av9UYt8BVmg0y2ui1kBg01"><b data-page-node-id="qpQ6oyWrO5rxhRTPhy3D7L">小店智投</b><span data-page-node-id="wIo15s87bVepF8eQEx51OG">智投基建数、渗透率越高，扶持越多</span></div>
+      <div class="bi" data-page-node-id="wznA25CIfqVGNABKgzdc1O"><b data-page-node-id="CU18EQUX8tZ5bt0U2mRZ57">版位渗透</b><span data-page-node-id="kaZbmD4fyJG7osJZXEHRtr">PCAD / 优量汇 / CID 版位达标，可叠加大促加码扶持</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="part" data-page-node-id="3NNgRvPVBQ7iNElqZ9fJXR">
+  <div class="phead" data-page-node-id="8PIUBkXTtxB1gCWHxPyFmO"><span class="pno" data-page-node-id="8PxcDk1zkeEtGW2Xb13VTW">二</span><h3 data-page-node-id="lZ9AdxPdim8h3HCrO9LzRe">场：从外层素材到直播间话术，全链路体现满减、承接转化</h3></div>
+
+  <div class="fcard first" data-page-node-id="iIzme1mmFodpGS68BZndHy">
+    <div class="fhead" data-page-node-id="K3vYDfQ3nooHTExGum8ckQ"><b data-page-node-id="W2HpGinkoTounQSsXFL2l6">1）外层素材：广告标题 + 素材内容，体现官方满减</b></div>
+    <div class="ful" data-page-node-id="UYcuIXpsg4KQMA73ihYzFq">
+      <div class="fli" data-page-node-id="V200lxe8pCLU9LbXtAlRIs">eco分下，机制素材保持<b data-page-node-id="yCqfDLPAPqP5Gmz1m4EDPg">【先放吸睛画面 + 促销后置】</b>方式：前 5s 用场景化 / 故事化内容吸睛，5s 后引出促销机制，体现<b data-page-node-id="vB9Wt1hARk2JvBhvtZLPfW">小店官方福利、小店福利价</b>等</div>
+      <div class="fli" data-page-node-id="nCtODLWYhOw6EHpNCZCVnL">素材结尾用<b data-page-node-id="FXFWUpG9PVA1n31A1Y1fX4">「券后价 / 到手价」</b>承接，点击直接进直播间或商品页，缩短「看到优惠 → 下单」的路径</div>
+      <div class="fli" data-page-node-id="lF6Mq0YcDGI3CZzhfalN5M">素材标题与直播间贴片统一用「11.11 抢先购」等大促字样，<b data-page-node-id="mH3qEmaRkGlmhvaYH8q6sR">外层说什么、进来就看到什么</b></div>
+    </div>
+  </div>
+
+  <div class="frowR" data-page-node-id="XG67FNUh8IvJOqybnkUw6U">
+    <div class="fcard" data-page-node-id="TyNJHXpkAjoUi5xSXoC0ca">
+      <div class="fhead" data-page-node-id="9krMGWd3qennxK4atmYbfr"><b data-page-node-id="EytGB9b1yVv0SaocW5zYyx">2）直播间主题 · 贴片 · 商品标题</b></div>
+      <div class="ful" data-page-node-id="EfrYAbyfcJAR4GCLhVEJGO">
+        <div class="fli" data-page-node-id="oBK2CJvzxXOps4QrTNJHCR"><b data-page-node-id="j6b0bRBRQ4kfqL8S1bXEHJ">主题及时更迭</b>：分周期更换 —— 10 月推荐「11.11 抢先购」，11.1–11.11 推荐「11.11 限时购」，11.12–11.15 推荐「返场」</div>
+        <div class="fli" data-page-node-id="IN5CBPfzzROwRXlepY93YY"><b data-page-node-id="O5PCMDd0hSrafjgjfHMp1h">贴片体现利益点</b>：强调「双11 满减、官方补贴」等活动信息，以及券后折扣力度</div>
+        <div class="fli" data-page-node-id="82kJyAn1OOg4VE4c7XYRix"><b data-page-node-id="ZS0d7uVIGkGKwrboDByNZS">商品标题强调限时</b>：体现比如「11.11 限时折扣」等</div>
+      </div>
+      <div class="shot" data-page-node-id="1HAIw0hyGBT9zND6nFFeCm"><img src="assets/d11/chang_theme.png" alt="直播间主题与贴片示例" data-page-node-id="nQQolgZbcK5xseohJ0VChH"></div>
+      <div class="shotcap" data-page-node-id="T3hZCJzbg68r6k8RXLiQSQ">示例（左→右）：七夕主题 + 总裁驾到　｜　七夕主题 + 优惠力度　｜　七夕限时折扣 + 商品标题</div>
+    </div>
+    <div class="fcol" data-page-node-id="UJUl6BZRpDJSCA3PN0dkwi">
+    <div class="fcard" data-page-node-id="Ovi0a0XIKpnUzQuub7SKDx">
+      <div class="fhead" data-page-node-id="j0gOGN42o4q3zUzWiMu9xc"><b data-page-node-id="QfZvzrQxlZ0BYj4wmIzuAA">3）主播口播话术</b></div>
+      <div data-page-node-id="GIGwHFa52ZumAmnBFZzG9B">
+        <div class="ful" data-page-node-id="EEpdxLV7kohrZPbMg4GdGU">
+          <div class="fli" data-page-node-id="iBuvGVVwNlq2Rdik9Vk5hP">话术强调<b data-page-node-id="TicD5qR5WTo6XuOmXPiZdE">「官方补贴、双11 限时福利、错过等一年」</b>，突出稀缺性</div>
+          <div class="fli" data-page-node-id="TL1mDIR8BaGfmdXN5PBQZm">帮用户算好满减，减少决策时间：<b data-page-node-id="W3qiE9ETbfxb3yqFt5hudV">直接给出券后价 + 凑单方式</b>，减少用户自己计算</div>
+        </div>
+        <div class="quote" data-page-node-id="CAGHvmgkU0ZHc3CFq5DbKA">「这支精华官方补贴 25，券后到手 143—— 双11 就这一波，错过等一年」</div>
+      </div>
+    </div>
+    <div class="fcard" data-page-node-id="bxR1Fp5PG7OHFmQ8tFoyXk">
+      <div class="fhead" data-page-node-id="z9DmMDKdjCIOA3QgURIbtI"><b data-page-node-id="X1Y9JCCFWBOxZStJYsEltc">4）直播间增加「双11 鹅选美妆节」贴片</b><span class="chip new" data-page-node-id="sJLZGn1EFMZDhSYCT65Ik2">NEW</span></div>
+      <div class="ful" data-page-node-id="NfjoD06mB7lq2NiEAvjoHs">
+        <div class="fli" data-page-node-id="vsiWqPy6G7BBJrwRfNXr2s">直播间增加「双11 鹅选美妆节」主题贴片，统一换用官方贴片文件，强化大促氛围与鹅选官方心智</div>
+      </div>
+      <div class="shot" data-page-node-id="N5G1eZWCemdsf5etK34Ajj"><img src="assets/d11/exuan_tiepian.png" alt="鹅选美妆节贴片" data-page-node-id="rO0zYamUWRQfk6Q62J3W4j"></div>
+      <div class="shotcap" data-page-node-id="83j0ksyGzIgBM9f70D8z7l">贴片示例：视频号 11.11 鹅选美妆节 · 直播间贴片样式</div>
+    </div>
+    </div>
+  </div>
+
+  <div class="frow2" data-page-node-id="svaMOstDClEj37FDo2XTLy">
+    <div class="fcard" data-page-node-id="ettt6qKMCZzmNn7nHdrbhV">
+      <div class="fhead" data-page-node-id="fQaXhsHxKgtjWurWvtK4vp"><b data-page-node-id="sqvzhY03Hr5eO6Sqr2wfFj">5）多场景联动 · 主播分享券</b><span class="chip new" data-page-node-id="BCpBuU2aVIU6ZIc3w89qch">NEW</span></div>
+      <div class="fhl" data-page-node-id="RDyRLRK4vkXq41lc1IrKdk">主播分享券<b data-page-node-id="VJq7WCk9Y1fSq15ckAO2A2"> 100% 由平台出资</b>，商家无需承担券成本</div>
+      <div class="ful" data-page-node-id="ioD5I8Dp0jKj1DBHTXo4mz">
+        <div class="fli" data-page-node-id="N7CRigqBL1jD5CdB7PrKgM">充分利用「主播分享券」提升直播间转化（需 3 个活动均报名才可使用），与满减叠加后折扣感知更强</div>
+        <div class="fli" data-page-node-id="US3ScjSbVl8Eqb48YIrHLa"><b data-page-node-id="gujPkCTMhTcogntHf4IfBi">【直播前】</b>通过群聊、朋友圈嵌入专属券二维码等方式，提前宣导主播分享券</div>
+        <div class="fli" data-page-node-id="hu8NgKPNBBpBj8MWZSe5eG"><b data-page-node-id="NAfun5owg9E12Dy8fYNnDd">【直播中】</b>贴片 &amp; 话术，引导用户「搜索口令，领取专属券」</div>
+      </div>
+      <div class="shot" data-page-node-id="RbKGZ4EaZp3F8o3DsM2rZu"><img src="assets/d11/chang_coupon.png" alt="主播分享券示例" data-page-node-id="taYvXsmNRqKcQUOebaHLEl"></div>
+      <div class="shotcap" data-page-node-id="cpgyKsaDbkiTTGzOZKGwgI">示例（左→右）：分享玩法 · 链接 / 二维码 / 专属券　｜　搜索玩法 · 短口令直达</div>
+    </div>
+    <div class="fcard" data-page-node-id="ZukAABE0PuCbdmKRYmFJ1h">
+      <div class="fhead" data-page-node-id="JAkmwS1N7vyu63h3kHoOO9"><b data-page-node-id="mfIDVrayyjH9IhfVPCX9AT">6）贴片 &amp; 话术引导「3 单挑战」</b><span class="chip new" data-page-node-id="XyKG2GinHjZsRU7T1oGu8W">NEW</span></div>
+      <div class="ful" data-page-node-id="nSNMr0Ks8YDKPanBPFlz32">
+        <div class="fli" data-page-node-id="cMU3XhMTfn17hbhw45L8yo">提升单客交易次数：如设置贴片「本场满 3 单享大额现金券」，与满减门槛叠加，把一单客变成多单客</div>
+      </div>
+      <div class="fnote" data-page-node-id="uGAUye0tunmZETqtSfYgBy">双11 中后期活动，尚未上线，具体上线时间请关注小店公告</div>
+      <div class="shot" data-page-node-id="GGiefDNO1HrUOGi1yL0AH5"><img src="assets/d11/chang_3order.png" alt="3 单挑战示例" data-page-node-id="ZWpsA9NO4LVMlEXws8kCuz"></div>
+      <div class="shotcap" data-page-node-id="tGplpxU0Nn7S2zCG6S0xAc">示例（左→右）：① 入口引导 → ② 三单进度 → ③ 激励到账</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="cta" data-page-node-id="VQBlOpmGX8H4spD5PhEjYa">
+  <div class="qwrap" data-page-node-id="Jf0nhF9MZT2YUATn3GBRbc"><img src="assets/d11/qr_guide.png" alt="《本土美妆行业｜26年双11大促实战指南》文档二维码" data-page-node-id="9cKXcKlew49lAU5qQiPf3D"></div>
+  <div class="ct" data-page-node-id="QMiXE0BvUY2EHv5cjmY8JK">
+    <div class="ctt" data-page-node-id="J0TFLv8uEzoMUNBLotnJ2j">完整双11操盘指南</div>
+    <div class="cts" data-page-node-id="E29yc8z6fC4zF31RiXavZf">扫码查看</div>
+    <div class="ctp" data-page-node-id="DDW0LOwrxCnlHtu9E82jLw">腾讯文档《本土美妆行业｜26年双11大促实战指南》全量内容 —— 扶持细则 · 活动报名 · 操盘清单 · 样式图示</div>
+  </div>
+</div>
+
+<footer data-page-node-id="Sv4NXyt89gPKEyWCdapV1M">数据窗口 2026.10.08–10.19　·　各案例满减生效节点见曲线图 D 标注　·　已脱敏</footer>
+
+</div>
+
+<script>
+const D = {"A": {"days": [{"d": "10.08", "i": 106.1}, {"d": "10.09", "i": 83.3}, {"d": "10.10", "i": 87.4}, {"d": "10.11", "i": 123.1}, {"d": "10.16", "i": 194.1}, {"d": "10.17", "i": 216.6}, {"d": "10.18", "i": 215.9}, {"d": "10.19", "i": 160.5}], "split": 4}, "B": {"days": [{"d": "10.08", "i": 20.6}, {"d": "10.09", "i": 243.3}, {"d": "10.10", "i": 10.7}, {"d": "10.11", "i": 125.4}, {"d": "10.12", "i": 276.6}, {"d": "10.14", "i": 412.3}, {"d": "10.16", "i": 505.6}], "split": 4}, "C": {"days": [{"d": "10.08", "i": 162.4}, {"d": "10.09", "i": 91.0}, {"d": "10.10", "i": 73.9}, {"d": "10.11", "i": 72.8}, {"d": "10.12", "i": 274.5}, {"d": "10.13", "i": 294.3}, {"d": "10.14", "i": 307.0}, {"d": "10.15", "i": 257.8}, {"d": "10.16", "i": 299.8}, {"d": "10.17", "i": 279.3}], "split": 4}, "D": {"days": [{"d": "10.08", "i": 110.6}, {"d": "10.09", "i": 114.6}, {"d": "10.10", "i": 66.2}, {"d": "10.11", "i": 108.5}, {"d": "10.13", "i": 86.1}, {"d": "10.14", "i": 149.0}, {"d": "10.15", "i": 193.5}, {"d": "10.16", "i": 213.1}, {"d": "10.17", "i": 155.2}], "split": 4}};
+
+function line(el, data, opt){
+  const W=272, H=206, PL=20, PR=8, PT=33, PB=21;
+  const n=data.length, iw=W-PL-PR, step=iw/(n-1);
+  const max=opt.max;
+  const Y=v=>PT+(H-PT-PB)*(1-Math.min(v,max)/max);
+  const X=i=>PL+step*i;
+  const sx=X(opt.split-0.5);
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img">`;
+
+  s+=`<rect x="${sx}" y="${PT-12}" width="${W-PR-sx}" height="${H-PB-(PT-12)}" fill="#FBF1D9"/>`;
+  [0,0.5,1].forEach(f=>{const y=Y(max*f);
+    s+=`<line x1="${PL}" x2="${W-PR}" y1="${y}" y2="${y}" stroke="#F2E6C9" stroke-width="1"/>`;});
+
+  s+=`<line x1="${PL}" x2="${W-PR}" y1="${Y(100)}" y2="${Y(100)}" stroke="#C3AC7F" stroke-width="1" stroke-dasharray="4 3"/>`;
+  s+=`<line x1="${sx}" x2="${sx}" y1="${PT-12}" y2="${H-PB}" stroke="#C49A4A" stroke-width="1.1" stroke-dasharray="3.5 3"/>`;
+
+  const pts=data.map((p,i)=>[X(i), Y(Math.max(p.i,0))]);
+  s+=`<polyline points="${pts.slice(0,opt.split).map(p=>p.join(',')).join(' ')}" fill="none" stroke="#C4B08A" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
+  s+=`<polyline points="${pts.slice(opt.split-1).map(p=>p.join(',')).join(' ')}" fill="none" stroke="#C98A16" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>`;
+
+  pts.forEach((p,i)=>{
+    const c=i>=opt.split?'#C98A16':'#C4B08A';
+    s+=`<circle cx="${p[0]}" cy="${p[1]}" r="2.2" fill="#fff" stroke="${c}" stroke-width="1.7"/>`;
+    s+=`<text class="ax" x="${p[0]}" y="${H-PB+13}" text-anchor="middle">D${i+1}</text>`;
+  });
+
+  s+=`<text class="tlab" x="${PL}" y="${PT-19}" text-anchor="start">活动前</text>`;
+  s+=`<text class="tlab" x="${sx-4}" y="${PT-19}" text-anchor="end">满减生效日</text>`;
+  s+=`<text class="tlab on" x="${sx+(W-PR-sx)/2}" y="${PT-19}" text-anchor="middle">满减周期</text>`;
+  s+='</svg>';
+  el.innerHTML=s;
+}
+line(document.getElementById('cA'), D.A.days, {max:250, split:D.A.split});
+line(document.getElementById('cB'), D.B.days, {max:600, split:D.B.split});
+line(document.getElementById('cC'), D.C.days, {max:400, split:D.C.split});
+line(document.getElementById('cD'), D.D.days, {max:250, split:D.D.split});
+</script>
+</body>
+</html>
