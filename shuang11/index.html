@@ -27,9 +27,22 @@
   .no { font-size: 12px; font-weight: 800; color: #C2410C; letter-spacing: 1px; margin-bottom: 8px; }
   .tag-new { position: absolute; top: 0; right: 0; background: linear-gradient(120deg, #E4572E, #F59E0B);
              color: #fff; font-size: 10.5px; font-weight: 800; letter-spacing: 1px;
-             padding: 5px 12px 5px 14px; border-radius: 0 0 0 12px;
+             padding: 5px 12px 5px 14px; border-radius: 0 0 0 12px; overflow: hidden;
              box-shadow: -1px 2px 8px rgba(180,60,20,.3); display: inline-flex; align-items: center; gap: 4px; }
-  .tag-new::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: #FFF3C4; }
+  .tag-new::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: #FFF3C4;
+                     animation: dotPulse 1.4s ease-in-out infinite; }
+  .tag-new { animation: tagBreath 2.2s ease-in-out infinite; }
+  .tag-new::after { content: ""; position: absolute; inset: 0; border-radius: inherit;
+                    background: linear-gradient(100deg, transparent 20%, rgba(255,255,255,.55) 50%, transparent 80%);
+                    transform: translateX(-120%);
+                    animation: shine 3.2s ease-in-out infinite; }
+  @keyframes dotPulse { 0%,100% { opacity:1; transform: scale(1); } 50% { opacity:.45; transform: scale(.72); } }
+  @keyframes tagBreath { 0%,100% { box-shadow: -1px 2px 8px rgba(180,60,20,.3); }
+                         50% { box-shadow: -1px 2px 16px rgba(228,87,46,.65); } }
+  @keyframes shine { 0% { transform: translateX(-120%); } 55%,100% { transform: translateX(120%); } }
+  @media (prefers-reduced-motion: reduce) {
+    .tag-new, .tag-new::before, .tag-new::after { animation: none; }
+  }
   .card h2 { font-size: 17px; font-weight: 700; line-height: 1.5; margin-bottom: 10px; color: #2B0F16; }
   .desc { font-size: 13px; color: #7A5A5F; line-height: 1.65; min-height: 44px; }
   .go { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px;
