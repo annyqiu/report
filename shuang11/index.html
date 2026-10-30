@@ -25,6 +25,11 @@
                   background: linear-gradient(180deg, #E4572E, #B3272F); }
   .card:hover { transform: translateY(-4px); box-shadow: 0 16px 34px rgba(60,10,15,.3); }
   .no { font-size: 12px; font-weight: 800; color: #C2410C; letter-spacing: 1px; margin-bottom: 8px; }
+  .tag-new { position: absolute; top: 0; right: 0; background: linear-gradient(120deg, #E4572E, #F59E0B);
+             color: #fff; font-size: 10.5px; font-weight: 800; letter-spacing: 1px;
+             padding: 5px 12px 5px 14px; border-radius: 0 0 0 12px;
+             box-shadow: -1px 2px 8px rgba(180,60,20,.3); display: inline-flex; align-items: center; gap: 4px; }
+  .tag-new::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: #FFF3C4; }
   .card h2 { font-size: 17px; font-weight: 700; line-height: 1.5; margin-bottom: 10px; color: #2B0F16; }
   .desc { font-size: 13px; color: #7A5A5F; line-height: 1.65; min-height: 44px; }
   .go { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px;
@@ -58,6 +63,7 @@
     </a>
 
     <a class="card" href="../baipai_shuang11_img.html">
+      <span class="tag-new">NEW</span>
       <div class="no">第二期</div>
       <h2>【双11增长指南·第二期】双链路跑通，广告消耗破百万</h2>
       <p class="desc">白牌美妆如何用「直播 + 小店直购」双链路，把双11广告消耗做到百万级。</p>
