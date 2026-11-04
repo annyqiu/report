@@ -1,0 +1,778 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>拾伍 · 竞价广告复盘（10.27-11.01）</title>
+<style>
+:root{
+  --blue:#2B5CE6;--blue-d:#1B3FA8;--ink:#0F172A;--ink2:#334155;--muted:#64748B;
+  --line:#E6EBF3;--bg:#F4F6FA;--green:#0E9F6E;--red:#DC2626;--amber:#D97706;--violet:#7C5CF0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif;
+  font-size:14px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:0 26px}
+.hero{background:linear-gradient(135deg,#111C4E 0%,#2B5CE6 58%,#1B3FA8 100%);color:#fff;padding:40px 0 34px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-80px;top:-120px;width:420px;height:420px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.16),rgba(255,255,255,0) 68%)}
+.hero h1{font-size:29px;font-weight:800;letter-spacing:.4px;line-height:1.3}
+.hero .meta{margin-top:9px;font-size:13px;color:rgba(255,255,255,.78)}
+.hero .meta i{font-style:normal;color:#fff;font-weight:700}
+.hero .tags{margin-top:20px;display:flex;flex-wrap:wrap;gap:9px}
+.hero .tag{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:8px;
+  padding:8px 13px;font-size:12.5px;color:rgba(255,255,255,.92)}
+.hero .tag b{font-size:16px;font-weight:800;color:#fff;margin:0 3px;letter-spacing:.3px}
+.hero .tag b.g{color:#7EF0C4}
+.sec{margin-top:34px}
+.sec-h{display:flex;align-items:center;gap:11px;margin-bottom:6px}
+.sec-h .n{width:28px;height:28px;border-radius:9px;background:var(--blue);color:#fff;font-size:13px;font-weight:800;
+  display:flex;align-items:center;justify-content:center;flex:none}
+.sec-h h2{font-size:19px;font-weight:800;letter-spacing:.3px}
+.sec-h .hint{margin-left:auto;font-size:12px;color:var(--muted)}
+.take{background:linear-gradient(90deg,#EEF3FF,#F7F9FF 70%,#fff);border-left:4px solid var(--blue);
+  border-radius:0 10px 10px 0;padding:13px 18px;font-size:13.8px;color:#1E2A45;line-height:1.72;margin:12px 0 18px}
+.take b{color:var(--blue-d)}
+.take .warn{color:var(--red);font-weight:800}
+.take .good{color:var(--green);font-weight:800}
+.card{background:#fff;border-radius:14px;padding:22px 24px;margin-bottom:16px;
+  box-shadow:0 1px 2px rgba(16,24,40,.05),0 8px 24px -18px rgba(16,24,40,.28)}
+.card-h{display:flex;align-items:baseline;gap:10px;margin-bottom:14px}
+.card-h h3{font-size:15.5px;font-weight:800}
+.card-h span{font-size:12px;color:var(--muted)}
+.kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.kpi{background:#F8FAFF;border:1px solid #E7EDFA;border-radius:11px;padding:14px 15px}
+.kpi-l{font-size:12px;color:var(--muted);font-weight:600}
+.kpi-v{font-size:25px;font-weight:800;color:var(--blue-d);line-height:1.25;margin-top:3px;letter-spacing:.2px}
+.kpi-v small{font-size:12px;font-weight:600;color:var(--muted);margin-left:2px}
+.kpi-d{font-size:12px;font-weight:700;margin-top:5px}
+.kpi-d.pos{color:var(--green)} .kpi-d.neg{color:var(--red)}
+.kpi-s{color:var(--muted);font-weight:500;margin-left:6px}
+.lane{border:1px solid var(--line);border-radius:13px;padding:18px 20px;margin-top:12px;background:#fff}
+.lane-top{display:flex;align-items:center;gap:12px;margin-bottom:4px}
+.lane-top .dot{width:9px;height:9px;border-radius:50%;background:var(--blue)}
+.lane-top h4{font-size:15px;font-weight:800}
+.lane-top .badge{font-size:11px;font-weight:800;border-radius:6px;padding:2px 8px}
+.badge.pass{color:#0B7A55;background:#E6F7F0;border:1px solid #BFE9D8}
+.badge.risk{color:#9B1C1C;background:#FEF0F0;border:1px solid #FBD5D5}
+.lane .sub{font-size:12px;color:var(--muted);margin-bottom:12px}
+.cmp{margin-bottom:14px}
+.cmp:last-child{margin-bottom:0}
+.cmp-title{font-size:12.8px;font-weight:700;color:var(--ink2);margin-bottom:6px}
+.cmp-title em{font-style:normal;font-size:11.5px;color:var(--muted);font-weight:600;margin-left:8px}
+.cmp-row{display:flex;align-items:center;gap:9px;margin-bottom:5px}
+.cmp-tag{font-size:10.5px;font-weight:800;color:var(--muted);width:28px;flex:none}
+.cmp-tag.me{color:var(--blue)}
+.track{flex:1;height:11px;background:#F1F4FA;border-radius:6px;overflow:hidden}
+.fill{display:block;height:100%;border-radius:6px}
+.fill.me{background:linear-gradient(90deg,#6E93F2,#2B5CE6)}
+.fill.bm{background:#D7DEEA}
+.fill.bad{background:linear-gradient(90deg,#F28B82,#DC2626)}
+.fill.good{background:linear-gradient(90deg,#5BD3A6,#0E9F6E)}
+.cmp-val{width:66px;text-align:right;font-size:12.5px;font-weight:800;color:var(--ink)}
+.cmp-val.dim{color:var(--muted);font-weight:600}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.stack{margin-top:4px}
+.stack-bar{display:flex;height:34px;border-radius:8px;overflow:hidden;border:1px solid #EFF2F8}
+.stack-bar i{display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:800;color:#fff;
+  border-right:2px solid #fff;white-space:nowrap;overflow:hidden}
+.stack-bar i:last-child{border-right:none}
+.stack-lab{font-size:12px;font-weight:700;color:var(--ink2);margin:14px 0 6px;display:flex;justify-content:space-between}
+.legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:11px;font-size:11.5px;color:var(--muted)}
+.legend span{display:flex;align-items:center;gap:5px}
+.legend em{width:9px;height:9px;border-radius:3px;display:inline-block}
+.bignum{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.bn{border:1px solid var(--line);border-radius:11px;padding:13px 14px;background:#FCFDFF}
+.bn-l{font-size:11.5px;color:var(--muted);font-weight:600}
+.bn-v{font-size:21px;font-weight:800;color:var(--ink);margin-top:3px}
+.bn-v small{font-size:11.5px;color:var(--muted);font-weight:600;margin-left:3px}
+.bn-x{font-size:11.5px;font-weight:700;margin-top:3px}
+.bn-x.neg{color:var(--red)} .bn-x.pos{color:var(--green)}
+.note{display:flex;gap:10px;padding:12px 14px;border-radius:10px;font-size:12.8px;line-height:1.7;margin-top:14px}
+.note .ico{font-weight:900;flex:none}
+.note.red{background:#FEF4F4;border:1px solid #F9DADA;color:#8F1D1D}
+.note.green{background:#F1FBF6;border:1px solid #CDEEDD;color:#0B5E43}
+.note.blue{background:#F3F6FF;border:1px solid #DEE7FB;color:#1E3A8A}
+.note.amber{background:#FFFAF0;border:1px solid #F8E6C2;color:#7C4A03}
+.note b{font-weight:800}
+.rooms{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+.rooms.two{grid-template-columns:repeat(2,1fr)}
+.room{border:1px solid var(--line);border-radius:12px;padding:15px 16px;background:linear-gradient(180deg,#FBFCFE,#fff)}
+.room-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
+.room-h b{font-size:14px}
+.room-h .rk{font-size:10.5px;font-weight:800;color:#fff;background:#94A3B8;border-radius:5px;padding:1px 6px}
+.room-h .rk.t1{background:var(--blue)}
+.room-v{font-size:22px;font-weight:800;color:var(--ink)}
+.room-v small{font-size:11.5px;color:var(--muted);font-weight:600;margin-left:2px}
+.room-d{font-size:11.5px;font-weight:700;margin-top:2px}
+.room-d.pos{color:var(--green)} .room-d.neg{color:var(--red)}
+.room-m{margin-top:10px;padding-top:9px;border-top:1px dashed #E8EDF6;display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
+.room-m b{color:var(--ink);font-weight:800}
+.pbar{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+.pbar .nm{width:150px;font-size:12.5px;font-weight:600;color:var(--ink2);flex:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pbar .tr{flex:1;height:16px;background:#F2F5FA;border-radius:5px;overflow:hidden}
+.pbar .tr i{display:block;height:100%;border-radius:5px;background:linear-gradient(90deg,#7FA3F4,#2B5CE6)}
+.pbar .vv{width:104px;text-align:right;font-size:12px;color:var(--muted);flex:none}
+.pbar .vv b{color:var(--ink);font-weight:800}
+.pbar.wide .nm{width:300px}
+.pbar.wide .vv{width:170px}
+.cap{display:grid;grid-template-columns:120px 1fr 190px;gap:14px;align-items:center;padding:11px 0;border-bottom:1px solid #F1F4F9}
+.cap:last-child{border-bottom:none}
+.cap .nm{font-size:13px;font-weight:800}
+.cap .nm em{display:block;font-style:normal;font-size:11px;color:var(--muted);font-weight:600;margin-top:2px}
+.cap .roi{display:flex;gap:8px;justify-content:flex-end;font-size:12px}
+.pill{font-size:11.5px;font-weight:800;border-radius:6px;padding:2px 8px;white-space:nowrap}
+.pill.g{color:#0B7A55;background:#E6F7F0}
+.pill.r{color:#9B1C1C;background:#FEF0F0}
+.pill.b{color:#1E40AF;background:#EEF3FF}
+.pill.n{color:#475569;background:#F1F5F9}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{background:#F4F7FD;color:#3B4A66;font-weight:800;font-size:11.8px;text-align:left;padding:9px 10px;border-bottom:1px solid #E1E8F4}
+td{padding:9px 10px;border-bottom:1px solid #F1F4F9;color:var(--ink2)}
+tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+td b{color:var(--ink);font-weight:800}
+.drill{margin-top:13px;border-top:1px dashed #DCE3F0;padding-top:12px}
+.drill summary{cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:7px;font-size:12.2px;font-weight:800;color:#1B3FA8;background:#EEF3FE;border:1px solid #D5E0F7;border-radius:20px;padding:7px 16px;user-select:none}
+.drill summary::-webkit-details-marker{display:none}
+.drill summary:after{content:"▾";font-size:10px}
+.drill[open] summary:after{content:"▴"}
+.drill-body{margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.droom{border:1px solid #E1E8F4;border-radius:10px;background:#F8FAFD;padding:13px 15px}
+.droom .dh{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.droom .dh b{font-size:13.5px;color:#0F172A}
+.droom .dh span{font-size:11px;font-weight:800;color:#64748B}
+.droom table.mini{margin-top:8px}
+.dnote{font-size:11.8px;line-height:1.62;color:#334155;margin-top:9px;font-weight:600}
+.tbl-wrap{overflow-x:auto}
+table.mini th{padding:6px 8px;font-size:11px}
+table.mini td{padding:6px 8px;font-size:11.8px}
+.pri{font-size:11px;font-weight:800;border-radius:5px;padding:2px 7px;color:#fff}
+.pri.p0{background:#DC2626} .pri.p1{background:#D97706} .pri.p2{background:#64748B}
+details{margin-top:12px;border-top:1px dashed var(--line);padding-top:10px}
+summary{cursor:pointer;font-size:12.5px;font-weight:800;color:var(--blue-d);list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"▸ ";font-size:11px}
+details[open] summary::before{content:"▾ "}
+.footer{text-align:center;color:#94A3B8;font-size:11.5px;padding:34px 0 44px}
+.tabbar{display:flex;gap:12px;margin-top:34px}
+.tabbtn{flex:1;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:14px 20px;text-align:left;
+  font-size:15px;font-weight:800;color:var(--ink2);cursor:pointer;display:flex;flex-direction:column;gap:4px;
+  box-shadow:0 1px 2px rgba(16,24,40,.05);transition:border-color .15s,box-shadow .15s;font-family:inherit}
+.tabbtn em{font-style:normal;font-size:11.5px;font-weight:600;color:var(--muted)}
+.tabbtn:hover{border-color:#9DB4F0}
+.tabbtn.active{border-color:var(--blue);background:linear-gradient(135deg,#F0F4FF,#FFFFFF);color:var(--blue-d);
+  box-shadow:0 8px 22px -12px rgba(43,92,230,.5)}
+.tabbtn.active em{color:var(--blue)}
+.lane-banner{border-radius:13px;padding:16px 24px;margin-top:34px;display:flex;align-items:baseline;gap:16px;color:#fff;flex-wrap:wrap}
+.lane-banner b{font-size:17.5px;font-weight:800;letter-spacing:.6px}
+.lane-banner span{font-size:12.5px;font-weight:600;opacity:.92}
+.lane-banner.b-blue{background:linear-gradient(135deg,#1B3FA8,#2B5CE6)}
+.lane-banner.b-violet{background:linear-gradient(135deg,#5436BE,#7C5CF0)}
+.funnel{display:flex;align-items:stretch;gap:12px;margin:6px 0 2px}
+.fstage{flex:none;width:88px;background:#EEF3FE;border:1px solid #D9E3F8;border-radius:10px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 4px;
+  font-size:12px;font-weight:800;color:#1E3A8A;text-align:center;line-height:1.4;position:relative}
+.fstage:not(:last-child)::after{content:"▸";position:absolute;right:-15px;top:50%;transform:translateY(-50%);
+  color:#9DB4F0;font-size:13px;font-weight:900;z-index:1}
+.fstep{flex:1;min-width:0;background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 12px;overflow:hidden}
+.fstep .fnm{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:800;color:var(--ink2);white-space:nowrap}
+.fstep .fformula{font-size:10px;color:var(--muted);font-weight:600;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fstep .fvals{display:flex;align-items:baseline;gap:8px;margin-top:3px;white-space:nowrap}
+.fstep .fme{font-size:15.5px;font-weight:800;color:var(--blue-d)}
+.fstep .fbm{font-size:11px;color:var(--muted);font-weight:600}
+.fvd{margin-left:auto;font-size:10.5px;font-weight:800;border-radius:5px;padding:2px 8px;white-space:nowrap;flex:none}
+.fvd.ok{color:#0B7A55;background:#E6F7F0}
+.fvd.gap{color:#9B1C1C;background:#FEF0F0}
+.fstep.gap{border-color:#F2B8B8;background:#FFFBFB}
+.fchain{font-size:12px;color:var(--ink2);background:#F7F9FE;border:1px dashed #D5E0F5;border-radius:8px;
+  padding:9px 14px;margin-top:13px;font-weight:600;line-height:1.75}
+.fchain b{color:var(--blue-d)}
+.fchain .gap{color:var(--red);font-weight:800}
+@media (max-width:900px){.two-col,.kpi-grid,.bignum,.rooms{grid-template-columns:1fr}}
+</style></head><body>
+<div class="hero"><div class="wrap">
+  <h1>拾伍 · 竞价广告复盘</h1>
+  <div class="meta">复盘周期 <i>2026-10-27 ~ 11-01（6 天）</i>　｜　对比周期 10.21-10.26　｜　双链路：直播 + 小店直购　｜　标杆：同期大盘头部商家</div>
+  <div class="tags">
+    <span class="tag">总日均 <b>11.15</b> 万 <b class="g">▲+2%</b></span>
+    <span class="tag">直播 <b>10.88</b> 万（97.6%）· 持平 · ROI <b>1.36</b> ▲+19%</span>
+    <span class="tag">小店直购 <b>0.27</b> 万（2.4%）<b class="g">▲+3886%</b> · ROI <b>1.44</b></span>
+    <span class="tag">4 间直播间 · <b>2 间未回本</b>（辛大 1.04 / 拾柒 0.87，合计占直播 27%）</span>
+    <span class="tag">日耗目标 <b>14.50</b> 万/日 · 本周期 ×1.3</span>
+  </div>
+</div></div>
+<div class="wrap">
+<div class="sec">
+  <div class="sec-h"><span class="n">00</span><h2>一句话结论：量持平、效率大涨，拖累集中在两间未回本的直播间</h2><span class="hint">全链路口径</span></div>
+  <div class="take">直播是绝对主力（10.88 万、占 97.6%），消耗与上期基本持平（+1%），但 <b>ROI 1.36 环比 +19% 是这一轮最大的进步</b>，<span class="good">效率基本盘在变好</span>；真正吃掉利润的是 <b>辛大生物-胶原种植仓（1.74 万 · ROI 1.04）</b>与 <b>拾柒-院线高奢护肤（1.20 万 · ROI 0.87）</b>——两间合计 2.94 万、占直播 27%，且 14 日退款率 43.57% / 49.85% 都高于大盘 36.66%。<b>这一轮的核心词是「给两间未回本的直播间止血，再把主力采儿的现成杠杆开满」。</b></div>
+  <div class="card">
+    <div class="card-h"><h3>三条依据</h3><span>按影响金额排序</span></div>
+    <div class="note green"><span class="ico">✓</span><span><b>主力采儿是健康的、且在放量</b>：6.68 万（占直播 61%）环比 +30%、ROI 1.54；潜客优投已跑出 1.28 万、ROI 2.24 明显优于未开启的 1.38——放大器已验证，但创意优投还完全没开（大盘使用率 35%）。</span></div>
+    <div class="note red"><span class="ico">!</span><span><b>两间未回本 + 高退款</b>：辛大（1.74 万 · ROI 1.04 · 14 日退款 43.57%）与拾柒（1.20 万 · ROI 0.87 · 49.85%）合计 2.94 万，是拖低整体的主因；拾柒 CPM 365 为四间最高、1 小时退款 17.74% 说明「下单即退」突出，585 单属中等样本、形态可信。</span></div>
+    <div class="note amber"><span class="ico">!</span><span><b>采儿的缺口在直播间内的促单</b>：漏斗拆开看，观看率 93.65% 与标杆持平，但商品点击率 92.24%（标杆 103.61%）、直播间下单率 8.89%（标杆 15.43%）连着掉两段——<b>不是流量问题，是直播间内的商品展示与促单</b>。</span></div>
+    <div class="note blue"><span class="ico">i</span><span><b>小店刚起步</b>：0.27 万、1 个在投商品聚拢组、11 条广告，ROI 1.44 且退款 14 日 10.68% 优于大盘 16.51%——体量太小还谈不上结构问题，先把基建量补起来。</span></div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-h"><span class="n">01</span><h2>双链路成绩单：直播效率大涨，小店刚起步</h2><span class="hint">本周期 10.27-11.01 · 日均口径</span></div>
+  <div class="card">
+    <div class="card-h"><h3>1.1　分链路成绩单</h3><span>合计日均 11.15 万 · 环比 +2%</span></div>
+    <div class="kpi-grid">
+      
+      <div class="kpi">
+        <div class="kpi-l">直播链路 · 日均消耗</div>
+        <div class="kpi-v">10.88<small>万</small></div>
+        <div class="kpi-d pos">▲ +1%<span class="kpi-s">上周期 10.75</span></div>
+      </div>
+      
+      <div class="kpi">
+        <div class="kpi-l">直播链路 · 下单ROI</div>
+        <div class="kpi-v">1.36<small></small></div>
+        <div class="kpi-d pos">▲ +19%<span class="kpi-s">上周期 1.14</span></div>
+      </div>
+      
+      <div class="kpi">
+        <div class="kpi-l">直播链路 · 下单成本</div>
+        <div class="kpi-v">157<small>元</small></div>
+        <div class="kpi-d pos">▲ +8%<span class="kpi-s">计价率 1.06</span></div>
+      </div>
+      
+      <div class="kpi">
+        <div class="kpi-l">小店直购 · 日均消耗</div>
+        <div class="kpi-v">0.27<small>万</small></div>
+        <div class="kpi-d pos">▲ +3886%<span class="kpi-s">上周期 0.01</span></div>
+      </div>
+      
+      <div class="kpi">
+        <div class="kpi-l">小店直购 · 下单ROI</div>
+        <div class="kpi-v">1.44<small></small></div>
+        <div class="kpi-d pos">▲ +83%<span class="kpi-s">上周期 0.78</span></div>
+      </div>
+      
+      <div class="kpi">
+        <div class="kpi-l">全链路 · 加权ROI</div>
+        <div class="kpi-v">1.36<small></small></div>
+        <div class="kpi-d pos">▲ +19%<span class="kpi-s">两链路消耗加权</span></div>
+      </div>
+    </div>
+    <div class="tbl-wrap" style="margin-top:16px"><table class="mini">
+      <thead><tr><th>链路</th><th class="num">日均消耗(万)</th><th class="num">占全量</th><th class="num">环比</th><th class="num">下单ROI</th><th class="num">计价率</th><th class="num">日耗目标(万/日)</th><th class="num">缺口</th></tr></thead>
+      <tbody>
+        <tr><td><b>直播链路</b></td><td class="num">10.88</td><td class="num">97.6%</td><td class="num"><b style="color:#0E9F6E">+1%</b></td><td class="num"><b>1.36</b></td><td class="num">1.06</td><td class="num">14.14</td><td class="num">3.26</td></tr>
+        <tr><td><b>小店直购链路</b></td><td class="num">0.27</td><td class="num">2.4%</td><td class="num"><b style="color:#0E9F6E">+3886%</b></td><td class="num"><b>1.44</b></td><td class="num">0.93</td><td class="num">0.35</td><td class="num">0.08</td></tr>
+        <tr><td><b>合计</b></td><td class="num"><b>11.15</b></td><td class="num">100%</td><td class="num"><b style="color:#0E9F6E">+2%</b></td><td class="num"><b>1.36</b></td><td class="num">-</td><td class="num"><b>14.50</b></td><td class="num"><b>3.35</b></td></tr>
+      </tbody>
+    </table></div>
+    <div style="font-size:11px;color:#8A94A6;margin-top:7px">日耗目标＝本周期 ×1.3（效率同步上行、按放量节奏外推）；加权 ROI＝两链路消耗加权。直播 ROI 1.36 已覆盖两间未回本直播间的拖累，修复后整体仍有上行空间。</div>
+  </div>
+</div>
+<div class="tabbar"><button class="tabbtn active" onclick="showTab('tab-live',this)">直播链路<em>日均 10.88 万（97.6%）· +1% · ROI 1.36 · 目标 14.14 万/日</em></button><button class="tabbtn" onclick="showTab('tab-shop',this)">小店直购链路<em>日均 0.27 万（2.4%）· +3886% · ROI 1.44 · 目标 0.35 万/日</em></button></div><div class="tabpanel" id="tab-live">
+<div class="sec">
+  <div class="sec-h"><span class="n">02</span><h2>分直播间：采儿扛住 61%，两间拖累 ROI</h2><span class="hint">4 间有消耗 · 合计 10.88 万</span></div>
+  <div class="take">四间里 <b>采儿-EviDanFan 6.68 万（61%）ROI 1.54</b> 是唯一「量够大且效率达标」的直播间，环比 +30% 还在放量；<span class="warn">辛大生物-胶原种植仓 1.74 万 ROI 1.04、拾柒-院线高奢护肤 1.20 万 ROI 0.87 是两处失血点</span>（合计 2.94 万、占 27%）。杨薇-活胶原主打抗皱环比 +179%、ROI 1.34，是这轮的增量来源。</div>
+  <div class="card">
+    <div class="card-h"><h3>2.1　四间直播间一览</h3><span>日均消耗 · 环比 · ROI</span></div>
+    <div class="rooms">
+      <div class="room"><div class="room-h"><b>采儿-EviDanFan</b><span class="rk t1">主力</span></div>
+        <div class="room-v">6.68<small>万/日</small></div><div class="room-d pos">▲ +30%　ROI 1.54 ▲+5%</div>
+        <div class="room-m"><span>CPM <b>187</b></span><span>下单率 <b>3.78%</b></span></div></div>
+      <div class="room"><div class="room-h"><b>辛大生物-胶原种植仓</b><span class="rk">待止血</span></div>
+        <div class="room-v">1.74<small>万/日</small></div><div class="room-d neg">▼ -17%　ROI 1.04 ▲+5%</div>
+        <div class="room-m"><span>CPM <b>177</b></span><span>下单率 <b>6.28%</b></span></div></div>
+      <div class="room"><div class="room-h"><b>杨薇-活胶原主打抗皱</b><span class="rk">增量</span></div>
+        <div class="room-v">1.26<small>万/日</small></div><div class="room-d pos">▲ +179%　ROI 1.34 ▲+14%</div>
+        <div class="room-m"><span>CPM <b>188</b></span><span>下单率 <b>9.23%</b></span></div></div>
+      <div class="room"><div class="room-h"><b>拾柒-院线高奢护肤</b><span class="rk">待止血</span></div>
+        <div class="room-v">1.20<small>万/日</small></div><div class="room-d neg">▼ -19%　ROI 0.87 ▲+7%</div>
+        <div class="room-m"><span>CPM <b>365</b></span><span>下单率 <b>6.09%</b></span></div></div>
+    </div>
+    <div class="tbl-wrap" style="margin-top:16px"><table class="mini">
+      <thead><tr><th>直播间</th><th class="num">日均消耗(万)</th><th class="num">占比</th><th class="num">竞价CPM</th><th class="num">点击率</th><th class="num">下单率</th><th class="num">CTCVR</th><th class="num">下单ROI</th><th class="num">计价率</th></tr></thead>
+      <tbody>
+        <tr><td><b>采儿-EviDanFan</b></td><td class="num">6.68</td><td class="num"><b>61%</b></td><td class="num">187</td><td class="num">1.61%</td><td class="num">3.78%</td><td class="num">6.08%</td><td class="num"><b style="color:#0B7A55">1.54</b></td><td class="num">1.05</td></tr>
+        <tr><td><b>辛大生物-胶原种植仓</b></td><td class="num">1.74</td><td class="num">16%</td><td class="num">177</td><td class="num">2.93%</td><td class="num">6.28%</td><td class="num">18.42%</td><td class="num"><b style="color:#DC2626">1.04</b></td><td class="num">1.14</td></tr>
+        <tr><td><b>杨薇-活胶原主打抗皱</b></td><td class="num">1.26</td><td class="num">12%</td><td class="num">188</td><td class="num">3.16%</td><td class="num"><b>9.23%</b></td><td class="num">29.16%</td><td class="num">1.34</td><td class="num"><b style="color:#0B7A55">0.89</b></td></tr>
+        <tr><td><b>拾柒-院线高奢护肤</b></td><td class="num">1.20</td><td class="num">11%</td><td class="num"><b style="color:#DC2626">365</b></td><td class="num"><b>4.88%</b></td><td class="num">6.09%</td><td class="num">29.72%</td><td class="num"><b style="color:#DC2626">0.87</b></td><td class="num">1.19</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note blue"><span class="ico">i</span><span><b>两间未回本的止损顺序：</b>拾柒（ROI 0.87）先动——它的 CPM 365 是四间最高而点击率 4.88% 也是最高，<b>竞争力在上行，但出价 99 元对下单单价 107 元几乎没有余量</b>，先降出价与低效广告、把消耗腾给杨薇这类 ROI 1.34 的直播间；辛大（ROI 1.04）配合退款一起修。</span></div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-h"><span class="n">03</span><h2>直播链路 vs 大盘标杆：结构与承接是两处差距</h2><span class="hint">标杆＝同期大盘头部商家</span></div>
+  <div class="take">对照标杆，<b>基建量不缺、素材前端与直播间内承接是两处硬差距</b>：采儿 3s 完播 35.23%（标杆 44.72%）、点击率 1.59%（2.24%）；直播间下单率 8.89%（标杆 15.43%）。<span class="warn">另有现成的杠杆没用满</span>：采儿小程序占比 19%（标杆 43%）而该版位 ROI 更好、创意优投四间全未开。</div>
+
+  <div class="card">
+    <div class="card-h"><h3>3.1　流量结构：小程序是明确的机会版位</h3><span>消耗占比（%）· 客户 vs 标杆</span></div>
+    <div class="stack-lab"><span>采儿-EviDanFan　6.68 万 · ROI 1.54</span></div><div class="stack-bar"><i style="width:47.47%;background:#2B5CE6">47%</i><i style="width:15.15%;background:#7C5CF0">15%</i><i style="width:7.07%;background:#D97706">7%</i><i style="width:11.11%;background:#0E9F6E">11%</i><i style="width:19.19%;background:#5AA9F0">19%</i></div>
+    <div class="stack-lab"><span>标杆直播间　74.48 万 · ROI 1.93</span></div><div class="stack-bar"><i style="width:33.33%;background:#2B5CE6">33%</i><i style="width:3.03%;background:#7C5CF0"></i><i style="width:6.06%;background:#D97706">6%</i><i style="width:14.14%;background:#0E9F6E">14%</i><i style="width:43.43%;background:#5AA9F0">43%</i></div>
+    <div class="stack-lab"><span>辛大生物-胶原种植仓　1.74 万</span></div><div class="stack-bar"><i style="width:74.00%;background:#2B5CE6">74%</i><i style="width:9.00%;background:#7C5CF0">9%</i><i style="width:4.00%;background:#D97706">4%</i><i style="width:2.00%;background:#0E9F6E"></i><i style="width:11.00%;background:#5AA9F0">11%</i></div>
+    <div class="stack-lab"><span>杨薇-活胶原主打抗皱　1.26 万</span></div><div class="stack-bar"><i style="width:61.62%;background:#2B5CE6">61%</i><i style="width:10.10%;background:#7C5CF0">10%</i><i style="width:11.11%;background:#D97706">11%</i><i style="width:1.01%;background:#0E9F6E"></i><i style="width:16.16%;background:#5AA9F0">16%</i></div>
+    <div class="stack-lab"><span>拾柒-院线高奢护肤　1.20 万</span></div><div class="stack-bar"><i style="width:70.71%;background:#2B5CE6">70%</i><i style="width:16.16%;background:#D97706">16%</i><i style="width:3.03%;background:#0E9F6E"></i><i style="width:10.10%;background:#5AA9F0">10%</i></div>
+    <div class="legend"><span><em style="background:#2B5CE6"></em>视频号</span><span><em style="background:#7C5CF0"></em>朋友圈</span><span><em style="background:#D97706"></em>公众号</span><span><em style="background:#0E9F6E"></em>平台与内容</span><span><em style="background:#5AA9F0"></em>小程序</span></div>
+    <div class="tbl-wrap" style="margin-top:14px"><table class="mini">
+      <thead><tr><th>直播间</th><th class="num">视频号占比</th><th class="num">朋友圈</th><th class="num">公众号</th><th class="num">平台与内容</th><th class="num">小程序</th><th class="num">整体ROI</th><th class="num">视频号ROI</th><th class="num">小程序ROI</th></tr></thead>
+      <tbody>
+        <tr><td><b>采儿-EviDanFan</b></td><td class="num">47%</td><td class="num">15%</td><td class="num">7%</td><td class="num">11%</td><td class="num"><b>19%</b></td><td class="num">1.54</td><td class="num">1.50</td><td class="num"><b style="color:#0B7A55">1.57</b></td></tr>
+        <tr><td>辛大生物-胶原种植仓</td><td class="num">74%</td><td class="num">9%</td><td class="num">4%</td><td class="num">2%</td><td class="num">11%</td><td class="num">1.04</td><td class="num">1.04</td><td class="num">0.98</td></tr>
+        <tr><td>杨薇-活胶原主打抗皱</td><td class="num">61%</td><td class="num">10%</td><td class="num">11%</td><td class="num">1%</td><td class="num">16%</td><td class="num">1.34</td><td class="num">1.35</td><td class="num">1.21</td></tr>
+        <tr><td>拾柒-院线高奢护肤</td><td class="num">70%</td><td class="num">0%</td><td class="num">16%</td><td class="num">3%</td><td class="num">10%</td><td class="num">0.87</td><td class="num">0.89</td><td class="num">0.78</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note blue"><span class="ico">i</span><span><b>机会版位＝微信小程序（采儿）：</b>标杆把 43% 的消耗放在小程序，采儿只有 19%，而采儿在小程序上的 ROI 1.57 高于整体 1.54——<b>转化效率满足要求、占比却有 24pct 的差距</b>，用 3.0 版位单投或智投补位去填。另三间的小程序 ROI 与整体持平或更低，先不动。</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><h3>3.2　基建：广告数不缺，单条广告吃不饱</h3><span>客户 vs 标杆客户</span></div>
+    
+    <div class="cmp">
+      <div class="cmp-title">创意指纹条均消耗（元）<em>本周期</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">拾伍</span>
+        <div class="track"><i class="fill me" style="width:39.8%"></i></div>
+        <span class="cmp-val">187</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
+        <span class="cmp-val dim">470</span>
+      </div>
+    </div>
+    
+    <div class="cmp">
+      <div class="cmp-title">创意指纹数<em>本周期</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">拾伍</span>
+        <div class="track"><i class="fill me" style="width:22.6%"></i></div>
+        <span class="cmp-val">2505</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
+        <span class="cmp-val dim">11087</span>
+      </div>
+    </div>
+    
+    <div class="cmp">
+      <div class="cmp-title">新广告占比<em>建议 10-30%</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">拾伍</span>
+        <div class="track"><i class="fill me" style="width:100.0%"></i></div>
+        <span class="cmp-val">10%</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
+        <span class="cmp-val dim">10%</span>
+      </div>
+    </div>
+    <div class="tbl-wrap" style="margin-top:14px"><table class="mini">
+      <thead><tr><th>直播间</th><th class="num">账户数</th><th class="num">项目&广告数</th><th class="num">创意指纹数</th><th class="num">条均消耗(元)</th><th class="num">新广告占比</th><th class="num">创意重复度</th></tr></thead>
+      <tbody>
+        <tr><td><b>采儿-EviDanFan</b></td><td class="num">25</td><td class="num">159</td><td class="num">2505</td><td class="num"><b>187</b></td><td class="num">10%</td><td class="num">—</td></tr>
+        <tr><td><b>辛大生物-胶原种植仓</b></td><td class="num">15</td><td class="num">209</td><td class="num">1005</td><td class="num">121</td><td class="num"><b style="color:#DC2626">4%</b></td><td class="num">—</td></tr>
+        <tr><td><b>杨薇-活胶原主打抗皱</b></td><td class="num">28</td><td class="num">247</td><td class="num">1406</td><td class="num">63</td><td class="num">13%</td><td class="num">—</td></tr>
+        <tr><td><b>拾柒-院线高奢护肤</b></td><td class="num">13</td><td class="num">119</td><td class="num">1039</td><td class="num">81</td><td class="num"><b style="color:#DC2626">7%</b></td><td class="num">—</td></tr>
+        <tr><td>标杆客户</td><td class="num">3</td><td class="num">269</td><td class="num">11087</td><td class="num">470</td><td class="num">10%</td><td class="num">—</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note amber"><span class="ico">!</span><span><b>两个动作：</b>① <b>辛大（4%）与拾柒（7%）的新广告占比偏低</b>（建议 10–30%），补新素材把有效参竞素材数提上来；② 采儿与杨薇的条均消耗只有 187 / 63 元（标杆 470），<b>广告铺得多但单条吃不饱</b>，与其继续加广告数，不如把消耗集中到已跑出量的广告上。</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><h3>3.3　素材：完播与点击率全面低于标杆，前 5 秒钩子要重做</h3><span>采儿-EviDanFan vs 标杆</span></div>
+    
+    <div class="cmp">
+      <div class="cmp-title">3s 完播率<em>本周期</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">拾伍</span>
+        <div class="track"><i class="fill me" style="width:78.8%"></i></div>
+        <span class="cmp-val">35.23%</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
+        <span class="cmp-val dim">44.72%</span>
+      </div>
+    </div>
+    
+    <div class="cmp">
+      <div class="cmp-title">5s 完播率<em>本周期</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">拾伍</span>
+        <div class="track"><i class="fill me" style="width:78.3%"></i></div>
+        <span class="cmp-val">26.10%</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
+        <span class="cmp-val dim">33.34%</span>
+      </div>
+    </div>
+    
+    <div class="cmp">
+      <div class="cmp-title">素材点击率<em>本周期</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">拾伍</span>
+        <div class="track"><i class="fill me" style="width:71.0%"></i></div>
+        <span class="cmp-val">1.59%</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
+        <span class="cmp-val dim">2.24%</span>
+      </div>
+    </div>
+    
+    <div class="cmp">
+      <div class="cmp-title">素材转化率 cvr<em>点击→下单</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">拾伍</span>
+        <div class="track"><i class="fill me" style="width:49.4%"></i></div>
+        <span class="cmp-val">6.15%</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
+        <span class="cmp-val dim">12.45%</span>
+      </div>
+    </div>
+    <div class="tbl-wrap" style="margin-top:14px"><table class="mini">
+      <thead><tr><th>直播间</th><th class="num">3s完播</th><th class="num">5s完播</th><th class="num">点击率</th><th class="num">cvr</th><th class="num">平均素材时长(s)</th></tr></thead>
+      <tbody>
+        <tr><td><b>采儿-EviDanFan</b></td><td class="num">35.23%</td><td class="num">26.10%</td><td class="num"><b style="color:#DC2626">1.59%</b></td><td class="num"><b style="color:#DC2626">6.15%</b></td><td class="num">61.68</td></tr>
+        <tr><td>辛大生物-胶原种植仓</td><td class="num">35.73%</td><td class="num">26.76%</td><td class="num">3.22%</td><td class="num">7.61%</td><td class="num">67.03</td></tr>
+        <tr><td>杨薇-活胶原主打抗皱</td><td class="num">36.11%</td><td class="num">24.14%</td><td class="num">4.10%</td><td class="num">10.97%</td><td class="num"><b style="color:#DC2626">50.01</b></td></tr>
+        <tr><td>拾柒-院线高奢护肤</td><td class="num"><b style="color:#0B7A55">48.49%</b></td><td class="num"><b style="color:#0B7A55">34.90%</b></td><td class="num"><b style="color:#0B7A55">5.31%</b></td><td class="num">7.01%</td><td class="num">97.62</td></tr>
+        <tr><td>标杆客户</td><td class="num">44.72%</td><td class="num">33.34%</td><td class="num">2.24%</td><td class="num">12.45%</td><td class="num">103.90</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note amber"><span class="ico">!</span><span><b>素材吸引力的差距集中在前 5 秒：</b>采儿 3s / 5s 完播 35.23% / 26.10%，低于标杆 44.72% / 33.34%，点击率 1.59% 也低于标杆 2.24%——<b>前一版素材的钩子不够抓人，重做前 5 秒并把时长往 80 秒靠</b>（杨薇当前只有 50.01 秒，明显偏短）。拾柒的完播与点击率反而是四间最好的（48.49% / 5.31%），它的失分不在素材前端。</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><h3>3.3b　素材类型结构：横版是小仓位高效率，值得试</h3><span>直播链路 · 客户 vs 大盘</span></div>
+    <div class="tbl-wrap"><table class="mini">
+      <thead><tr><th>素材类型</th><th class="num">采儿·消耗占比</th><th class="num">采儿·下单ROI</th><th class="num">采儿·广告数</th><th class="num">大盘·消耗占比</th><th class="num">大盘·下单ROI</th></tr></thead>
+      <tbody>
+        <tr><td><b>竖版视频</b></td><td class="num"><b>85%</b></td><td class="num">1.53</td><td class="num">287</td><td class="num">95%</td><td class="num">1.83</td></tr>
+        <tr><td><b>实时画面</b></td><td class="num">10%</td><td class="num">1.50</td><td class="num">21</td><td class="num">3%</td><td class="num">2.34</td></tr>
+        <tr><td><b>横版视频</b></td><td class="num">4%</td><td class="num"><b style="color:#0B7A55">1.89</b></td><td class="num">44</td><td class="num">1%</td><td class="num">1.66</td></tr>
+        <tr><td><b>原生动态</b></td><td class="num">0%</td><td class="num">—</td><td class="num">3</td><td class="num">0%</td><td class="num">3.26</td></tr>
+      </tbody>
+    </table></div>
+    <div style="font-size:11px;color:#8A94A6;margin-top:7px">其余三间几乎全为竖版视频（辛大 100%、拾柒 100%、杨薇 95%），无横版与实时画面的有效消耗。采儿实时画面占 10%、ROI 1.50，低于自身竖版 1.53，也低于大盘同类型 2.34。</div>
+    <div class="note blue"><span class="ico">i</span><span><b>横版值得加一点：</b>采儿横版占 4%、ROI 1.89，既高于大盘横版 1.66 也高于自身竖版 1.53——<b>占比小、效率更好，属于可以提占比的类型</b>，用 2–3 条广告小仓位试投；实时画面 10% 的 ROI 只到 1.50、低于自身整体，先不追量。</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><h3>3.4　承接：CVR 的缺口在直播间内的两段，不在观看</h3><span>采儿-EviDanFan 转化漏斗 · vs 标杆</span></div>
+    <div class="funnel"><div class="fstage">广告点击</div><div class="fstep"><div class="fnm">直播间观看率<span class="fvd ok">与标杆持平</span></div><div class="fformula">直播间观看 ÷ 广告点击</div><div class="fvals"><span class="fme">93.65%</span><span class="fbm">标杆 93.63%</span></div></div><div class="fstage">直播间观看</div><div class="fstep gap"><div class="fnm">商品点击率<span class="fvd gap">低 11.37pct</span></div><div class="fformula">商品点击 ÷ 直播间观看</div><div class="fvals"><span class="fme">92.24%</span><span class="fbm">标杆 103.61%</span></div></div><div class="fstage">商品点击</div><div class="fstep gap"><div class="fnm">直播间下单率<span class="fvd gap">低 42%</span></div><div class="fformula">直播间下单 ÷ 商品点击</div><div class="fvals"><span class="fme">8.89%</span><span class="fbm">标杆 15.43%</span></div></div><div class="fstage">直播间下单</div></div>
+    <div class="fchain">链式相乘：广告点击 <b>×93.65%</b>（观看率）→ 直播间观看 <b>×92.24%</b>（商品点击率）→ 商品点击 <b class="gap">×8.89%</b>（下单率）→ 下单　＝ 素材 CVR <b>6.15%</b>，标杆 <b>12.45%</b>。<span class="gap">缺口主要在第三段（下单率 8.89% vs 15.43%）</span>，其次是第二段商品点击率。</div>
+    <div class="tbl-wrap" style="margin-top:14px"><table class="mini">
+      <thead><tr><th>直播间</th><th class="num">直播间观看率</th><th class="num">商品点击率</th><th class="num">直播间下单率</th><th class="num">人均观看时长(s)</th></tr></thead>
+      <tbody>
+        <tr><td><b>采儿-EviDanFan</b></td><td class="num">93.65%</td><td class="num">92.24%</td><td class="num"><b style="color:#DC2626">8.89%</b></td><td class="num">104</td></tr>
+        <tr><td>辛大生物-胶原种植仓</td><td class="num">87.63%</td><td class="num"><b style="color:#DC2626">57.90%</b></td><td class="num">17.27%</td><td class="num">138</td></tr>
+        <tr><td>杨薇-活胶原主打抗皱</td><td class="num">87.01%</td><td class="num">74.61%</td><td class="num">18.24%</td><td class="num">145</td></tr>
+        <tr><td>拾柒-院线高奢护肤</td><td class="num">89.12%</td><td class="num"><b style="color:#DC2626">57.21%</b></td><td class="num">17.39%</td><td class="num">135</td></tr>
+        <tr><td>标杆客户</td><td class="num">93.63%</td><td class="num">103.61%</td><td class="num">15.43%</td><td class="num">114</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note red"><span class="ico">!</span><span><b>缺口定位与修复：</b>采儿把人拉进直播间没有问题（观看率 93.65% 与标杆持平），<b>掉的是「看了没点商品」和「点了没下单」</b>——商品点击率 92.24%（标杆 103.61%）、下单率 8.89%（标杆 15.43%）。动作落在直播间侧：<b>商品讲解前置、每 15 分钟一轮留人钩子 + 明确的促单机制</b>，与 3.3 的前端素材钩子一起改，两段都要补。</span></div>
+    <div class="note blue"><span class="ico">i</span><span><b>另外三间是另一种形态：</b>辛大与拾柒的商品点击率只有 57% 上下（标杆 103.61%），但下单率 17.27% / 17.39% 反而高于标杆——<b>进来的人下单意愿不差，是商品展示没把人接住</b>，改选品排序与展示节奏即可，不用动促单话术。</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><h3>3.5　退款与店铺三率：两间高退款要修，CCR 是店铺侧主风险</h3><span>直播链路 · 大盘基准 14 日 36.66%</span></div>
+    <div class="tbl-wrap"><table class="mini">
+      <thead><tr><th>直播间</th><th class="num">总下单次数</th><th class="num">1h</th><th class="num">24h</th><th class="num">3日</th><th class="num">7日</th><th class="num">14日</th><th class="num">30日</th></tr></thead>
+      <tbody>
+        <tr><td><b>拾伍 · 直播整体</b></td><td class="num">4149</td><td class="num">12.91%</td><td class="num">19.87%</td><td class="num">24.40%</td><td class="num">31.61%</td><td class="num"><b style="color:#0B7A55">36.25%</b></td><td class="num">37.45%</td></tr>
+        <tr><td><b>采儿-EviDanFan</b></td><td class="num">1304</td><td class="num">13.54%</td><td class="num">19.66%</td><td class="num">22.49%</td><td class="num">28.80%</td><td class="num"><b style="color:#0B7A55">33.86%</b></td><td class="num">35.57%</td></tr>
+        <tr><td><b>杨薇-活胶原主打抗皱</b></td><td class="num">1175</td><td class="num">9.70%</td><td class="num">14.66%</td><td class="num">17.58%</td><td class="num">20.79%</td><td class="num"><b style="color:#0B7A55">21.08%</b></td><td class="num">21.37%</td></tr>
+        <tr><td><b>辛大生物-胶原种植仓</b></td><td class="num">1086</td><td class="num">13.02%</td><td class="num">20.52%</td><td class="num">27.55%</td><td class="num">38.04%</td><td class="num"><b style="color:#DC2626">43.57%</b></td><td class="num">44.91%</td></tr>
+        <tr><td><b>拾柒-院线高奢护肤</b></td><td class="num">585</td><td class="num"><b style="color:#DC2626">17.74%</b></td><td class="num">29.62%</td><td class="num">36.51%</td><td class="num">44.57%</td><td class="num"><b style="color:#DC2626">49.85%</b></td><td class="num">50.29%</td></tr>
+        <tr><td>大盘均值</td><td class="num">—</td><td class="num">13.60%</td><td class="num">22.87%</td><td class="num">26.50%</td><td class="num">33.38%</td><td class="num">36.66%</td><td class="num">37.64%</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note green"><span class="ico">✓</span><span><b>整体与大盘持平、样本充足：</b>直播整体 4149 单、14 日 36.25%，与大盘 36.66% 基本持平（优 0.41pct）；主力采儿 1304 单、33.86% 低于大盘 2.80pct；杨薇 1175 单只有 21.08%，是四间里最健康的，且环比大幅改善（14 日 -20%）。<b>这两个直播间放量不会被退款反噬。</b></span></div>
+    <div class="note red"><span class="ico">!</span><span><b>要修的是辛大与拾柒：</b>辛大 1086 单（样本充足）、14 日 43.57% 高于大盘 6.91pct（环比 +1% 未改善）；拾柒 585 单（样本中等、形态可信）、49.85% 高于大盘 13.19pct，且 <b>1 小时退款 17.74% 高于大盘 13.60%，是典型的「下单即退」</b>。<b>分窗口动作：</b>24 小时内退＝核对直播间话术与实物/规格一致，并对未发货订单做 1 小时客服拦截挽单；3 日退＝48 小时内发货 + 加固包装 + 主动触达；14 日退＝按退款原因拆解 + 7 日回访。</span></div>
+    <div class="tbl-wrap" style="margin-top:14px"><table class="mini">
+      <thead><tr><th>店铺</th><th class="num">总下单次数</th><th class="num">有效评论率</th><th class="num">差评率</th><th class="num">品退率</th><th class="num">纠纷率</th><th class="num">14日CCR</th></tr></thead>
+      <tbody>
+        <tr><td><b>拾柒清梵护肤店</b></td><td class="num">160</td><td class="num">5.35%</td><td class="num">0.00%</td><td class="num">0.00%</td><td class="num">0.31%</td><td class="num">1.87%</td></tr>
+        <tr><td>大盘均值</td><td class="num">—</td><td class="num">4.14%</td><td class="num">2.83%</td><td class="num">0.20%</td><td class="num">0.30%</td><td class="num">2.38%</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note blue"><span class="ico">i</span><span><b>店铺侧本期只有一家有数据：</b>拾柒清梵护肤店 160 单、差评率 0.00% 优于大盘 2.83%、CCR 1.87% 低于大盘 2.38%——店铺三率不是这一轮的风险点，<b>重点仍放在直播间的退款与承接上</b>。</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><h3>3.6　产品能力：潜客优投已验证正向，创意优投四间全未开</h3><span>直播链路 · 本期无智投分层数据</span></div>
+    <div class="tbl-wrap"><table class="mini">
+      <thead><tr><th>直播间</th><th class="num">潜客优投消耗(万)</th><th class="num">占比</th><th class="num">潜客优投ROI</th><th class="num">未开启ROI</th><th>使用效果</th></tr></thead>
+      <tbody>
+        <tr><td><b>采儿-EviDanFan</b></td><td class="num">1.28</td><td class="num">19%</td><td class="num"><b style="color:#0B7A55">2.24</b></td><td class="num">1.38</td><td><span class="pill g">正向</span></td></tr>
+        <tr><td>杨薇-活胶原主打抗皱</td><td class="num">0.09</td><td class="num">7%</td><td class="num">1.46</td><td class="num">1.33</td><td><span class="pill g">正向</span></td></tr>
+        <tr><td>拾柒-院线高奢护肤</td><td class="num">0.01</td><td class="num">1%</td><td class="num">1.19</td><td class="num">0.85</td><td><span class="pill b">样本低</span></td></tr>
+        <tr><td>辛大生物-胶原种植仓</td><td class="num">0.00</td><td class="num">0%</td><td class="num">—</td><td class="num">1.06</td><td><span class="pill n">未跑出量</span></td></tr>
+      </tbody>
+    </table></div>
+    <div class="note green"><span class="ico">✓</span><span><b>两个现成的放大器：</b>① <b>潜客优投在采儿已跑出 1.28 万、ROI 2.24（未开启 1.38）</b>，按头部商家 10–15% 消耗的口径还有空间，先加到 10% 仓位；② <b>创意优投四间全部未开启</b>，大盘使用率 35%、效果显著正向，先给采儿与杨薇的项目内 TOP3 素材开。</span></div>
+    <div class="note amber"><span class="ico">!</span><span><b>商品表达要补小店商品：</b>采儿挂了微信小店商品（21% 消耗、ROI 1.59 优于直播的 1.53，但当前效果不显著、需优化选品），辛大与杨薇还是 100% 视频号直播，<b>建议两间各绑 1–2 个同功效、店铺三率好的小店商品</b>试商品表达。</span></div>
+  </div>
+</div>
+</div><div class="tabpanel" id="tab-shop" style="display:none">
+<div class="sec">
+  <div class="sec-h"><span class="n">04</span><h2>小店直购链路：0.27 万刚起步，先补基建量</h2><span class="hint">日均 0.27 万（占全量 2.4%）· 环比 +3886% · ROI 1.44</span></div>
+  <div class="take">小店链路本期从 0.01 万起量到 0.27 万，<b>ROI 1.44、计价率 0.93 都在合理区间，退款 14 日 10.68% 还低于大盘 16.51%</b>——方向是对的。当前只有一个在投商品聚拢组、11 条广告，<span class="warn">体量太小，这一轮不谈结构，先把基建量补起来</span>。</div>
+
+  <div class="card">
+    <div class="card-h"><h3>4.1　分商品数据情况</h3><span>小店链路整体 0.24 万 · 环比 +4317% · ROI 1.44</span></div>
+    <div class="tbl-wrap"><table class="mini">
+      <thead><tr><th>商品聚拢组</th><th class="num">日均消耗(万)</th><th class="num">环比</th><th class="num">下单ROI</th><th class="num">点击率</th><th class="num">下单率</th><th class="num">计价率</th></tr></thead>
+      <tbody>
+        <tr><td><b>梵芙尼 活胶原 抗皱紧致 冻干絮 · 19品</b></td><td class="num">0.23</td><td class="num">—</td><td class="num">1.44</td><td class="num">4.41%</td><td class="num"><b>4.59%</b></td><td class="num">0.89</td></tr>
+        <tr><td>小店链路汇总</td><td class="num">0.24</td><td class="num"><b style="color:#0E9F6E">+4317%</b></td><td class="num">1.44</td><td class="num">2.31%</td><td class="num">2.81%</td><td class="num">0.90</td></tr>
+      </tbody>
+    </table></div>
+    <div style="font-size:11px;color:#8A94A6;margin-top:7px">本期小店链路只有 1 个有消耗的商品聚拢组（相似品已归并），上周期该组无消耗，故无环比。</div>
+    <div class="note blue"><span class="ico">i</span><span><b>单点依赖是结构风险：</b>全部消耗压在一个商品聚拢组上，<b>建议在基建量补起来的同时上第二商品</b>（紧致面霜等），分散单点依赖。</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><h3>4.2　流量结构：视频号占比偏高，可往其他版位分散</h3><span>消耗占比（%）· 客户 vs 标杆</span></div>
+    <div class="stack-lab"><span>梵芙尼 活胶原 抗皱紧致 冻干絮　0.23 万 · ROI 1.44</span></div><div class="stack-bar"><i style="width:73.27%;background:#2B5CE6">74%</i><i style="width:8.91%;background:#7C5CF0">9%</i><i style="width:5.94%;background:#D97706">6%</i><i style="width:11.88%;background:#5AA9F0">12%</i></div>
+    <div class="stack-lab"><span>标杆客户　16.98 万 · ROI 1.87</span></div><div class="stack-bar"><i style="width:52.53%;background:#2B5CE6">52%</i><i style="width:5.05%;background:#7C5CF0">5%</i><i style="width:3.03%;background:#D97706"></i><i style="width:2.02%;background:#0E9F6E"></i><i style="width:37.37%;background:#5AA9F0">37%</i></div>
+    <div class="legend"><span><em style="background:#2B5CE6"></em>视频号</span><span><em style="background:#7C5CF0"></em>朋友圈</span><span><em style="background:#D97706"></em>公众号</span><span><em style="background:#5AA9F0"></em>小程序</span></div>
+    <div class="tbl-wrap" style="margin-top:14px"><table class="mini">
+      <thead><tr><th>版位</th><th class="num">客户·消耗占比</th><th class="num">客户·下单ROI</th><th class="num">标杆·消耗占比</th><th class="num">标杆·下单ROI</th></tr></thead>
+      <tbody>
+        <tr><td><b>微信视频号</b></td><td class="num"><b>74%</b></td><td class="num">1.44</td><td class="num">52%</td><td class="num">1.83</td></tr>
+        <tr><td><b>微信朋友圈</b></td><td class="num">9%</td><td class="num">1.42</td><td class="num">5%</td><td class="num">1.79</td></tr>
+        <tr><td><b>微信公众号</b></td><td class="num">6%</td><td class="num">1.42</td><td class="num">3%</td><td class="num">1.86</td></tr>
+        <tr><td><b>微信小程序</b></td><td class="num">12%</td><td class="num">1.43</td><td class="num">37%</td><td class="num">1.90</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note blue"><span class="ico">i</span><span><b>视频号占比 74% 偏高</b>（建议 30–65%、标杆 52%），可往朋友圈/公众号/小程序分散；但<b>客户在各版位的 ROI 都低于标杆同版位</b>（视频号 1.44 vs 1.83、小程序 1.43 vs 1.90），说明小店链路的转化效率整体还有空间，<b>先补基建与素材，再谈调流量结构</b>。</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><h3>4.3　基建：单条创意已跑满，缺的是创意与广告条数</h3><span>客户 vs 标杆客户</span></div>
+    
+    <div class="cmp">
+      <div class="cmp-title">单创意消耗（元）<em>本周期</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">拾伍</span>
+        <div class="track"><i class="fill me" style="width:100.0%"></i></div>
+        <span class="cmp-val">255</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:17.6%"></i></div>
+        <span class="cmp-val dim">45</span>
+      </div>
+    </div>
+    
+    <div class="cmp">
+      <div class="cmp-title">有消耗创意数<em>本周期</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">拾伍</span>
+        <div class="track"><i class="fill me" style="width:0.2%"></i></div>
+        <span class="cmp-val">9.17</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
+        <span class="cmp-val dim">3770</span>
+      </div>
+    </div>
+    
+    <div class="cmp">
+      <div class="cmp-title">创意重复度<em>及格线 <40%</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">拾伍</span>
+        <div class="track"><i class="fill me" style="width:100.0%"></i></div>
+        <span class="cmp-val">53%</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:81.1%"></i></div>
+        <span class="cmp-val dim">43%</span>
+      </div>
+    </div>
+    
+    <div class="cmp">
+      <div class="cmp-title">新广告占比<em>建议 10-30%</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">拾伍</span>
+        <div class="track"><i class="fill me" style="width:100.0%"></i></div>
+        <span class="cmp-val">49%</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:32.7%"></i></div>
+        <span class="cmp-val dim">16%</span>
+      </div>
+    </div>
+    <div class="tbl-wrap" style="margin-top:14px"><table class="mini">
+      <thead><tr><th>指标</th><th class="num">客户</th><th class="num">标杆客户</th><th class="num">建议区间</th></tr></thead>
+      <tbody>
+        <tr><td><b>账户数</b></td><td class="num">11</td><td class="num">80</td><td class="num">—</td></tr>
+        <tr><td><b>项目&广告数</b></td><td class="num">11</td><td class="num">187</td><td class="num">—</td></tr>
+        <tr><td><b>新广告占比</b></td><td class="num"><b>49%</b></td><td class="num">16%</td><td class="num">10–30%</td></tr>
+        <tr><td><b>有消耗创意数</b></td><td class="num"><b style="color:#DC2626">9.17</b></td><td class="num">3770</td><td class="num">—</td></tr>
+        <tr><td><b>创意重复度</b></td><td class="num"><b style="color:#DC2626">53%</b></td><td class="num">43%</td><td class="num">&lt; 40%</td></tr>
+        <tr><td><b>单创意消耗（元）</b></td><td class="num"><b style="color:#DC2626">255</b></td><td class="num">45</td><td class="num">越低越分散</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note amber"><span class="ico">!</span><span><b>两个动作：</b>① <b>补新素材把创意重复度从 53% 降下来</b>（及格线 40%），重复素材会被系统过滤，实际参竞的有效创意数变少，消耗天花板就上不去；② 单创意消耗 255 元远高于标杆 45 元、有消耗创意数只有 9 个（标杆 3770），<b>单条创意已跑得很满，缺的是创意供给与广告条数</b>，先把创意量补起来。</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><h3>4.4　素材：完播与点击优于标杆，差在转化后段与素材时长</h3><span>梵芙尼 活胶原 抗皱紧致 冻干絮 vs 标杆</span></div>
+    
+    <div class="cmp">
+      <div class="cmp-title">3s 完播率<em>本周期</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">拾伍</span>
+        <div class="track"><i class="fill me" style="width:100.0%"></i></div>
+        <span class="cmp-val">42.73%</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:77.7%"></i></div>
+        <span class="cmp-val dim">33.20%</span>
+      </div>
+    </div>
+    
+    <div class="cmp">
+      <div class="cmp-title">素材点击率<em>本周期</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">拾伍</span>
+        <div class="track"><i class="fill me" style="width:100.0%"></i></div>
+        <span class="cmp-val">5.95%</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:52.6%"></i></div>
+        <span class="cmp-val dim">3.13%</span>
+      </div>
+    </div>
+    
+    <div class="cmp">
+      <div class="cmp-title">素材转化率 cvr<em>点击→下单</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">拾伍</span>
+        <div class="track"><i class="fill me" style="width:73.4%"></i></div>
+        <span class="cmp-val">5.92%</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
+        <span class="cmp-val dim">8.06%</span>
+      </div>
+    </div>
+    
+    <div class="cmp">
+      <div class="cmp-title">平均素材时长（秒）<em>美妆建议 60 秒以上</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">拾伍</span>
+        <div class="track"><i class="fill me" style="width:56.3%"></i></div>
+        <span class="cmp-val">48.26</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
+        <span class="cmp-val dim">85.67</span>
+      </div>
+    </div>
+    <div class="tbl-wrap" style="margin-top:14px"><table class="mini">
+      <thead><tr><th>素材类型</th><th class="num">客户·消耗占比</th><th class="num">客户·下单ROI</th><th class="num">客户·广告数</th><th class="num">大盘·消耗占比</th><th class="num">大盘·下单ROI</th></tr></thead>
+      <tbody>
+        <tr><td><b>竖版视频</b></td><td class="num"><b>98%</b></td><td class="num">1.44</td><td class="num">11</td><td class="num">94%</td><td class="num">2.02</td></tr>
+        <tr><td><b>横版视频</b></td><td class="num">2%</td><td class="num">1.35</td><td class="num">1</td><td class="num">1%</td><td class="num">2.38</td></tr>
+      </tbody>
+    </table></div>
+    <div style="font-size:11px;color:#8A94A6;margin-top:7px">小店直购链路不统计实时画面；大盘原生动态占 5%、ROI 2.39，客户本期无原生动态消耗。</div>
+    <div class="note amber"><span class="ico">!</span><span><b>前端没问题、后段要补：</b>3s 完播 42.73% 与点击率 5.95% 都优于标杆（33.20% / 3.13%），说明素材的吸引力是够的；但 cvr 5.92% 低于标杆 8.06%，<b>点击进来之后的转化没接住</b>——配合商品详情页与主图一致性一起看。素材时长 48.26 秒也低于美妆 60 秒的建议，下一版往上加。</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><h3>4.5　退款：优于大盘，但 242 单属小样本</h3><span>小店链路 · 大盘基准 14 日 16.51%</span></div>
+    <div class="tbl-wrap"><table class="mini">
+      <thead><tr><th>商品聚拢组</th><th class="num">总下单次数</th><th class="num">1h</th><th class="num">24h</th><th class="num">3日</th><th class="num">7日</th><th class="num">14日</th><th class="num">30日</th></tr></thead>
+      <tbody>
+        <tr><td><b>梵芙尼 活胶原 抗皱紧致 冻干絮 · 19品</b></td><td class="num">242</td><td class="num">7.60%</td><td class="num">10.68%</td><td class="num">10.68%</td><td class="num">10.68%</td><td class="num"><b style="color:#0B7A55">10.68%</b></td><td class="num">11.57%</td></tr>
+        <tr><td>大盘均值</td><td class="num">—</td><td class="num">8.28%</td><td class="num">12.00%</td><td class="num">13.38%</td><td class="num">15.66%</td><td class="num">16.51%</td><td class="num">16.83%</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note blue"><span class="ico">i</span><span><b>先观察、不过度反应：</b>14 日退款 10.68% 低于大盘 16.51%，但只有 242 单、且各窗口都停在 10.68%（说明后续窗口几乎没有新增退款），属于小样本，<b>不足以据此下强结论，也不构成放量障碍</b>。等单量上到 300 单以上再看形态是否稳定。</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><h3>4.6　店铺三率：CCR 优于大盘</h3><span>小店链路 · 大盘基准 14 日 CCR 1.36%</span></div>
+    <div class="tbl-wrap"><table class="mini">
+      <thead><tr><th>店铺</th><th class="num">总下单次数</th><th class="num">有效评论率</th><th class="num">差评率</th><th class="num">品退率</th><th class="num">纠纷率</th><th class="num">14日CCR</th></tr></thead>
+      <tbody>
+        <tr><td><b>活胶原护肤E店</b></td><td class="num">233</td><td class="num">0.00%</td><td class="num">—</td><td class="num">0.00%</td><td class="num">0.00%</td><td class="num"><b style="color:#0B7A55">1.01%</b></td></tr>
+        <tr><td>大盘均值</td><td class="num">—</td><td class="num">3.33%</td><td class="num">7.77%</td><td class="num">0.13%</td><td class="num">0.12%</td><td class="num">1.36%</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note blue"><span class="ico">i</span><span><b>店铺侧不是风险点：</b>活胶原护肤E店 233 单、CCR 1.01% 低于大盘 1.36%、品退率 0.00%——店铺三率健康，<b>重点仍放在补基建量与素材上</b>。</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><h3>4.7　产品能力：智投已 100%，两个优投都还没开</h3><span>小店链路 · 大盘智投占比 78%</span></div>
+    <div class="tbl-wrap"><table class="mini">
+      <thead><tr><th>能力</th><th class="num">客户使用情况</th><th class="num">大盘/建议</th><th>判定与动作</th></tr></thead>
+      <tbody>
+        <tr><td><b>智投</b></td><td class="num">100%（智投全店托管 · CPA）</td><td class="num">78%</td><td><span class="pill g">占比优于大盘</span>　维持，新商品继续用智投起量</td></tr>
+        <tr><td><b>潜客优投</b></td><td class="num">未开启</td><td class="num">头部 10–15% 消耗</td><td><span class="pill n">未开启</span>　当前体量太小，等单品日均上到千级再开</td></tr>
+        <tr><td><b>创意优投</b></td><td class="num">未开启</td><td class="num">使用率 35%</td><td><span class="pill b">建议开启</span>　给主力品 TOP 素材开创意优投</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note blue"><span class="ico">i</span><span><b>智投已满（智投全店托管、占比优于大盘），维持即可；</b>潜客优投当前体量太小先不开，<b>创意优投给主力品 TOP 素材开</b>（大盘使用率 35%、效果显著正向）。</span></div>
+  </div>
+</div>
+</div>
+<div class="sec">
+  <div class="sec-h"><span class="n">05</span><h2>下次怎么做：一页纸行动清单</h2><span class="hint">按优先级排序，每条都对应上面的数据</span></div>
+  <div class="take">7 件事按顺序做：<b>先给两间未回本的直播间止血（拾柒降出价、辛大补新素材），再修它们的高退款，最后把已验证的放大器（采儿潜客优投、创意优投、小程序版位）开满</b>。效率基本盘在变好（ROI +19%），这轮的目标是把 11.15 万/日推到 <b>14.50 万/日</b>。</div>
+  <div class="card">
+    <div class="tbl-wrap"><table class="mini">
+      <thead><tr><th style="width:52px">优先级</th><th style="width:190px">动作</th><th>依据（数据）</th><th>怎么做</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pri p0">P0</span></td><td><b>拾柒-院线高奢护肤止血</b></td><td>1.20 万/日 · ROI <b>0.87</b> · CPM 365（四间最高）· 出价 99 对下单单价 107 · 14 日退款 <b>49.85%</b>（大盘 36.66%）· 1h 退款 17.74% · 585 单</td><td>先降出价与低效广告、把 CPM 拉回 200 上下；高退款按三窗口处理（话术与实物一致 + 1h 客服拦截 / 48h 发货 / 7 日回访）；修复前不加量</td></tr>
+        <tr><td><span class="pri p0">P0</span></td><td><b>辛大生物-胶原种植仓修复</b></td><td>1.74 万/日 · ROI <b>1.04</b> · 新广告占比 <b>4%</b>（建议 10–30%）· 14 日退款 <b>43.57%</b> · 1086 单</td><td>补新素材把新广告占比提到 10–30%；退款按三窗口处理（环比未改善，需加力）；修复前不加量</td></tr>
+        <tr><td><span class="pri p1">P1</span></td><td><b>采儿潜客优投加到 10% 仓位 + 开创意优投</b></td><td>潜客优投 1.28 万 · ROI <b>2.24</b> vs 未开启 1.38；创意优投四间<b>全未开启</b>（大盘使用率 35%）</td><td>潜客优投先在采儿加到 10% 消耗占比，杨薇与拾柒小仓位跟；给采儿与杨薇的项目内 TOP3 素材开创意优投，按周验证 ROI</td></tr>
+        <tr><td><span class="pri p1">P1</span></td><td><b>采儿补小程序版位</b></td><td>小程序占 19%（标杆 43%）· 该版位 ROI <b>1.57</b> 高于整体 1.54</td><td>用 3.0 版位单投 / 智投补位，目标往 30% 提；辛大、杨薇、拾柒的小程序 ROI 不占优，先不动</td></tr>
+        <tr><td><span class="pri p1">P1</span></td><td><b>采儿与另两间的直播间承接</b></td><td>采儿下单率 8.89%（标杆 15.43%）、商品点击率 92.24%（103.61%）；辛大与拾柒商品点击率仅 57% 上下</td><td>采儿改促单话术与商品讲解前置（每 15 分钟一轮钩子）；辛大与拾柒改选品排序与商品展示节奏</td></tr>
+        <tr><td><span class="pri p1">P1</span></td><td><b>补小店商品表达</b></td><td>采儿小店商品 21% · ROI 1.59 优于直播 1.53；辛大与杨薇 100% 视频号直播、未配小店商品</td><td>辛大与杨薇各绑 1–2 个同功效、店铺三率好的小店商品试商品表达；采儿优化现有小店商品选品</td></tr>
+        <tr><td><span class="pri p2">P2</span></td><td><b>素材前 5 秒钩子重做</b></td><td>采儿 3s/5s 完播 35.23% / 26.10%（标杆 44.72% / 33.34%）、点击率 1.59%（2.24%）；杨薇素材时长仅 50.01 秒</td><td>按大盘 80 秒左右的时长重做一版，前 5 秒换更抓人的钩子；先在小仓位验完再放量</td></tr>
+        <tr><td><span class="pri p2">P2</span></td><td><b>小店链路补创意量</b></td><td>0.27 万/日 · 1 个商品聚拢组 · 11 条广告 · 创意重复度 <b>53%</b>（及格线 40%）· 单创意消耗 255 元（标杆 45）</td><td>主力品补新素材降重复度；创意量补起来后再上第二商品</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <details>
+    <summary>展开：关键口径</summary>
+    <div style="margin-top:12px;font-size:12.8px;line-height:1.9;color:#334155">
+      <b>日耗目标</b>：效率同步上行，目标＝本周期 ×1.3——直播 14.14 万/日 + 小店 0.35 万/日，合计 <b>14.50 万/日</b>（当前 11.15 万/日，缺口 3.35 万/日）。<br><br>
+      <b>口径</b>：本周期 10.27-11.01（6 天），上周期 10.21-10.26，全部为日均口径；ROI 为下单 ROI。拾伍为直播链路（10.88 万 · 97.6%）+ 小店直购链路（0.27 万 · 2.4%）双链路，两链路的大盘基准各自独立（直播退款大盘 14 日 36.66%，小店退款大盘 14 日 16.51%），不可互换。标杆为 V5 报告指定客户同期数据（直播与小店均为同一标杆客户；素材类型对比中的「大盘情况」为直播/小店各自的大盘基准）。本期直播链路智投分层数据缺失（V5 报告「暂无智投数据」），故产品能力卡只呈现潜客优投与创意优投。机会流量判定＝占比 &lt; 标杆且 ROI 高于本直播间整体。计价率 0.8–1.2 为合理区间；新广告占比 10–30% 为宜、创意重复度 &lt; 40% 为及格线。退款率为下单后 N 个自然日累计退款占比；退款率结论结合总下单次数评估置信度（≥1000 单样本充足、300–999 单样本中等、&lt;300 单小样本）。
+    </div>
+  </details>
+</div>
+
+<div class="footer">数据来源：AMS 经营数仓　｜　复盘周期 2026-10-27 ~ 11-01　｜　报告重构于 2026-11-04</div>
+</div>
+<script>
+function showTab(id,btn){
+  document.querySelectorAll('.tabpanel').forEach(function(p){p.style.display='none'});
+  document.getElementById(id).style.display='block';
+  document.querySelectorAll('.tabbtn').forEach(function(b){b.classList.remove('active')});
+  btn.classList.add('active');
+}
+</script>
+</body></html>
