@@ -1,0 +1,788 @@
+<!DOCTYPE html><html lang="zh-CN"><head><script>(function(){window.__idata_artifact_error__=[];function _record(t){t=String(t==null?'unknown error':t).slice(0,5000);window.__idata_artifact_error__.push(t);try{window.parent&&window.parent.postMessage({type:'artifact-error',message:t.slice(0,500)},'*');}catch(_e){}}window.addEventListener('error',function(ev){var parts=[];if(ev.error&&(ev.error.stack||ev.error.message)){parts.push(String(ev.error.stack||ev.error.message));}else{parts.push(ev.message||'Unknown error');}if(ev.filename){parts.push('\n(at '+ev.filename+':'+(ev.lineno||'?')+':'+(ev.colno||'?')+')');}_record(parts.join('\n'));},true);window.addEventListener('unhandledrejection',function(ev){var r=ev.reason;_record((r&&(r.stack||r.message))||r||'Unhandled Promise rejection');});})();</script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>蚁团美妆2025 · 操盘基建监控报告（2026-11-16~2026-11-22 · 对外版）</title>
+<style>
+:root{--blue:#2563eb;--ink:#1e293b;--muted:#64748b;--line:#e2e8f0;--bg:#eef2f7;
+--good:#15803d;--warn:#c2410c;--bad:#b91c1c;--mid:#a16207;--card:#fff;}
+*{box-sizing:border-box;}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei","Helvetica Neue",sans-serif;
+background:var(--bg);color:var(--ink);margin:0;padding:22px;font-size:13px;line-height:1.6;}
+.wrap{max-width:1400px;margin:0 auto;}
+.hero{background:linear-gradient(120deg,#1e3a8a,#2563eb 55%,#0ea5e9);color:#fff;
+border-radius:14px;padding:24px 28px;box-shadow:0 8px 24px rgba(37,99,235,.25);}
+.hero h1{margin:0 0 6px;font-size:24px;letter-spacing:.5px;}
+.hero .meta{font-size:12.5px;opacity:.92;}
+.hero .tags{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;}
+.hero .tag{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);
+border-radius:20px;padding:3px 12px;font-size:12px;}
+.card{background:var(--card);border-radius:12px;padding:18px 20px;margin-top:16px;
+box-shadow:0 2px 10px rgba(15,23,42,.06);}
+h2.sec{font-size:16px;margin:0 0 4px;padding-left:10px;border-left:4px solid var(--blue);}
+.sec-sub{color:var(--muted);font-size:12px;margin:0 0 14px;padding-left:14px;}
+/* 评分卡 */
+.score-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:14px;}
+@media(max-width:980px){.score-grid{grid-template-columns:repeat(2,1fr);}}
+.sc{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fbfdff;}
+.sc .nm{font-size:13px;color:var(--muted);font-weight:600;}
+.sc .big{font-size:32px;font-weight:800;line-height:1.15;margin:4px 0 2px;}
+.sc .gd{display:inline-block;font-size:11.5px;padding:1px 9px;border-radius:10px;color:#fff;}
+.sc .bars{margin-top:10px;}
+.bar{display:flex;align-items:center;gap:6px;font-size:11.5px;margin-top:5px;}
+.bar .lb{width:52px;color:var(--muted);flex:none;}
+.bar .tr{flex:1;height:7px;background:#e8eef7;border-radius:4px;overflow:hidden;}
+.bar .fi{height:100%;border-radius:4px;}
+.bar .vl{width:32px;text-align:right;font-variant-numeric:tabular-nums;color:var(--ink);flex:none;}
+/* tabs */
+input[name=lk]{display:none;}
+.tabs{display:flex;gap:6px;margin-top:18px;flex-wrap:wrap;}
+.tabs label{cursor:pointer;padding:9px 20px;border-radius:10px 10px 0 0;background:#dbe4f0;
+color:#334155;font-weight:600;font-size:13.5px;border:1px solid var(--line);border-bottom:none;}
+.tabs label:hover{background:#cbd7e8;}
+.panes>.pane{display:none;background:var(--card);border-radius:0 12px 12px 12px;
+padding:20px;box-shadow:0 2px 10px rgba(15,23,42,.06);}
+#t0:checked~.tabs label[for=t0],#t1:checked~.tabs label[for=t1],
+#t2:checked~.tabs label[for=t2],#t3:checked~.tabs label[for=t3]{
+background:#2563eb;color:#fff;border-color:#2563eb;}
+#t0:checked~.panes #p0,#t1:checked~.panes #p1,
+#t2:checked~.panes #p2,#t3:checked~.panes #p3{display:block;}
+/* 表格 */
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:12px;}
+th{background:#2563eb;color:#fff;padding:9px 6px;text-align:center;font-weight:600;
+font-size:12px;border:1px solid #1d4ed8;}
+td{padding:8px 6px;border:1px solid var(--line);text-align:center;vertical-align:middle;}
+tbody tr:nth-child(even){background:#f8fafc;}
+tbody tr:hover{background:#eff6ff;}
+td.l{text-align:left;}
+td.n{font-variant-numeric:tabular-nums;}
+.hi{background:#fef3c7!important;font-weight:600;}
+.sub-h{background:#e0e7ff!important;color:#1e3a8a;font-weight:700;}
+/* 徽章 */
+.bdg{display:inline-block;padding:1px 8px;border-radius:9px;font-size:11px;font-weight:600;color:#fff;}
+.b-good{background:#16a34a;}.b-mid{background:#d97706;}.b-bad{background:#dc2626;}
+.b-eq{background:#64748b;}
+.up{color:#15803d;font-weight:700;}.down{color:#b91c1c;font-weight:700;}
+/* 结论 */
+.concl{margin-top:8px;border-left:3px solid #93c5fd;background:#f0f7ff;
+padding:9px 12px;border-radius:0 8px 8px 0;font-size:12.5px;color:#1e3a8a;}
+.concl b{color:#1e40af;}
+.advice{margin-top:6px;border-left:3px solid #fdba74;background:#fff7ed;
+padding:9px 12px;border-radius:0 8px 8px 0;font-size:12.5px;color:#7c2d12;}
+.note{font-size:11.5px;color:var(--muted);margin-top:8px;}
+.footer{margin-top:18px;font-size:11.5px;color:var(--muted);text-align:center;padding:14px 0;}
+.kv{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;}
+.kv .it{background:#f1f5f9;border-radius:9px;padding:7px 14px;font-size:12px;}
+.kv .it b{font-size:15px;color:#1e40af;margin-left:5px;}
+
+/* 双图容器 */
+.viz2{display:grid;grid-template-columns:1.55fr 1fr;gap:18px;align-items:center;
+background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px 18px;margin-top:12px;}
+@media(max-width:900px){.viz2{grid-template-columns:1fr;}}
+.viz-t{font-size:12.5px;font-weight:700;color:#1e3a8a;margin-bottom:2px;}
+.viz-s{font-size:11.5px;color:#64748b;margin-bottom:6px;}
+/* 堆叠条 */
+.sbr{display:flex;align-items:center;gap:9px;margin-top:11px;}
+.sbr-lb{width:104px;flex:none;font-size:11.5px;color:#475569;font-weight:600;text-align:right;line-height:1.25;}
+.sbr-track{flex:1;height:30px;display:flex;position:relative;min-width:0;}
+.sbr-seg{display:flex;align-items:center;justify-content:center;font-size:11.5px;
+font-weight:700;color:#fff;position:relative;min-width:0;transition:width .2s;}
+.sbr-seg:first-child{border-radius:8px 0 0 8px;}
+.sbr-seg:last-child{border-radius:0 8px 8px 0;}
+.sbr-seg:only-child{border-radius:8px;}
+.sbr-row.peer .sbr-seg{color:#334155;}
+.sbr-seg.narrow span{position:absolute;left:100%;margin-left:5px;color:#334155;
+background:#fff;padding:1px 5px;border-radius:4px;border:1px solid #e2e8f0;
+white-space:nowrap;z-index:3;font-size:11px;}
+.sbr-seg.narrow.last span{left:auto;right:100%;margin-right:5px;margin-left:0;}
+/* 图例 */
+.lgd{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px;font-size:11.5px;color:#475569;}
+.lgd i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;
+vertical-align:-1px;}
+/* 环形图 */
+.dnut-wrap{display:flex;flex-direction:column;align-items:center;}
+.dnut{width:100%;max-width:168px;height:auto;display:block;}
+.dnut .dc{font-variant-numeric:tabular-nums;}
+/* 脚注 */
+.viz-note{font-size:11px;color:#94a3b8;margin-top:10px;line-height:1.5;}
+/* 打印：保留背景色，避免图形塌陷 */
+@media print{
+  body{background:#fff;padding:0;}
+  .sbr-seg,.bdg,.sc .gd,th{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .card,.viz2{box-shadow:none;break-inside:avoid;}
+  .panes>.pane{display:block!important;page-break-before:always;}
+  .tabs{display:none;}
+}
+/* 分布板块小标题 */
+.viz-h{font-size:13.5px;color:#1e3a8a;margin:20px 0 2px;padding-left:9px;
+border-left:3px solid #60a5fa;line-height:1.35;}
+
+/* 环比 */
+.qc{font-weight:700;white-space:nowrap}
+.qc.up{color:#16a34a}.qc.down{color:#dc2626}.qc.flat{color:#94a3b8;font-weight:500}
+.cmp1{background:#f8fafc;color:#475569}
+.cmp2{background:#fff7ed}
+th.cmp1-h{background:#f1f5f9;color:#334155}
+th.cmp2-h{background:#fff7ed;color:#9a3412}
+.mask{color:#94a3b8;font-size:10.5px;font-weight:400}
+.slash{color:#94a3b8;font-size:13px;font-weight:600}
+.note-s{font-size:10.5px;color:#94a3b8;font-weight:400;white-space:nowrap}
+.ext th{font-size:12px}
+.ext td{font-size:12px}
+.hero .tag{font-size:11.5px}
+.sec-sub{font-size:12px}
+.sectag{display:inline-block;background:#eef2ff;color:#3730a3;border-radius:6px;
+padding:1px 8px;font-size:11px;font-weight:600;margin-left:8px}
+/* 三段式结论：优势 / 劣势 / 建议动作 */
+.vd{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0 4px}
+.vd-sec{border-radius:10px;padding:11px 13px 12px;border:1px solid;min-width:0}
+.vd-good{background:#f0fdf4;border-color:#bbf7d0}
+.vd-bad{background:#fff7ed;border-color:#fed7aa}
+.vd-act{background:#eff6ff;border-color:#bfdbfe}
+.vd-h{font-weight:800;font-size:12.5px;margin-bottom:7px;display:flex;align-items:center;gap:6px}
+.vd-good .vd-h{color:#15803d}.vd-bad .vd-h{color:#c2410c}.vd-act .vd-h{color:#1d4ed8}
+.vd-ic{font-size:13px}
+.vd ul{list-style:none;margin:0;padding:0}
+.vd li{position:relative;padding-left:15px;margin:0 0 5px;font-size:11.8px;
+line-height:1.65;color:#334155;word-break:break-word}
+.vd li:before{content:"";position:absolute;left:2px;top:8px;width:5px;height:5px;
+border-radius:50%;background:#94a3b8}
+.vd-good li:before{background:#22c55e}.vd-bad li:before{background:#f97316}
+.vd-act li:before{background:#3b82f6}
+.vd li.muted{color:#94a3b8;font-style:italic}
+/* 报告开头的精简评分汇总条 */
+.strip{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 4px}
+.strip .st-lb{font-size:11.5px;font-weight:700;color:#475569;margin-right:2px}
+.strip .st-it{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:8px;
+padding:4px 10px;font-size:11.5px;color:#475569;white-space:nowrap}
+.strip .st-it b{font-size:14px;margin:0 3px}
+.strip .st-it .st-d{font-size:10.5px;font-weight:700;margin-left:3px}
+@media(max-width:760px){.vd{grid-template-columns:1fr}}
+@media print{.panes>.pane{display:block!important;page-break-before:always}.tabs{display:none}}
+
+.mt-wrap{margin-top:6px}
+.mt-wrap>input.mt{display:none}
+.mtabs{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+.mtabs label{cursor:pointer;padding:8px 20px;border-radius:10px 10px 0 0;background:#dbe4f0;
+color:#334155;font-weight:700;font-size:12.5px;border:1px solid #cbd5e1;border-bottom:none}
+.mtabs label:hover{background:#cbd7e8}
+.mpanes>.mpane{display:none;background:var(--card);border-radius:0 12px 12px 12px;
+border:1px solid #cbd5e1;padding:14px}
+.dir-down{color:#c2410c;font-weight:700}
+.mod-h{font-size:16px;font-weight:800;color:#1e3a8a;margin:2px 0 4px}
+.mod-sub{font-size:12px;color:#64748b;margin:0 0 12px;line-height:1.7}
+.gtbl-cap{font-size:12.5px;font-weight:700;color:#1e3a8a;margin:14px 0 2px;padding-left:9px;
+border-left:3px solid #60a5fa}
+.gtbl-cap:first-child{margin-top:2px}
+@media print{.mpanes>.mpane{display:block!important;page-break-before:always;border:none}
+.mtabs{display:none}}
+</style></head><body><div class="wrap">
+<div class="hero">
+<h1>蚁团美妆2025 · 操盘基建监控报告 <span style="font-size:14px;opacity:.85">对外版</span></h1>
+<div class="meta">本期 2026-11-16 ~ 2026-11-22（7 天）　vs　上期 2026-11-09 ~ 2026-11-15（7 天）　vs　9月跑量期 2026-09-09 ~ 2026-09-15（7 天）　|　
+口径：仅统计竞价广告（排除全域通）　|　生成日期 2026-11-25</div>
+<div class="tags">
+<span class="tag"><b>总览独立</b>　4 链路总体操盘评分（含较上期对比）</span><span class="tag"><b>消耗统一日均</b>　所有消耗类数值均为日均消耗（该期累计 ÷ 该期天数）；余额 / 日耗不折算</span><span class="tag"><b>模块内嵌对比周期</b>　模块一/二/三/四每张主表含「上期」、「9月跑量期」数值列与对应环比列</span><span class="tag"><b>五大模块</b>　账户&余额 · 有效基建数 · 有效上新数 · 广告定向 · 主力账户评分表</span><span class="tag"><b>每模块按链路切换</b>　直播 / 小店直购 / CID 独立 tab，互不联动</span><span class="tag">有效基建 / 有效上新总数＝账户数 × 单户量 × 单条量（三因子乘法分解）</span><span class="tag">评分权重：有效基建 30% / 有效上新 30% / 广告定向 20% / 账户余额 20%</span><span class="tag">行业基准为同链路同口径客户群均值；涉及消耗金额的基准列以「/」表示</span>
+</div></div>
+<div class="card">
+<h2 class="sec">各链路总体操盘评分 <span style="font-size:12px;color:#64748b;font-weight:400">（含较上期对比）</span></h2>
+<p class="sec-sub">评分规则：按报告四大模块结构打分——有效基建 30% / 有效上新 30% / 广告定向 20% / 账户与余额 20%。
+各模块内指标等权平均得模块分，单指标沿用 min(自身÷行业, 150%)÷150%×100（反向指标分子分母互换）；
+「在投创意重复度」「新建创意重复度」两项在所属模块内权重降为等权的一半（三指标模块 → 5/12、5/12、1/6；两指标模块 → 3/4、1/4）；
+规模类绝对量（在投账户数、有效总数）不纳入打分，以免封顶失真；主力 / 非主力按在投账户数加权合并。
+有效上新模块由原「广告上新 + 创意上新」两维合并。≥90 优秀 / 75~90 良好 / 60~75 待改进 / &lt;60 需重点干预。</p>
+<div class="score-grid"><div class="sc">
+<div class="nm">总览（全链路）　<span style="font-size:11px;color:#94a3b8">权重 20/30/30/20%</span></div>
+<div class="big" style="color:#d97706">63.8</div>
+<div><span class="gd" style="background:#d97706">待改进</span>
+<span style="font-size:11.5px;color:#64748b;margin-left:6px">日均消耗 8.7 万（+23.1%）</span></div>
+<div class="note" style="margin:6px 0 2px;font-size:11px">较上期 <b style="color:#16a34a">+6.2 分</b>（上期 57.7，需重点干预 → 待改进）</div>
+<div class="bars"><div class="bar"><div class="lb">账户余额</div><div class="tr"><div class="fi" style="width:75%;background:#d97706"></div></div><div class="vl" style="color:#d97706">75</div><span class="note" style="font-size:10px;color:#94a3b8">较上期 72</span></div><div class="bar"><div class="lb">有效基建</div><div class="tr"><div class="fi" style="width:48%;background:#dc2626"></div></div><div class="vl" style="color:#dc2626">48</div><span class="note" style="font-size:10px;color:#94a3b8">较上期 37</span></div><div class="bar"><div class="lb">有效上新</div><div class="tr"><div class="fi" style="width:83%;background:#2563eb"></div></div><div class="vl" style="color:#2563eb">83</div><span class="note" style="font-size:10px;color:#94a3b8">较上期 81</span></div><div class="bar"><div class="lb">广告定向</div><div class="tr"><div class="fi" style="width:47%;background:#dc2626"></div></div><div class="vl" style="color:#dc2626">47</div><span class="note" style="font-size:10px;color:#94a3b8">较上期 38</span></div></div></div><div class="sc">
+<div class="nm">直播　<span style="font-size:11px;color:#94a3b8">权重 20/30/30/20%</span></div>
+<div class="big" style="color:#d97706">65.5</div>
+<div><span class="gd" style="background:#d97706">待改进</span>
+<span style="font-size:11.5px;color:#64748b;margin-left:6px">日均消耗 4.1 万（+32.9%）</span></div>
+<div class="note" style="margin:6px 0 2px;font-size:11px">较上期 <b style="color:#16a34a">+4.7 分</b>（上期 60.9，待改进 → 待改进）</div>
+<div class="bars"><div class="bar"><div class="lb">账户余额</div><div class="tr"><div class="fi" style="width:72%;background:#d97706"></div></div><div class="vl" style="color:#d97706">72</div><span class="note" style="font-size:10px;color:#94a3b8">较上期 68</span></div><div class="bar"><div class="lb">有效基建</div><div class="tr"><div class="fi" style="width:41%;background:#dc2626"></div></div><div class="vl" style="color:#dc2626">41</div><span class="note" style="font-size:10px;color:#94a3b8">较上期 37</span></div><div class="bar"><div class="lb">有效上新</div><div class="tr"><div class="fi" style="width:87%;background:#2563eb"></div></div><div class="vl" style="color:#2563eb">87</div><span class="note" style="font-size:10px;color:#94a3b8">较上期 85</span></div><div class="bar"><div class="lb">广告定向</div><div class="tr"><div class="fi" style="width:65%;background:#d97706"></div></div><div class="vl" style="color:#d97706">65</div><span class="note" style="font-size:10px;color:#94a3b8">较上期 53</span></div></div></div><div class="sc">
+<div class="nm">小店直购　<span style="font-size:11px;color:#94a3b8">权重 20/30/30/20%</span></div>
+<div class="big" style="color:#dc2626">59.1</div>
+<div><span class="gd" style="background:#dc2626">需重点干预</span>
+<span style="font-size:11.5px;color:#64748b;margin-left:6px">日均消耗 3.4 万（+16.8%）</span></div>
+<div class="note" style="margin:6px 0 2px;font-size:11px">较上期 <b style="color:#16a34a">+4.4 分</b>（上期 54.8，需重点干预 → 需重点干预）</div>
+<div class="bars"><div class="bar"><div class="lb">账户余额</div><div class="tr"><div class="fi" style="width:81%;background:#2563eb"></div></div><div class="vl" style="color:#2563eb">81</div><span class="note" style="font-size:10px;color:#94a3b8">较上期 78</span></div><div class="bar"><div class="lb">有效基建</div><div class="tr"><div class="fi" style="width:47%;background:#dc2626"></div></div><div class="vl" style="color:#dc2626">47</div><span class="note" style="font-size:10px;color:#94a3b8">较上期 36</span></div><div class="bar"><div class="lb">有效上新</div><div class="tr"><div class="fi" style="width:82%;background:#2563eb"></div></div><div class="vl" style="color:#2563eb">82</div><span class="note" style="font-size:10px;color:#94a3b8">较上期 78</span></div><div class="bar"><div class="lb">广告定向</div><div class="tr"><div class="fi" style="width:22%;background:#dc2626"></div></div><div class="vl" style="color:#dc2626">22</div><span class="note" style="font-size:10px;color:#94a3b8">较上期 24</span></div></div></div><div class="sc">
+<div class="nm">CID　<span style="font-size:11px;color:#94a3b8">权重 20/30/30/20%</span></div>
+<div class="big" style="color:#d97706">64.4</div>
+<div><span class="gd" style="background:#d97706">待改进</span>
+<span style="font-size:11.5px;color:#64748b;margin-left:6px">日均消耗 1.2 万（+12.3%）</span></div>
+<div class="note" style="margin:6px 0 2px;font-size:11px">较上期 <b style="color:#16a34a">+9.2 分</b>（上期 55.2，需重点干预 → 待改进）</div>
+<div class="bars"><div class="bar"><div class="lb">账户余额</div><div class="tr"><div class="fi" style="width:75%;background:#2563eb"></div></div><div class="vl" style="color:#2563eb">75</div><span class="note" style="font-size:10px;color:#94a3b8">较上期 75</span></div><div class="bar"><div class="lb">有效基建</div><div class="tr"><div class="fi" style="width:92%;background:#15803d"></div></div><div class="vl" style="color:#15803d">92</div><span class="note" style="font-size:10px;color:#94a3b8">较上期 67</span></div><div class="bar"><div class="lb">有效上新</div><div class="tr"><div class="fi" style="width:39%;background:#dc2626"></div></div><div class="vl" style="color:#dc2626">39</div><span class="note" style="font-size:10px;color:#94a3b8">较上期 40</span></div><div class="bar"><div class="lb">广告定向</div><div class="tr"><div class="fi" style="width:50%;background:#dc2626"></div></div><div class="vl" style="color:#dc2626">50</div><span class="note" style="font-size:10px;color:#94a3b8">较上期 40</span></div></div></div></div>
+</div>
+<div class="card"><h2 class="sec">一 · 账户&余额分析 <span class="sectag">各链路独立切换</span></h2><div class="mt-wrap"><style>#mt_m1_0:checked~.mtabs label[for=mt_m1_0],#mt_m1_1:checked~.mtabs label[for=mt_m1_1],#mt_m1_2:checked~.mtabs label[for=mt_m1_2]{background:#2563eb;color:#fff;border-color:#2563eb}#mt_m1_0:checked~.mpanes #mp_m1_0,#mt_m1_1:checked~.mpanes #mp_m1_1,#mt_m1_2:checked~.mpanes #mp_m1_2{display:block}</style><input class="mt" type="radio" name="mt_m1" id="mt_m1_0" checked><input class="mt" type="radio" name="mt_m1" id="mt_m1_1"><input class="mt" type="radio" name="mt_m1" id="mt_m1_2"><div class="mtabs"><label for="mt_m1_0">直播</label><label for="mt_m1_1">小店直购</label><label for="mt_m1_2">CID</label></div><div class="mpanes"><div class="mpane" id="mp_m1_0"><p class="mod-sub">在投账户 = 周期内有消耗的账户；主力账户 = 按消耗降序累计覆盖 80% 消耗的账户；余额充足 = 期末可用余额 &gt; 3 × 期末单日消耗。本模块账户数为周期内去重口径。</p><div class="kv"><div class="it">日均消耗<b>4.05 万</b></div><div class="it">在投账户<b>129 个</b></div><div class="it">主力账户<b>32 个</b></div><div class="it">主力占比<b>24.8%</b></div><div class="it">余额充足率<b>100.0%</b></div></div><table class="ext"><thead><tr><th>监控指标</th><th>本期<br>11-16~11-22</th><th class="cmp1-h">上期<br>11-09~11-15</th><th class="cmp2-h">9月跑量期<br>09-09~09-15</th><th class="cmp1-h">较上期</th><th class="cmp2-h">较9月跑量期</th><th>行业基准</th><th>差异</th><th>水平</th></tr></thead><tbody><tr><td class="l">在投账户数</td><td class="n"><b>129</b></td><td class="n cmp1">115</td><td class="n cmp2">419</td><td class="n qc cmp1 up">+12.2%</td><td class="n qc cmp2 down">-69.2%</td><td class="n">43</td><td class="n"><span class="up">+199%</span></td><td><span class="bdg b-eq">规模参考</span></td></tr><tr><td class="l">主力账户数</td><td class="n"><b>32</b></td><td class="n cmp1">35</td><td class="n cmp2">74</td><td class="n qc cmp1 down">-8.6%</td><td class="n qc cmp2 down">-56.8%</td><td class="n">14</td><td class="n"><span class="up">+131%</span></td><td><span class="bdg b-good">领先</span></td></tr><tr><td class="l">主力账户占比</td><td class="n"><b>24.8%</b></td><td class="n cmp1">30.4%</td><td class="n cmp2">17.7%</td><td class="n qc cmp1 down">-18.5%</td><td class="n qc cmp2 up">+40.5%</td><td class="n">37.4%</td><td class="n"><span class="down">-34%</span></td><td><span class="bdg b-mid">落后</span></td></tr><tr><td class="l">主力账户余额充足数</td><td class="n"><b>32</b></td><td class="n cmp1">35</td><td class="n cmp2">70</td><td class="n qc cmp1 down">-8.6%</td><td class="n qc cmp2 down">-54.3%</td><td class="n">13</td><td class="n"><span class="up">+139%</span></td><td><span class="bdg b-good">领先</span></td></tr><tr><td class="l">主力账户余额充足率</td><td class="n"><b>100.0%</b></td><td class="n cmp1">100.0%</td><td class="n cmp2">94.6%</td><td class="n qc cmp1 flat">持平</td><td class="n qc cmp2 up">+5.7%</td><td class="n">93.0%</td><td class="n"><span class="up">+8%</span></td><td><span class="bdg b-eq">持平</span></td></tr></tbody></table><div class="vd"><div class="vd-sec vd-good"><div class="vd-h"><span class="vd-ic">✅</span>优势</div><ul><li>主力账户余额充足率 <b>100.0%</b>（行业基准 93.0%，+7.0pp），全部主力账户均无断投风险。</li><li>32 个主力账户中 <b>32</b> 个余额充足，覆盖率 100.0%。</li><li>余额充足率与上期 100.0% 相比未回落，健康度保持稳定。</li><li>在投账户数由上期 115 增至 129（+14），投放广度在扩张。</li></ul></div><div class="vd-sec vd-bad"><div class="vd-h"><span class="vd-ic">⚠️</span>劣势</div><ul><li>主力账户占比 24.8%（行业基准 37.4%，<span class="down">-12.6pp</span>），集中度偏弱。</li><li>129 个在投账户中仅 32 个贡献 80% 消耗，消耗结构偏分散、长尾账户多。</li><li>主力账户数较上期减少 3 个（35 → 32），需确认是主动收敛还是消耗流失。</li></ul></div><div class="vd-sec vd-act"><div class="vd-h"><span class="vd-ic">🎯</span>建议动作</div><ul><li>把预算与人力向 32 个主力账户倾斜；对长尾账户设消耗门槛，连续 3 天消耗低于 500 元的账户合并或关停。</li><li>目标：把主力账户占比从 24.8% 提升到行业基准 37.4% 附近。</li><li>维持 32 个主力账户的余额覆盖与占比 24.8% 不回落，把新增预算优先分配给主力账户。</li></ul></div></div><div class="note">注：行业基准列仅含账户规模、占比与余额健康度等非消耗类指标；涉及消耗金额的基准列以「/」表示。</div></div><div class="mpane" id="mp_m1_1"><p class="mod-sub">在投账户 = 周期内有消耗的账户；主力账户 = 按消耗降序累计覆盖 80% 消耗的账户；余额充足 = 期末可用余额 &gt; 3 × 期末单日消耗。本模块账户数为周期内去重口径。</p><div class="kv"><div class="it">日均消耗<b>3.43 万</b></div><div class="it">在投账户<b>107 个</b></div><div class="it">主力账户<b>18 个</b></div><div class="it">主力占比<b>16.8%</b></div><div class="it">余额充足率<b>100.0%</b></div></div><table class="ext"><thead><tr><th>监控指标</th><th>本期<br>11-16~11-22</th><th class="cmp1-h">上期<br>11-09~11-15</th><th class="cmp2-h">9月跑量期<br>09-09~09-15</th><th class="cmp1-h">较上期</th><th class="cmp2-h">较9月跑量期</th><th>行业基准</th><th>差异</th><th>水平</th></tr></thead><tbody><tr><td class="l">在投账户数</td><td class="n"><b>107</b></td><td class="n cmp1">97</td><td class="n cmp2">127</td><td class="n qc cmp1 up">+10.3%</td><td class="n qc cmp2 down">-15.7%</td><td class="n">33</td><td class="n"><span class="up">+222%</span></td><td><span class="bdg b-eq">规模参考</span></td></tr><tr><td class="l">主力账户数</td><td class="n"><b>18</b></td><td class="n cmp1">18</td><td class="n cmp2">29</td><td class="n qc cmp1 flat">持平</td><td class="n qc cmp2 down">-37.9%</td><td class="n">8</td><td class="n"><span class="up">+128%</span></td><td><span class="bdg b-good">领先</span></td></tr><tr><td class="l">主力账户占比</td><td class="n"><b>16.8%</b></td><td class="n cmp1">18.6%</td><td class="n cmp2">22.8%</td><td class="n qc cmp1 down">-9.3%</td><td class="n qc cmp2 down">-26.3%</td><td class="n">41.2%</td><td class="n"><span class="down">-59%</span></td><td><span class="bdg b-bad">显著落后</span></td></tr><tr><td class="l">主力账户余额充足数</td><td class="n"><b>18</b></td><td class="n cmp1">18</td><td class="n cmp2">27</td><td class="n qc cmp1 flat">持平</td><td class="n qc cmp2 down">-33.3%</td><td class="n">7</td><td class="n"><span class="up">+154%</span></td><td><span class="bdg b-good">领先</span></td></tr><tr><td class="l">主力账户余额充足率</td><td class="n"><b>100.0%</b></td><td class="n cmp1">100.0%</td><td class="n cmp2">93.1%</td><td class="n qc cmp1 flat">持平</td><td class="n qc cmp2 up">+7.4%</td><td class="n">82.8%</td><td class="n"><span class="up">+21%</span></td><td><span class="bdg b-good">领先</span></td></tr></tbody></table><div class="vd"><div class="vd-sec vd-good"><div class="vd-h"><span class="vd-ic">✅</span>优势</div><ul><li>主力账户余额充足率 <b>100.0%</b>（行业基准 82.8%，+17.2pp），全部主力账户均无断投风险。</li><li>18 个主力账户中 <b>18</b> 个余额充足，覆盖率 100.0%。</li><li>余额充足率与上期 100.0% 相比未回落，健康度保持稳定。</li><li>在投账户数由上期 97 增至 107（+10），投放广度在扩张。</li></ul></div><div class="vd-sec vd-bad"><div class="vd-h"><span class="vd-ic">⚠️</span>劣势</div><ul><li>主力账户占比 16.8%（行业基准 41.2%，<span class="down">-24.4pp</span>），集中度偏弱。</li><li>107 个在投账户中仅 18 个贡献 80% 消耗，消耗结构偏分散、长尾账户多。</li></ul></div><div class="vd-sec vd-act"><div class="vd-h"><span class="vd-ic">🎯</span>建议动作</div><ul><li>把预算与人力向 18 个主力账户倾斜；对长尾账户设消耗门槛，连续 3 天消耗低于 500 元的账户合并或关停。</li><li>目标：把主力账户占比从 16.8% 提升到行业基准 41.2% 附近。</li><li>维持 18 个主力账户的余额覆盖与占比 16.8% 不回落，把新增预算优先分配给主力账户。</li></ul></div></div><div class="note">注：行业基准列仅含账户规模、占比与余额健康度等非消耗类指标；涉及消耗金额的基准列以「/」表示。</div></div><div class="mpane" id="mp_m1_2"><p class="mod-sub">在投账户 = 周期内有消耗的账户；主力账户 = 按消耗降序累计覆盖 80% 消耗的账户；余额充足 = 期末可用余额 &gt; 3 × 期末单日消耗。本模块账户数为周期内去重口径。</p><div class="kv"><div class="it">日均消耗<b>1.17 万</b></div><div class="it">在投账户<b>80 个</b></div><div class="it">主力账户<b>18 个</b></div><div class="it">主力占比<b>22.5%</b></div><div class="it">余额充足率<b>100.0%</b></div></div><table class="ext"><thead><tr><th>监控指标</th><th>本期<br>11-16~11-22</th><th class="cmp1-h">上期<br>11-09~11-15</th><th class="cmp2-h">9月跑量期<br>09-09~09-15</th><th class="cmp1-h">较上期</th><th class="cmp2-h">较9月跑量期</th><th>行业基准</th><th>差异</th><th>水平</th></tr></thead><tbody><tr><td class="l">在投账户数</td><td class="n"><b>80</b></td><td class="n cmp1">84</td><td class="n cmp2">223</td><td class="n qc cmp1 down">-4.8%</td><td class="n qc cmp2 down">-64.1%</td><td class="n">102</td><td class="n"><span class="down">-21%</span></td><td><span class="bdg b-eq">规模参考</span></td></tr><tr><td class="l">主力账户数</td><td class="n"><b>18</b></td><td class="n cmp1">20</td><td class="n cmp2">46</td><td class="n qc cmp1 down">-10.0%</td><td class="n qc cmp2 down">-60.9%</td><td class="n">15</td><td class="n"><span class="up">+23%</span></td><td><span class="bdg b-good">领先</span></td></tr><tr><td class="l">主力账户占比</td><td class="n"><b>22.5%</b></td><td class="n cmp1">23.8%</td><td class="n cmp2">20.6%</td><td class="n qc cmp1 down">-5.5%</td><td class="n qc cmp2 up">+9.1%</td><td class="n">23.3%</td><td class="n">-4%</td><td><span class="bdg b-eq">持平</span></td></tr><tr><td class="l">主力账户余额充足数</td><td class="n"><b>18</b></td><td class="n cmp1">20</td><td class="n cmp2">42</td><td class="n qc cmp1 down">-10.0%</td><td class="n qc cmp2 down">-57.1%</td><td class="n">13</td><td class="n"><span class="up">+43%</span></td><td><span class="bdg b-good">领先</span></td></tr><tr><td class="l">主力账户余额充足率</td><td class="n"><b>100.0%</b></td><td class="n cmp1">100.0%</td><td class="n cmp2">91.3%</td><td class="n qc cmp1 flat">持平</td><td class="n qc cmp2 up">+9.5%</td><td class="n">88.4%</td><td class="n"><span class="up">+13%</span></td><td><span class="bdg b-eq">持平</span></td></tr></tbody></table><div class="vd"><div class="vd-sec vd-good"><div class="vd-h"><span class="vd-ic">✅</span>优势</div><ul><li>主力账户余额充足率 <b>100.0%</b>（行业基准 88.4%，+11.6pp），全部主力账户均无断投风险。</li><li>18 个主力账户中 <b>18</b> 个余额充足，覆盖率 100.0%。</li><li>余额充足率与上期 100.0% 相比未回落，健康度保持稳定。</li></ul></div><div class="vd-sec vd-bad"><div class="vd-h"><span class="vd-ic">⚠️</span>劣势</div><ul><li>主力账户占比 22.5% 与行业基准 23.3% 接近，集中度无相对优势。</li><li>主力账户数较上期减少 2 个（20 → 18），需确认是主动收敛还是消耗流失。</li><li>在投账户数较上期减少 4 个，投放广度收缩。</li></ul></div><div class="vd-sec vd-act"><div class="vd-h"><span class="vd-ic">🎯</span>建议动作</div><ul><li>维持 18 个主力账户的余额覆盖与占比 22.5% 不回落，把新增预算优先分配给主力账户。</li><li>按月复核「余额 / 日耗」倍数分布，提前识别临界账户。</li></ul></div></div><div class="note">注：行业基准列仅含账户规模、占比与余额健康度等非消耗类指标；涉及消耗金额的基准列以「/」表示。</div></div></div></div></div>
+<div class="card"><h2 class="sec">二 · 有效基建数 <span class="sectag">各链路独立切换 · 主力/非主力并列两表</span></h2><div class="mt-wrap"><style>#mt_m2_0:checked~.mtabs label[for=mt_m2_0],#mt_m2_1:checked~.mtabs label[for=mt_m2_1],#mt_m2_2:checked~.mtabs label[for=mt_m2_2]{background:#2563eb;color:#fff;border-color:#2563eb}#mt_m2_0:checked~.mpanes #mp_m2_0,#mt_m2_1:checked~.mpanes #mp_m2_1,#mt_m2_2:checked~.mpanes #mp_m2_2{display:block}</style><input class="mt" type="radio" name="mt_m2" id="mt_m2_0" checked><input class="mt" type="radio" name="mt_m2" id="mt_m2_1"><input class="mt" type="radio" name="mt_m2" id="mt_m2_2"><div class="mtabs"><label for="mt_m2_0">直播</label><label for="mt_m2_1">小店直购</label><label for="mt_m2_2">CID</label></div><div class="mpanes"><div class="mpane" id="mp_m2_0"><p class="mod-sub">口径：三因子为「逐日快照的日均值」（Σ 每日值 ÷ 7），在投创意重复度为「整窗跨天去重」口径（不可按天平均）。把基建规模拆成三层因子相乘，用于定位瓶颈在账户数、单户广告数还是单广告创意数；重复度用于判断曝光创意是否过度同质化。主力 / 非主力账户两张表并列展示（非 tab 切换）。</p><div class="gtbl-cap">▍主力账户</div><table class="ext"><thead><tr><th>监控指标</th><th>本期<br>11-16~11-22</th><th class="cmp1-h">上期<br>11-09~11-15</th><th class="cmp2-h">9月跑量期<br>09-09~09-15</th><th class="cmp1-h">较上期</th><th class="cmp2-h">较9月跑量期</th><th>行业基准</th><th>差异</th><th>水平</th></tr></thead><tbody><tr><td class="l">每日在投账户数</td><td class="n"><b>25.7</b></td><td class="n cmp1">26.4</td><td class="n cmp2">74.0</td><td class="n qc cmp1 down">-2.7%</td><td class="n qc cmp2 down">-65.3%</td><td class="n">12.2</td><td class="n"><span class="up">+110%</span></td><td><span class="bdg b-eq">规模参考</span></td></tr><tr><td class="l">单户每日在投广告数</td><td class="n"><b>11.09</b></td><td class="n cmp1">13.18</td><td class="n cmp2">9.39</td><td class="n qc cmp1 down">-15.8%</td><td class="n qc cmp2 up">+18.1%</td><td class="n">19.23</td><td class="n"><span class="down">-42%</span></td><td><span class="bdg b-mid">落后</span></td></tr><tr><td class="l">单广告每日在投创意数</td><td class="n"><b>2.68</b></td><td class="n cmp1">3.12</td><td class="n cmp2">2.41</td><td class="n qc cmp1 down">-14.0%</td><td class="n qc cmp2 up">+11.1%</td><td class="n">3.58</td><td class="n"><span class="down">-25%</span></td><td><span class="bdg b-mid">落后</span></td></tr><tr><td class="l">在投创意重复度（有曝光 TID 口径）</td><td class="n"><b>70.9%</b></td><td class="n cmp1">69.8%</td><td class="n cmp2">48.9%</td><td class="n qc cmp1 down">+1.6%</td><td class="n qc cmp2 down">+45.0%</td><td class="n">68.2%</td><td class="n">+4%</td><td><span class="bdg b-eq">持平</span></td></tr><tr><td class="l">每日有效基建总数（= 三因子连乘）</td><td class="n"><b>765</b></td><td class="n cmp1">1,085</td><td class="n cmp2">1,677</td><td class="n qc cmp1 down">-29.5%</td><td class="n qc cmp2 down">-54.4%</td><td class="n">844</td><td class="n"><span class="down">-9%</span></td><td><span class="bdg b-eq">规模参考</span></td></tr></tbody></table><div class="gtbl-cap">▍非主力账户</div><table class="ext"><thead><tr><th>监控指标</th><th>本期<br>11-16~11-22</th><th class="cmp1-h">上期<br>11-09~11-15</th><th class="cmp2-h">9月跑量期<br>09-09~09-15</th><th class="cmp1-h">较上期</th><th class="cmp2-h">较9月跑量期</th><th>行业基准</th><th>差异</th><th>水平</th></tr></thead><tbody><tr><td class="l">每日在投账户数</td><td class="n"><b>60.0</b></td><td class="n cmp1">50.1</td><td class="n cmp2">298.6</td><td class="n qc cmp1 up">+19.7%</td><td class="n qc cmp2 down">-79.9%</td><td class="n">20.6</td><td class="n"><span class="up">+191%</span></td><td><span class="bdg b-eq">规模参考</span></td></tr><tr><td class="l">单户每日在投广告数</td><td class="n"><b>6.94</b></td><td class="n cmp1">6.18</td><td class="n cmp2">5.82</td><td class="n qc cmp1 up">+12.2%</td><td class="n qc cmp2 up">+19.1%</td><td class="n">10.46</td><td class="n"><span class="down">-34%</span></td><td><span class="bdg b-mid">落后</span></td></tr><tr><td class="l">单广告每日在投创意数</td><td class="n"><b>2.58</b></td><td class="n cmp1">2.45</td><td class="n cmp2">1.87</td><td class="n qc cmp1 up">+5.5%</td><td class="n qc cmp2 up">+38.4%</td><td class="n">3.14</td><td class="n"><span class="down">-18%</span></td><td><span class="bdg b-eq">持平</span></td></tr><tr><td class="l">在投创意重复度（有曝光 TID 口径）</td><td class="n"><b>70.9%</b></td><td class="n cmp1">69.8%</td><td class="n cmp2">48.9%</td><td class="n qc cmp1 down">+1.6%</td><td class="n qc cmp2 down">+45.0%</td><td class="n">68.2%</td><td class="n">+4%</td><td><span class="bdg b-eq">持平</span></td></tr><tr><td class="l">每日有效基建总数（= 三因子连乘）</td><td class="n"><b>1,075</b></td><td class="n cmp1">759</td><td class="n cmp2">3,246</td><td class="n qc cmp1 up">+41.7%</td><td class="n qc cmp2 down">-66.9%</td><td class="n">677</td><td class="n"><span class="up">+59%</span></td><td><span class="bdg b-eq">规模参考</span></td></tr></tbody></table><div class="defbox"><div class="defbox-t">▍指标口径与方向说明</div><div class="defbox-i"><b>每日有效基建总数</b>＝每日在投账户数 × 单户每日在投广告数 × 单广告每日在投创意数，三因子连乘恒等于「每日在投创意数」。用于把基建规模拆成「账户规模 → 单户铺量 → 单条创意容量」三层，定位瓶颈在账户数、单户广告数还是单广告创意数。</div><div class="defbox-i"><b>单广告每日在投创意数</b>＝每日在投创意数 ÷ 每日在投广告数（逐日快照日均的比值，在投创意取曝光创意ID 口径）；均为逐日日均口径，与「新建创意」不可相减。</div><div class="defbox-i"><b>在投创意重复度</b>（有曝光的创意重复度，TID 级别）＝ 1 − 有曝光创意指纹数 ÷ 有曝光展开创意数(TID)，衡量同一批曝光创意中有多少是「同指纹复用」，<span class="dir-down">越低越好</span>。该指标为<b>整窗跨天去重口径</b>（曝光展开创意跨账户会重复计数），无法按主力 / 非主力账户拆分，故两表该行同值，仅作链路整体参照。该指标在「有效基建」模块评分中的权重为其他指标的<b>一半</b>（5/12、5/12、1/6）。</div><div class="defbox-i">主力 / 非主力账户按该链路 7 天消耗降序累计覆盖 80% 划分；两表为并列展示，非 tab 切换。</div></div><div class="vd"><div class="vd-sec vd-good"><div class="vd-h"><span class="vd-ic">✅</span>优势</div><ul><li>主力账户「每日在投账户数」25.71（行业基准 12.24，+110%）。</li><li>非主力账户「每日在投账户数」60.00（行业基准 20.60，+191%）。</li><li>非主力账户每日有效基建总数 1075 个/天，较上期 759 <b style="color:#16a34a">+41.7%</b>，基建规模在放量。</li></ul></div><div class="vd-sec vd-bad"><div class="vd-h"><span class="vd-ic">⚠️</span>劣势</div><ul><li>主力账户「单户每日在投广告数」11.09（行业基准 19.23，-42%）。</li><li>主力账户「单广告每日在投创意数」2.68（行业基准 3.58，-25%）。</li><li>主力账户每日有效基建总数 765 个/天，较上期 1085 <b style="color:#dc2626">-29.5%</b>，基建规模收缩。</li><li>非主力账户「单户每日在投广告数」6.94（行业基准 10.46，-34%）。</li><li>非主力账户「单广告每日在投创意数」2.58（行业基准 3.14，-18%）。</li></ul></div><div class="vd-sec vd-act"><div class="vd-h"><span class="vd-ic">🎯</span>建议动作</div><ul><li>优先补「主力账户 · 单户铺量」：当前 11.09 vs 行业 19.23（-42%），是三因子里相对差距最大的一层。</li><li>动作：对单户在投广告数偏低的主力账户补广告位，目标达到行业基准；该因子提升会按乘法直接放大「每日有效基建总数」。</li><li>按「账户数 → 单户广告数 → 单广告创意数」逐层复核，下一周期目标：有效基建总数（每日在投创意数）继续环比正增长。</li></ul></div></div></div><div class="mpane" id="mp_m2_1"><p class="mod-sub">口径：三因子为「逐日快照的日均值」（Σ 每日值 ÷ 7），在投创意重复度为「整窗跨天去重」口径（不可按天平均）。把基建规模拆成三层因子相乘，用于定位瓶颈在账户数、单户广告数还是单广告创意数；重复度用于判断曝光创意是否过度同质化。主力 / 非主力账户两张表并列展示（非 tab 切换）。</p><div class="gtbl-cap">▍主力账户</div><table class="ext"><thead><tr><th>监控指标</th><th>本期<br>11-16~11-22</th><th class="cmp1-h">上期<br>11-09~11-15</th><th class="cmp2-h">9月跑量期<br>09-09~09-15</th><th class="cmp1-h">较上期</th><th class="cmp2-h">较9月跑量期</th><th>行业基准</th><th>差异</th><th>水平</th></tr></thead><tbody><tr><td class="l">每日在投账户数</td><td class="n"><b>17.4</b></td><td class="n cmp1">17.0</td><td class="n cmp2">28.3</td><td class="n qc cmp1 up">+2.5%</td><td class="n qc cmp2 down">-38.4%</td><td class="n">6.7</td><td class="n"><span class="up">+159%</span></td><td><span class="bdg b-eq">规模参考</span></td></tr><tr><td class="l">单户每日在投广告数</td><td class="n"><b>15.55</b></td><td class="n cmp1">6.16</td><td class="n cmp2">10.15</td><td class="n qc cmp1 up">+152.4%</td><td class="n qc cmp2 up">+53.2%</td><td class="n">15.59</td><td class="n">-0%</td><td><span class="bdg b-eq">持平</span></td></tr><tr><td class="l">单广告每日在投创意数</td><td class="n"><b>3.76</b></td><td class="n cmp1">6.28</td><td class="n cmp2">1.93</td><td class="n qc cmp1 down">-40.1%</td><td class="n qc cmp2 up">+94.4%</td><td class="n">3.12</td><td class="n"><span class="up">+21%</span></td><td><span class="bdg b-good">领先</span></td></tr><tr><td class="l">在投创意重复度（有曝光 TID 口径）</td><td class="n"><b>62.5%</b></td><td class="n cmp1">64.4%</td><td class="n cmp2">7.3%</td><td class="n qc cmp1 up">-3.0%</td><td class="n qc cmp2 down">+753.4%</td><td class="n">57.1%</td><td class="n"><span class="down">+9%</span></td><td><span class="bdg b-eq">持平</span></td></tr><tr><td class="l">每日有效基建总数（= 三因子连乘）</td><td class="n"><b>1,019</b></td><td class="n cmp1">658</td><td class="n cmp2">555</td><td class="n qc cmp1 up">+55.0%</td><td class="n qc cmp2 up">+83.5%</td><td class="n">327</td><td class="n"><span class="up">+212%</span></td><td><span class="bdg b-eq">规模参考</span></td></tr></tbody></table><div class="gtbl-cap">▍非主力账户</div><table class="ext"><thead><tr><th>监控指标</th><th>本期<br>11-16~11-22</th><th class="cmp1-h">上期<br>11-09~11-15</th><th class="cmp2-h">9月跑量期<br>09-09~09-15</th><th class="cmp1-h">较上期</th><th class="cmp2-h">较9月跑量期</th><th>行业基准</th><th>差异</th><th>水平</th></tr></thead><tbody><tr><td class="l">每日在投账户数</td><td class="n"><b>76.3</b></td><td class="n cmp1">62.0</td><td class="n cmp2">81.6</td><td class="n qc cmp1 up">+23.0%</td><td class="n qc cmp2 down">-6.5%</td><td class="n">16.4</td><td class="n"><span class="up">+366%</span></td><td><span class="bdg b-eq">规模参考</span></td></tr><tr><td class="l">单户每日在投广告数</td><td class="n"><b>4.74</b></td><td class="n cmp1">4.39</td><td class="n cmp2">5.11</td><td class="n qc cmp1 up">+7.8%</td><td class="n qc cmp2 down">-7.3%</td><td class="n">7.72</td><td class="n"><span class="down">-39%</span></td><td><span class="bdg b-mid">落后</span></td></tr><tr><td class="l">单广告每日在投创意数</td><td class="n"><b>2.35</b></td><td class="n cmp1">2.41</td><td class="n cmp2">1.66</td><td class="n qc cmp1 down">-2.3%</td><td class="n qc cmp2 up">+41.6%</td><td class="n">2.09</td><td class="n"><span class="up">+13%</span></td><td><span class="bdg b-eq">持平</span></td></tr><tr><td class="l">在投创意重复度（有曝光 TID 口径）</td><td class="n"><b>62.5%</b></td><td class="n cmp1">64.4%</td><td class="n cmp2">7.3%</td><td class="n qc cmp1 up">-3.0%</td><td class="n qc cmp2 down">+753.4%</td><td class="n">57.1%</td><td class="n"><span class="down">+9%</span></td><td><span class="bdg b-eq">持平</span></td></tr><tr><td class="l">每日有效基建总数（= 三因子连乘）</td><td class="n"><b>850</b></td><td class="n cmp1">655</td><td class="n cmp2">692</td><td class="n qc cmp1 up">+29.7%</td><td class="n qc cmp2 up">+22.8%</td><td class="n">264</td><td class="n"><span class="up">+222%</span></td><td><span class="bdg b-eq">规模参考</span></td></tr></tbody></table><div class="defbox"><div class="defbox-t">▍指标口径与方向说明</div><div class="defbox-i"><b>每日有效基建总数</b>＝每日在投账户数 × 单户每日在投广告数 × 单广告每日在投创意数，三因子连乘恒等于「每日在投创意数」。用于把基建规模拆成「账户规模 → 单户铺量 → 单条创意容量」三层，定位瓶颈在账户数、单户广告数还是单广告创意数。</div><div class="defbox-i"><b>单广告每日在投创意数</b>＝每日在投创意数 ÷ 每日在投广告数（逐日快照日均的比值，在投创意取曝光创意ID 口径）；均为逐日日均口径，与「新建创意」不可相减。</div><div class="defbox-i"><b>在投创意重复度</b>（有曝光的创意重复度，TID 级别）＝ 1 − 有曝光创意指纹数 ÷ 有曝光展开创意数(TID)，衡量同一批曝光创意中有多少是「同指纹复用」，<span class="dir-down">越低越好</span>。该指标为<b>整窗跨天去重口径</b>（曝光展开创意跨账户会重复计数），无法按主力 / 非主力账户拆分，故两表该行同值，仅作链路整体参照。该指标在「有效基建」模块评分中的权重为其他指标的<b>一半</b>（5/12、5/12、1/6）。</div><div class="defbox-i">主力 / 非主力账户按该链路 7 天消耗降序累计覆盖 80% 划分；两表为并列展示，非 tab 切换。</div></div><div class="vd"><div class="vd-sec vd-good"><div class="vd-h"><span class="vd-ic">✅</span>优势</div><ul><li>主力账户「每日在投账户数」17.43（行业基准 6.72，+159%）。</li><li>主力账户「单广告每日在投创意数」3.76（行业基准 3.12，+21%）。</li><li>主力账户每日有效基建总数 1019 个/天，较上期 658 <b style="color:#16a34a">+55.0%</b>，基建规模在放量。</li><li>非主力账户每日有效基建总数 850 个/天，较上期 655 <b style="color:#16a34a">+29.7%</b>，基建规模在放量。</li></ul></div><div class="vd-sec vd-bad"><div class="vd-h"><span class="vd-ic">⚠️</span>劣势</div><ul><li>非主力账户「单户每日在投广告数」4.74（行业基准 7.72，-39%）。</li></ul></div><div class="vd-sec vd-act"><div class="vd-h"><span class="vd-ic">🎯</span>建议动作</div><ul><li>优先补「非主力账户 · 单户铺量」：当前 4.74 vs 行业 7.72（-39%），是三因子里相对差距最大的一层。</li><li>动作：对单户在投广告数偏低的主力账户补广告位，目标达到行业基准；该因子提升会按乘法直接放大「每日有效基建总数」。</li><li>按「账户数 → 单户广告数 → 单广告创意数」逐层复核，下一周期目标：有效基建总数（每日在投创意数）继续环比正增长。</li></ul></div></div></div><div class="mpane" id="mp_m2_2"><p class="mod-sub">口径：三因子为「逐日快照的日均值」（Σ 每日值 ÷ 7），在投创意重复度为「整窗跨天去重」口径（不可按天平均）。把基建规模拆成三层因子相乘，用于定位瓶颈在账户数、单户广告数还是单广告创意数；重复度用于判断曝光创意是否过度同质化。主力 / 非主力账户两张表并列展示（非 tab 切换）。</p><div class="gtbl-cap">▍主力账户</div><table class="ext"><thead><tr><th>监控指标</th><th>本期<br>11-16~11-22</th><th class="cmp1-h">上期<br>11-09~11-15</th><th class="cmp2-h">9月跑量期<br>09-09~09-15</th><th class="cmp1-h">较上期</th><th class="cmp2-h">较9月跑量期</th><th>行业基准</th><th>差异</th><th>水平</th></tr></thead><tbody><tr><td class="l">每日在投账户数</td><td class="n"><b>18.0</b></td><td class="n cmp1">19.0</td><td class="n cmp2">46.0</td><td class="n qc cmp1 down">-5.3%</td><td class="n qc cmp2 down">-60.9%</td><td class="n">12.4</td><td class="n"><span class="up">+45%</span></td><td><span class="bdg b-eq">规模参考</span></td></tr><tr><td class="l">单户每日在投广告数</td><td class="n"><b>8.88</b></td><td class="n cmp1">6.12</td><td class="n cmp2">7.37</td><td class="n qc cmp1 up">+45.1%</td><td class="n qc cmp2 up">+20.6%</td><td class="n">6.93</td><td class="n"><span class="up">+28%</span></td><td><span class="bdg b-good">领先</span></td></tr><tr><td class="l">单广告每日在投创意数</td><td class="n"><b>3.07</b></td><td class="n cmp1">2.60</td><td class="n cmp2">2.85</td><td class="n qc cmp1 up">+18.0%</td><td class="n qc cmp2 up">+7.9%</td><td class="n">2.64</td><td class="n"><span class="up">+16%</span></td><td><span class="bdg b-eq">持平</span></td></tr><tr><td class="l">在投创意重复度（有曝光 TID 口径）</td><td class="n"><b>5.5%</b></td><td class="n cmp1">18.1%</td><td class="n cmp2">16.6%</td><td class="n qc cmp1 up">-69.7%</td><td class="n qc cmp2 up">-67.0%</td><td class="n">41.8%</td><td class="n"><span class="up">-87%</span></td><td><span class="bdg b-good">优于行业</span></td></tr><tr><td class="l">每日有效基建总数（= 三因子连乘）</td><td class="n"><b>491</b></td><td class="n cmp1">303</td><td class="n cmp2">965</td><td class="n qc cmp1 up">+62.2%</td><td class="n qc cmp2 down">-49.1%</td><td class="n">227</td><td class="n"><span class="up">+117%</span></td><td><span class="bdg b-eq">规模参考</span></td></tr></tbody></table><div class="gtbl-cap">▍非主力账户</div><table class="ext"><thead><tr><th>监控指标</th><th>本期<br>11-16~11-22</th><th class="cmp1-h">上期<br>11-09~11-15</th><th class="cmp2-h">9月跑量期<br>09-09~09-15</th><th class="cmp1-h">较上期</th><th class="cmp2-h">较9月跑量期</th><th>行业基准</th><th>差异</th><th>水平</th></tr></thead><tbody><tr><td class="l">每日在投账户数</td><td class="n"><b>48.1</b></td><td class="n cmp1">45.9</td><td class="n cmp2">157.3</td><td class="n qc cmp1 up">+5.0%</td><td class="n qc cmp2 down">-69.4%</td><td class="n">50.8</td><td class="n"><span class="down">-5%</span></td><td><span class="bdg b-eq">规模参考</span></td></tr><tr><td class="l">单户每日在投广告数</td><td class="n"><b>4.01</b></td><td class="n cmp1">2.99</td><td class="n cmp2">4.17</td><td class="n qc cmp1 up">+34.1%</td><td class="n qc cmp2 down">-3.9%</td><td class="n">3.25</td><td class="n"><span class="up">+23%</span></td><td><span class="bdg b-good">领先</span></td></tr><tr><td class="l">单广告每日在投创意数</td><td class="n"><b>2.69</b></td><td class="n cmp1">2.42</td><td class="n cmp2">2.21</td><td class="n qc cmp1 up">+10.9%</td><td class="n qc cmp2 up">+21.6%</td><td class="n">2.27</td><td class="n"><span class="up">+18%</span></td><td><span class="bdg b-eq">持平</span></td></tr><tr><td class="l">在投创意重复度（有曝光 TID 口径）</td><td class="n"><b>5.5%</b></td><td class="n cmp1">18.1%</td><td class="n cmp2">16.6%</td><td class="n qc cmp1 up">-69.7%</td><td class="n qc cmp2 up">-67.0%</td><td class="n">41.8%</td><td class="n"><span class="up">-87%</span></td><td><span class="bdg b-good">优于行业</span></td></tr><tr><td class="l">每日有效基建总数（= 三因子连乘）</td><td class="n"><b>518</b></td><td class="n cmp1">332</td><td class="n cmp2">1,450</td><td class="n qc cmp1 up">+56.2%</td><td class="n qc cmp2 down">-64.3%</td><td class="n">376</td><td class="n"><span class="up">+38%</span></td><td><span class="bdg b-eq">规模参考</span></td></tr></tbody></table><div class="defbox"><div class="defbox-t">▍指标口径与方向说明</div><div class="defbox-i"><b>每日有效基建总数</b>＝每日在投账户数 × 单户每日在投广告数 × 单广告每日在投创意数，三因子连乘恒等于「每日在投创意数」。用于把基建规模拆成「账户规模 → 单户铺量 → 单条创意容量」三层，定位瓶颈在账户数、单户广告数还是单广告创意数。</div><div class="defbox-i"><b>单广告每日在投创意数</b>＝每日在投创意数 ÷ 每日在投广告数（逐日快照日均的比值，在投创意取曝光创意ID 口径）；均为逐日日均口径，与「新建创意」不可相减。</div><div class="defbox-i"><b>在投创意重复度</b>（有曝光的创意重复度，TID 级别）＝ 1 − 有曝光创意指纹数 ÷ 有曝光展开创意数(TID)，衡量同一批曝光创意中有多少是「同指纹复用」，<span class="dir-down">越低越好</span>。该指标为<b>整窗跨天去重口径</b>（曝光展开创意跨账户会重复计数），无法按主力 / 非主力账户拆分，故两表该行同值，仅作链路整体参照。该指标在「有效基建」模块评分中的权重为其他指标的<b>一半</b>（5/12、5/12、1/6）。</div><div class="defbox-i">主力 / 非主力账户按该链路 7 天消耗降序累计覆盖 80% 划分；两表为并列展示，非 tab 切换。</div></div><div class="vd"><div class="vd-sec vd-good"><div class="vd-h"><span class="vd-ic">✅</span>优势</div><ul><li>主力账户「每日在投账户数」18.00（行业基准 12.40，+45%）。</li><li>主力账户「单户每日在投广告数」8.88（行业基准 6.93，+28%）。</li><li>主力账户每日有效基建总数 491 个/天，较上期 303 <b style="color:#16a34a">+62.2%</b>，基建规模在放量。</li><li>非主力账户每日有效基建总数 518 个/天，较上期 332 <b style="color:#16a34a">+56.2%</b>，基建规模在放量。</li></ul></div><div class="vd-sec vd-bad"><div class="vd-h"><span class="vd-ic">⚠️</span>劣势</div><ul><li>三因子相对行业基准无显著落后项，本模块暂无明显短板。</li></ul></div><div class="vd-sec vd-act"><div class="vd-h"><span class="vd-ic">🎯</span>建议动作</div><ul><li>优先补「非主力账户 · 账户规模」：当前 48.14 vs 行业 50.84（-5%），是三因子里相对差距最大的一层。</li><li>动作：拓新账户 / 唤醒停投账户，先把在投账户数补齐；该因子提升会按乘法直接放大「每日有效基建总数」。</li><li>按「账户数 → 单户广告数 → 单广告创意数」逐层复核，下一周期目标：有效基建总数（每日在投创意数）继续环比正增长。</li></ul></div></div></div></div></div></div>
+<div class="card"><h2 class="sec">三 · 有效上新数 <span class="sectag">各链路独立切换 · 主力/非主力并列两表</span></h2><div class="mt-wrap"><style>#mt_m3_0:checked~.mtabs label[for=mt_m3_0],#mt_m3_1:checked~.mtabs label[for=mt_m3_1],#mt_m3_2:checked~.mtabs label[for=mt_m3_2]{background:#2563eb;color:#fff;border-color:#2563eb}#mt_m3_0:checked~.mpanes #mp_m3_0,#mt_m3_1:checked~.mpanes #mp_m3_1,#mt_m3_2:checked~.mpanes #mp_m3_2{display:block}</style><input class="mt" type="radio" name="mt_m3" id="mt_m3_0" checked><input class="mt" type="radio" name="mt_m3" id="mt_m3_1"><input class="mt" type="radio" name="mt_m3" id="mt_m3_2"><div class="mtabs"><label for="mt_m3_0">直播</label><label for="mt_m3_1">小店直购</label><label for="mt_m3_2">CID</label></div><div class="mpanes"><div class="mpane" id="mp_m3_0"><p class="mod-sub">口径：流量类指标为「逐日快照的日均值」（Σ 每日值 ÷ 7），新建创意重复度为「整窗跨天去重」口径（不可按天平均）。把上新规模拆成三层因子相乘；频次、0 上新占比与新建创意重复度均为越小越好。主力 / 非主力账户两张表并列展示（非 tab 切换）。</p><div class="gtbl-cap">▍主力账户</div><table class="ext"><thead><tr><th>监控指标</th><th>本期<br>11-16~11-22</th><th class="cmp1-h">上期<br>11-09~11-15</th><th class="cmp2-h">9月跑量期<br>09-09~09-15</th><th class="cmp1-h">较上期</th><th class="cmp2-h">较9月跑量期</th><th>行业基准</th><th>差异</th><th>水平</th></tr></thead><tbody><tr><td class="l">每日在投账户数</td><td class="n"><b>25.7</b></td><td class="n cmp1">26.4</td><td class="n cmp2">74.0</td><td class="n qc cmp1 down">-2.7%</td><td class="n qc cmp2 down">-65.3%</td><td class="n">12.2</td><td class="n"><span class="up">+110%</span></td><td><span class="bdg b-eq">规模参考</span></td></tr><tr><td class="l">单户每日上新项目广告数</td><td class="n"><b>7.62</b></td><td class="n cmp1">3.64</td><td class="n cmp2">4.90</td><td class="n qc cmp1 up">+109.4%</td><td class="n qc cmp2 up">+55.3%</td><td class="n">5.62</td><td class="n"><span class="up">+35%</span></td><td><span class="bdg b-good">领先</span></td></tr><tr><td class="l">单广告每日上新创意数</td><td class="n"><b>19.27</b></td><td class="n cmp1">37.06</td><td class="n cmp2">4.68</td><td class="n qc cmp1 down">-48.0%</td><td class="n qc cmp2 up">+311.8%</td><td class="n">35.84</td><td class="n"><span class="down">-46%</span></td><td><span class="bdg b-mid">落后</span></td></tr><tr><td class="l">广告上新频次（平均几天上新项目广告，天/次）</td><td class="n"><b>2.76</b></td><td class="n cmp1">3.13</td><td class="n cmp2">3.20</td><td class="n qc cmp1 up">-11.8%</td><td class="n qc cmp2 up">-13.7%</td><td class="n">2.90</td><td class="n">-5%</td><td><span class="bdg b-eq">持平</span></td></tr><tr><td class="l">创意上新频次（平均几天上新创意，天/次）</td><td class="n"><b>1.74</b></td><td class="n cmp1">2.07</td><td class="n cmp2">2.69</td><td class="n qc cmp1 up">-15.9%</td><td class="n qc cmp2 up">-35.4%</td><td class="n">1.74</td><td class="n">-0%</td><td><span class="bdg b-eq">持平</span></td></tr><tr><td class="l">0 上新账户占比</td><td class="n"><b>3.1%</b></td><td class="n cmp1">11.4%</td><td class="n cmp2">13.5%</td><td class="n qc cmp1 up">-72.7%</td><td class="n qc cmp2 up">-76.9%</td><td class="n">3.2%</td><td class="n">-4%</td><td><span class="bdg b-eq">持平</span></td></tr><tr><td class="l">0 上新广告占比</td><td class="n"><b>10.9%</b></td><td class="n cmp1">15.5%</td><td class="n cmp2">53.2%</td><td class="n qc cmp1 up">-29.8%</td><td class="n qc cmp2 up">-79.6%</td><td class="n">16.8%</td><td class="n"><span class="up">-35%</span></td><td><span class="bdg b-good">优于行业</span></td></tr><tr><td class="l">新建创意重复度（新建 TID 口径）</td><td class="n"><b>89.8%</b></td><td class="n cmp1">84.4%</td><td class="n cmp2">76.3%</td><td class="n qc cmp1 down">+6.4%</td><td class="n qc cmp2 down">+17.8%</td><td class="n">81.5%</td><td class="n"><span class="down">+10%</span></td><td><span class="bdg b-eq">持平</span></td></tr><tr><td class="l">每日有效上新总数（= 三因子连乘）</td><td class="n"><b>3,774</b></td><td class="n cmp1">3,561</td><td class="n cmp2">1,698</td><td class="n qc cmp1 up">+6.0%</td><td class="n qc cmp2 up">+122.2%</td><td class="n">2,468</td><td class="n"><span class="up">+53%</span></td><td><span class="bdg b-eq">规模参考</span></td></tr></tbody></table><div class="gtbl-cap">▍非主力账户</div><table class="ext"><thead><tr><th>监控指标</th><th>本期<br>11-16~11-22</th><th class="cmp1-h">上期<br>11-09~11-15</th><th class="cmp2-h">9月跑量期<br>09-09~09-15</th><th class="cmp1-h">较上期</th><th class="cmp2-h">较9月跑量期</th><th>行业基准</th><th>差异</th><th>水平</th></tr></thead><tbody><tr><td class="l">每日在投账户数</td><td class="n"><b>60.0</b></td><td class="n cmp1">50.1</td><td class="n cmp2">298.6</td><td class="n qc cmp1 up">+19.7%</td><td class="n qc cmp2 down">-79.9%</td><td class="n">20.6</td><td class="n"><span class="up">+191%</span></td><td><span class="bdg b-eq">规模参考</span></td></tr><tr><td class="l">单户每日上新项目广告数</td><td class="n"><b>4.55</b></td><td class="n cmp1">2.04</td><td class="n cmp2">4.66</td><td class="n qc cmp1 up">+123.0%</td><td class="n qc cmp2 down">-2.5%</td><td class="n">5.71</td><td class="n"><span class="down">-20%</span></td><td><span class="bdg b-mid">落后</span></td></tr><tr><td class="l">单广告每日上新创意数</td><td class="n"><b>31.10</b></td><td class="n cmp1">45.35</td><td class="n cmp2">3.73</td><td class="n qc cmp1 down">-31.4%</td><td class="n qc cmp2 up">+733.2%</td><td class="n">30.58</td><td class="n">+2%</td><td><span class="bdg b-eq">持平</span></td></tr><tr><td class="l">广告上新频次（平均几天上新项目广告，天/次）</td><td class="n"><b>4.46</b></td><td class="n cmp1">4.46</td><td class="n cmp2">3.35</td><td class="n qc cmp1 down">+0.1%</td><td class="n qc cmp2 down">+33.2%</td><td class="n">4.40</td><td class="n">+1%</td><td><span class="bdg b-eq">持平</span></td></tr><tr><td class="l">创意上新频次（平均几天上新创意，天/次）</td><td class="n"><b>3.06</b></td><td class="n cmp1">3.51</td><td class="n cmp2">2.69</td><td class="n qc cmp1 up">-12.9%</td><td class="n qc cmp2 down">+13.7%</td><td class="n">3.20</td><td class="n">-4%</td><td><span class="bdg b-eq">持平</span></td></tr><tr><td class="l">0 上新账户占比</td><td class="n"><b>14.4%</b></td><td class="n cmp1">26.2%</td><td class="n cmp2">10.1%</td><td class="n qc cmp1 up">-45.0%</td><td class="n qc cmp2 down">+42.3%</td><td class="n">10.2%</td><td class="n"><span class="down">+41%</span></td><td><span class="bdg b-mid">偏高</span></td></tr><tr><td class="l">0 上新广告占比</td><td class="n"><b>10.9%</b></td><td class="n cmp1">15.5%</td><td class="n cmp2">53.2%</td><td class="n qc cmp1 up">-29.8%</td><td class="n qc cmp2 up">-79.6%</td><td class="n">16.8%</td><td class="n"><span class="up">-35%</span></td><td><span class="bdg b-good">优于行业</span></td></tr><tr><td class="l">新建创意重复度（新建 TID 口径）</td><td class="n"><b>88.1%</b></td><td class="n cmp1">83.9%</td><td class="n cmp2">68.8%</td><td class="n qc cmp1 down">+5.1%</td><td class="n qc cmp2 down">+28.1%</td><td class="n">81.5%</td><td class="n"><span class="down">+8%</span></td><td><span class="bdg b-eq">持平</span></td></tr><tr><td class="l">每日有效上新总数（= 三因子连乘）</td><td class="n"><b>8,482</b></td><td class="n cmp1">4,634</td><td class="n cmp2">5,196</td><td class="n qc cmp1 up">+83.0%</td><td class="n qc cmp2 up">+63.2%</td><td class="n">3,598</td><td class="n"><span class="up">+136%</span></td><td><span class="bdg b-eq">规模参考</span></td></tr></tbody></table><div class="defbox"><div class="defbox-t">▍指标口径与方向说明</div><div class="defbox-i"><b>每日有效上新总数</b>＝每日在投账户数 × 单户每日上新项目广告数 × 单广告每日上新创意数，三因子连乘恒等于「每日上新创意数」（新建创意 TID 口径，逐日日均）。</div><div class="defbox-i"><b>广告上新频次</b>＝账户级「7 ÷ 该账户有新建项目广告动作的天数」等权平均，7 天完全无上新按 7 天/次封顶，值域 1~7，<span class="dir-down">越小越好</span>（越小＝上新越频繁）；<b>创意上新频次</b>＝同法按「有新建创意动作的天数」计算。两者动作口径不同，不可直接相减。</div><div class="defbox-i"><b>0 上新账户占比</b>＝7 天完全无新建创意动作的账户数 ÷ 该组账户总数（分主力 / 非主力）；<b>0 上新广告占比</b>＝7 天无新建创意的广告数 ÷ 广告总数，为<b>链路级全量口径</b>（广告无法全量归属到单个账户），故主力 / 非主力两表该行同值，仅作链路整体参照。两项占比均为<span class="dir-down">越小越好</span>。</div><div class="defbox-i"><b>新建创意重复度</b>（新建创意重复度，TID 级别）＝ 1 − 新建创意指纹数 ÷ 新建展开创意数(TID)，衡量本期新建创意中同指纹复用的比例，<span class="dir-down">越低越好</span>。该指标分子分母均可加（同一新建 TID 只归属一个账户），按主力 / 非主力账户分组重算，与链路级整窗值一致。该指标在「有效上新」模块评分中的权重为其他指标的<b>一半</b>（5/12、5/12、1/6）。</div><div class="defbox-i">主力 / 非主力账户按该链路 7 天消耗降序累计覆盖 80% 划分；两表为并列展示，非 tab 切换。</div></div><div class="vd"><div class="vd-sec vd-good"><div class="vd-h"><span class="vd-ic">✅</span>优势</div><ul><li>主力账户「单户每日上新项目广告数」7.62（行业基准 5.62，+35%）。</li><li>主力账户每日有效上新总数 3774 个/天，较上期 3561 <b style="color:#16a34a">+6.0%</b>，上新供给在放量。</li><li>非主力账户每日有效上新总数 8482 个/天，较上期 4634 <b style="color:#16a34a">+83.0%</b>，上新供给在放量。</li><li>链路级 0 上新广告占比 10.9%（行业基准 16.8%，-35%）。</li></ul></div><div class="vd-sec vd-bad"><div class="vd-h"><span class="vd-ic">⚠️</span>劣势</div><ul><li>主力账户「单广告每日上新创意数」19.27（行业基准 35.84，-46%）。</li><li>非主力账户「0 上新账户占比」14.4%（行业基准 10.2%，+41%，越小越好）。</li><li>非主力账户「单户每日上新项目广告数」4.55（行业基准 5.71，-20%）。</li><li>主力账户「新建创意重复度」89.8%（行业基准 81.5%，+10%，越低越好），新建素材同指纹复用偏多。</li><li>主力账户新建创意重复度较上期 84.4% 升至 89.8%（+6.4%），新建素材趋同。</li><li>非主力账户新建创意重复度较上期 83.9% 升至 88.1%（+5.1%），新建素材趋同。</li></ul></div><div class="vd-sec vd-act"><div class="vd-h"><span class="vd-ic">🎯</span>建议动作</div><ul><li>优先治理「非主力账户 · 0 上新账户占比」：当前 14.4% vs 行业 10.2%（+41%，越小越好），是反向指标里相对差距最大的一项。</li><li>动作：唤醒 7 天完全无上新的账户，先补一批新建创意；该指标改善会同时抬升「每日有效上新总数」。</li><li>主力账户新建创意重复度 89.8% 高于行业 81.5%：建议控制「同一脚本换模板」式上新，同一创意指纹只保留 1 个 TID，把新建量转投差异化脚本 / 视觉。</li><li>按「账户数 → 单户上新项目广告数 → 单广告上新创意数」逐层复核，下一周期目标：有效上新总数（每日上新创意数）继续环比正增长、0 上新占比继续下降。</li></ul></div></div></div><div class="mpane" id="mp_m3_1"><p class="mod-sub">口径：流量类指标为「逐日快照的日均值」（Σ 每日值 ÷ 7），新建创意重复度为「整窗跨天去重」口径（不可按天平均）。把上新规模拆成三层因子相乘；频次、0 上新占比与新建创意重复度均为越小越好。主力 / 非主力账户两张表并列展示（非 tab 切换）。</p><div class="gtbl-cap">▍主力账户</div><table class="ext"><thead><tr><th>监控指标</th><th>本期<br>11-16~11-22</th><th class="cmp1-h">上期<br>11-09~11-15</th><th class="cmp2-h">9月跑量期<br>09-09~09-15</th><th class="cmp1-h">较上期</th><th class="cmp2-h">较9月跑量期</th><th>行业基准</th><th>差异</th><th>水平</th></tr></thead><tbody><tr><td class="l">每日在投账户数</td><td class="n"><b>17.4</b></td><td class="n cmp1">17.0</td><td class="n cmp2">28.3</td><td class="n qc cmp1 up">+2.5%</td><td class="n qc cmp2 down">-38.4%</td><td class="n">6.7</td><td class="n"><span class="up">+159%</span></td><td><span class="bdg b-eq">规模参考</span></td></tr><tr><td class="l">单户每日上新项目广告数</td><td class="n"><b>19.22</b></td><td class="n cmp1">16.30</td><td class="n cmp2">3.21</td><td class="n qc cmp1 up">+17.9%</td><td class="n qc cmp2 up">+498.2%</td><td class="n">17.58</td><td class="n"><span class="up">+9%</span></td><td><span class="bdg b-eq">持平</span></td></tr><tr><td class="l">单广告每日上新创意数</td><td class="n"><b>17.39</b></td><td class="n cmp1">9.38</td><td class="n cmp2">14.84</td><td class="n qc cmp1 up">+85.5%</td><td class="n qc cmp2 up">+17.2%</td><td class="n">24.53</td><td class="n"><span class="down">-29%</span></td><td><span class="bdg b-mid">落后</span></td></tr><tr><td class="l">广告上新频次（平均几天上新项目广告，天/次）</td><td class="n"><b>2.28</b></td><td class="n cmp1">2.04</td><td class="n cmp2">2.03</td><td class="n qc cmp1 down">+11.8%</td><td class="n qc cmp2 down">+12.2%</td><td class="n">3.45</td><td class="n"><span class="up">-34%</span></td><td><span class="bdg b-good">优于行业</span></td></tr><tr><td class="l">创意上新频次（平均几天上新创意，天/次）</td><td class="n"><b>1.25</b></td><td class="n cmp1">1.24</td><td class="n cmp2">1.69</td><td class="n qc cmp1 down">+1.4%</td><td class="n qc cmp2 up">-25.8%</td><td class="n">1.55</td><td class="n"><span class="up">-19%</span></td><td><span class="bdg b-eq">持平</span></td></tr><tr><td class="l">0 上新账户占比</td><td class="n"><b>0.0%</b></td><td class="n cmp1">0.0%</td><td class="n cmp2">0.0%</td><td class="n qc cmp1">—</td><td class="n qc cmp2">—</td><td class="n">0.7%</td><td class="n"><span class="up">-100%</span></td><td><span class="bdg b-good">优于行业</span></td></tr><tr><td class="l">0 上新广告占比</td><td class="n"><b>1.0%</b></td><td class="n cmp1">7.8%</td><td class="n cmp2">47.2%</td><td class="n qc cmp1 up">-87.7%</td><td class="n qc cmp2 up">-98.0%</td><td class="n">4.4%</td><td class="n"><span class="up">-78%</span></td><td><span class="bdg b-good">优于行业</span></td></tr><tr><td class="l">新建创意重复度（新建 TID 口径）</td><td class="n"><b>72.3%</b></td><td class="n cmp1">74.5%</td><td class="n cmp2">13.5%</td><td class="n qc cmp1 up">-3.0%</td><td class="n qc cmp2 down">+436.8%</td><td class="n">72.6%</td><td class="n">-0%</td><td><span class="bdg b-eq">持平</span></td></tr><tr><td class="l">每日有效上新总数（= 三因子连乘）</td><td class="n"><b>5,825</b></td><td class="n cmp1">2,598</td><td class="n cmp2">1,348</td><td class="n qc cmp1 up">+124.2%</td><td class="n qc cmp2 up">+332.0%</td><td class="n">2,898</td><td class="n"><span class="up">+101%</span></td><td><span class="bdg b-eq">规模参考</span></td></tr></tbody></table><div class="gtbl-cap">▍非主力账户</div><table class="ext"><thead><tr><th>监控指标</th><th>本期<br>11-16~11-22</th><th class="cmp1-h">上期<br>11-09~11-15</th><th class="cmp2-h">9月跑量期<br>09-09~09-15</th><th class="cmp1-h">较上期</th><th class="cmp2-h">较9月跑量期</th><th>行业基准</th><th>差异</th><th>水平</th></tr></thead><tbody><tr><td class="l">每日在投账户数</td><td class="n"><b>76.3</b></td><td class="n cmp1">62.0</td><td class="n cmp2">81.6</td><td class="n qc cmp1 up">+23.0%</td><td class="n qc cmp2 down">-6.5%</td><td class="n">16.4</td><td class="n"><span class="up">+366%</span></td><td><span class="bdg b-eq">规模参考</span></td></tr><tr><td class="l">单户每日上新项目广告数</td><td class="n"><b>12.95</b></td><td class="n cmp1">8.64</td><td class="n cmp2">4.43</td><td class="n qc cmp1 up">+49.9%</td><td class="n qc cmp2 up">+192.4%</td><td class="n">14.87</td><td class="n"><span class="down">-13%</span></td><td><span class="bdg b-eq">持平</span></td></tr><tr><td class="l">单广告每日上新创意数</td><td class="n"><b>15.18</b></td><td class="n cmp1">17.76</td><td class="n cmp2">6.81</td><td class="n qc cmp1 down">-14.6%</td><td class="n qc cmp2 up">+122.9%</td><td class="n">14.73</td><td class="n">+3%</td><td><span class="bdg b-eq">持平</span></td></tr><tr><td class="l">广告上新频次（平均几天上新项目广告，天/次）</td><td class="n"><b>3.04</b></td><td class="n cmp1">3.36</td><td class="n cmp2">2.78</td><td class="n qc cmp1 up">-9.3%</td><td class="n qc cmp2 down">+9.6%</td><td class="n">3.87</td><td class="n"><span class="up">-21%</span></td><td><span class="bdg b-good">优于行业</span></td></tr><tr><td class="l">创意上新频次（平均几天上新创意，天/次）</td><td class="n"><b>1.49</b></td><td class="n cmp1">1.59</td><td class="n cmp2">2.33</td><td class="n qc cmp1 up">-6.3%</td><td class="n qc cmp2 up">-36.3%</td><td class="n">2.45</td><td class="n"><span class="up">-39%</span></td><td><span class="bdg b-good">优于行业</span></td></tr><tr><td class="l">0 上新账户占比</td><td class="n"><b>2.2%</b></td><td class="n cmp1">0.0%</td><td class="n cmp2">5.1%</td><td class="n qc cmp1">—</td><td class="n qc cmp2 up">-56.0%</td><td class="n">6.8%</td><td class="n"><span class="up">-67%</span></td><td><span class="bdg b-good">优于行业</span></td></tr><tr><td class="l">0 上新广告占比</td><td class="n"><b>1.0%</b></td><td class="n cmp1">7.8%</td><td class="n cmp2">47.2%</td><td class="n qc cmp1 up">-87.7%</td><td class="n qc cmp2 up">-98.0%</td><td class="n">4.4%</td><td class="n"><span class="up">-78%</span></td><td><span class="bdg b-good">优于行业</span></td></tr><tr><td class="l">新建创意重复度（新建 TID 口径）</td><td class="n"><b>74.4%</b></td><td class="n cmp1">70.4%</td><td class="n cmp2">6.8%</td><td class="n qc cmp1 down">+5.7%</td><td class="n qc cmp2 down">+1000.1%</td><td class="n">72.6%</td><td class="n">+2%</td><td><span class="bdg b-eq">持平</span></td></tr><tr><td class="l">每日有效上新总数（= 三因子连乘）</td><td class="n"><b>14,986</b></td><td class="n cmp1">9,514</td><td class="n cmp2">2,458</td><td class="n qc cmp1 up">+57.5%</td><td class="n qc cmp2 up">+509.6%</td><td class="n">3,587</td><td class="n"><span class="up">+318%</span></td><td><span class="bdg b-eq">规模参考</span></td></tr></tbody></table><div class="defbox"><div class="defbox-t">▍指标口径与方向说明</div><div class="defbox-i"><b>每日有效上新总数</b>＝每日在投账户数 × 单户每日上新项目广告数 × 单广告每日上新创意数，三因子连乘恒等于「每日上新创意数」（新建创意 TID 口径，逐日日均）。</div><div class="defbox-i"><b>广告上新频次</b>＝账户级「7 ÷ 该账户有新建项目广告动作的天数」等权平均，7 天完全无上新按 7 天/次封顶，值域 1~7，<span class="dir-down">越小越好</span>（越小＝上新越频繁）；<b>创意上新频次</b>＝同法按「有新建创意动作的天数」计算。两者动作口径不同，不可直接相减。</div><div class="defbox-i"><b>0 上新账户占比</b>＝7 天完全无新建创意动作的账户数 ÷ 该组账户总数（分主力 / 非主力）；<b>0 上新广告占比</b>＝7 天无新建创意的广告数 ÷ 广告总数，为<b>链路级全量口径</b>（广告无法全量归属到单个账户），故主力 / 非主力两表该行同值，仅作链路整体参照。两项占比均为<span class="dir-down">越小越好</span>。</div><div class="defbox-i"><b>新建创意重复度</b>（新建创意重复度，TID 级别）＝ 1 − 新建创意指纹数 ÷ 新建展开创意数(TID)，衡量本期新建创意中同指纹复用的比例，<span class="dir-down">越低越好</span>。该指标分子分母均可加（同一新建 TID 只归属一个账户），按主力 / 非主力账户分组重算，与链路级整窗值一致。该指标在「有效上新」模块评分中的权重为其他指标的<b>一半</b>（5/12、5/12、1/6）。</div><div class="defbox-i">主力 / 非主力账户按该链路 7 天消耗降序累计覆盖 80% 划分；两表为并列展示，非 tab 切换。</div></div><div class="vd"><div class="vd-sec vd-good"><div class="vd-h"><span class="vd-ic">✅</span>优势</div><ul><li>主力账户「广告上新频次」2.28（行业基准 3.45，-34%，越小越好）。</li><li>主力账户「创意上新频次」1.25（行业基准 1.55，-19%，越小越好）。</li><li>主力账户每日有效上新总数 5825 个/天，较上期 2598 <b style="color:#16a34a">+124.2%</b>，上新供给在放量。</li><li>非主力账户每日有效上新总数 14986 个/天，较上期 9514 <b style="color:#16a34a">+57.5%</b>，上新供给在放量。</li></ul></div><div class="vd-sec vd-bad"><div class="vd-h"><span class="vd-ic">⚠️</span>劣势</div><ul><li>主力账户「单广告每日上新创意数」17.39（行业基准 24.53，-29%）。</li><li>非主力账户「单户每日上新项目广告数」12.95（行业基准 14.87，-13%）。</li><li>非主力账户新建创意重复度较上期 70.4% 升至 74.4%（+5.7%），新建素材趋同。</li></ul></div><div class="vd-sec vd-act"><div class="vd-h"><span class="vd-ic">🎯</span>建议动作</div><ul><li>反向指标相对行业基准均不弱，保持现有上新排期与账户分层。</li><li>按「账户数 → 单户上新项目广告数 → 单广告上新创意数」逐层复核，下一周期目标：有效上新总数（每日上新创意数）继续环比正增长、0 上新占比继续下降。</li></ul></div></div></div><div class="mpane" id="mp_m3_2"><p class="mod-sub">口径：流量类指标为「逐日快照的日均值」（Σ 每日值 ÷ 7），新建创意重复度为「整窗跨天去重」口径（不可按天平均）。把上新规模拆成三层因子相乘；频次、0 上新占比与新建创意重复度均为越小越好。主力 / 非主力账户两张表并列展示（非 tab 切换）。</p><div class="gtbl-cap">▍主力账户</div><table class="ext"><thead><tr><th>监控指标</th><th>本期<br>11-16~11-22</th><th class="cmp1-h">上期<br>11-09~11-15</th><th class="cmp2-h">9月跑量期<br>09-09~09-15</th><th class="cmp1-h">较上期</th><th class="cmp2-h">较9月跑量期</th><th>行业基准</th><th>差异</th><th>水平</th></tr></thead><tbody><tr><td class="l">每日在投账户数</td><td class="n"><b>18.0</b></td><td class="n cmp1">19.0</td><td class="n cmp2">46.0</td><td class="n qc cmp1 down">-5.3%</td><td class="n qc cmp2 down">-60.9%</td><td class="n">12.4</td><td class="n"><span class="up">+45%</span></td><td><span class="bdg b-eq">规模参考</span></td></tr><tr><td class="l">单户每日上新项目广告数</td><td class="n"><b>2.34</b></td><td class="n cmp1">1.23</td><td class="n cmp2">1.20</td><td class="n qc cmp1 up">+91.0%</td><td class="n qc cmp2 up">+94.8%</td><td class="n">5.40</td><td class="n"><span class="down">-57%</span></td><td><span class="bdg b-bad">显著落后</span></td></tr><tr><td class="l">单广告每日上新创意数</td><td class="n"><b>23.67</b></td><td class="n cmp1">30.11</td><td class="n cmp2">18.41</td><td class="n qc cmp1 down">-21.4%</td><td class="n qc cmp2 up">+28.5%</td><td class="n">13.50</td><td class="n"><span class="up">+75%</span></td><td><span class="bdg b-good">领先</span></td></tr><tr><td class="l">广告上新频次（平均几天上新项目广告，天/次）</td><td class="n"><b>2.42</b></td><td class="n cmp1">4.10</td><td class="n cmp2">2.50</td><td class="n qc cmp1 up">-40.9%</td><td class="n qc cmp2 up">-3.0%</td><td class="n">3.70</td><td class="n"><span class="up">-35%</span></td><td><span class="bdg b-good">优于行业</span></td></tr><tr><td class="l">创意上新频次（平均几天上新创意，天/次）</td><td class="n"><b>1.98</b></td><td class="n cmp1">2.34</td><td class="n cmp2">2.27</td><td class="n qc cmp1 up">-15.5%</td><td class="n qc cmp2 up">-13.0%</td><td class="n">3.01</td><td class="n"><span class="up">-34%</span></td><td><span class="bdg b-good">优于行业</span></td></tr><tr><td class="l">0 上新账户占比</td><td class="n"><b>0.0%</b></td><td class="n cmp1">5.0%</td><td class="n cmp2">2.2%</td><td class="n qc cmp1 up">-100.0%</td><td class="n qc cmp2 up">-100.0%</td><td class="n">7.2%</td><td class="n"><span class="up">-100%</span></td><td><span class="bdg b-good">优于行业</span></td></tr><tr><td class="l">0 上新广告占比</td><td class="n"><b>14.7%</b></td><td class="n cmp1">15.9%</td><td class="n cmp2">51.0%</td><td class="n qc cmp1 up">-7.4%</td><td class="n qc cmp2 up">-71.2%</td><td class="n">7.2%</td><td class="n"><span class="down">+103%</span></td><td><span class="bdg b-bad">显著偏高</span></td></tr><tr><td class="l">新建创意重复度（新建 TID 口径）</td><td class="n"><b>12.0%</b></td><td class="n cmp1">25.5%</td><td class="n cmp2">7.0%</td><td class="n qc cmp1 up">-52.9%</td><td class="n qc cmp2 down">+70.8%</td><td class="n">51.2%</td><td class="n"><span class="up">-77%</span></td><td><span class="bdg b-good">优于行业</span></td></tr><tr><td class="l">每日有效上新总数（= 三因子连乘）</td><td class="n"><b>997</b></td><td class="n cmp1">701</td><td class="n cmp2">1,018</td><td class="n qc cmp1 up">+42.3%</td><td class="n qc cmp2 down">-2.0%</td><td class="n">904</td><td class="n"><span class="up">+10%</span></td><td><span class="bdg b-eq">规模参考</span></td></tr></tbody></table><div class="gtbl-cap">▍非主力账户</div><table class="ext"><thead><tr><th>监控指标</th><th>本期<br>11-16~11-22</th><th class="cmp1-h">上期<br>11-09~11-15</th><th class="cmp2-h">9月跑量期<br>09-09~09-15</th><th class="cmp1-h">较上期</th><th class="cmp2-h">较9月跑量期</th><th>行业基准</th><th>差异</th><th>水平</th></tr></thead><tbody><tr><td class="l">每日在投账户数</td><td class="n"><b>48.1</b></td><td class="n cmp1">45.9</td><td class="n cmp2">157.3</td><td class="n qc cmp1 up">+5.0%</td><td class="n qc cmp2 down">-69.4%</td><td class="n">50.8</td><td class="n"><span class="down">-5%</span></td><td><span class="bdg b-eq">规模参考</span></td></tr><tr><td class="l">单户每日上新项目广告数</td><td class="n"><b>1.79</b></td><td class="n cmp1">1.36</td><td class="n cmp2">2.11</td><td class="n qc cmp1 up">+31.9%</td><td class="n qc cmp2 down">-15.3%</td><td class="n">2.55</td><td class="n"><span class="down">-30%</span></td><td><span class="bdg b-mid">落后</span></td></tr><tr><td class="l">单广告每日上新创意数</td><td class="n"><b>25.42</b></td><td class="n cmp1">28.72</td><td class="n cmp2">10.64</td><td class="n qc cmp1 down">-11.5%</td><td class="n qc cmp2 up">+138.9%</td><td class="n">14.43</td><td class="n"><span class="up">+76%</span></td><td><span class="bdg b-good">领先</span></td></tr><tr><td class="l">广告上新频次（平均几天上新项目广告，天/次）</td><td class="n"><b>3.91</b></td><td class="n cmp1">4.56</td><td class="n cmp2">3.41</td><td class="n qc cmp1 up">-14.2%</td><td class="n qc cmp2 down">+14.7%</td><td class="n">5.05</td><td class="n"><span class="up">-22%</span></td><td><span class="bdg b-good">优于行业</span></td></tr><tr><td class="l">创意上新频次（平均几天上新创意，天/次）</td><td class="n"><b>3.50</b></td><td class="n cmp1">3.20</td><td class="n cmp2">2.82</td><td class="n qc cmp1 down">+9.3%</td><td class="n qc cmp2 down">+24.0%</td><td class="n">4.49</td><td class="n"><span class="up">-22%</span></td><td><span class="bdg b-good">优于行业</span></td></tr><tr><td class="l">0 上新账户占比</td><td class="n"><b>16.1%</b></td><td class="n cmp1">14.1%</td><td class="n cmp2">9.0%</td><td class="n qc cmp1 down">+14.7%</td><td class="n qc cmp2 down">+78.4%</td><td class="n">29.0%</td><td class="n"><span class="up">-44%</span></td><td><span class="bdg b-good">优于行业</span></td></tr><tr><td class="l">0 上新广告占比</td><td class="n"><b>14.7%</b></td><td class="n cmp1">15.9%</td><td class="n cmp2">51.0%</td><td class="n qc cmp1 up">-7.4%</td><td class="n qc cmp2 up">-71.2%</td><td class="n">7.2%</td><td class="n"><span class="down">+103%</span></td><td><span class="bdg b-bad">显著偏高</span></td></tr><tr><td class="l">新建创意重复度（新建 TID 口径）</td><td class="n"><b>15.7%</b></td><td class="n cmp1">23.2%</td><td class="n cmp2">9.0%</td><td class="n qc cmp1 up">-32.2%</td><td class="n qc cmp2 down">+73.7%</td><td class="n">51.2%</td><td class="n"><span class="up">-69%</span></td><td><span class="bdg b-good">优于行业</span></td></tr><tr><td class="l">每日有效上新总数（= 三因子连乘）</td><td class="n"><b>2,190</b></td><td class="n cmp1">1,786</td><td class="n cmp2">3,534</td><td class="n qc cmp1 up">+22.6%</td><td class="n qc cmp2 down">-38.0%</td><td class="n">1,873</td><td class="n"><span class="up">+17%</span></td><td><span class="bdg b-eq">规模参考</span></td></tr></tbody></table><div class="defbox"><div class="defbox-t">▍指标口径与方向说明</div><div class="defbox-i"><b>每日有效上新总数</b>＝每日在投账户数 × 单户每日上新项目广告数 × 单广告每日上新创意数，三因子连乘恒等于「每日上新创意数」（新建创意 TID 口径，逐日日均）。</div><div class="defbox-i"><b>广告上新频次</b>＝账户级「7 ÷ 该账户有新建项目广告动作的天数」等权平均，7 天完全无上新按 7 天/次封顶，值域 1~7，<span class="dir-down">越小越好</span>（越小＝上新越频繁）；<b>创意上新频次</b>＝同法按「有新建创意动作的天数」计算。两者动作口径不同，不可直接相减。</div><div class="defbox-i"><b>0 上新账户占比</b>＝7 天完全无新建创意动作的账户数 ÷ 该组账户总数（分主力 / 非主力）；<b>0 上新广告占比</b>＝7 天无新建创意的广告数 ÷ 广告总数，为<b>链路级全量口径</b>（广告无法全量归属到单个账户），故主力 / 非主力两表该行同值，仅作链路整体参照。两项占比均为<span class="dir-down">越小越好</span>。</div><div class="defbox-i"><b>新建创意重复度</b>（新建创意重复度，TID 级别）＝ 1 − 新建创意指纹数 ÷ 新建展开创意数(TID)，衡量本期新建创意中同指纹复用的比例，<span class="dir-down">越低越好</span>。该指标分子分母均可加（同一新建 TID 只归属一个账户），按主力 / 非主力账户分组重算，与链路级整窗值一致。该指标在「有效上新」模块评分中的权重为其他指标的<b>一半</b>（5/12、5/12、1/6）。</div><div class="defbox-i">主力 / 非主力账户按该链路 7 天消耗降序累计覆盖 80% 划分；两表为并列展示，非 tab 切换。</div></div><div class="vd"><div class="vd-sec vd-good"><div class="vd-h"><span class="vd-ic">✅</span>优势</div><ul><li>主力账户「广告上新频次」2.42（行业基准 3.70，-35%，越小越好）。</li><li>主力账户「创意上新频次」1.98（行业基准 3.01，-34%，越小越好）。</li><li>主力账户每日有效上新总数 997 个/天，较上期 701 <b style="color:#16a34a">+42.3%</b>，上新供给在放量。</li><li>非主力账户每日有效上新总数 2190 个/天，较上期 1786 <b style="color:#16a34a">+22.6%</b>，上新供给在放量。</li></ul></div><div class="vd-sec vd-bad"><div class="vd-h"><span class="vd-ic">⚠️</span>劣势</div><ul><li>主力账户「单户每日上新项目广告数」2.34（行业基准 5.40，-57%）。</li><li>非主力账户「单户每日上新项目广告数」1.79（行业基准 2.55，-30%）。</li><li>链路级 0 上新广告占比 14.7%（行业基准 7.2%，+103%，越小越好）。</li></ul></div><div class="vd-sec vd-act"><div class="vd-h"><span class="vd-ic">🎯</span>建议动作</div><ul><li>反向指标相对行业基准均不弱，保持现有上新排期与账户分层。</li><li>按「账户数 → 单户上新项目广告数 → 单广告上新创意数」逐层复核，下一周期目标：有效上新总数（每日上新创意数）继续环比正增长、0 上新占比继续下降。</li></ul></div></div></div></div></div></div>
+<div class="card"><h2 class="sec">四 · 广告定向 <span class="sectag">各链路独立切换</span></h2><div class="mt-wrap"><style>#mt_m4_0:checked~.mtabs label[for=mt_m4_0],#mt_m4_1:checked~.mtabs label[for=mt_m4_1],#mt_m4_2:checked~.mtabs label[for=mt_m4_2]{background:#2563eb;color:#fff;border-color:#2563eb}#mt_m4_0:checked~.mpanes #mp_m4_0,#mt_m4_1:checked~.mpanes #mp_m4_1,#mt_m4_2:checked~.mpanes #mp_m4_2{display:block}</style><input class="mt" type="radio" name="mt_m4" id="mt_m4_0" checked><input class="mt" type="radio" name="mt_m4" id="mt_m4_1"><input class="mt" type="radio" name="mt_m4" id="mt_m4_2"><div class="mtabs"><label for="mt_m4_0">直播</label><label for="mt_m4_1">小店直购</label><label for="mt_m4_2">CID</label></div><div class="mpanes"><div class="mpane" id="mp_m4_0"><p class="mod-sub">口径：仅竞价广告（排除全域通）｜4+M 重复广告占比越低越好；智能定向开启率 = 3.0 广告中开启智能定向的广告数占比；计价率 = Cost/GMV，越低越好。使用效果板块仅对比客户自身「智能 vs 非智能」两组观测，不含行业消耗金额。</p><table class="ext"><thead><tr><th>监控指标</th><th>本期<br>11-16~11-22</th><th class="cmp1-h">上期<br>11-09~11-15</th><th class="cmp2-h">9月跑量期<br>09-09~09-15</th><th class="cmp1-h">较上期</th><th class="cmp2-h">较9月跑量期</th><th>行业基准</th><th>差异</th><th>水平</th></tr></thead><tbody><tr><td class="l">4+M重复广告占比（越低越好）<span class="mask">　行业基准取中位数（原始均值受个别负值异常影响不采用）</span></td><td class="n"><b>54.92%</b></td><td class="n cmp1">55.64%</td><td class="n cmp2">79.38%</td><td class="n qc cmp1 up">-1.3%</td><td class="n qc cmp2 up">-30.8%</td><td class="n">24.69%</td><td class="n"><span class="down">+122%</span></td><td><span class="bdg b-bad">显著偏高</span></td></tr><tr><td class="l">3.0广告智能定向开启率</td><td class="n"><b>38.4%</b></td><td class="n cmp1">34.9%</td><td class="n cmp2">33.8%</td><td class="n qc cmp1 up">+10.1%</td><td class="n qc cmp2 up">+13.5%</td><td class="n">25.3%</td><td class="n"><span class="up">+52%</span></td><td><span class="bdg b-good">领先</span></td></tr><tr><td class="l">整体计价率（Cost/GMV，越低越好）</td><td class="n"><b>1.224</b></td><td class="n cmp1">1.251</td><td class="n cmp2">1.098</td><td class="n qc cmp1 up">-2.2%</td><td class="n qc cmp2 down">+11.4%</td><td class="n">1.202</td><td class="n">+2%</td><td><span class="bdg b-eq">持平</span></td></tr></tbody></table><div class="gtbl-cap">▍智能定向使用效果数据（仅客户自身智能 vs 非智能定向对比）</div>
+<table class="ext"><thead><tr><th>监控指标</th>
+<th>智能定向广告<br><span class="note-s">本期 / 上期·环比</span></th>
+<th>非智能定向广告<br><span class="note-s">本期 / 上期·环比</span></th>
+<th>智能 vs 非智能</th><th>方向判读</th></tr></thead><tbody>
+<tr><td class="l">广告条均消耗（元/条·天，日均，越大越好）</td>
+<td class="n">61.9 <span class="mask">上期 49.1 <b style="color:#16a34a">+26.3%</b></span></td>
+<td class="n">35.7 <span class="mask">上期 30.6 <b style="color:#16a34a">+16.6%</b></span></td>
+<td class="n">1.74×</td>
+<td><span class="bdg" style="background:#16a34a">智能更高</span></td></tr>
+<tr><td class="l">计价率（Cost/GMV，越低越好）</td>
+<td class="n">1.133 <span class="mask">上期 1.167 <b style="color:#16a34a">-3.0%</b></span></td>
+<td class="n">1.246 <span class="mask">上期 1.240 <b style="color:#dc2626">+0.5%</b></span></td>
+<td class="n">差 -0.113</td>
+<td><span class="bdg" style="background:#16a34a">智能更低</span></td></tr>
+</tbody></table>
+<div class="note">指标读法：拿量维度看「智能 ÷ 非智能」倍数（&gt;1 代表智能定向广告条均消耗更高）；
+成本维度看「智能 − 非智能」计价率差（&lt;0 代表智能定向成本更优）。
+两行均为本客户自身分组观测值，属分组观测、非因果实验，不含行业数据。</div><div class="vd"><div class="vd-sec vd-good"><div class="vd-h"><span class="vd-ic">✅</span>优势</div><ul><li>3.0 广告智能定向开启率 38.4%（行业 25.3%）。</li><li>智能定向使用效果判定「<b style="color:#16a34a">正向</b>」：既拿量（日均条均消耗 61.9 vs 35.7 元/条·天）又控成本（计价率 1.133 vs 1.246）。</li></ul></div><div class="vd-sec vd-bad"><div class="vd-h"><span class="vd-ic">⚠️</span>劣势</div><ul><li>4+M 重复广告占比 54.92%（行业中位数 24.69%）（<span class="down">+30.2pp</span>），大量广告重复投放相近素材。</li></ul></div><div class="vd-sec vd-act"><div class="vd-h"><span class="vd-ic">🎯</span>建议动作</div><ul><li>治理重复广告：以「素材指纹（TID）+ 定向组合」排查 4+M 重复，对重复广告保留消耗最高的一条、其余关停。</li><li>扩大智能定向覆盖：当前开启率 38.4%，把新增 3.0 广告默认开启智能定向写入投放 SOP，按周复核两维度是否维持同向优势。</li><li>按「重复度 → 开启率 → 使用效果」逐项复核，下一周期目标：重复度环比下降、且智能定向维持正向判定。</li></ul></div></div></div><div class="mpane" id="mp_m4_1"><p class="mod-sub">口径：仅竞价广告（排除全域通）｜4+M 重复广告占比越低越好；智能定向开启率 = 3.0 广告中开启智能定向的广告数占比；计价率 = Cost/GMV，越低越好。使用效果板块仅对比客户自身「智能 vs 非智能」两组观测，不含行业消耗金额。</p><table class="ext"><thead><tr><th>监控指标</th><th>本期<br>11-16~11-22</th><th class="cmp1-h">上期<br>11-09~11-15</th><th class="cmp2-h">9月跑量期<br>09-09~09-15</th><th class="cmp1-h">较上期</th><th class="cmp2-h">较9月跑量期</th><th>行业基准</th><th>差异</th><th>水平</th></tr></thead><tbody><tr><td class="l">4+M重复广告占比（越低越好）<span class="mask">　行业基准取中位数（原始均值受个别负值异常影响不采用）</span></td><td class="n"><b>57.75%</b></td><td class="n cmp1">57.10%</td><td class="n cmp2">83.16%</td><td class="n qc cmp1 down">+1.1%</td><td class="n qc cmp2 up">-30.5%</td><td class="n">15.87%</td><td class="n"><span class="down">+264%</span></td><td><span class="bdg b-bad">显著偏高</span></td></tr><tr><td class="l">3.0广告智能定向开启率</td><td class="n"><b>15.3%</b></td><td class="n cmp1">24.5%</td><td class="n cmp2">27.2%</td><td class="n qc cmp1 down">-37.5%</td><td class="n qc cmp2 down">-43.7%</td><td class="n">39.3%</td><td class="n"><span class="down">-61%</span></td><td><span class="bdg b-bad">显著落后</span></td></tr><tr><td class="l">整体计价率（Cost/GMV，越低越好）</td><td class="n"><b>1.153</b></td><td class="n cmp1">1.152</td><td class="n cmp2">1.104</td><td class="n qc cmp1 down">+0.1%</td><td class="n qc cmp2 down">+4.5%</td><td class="n">1.109</td><td class="n">+4%</td><td><span class="bdg b-eq">持平</span></td></tr></tbody></table><div class="gtbl-cap">▍智能定向使用效果数据（仅客户自身智能 vs 非智能定向对比）</div>
+<table class="ext"><thead><tr><th>监控指标</th>
+<th>智能定向广告<br><span class="note-s">本期 / 上期·环比</span></th>
+<th>非智能定向广告<br><span class="note-s">本期 / 上期·环比</span></th>
+<th>智能 vs 非智能</th><th>方向判读</th></tr></thead><tbody>
+<tr><td class="l">广告条均消耗（元/条·天，日均，越大越好）</td>
+<td class="n">57.1 <span class="mask">上期 49.3 <b style="color:#16a34a">+15.8%</b></span></td>
+<td class="n">31.8 <span class="mask">上期 58.1 <b style="color:#dc2626">-45.2%</b></span></td>
+<td class="n">1.80×</td>
+<td><span class="bdg" style="background:#16a34a">智能更高</span></td></tr>
+<tr><td class="l">计价率（Cost/GMV，越低越好）</td>
+<td class="n">1.184 <span class="mask">上期 1.253 <b style="color:#16a34a">-5.5%</b></span></td>
+<td class="n">1.299 <span class="mask">上期 1.247 <b style="color:#dc2626">+4.1%</b></span></td>
+<td class="n">差 -0.114</td>
+<td><span class="bdg" style="background:#16a34a">智能更低</span></td></tr>
+</tbody></table>
+<div class="note">指标读法：拿量维度看「智能 ÷ 非智能」倍数（&gt;1 代表智能定向广告条均消耗更高）；
+成本维度看「智能 − 非智能」计价率差（&lt;0 代表智能定向成本更优）。
+两行均为本客户自身分组观测值，属分组观测、非因果实验，不含行业数据。</div><div class="vd"><div class="vd-sec vd-good"><div class="vd-h"><span class="vd-ic">✅</span>优势</div><ul><li>智能定向使用效果判定「<b style="color:#16a34a">正向</b>」：既拿量（日均条均消耗 57.1 vs 31.8 元/条·天）又控成本（计价率 1.184 vs 1.299）。</li></ul></div><div class="vd-sec vd-bad"><div class="vd-h"><span class="vd-ic">⚠️</span>劣势</div><ul><li>4+M 重复广告占比 57.75%（行业中位数 15.87%）（<span class="down">+41.9pp</span>），大量广告重复投放相近素材。</li><li>3.0 广告智能定向开启率 15.3%（行业 39.3%）（<span class="down">-24.0pp</span>）。</li></ul></div><div class="vd-sec vd-act"><div class="vd-h"><span class="vd-ic">🎯</span>建议动作</div><ul><li>治理重复广告：以「素材指纹（TID）+ 定向组合」排查 4+M 重复，对重复广告保留消耗最高的一条、其余关停。</li><li>扩大智能定向覆盖：当前开启率 15.3%，把新增 3.0 广告默认开启智能定向写入投放 SOP，按周复核两维度是否维持同向优势。</li><li>把智能定向开启率从 15.3% 向行业 39.3% 靠拢，但须以上方使用效果正负向结论为前提，不盲目提开启率。</li><li>按「重复度 → 开启率 → 使用效果」逐项复核，下一周期目标：重复度环比下降、且智能定向维持正向判定。</li></ul></div></div></div><div class="mpane" id="mp_m4_2"><p class="mod-sub">口径：仅竞价广告（排除全域通）｜4+M 重复广告占比越低越好；智能定向开启率 = 3.0 广告中开启智能定向的广告数占比；计价率 = Cost/GMV，越低越好。使用效果板块仅对比客户自身「智能 vs 非智能」两组观测，不含行业消耗金额。</p><table class="ext"><thead><tr><th>监控指标</th><th>本期<br>11-16~11-22</th><th class="cmp1-h">上期<br>11-09~11-15</th><th class="cmp2-h">9月跑量期<br>09-09~09-15</th><th class="cmp1-h">较上期</th><th class="cmp2-h">较9月跑量期</th><th>行业基准</th><th>差异</th><th>水平</th></tr></thead><tbody><tr><td class="l">4+M重复广告占比（越低越好）<span class="mask">　行业基准取中位数（原始均值受个别负值异常影响不采用）</span></td><td class="n"><b>36.77%</b></td><td class="n cmp1">20.21%</td><td class="n cmp2">67.65%</td><td class="n qc cmp1 down">+82.0%</td><td class="n qc cmp2 up">-45.7%</td><td class="n">15.72%</td><td class="n"><span class="down">+134%</span></td><td><span class="bdg b-bad">显著偏高</span></td></tr><tr><td class="l">3.0广告智能定向开启率</td><td class="n"><b>39.8%</b></td><td class="n cmp1">34.1%</td><td class="n cmp2">29.4%</td><td class="n qc cmp1 up">+16.9%</td><td class="n qc cmp2 up">+35.4%</td><td class="n">37.2%</td><td class="n"><span class="up">+7%</span></td><td><span class="bdg b-eq">持平</span></td></tr><tr><td class="l">整体计价率（Cost/GMV，越低越好）</td><td class="n"><b>1.350</b></td><td class="n cmp1">1.356</td><td class="n cmp2">1.146</td><td class="n qc cmp1 up">-0.5%</td><td class="n qc cmp2 down">+17.8%</td><td class="n">1.219</td><td class="n"><span class="down">+11%</span></td><td><span class="bdg b-eq">持平</span></td></tr></tbody></table><div class="gtbl-cap">▍智能定向使用效果数据（仅客户自身智能 vs 非智能定向对比）</div>
+<table class="ext"><thead><tr><th>监控指标</th>
+<th>智能定向广告<br><span class="note-s">本期 / 上期·环比</span></th>
+<th>非智能定向广告<br><span class="note-s">本期 / 上期·环比</span></th>
+<th>智能 vs 非智能</th><th>方向判读</th></tr></thead><tbody>
+<tr><td class="l">广告条均消耗（元/条·天，日均，越大越好）</td>
+<td class="n">19.8 <span class="mask">上期 18.8 <b style="color:#16a34a">+5.8%</b></span></td>
+<td class="n">16.7 <span class="mask">上期 20.4 <b style="color:#dc2626">-17.9%</b></span></td>
+<td class="n">1.19×</td>
+<td><span class="bdg" style="background:#16a34a">智能更高</span></td></tr>
+<tr><td class="l">计价率（Cost/GMV，越低越好）</td>
+<td class="n">1.362 <span class="mask">上期 1.340 <b style="color:#dc2626">+1.7%</b></span></td>
+<td class="n">1.347 <span class="mask">上期 1.364 <b style="color:#16a34a">-1.2%</b></span></td>
+<td class="n">差 +0.015</td>
+<td><span class="bdg" style="background:#d97706">智能偏高</span></td></tr>
+</tbody></table>
+<div class="note">指标读法：拿量维度看「智能 ÷ 非智能」倍数（&gt;1 代表智能定向广告条均消耗更高）；
+成本维度看「智能 − 非智能」计价率差（&lt;0 代表智能定向成本更优）。
+两行均为本客户自身分组观测值，属分组观测、非因果实验，不含行业数据。</div><div class="vd"><div class="vd-sec vd-good"><div class="vd-h"><span class="vd-ic">✅</span>优势</div><ul><li>重复度、开启率与计价率较上期未恶化，定向结构保持稳定。</li></ul></div><div class="vd-sec vd-bad"><div class="vd-h"><span class="vd-ic">⚠️</span>劣势</div><ul><li>4+M 重复广告占比 36.77%（行业中位数 15.72%）（<span class="down">+21.0pp</span>），大量广告重复投放相近素材。</li><li>4+M 重复广告占比较上期 20.21% 升至 36.77%（+82.0%）。</li><li>智能定向使用效果判定「<b style="color:#d97706">中性</b>」：成本维度未占优，扩量前需先补弱项。</li></ul></div><div class="vd-sec vd-act"><div class="vd-h"><span class="vd-ic">🎯</span>建议动作</div><ul><li>治理重复广告：以「素材指纹（TID）+ 定向组合」排查 4+M 重复，对重复广告保留消耗最高的一条、其余关停。</li><li>不盲目扩量：先做同商品、同出价的小流量 A/B（各 10~20 条，跑满 7 天），对照结论出来前维持现有覆盖。</li><li>按「重复度 → 开启率 → 使用效果」逐项复核，下一周期目标：重复度环比下降、且智能定向维持正向判定。</li></ul></div></div></div></div></div></div>
+<div class="card" id="mod4">
+<h2 class="sec">五 · 主力账户评分表 <span class="sectag">每链路独立切换 · 各链路 TOP10 明细</span></h2>
+<p class="sec-sub">每链路取消耗 TOP10 主力账户，按链路切换查看。评分按本报告四模块结构重算：
+有效基建 30%（单户在投项目数 + 单户在投创意数 + <b>在投创意重复度（反向）</b>）/
+有效上新 30%（账户级取<b>单户日均新建对客项目/广告数</b> + 单户日均上新创意数 + <b>新建创意重复度（反向）</b>）/
+广告定向 20% / 账户与余额 20%，模块内指标等权（<b>两个创意重复度指标权重降为等权的一半</b>：
+有效基建三指标 → 5/12、5/12、1/6；有效上新两指标 → 3/4、1/4）；
+余额充足 = 100 分、不足 = 0 分，其余维度按 min(账户值÷行业主力账户均值, 150%)÷150%×100。
+对比周期评分按账户 ID 匹配并以同一结构重算；本期新进主力账户在对比周期可能非主力，标注而不臆造分值。</p>
+<div class="mt-wrap"><style>#mt_m5_0:checked~.mtabs label[for=mt_m5_0],#mt_m5_1:checked~.mtabs label[for=mt_m5_1],#mt_m5_2:checked~.mtabs label[for=mt_m5_2]{background:#2563eb;color:#fff;border-color:#2563eb}#mt_m5_0:checked~.mpanes #mp_m5_0,#mt_m5_1:checked~.mpanes #mp_m5_1,#mt_m5_2:checked~.mpanes #mp_m5_2{display:block}</style><input class="mt" type="radio" name="mt_m5" id="mt_m5_0" checked><input class="mt" type="radio" name="mt_m5" id="mt_m5_1"><input class="mt" type="radio" name="mt_m5" id="mt_m5_2"><div class="mtabs"><label for="mt_m5_0">直播</label><label for="mt_m5_1">小店直购</label><label for="mt_m5_2">CID</label></div><div class="mpanes"><div class="mpane" id="mp_m5_0"><h3 class="viz-h">▍直播　主力账户 10 个（按 7 天消耗取 TOP10）</h3><table class="ext"><thead><tr><th>账户ID</th><th>日均消耗<br>(万元)</th><th>余额健康</th><th>单户在投<br>项目/广告</th><th>单户在投<br>创意数</th><th>单户日均上新<br>项目/广告</th><th>单户日均<br>上新创意</th><th>在投创意<br>重复度</th><th>新建创意<br>重复度</th><th>智能定向<br>开启率</th><th>本期<br>评分</th><th>分档</th><th class="cmp1-h">上期<br>评分</th><th class="cmp1-h">分值升降<br>/档位变化</th></tr></thead><tbody><tr>
+<td class="n"><b>81066191</b></td>
+<td class="n">0.47</td>
+<td class="n">✅ 充足<br><span class="note">余额 5.5万 / 日耗 10,955元</span></td>
+<td class="n">2<br><span class="note">行业户均 7.5</span></td>
+<td class="n">8<br><span class="note">行业户均 85</span></td>
+<td class="n">0.29<br><span class="note">行业主力 1.27</span></td>
+<td class="n">39<br><span class="note">行业主力 168</span></td>
+<td class="n">34.4%<br><span class="note">行业 68.2%</span></td>
+<td class="n">91.0%<br><span class="note">行业 81.5%</span></td>
+<td class="n">0.0%<br><span class="note">行业 25.3%</span></td>
+<td class="n" style="color:#dc2626;font-weight:800;font-size:14px">40</td>
+<td><span class="bdg" style="background:#dc2626">需重点干预</span></td>
+<td class="n cmp1">35<br><span class="note">需重点干预</span></td>
+<td class="n"><b style="color:#16a34a">+5</b><br><span class="note">需重点干预 → 需重点干预</span></td>
+</tr><tr>
+<td class="n"><b>87087251</b></td>
+<td class="n">0.31</td>
+<td class="n">✅ 充足<br><span class="note">余额 4.6万 / 日耗 3,983元</span></td>
+<td class="n">6<br><span class="note">行业户均 7.5</span></td>
+<td class="n">20<br><span class="note">行业户均 85</span></td>
+<td class="n">0.71<br><span class="note">行业主力 1.27</span></td>
+<td class="n">46<br><span class="note">行业主力 168</span></td>
+<td class="n">39.4%<br><span class="note">行业 68.2%</span></td>
+<td class="n">88.6%<br><span class="note">行业 81.5%</span></td>
+<td class="n">57.1%<br><span class="note">行业 25.3%</span></td>
+<td class="n" style="color:#2563eb;font-weight:800;font-size:14px">80</td>
+<td><span class="bdg" style="background:#2563eb">良好</span></td>
+<td class="n cmp1">73<br><span class="note">待改进</span></td>
+<td class="n"><b style="color:#16a34a">+7</b><br><span class="note">待改进 → 良好</span></td>
+</tr><tr>
+<td class="n"><b>76845188</b></td>
+<td class="n">0.27</td>
+<td class="n">✅ 充足<br><span class="note">余额 5.3万 / 日耗 9,133元</span></td>
+<td class="n">2<br><span class="note">行业户均 7.5</span></td>
+<td class="n">2<br><span class="note">行业户均 85</span></td>
+<td class="n">0.00<br><span class="note">行业主力 1.27</span></td>
+<td class="n">0<br><span class="note">行业主力 168</span></td>
+<td class="n">71.4%<br><span class="note">行业 68.2%</span></td>
+<td class="n">33.3%<br><span class="note">行业 81.5%</span></td>
+<td class="n">66.7%<br><span class="note">行业 25.3%</span></td>
+<td class="n" style="color:#dc2626;font-weight:800;font-size:14px">52</td>
+<td><span class="bdg" style="background:#dc2626">需重点干预</span></td>
+<td class="n cmp1">51<br><span class="note">需重点干预</span></td>
+<td class="n"><b style="color:#16a34a">+1</b><br><span class="note">需重点干预 → 需重点干预</span></td>
+</tr><tr>
+<td class="n"><b>88617653</b></td>
+<td class="n">0.18</td>
+<td class="n">✅ 充足<br><span class="note">余额 4.5万 / 日耗 4,448元</span></td>
+<td class="n">4<br><span class="note">行业户均 7.5</span></td>
+<td class="n">19<br><span class="note">行业户均 85</span></td>
+<td class="n">0.71<br><span class="note">行业主力 1.27</span></td>
+<td class="n">50<br><span class="note">行业主力 168</span></td>
+<td class="n">55.6%<br><span class="note">行业 68.2%</span></td>
+<td class="n">93.3%<br><span class="note">行业 81.5%</span></td>
+<td class="n">100.0%<br><span class="note">行业 25.3%</span></td>
+<td class="n" style="color:#d97706;font-weight:800;font-size:14px">73</td>
+<td><span class="bdg" style="background:#d97706">待改进</span></td>
+<td class="n cmp1"><span class="note">上期非主力<br>无同账户评分</span></td>
+<td class="n"><span class="note">—</span></td>
+</tr><tr>
+<td class="n"><b>75432462</b></td>
+<td class="n">0.17</td>
+<td class="n">✅ 充足<br><span class="note">余额 7.5万 / 日耗 5,822元</span></td>
+<td class="n">2<br><span class="note">行业户均 7.5</span></td>
+<td class="n">5<br><span class="note">行业户均 85</span></td>
+<td class="n">0.32<br><span class="note">行业主力 1.27</span></td>
+<td class="n">202<br><span class="note">行业主力 168</span></td>
+<td class="n">43.8%<br><span class="note">行业 68.2%</span></td>
+<td class="n">61.4%<br><span class="note">行业 81.5%</span></td>
+<td class="n">25.0%<br><span class="note">行业 25.3%</span></td>
+<td class="n" style="color:#d97706;font-weight:800;font-size:14px">61</td>
+<td><span class="bdg" style="background:#d97706">待改进</span></td>
+<td class="n cmp1">64<br><span class="note">待改进</span></td>
+<td class="n"><b style="color:#dc2626">-3</b><br><span class="note">待改进 → 待改进</span></td>
+</tr><tr>
+<td class="n"><b>77021297</b></td>
+<td class="n">0.14</td>
+<td class="n">✅ 充足<br><span class="note">余额 7.9万 / 日耗 1,526元</span></td>
+<td class="n">10<br><span class="note">行业户均 7.5</span></td>
+<td class="n">17<br><span class="note">行业户均 85</span></td>
+<td class="n">3.57<br><span class="note">行业主力 1.27</span></td>
+<td class="n">82<br><span class="note">行业主力 168</span></td>
+<td class="n">52.0%<br><span class="note">行业 68.2%</span></td>
+<td class="n">91.6%<br><span class="note">行业 81.5%</span></td>
+<td class="n">100.0%<br><span class="note">行业 25.3%</span></td>
+<td class="n" style="color:#2563eb;font-weight:800;font-size:14px">89</td>
+<td><span class="bdg" style="background:#2563eb">良好</span></td>
+<td class="n cmp1"><span class="note">上期非主力<br>无同账户评分</span></td>
+<td class="n"><span class="note">—</span></td>
+</tr><tr>
+<td class="n"><b>93486382</b></td>
+<td class="n">0.11</td>
+<td class="n">✅ 充足<br><span class="note">余额 5.0万 / 日耗 1,707元</span></td>
+<td class="n">8<br><span class="note">行业户均 7.5</span></td>
+<td class="n">79<br><span class="note">行业户均 85</span></td>
+<td class="n">5.00<br><span class="note">行业主力 1.27</span></td>
+<td class="n">451<br><span class="note">行业主力 168</span></td>
+<td class="n">73.8%<br><span class="note">行业 68.2%</span></td>
+<td class="n">93.5%<br><span class="note">行业 81.5%</span></td>
+<td class="n">100.0%<br><span class="note">行业 25.3%</span></td>
+<td class="n" style="color:#15803d;font-weight:800;font-size:14px">97</td>
+<td><span class="bdg" style="background:#15803d">优秀</span></td>
+<td class="n cmp1">74<br><span class="note">待改进</span></td>
+<td class="n"><b style="color:#16a34a">+23</b><br><span class="note">待改进 → 优秀</span></td>
+</tr><tr>
+<td class="n"><b>81049607</b></td>
+<td class="n">0.10</td>
+<td class="n">✅ 充足<br><span class="note">余额 4.0万 / 日耗 2,966元</span></td>
+<td class="n">7<br><span class="note">行业户均 7.5</span></td>
+<td class="n">65<br><span class="note">行业户均 85</span></td>
+<td class="n">1.57<br><span class="note">行业主力 1.27</span></td>
+<td class="n">174<br><span class="note">行业主力 168</span></td>
+<td class="n">63.3%<br><span class="note">行业 68.2%</span></td>
+<td class="n">86.4%<br><span class="note">行业 81.5%</span></td>
+<td class="n">—<br><span class="note">行业 25.3%</span></td>
+<td class="n" style="color:#2563eb;font-weight:800;font-size:14px">89</td>
+<td><span class="bdg" style="background:#2563eb">良好</span></td>
+<td class="n cmp1"><span class="note">上期非主力<br>无同账户评分</span></td>
+<td class="n"><span class="note">—</span></td>
+</tr><tr>
+<td class="n"><b>81852556</b></td>
+<td class="n">0.09</td>
+<td class="n">✅ 充足<br><span class="note">余额 3.9万 / 日耗 1,144元</span></td>
+<td class="n">5<br><span class="note">行业户均 7.5</span></td>
+<td class="n">9<br><span class="note">行业户均 85</span></td>
+<td class="n">0.86<br><span class="note">行业主力 1.27</span></td>
+<td class="n">28<br><span class="note">行业主力 168</span></td>
+<td class="n">23.1%<br><span class="note">行业 68.2%</span></td>
+<td class="n">80.7%<br><span class="note">行业 81.5%</span></td>
+<td class="n">40.0%<br><span class="note">行业 25.3%</span></td>
+<td class="n" style="color:#d97706;font-weight:800;font-size:14px">73</td>
+<td><span class="bdg" style="background:#d97706">待改进</span></td>
+<td class="n cmp1"><span class="note">上期非主力<br>无同账户评分</span></td>
+<td class="n"><span class="note">—</span></td>
+</tr><tr>
+<td class="n"><b>76180636</b></td>
+<td class="n">0.09</td>
+<td class="n">✅ 充足<br><span class="note">余额 5.2万 / 日耗 2,467元</span></td>
+<td class="n">2<br><span class="note">行业户均 7.5</span></td>
+<td class="n">4<br><span class="note">行业户均 85</span></td>
+<td class="n">1.14<br><span class="note">行业主力 1.27</span></td>
+<td class="n">26<br><span class="note">行业主力 168</span></td>
+<td class="n">64.3%<br><span class="note">行业 68.2%</span></td>
+<td class="n">61.8%<br><span class="note">行业 81.5%</span></td>
+<td class="n">16.7%<br><span class="note">行业 25.3%</span></td>
+<td class="n" style="color:#dc2626;font-weight:800;font-size:14px">55</td>
+<td><span class="bdg" style="background:#dc2626">需重点干预</span></td>
+<td class="n cmp1"><span class="note">上期非主力<br>无同账户评分</span></td>
+<td class="n"><span class="note">—</span></td>
+</tr></tbody></table></div><div class="mpane" id="mp_m5_1"><h3 class="viz-h">▍小店直购　主力账户 10 个（按 7 天消耗取 TOP10）</h3><table class="ext"><thead><tr><th>账户ID</th><th>日均消耗<br>(万元)</th><th>余额健康</th><th>单户在投<br>项目/广告</th><th>单户在投<br>创意数</th><th>单户日均上新<br>项目/广告</th><th>单户日均<br>上新创意</th><th>在投创意<br>重复度</th><th>新建创意<br>重复度</th><th>智能定向<br>开启率</th><th>本期<br>评分</th><th>分档</th><th class="cmp1-h">上期<br>评分</th><th class="cmp1-h">分值升降<br>/档位变化</th></tr></thead><tbody><tr>
+<td class="n"><b>75432462</b></td>
+<td class="n">0.53</td>
+<td class="n">✅ 充足<br><span class="note">余额 7.5万 / 日耗 5,822元</span></td>
+<td class="n">6<br><span class="note">行业户均 6.1</span></td>
+<td class="n">233<br><span class="note">行业户均 56</span></td>
+<td class="n">0.97<br><span class="note">行业主力 2.18</span></td>
+<td class="n">619<br><span class="note">行业主力 455</span></td>
+<td class="n">55.0%<br><span class="note">行业 57.1%</span></td>
+<td class="n">74.5%<br><span class="note">行业 72.6%</span></td>
+<td class="n">—<br><span class="note">行业 39.3%</span></td>
+<td class="n" style="color:#2563eb;font-weight:800;font-size:14px">77</td>
+<td><span class="bdg" style="background:#2563eb">良好</span></td>
+<td class="n cmp1">69<br><span class="note">待改进</span></td>
+<td class="n"><b style="color:#16a34a">+8</b><br><span class="note">待改进 → 良好</span></td>
+</tr><tr>
+<td class="n"><b>86015991</b></td>
+<td class="n">0.37</td>
+<td class="n">✅ 充足<br><span class="note">余额 7.6万 / 日耗 1,386元</span></td>
+<td class="n">14<br><span class="note">行业户均 6.1</span></td>
+<td class="n">177<br><span class="note">行业户均 56</span></td>
+<td class="n">2.14<br><span class="note">行业主力 2.18</span></td>
+<td class="n">862<br><span class="note">行业主力 455</span></td>
+<td class="n">54.4%<br><span class="note">行业 57.1%</span></td>
+<td class="n">69.9%<br><span class="note">行业 72.6%</span></td>
+<td class="n">0.0%<br><span class="note">行业 39.3%</span></td>
+<td class="n" style="color:#d97706;font-weight:800;font-size:14px">72</td>
+<td><span class="bdg" style="background:#d97706">待改进</span></td>
+<td class="n cmp1">73<br><span class="note">待改进</span></td>
+<td class="n"><b style="color:#dc2626">-0</b><br><span class="note">待改进 → 待改进</span></td>
+</tr><tr>
+<td class="n"><b>94184983</b></td>
+<td class="n">0.30</td>
+<td class="n">✅ 充足<br><span class="note">余额 8.3万 / 日耗 789元</span></td>
+<td class="n">7<br><span class="note">行业户均 6.1</span></td>
+<td class="n">62<br><span class="note">行业户均 56</span></td>
+<td class="n">3.00<br><span class="note">行业主力 2.18</span></td>
+<td class="n">197<br><span class="note">行业主力 455</span></td>
+<td class="n">41.0%<br><span class="note">行业 57.1%</span></td>
+<td class="n">70.2%<br><span class="note">行业 72.6%</span></td>
+<td class="n">0.0%<br><span class="note">行业 39.3%</span></td>
+<td class="n" style="color:#d97706;font-weight:800;font-size:14px">69</td>
+<td><span class="bdg" style="background:#d97706">待改进</span></td>
+<td class="n cmp1">76<br><span class="note">良好</span></td>
+<td class="n"><b style="color:#dc2626">-7</b><br><span class="note">良好 → 待改进</span></td>
+</tr><tr>
+<td class="n"><b>90505547</b></td>
+<td class="n">0.19</td>
+<td class="n">✅ 充足<br><span class="note">余额 6.0万 / 日耗 6,962元</span></td>
+<td class="n">10<br><span class="note">行业户均 6.1</span></td>
+<td class="n">96<br><span class="note">行业户均 56</span></td>
+<td class="n">2.57<br><span class="note">行业主力 2.18</span></td>
+<td class="n">405<br><span class="note">行业主力 455</span></td>
+<td class="n">34.5%<br><span class="note">行业 57.1%</span></td>
+<td class="n">73.5%<br><span class="note">行业 72.6%</span></td>
+<td class="n">0.0%<br><span class="note">行业 39.3%</span></td>
+<td class="n" style="color:#d97706;font-weight:800;font-size:14px">71</td>
+<td><span class="bdg" style="background:#d97706">待改进</span></td>
+<td class="n cmp1"><span class="note">上期非主力<br>无同账户评分</span></td>
+<td class="n"><span class="note">—</span></td>
+</tr><tr>
+<td class="n"><b>96185553</b></td>
+<td class="n">0.18</td>
+<td class="n">✅ 充足<br><span class="note">余额 6.7万 / 日耗 974元</span></td>
+<td class="n">4<br><span class="note">行业户均 6.1</span></td>
+<td class="n">70<br><span class="note">行业户均 56</span></td>
+<td class="n">1.14<br><span class="note">行业主力 2.18</span></td>
+<td class="n">637<br><span class="note">行业主力 455</span></td>
+<td class="n">57.3%<br><span class="note">行业 57.1%</span></td>
+<td class="n">78.7%<br><span class="note">行业 72.6%</span></td>
+<td class="n">—<br><span class="note">行业 39.3%</span></td>
+<td class="n" style="color:#2563eb;font-weight:800;font-size:14px">78</td>
+<td><span class="bdg" style="background:#2563eb">良好</span></td>
+<td class="n cmp1"><span class="note">上期非主力<br>无同账户评分</span></td>
+<td class="n"><span class="note">—</span></td>
+</tr><tr>
+<td class="n"><b>95431075</b></td>
+<td class="n">0.14</td>
+<td class="n">✅ 充足<br><span class="note">余额 5.7万 / 日耗 750元</span></td>
+<td class="n">6<br><span class="note">行业户均 6.1</span></td>
+<td class="n">54<br><span class="note">行业户均 56</span></td>
+<td class="n">2.29<br><span class="note">行业主力 2.18</span></td>
+<td class="n">108<br><span class="note">行业主力 455</span></td>
+<td class="n">34.6%<br><span class="note">行业 57.1%</span></td>
+<td class="n">67.5%<br><span class="note">行业 72.6%</span></td>
+<td class="n">0.0%<br><span class="note">行业 39.3%</span></td>
+<td class="n" style="color:#d97706;font-weight:800;font-size:14px">65</td>
+<td><span class="bdg" style="background:#d97706">待改进</span></td>
+<td class="n cmp1">66<br><span class="note">待改进</span></td>
+<td class="n"><b style="color:#dc2626">-1</b><br><span class="note">待改进 → 待改进</span></td>
+</tr><tr>
+<td class="n"><b>90036697</b></td>
+<td class="n">0.14</td>
+<td class="n">✅ 充足<br><span class="note">余额 4.2万 / 日耗 655元</span></td>
+<td class="n">2<br><span class="note">行业户均 6.1</span></td>
+<td class="n">2<br><span class="note">行业户均 56</span></td>
+<td class="n">0.71<br><span class="note">行业主力 2.18</span></td>
+<td class="n">10<br><span class="note">行业主力 455</span></td>
+<td class="n">0.0%<br><span class="note">行业 57.1%</span></td>
+<td class="n">44.0%<br><span class="note">行业 72.6%</span></td>
+<td class="n">20.0%<br><span class="note">行业 39.3%</span></td>
+<td class="n" style="color:#dc2626;font-weight:800;font-size:14px">44</td>
+<td><span class="bdg" style="background:#dc2626">需重点干预</span></td>
+<td class="n cmp1">57<br><span class="note">需重点干预</span></td>
+<td class="n"><b style="color:#dc2626">-13</b><br><span class="note">需重点干预 → 需重点干预</span></td>
+</tr><tr>
+<td class="n"><b>90607533</b></td>
+<td class="n">0.12</td>
+<td class="n">✅ 充足<br><span class="note">余额 4.6万 / 日耗 426元</span></td>
+<td class="n">10<br><span class="note">行业户均 6.1</span></td>
+<td class="n">35<br><span class="note">行业户均 56</span></td>
+<td class="n">4.71<br><span class="note">行业主力 2.18</span></td>
+<td class="n">713<br><span class="note">行业主力 455</span></td>
+<td class="n">38.5%<br><span class="note">行业 57.1%</span></td>
+<td class="n">76.3%<br><span class="note">行业 72.6%</span></td>
+<td class="n">88.9%<br><span class="note">行业 39.3%</span></td>
+<td class="n" style="color:#15803d;font-weight:800;font-size:14px">99</td>
+<td><span class="bdg" style="background:#15803d">优秀</span></td>
+<td class="n cmp1">97<br><span class="note">优秀</span></td>
+<td class="n"><b style="color:#16a34a">+1</b><br><span class="note">优秀 → 优秀</span></td>
+</tr><tr>
+<td class="n"><b>84444004</b></td>
+<td class="n">0.11</td>
+<td class="n">✅ 充足<br><span class="note">余额 7.2万 / 日耗 448元</span></td>
+<td class="n">4<br><span class="note">行业户均 6.1</span></td>
+<td class="n">51<br><span class="note">行业户均 56</span></td>
+<td class="n">1.43<br><span class="note">行业主力 2.18</span></td>
+<td class="n">413<br><span class="note">行业主力 455</span></td>
+<td class="n">53.8%<br><span class="note">行业 57.1%</span></td>
+<td class="n">77.9%<br><span class="note">行业 72.6%</span></td>
+<td class="n">0.0%<br><span class="note">行业 39.3%</span></td>
+<td class="n" style="color:#dc2626;font-weight:800;font-size:14px">60</td>
+<td><span class="bdg" style="background:#dc2626">需重点干预</span></td>
+<td class="n cmp1">56<br><span class="note">需重点干预</span></td>
+<td class="n"><b style="color:#16a34a">+4</b><br><span class="note">需重点干预 → 需重点干预</span></td>
+</tr><tr>
+<td class="n"><b>95597513</b></td>
+<td class="n">0.10</td>
+<td class="n">✅ 充足<br><span class="note">余额 3.9万 / 日耗 2元</span></td>
+<td class="n">3<br><span class="note">行业户均 6.1</span></td>
+<td class="n">23<br><span class="note">行业户均 56</span></td>
+<td class="n">1.71<br><span class="note">行业主力 2.18</span></td>
+<td class="n">150<br><span class="note">行业主力 455</span></td>
+<td class="n">33.3%<br><span class="note">行业 57.1%</span></td>
+<td class="n">64.4%<br><span class="note">行业 72.6%</span></td>
+<td class="n">0.0%<br><span class="note">行业 39.3%</span></td>
+<td class="n" style="color:#dc2626;font-weight:800;font-size:14px">58</td>
+<td><span class="bdg" style="background:#dc2626">需重点干预</span></td>
+<td class="n cmp1"><span class="note">上期非主力<br>无同账户评分</span></td>
+<td class="n"><span class="note">—</span></td>
+</tr></tbody></table></div><div class="mpane" id="mp_m5_2"><h3 class="viz-h">▍CID　主力账户 10 个（按 7 天消耗取 TOP10）</h3><table class="ext"><thead><tr><th>账户ID</th><th>日均消耗<br>(万元)</th><th>余额健康</th><th>单户在投<br>项目/广告</th><th>单户在投<br>创意数</th><th>单户日均上新<br>项目/广告</th><th>单户日均<br>上新创意</th><th>在投创意<br>重复度</th><th>新建创意<br>重复度</th><th>智能定向<br>开启率</th><th>本期<br>评分</th><th>分档</th><th class="cmp1-h">上期<br>评分</th><th class="cmp1-h">分值升降<br>/档位变化</th></tr></thead><tbody><tr>
+<td class="n"><b>88033391</b></td>
+<td class="n">0.09</td>
+<td class="n">✅ 充足<br><span class="note">余额 3.1万 / 日耗 604元</span></td>
+<td class="n">12<br><span class="note">行业户均 5.2</span></td>
+<td class="n">47<br><span class="note">行业户均 22</span></td>
+<td class="n">2.86<br><span class="note">行业主力 1.97</span></td>
+<td class="n">61<br><span class="note">行业主力 85</span></td>
+<td class="n">2.2%<br><span class="note">行业 41.8%</span></td>
+<td class="n">9.3%<br><span class="note">行业 51.2%</span></td>
+<td class="n">23.8%<br><span class="note">行业 37.2%</span></td>
+<td class="n" style="color:#2563eb;font-weight:800;font-size:14px">82</td>
+<td><span class="bdg" style="background:#2563eb">良好</span></td>
+<td class="n cmp1"><span class="note">上期非主力<br>无同账户评分</span></td>
+<td class="n"><span class="note">—</span></td>
+</tr><tr>
+<td class="n"><b>91827858</b></td>
+<td class="n">0.09</td>
+<td class="n">✅ 充足<br><span class="note">余额 3.4万 / 日耗 854元</span></td>
+<td class="n">9<br><span class="note">行业户均 5.2</span></td>
+<td class="n">37<br><span class="note">行业户均 22</span></td>
+<td class="n">1.71<br><span class="note">行业主力 1.97</span></td>
+<td class="n">43<br><span class="note">行业主力 85</span></td>
+<td class="n">0.0%<br><span class="note">行业 41.8%</span></td>
+<td class="n">11.3%<br><span class="note">行业 51.2%</span></td>
+<td class="n">50.0%<br><span class="note">行业 37.2%</span></td>
+<td class="n" style="color:#2563eb;font-weight:800;font-size:14px">84</td>
+<td><span class="bdg" style="background:#2563eb">良好</span></td>
+<td class="n cmp1"><span class="note">上期非主力<br>无同账户评分</span></td>
+<td class="n"><span class="note">—</span></td>
+</tr><tr>
+<td class="n"><b>80975290</b></td>
+<td class="n">0.09</td>
+<td class="n">✅ 充足<br><span class="note">余额 2.0万 / 日耗 366元</span></td>
+<td class="n">5<br><span class="note">行业户均 5.2</span></td>
+<td class="n">11<br><span class="note">行业户均 22</span></td>
+<td class="n">2.86<br><span class="note">行业主力 1.97</span></td>
+<td class="n">43<br><span class="note">行业主力 85</span></td>
+<td class="n">0.0%<br><span class="note">行业 41.8%</span></td>
+<td class="n">0.3%<br><span class="note">行业 51.2%</span></td>
+<td class="n">100.0%<br><span class="note">行业 37.2%</span></td>
+<td class="n" style="color:#15803d;font-weight:800;font-size:14px">92</td>
+<td><span class="bdg" style="background:#15803d">优秀</span></td>
+<td class="n cmp1">61<br><span class="note">待改进</span></td>
+<td class="n"><b style="color:#16a34a">+31</b><br><span class="note">待改进 → 优秀</span></td>
+</tr><tr>
+<td class="n"><b>88033402</b></td>
+<td class="n">0.08</td>
+<td class="n">✅ 充足<br><span class="note">余额 5.1万 / 日耗 1,994元</span></td>
+<td class="n">11<br><span class="note">行业户均 5.2</span></td>
+<td class="n">51<br><span class="note">行业户均 22</span></td>
+<td class="n">3.71<br><span class="note">行业主力 1.97</span></td>
+<td class="n">72<br><span class="note">行业主力 85</span></td>
+<td class="n">0.0%<br><span class="note">行业 41.8%</span></td>
+<td class="n">3.3%<br><span class="note">行业 51.2%</span></td>
+<td class="n">96.2%<br><span class="note">行业 37.2%</span></td>
+<td class="n" style="color:#15803d;font-weight:800;font-size:14px">95</td>
+<td><span class="bdg" style="background:#15803d">优秀</span></td>
+<td class="n cmp1"><span class="note">上期非主力<br>无同账户评分</span></td>
+<td class="n"><span class="note">—</span></td>
+</tr><tr>
+<td class="n"><b>88033418</b></td>
+<td class="n">0.08</td>
+<td class="n">✅ 充足<br><span class="note">余额 4.3万 / 日耗 1,166元</span></td>
+<td class="n">12<br><span class="note">行业户均 5.2</span></td>
+<td class="n">65<br><span class="note">行业户均 22</span></td>
+<td class="n">3.86<br><span class="note">行业主力 1.97</span></td>
+<td class="n">138<br><span class="note">行业主力 85</span></td>
+<td class="n">8.4%<br><span class="note">行业 41.8%</span></td>
+<td class="n">16.3%<br><span class="note">行业 51.2%</span></td>
+<td class="n">95.8%<br><span class="note">行业 37.2%</span></td>
+<td class="n" style="color:#15803d;font-weight:800;font-size:14px">100</td>
+<td><span class="bdg" style="background:#15803d">优秀</span></td>
+<td class="n cmp1">89<br><span class="note">良好</span></td>
+<td class="n"><b style="color:#16a34a">+11</b><br><span class="note">良好 → 优秀</span></td>
+</tr><tr>
+<td class="n"><b>83820218</b></td>
+<td class="n">0.07</td>
+<td class="n">✅ 充足<br><span class="note">余额 1.3万 / 日耗 1,337元</span></td>
+<td class="n">12<br><span class="note">行业户均 5.2</span></td>
+<td class="n">26<br><span class="note">行业户均 22</span></td>
+<td class="n">3.14<br><span class="note">行业主力 1.97</span></td>
+<td class="n">61<br><span class="note">行业主力 85</span></td>
+<td class="n">0.0%<br><span class="note">行业 41.8%</span></td>
+<td class="n">20.1%<br><span class="note">行业 51.2%</span></td>
+<td class="n">47.1%<br><span class="note">行业 37.2%</span></td>
+<td class="n" style="color:#15803d;font-weight:800;font-size:14px">91</td>
+<td><span class="bdg" style="background:#15803d">优秀</span></td>
+<td class="n cmp1"><span class="note">上期非主力<br>无同账户评分</span></td>
+<td class="n"><span class="note">—</span></td>
+</tr><tr>
+<td class="n"><b>82475400</b></td>
+<td class="n">0.07</td>
+<td class="n">✅ 充足<br><span class="note">余额 3.7万 / 日耗 654元</span></td>
+<td class="n">5<br><span class="note">行业户均 5.2</span></td>
+<td class="n">14<br><span class="note">行业户均 22</span></td>
+<td class="n">1.14<br><span class="note">行业主力 1.97</span></td>
+<td class="n">5<br><span class="note">行业主力 85</span></td>
+<td class="n">0.0%<br><span class="note">行业 41.8%</span></td>
+<td class="n">31.2%<br><span class="note">行业 51.2%</span></td>
+<td class="n">16.7%<br><span class="note">行业 37.2%</span></td>
+<td class="n" style="color:#d97706;font-weight:800;font-size:14px">62</td>
+<td><span class="bdg" style="background:#d97706">待改进</span></td>
+<td class="n cmp1">59<br><span class="note">需重点干预</span></td>
+<td class="n"><b style="color:#16a34a">+4</b><br><span class="note">需重点干预 → 待改进</span></td>
+</tr><tr>
+<td class="n"><b>85872649</b></td>
+<td class="n">0.06</td>
+<td class="n">✅ 充足<br><span class="note">余额 2.5万 / 日耗 668元</span></td>
+<td class="n">7<br><span class="note">行业户均 5.2</span></td>
+<td class="n">26<br><span class="note">行业户均 22</span></td>
+<td class="n">1.43<br><span class="note">行业主力 1.97</span></td>
+<td class="n">45<br><span class="note">行业主力 85</span></td>
+<td class="n">4.3%<br><span class="note">行业 41.8%</span></td>
+<td class="n">1.5%<br><span class="note">行业 51.2%</span></td>
+<td class="n">0.0%<br><span class="note">行业 37.2%</span></td>
+<td class="n" style="color:#d97706;font-weight:800;font-size:14px">65</td>
+<td><span class="bdg" style="background:#d97706">待改进</span></td>
+<td class="n cmp1"><span class="note">上期非主力<br>无同账户评分</span></td>
+<td class="n"><span class="note">—</span></td>
+</tr><tr>
+<td class="n"><b>83820200</b></td>
+<td class="n">0.05</td>
+<td class="n">✅ 充足<br><span class="note">余额 1.5万 / 日耗 345元</span></td>
+<td class="n">12<br><span class="note">行业户均 5.2</span></td>
+<td class="n">34<br><span class="note">行业户均 22</span></td>
+<td class="n">3.14<br><span class="note">行业主力 1.97</span></td>
+<td class="n">60<br><span class="note">行业主力 85</span></td>
+<td class="n">5.7%<br><span class="note">行业 41.8%</span></td>
+<td class="n">18.1%<br><span class="note">行业 51.2%</span></td>
+<td class="n">56.2%<br><span class="note">行业 37.2%</span></td>
+<td class="n" style="color:#15803d;font-weight:800;font-size:14px">94</td>
+<td><span class="bdg" style="background:#15803d">优秀</span></td>
+<td class="n cmp1"><span class="note">上期非主力<br>无同账户评分</span></td>
+<td class="n"><span class="note">—</span></td>
+</tr><tr>
+<td class="n"><b>90998010</b></td>
+<td class="n">0.05</td>
+<td class="n">✅ 充足<br><span class="note">余额 3.5万 / 日耗 446元</span></td>
+<td class="n">4<br><span class="note">行业户均 5.2</span></td>
+<td class="n">6<br><span class="note">行业户均 22</span></td>
+<td class="n">3.71<br><span class="note">行业主力 1.97</span></td>
+<td class="n">58<br><span class="note">行业主力 85</span></td>
+<td class="n">0.0%<br><span class="note">行业 41.8%</span></td>
+<td class="n">0.7%<br><span class="note">行业 51.2%</span></td>
+<td class="n">100.0%<br><span class="note">行业 37.2%</span></td>
+<td class="n" style="color:#15803d;font-weight:800;font-size:14px">94</td>
+<td><span class="bdg" style="background:#15803d">优秀</span></td>
+<td class="n cmp1">78<br><span class="note">良好</span></td>
+<td class="n"><b style="color:#16a34a">+16</b><br><span class="note">良好 → 优秀</span></td>
+</tr></tbody></table></div></div></div>
+<div class="vd"><div class="vd-sec vd-good"><div class="vd-h"><span class="vd-ic">✅</span>优势</div><ul><li>3 条链路共 <b>30</b> 个主力账户全部在此逐账户列示，平均评分 <b>75.3</b> 分，最高 <b>100</b> 分。</li><li>CID 链路主力账户平均评分最高（86.0 分，账户级口径），其账户运营方法可作为输出模板。</li><li>30/30 个主力账户余额充足，无断投风险。</li><li>11 个账户评分较上期上升，改善面覆盖 36.7%。</li></ul></div><div class="vd-sec vd-bad"><div class="vd-h"><span class="vd-ic">⚠️</span>劣势</div><ul><li>小店直购 链路主力账户平均评分最低（69.2 分，账户级口径），该链路的低分账户值得优先复核。</li><li>共 <b>6</b> 个账户低于 60 分（「需重点干预」），占 20.0%；最低分仅 40 分。</li><li>5 个账户评分较上期下降，需排查基建 / 上新是否收缩。</li><li>14 个账户本期新进主力、上期非主力，表中标注「上期非主力」而不臆造分值。</li></ul></div><div class="vd-sec vd-act"><div class="vd-h"><span class="vd-ic">🎯</span>建议动作</div><ul><li>优先复核 小店直购 链路的低分账户，按「优势 / 劣势 / 建议动作」逐账户落地。</li><li>把高分账户（最高 100 分）的在投创意数、日均上新、智能定向开启率做成模板，跨链路复制。</li><li>按明细表的「分值升降 / 档位变化」列逐个追踪，下一周期目标：低分账户数减半、平均分提升 3~5 分。</li></ul></div></div><div class="note" style="margin-top:6px">口径提示：本表为<b>账户级评分</b>（单个账户 vs 行业主力账户均值）；模块一的「链路总体评分」为<b>链路级评分</b>（客户整体 vs 行业基准），两者基准与样本不同，排名不一致属正常，不构成结论冲突。</div>
+<div class="note">注：账户级「在投项目/广告数、在投创意数」为周期内去重值；「日均上新」按账户在该链路的消耗占比分摊；
+「<b>单户日均上新项目/广告</b>」列只取<b>单户日均新建对客项目/广告数</b>（`new_create_adv_op_aid` ÷ 周期天数），
+下方小字为行业主力账户对应户均值；该字段与模块三主表「单户每日上新项目广告数」（`new_ad_num` 新建广告数）为两个不同字段，本表不与后者混算；
+账户级「有效上新」维度评分<b>只取「单户日均新建对客项目/广告数」这一项</b>（与表内展示列一致），不再混入「新建广告数」；
+「在投创意重复度」「新建创意重复度」为整窗跨天去重口径的账户级值（有曝光展开创意跨账户会重复计数，
+故「在投创意重复度」的行业基准取行业客户级均值，「新建创意重复度」因分子分母可加、分组值与链路级一致）；
+行业基准为该链路行业主力账户户均值（均为非消耗类基建 / 效率指标，涉及消耗金额的基准列以「/」表示）。</div>
+</div>
+<div class="card" style="background:#f8fafc">
+<h2 class="sec">口径与数据说明</h2>
+<table class="ext" style="font-size:12px"><tbody>
+<tr><td class="l" style="width:150px"><b>统计周期</b></td><td class="l">本期（诊断周期）2026-11-16 ~ 2026-11-22（7 天）；对比周期1「上期」2026-11-09 ~ 2026-11-15（7 天）；对比周期2「9月跑量期」2026-09-09 ~ 2026-09-15（7 天）。
+各期天数分别为 7、7、7 天。环比 =（本期 − 对比期）÷|对比期|×100%，对比期为 0 或缺失记「—」不臆造；各模块主表同时给出「较上期」、「较9月跑量期」环比。
+如对比周期处于大促投放高峰，其消耗规模可能显著高于本期，跨期解读以效率 / 比率 / 频次 / 占比等相对指标为主。</td></tr>
+<tr><td class="l"><b>消耗口径（日均）</b></td><td class="l">全报告所有消耗类数值一律为<b>日均消耗＝该期累计消耗 ÷ 该期天数</b>（本期 ÷7，上期 ÷7，9月跑量期 ÷7）。各期按各自天数折算，故天数不同的周期之间可直接比较；因分子分母同除天数，环比百分比不受影响。<b>账户余额</b>为期末时点值、<b>日耗</b>本身即单日消耗，二者均不折算、保持原值。</td></tr>
+<tr><td class="l"><b>统计口径</b></td><td class="l">仅统计竞价广告（排除全域通系）；按直播 / 小店直购 / CID 分链路；
+模块二 / 三的流量类指标为「逐日快照的日均值」＝ Σ 每日值 ÷ 该期天数。各期的行业基准均为各自同期的同链路客户群均值
+（名单按各期窗口重取，故各期基准样本不同，评分仍为「自身 ÷ 同期基准」的同期相对位置、可跨期比较）。</td></tr>
+<tr><td class="l"><b>有效总数（乘法分解）</b></td><td class="l">
+每日有效基建总数＝每日在投账户数 × 单户每日在投广告数 × 单广告每日在投创意数，恒等于「每日在投创意数」；
+每日有效上新总数＝每日在投账户数 × 单户每日上新项目广告数 × 单广告每日上新创意数，恒等于「每日上新创意数」。
+用于把创意规模拆成「账户规模 → 单户铺量 → 单条容量」三层，定位瓶颈层级。</td></tr>
+<tr><td class="l"><b>频次与 0 上新占比</b></td><td class="l">
+广告上新频次 = 账户级「7 ÷ 有新建项目广告动作的天数」等权平均（7 天完全无上新按 7 天/次封顶，
+值域 1~7，越小越好）；创意上新频次 = 同法按「有新建创意动作的天数」计算。两者动作口径不同，不可相减。
+0 上新账户占比 = 7 天完全无新建创意动作的账户数 ÷ 该组账户总数（分主力 / 非主力）；
+0 上新广告占比 = 7 天无新建创意的广告数 ÷ 广告总数，为链路级全量口径（广告无法全量归属到单个账户），
+故主力 / 非主力两表该行同值。三项均越小越好。</td></tr>
+<tr><td class="l"><b>行业基准</b></td><td class="l">同链路、同口径客户群的同期均值（名单含本客户自身）；
+4+M 重复度基准取中位数（原始均值受个别负值异常影响不采用）。评分以行业基准为参照，
+正向指标 = min(自身÷基准, 150%)÷150%×100，反向指标 = min(基准÷自身, 150%)÷150%×100。</td></tr>
+<tr><td class="l"><b>数据范围</b></td><td class="l">涉及行业整体消耗金额的基准列
+统一以「<b>/</b>」表示，仅展示客户自身值与环比；结论与建议中亦不使用行业消耗金额。
+报告中的消耗、余额、日耗均为本客户自身经营数据；行业基准仅保留账户数、在投 / 上新数量、占比、频次、开启率等非消耗类指标。</td></tr>
+<tr><td class="l"><b>关键定义</b></td><td class="l">主力账户 = 账户按该链路 7 天消耗降序累计覆盖 80% 消耗的账户集合；
+余额充足 = 期末可用余额 &gt; 3 × 期末单日消耗；「在投创意数」取曝光创意ID 口径，
+「上新创意数」取新建创意 TID 口径，两者统计层级不同，不可相减。</td></tr>
+<tr><td class="l"><b>评分与分档</b></td><td class="l">按报告四模块结构打分：有效基建 30% /
+有效上新 30% / 广告定向 20% / 账户与余额 20%；模块内可比指标等权平均得模块分再加权汇总
+（例外：「在投创意重复度」「新建创意重复度」两项在其所属模块内的权重降为等权的一半，
+即三指标模块中由各 1/3 变为 5/12、5/12、1/6，两指标模块中由各 1/2 变为 3/4、1/4），
+规模类绝对量（在投账户数、有效总数）不纳入打分以免封顶失真；有效上新模块由原「广告上新 + 创意上新」两维合并。
+≥90 优秀 / 75~90 良好 / 60~75 待改进 / &lt;60 需重点干预。链路级与账户级评分均按同一结构同步重算。</td></tr>
+<tr><td class="l"><b>结论结构</b></td><td class="l">每个模块每个链路的结论统一为
+「✅ 优势 / ⚠️ 劣势 / 🎯 建议动作」三段，逐条分点、独立断句；「✅ 优势」挑重点精简为 3~4 行；
+数值均由实取数据计算，不臆造。</td></tr>
+<tr><td class="l"><b>模块布局</b></td><td class="l">「总览评分」为报告开头独立板块；
+「一 账户&余额 / 二 有效基建数 / 三 有效上新数 / 四 广告定向」各自一套 3 链路 tab（直播 / 小店直购 / CID），互不联动；
+「五 主力账户评分表」亦按每链路一个 tab 切换，在报告末尾独立展示。</td></tr>
+</tbody></table></div>
+<div class="footer">蚁团美妆2025 · 操盘基建监控报告（对外版）　|　本期 2026-11-16 ~ 2026-11-22（7 天）　vs　上期 2026-11-09 ~ 2026-11-15（7 天）　vs　9月跑量期 2026-09-09 ~ 2026-09-15（7 天）　|　消耗均为日均　|　生成于 2026-11-25</div>
+</div><script>(function(){var _h=0,_t;function m(){var b=document.body;if(!b)return 0;return Math.max(b.scrollHeight,b.offsetHeight,Math.ceil(b.getBoundingClientRect().height))}function s(){var h=m();if(h>0&&h!==_h){_h=h;window.parent.postMessage({type:"iframe-resize",height:h},"*")}}function d(){clearTimeout(_t);_t=setTimeout(s,150)}if(document.readyState==="complete")s();else window.addEventListener("load",s);window.addEventListener("resize",d);if(typeof ResizeObserver!=="undefined"){var ro=new ResizeObserver(d);ro.observe(document.documentElement);if(document.body)ro.observe(document.body)}})();</script><div id="__idata_artifact_err_overlay__" style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);display:none;width:min(640px,calc(100vw - 48px));max-height:80vh;padding:24px 28px;background:#ffffff;border:1px solid #fca5a5;border-left:4px solid #ef4444;border-radius:12px;box-shadow:0 12px 32px rgba(0,0,0,0.12);z-index:2147483646;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei','Segoe UI',sans-serif;color:#7f1d1d;box-sizing:border-box;"><div style="display:flex;align-items:center;gap:10px;font-size:16px;font-weight:600;margin-bottom:14px;"><span style="display:inline-flex;width:24px;height:24px;align-items:center;justify-content:center;background:#ef4444;color:#fff;border-radius:50%;font-size:14px;font-weight:bold;flex-shrink:0;">!</span><span>图表渲染失败</span></div><pre id="__idata_artifact_err_msg__" style="margin:0;padding:14px 16px;background:#fef2f2;border-radius:8px;font-size:12px;line-height:1.65;white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;color:#7f1d1d;max-height:60vh;overflow:auto;"></pre><div style="margin-top:12px;font-size:11px;color:#9ca3af;line-height:1.5;"><span id="__idata_artifact_err_copy_inline__" style="color:#5867ed;cursor:pointer;text-decoration:underline;">复制错误</span><span style="margin-left:4px;">报告给大模型可自动修复该脚本</span></div><div style="margin-top:14px;display:flex;justify-content:flex-end;gap:8px;"><button id="__idata_artifact_err_copy_btn__" type="button" style="padding:6px 14px;font-size:12px;background:#fff;color:#5867ed;border:1px solid #5867ed;border-radius:6px;cursor:pointer;">复制错误</button><button id="__idata_artifact_err_ignore_btn__" type="button" style="padding:6px 14px;font-size:12px;background:#fff;color:#7f1d1d;border:1px solid #fca5a5;border-radius:6px;cursor:pointer;">忽略错误</button></div></div><script>(function(){var ov=document.getElementById('__idata_artifact_err_overlay__');var msg=document.getElementById('__idata_artifact_err_msg__');if(!ov||!msg)return;var shownSet={};var m=window.location.pathname.match(/\/artifacts_v2\/([^/]+)\/(.+)$/);var sessionId=m?m[1]:'';var artifactName=m?decodeURIComponent(m[2]):'';function _hash(s){var h=5381;for(var i=0;i<s.length;i++){h=((h<<5)+h+s.charCodeAt(i))|0;}return (h>>>0).toString(36);}function _ignoreKey(t){return 'adw:artifact:err-ignored:'+sessionId+':'+artifactName+':'+_hash(t);}function _show(t){if(!t||shownSet[t])return;shownSet[t]=1;try{if(localStorage.getItem(_ignoreKey(t))){return;}}catch(_e){}msg.textContent=String(t).slice(0,3000);ov.style.display='block';}var q=window.__idata_artifact_error__||[];for(var i=0;i<q.length;i++)_show(q[i]);window.addEventListener('error',function(ev){var parts=[];if(ev.error&&(ev.error.stack||ev.error.message)){parts.push(String(ev.error.stack||ev.error.message));}else{parts.push(ev.message||'Unknown error');}if(ev.filename){parts.push('\n(at '+ev.filename+':'+(ev.lineno||'?')+':'+(ev.colno||'?')+')');}_show(parts.join('\n'));});window.addEventListener('unhandledrejection',function(ev){var r=ev.reason;_show((r&&(r.stack||r.message))||r||'Unhandled Promise rejection');});function _copyError(){var txt=msg.textContent;if(!txt)return;if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(function(){},function(){_copyFallback(txt);});}else{_copyFallback(txt);}}function _copyFallback(txt){var ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(_e){}document.body.removeChild(ta);}function _ignoreError(){var txt=msg.textContent;try{localStorage.setItem(_ignoreKey(txt),'1');}catch(_e){}ov.style.display='none';}var copyInline=document.getElementById('__idata_artifact_err_copy_inline__');if(copyInline)copyInline.addEventListener('click',_copyError);var copyBtn=document.getElementById('__idata_artifact_err_copy_btn__');if(copyBtn){copyBtn.addEventListener('click',function(){_copyError();var orig=copyBtn.textContent;copyBtn.textContent='已复制';setTimeout(function(){copyBtn.textContent=orig;},1500);});}var ignoreBtn=document.getElementById('__idata_artifact_err_ignore_btn__');if(ignoreBtn)ignoreBtn.addEventListener('click',_ignoreError);})();</script><style id="__adata_wm_style__">.__adata_wm__{position:fixed;inset:0;pointer-events:none;z-index:2147483647;background-repeat:repeat;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='160'><text x='50%' y='50%' fill='rgba(0,0,0,0.08)' font-size='14' font-family='-apple-system,Segoe UI,sans-serif' text-anchor='middle' transform='rotate(-25 120 80)'>annyyguo</text></svg>")}</style><div class="__adata_wm__" aria-hidden="true"></div></body></html>
