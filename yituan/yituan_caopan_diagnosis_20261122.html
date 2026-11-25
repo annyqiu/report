@@ -155,6 +155,17 @@ border-radius:50%;background:#94a3b8}
 padding:4px 10px;font-size:11.5px;color:#475569;white-space:nowrap}
 .strip .st-it b{font-size:14px;margin:0 3px}
 .strip .st-it .st-d{font-size:10.5px;font-weight:700;margin-left:3px}
+/* 主力账户表：主体名称列 / 主体块标题 / CSV 下载按钮 */
+.ext td.ent{font-weight:600;color:#334155;white-space:normal;min-width:120px;max-width:190px}
+.ent-h{margin:16px 0 6px;font-size:13px;font-weight:800;color:#1e293b;
+border-left:3px solid #2563eb;padding-left:8px;line-height:1.5}
+.dl-wrap{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:10px 0 2px}
+.dl-btn{display:inline-block;background:#2563eb;color:#fff!important;font-size:12.5px;
+font-weight:700;padding:7px 16px;border-radius:8px;text-decoration:none!important;
+box-shadow:0 1px 3px rgba(37,99,235,.3);transition:background .15s}
+.dl-btn:hover{background:#1d4ed8}
+.dl-note{font-size:11px;color:#94a3b8}
+@media print{.dl-wrap{display:none}}
 @media(max-width:760px){.vd{grid-template-columns:1fr}}
 @media print{.panes>.pane{display:block!important;page-break-before:always}.tabs{display:none}}
 
@@ -274,31 +285,59 @@ border-left:3px solid #60a5fa}
 成本维度看「智能 − 非智能」计价率差（&lt;0 代表智能定向成本更优）。
 两行均为本客户自身分组观测值，属分组观测、非因果实验，不含行业数据。</div><div class="vd"><div class="vd-sec vd-good"><div class="vd-h"><span class="vd-ic">✅</span>优势</div><ul><li>重复度、开启率与计价率较上期未恶化，定向结构保持稳定。</li></ul></div><div class="vd-sec vd-bad"><div class="vd-h"><span class="vd-ic">⚠️</span>劣势</div><ul><li>4+M 重复广告占比 36.77%（行业中位数 15.72%）（<span class="down">+21.0pp</span>），大量广告重复投放相近素材。</li><li>4+M 重复广告占比较上期 20.21% 升至 36.77%（+82.0%）。</li><li>智能定向使用效果判定「<b style="color:#d97706">中性</b>」：成本维度未占优，扩量前需先补弱项。</li></ul></div><div class="vd-sec vd-act"><div class="vd-h"><span class="vd-ic">🎯</span>建议动作</div><ul><li>治理重复广告：以「素材指纹（TID）+ 定向组合」排查 4+M 重复，对重复广告保留消耗最高的一条、其余关停。</li><li>不盲目扩量：先做同商品、同出价的小流量 A/B（各 10~20 条，跑满 7 天），对照结论出来前维持现有覆盖。</li><li>按「重复度 → 开启率 → 使用效果」逐项复核，下一周期目标：重复度环比下降、且智能定向维持正向判定。</li></ul></div></div></div></div></div></div>
 <div class="card" id="mod4">
-<h2 class="sec">五 · 主力账户评分表 <span class="sectag">每链路独立切换 · 各链路 TOP10 明细</span></h2>
-<p class="sec-sub">每链路取消耗 TOP10 主力账户，按链路切换查看。评分按本报告四模块结构重算：
+<h2 class="sec">五 · 主力账户评分表 <span class="sectag">按主体拆分 · 每链路 TOP5 主体 × 各自主力账户 TOP10</span></h2>
+<div class="dl-wrap"><a class="dl-btn" download="蚁团美妆2025_主力账户明细_2026-11-16-2026-11-22.csv" href="data:text/csv;charset=utf-8;base64,77u/6ZO+6LevLOS4u+S9k+WQjeensCzotKbmiLdJRCzml6XlnYfmtojogJco5LiH5YWDKSzkvZnpop3nirbmgIEs5L2Z6aKdKOS4h+WFgyksVC0x5pel6ICXKOWFgyks5Y2V5oi35Zyo5oqV6aG555uu5pWwLOWNleaIt+WcqOaKleWIm+aEj+aVsCzljZXmiLfml6XlnYfkuIrmlrDpobnnm64v5bm/5ZGK5pWwLOWNleaIt+aXpeWdh+S4iuaWsOWIm+aEj+aVsCzlnKjmipXliJvmhI/ph43lpI3luqYoJSks5paw5bu65Yib5oSP6YeN5aSN5bqmKCUpLOaZuuiDveWumuWQkeW8gOWQr+eOhyglKSzmnKzmnJ/or4TliIYs5YiG5qGjLOS4iuacn+ivhOWIhizliIblgLzljYfpmY0KIuebtOaSrSIsIuW5v+W3nuW4guayheiUk+WVhui0uOaciemZkOWFrOWPuCIsIjg3MDg3MjUxIiwiMC4zMSIsIuWFhei2syIsIjQuNiIsIjM5ODMiLCI2IiwiMjAiLCIwLjcxIiwiNDYiLCIzOS40IiwiODguNiIsIjU3LjEiLCI4MCIsIuiJr+WlvSIsIjczIiwiKzciCiLnm7Tmkq0iLCLlub/lt57luILmsoXolJPllYbotLjmnInpmZDlhazlj7giLCI4ODYxNzY1MyIsIjAuMTgiLCLlhYXotrMiLCI0LjUiLCI0NDQ4IiwiNCIsIjE5IiwiMC43MSIsIjUwIiwiNTUuNiIsIjkzLjMiLCIxMDAuMCIsIjczIiwi5b6F5pS56L+bIiwiNjQiLCIrMTAiCiLnm7Tmkq0iLCLlub/lt57luILmsoXolJPllYbotLjmnInpmZDlhazlj7giLCI4MTg1MjU1NiIsIjAuMDkiLCLlhYXotrMiLCIzLjkiLCIxMTQ0IiwiNSIsIjkiLCIwLjg2IiwiMjgiLCIyMy4xIiwiODAuNyIsIjQwLjAiLCI3MyIsIuW+heaUuei/myIsIiIsIiIKIuebtOaSrSIsIuW5v+W3nuW4guayheiUk+WVhui0uOaciemZkOWFrOWPuCIsIjg4MjM5MDQ0IiwiMC4wNSIsIuWFhei2syIsIjQuNCIsIjIyOCIsIjUiLCIyNiIsIjAuNzEiLCI4OCIsIjYwLjQiLCI4OS45IiwiNDAuMCIsIjc3Iiwi6Imv5aW9IiwiNzEiLCIrNiIKIuebtOaSrSIsIuW5v+W3nuW4guayheiUk+WVhui0uOaciemZkOWFrOWPuCIsIjg3MDg3MjM1IiwiMC4wNSIsIuWFhei2syIsIjQuOCIsIjIzMDkiLCIzIiwiMjMiLCIwLjcxIiwiNDkiLCI0Mi4yIiwiOTEuMSIsIjEwMC4wIiwiNzMiLCLlvoXmlLnov5siLCI3NiIsIi0zIgoi55u05pKtIiwi5bm/5bee5biC6JyC5rqx5ZWG6LS45pyJ6ZmQ5YWs5Y+4IiwiODEwNDk2MDciLCIwLjEwIiwi5YWF6LazIiwiNC4wIiwiMjk2NiIsIjciLCI2NSIsIjEuNTciLCIxNzQiLCI2My4zIiwiODYuNCIsIiIsIjg5Iiwi6Imv5aW9IiwiODAiLCIrOSIKIuebtOaSrSIsIuW5v+W3nuW4guicgua6seWVhui0uOaciemZkOWFrOWPuCIsIjgxMDQ5NjAwIiwiMC4wOCIsIuWFhei2syIsIjQuMiIsIjU4NSIsIjciLCI0NyIsIjEuNTQiLCIxNjkiLCI1NC44IiwiODYuOCIsIiIsIjg5Iiwi6Imv5aW9IiwiODIiLCIrNyIKIuebtOaSrSIsIuW5v+W3nuW4guicgua6seWVhui0uOaciemZkOWFrOWPuCIsIjgxMDQ5NjEyIiwiMC4wOCIsIuWFhei2syIsIjUuMyIsIjEzODUiLCIxIiwiMSIsIjAuNDEiLCI1NSIsIjMzLjMiLCIxMDAuMCIsIjAuMCIsIjM2Iiwi6ZyA6YeN54K55bmy6aKEIiwiMjMiLCIrMTMiCiLnm7Tmkq0iLCLlub/lt57luILonILmurHllYbotLjmnInpmZDlhazlj7giLCI4MTA0OTU5NCIsIjAuMDYiLCLlhYXotrMiLCI0LjUiLCIxOTM5IiwiNyIsIjM1IiwiMS40MyIsIjE4OCIsIjUzLjgiLCI4OC4xIiwiIiwiODkiLCLoia/lpb0iLCI4NSIsIis0Igoi55u05pKtIiwi5bm/5bee5biC6JyC5rqx5ZWG6LS45pyJ6ZmQ5YWs5Y+4IiwiNzk5ODQxNzciLCIwLjA2Iiwi5YWF6LazIiwiMi44IiwiMTYxNiIsIjEiLCIyIiwiMC4yOSIsIjEyIiwiMC4wIiwiMTAwLjAiLCIwLjAiLCIyOSIsIumcgOmHjeeCueW5sumihCIsIiIsIiIKIuebtOaSrSIsIuW5v+W3nuW4guicgua6seWVhui0uOaciemZkOWFrOWPuCIsIjgxMDQ5NjAyIiwiMC4wNSIsIuWFhei2syIsIjMuMSIsIjczNSIsIjciLCI2OCIsIjEuNzEiLCIxNjAiLCI1My41IiwiODUuOCIsIiIsIjkwIiwi5LyY56eAIiwiNzYiLCIrMTQiCiLnm7Tmkq0iLCLlub/lt57luILonILmurHllYbotLjmnInpmZDlhazlj7giLCI4MTA0OTU4MyIsIjAuMDQiLCLlhYXotrMiLCIyLjUiLCI3MzciLCI2IiwiNDciLCIxLjU3IiwiMTk5IiwiNTAuNyIsIjg4LjAiLCIiLCI5MSIsIuS8mOengCIsIiIsIiIKIuebtOaSrSIsIuW5v+W3nuW4guicgua6seWVhui0uOaciemZkOWFrOWPuCIsIjgxMDQ5NjA4IiwiMC4wNCIsIuWFhei2syIsIjMuNSIsIjUzOSIsIjYiLCI0NCIsIjEuNDMiLCIxMjIiLCI1Mi40IiwiODUuOSIsIiIsIjg1Iiwi6Imv5aW9IiwiODIiLCIrMyIKIuebtOaSrSIsIuW5v+W3nuW4guiqiuaYsei0uOaYk+aciemZkOWFrOWPuCIsIjgxMDY2MTkxIiwiMC40NyIsIuWFhei2syIsIjUuNSIsIjEwOTU1IiwiMiIsIjgiLCIwLjI5IiwiMzkiLCIzNC40IiwiOTEuMCIsIjAuMCIsIjQwIiwi6ZyA6YeN54K55bmy6aKEIiwiMzUiLCIrNSIKIuebtOaSrSIsIuW5v+W3nuW4guWLkOaygeWVhui0uOaciemZkOWFrOWPuCIsIjc2ODQ1MTg4IiwiMC4yNyIsIuWFhei2syIsIjUuMyIsIjkxMzMiLCIyIiwiMiIsIjAuMDAiLCIwIiwiNzEuNCIsIjMzLjMiLCI2Ni43IiwiNTIiLCLpnIDph43ngrnlubLpooQiLCI1MSIsIisxIgoi55u05pKtIiwi5bm/5bee5biC552r5YuS5ZWG6LS45pyJ6ZmQ5YWs5Y+4IiwiODgwMzMzNTQiLCIwLjA4Iiwi5YWF6LazIiwiNC4zIiwiMTIwIiwiNiIsIjExIiwiMS4yOCIsIjMyMiIsIjYxLjUiLCI5MC42IiwiNTUuNiIsIjg1Iiwi6Imv5aW9IiwiIiwiIgoi55u05pKtIiwi5bm/5bee5biC552r5YuS5ZWG6LS45pyJ6ZmQ5YWs5Y+4IiwiODgwMzMzNjAiLCIwLjA3Iiwi5YWF6LazIiwiMy4zIiwiOTE2IiwiNiIsIjExIiwiMS4yNyIsIjMxMCIsIjQ2LjQiLCI4Ny4yIiwiNjAuMCIsIjg3Iiwi6Imv5aW9IiwiIiwiIgoi55u05pKtIiwi5bm/5bee5biC552r5YuS5ZWG6LS45pyJ6ZmQ5YWs5Y+4IiwiODgwMzMzNjMiLCIwLjA1Iiwi5YWF6LazIiwiMS40IiwiNDUzIiwiNSIsIjkiLCIwLjU3IiwiMjMiLCI0My41IiwiODcuNyIsIjc3LjgiLCI2OSIsIuW+heaUuei/myIsIiIsIiIKIuWwj+W6l+ebtOi0rSIsIuW5v+W3nuW4gum6n+m5v+WVhui0uOaciemZkOWFrOWPuCIsIjc1NDMyNDYyIiwiMC41MyIsIuWFhei2syIsIjcuNSIsIjU4MjIiLCI2IiwiMjMzIiwiMC45NyIsIjYxOSIsIjU1LjAiLCI3NC41IiwiIiwiNzciLCLoia/lpb0iLCI2OSIsIis4Igoi5bCP5bqX55u06LStIiwi5bm/5bee5biC6bqf6bm/5ZWG6LS45pyJ6ZmQ5YWs5Y+4IiwiOTQxODQ5ODMiLCIwLjMwIiwi5YWF6LazIiwiOC4zIiwiNzg5IiwiNyIsIjYyIiwiMy4wMCIsIjE5NyIsIjQxLjAiLCI3MC4yIiwiMC4wIiwiNjkiLCLlvoXmlLnov5siLCI3NiIsIi03Igoi5bCP5bqX55u06LStIiwi5bm/5bee5biC6bqf6bm/5ZWG6LS45pyJ6ZmQ5YWs5Y+4IiwiOTA1MDU1NDciLCIwLjE5Iiwi5YWF6LazIiwiNi4wIiwiNjk2MiIsIjEwIiwiOTYiLCIyLjU3IiwiNDA1IiwiMzQuNSIsIjczLjUiLCIwLjAiLCI3MSIsIuW+heaUuei/myIsIjYzIiwiKzgiCiLlsI/lupfnm7TotK0iLCLlub/lt57luILpup/pub/llYbotLjmnInpmZDlhazlj7giLCI5NTQzMTA3NSIsIjAuMTQiLCLlhYXotrMiLCI1LjciLCI3NTAiLCI2IiwiNTQiLCIyLjI5IiwiMTA4IiwiMzQuNiIsIjY3LjUiLCIwLjAiLCI2NSIsIuW+heaUuei/myIsIjY2IiwiLTEiCiLlsI/lupfnm7TotK0iLCLlub/lt57luILpmpzmmLHllYbotLjmnInpmZDlhazlj7giLCI5NjE4NTU1MyIsIjAuMTgiLCLlhYXotrMiLCI2LjciLCI5NzQiLCI0IiwiNzAiLCIxLjE0IiwiNjM3IiwiNTcuMyIsIjc4LjciLCIiLCI3OCIsIuiJr+WlvSIsIiIsIiIKIuWwj+W6l+ebtOi0rSIsIuW5v+W3nuW4gumanOaYseWVhui0uOaciemZkOWFrOWPuCIsIjk1NTk3NTEzIiwiMC4xMCIsIuWFhei2syIsIjMuOSIsIjIiLCIzIiwiMjMiLCIxLjcxIiwiMTUwIiwiMzMuMyIsIjY0LjQiLCIwLjAiLCI1OCIsIumcgOmHjeeCueW5sumihCIsIiIsIiIKIuWwj+W6l+ebtOi0rSIsIuW5v+W3nuW4gumanOaYseWVhui0uOaciemZkOWFrOWPuCIsIjk1NTk3NDk3IiwiMC4wOCIsIuWFhei2syIsIjEuNCIsIjc0NyIsIjYiLCI0MyIsIjEuNDMiLCI0MTUiLCIzNy4xIiwiNTguMyIsIjAuMCIsIjY3Iiwi5b6F5pS56L+bIiwiIiwiIgoi5bCP5bqX55u06LStIiwi5bm/5bee5biC6Zqc5pix5ZWG6LS45pyJ6ZmQ5YWs5Y+4IiwiOTU1OTc1NDAiLCIwLjA4Iiwi5YWF6LazIiwiNC40IiwiNTI3IiwiNyIsIjM5IiwiMi4xNCIsIjMyNiIsIjIyLjUiLCI2NS42IiwiMC4wIiwiNjgiLCLlvoXmlLnov5siLCIiLCIiCiLlsI/lupfnm7TotK0iLCLlub/lt57luILpmpzmmLHllYbotLjmnInpmZDlhazlj7giLCI5NTU5NzQ4NCIsIjAuMDYiLCLlhYXotrMiLCI1LjgiLCIyNzYiLCI0IiwiNDciLCIxLjcxIiwiNDYwIiwiMzcuNSIsIjcxLjIiLCIwLjAiLCI2NyIsIuW+heaUuei/myIsIjYxIiwiKzUiCiLlsI/lupfnm7TotK0iLCLlub/lt57luILlsprpmr3llYbotLjmnInpmZDlhazlj7giLCI4NjAxNTk5MSIsIjAuMzciLCLlhYXotrMiLCI3LjYiLCIxMzg2IiwiMTQiLCIxNzciLCIyLjE0IiwiODYyIiwiNTQuNCIsIjY5LjkiLCIwLjAiLCI3MiIsIuW+heaUuei/myIsIjczIiwiLTAiCiLlsI/lupfnm7TotK0iLCLlub/lt57luILoqormuJ3llYbotLjmnInpmZDlhazlj7giLCI4NDQ0NDAwNCIsIjAuMTEiLCLlhYXotrMiLCI3LjIiLCI0NDgiLCI0IiwiNTEiLCIxLjQzIiwiNDEzIiwiNTMuOCIsIjc3LjkiLCIwLjAiLCI2MCIsIumcgOmHjeeCueW5sumihCIsIjU2IiwiKzQiCiLlsI/lupfnm7TotK0iLCLlub/lt57luILoqormuJ3llYbotLjmnInpmZDlhazlj7giLCI3NjI2MjY4MCIsIjAuMDciLCLlhYXotrMiLCI2LjgiLCI3MiIsIjIiLCIyIiwiMC43MSIsIjI1IiwiMC4wIiwiMTguOCIsIjAuMCIsIjM1Iiwi6ZyA6YeN54K55bmy6aKEIiwiNDEiLCItNiIKIuWwj+W6l+ebtOi0rSIsIuW5v+W3nuW4guS9keelnOWVhui0uOaciemZkOWFrOWPuCIsIjg5NTk5MDIzIiwiMC4wOCIsIuWFhei2syIsIjMuNCIsIjAiLCIyIiwiMjUiLCIyLjI5IiwiOTYiLCI3Ni4wIiwiNzcuMCIsIjAuMCIsIjU1Iiwi6ZyA6YeN54K55bmy6aKEIiwiNTYiLCItMSIKIuWwj+W6l+ebtOi0rSIsIuW5v+W3nuW4guS9keelnOWVhui0uOaciemZkOWFrOWPuCIsIjg5NTk5MDYxIiwiMC4wNyIsIuWFhei2syIsIjUuMSIsIjI1MCIsIjMiLCIzNCIsIjIuMTQiLCIxNjEiLCI1OC4yIiwiNzcuNSIsIjAuMCIsIjU5Iiwi6ZyA6YeN54K55bmy6aKEIiwiNjAiLCItMiIKIkNJRCIsIuW5v+W3nuW4gueOrueQmuWVhui0uOaciemZkOWFrOWPuCIsIjg4MDMzMzkxIiwiMC4wOSIsIuWFhei2syIsIjMuMSIsIjYwNCIsIjEyIiwiNDciLCIyLjg2IiwiNjEiLCIyLjIiLCI5LjMiLCIyMy44IiwiODIiLCLoia/lpb0iLCIiLCIiCiJDSUQiLCLlub/lt57luILnjq7nkJrllYbotLjmnInpmZDlhazlj7giLCI5MTgyNzg1OCIsIjAuMDkiLCLlhYXotrMiLCIzLjQiLCI4NTQiLCI5IiwiMzciLCIxLjcxIiwiNDMiLCIwLjAiLCIxMS4zIiwiNTAuMCIsIjg0Iiwi6Imv5aW9IiwiIiwiIgoiQ0lEIiwi5bm/5bee5biC546u55Ca5ZWG6LS45pyJ6ZmQ5YWs5Y+4IiwiODgwMzM0MDIiLCIwLjA4Iiwi5YWF6LazIiwiNS4xIiwiMTk5NCIsIjExIiwiNTEiLCIzLjcxIiwiNzIiLCIwLjAiLCIzLjMiLCI5Ni4yIiwiOTUiLCLkvJjnp4AiLCIiLCIiCiJDSUQiLCLlub/lt57luILnjq7nkJrllYbotLjmnInpmZDlhazlj7giLCI4ODAzMzQxOCIsIjAuMDgiLCLlhYXotrMiLCI0LjMiLCIxMTY2IiwiMTIiLCI2NSIsIjMuODYiLCIxMzgiLCI4LjQiLCIxNi4zIiwiOTUuOCIsIjEwMCIsIuS8mOengCIsIjg5IiwiKzExIgoiQ0lEIiwi5bm/5bee5biC546u55Ca5ZWG6LS45pyJ6ZmQ5YWs5Y+4IiwiODgwMzMzODMiLCIwLjAyIiwi5YWF6LazIiwiNC45IiwiMjIwIiwiMTAiLCI1NCIsIjMuNzEiLCI3NSIsIjEuMCIsIjEuNyIsIjEwMC4wIiwiOTUiLCLkvJjnp4AiLCIiLCIiCiJDSUQiLCLlub/lt57luILnnZDlvKfllYbotLjmnInpmZDlhazlj7giLCI4MzgyMDIxOCIsIjAuMDciLCLlhYXotrMiLCIxLjMiLCIxMzM3IiwiMTIiLCIyNiIsIjMuMTQiLCI2MSIsIjAuMCIsIjIwLjEiLCI0Ny4xIiwiOTEiLCLkvJjnp4AiLCI4MSIsIisxMCIKIkNJRCIsIuW5v+W3nuW4guedkOW8p+WVhui0uOaciemZkOWFrOWPuCIsIjgzODIwMjAwIiwiMC4wNSIsIuWFhei2syIsIjEuNSIsIjM0NSIsIjEyIiwiMzQiLCIzLjE0IiwiNjAiLCI1LjciLCIxOC4xIiwiNTYuMiIsIjk0Iiwi5LyY56eAIiwiODQiLCIrMTAiCiJDSUQiLCLlub/lt57luILnnZDlvKfllYbotLjmnInpmZDlhazlj7giLCI4MzgyMDIwNyIsIjAuMDIiLCLlhYXotrMiLCIxLjciLCIyMjQiLCIxMSIsIjIyIiwiMy4xNCIsIjYwIiwiMC4wIiwiMjAuOCIsIjUwLjAiLCI5MiIsIuS8mOengCIsIiIsIiIKIkNJRCIsIuW5v+W3nuW4guajmOaYseWVhui0uOaciemZkOWFrOWPuCIsIjg1ODcyNjQ5IiwiMC4wNiIsIuWFhei2syIsIjIuNSIsIjY2OCIsIjciLCIyNiIsIjEuNDMiLCI0NSIsIjQuMyIsIjEuNSIsIjAuMCIsIjY1Iiwi5b6F5pS56L+bIiwiIiwiIgoiQ0lEIiwi5bm/5bee5biC5qOY5pix5ZWG6LS45pyJ6ZmQ5YWs5Y+4IiwiOTAxMzU0NzQiLCIwLjA0Iiwi5YWF6LazIiwiNS4yIiwiMTcwIiwiOSIsIjIwIiwiMC43MSIsIjIyIiwiMC4wIiwiMC4wIiwiMC4wIiwiNTYiLCLpnIDph43ngrnlubLpooQiLCI1OSIsIi0yIgoiQ0lEIiwi5bm/5bee5biC6ICY552r5ZWG6LS45pyJ6ZmQ5YWs5Y+4IiwiOTE0Nzg5MDEiLCIwLjA0Iiwi5YWF6LazIiwiMy45IiwiNDMyIiwiNyIsIjEyIiwiMC41NyIsIjI1IiwiMC4wIiwiMTIuNCIsIjAuMCIsIjU5Iiwi6ZyA6YeN54K55bmy6aKEIiwiNTUiLCIrNCIKIkNJRCIsIuW5v+W3nuW4guiAmOedq+WVhui0uOaciemZkOWFrOWPuCIsIjg3NjY2MDIxIiwiMC4wMyIsIuWFhei2syIsIjQuOCIsIjM5IiwiOCIsIjE3IiwiMS4wMCIsIjMzIiwiMi40IiwiMjEuMCIsIjAuMCIsIjYyIiwi5b6F5pS56L+bIiwiNTciLCIrNSIKIkNJRCIsIuW5v+W3nuW4guiAmOedq+WVhui0uOaciemZkOWFrOWPuCIsIjg1OTg0NjY0IiwiMC4wMyIsIuWFhei2syIsIjMuNCIsIjExOSIsIjciLCIxNiIsIjEuMDAiLCIzMyIsIjMuMCIsIjEyLjgiLCIwLjAiLCI2MiIsIuW+heaUuei/myIsIjU2IiwiKzUiCiJDSUQiLCLlub/lt57luILogJjnnavllYbotLjmnInpmZDlhazlj7giLCI4NTk4NDY2OCIsIjAuMDIiLCLlhYXotrMiLCI0LjEiLCI2MiIsIjciLCIxMyIsIjEuMDAiLCIyOSIsIjMuMyIsIjE2LjQiLCIwLjAiLCI2MSIsIuW+heaUuei/myIsIjU2IiwiKzUiCiJDSUQiLCLlub/lt57luILluYLotaHllYbotLjmnInpmZDlhazlj7giLCI4MDk3NTI5MCIsIjAuMDkiLCLlhYXotrMiLCIyLjAiLCIzNjYiLCI1IiwiMTEiLCIyLjg2IiwiNDMiLCIwLjAiLCIwLjMiLCIxMDAuMCIsIjkyIiwi5LyY56eAIiwiNjEiLCIrMzEi">⬇ 下载表格（CSV · 47 行）</a><span class="dl-note">含全部 3 条链路 × 消耗 TOP5 主体 × 各自主力账户 TOP10 明细，UTF-8 BOM 编码，Excel 可直接打开</span></div>
+<p class="sec-sub">每链路先按<b>客户主体名称</b>聚合消耗取 TOP5，再列出该主体下<b>主力账户</b>按消耗降序 TOP10 明细。
+评分按本报告四模块结构重算：
 有效基建 30%（单户在投项目数 + 单户在投创意数 + <b>在投创意重复度（反向）</b>）/
 有效上新 30%（账户级取<b>单户日均新建对客项目/广告数</b> + 单户日均上新创意数 + <b>新建创意重复度（反向）</b>）/
 广告定向 20% / 账户与余额 20%，模块内指标等权（<b>两个创意重复度指标权重降为等权的一半</b>：
 有效基建三指标 → 5/12、5/12、1/6；有效上新两指标 → 3/4、1/4）；
 余额充足 = 100 分、不足 = 0 分，其余维度按 min(账户值÷行业主力账户均值, 150%)÷150%×100。
 对比周期评分按账户 ID 匹配并以同一结构重算；本期新进主力账户在对比周期可能非主力，标注而不臆造分值。</p>
-<div class="mt-wrap"><style>#mt_m5_0:checked~.mtabs label[for=mt_m5_0],#mt_m5_1:checked~.mtabs label[for=mt_m5_1],#mt_m5_2:checked~.mtabs label[for=mt_m5_2]{background:#2563eb;color:#fff;border-color:#2563eb}#mt_m5_0:checked~.mpanes #mp_m5_0,#mt_m5_1:checked~.mpanes #mp_m5_1,#mt_m5_2:checked~.mpanes #mp_m5_2{display:block}</style><input class="mt" type="radio" name="mt_m5" id="mt_m5_0" checked><input class="mt" type="radio" name="mt_m5" id="mt_m5_1"><input class="mt" type="radio" name="mt_m5" id="mt_m5_2"><div class="mtabs"><label for="mt_m5_0">直播</label><label for="mt_m5_1">小店直购</label><label for="mt_m5_2">CID</label></div><div class="mpanes"><div class="mpane" id="mp_m5_0"><h3 class="viz-h">▍直播　主力账户 10 个（按 7 天消耗取 TOP10）</h3><table class="ext"><thead><tr><th>账户ID</th><th>日均消耗<br>(万元)</th><th>余额健康</th><th>单户在投<br>项目/广告</th><th>单户在投<br>创意数</th><th>单户日均上新<br>项目/广告</th><th>单户日均<br>上新创意</th><th>在投创意<br>重复度</th><th>新建创意<br>重复度</th><th>智能定向<br>开启率</th><th>本期<br>评分</th><th>分档</th><th class="cmp1-h">上期<br>评分</th><th class="cmp1-h">分值升降<br>/档位变化</th></tr></thead><tbody><tr>
-<td class="n"><b>81066191</b></td>
-<td class="n">0.47</td>
-<td class="n">✅ 充足<br><span class="note">余额 5.5万 / 日耗 10,955元</span></td>
-<td class="n">2<br><span class="note">行业户均 7.5</span></td>
-<td class="n">8<br><span class="note">行业户均 85</span></td>
-<td class="n">0.29<br><span class="note">行业主力 1.27</span></td>
-<td class="n">39<br><span class="note">行业主力 168</span></td>
-<td class="n">34.4%<br><span class="note">行业 68.2%</span></td>
-<td class="n">91.0%<br><span class="note">行业 81.5%</span></td>
-<td class="n">0.0%<br><span class="note">行业 25.3%</span></td>
-<td class="n" style="color:#dc2626;font-weight:800;font-size:14px">40</td>
-<td><span class="bdg" style="background:#dc2626">需重点干预</span></td>
-<td class="n cmp1">35<br><span class="note">需重点干预</span></td>
-<td class="n"><b style="color:#16a34a">+5</b><br><span class="note">需重点干预 → 需重点干预</span></td>
+<div class="mt-wrap"><style>#mt_m5_0:checked~.mtabs label[for=mt_m5_0],#mt_m5_1:checked~.mtabs label[for=mt_m5_1],#mt_m5_2:checked~.mtabs label[for=mt_m5_2]{background:#2563eb;color:#fff;border-color:#2563eb}#mt_m5_0:checked~.mpanes #mp_m5_0,#mt_m5_1:checked~.mpanes #mp_m5_1,#mt_m5_2:checked~.mpanes #mp_m5_2{display:block}</style><input class="mt" type="radio" name="mt_m5" id="mt_m5_0" checked><input class="mt" type="radio" name="mt_m5" id="mt_m5_1"><input class="mt" type="radio" name="mt_m5" id="mt_m5_2"><div class="mtabs"><label for="mt_m5_0">直播</label><label for="mt_m5_1">小店直购</label><label for="mt_m5_2">CID</label></div><div class="mpanes"><div class="mpane" id="mp_m5_0"><h3 class="viz-h">▍直播　消耗 TOP5 主体 × 各自主力账户 TOP10（该链路主力账户共 32 个）</h3><table class="ext"><thead><tr><th>主体名称</th><th>日均消耗<br>(万元)</th><th>消耗占比<br>(该链路)</th><th>账户数</th><th>主力<br>账户数</th><th>主力账户<br>日均消耗(万元)</th><th>明细<br>账户数</th></tr></thead><tbody><tr>
+<td class="ent"><b>广州市沅蔓商贸有限公司</b></td>
+<td class="n">0.74</td>
+<td class="n">18.3%</td>
+<td class="n">9</td>
+<td class="n">5</td>
+<td class="n">0.69<br><span class="note">占主体 92.5%</span></td>
+<td class="n">5</td>
 </tr><tr>
+<td class="ent"><b>广州市蜂溱商贸有限公司</b></td>
+<td class="n">0.60</td>
+<td class="n">14.7%</td>
+<td class="n">14</td>
+<td class="n">8</td>
+<td class="n">0.52<br><span class="note">占主体 87.3%</span></td>
+<td class="n">8</td>
+</tr><tr>
+<td class="ent"><b>广州市誊昱贸易有限公司</b></td>
+<td class="n">0.48</td>
+<td class="n">11.8%</td>
+<td class="n">10</td>
+<td class="n">1</td>
+<td class="n">0.47<br><span class="note">占主体 98.4%</span></td>
+<td class="n">1</td>
+</tr><tr>
+<td class="ent"><b>广州市勐沁商贸有限公司</b></td>
+<td class="n">0.27</td>
+<td class="n">6.7%</td>
+<td class="n">1</td>
+<td class="n">1</td>
+<td class="n">0.27<br><span class="note">占主体 100.0%</span></td>
+<td class="n">1</td>
+</tr><tr>
+<td class="ent"><b>广州市睫勒商贸有限公司</b></td>
+<td class="n">0.25</td>
+<td class="n">6.1%</td>
+<td class="n">6</td>
+<td class="n">3</td>
+<td class="n">0.20<br><span class="note">占主体 79.6%</span></td>
+<td class="n">3</td>
+</tr></tbody></table><h4 class="ent-h">▍广州市沅蔓商贸有限公司　主力账户 5 个 / 主体日均消耗 0.74 万（占该链路 18.3%）</h4><table class="ext"><thead><tr><th>账户ID</th><th>主体名称</th><th>日均消耗<br>(万元)</th><th>余额健康</th><th>单户在投<br>项目数</th><th>单户在投<br>创意数</th><th>单户日均上新<br>项目/广告</th><th>单户日均<br>上新创意</th><th>在投创意<br>重复度</th><th>新建创意<br>重复度</th><th>智能定向<br>开启率</th><th>本期<br>评分</th><th>分档</th><th class="cmp1-h">上期<br>评分</th><th class="cmp1-h">分值升降<br>/档位变化</th></tr></thead><tbody><tr>
 <td class="n"><b>87087251</b></td>
+<td class="ent">广州市沅蔓商贸有限公司</td>
 <td class="n">0.31</td>
 <td class="n">✅ 充足<br><span class="note">余额 4.6万 / 日耗 3,983元</span></td>
 <td class="n">6<br><span class="note">行业户均 7.5</span></td>
@@ -313,22 +352,8 @@ border-left:3px solid #60a5fa}
 <td class="n cmp1">73<br><span class="note">待改进</span></td>
 <td class="n"><b style="color:#16a34a">+7</b><br><span class="note">待改进 → 良好</span></td>
 </tr><tr>
-<td class="n"><b>76845188</b></td>
-<td class="n">0.27</td>
-<td class="n">✅ 充足<br><span class="note">余额 5.3万 / 日耗 9,133元</span></td>
-<td class="n">2<br><span class="note">行业户均 7.5</span></td>
-<td class="n">2<br><span class="note">行业户均 85</span></td>
-<td class="n">0.00<br><span class="note">行业主力 1.27</span></td>
-<td class="n">0<br><span class="note">行业主力 168</span></td>
-<td class="n">71.4%<br><span class="note">行业 68.2%</span></td>
-<td class="n">33.3%<br><span class="note">行业 81.5%</span></td>
-<td class="n">66.7%<br><span class="note">行业 25.3%</span></td>
-<td class="n" style="color:#dc2626;font-weight:800;font-size:14px">52</td>
-<td><span class="bdg" style="background:#dc2626">需重点干预</span></td>
-<td class="n cmp1">51<br><span class="note">需重点干预</span></td>
-<td class="n"><b style="color:#16a34a">+1</b><br><span class="note">需重点干预 → 需重点干预</span></td>
-</tr><tr>
 <td class="n"><b>88617653</b></td>
+<td class="ent">广州市沅蔓商贸有限公司</td>
 <td class="n">0.18</td>
 <td class="n">✅ 充足<br><span class="note">余额 4.5万 / 日耗 4,448元</span></td>
 <td class="n">4<br><span class="note">行业户均 7.5</span></td>
@@ -340,70 +365,11 @@ border-left:3px solid #60a5fa}
 <td class="n">100.0%<br><span class="note">行业 25.3%</span></td>
 <td class="n" style="color:#d97706;font-weight:800;font-size:14px">73</td>
 <td><span class="bdg" style="background:#d97706">待改进</span></td>
-<td class="n cmp1"><span class="note">上期非主力<br>无同账户评分</span></td>
-<td class="n"><span class="note">—</span></td>
-</tr><tr>
-<td class="n"><b>75432462</b></td>
-<td class="n">0.17</td>
-<td class="n">✅ 充足<br><span class="note">余额 7.5万 / 日耗 5,822元</span></td>
-<td class="n">2<br><span class="note">行业户均 7.5</span></td>
-<td class="n">5<br><span class="note">行业户均 85</span></td>
-<td class="n">0.32<br><span class="note">行业主力 1.27</span></td>
-<td class="n">202<br><span class="note">行业主力 168</span></td>
-<td class="n">43.8%<br><span class="note">行业 68.2%</span></td>
-<td class="n">61.4%<br><span class="note">行业 81.5%</span></td>
-<td class="n">25.0%<br><span class="note">行业 25.3%</span></td>
-<td class="n" style="color:#d97706;font-weight:800;font-size:14px">61</td>
-<td><span class="bdg" style="background:#d97706">待改进</span></td>
 <td class="n cmp1">64<br><span class="note">待改进</span></td>
-<td class="n"><b style="color:#dc2626">-3</b><br><span class="note">待改进 → 待改进</span></td>
-</tr><tr>
-<td class="n"><b>77021297</b></td>
-<td class="n">0.14</td>
-<td class="n">✅ 充足<br><span class="note">余额 7.9万 / 日耗 1,526元</span></td>
-<td class="n">10<br><span class="note">行业户均 7.5</span></td>
-<td class="n">17<br><span class="note">行业户均 85</span></td>
-<td class="n">3.57<br><span class="note">行业主力 1.27</span></td>
-<td class="n">82<br><span class="note">行业主力 168</span></td>
-<td class="n">52.0%<br><span class="note">行业 68.2%</span></td>
-<td class="n">91.6%<br><span class="note">行业 81.5%</span></td>
-<td class="n">100.0%<br><span class="note">行业 25.3%</span></td>
-<td class="n" style="color:#2563eb;font-weight:800;font-size:14px">89</td>
-<td><span class="bdg" style="background:#2563eb">良好</span></td>
-<td class="n cmp1"><span class="note">上期非主力<br>无同账户评分</span></td>
-<td class="n"><span class="note">—</span></td>
-</tr><tr>
-<td class="n"><b>93486382</b></td>
-<td class="n">0.11</td>
-<td class="n">✅ 充足<br><span class="note">余额 5.0万 / 日耗 1,707元</span></td>
-<td class="n">8<br><span class="note">行业户均 7.5</span></td>
-<td class="n">79<br><span class="note">行业户均 85</span></td>
-<td class="n">5.00<br><span class="note">行业主力 1.27</span></td>
-<td class="n">451<br><span class="note">行业主力 168</span></td>
-<td class="n">73.8%<br><span class="note">行业 68.2%</span></td>
-<td class="n">93.5%<br><span class="note">行业 81.5%</span></td>
-<td class="n">100.0%<br><span class="note">行业 25.3%</span></td>
-<td class="n" style="color:#15803d;font-weight:800;font-size:14px">97</td>
-<td><span class="bdg" style="background:#15803d">优秀</span></td>
-<td class="n cmp1">74<br><span class="note">待改进</span></td>
-<td class="n"><b style="color:#16a34a">+23</b><br><span class="note">待改进 → 优秀</span></td>
-</tr><tr>
-<td class="n"><b>81049607</b></td>
-<td class="n">0.10</td>
-<td class="n">✅ 充足<br><span class="note">余额 4.0万 / 日耗 2,966元</span></td>
-<td class="n">7<br><span class="note">行业户均 7.5</span></td>
-<td class="n">65<br><span class="note">行业户均 85</span></td>
-<td class="n">1.57<br><span class="note">行业主力 1.27</span></td>
-<td class="n">174<br><span class="note">行业主力 168</span></td>
-<td class="n">63.3%<br><span class="note">行业 68.2%</span></td>
-<td class="n">86.4%<br><span class="note">行业 81.5%</span></td>
-<td class="n">—<br><span class="note">行业 25.3%</span></td>
-<td class="n" style="color:#2563eb;font-weight:800;font-size:14px">89</td>
-<td><span class="bdg" style="background:#2563eb">良好</span></td>
-<td class="n cmp1"><span class="note">上期非主力<br>无同账户评分</span></td>
-<td class="n"><span class="note">—</span></td>
+<td class="n"><b style="color:#16a34a">+10</b><br><span class="note">待改进 → 待改进</span></td>
 </tr><tr>
 <td class="n"><b>81852556</b></td>
+<td class="ent">广州市沅蔓商贸有限公司</td>
 <td class="n">0.09</td>
 <td class="n">✅ 充足<br><span class="note">余额 3.9万 / 日耗 1,144元</span></td>
 <td class="n">5<br><span class="note">行业户均 7.5</span></td>
@@ -418,22 +384,288 @@ border-left:3px solid #60a5fa}
 <td class="n cmp1"><span class="note">上期非主力<br>无同账户评分</span></td>
 <td class="n"><span class="note">—</span></td>
 </tr><tr>
-<td class="n"><b>76180636</b></td>
-<td class="n">0.09</td>
-<td class="n">✅ 充足<br><span class="note">余额 5.2万 / 日耗 2,467元</span></td>
-<td class="n">2<br><span class="note">行业户均 7.5</span></td>
-<td class="n">4<br><span class="note">行业户均 85</span></td>
-<td class="n">1.14<br><span class="note">行业主力 1.27</span></td>
-<td class="n">26<br><span class="note">行业主力 168</span></td>
-<td class="n">64.3%<br><span class="note">行业 68.2%</span></td>
-<td class="n">61.8%<br><span class="note">行业 81.5%</span></td>
-<td class="n">16.7%<br><span class="note">行业 25.3%</span></td>
-<td class="n" style="color:#dc2626;font-weight:800;font-size:14px">55</td>
+<td class="n"><b>88239044</b></td>
+<td class="ent">广州市沅蔓商贸有限公司</td>
+<td class="n">0.05</td>
+<td class="n">✅ 充足<br><span class="note">余额 4.4万 / 日耗 228元</span></td>
+<td class="n">5<br><span class="note">行业户均 7.5</span></td>
+<td class="n">26<br><span class="note">行业户均 85</span></td>
+<td class="n">0.71<br><span class="note">行业主力 1.27</span></td>
+<td class="n">88<br><span class="note">行业主力 168</span></td>
+<td class="n">60.4%<br><span class="note">行业 68.2%</span></td>
+<td class="n">89.9%<br><span class="note">行业 81.5%</span></td>
+<td class="n">40.0%<br><span class="note">行业 25.3%</span></td>
+<td class="n" style="color:#2563eb;font-weight:800;font-size:14px">77</td>
+<td><span class="bdg" style="background:#2563eb">良好</span></td>
+<td class="n cmp1">71<br><span class="note">待改进</span></td>
+<td class="n"><b style="color:#16a34a">+6</b><br><span class="note">待改进 → 良好</span></td>
+</tr><tr>
+<td class="n"><b>87087235</b></td>
+<td class="ent">广州市沅蔓商贸有限公司</td>
+<td class="n">0.05</td>
+<td class="n">✅ 充足<br><span class="note">余额 4.8万 / 日耗 2,309元</span></td>
+<td class="n">3<br><span class="note">行业户均 7.5</span></td>
+<td class="n">23<br><span class="note">行业户均 85</span></td>
+<td class="n">0.71<br><span class="note">行业主力 1.27</span></td>
+<td class="n">49<br><span class="note">行业主力 168</span></td>
+<td class="n">42.2%<br><span class="note">行业 68.2%</span></td>
+<td class="n">91.1%<br><span class="note">行业 81.5%</span></td>
+<td class="n">100.0%<br><span class="note">行业 25.3%</span></td>
+<td class="n" style="color:#d97706;font-weight:800;font-size:14px">73</td>
+<td><span class="bdg" style="background:#d97706">待改进</span></td>
+<td class="n cmp1">76<br><span class="note">良好</span></td>
+<td class="n"><b style="color:#dc2626">-3</b><br><span class="note">良好 → 待改进</span></td>
+</tr></tbody></table><h4 class="ent-h">▍广州市蜂溱商贸有限公司　主力账户 8 个 / 主体日均消耗 0.60 万（占该链路 14.7%）</h4><table class="ext"><thead><tr><th>账户ID</th><th>主体名称</th><th>日均消耗<br>(万元)</th><th>余额健康</th><th>单户在投<br>项目数</th><th>单户在投<br>创意数</th><th>单户日均上新<br>项目/广告</th><th>单户日均<br>上新创意</th><th>在投创意<br>重复度</th><th>新建创意<br>重复度</th><th>智能定向<br>开启率</th><th>本期<br>评分</th><th>分档</th><th class="cmp1-h">上期<br>评分</th><th class="cmp1-h">分值升降<br>/档位变化</th></tr></thead><tbody><tr>
+<td class="n"><b>81049607</b></td>
+<td class="ent">广州市蜂溱商贸有限公司</td>
+<td class="n">0.10</td>
+<td class="n">✅ 充足<br><span class="note">余额 4.0万 / 日耗 2,966元</span></td>
+<td class="n">7<br><span class="note">行业户均 7.5</span></td>
+<td class="n">65<br><span class="note">行业户均 85</span></td>
+<td class="n">1.57<br><span class="note">行业主力 1.27</span></td>
+<td class="n">174<br><span class="note">行业主力 168</span></td>
+<td class="n">63.3%<br><span class="note">行业 68.2%</span></td>
+<td class="n">86.4%<br><span class="note">行业 81.5%</span></td>
+<td class="n">—<br><span class="note">行业 25.3%</span></td>
+<td class="n" style="color:#2563eb;font-weight:800;font-size:14px">89</td>
+<td><span class="bdg" style="background:#2563eb">良好</span></td>
+<td class="n cmp1">80<br><span class="note">良好</span></td>
+<td class="n"><b style="color:#16a34a">+9</b><br><span class="note">良好 → 良好</span></td>
+</tr><tr>
+<td class="n"><b>81049600</b></td>
+<td class="ent">广州市蜂溱商贸有限公司</td>
+<td class="n">0.08</td>
+<td class="n">✅ 充足<br><span class="note">余额 4.2万 / 日耗 585元</span></td>
+<td class="n">7<br><span class="note">行业户均 7.5</span></td>
+<td class="n">47<br><span class="note">行业户均 85</span></td>
+<td class="n">1.54<br><span class="note">行业主力 1.27</span></td>
+<td class="n">169<br><span class="note">行业主力 168</span></td>
+<td class="n">54.8%<br><span class="note">行业 68.2%</span></td>
+<td class="n">86.8%<br><span class="note">行业 81.5%</span></td>
+<td class="n">—<br><span class="note">行业 25.3%</span></td>
+<td class="n" style="color:#2563eb;font-weight:800;font-size:14px">89</td>
+<td><span class="bdg" style="background:#2563eb">良好</span></td>
+<td class="n cmp1">82<br><span class="note">良好</span></td>
+<td class="n"><b style="color:#16a34a">+7</b><br><span class="note">良好 → 良好</span></td>
+</tr><tr>
+<td class="n"><b>81049612</b></td>
+<td class="ent">广州市蜂溱商贸有限公司</td>
+<td class="n">0.08</td>
+<td class="n">✅ 充足<br><span class="note">余额 5.3万 / 日耗 1,385元</span></td>
+<td class="n">1<br><span class="note">行业户均 7.5</span></td>
+<td class="n">1<br><span class="note">行业户均 85</span></td>
+<td class="n">0.41<br><span class="note">行业主力 1.27</span></td>
+<td class="n">55<br><span class="note">行业主力 168</span></td>
+<td class="n">33.3%<br><span class="note">行业 68.2%</span></td>
+<td class="n">100.0%<br><span class="note">行业 81.5%</span></td>
+<td class="n">0.0%<br><span class="note">行业 25.3%</span></td>
+<td class="n" style="color:#dc2626;font-weight:800;font-size:14px">36</td>
+<td><span class="bdg" style="background:#dc2626">需重点干预</span></td>
+<td class="n cmp1">23<br><span class="note">需重点干预</span></td>
+<td class="n"><b style="color:#16a34a">+13</b><br><span class="note">需重点干预 → 需重点干预</span></td>
+</tr><tr>
+<td class="n"><b>81049594</b></td>
+<td class="ent">广州市蜂溱商贸有限公司</td>
+<td class="n">0.06</td>
+<td class="n">✅ 充足<br><span class="note">余额 4.5万 / 日耗 1,939元</span></td>
+<td class="n">7<br><span class="note">行业户均 7.5</span></td>
+<td class="n">35<br><span class="note">行业户均 85</span></td>
+<td class="n">1.43<br><span class="note">行业主力 1.27</span></td>
+<td class="n">188<br><span class="note">行业主力 168</span></td>
+<td class="n">53.8%<br><span class="note">行业 68.2%</span></td>
+<td class="n">88.1%<br><span class="note">行业 81.5%</span></td>
+<td class="n">—<br><span class="note">行业 25.3%</span></td>
+<td class="n" style="color:#2563eb;font-weight:800;font-size:14px">89</td>
+<td><span class="bdg" style="background:#2563eb">良好</span></td>
+<td class="n cmp1">85<br><span class="note">良好</span></td>
+<td class="n"><b style="color:#16a34a">+4</b><br><span class="note">良好 → 良好</span></td>
+</tr><tr>
+<td class="n"><b>79984177</b></td>
+<td class="ent">广州市蜂溱商贸有限公司</td>
+<td class="n">0.06</td>
+<td class="n">✅ 充足<br><span class="note">余额 2.8万 / 日耗 1,616元</span></td>
+<td class="n">1<br><span class="note">行业户均 7.5</span></td>
+<td class="n">2<br><span class="note">行业户均 85</span></td>
+<td class="n">0.29<br><span class="note">行业主力 1.27</span></td>
+<td class="n">12<br><span class="note">行业主力 168</span></td>
+<td class="n">0.0%<br><span class="note">行业 68.2%</span></td>
+<td class="n">100.0%<br><span class="note">行业 81.5%</span></td>
+<td class="n">0.0%<br><span class="note">行业 25.3%</span></td>
+<td class="n" style="color:#dc2626;font-weight:800;font-size:14px">29</td>
 <td><span class="bdg" style="background:#dc2626">需重点干预</span></td>
 <td class="n cmp1"><span class="note">上期非主力<br>无同账户评分</span></td>
 <td class="n"><span class="note">—</span></td>
-</tr></tbody></table></div><div class="mpane" id="mp_m5_1"><h3 class="viz-h">▍小店直购　主力账户 10 个（按 7 天消耗取 TOP10）</h3><table class="ext"><thead><tr><th>账户ID</th><th>日均消耗<br>(万元)</th><th>余额健康</th><th>单户在投<br>项目/广告</th><th>单户在投<br>创意数</th><th>单户日均上新<br>项目/广告</th><th>单户日均<br>上新创意</th><th>在投创意<br>重复度</th><th>新建创意<br>重复度</th><th>智能定向<br>开启率</th><th>本期<br>评分</th><th>分档</th><th class="cmp1-h">上期<br>评分</th><th class="cmp1-h">分值升降<br>/档位变化</th></tr></thead><tbody><tr>
+</tr><tr>
+<td class="n"><b>81049602</b></td>
+<td class="ent">广州市蜂溱商贸有限公司</td>
+<td class="n">0.05</td>
+<td class="n">✅ 充足<br><span class="note">余额 3.1万 / 日耗 735元</span></td>
+<td class="n">7<br><span class="note">行业户均 7.5</span></td>
+<td class="n">68<br><span class="note">行业户均 85</span></td>
+<td class="n">1.71<br><span class="note">行业主力 1.27</span></td>
+<td class="n">160<br><span class="note">行业主力 168</span></td>
+<td class="n">53.5%<br><span class="note">行业 68.2%</span></td>
+<td class="n">85.8%<br><span class="note">行业 81.5%</span></td>
+<td class="n">—<br><span class="note">行业 25.3%</span></td>
+<td class="n" style="color:#15803d;font-weight:800;font-size:14px">90</td>
+<td><span class="bdg" style="background:#15803d">优秀</span></td>
+<td class="n cmp1">76<br><span class="note">良好</span></td>
+<td class="n"><b style="color:#16a34a">+14</b><br><span class="note">良好 → 优秀</span></td>
+</tr><tr>
+<td class="n"><b>81049583</b></td>
+<td class="ent">广州市蜂溱商贸有限公司</td>
+<td class="n">0.04</td>
+<td class="n">✅ 充足<br><span class="note">余额 2.5万 / 日耗 737元</span></td>
+<td class="n">6<br><span class="note">行业户均 7.5</span></td>
+<td class="n">47<br><span class="note">行业户均 85</span></td>
+<td class="n">1.57<br><span class="note">行业主力 1.27</span></td>
+<td class="n">199<br><span class="note">行业主力 168</span></td>
+<td class="n">50.7%<br><span class="note">行业 68.2%</span></td>
+<td class="n">88.0%<br><span class="note">行业 81.5%</span></td>
+<td class="n">—<br><span class="note">行业 25.3%</span></td>
+<td class="n" style="color:#15803d;font-weight:800;font-size:14px">91</td>
+<td><span class="bdg" style="background:#15803d">优秀</span></td>
+<td class="n cmp1"><span class="note">上期非主力<br>无同账户评分</span></td>
+<td class="n"><span class="note">—</span></td>
+</tr><tr>
+<td class="n"><b>81049608</b></td>
+<td class="ent">广州市蜂溱商贸有限公司</td>
+<td class="n">0.04</td>
+<td class="n">✅ 充足<br><span class="note">余额 3.5万 / 日耗 539元</span></td>
+<td class="n">6<br><span class="note">行业户均 7.5</span></td>
+<td class="n">44<br><span class="note">行业户均 85</span></td>
+<td class="n">1.43<br><span class="note">行业主力 1.27</span></td>
+<td class="n">122<br><span class="note">行业主力 168</span></td>
+<td class="n">52.4%<br><span class="note">行业 68.2%</span></td>
+<td class="n">85.9%<br><span class="note">行业 81.5%</span></td>
+<td class="n">—<br><span class="note">行业 25.3%</span></td>
+<td class="n" style="color:#2563eb;font-weight:800;font-size:14px">85</td>
+<td><span class="bdg" style="background:#2563eb">良好</span></td>
+<td class="n cmp1">82<br><span class="note">良好</span></td>
+<td class="n"><b style="color:#16a34a">+3</b><br><span class="note">良好 → 良好</span></td>
+</tr></tbody></table><h4 class="ent-h">▍广州市誊昱贸易有限公司　主力账户 1 个 / 主体日均消耗 0.48 万（占该链路 11.8%）</h4><table class="ext"><thead><tr><th>账户ID</th><th>主体名称</th><th>日均消耗<br>(万元)</th><th>余额健康</th><th>单户在投<br>项目数</th><th>单户在投<br>创意数</th><th>单户日均上新<br>项目/广告</th><th>单户日均<br>上新创意</th><th>在投创意<br>重复度</th><th>新建创意<br>重复度</th><th>智能定向<br>开启率</th><th>本期<br>评分</th><th>分档</th><th class="cmp1-h">上期<br>评分</th><th class="cmp1-h">分值升降<br>/档位变化</th></tr></thead><tbody><tr>
+<td class="n"><b>81066191</b></td>
+<td class="ent">广州市誊昱贸易有限公司</td>
+<td class="n">0.47</td>
+<td class="n">✅ 充足<br><span class="note">余额 5.5万 / 日耗 10,955元</span></td>
+<td class="n">2<br><span class="note">行业户均 7.5</span></td>
+<td class="n">8<br><span class="note">行业户均 85</span></td>
+<td class="n">0.29<br><span class="note">行业主力 1.27</span></td>
+<td class="n">39<br><span class="note">行业主力 168</span></td>
+<td class="n">34.4%<br><span class="note">行业 68.2%</span></td>
+<td class="n">91.0%<br><span class="note">行业 81.5%</span></td>
+<td class="n">0.0%<br><span class="note">行业 25.3%</span></td>
+<td class="n" style="color:#dc2626;font-weight:800;font-size:14px">40</td>
+<td><span class="bdg" style="background:#dc2626">需重点干预</span></td>
+<td class="n cmp1">35<br><span class="note">需重点干预</span></td>
+<td class="n"><b style="color:#16a34a">+5</b><br><span class="note">需重点干预 → 需重点干预</span></td>
+</tr></tbody></table><h4 class="ent-h">▍广州市勐沁商贸有限公司　主力账户 1 个 / 主体日均消耗 0.27 万（占该链路 6.7%）</h4><table class="ext"><thead><tr><th>账户ID</th><th>主体名称</th><th>日均消耗<br>(万元)</th><th>余额健康</th><th>单户在投<br>项目数</th><th>单户在投<br>创意数</th><th>单户日均上新<br>项目/广告</th><th>单户日均<br>上新创意</th><th>在投创意<br>重复度</th><th>新建创意<br>重复度</th><th>智能定向<br>开启率</th><th>本期<br>评分</th><th>分档</th><th class="cmp1-h">上期<br>评分</th><th class="cmp1-h">分值升降<br>/档位变化</th></tr></thead><tbody><tr>
+<td class="n"><b>76845188</b></td>
+<td class="ent">广州市勐沁商贸有限公司</td>
+<td class="n">0.27</td>
+<td class="n">✅ 充足<br><span class="note">余额 5.3万 / 日耗 9,133元</span></td>
+<td class="n">2<br><span class="note">行业户均 7.5</span></td>
+<td class="n">2<br><span class="note">行业户均 85</span></td>
+<td class="n">0.00<br><span class="note">行业主力 1.27</span></td>
+<td class="n">0<br><span class="note">行业主力 168</span></td>
+<td class="n">71.4%<br><span class="note">行业 68.2%</span></td>
+<td class="n">33.3%<br><span class="note">行业 81.5%</span></td>
+<td class="n">66.7%<br><span class="note">行业 25.3%</span></td>
+<td class="n" style="color:#dc2626;font-weight:800;font-size:14px">52</td>
+<td><span class="bdg" style="background:#dc2626">需重点干预</span></td>
+<td class="n cmp1">51<br><span class="note">需重点干预</span></td>
+<td class="n"><b style="color:#16a34a">+1</b><br><span class="note">需重点干预 → 需重点干预</span></td>
+</tr></tbody></table><h4 class="ent-h">▍广州市睫勒商贸有限公司　主力账户 3 个 / 主体日均消耗 0.25 万（占该链路 6.1%）</h4><table class="ext"><thead><tr><th>账户ID</th><th>主体名称</th><th>日均消耗<br>(万元)</th><th>余额健康</th><th>单户在投<br>项目数</th><th>单户在投<br>创意数</th><th>单户日均上新<br>项目/广告</th><th>单户日均<br>上新创意</th><th>在投创意<br>重复度</th><th>新建创意<br>重复度</th><th>智能定向<br>开启率</th><th>本期<br>评分</th><th>分档</th><th class="cmp1-h">上期<br>评分</th><th class="cmp1-h">分值升降<br>/档位变化</th></tr></thead><tbody><tr>
+<td class="n"><b>88033354</b></td>
+<td class="ent">广州市睫勒商贸有限公司</td>
+<td class="n">0.08</td>
+<td class="n">✅ 充足<br><span class="note">余额 4.3万 / 日耗 120元</span></td>
+<td class="n">6<br><span class="note">行业户均 7.5</span></td>
+<td class="n">11<br><span class="note">行业户均 85</span></td>
+<td class="n">1.28<br><span class="note">行业主力 1.27</span></td>
+<td class="n">322<br><span class="note">行业主力 168</span></td>
+<td class="n">61.5%<br><span class="note">行业 68.2%</span></td>
+<td class="n">90.6%<br><span class="note">行业 81.5%</span></td>
+<td class="n">55.6%<br><span class="note">行业 25.3%</span></td>
+<td class="n" style="color:#2563eb;font-weight:800;font-size:14px">85</td>
+<td><span class="bdg" style="background:#2563eb">良好</span></td>
+<td class="n cmp1"><span class="note">上期非主力<br>无同账户评分</span></td>
+<td class="n"><span class="note">—</span></td>
+</tr><tr>
+<td class="n"><b>88033360</b></td>
+<td class="ent">广州市睫勒商贸有限公司</td>
+<td class="n">0.07</td>
+<td class="n">✅ 充足<br><span class="note">余额 3.3万 / 日耗 916元</span></td>
+<td class="n">6<br><span class="note">行业户均 7.5</span></td>
+<td class="n">11<br><span class="note">行业户均 85</span></td>
+<td class="n">1.27<br><span class="note">行业主力 1.27</span></td>
+<td class="n">310<br><span class="note">行业主力 168</span></td>
+<td class="n">46.4%<br><span class="note">行业 68.2%</span></td>
+<td class="n">87.2%<br><span class="note">行业 81.5%</span></td>
+<td class="n">60.0%<br><span class="note">行业 25.3%</span></td>
+<td class="n" style="color:#2563eb;font-weight:800;font-size:14px">87</td>
+<td><span class="bdg" style="background:#2563eb">良好</span></td>
+<td class="n cmp1"><span class="note">上期非主力<br>无同账户评分</span></td>
+<td class="n"><span class="note">—</span></td>
+</tr><tr>
+<td class="n"><b>88033363</b></td>
+<td class="ent">广州市睫勒商贸有限公司</td>
+<td class="n">0.05</td>
+<td class="n">✅ 充足<br><span class="note">余额 1.4万 / 日耗 453元</span></td>
+<td class="n">5<br><span class="note">行业户均 7.5</span></td>
+<td class="n">9<br><span class="note">行业户均 85</span></td>
+<td class="n">0.57<br><span class="note">行业主力 1.27</span></td>
+<td class="n">23<br><span class="note">行业主力 168</span></td>
+<td class="n">43.5%<br><span class="note">行业 68.2%</span></td>
+<td class="n">87.7%<br><span class="note">行业 81.5%</span></td>
+<td class="n">77.8%<br><span class="note">行业 25.3%</span></td>
+<td class="n" style="color:#d97706;font-weight:800;font-size:14px">69</td>
+<td><span class="bdg" style="background:#d97706">待改进</span></td>
+<td class="n cmp1"><span class="note">上期非主力<br>无同账户评分</span></td>
+<td class="n"><span class="note">—</span></td>
+</tr></tbody></table></div><div class="mpane" id="mp_m5_1"><h3 class="viz-h">▍小店直购　消耗 TOP5 主体 × 各自主力账户 TOP10（该链路主力账户共 18 个）</h3><table class="ext"><thead><tr><th>主体名称</th><th>日均消耗<br>(万元)</th><th>消耗占比<br>(该链路)</th><th>账户数</th><th>主力<br>账户数</th><th>主力账户<br>日均消耗(万元)</th><th>明细<br>账户数</th></tr></thead><tbody><tr>
+<td class="ent"><b>广州市麟鹿商贸有限公司</b></td>
+<td class="n">1.17</td>
+<td class="n">34.1%</td>
+<td class="n">4</td>
+<td class="n">4</td>
+<td class="n">1.17<br><span class="note">占主体 100.0%</span></td>
+<td class="n">4</td>
+</tr><tr>
+<td class="ent"><b>广州市障昱商贸有限公司</b></td>
+<td class="n">0.52</td>
+<td class="n">15.0%</td>
+<td class="n">6</td>
+<td class="n">5</td>
+<td class="n">0.50<br><span class="note">占主体 97.7%</span></td>
+<td class="n">5</td>
+</tr><tr>
+<td class="ent"><b>广州市岚隽商贸有限公司</b></td>
+<td class="n">0.40</td>
+<td class="n">11.7%</td>
+<td class="n">2</td>
+<td class="n">1</td>
+<td class="n">0.37<br><span class="note">占主体 93.3%</span></td>
+<td class="n">1</td>
+</tr><tr>
+<td class="ent"><b>广州市誊渝商贸有限公司</b></td>
+<td class="n">0.21</td>
+<td class="n">6.2%</td>
+<td class="n">5</td>
+<td class="n">2</td>
+<td class="n">0.18<br><span class="note">占主体 85.5%</span></td>
+<td class="n">2</td>
+</tr><tr>
+<td class="ent"><b>广州市佑祜商贸有限公司</b></td>
+<td class="n">0.21</td>
+<td class="n">6.1%</td>
+<td class="n">12</td>
+<td class="n">2</td>
+<td class="n">0.15<br><span class="note">占主体 69.6%</span></td>
+<td class="n">2</td>
+</tr></tbody></table><h4 class="ent-h">▍广州市麟鹿商贸有限公司　主力账户 4 个 / 主体日均消耗 1.17 万（占该链路 34.1%）</h4><table class="ext"><thead><tr><th>账户ID</th><th>主体名称</th><th>日均消耗<br>(万元)</th><th>余额健康</th><th>单户在投<br>项目数</th><th>单户在投<br>创意数</th><th>单户日均上新<br>项目/广告</th><th>单户日均<br>上新创意</th><th>在投创意<br>重复度</th><th>新建创意<br>重复度</th><th>智能定向<br>开启率</th><th>本期<br>评分</th><th>分档</th><th class="cmp1-h">上期<br>评分</th><th class="cmp1-h">分值升降<br>/档位变化</th></tr></thead><tbody><tr>
 <td class="n"><b>75432462</b></td>
+<td class="ent">广州市麟鹿商贸有限公司</td>
 <td class="n">0.53</td>
 <td class="n">✅ 充足<br><span class="note">余额 7.5万 / 日耗 5,822元</span></td>
 <td class="n">6<br><span class="note">行业户均 6.1</span></td>
@@ -448,22 +680,8 @@ border-left:3px solid #60a5fa}
 <td class="n cmp1">69<br><span class="note">待改进</span></td>
 <td class="n"><b style="color:#16a34a">+8</b><br><span class="note">待改进 → 良好</span></td>
 </tr><tr>
-<td class="n"><b>86015991</b></td>
-<td class="n">0.37</td>
-<td class="n">✅ 充足<br><span class="note">余额 7.6万 / 日耗 1,386元</span></td>
-<td class="n">14<br><span class="note">行业户均 6.1</span></td>
-<td class="n">177<br><span class="note">行业户均 56</span></td>
-<td class="n">2.14<br><span class="note">行业主力 2.18</span></td>
-<td class="n">862<br><span class="note">行业主力 455</span></td>
-<td class="n">54.4%<br><span class="note">行业 57.1%</span></td>
-<td class="n">69.9%<br><span class="note">行业 72.6%</span></td>
-<td class="n">0.0%<br><span class="note">行业 39.3%</span></td>
-<td class="n" style="color:#d97706;font-weight:800;font-size:14px">72</td>
-<td><span class="bdg" style="background:#d97706">待改进</span></td>
-<td class="n cmp1">73<br><span class="note">待改进</span></td>
-<td class="n"><b style="color:#dc2626">-0</b><br><span class="note">待改进 → 待改进</span></td>
-</tr><tr>
 <td class="n"><b>94184983</b></td>
+<td class="ent">广州市麟鹿商贸有限公司</td>
 <td class="n">0.30</td>
 <td class="n">✅ 充足<br><span class="note">余额 8.3万 / 日耗 789元</span></td>
 <td class="n">7<br><span class="note">行业户均 6.1</span></td>
@@ -479,6 +697,7 @@ border-left:3px solid #60a5fa}
 <td class="n"><b style="color:#dc2626">-7</b><br><span class="note">良好 → 待改进</span></td>
 </tr><tr>
 <td class="n"><b>90505547</b></td>
+<td class="ent">广州市麟鹿商贸有限公司</td>
 <td class="n">0.19</td>
 <td class="n">✅ 充足<br><span class="note">余额 6.0万 / 日耗 6,962元</span></td>
 <td class="n">10<br><span class="note">行业户均 6.1</span></td>
@@ -490,10 +709,27 @@ border-left:3px solid #60a5fa}
 <td class="n">0.0%<br><span class="note">行业 39.3%</span></td>
 <td class="n" style="color:#d97706;font-weight:800;font-size:14px">71</td>
 <td><span class="bdg" style="background:#d97706">待改进</span></td>
-<td class="n cmp1"><span class="note">上期非主力<br>无同账户评分</span></td>
-<td class="n"><span class="note">—</span></td>
+<td class="n cmp1">63<br><span class="note">待改进</span></td>
+<td class="n"><b style="color:#16a34a">+8</b><br><span class="note">待改进 → 待改进</span></td>
 </tr><tr>
+<td class="n"><b>95431075</b></td>
+<td class="ent">广州市麟鹿商贸有限公司</td>
+<td class="n">0.14</td>
+<td class="n">✅ 充足<br><span class="note">余额 5.7万 / 日耗 750元</span></td>
+<td class="n">6<br><span class="note">行业户均 6.1</span></td>
+<td class="n">54<br><span class="note">行业户均 56</span></td>
+<td class="n">2.29<br><span class="note">行业主力 2.18</span></td>
+<td class="n">108<br><span class="note">行业主力 455</span></td>
+<td class="n">34.6%<br><span class="note">行业 57.1%</span></td>
+<td class="n">67.5%<br><span class="note">行业 72.6%</span></td>
+<td class="n">0.0%<br><span class="note">行业 39.3%</span></td>
+<td class="n" style="color:#d97706;font-weight:800;font-size:14px">65</td>
+<td><span class="bdg" style="background:#d97706">待改进</span></td>
+<td class="n cmp1">66<br><span class="note">待改进</span></td>
+<td class="n"><b style="color:#dc2626">-1</b><br><span class="note">待改进 → 待改进</span></td>
+</tr></tbody></table><h4 class="ent-h">▍广州市障昱商贸有限公司　主力账户 5 个 / 主体日均消耗 0.52 万（占该链路 15.0%）</h4><table class="ext"><thead><tr><th>账户ID</th><th>主体名称</th><th>日均消耗<br>(万元)</th><th>余额健康</th><th>单户在投<br>项目数</th><th>单户在投<br>创意数</th><th>单户日均上新<br>项目/广告</th><th>单户日均<br>上新创意</th><th>在投创意<br>重复度</th><th>新建创意<br>重复度</th><th>智能定向<br>开启率</th><th>本期<br>评分</th><th>分档</th><th class="cmp1-h">上期<br>评分</th><th class="cmp1-h">分值升降<br>/档位变化</th></tr></thead><tbody><tr>
 <td class="n"><b>96185553</b></td>
+<td class="ent">广州市障昱商贸有限公司</td>
 <td class="n">0.18</td>
 <td class="n">✅ 充足<br><span class="note">余额 6.7万 / 日耗 974元</span></td>
 <td class="n">4<br><span class="note">行业户均 6.1</span></td>
@@ -508,52 +744,88 @@ border-left:3px solid #60a5fa}
 <td class="n cmp1"><span class="note">上期非主力<br>无同账户评分</span></td>
 <td class="n"><span class="note">—</span></td>
 </tr><tr>
-<td class="n"><b>95431075</b></td>
-<td class="n">0.14</td>
-<td class="n">✅ 充足<br><span class="note">余额 5.7万 / 日耗 750元</span></td>
-<td class="n">6<br><span class="note">行业户均 6.1</span></td>
-<td class="n">54<br><span class="note">行业户均 56</span></td>
-<td class="n">2.29<br><span class="note">行业主力 2.18</span></td>
-<td class="n">108<br><span class="note">行业主力 455</span></td>
-<td class="n">34.6%<br><span class="note">行业 57.1%</span></td>
-<td class="n">67.5%<br><span class="note">行业 72.6%</span></td>
+<td class="n"><b>95597513</b></td>
+<td class="ent">广州市障昱商贸有限公司</td>
+<td class="n">0.10</td>
+<td class="n">✅ 充足<br><span class="note">余额 3.9万 / 日耗 2元</span></td>
+<td class="n">3<br><span class="note">行业户均 6.1</span></td>
+<td class="n">23<br><span class="note">行业户均 56</span></td>
+<td class="n">1.71<br><span class="note">行业主力 2.18</span></td>
+<td class="n">150<br><span class="note">行业主力 455</span></td>
+<td class="n">33.3%<br><span class="note">行业 57.1%</span></td>
+<td class="n">64.4%<br><span class="note">行业 72.6%</span></td>
 <td class="n">0.0%<br><span class="note">行业 39.3%</span></td>
-<td class="n" style="color:#d97706;font-weight:800;font-size:14px">65</td>
-<td><span class="bdg" style="background:#d97706">待改进</span></td>
-<td class="n cmp1">66<br><span class="note">待改进</span></td>
-<td class="n"><b style="color:#dc2626">-1</b><br><span class="note">待改进 → 待改进</span></td>
-</tr><tr>
-<td class="n"><b>90036697</b></td>
-<td class="n">0.14</td>
-<td class="n">✅ 充足<br><span class="note">余额 4.2万 / 日耗 655元</span></td>
-<td class="n">2<br><span class="note">行业户均 6.1</span></td>
-<td class="n">2<br><span class="note">行业户均 56</span></td>
-<td class="n">0.71<br><span class="note">行业主力 2.18</span></td>
-<td class="n">10<br><span class="note">行业主力 455</span></td>
-<td class="n">0.0%<br><span class="note">行业 57.1%</span></td>
-<td class="n">44.0%<br><span class="note">行业 72.6%</span></td>
-<td class="n">20.0%<br><span class="note">行业 39.3%</span></td>
-<td class="n" style="color:#dc2626;font-weight:800;font-size:14px">44</td>
+<td class="n" style="color:#dc2626;font-weight:800;font-size:14px">58</td>
 <td><span class="bdg" style="background:#dc2626">需重点干预</span></td>
-<td class="n cmp1">57<br><span class="note">需重点干预</span></td>
-<td class="n"><b style="color:#dc2626">-13</b><br><span class="note">需重点干预 → 需重点干预</span></td>
+<td class="n cmp1"><span class="note">上期非主力<br>无同账户评分</span></td>
+<td class="n"><span class="note">—</span></td>
 </tr><tr>
-<td class="n"><b>90607533</b></td>
-<td class="n">0.12</td>
-<td class="n">✅ 充足<br><span class="note">余额 4.6万 / 日耗 426元</span></td>
-<td class="n">10<br><span class="note">行业户均 6.1</span></td>
-<td class="n">35<br><span class="note">行业户均 56</span></td>
-<td class="n">4.71<br><span class="note">行业主力 2.18</span></td>
-<td class="n">713<br><span class="note">行业主力 455</span></td>
-<td class="n">38.5%<br><span class="note">行业 57.1%</span></td>
-<td class="n">76.3%<br><span class="note">行业 72.6%</span></td>
-<td class="n">88.9%<br><span class="note">行业 39.3%</span></td>
-<td class="n" style="color:#15803d;font-weight:800;font-size:14px">99</td>
-<td><span class="bdg" style="background:#15803d">优秀</span></td>
-<td class="n cmp1">97<br><span class="note">优秀</span></td>
-<td class="n"><b style="color:#16a34a">+1</b><br><span class="note">优秀 → 优秀</span></td>
+<td class="n"><b>95597497</b></td>
+<td class="ent">广州市障昱商贸有限公司</td>
+<td class="n">0.08</td>
+<td class="n">✅ 充足<br><span class="note">余额 1.4万 / 日耗 747元</span></td>
+<td class="n">6<br><span class="note">行业户均 6.1</span></td>
+<td class="n">43<br><span class="note">行业户均 56</span></td>
+<td class="n">1.43<br><span class="note">行业主力 2.18</span></td>
+<td class="n">415<br><span class="note">行业主力 455</span></td>
+<td class="n">37.1%<br><span class="note">行业 57.1%</span></td>
+<td class="n">58.3%<br><span class="note">行业 72.6%</span></td>
+<td class="n">0.0%<br><span class="note">行业 39.3%</span></td>
+<td class="n" style="color:#d97706;font-weight:800;font-size:14px">67</td>
+<td><span class="bdg" style="background:#d97706">待改进</span></td>
+<td class="n cmp1"><span class="note">上期非主力<br>无同账户评分</span></td>
+<td class="n"><span class="note">—</span></td>
 </tr><tr>
+<td class="n"><b>95597540</b></td>
+<td class="ent">广州市障昱商贸有限公司</td>
+<td class="n">0.08</td>
+<td class="n">✅ 充足<br><span class="note">余额 4.4万 / 日耗 527元</span></td>
+<td class="n">7<br><span class="note">行业户均 6.1</span></td>
+<td class="n">39<br><span class="note">行业户均 56</span></td>
+<td class="n">2.14<br><span class="note">行业主力 2.18</span></td>
+<td class="n">326<br><span class="note">行业主力 455</span></td>
+<td class="n">22.5%<br><span class="note">行业 57.1%</span></td>
+<td class="n">65.6%<br><span class="note">行业 72.6%</span></td>
+<td class="n">0.0%<br><span class="note">行业 39.3%</span></td>
+<td class="n" style="color:#d97706;font-weight:800;font-size:14px">68</td>
+<td><span class="bdg" style="background:#d97706">待改进</span></td>
+<td class="n cmp1"><span class="note">上期非主力<br>无同账户评分</span></td>
+<td class="n"><span class="note">—</span></td>
+</tr><tr>
+<td class="n"><b>95597484</b></td>
+<td class="ent">广州市障昱商贸有限公司</td>
+<td class="n">0.06</td>
+<td class="n">✅ 充足<br><span class="note">余额 5.8万 / 日耗 276元</span></td>
+<td class="n">4<br><span class="note">行业户均 6.1</span></td>
+<td class="n">47<br><span class="note">行业户均 56</span></td>
+<td class="n">1.71<br><span class="note">行业主力 2.18</span></td>
+<td class="n">460<br><span class="note">行业主力 455</span></td>
+<td class="n">37.5%<br><span class="note">行业 57.1%</span></td>
+<td class="n">71.2%<br><span class="note">行业 72.6%</span></td>
+<td class="n">0.0%<br><span class="note">行业 39.3%</span></td>
+<td class="n" style="color:#d97706;font-weight:800;font-size:14px">67</td>
+<td><span class="bdg" style="background:#d97706">待改进</span></td>
+<td class="n cmp1">61<br><span class="note">待改进</span></td>
+<td class="n"><b style="color:#16a34a">+5</b><br><span class="note">待改进 → 待改进</span></td>
+</tr></tbody></table><h4 class="ent-h">▍广州市岚隽商贸有限公司　主力账户 1 个 / 主体日均消耗 0.40 万（占该链路 11.7%）</h4><table class="ext"><thead><tr><th>账户ID</th><th>主体名称</th><th>日均消耗<br>(万元)</th><th>余额健康</th><th>单户在投<br>项目数</th><th>单户在投<br>创意数</th><th>单户日均上新<br>项目/广告</th><th>单户日均<br>上新创意</th><th>在投创意<br>重复度</th><th>新建创意<br>重复度</th><th>智能定向<br>开启率</th><th>本期<br>评分</th><th>分档</th><th class="cmp1-h">上期<br>评分</th><th class="cmp1-h">分值升降<br>/档位变化</th></tr></thead><tbody><tr>
+<td class="n"><b>86015991</b></td>
+<td class="ent">广州市岚隽商贸有限公司</td>
+<td class="n">0.37</td>
+<td class="n">✅ 充足<br><span class="note">余额 7.6万 / 日耗 1,386元</span></td>
+<td class="n">14<br><span class="note">行业户均 6.1</span></td>
+<td class="n">177<br><span class="note">行业户均 56</span></td>
+<td class="n">2.14<br><span class="note">行业主力 2.18</span></td>
+<td class="n">862<br><span class="note">行业主力 455</span></td>
+<td class="n">54.4%<br><span class="note">行业 57.1%</span></td>
+<td class="n">69.9%<br><span class="note">行业 72.6%</span></td>
+<td class="n">0.0%<br><span class="note">行业 39.3%</span></td>
+<td class="n" style="color:#d97706;font-weight:800;font-size:14px">72</td>
+<td><span class="bdg" style="background:#d97706">待改进</span></td>
+<td class="n cmp1">73<br><span class="note">待改进</span></td>
+<td class="n"><b style="color:#dc2626">-0</b><br><span class="note">待改进 → 待改进</span></td>
+</tr></tbody></table><h4 class="ent-h">▍广州市誊渝商贸有限公司　主力账户 2 个 / 主体日均消耗 0.21 万（占该链路 6.2%）</h4><table class="ext"><thead><tr><th>账户ID</th><th>主体名称</th><th>日均消耗<br>(万元)</th><th>余额健康</th><th>单户在投<br>项目数</th><th>单户在投<br>创意数</th><th>单户日均上新<br>项目/广告</th><th>单户日均<br>上新创意</th><th>在投创意<br>重复度</th><th>新建创意<br>重复度</th><th>智能定向<br>开启率</th><th>本期<br>评分</th><th>分档</th><th class="cmp1-h">上期<br>评分</th><th class="cmp1-h">分值升降<br>/档位变化</th></tr></thead><tbody><tr>
 <td class="n"><b>84444004</b></td>
+<td class="ent">广州市誊渝商贸有限公司</td>
 <td class="n">0.11</td>
 <td class="n">✅ 充足<br><span class="note">余额 7.2万 / 日耗 448元</span></td>
 <td class="n">4<br><span class="note">行业户均 6.1</span></td>
@@ -568,22 +840,96 @@ border-left:3px solid #60a5fa}
 <td class="n cmp1">56<br><span class="note">需重点干预</span></td>
 <td class="n"><b style="color:#16a34a">+4</b><br><span class="note">需重点干预 → 需重点干预</span></td>
 </tr><tr>
-<td class="n"><b>95597513</b></td>
-<td class="n">0.10</td>
-<td class="n">✅ 充足<br><span class="note">余额 3.9万 / 日耗 2元</span></td>
-<td class="n">3<br><span class="note">行业户均 6.1</span></td>
-<td class="n">23<br><span class="note">行业户均 56</span></td>
-<td class="n">1.71<br><span class="note">行业主力 2.18</span></td>
-<td class="n">150<br><span class="note">行业主力 455</span></td>
-<td class="n">33.3%<br><span class="note">行业 57.1%</span></td>
-<td class="n">64.4%<br><span class="note">行业 72.6%</span></td>
+<td class="n"><b>76262680</b></td>
+<td class="ent">广州市誊渝商贸有限公司</td>
+<td class="n">0.07</td>
+<td class="n">✅ 充足<br><span class="note">余额 6.8万 / 日耗 72元</span></td>
+<td class="n">2<br><span class="note">行业户均 6.1</span></td>
+<td class="n">2<br><span class="note">行业户均 56</span></td>
+<td class="n">0.71<br><span class="note">行业主力 2.18</span></td>
+<td class="n">25<br><span class="note">行业主力 455</span></td>
+<td class="n">0.0%<br><span class="note">行业 57.1%</span></td>
+<td class="n">18.8%<br><span class="note">行业 72.6%</span></td>
 <td class="n">0.0%<br><span class="note">行业 39.3%</span></td>
-<td class="n" style="color:#dc2626;font-weight:800;font-size:14px">58</td>
+<td class="n" style="color:#dc2626;font-weight:800;font-size:14px">35</td>
 <td><span class="bdg" style="background:#dc2626">需重点干预</span></td>
-<td class="n cmp1"><span class="note">上期非主力<br>无同账户评分</span></td>
-<td class="n"><span class="note">—</span></td>
-</tr></tbody></table></div><div class="mpane" id="mp_m5_2"><h3 class="viz-h">▍CID　主力账户 10 个（按 7 天消耗取 TOP10）</h3><table class="ext"><thead><tr><th>账户ID</th><th>日均消耗<br>(万元)</th><th>余额健康</th><th>单户在投<br>项目/广告</th><th>单户在投<br>创意数</th><th>单户日均上新<br>项目/广告</th><th>单户日均<br>上新创意</th><th>在投创意<br>重复度</th><th>新建创意<br>重复度</th><th>智能定向<br>开启率</th><th>本期<br>评分</th><th>分档</th><th class="cmp1-h">上期<br>评分</th><th class="cmp1-h">分值升降<br>/档位变化</th></tr></thead><tbody><tr>
+<td class="n cmp1">41<br><span class="note">需重点干预</span></td>
+<td class="n"><b style="color:#dc2626">-6</b><br><span class="note">需重点干预 → 需重点干预</span></td>
+</tr></tbody></table><h4 class="ent-h">▍广州市佑祜商贸有限公司　主力账户 2 个 / 主体日均消耗 0.21 万（占该链路 6.1%）</h4><table class="ext"><thead><tr><th>账户ID</th><th>主体名称</th><th>日均消耗<br>(万元)</th><th>余额健康</th><th>单户在投<br>项目数</th><th>单户在投<br>创意数</th><th>单户日均上新<br>项目/广告</th><th>单户日均<br>上新创意</th><th>在投创意<br>重复度</th><th>新建创意<br>重复度</th><th>智能定向<br>开启率</th><th>本期<br>评分</th><th>分档</th><th class="cmp1-h">上期<br>评分</th><th class="cmp1-h">分值升降<br>/档位变化</th></tr></thead><tbody><tr>
+<td class="n"><b>89599023</b></td>
+<td class="ent">广州市佑祜商贸有限公司</td>
+<td class="n">0.08</td>
+<td class="n">✅ 充足<br><span class="note">余额 3.4万 / 日耗 0元</span></td>
+<td class="n">2<br><span class="note">行业户均 6.1</span></td>
+<td class="n">25<br><span class="note">行业户均 56</span></td>
+<td class="n">2.29<br><span class="note">行业主力 2.18</span></td>
+<td class="n">96<br><span class="note">行业主力 455</span></td>
+<td class="n">76.0%<br><span class="note">行业 57.1%</span></td>
+<td class="n">77.0%<br><span class="note">行业 72.6%</span></td>
+<td class="n">0.0%<br><span class="note">行业 39.3%</span></td>
+<td class="n" style="color:#dc2626;font-weight:800;font-size:14px">55</td>
+<td><span class="bdg" style="background:#dc2626">需重点干预</span></td>
+<td class="n cmp1">56<br><span class="note">需重点干预</span></td>
+<td class="n"><b style="color:#dc2626">-1</b><br><span class="note">需重点干预 → 需重点干预</span></td>
+</tr><tr>
+<td class="n"><b>89599061</b></td>
+<td class="ent">广州市佑祜商贸有限公司</td>
+<td class="n">0.07</td>
+<td class="n">✅ 充足<br><span class="note">余额 5.1万 / 日耗 250元</span></td>
+<td class="n">3<br><span class="note">行业户均 6.1</span></td>
+<td class="n">34<br><span class="note">行业户均 56</span></td>
+<td class="n">2.14<br><span class="note">行业主力 2.18</span></td>
+<td class="n">161<br><span class="note">行业主力 455</span></td>
+<td class="n">58.2%<br><span class="note">行业 57.1%</span></td>
+<td class="n">77.5%<br><span class="note">行业 72.6%</span></td>
+<td class="n">0.0%<br><span class="note">行业 39.3%</span></td>
+<td class="n" style="color:#dc2626;font-weight:800;font-size:14px">59</td>
+<td><span class="bdg" style="background:#dc2626">需重点干预</span></td>
+<td class="n cmp1">60<br><span class="note">待改进</span></td>
+<td class="n"><b style="color:#dc2626">-2</b><br><span class="note">待改进 → 需重点干预</span></td>
+</tr></tbody></table></div><div class="mpane" id="mp_m5_2"><h3 class="viz-h">▍CID　消耗 TOP5 主体 × 各自主力账户 TOP10（该链路主力账户共 18 个）</h3><table class="ext"><thead><tr><th>主体名称</th><th>日均消耗<br>(万元)</th><th>消耗占比<br>(该链路)</th><th>账户数</th><th>主力<br>账户数</th><th>主力账户<br>日均消耗(万元)</th><th>明细<br>账户数</th></tr></thead><tbody><tr>
+<td class="ent"><b>广州市玮琚商贸有限公司</b></td>
+<td class="n">0.37</td>
+<td class="n">31.4%</td>
+<td class="n">9</td>
+<td class="n">5</td>
+<td class="n">0.35<br><span class="note">占主体 95.6%</span></td>
+<td class="n">5</td>
+</tr><tr>
+<td class="ent"><b>广州市睐弧商贸有限公司</b></td>
+<td class="n">0.18</td>
+<td class="n">15.5%</td>
+<td class="n">10</td>
+<td class="n">3</td>
+<td class="n">0.15<br><span class="note">占主体 80.5%</span></td>
+<td class="n">3</td>
+</tr><tr>
+<td class="ent"><b>广州市棘昱商贸有限公司</b></td>
+<td class="n">0.16</td>
+<td class="n">14.1%</td>
+<td class="n">10</td>
+<td class="n">2</td>
+<td class="n">0.10<br><span class="note">占主体 59.1%</span></td>
+<td class="n">2</td>
+</tr><tr>
+<td class="ent"><b>广州市耘睫商贸有限公司</b></td>
+<td class="n">0.15</td>
+<td class="n">13.0%</td>
+<td class="n">12</td>
+<td class="n">4</td>
+<td class="n">0.12<br><span class="note">占主体 76.2%</span></td>
+<td class="n">4</td>
+</tr><tr>
+<td class="ent"><b>广州市幂赡商贸有限公司</b></td>
+<td class="n">0.11</td>
+<td class="n">9.5%</td>
+<td class="n">5</td>
+<td class="n">1</td>
+<td class="n">0.09<br><span class="note">占主体 76.5%</span></td>
+<td class="n">1</td>
+</tr></tbody></table><h4 class="ent-h">▍广州市玮琚商贸有限公司　主力账户 5 个 / 主体日均消耗 0.37 万（占该链路 31.4%）</h4><table class="ext"><thead><tr><th>账户ID</th><th>主体名称</th><th>日均消耗<br>(万元)</th><th>余额健康</th><th>单户在投<br>项目数</th><th>单户在投<br>创意数</th><th>单户日均上新<br>项目/广告</th><th>单户日均<br>上新创意</th><th>在投创意<br>重复度</th><th>新建创意<br>重复度</th><th>智能定向<br>开启率</th><th>本期<br>评分</th><th>分档</th><th class="cmp1-h">上期<br>评分</th><th class="cmp1-h">分值升降<br>/档位变化</th></tr></thead><tbody><tr>
 <td class="n"><b>88033391</b></td>
+<td class="ent">广州市玮琚商贸有限公司</td>
 <td class="n">0.09</td>
 <td class="n">✅ 充足<br><span class="note">余额 3.1万 / 日耗 604元</span></td>
 <td class="n">12<br><span class="note">行业户均 5.2</span></td>
@@ -599,6 +945,7 @@ border-left:3px solid #60a5fa}
 <td class="n"><span class="note">—</span></td>
 </tr><tr>
 <td class="n"><b>91827858</b></td>
+<td class="ent">广州市玮琚商贸有限公司</td>
 <td class="n">0.09</td>
 <td class="n">✅ 充足<br><span class="note">余额 3.4万 / 日耗 854元</span></td>
 <td class="n">9<br><span class="note">行业户均 5.2</span></td>
@@ -613,22 +960,8 @@ border-left:3px solid #60a5fa}
 <td class="n cmp1"><span class="note">上期非主力<br>无同账户评分</span></td>
 <td class="n"><span class="note">—</span></td>
 </tr><tr>
-<td class="n"><b>80975290</b></td>
-<td class="n">0.09</td>
-<td class="n">✅ 充足<br><span class="note">余额 2.0万 / 日耗 366元</span></td>
-<td class="n">5<br><span class="note">行业户均 5.2</span></td>
-<td class="n">11<br><span class="note">行业户均 22</span></td>
-<td class="n">2.86<br><span class="note">行业主力 1.97</span></td>
-<td class="n">43<br><span class="note">行业主力 85</span></td>
-<td class="n">0.0%<br><span class="note">行业 41.8%</span></td>
-<td class="n">0.3%<br><span class="note">行业 51.2%</span></td>
-<td class="n">100.0%<br><span class="note">行业 37.2%</span></td>
-<td class="n" style="color:#15803d;font-weight:800;font-size:14px">92</td>
-<td><span class="bdg" style="background:#15803d">优秀</span></td>
-<td class="n cmp1">61<br><span class="note">待改进</span></td>
-<td class="n"><b style="color:#16a34a">+31</b><br><span class="note">待改进 → 优秀</span></td>
-</tr><tr>
 <td class="n"><b>88033402</b></td>
+<td class="ent">广州市玮琚商贸有限公司</td>
 <td class="n">0.08</td>
 <td class="n">✅ 充足<br><span class="note">余额 5.1万 / 日耗 1,994元</span></td>
 <td class="n">11<br><span class="note">行业户均 5.2</span></td>
@@ -644,6 +977,7 @@ border-left:3px solid #60a5fa}
 <td class="n"><span class="note">—</span></td>
 </tr><tr>
 <td class="n"><b>88033418</b></td>
+<td class="ent">广州市玮琚商贸有限公司</td>
 <td class="n">0.08</td>
 <td class="n">✅ 充足<br><span class="note">余额 4.3万 / 日耗 1,166元</span></td>
 <td class="n">12<br><span class="note">行业户均 5.2</span></td>
@@ -658,7 +992,24 @@ border-left:3px solid #60a5fa}
 <td class="n cmp1">89<br><span class="note">良好</span></td>
 <td class="n"><b style="color:#16a34a">+11</b><br><span class="note">良好 → 优秀</span></td>
 </tr><tr>
+<td class="n"><b>88033383</b></td>
+<td class="ent">广州市玮琚商贸有限公司</td>
+<td class="n">0.02</td>
+<td class="n">✅ 充足<br><span class="note">余额 4.9万 / 日耗 220元</span></td>
+<td class="n">10<br><span class="note">行业户均 5.2</span></td>
+<td class="n">54<br><span class="note">行业户均 22</span></td>
+<td class="n">3.71<br><span class="note">行业主力 1.97</span></td>
+<td class="n">75<br><span class="note">行业主力 85</span></td>
+<td class="n">1.0%<br><span class="note">行业 41.8%</span></td>
+<td class="n">1.7%<br><span class="note">行业 51.2%</span></td>
+<td class="n">100.0%<br><span class="note">行业 37.2%</span></td>
+<td class="n" style="color:#15803d;font-weight:800;font-size:14px">95</td>
+<td><span class="bdg" style="background:#15803d">优秀</span></td>
+<td class="n cmp1"><span class="note">上期非主力<br>无同账户评分</span></td>
+<td class="n"><span class="note">—</span></td>
+</tr></tbody></table><h4 class="ent-h">▍广州市睐弧商贸有限公司　主力账户 3 个 / 主体日均消耗 0.18 万（占该链路 15.5%）</h4><table class="ext"><thead><tr><th>账户ID</th><th>主体名称</th><th>日均消耗<br>(万元)</th><th>余额健康</th><th>单户在投<br>项目数</th><th>单户在投<br>创意数</th><th>单户日均上新<br>项目/广告</th><th>单户日均<br>上新创意</th><th>在投创意<br>重复度</th><th>新建创意<br>重复度</th><th>智能定向<br>开启率</th><th>本期<br>评分</th><th>分档</th><th class="cmp1-h">上期<br>评分</th><th class="cmp1-h">分值升降<br>/档位变化</th></tr></thead><tbody><tr>
 <td class="n"><b>83820218</b></td>
+<td class="ent">广州市睐弧商贸有限公司</td>
 <td class="n">0.07</td>
 <td class="n">✅ 充足<br><span class="note">余额 1.3万 / 日耗 1,337元</span></td>
 <td class="n">12<br><span class="note">行业户均 5.2</span></td>
@@ -670,25 +1021,43 @@ border-left:3px solid #60a5fa}
 <td class="n">47.1%<br><span class="note">行业 37.2%</span></td>
 <td class="n" style="color:#15803d;font-weight:800;font-size:14px">91</td>
 <td><span class="bdg" style="background:#15803d">优秀</span></td>
+<td class="n cmp1">81<br><span class="note">良好</span></td>
+<td class="n"><b style="color:#16a34a">+10</b><br><span class="note">良好 → 优秀</span></td>
+</tr><tr>
+<td class="n"><b>83820200</b></td>
+<td class="ent">广州市睐弧商贸有限公司</td>
+<td class="n">0.05</td>
+<td class="n">✅ 充足<br><span class="note">余额 1.5万 / 日耗 345元</span></td>
+<td class="n">12<br><span class="note">行业户均 5.2</span></td>
+<td class="n">34<br><span class="note">行业户均 22</span></td>
+<td class="n">3.14<br><span class="note">行业主力 1.97</span></td>
+<td class="n">60<br><span class="note">行业主力 85</span></td>
+<td class="n">5.7%<br><span class="note">行业 41.8%</span></td>
+<td class="n">18.1%<br><span class="note">行业 51.2%</span></td>
+<td class="n">56.2%<br><span class="note">行业 37.2%</span></td>
+<td class="n" style="color:#15803d;font-weight:800;font-size:14px">94</td>
+<td><span class="bdg" style="background:#15803d">优秀</span></td>
+<td class="n cmp1">84<br><span class="note">良好</span></td>
+<td class="n"><b style="color:#16a34a">+10</b><br><span class="note">良好 → 优秀</span></td>
+</tr><tr>
+<td class="n"><b>83820207</b></td>
+<td class="ent">广州市睐弧商贸有限公司</td>
+<td class="n">0.02</td>
+<td class="n">✅ 充足<br><span class="note">余额 1.7万 / 日耗 224元</span></td>
+<td class="n">11<br><span class="note">行业户均 5.2</span></td>
+<td class="n">22<br><span class="note">行业户均 22</span></td>
+<td class="n">3.14<br><span class="note">行业主力 1.97</span></td>
+<td class="n">60<br><span class="note">行业主力 85</span></td>
+<td class="n">0.0%<br><span class="note">行业 41.8%</span></td>
+<td class="n">20.8%<br><span class="note">行业 51.2%</span></td>
+<td class="n">50.0%<br><span class="note">行业 37.2%</span></td>
+<td class="n" style="color:#15803d;font-weight:800;font-size:14px">92</td>
+<td><span class="bdg" style="background:#15803d">优秀</span></td>
 <td class="n cmp1"><span class="note">上期非主力<br>无同账户评分</span></td>
 <td class="n"><span class="note">—</span></td>
-</tr><tr>
-<td class="n"><b>82475400</b></td>
-<td class="n">0.07</td>
-<td class="n">✅ 充足<br><span class="note">余额 3.7万 / 日耗 654元</span></td>
-<td class="n">5<br><span class="note">行业户均 5.2</span></td>
-<td class="n">14<br><span class="note">行业户均 22</span></td>
-<td class="n">1.14<br><span class="note">行业主力 1.97</span></td>
-<td class="n">5<br><span class="note">行业主力 85</span></td>
-<td class="n">0.0%<br><span class="note">行业 41.8%</span></td>
-<td class="n">31.2%<br><span class="note">行业 51.2%</span></td>
-<td class="n">16.7%<br><span class="note">行业 37.2%</span></td>
-<td class="n" style="color:#d97706;font-weight:800;font-size:14px">62</td>
-<td><span class="bdg" style="background:#d97706">待改进</span></td>
-<td class="n cmp1">59<br><span class="note">需重点干预</span></td>
-<td class="n"><b style="color:#16a34a">+4</b><br><span class="note">需重点干预 → 待改进</span></td>
-</tr><tr>
+</tr></tbody></table><h4 class="ent-h">▍广州市棘昱商贸有限公司　主力账户 2 个 / 主体日均消耗 0.16 万（占该链路 14.1%）</h4><table class="ext"><thead><tr><th>账户ID</th><th>主体名称</th><th>日均消耗<br>(万元)</th><th>余额健康</th><th>单户在投<br>项目数</th><th>单户在投<br>创意数</th><th>单户日均上新<br>项目/广告</th><th>单户日均<br>上新创意</th><th>在投创意<br>重复度</th><th>新建创意<br>重复度</th><th>智能定向<br>开启率</th><th>本期<br>评分</th><th>分档</th><th class="cmp1-h">上期<br>评分</th><th class="cmp1-h">分值升降<br>/档位变化</th></tr></thead><tbody><tr>
 <td class="n"><b>85872649</b></td>
+<td class="ent">广州市棘昱商贸有限公司</td>
 <td class="n">0.06</td>
 <td class="n">✅ 充足<br><span class="note">余额 2.5万 / 日耗 668元</span></td>
 <td class="n">7<br><span class="note">行业户均 5.2</span></td>
@@ -703,38 +1072,108 @@ border-left:3px solid #60a5fa}
 <td class="n cmp1"><span class="note">上期非主力<br>无同账户评分</span></td>
 <td class="n"><span class="note">—</span></td>
 </tr><tr>
-<td class="n"><b>83820200</b></td>
-<td class="n">0.05</td>
-<td class="n">✅ 充足<br><span class="note">余额 1.5万 / 日耗 345元</span></td>
-<td class="n">12<br><span class="note">行业户均 5.2</span></td>
-<td class="n">34<br><span class="note">行业户均 22</span></td>
-<td class="n">3.14<br><span class="note">行业主力 1.97</span></td>
-<td class="n">60<br><span class="note">行业主力 85</span></td>
-<td class="n">5.7%<br><span class="note">行业 41.8%</span></td>
-<td class="n">18.1%<br><span class="note">行业 51.2%</span></td>
-<td class="n">56.2%<br><span class="note">行业 37.2%</span></td>
-<td class="n" style="color:#15803d;font-weight:800;font-size:14px">94</td>
-<td><span class="bdg" style="background:#15803d">优秀</span></td>
-<td class="n cmp1"><span class="note">上期非主力<br>无同账户评分</span></td>
-<td class="n"><span class="note">—</span></td>
-</tr><tr>
-<td class="n"><b>90998010</b></td>
-<td class="n">0.05</td>
-<td class="n">✅ 充足<br><span class="note">余额 3.5万 / 日耗 446元</span></td>
-<td class="n">4<br><span class="note">行业户均 5.2</span></td>
-<td class="n">6<br><span class="note">行业户均 22</span></td>
-<td class="n">3.71<br><span class="note">行业主力 1.97</span></td>
-<td class="n">58<br><span class="note">行业主力 85</span></td>
+<td class="n"><b>90135474</b></td>
+<td class="ent">广州市棘昱商贸有限公司</td>
+<td class="n">0.04</td>
+<td class="n">✅ 充足<br><span class="note">余额 5.2万 / 日耗 170元</span></td>
+<td class="n">9<br><span class="note">行业户均 5.2</span></td>
+<td class="n">20<br><span class="note">行业户均 22</span></td>
+<td class="n">0.71<br><span class="note">行业主力 1.97</span></td>
+<td class="n">22<br><span class="note">行业主力 85</span></td>
 <td class="n">0.0%<br><span class="note">行业 41.8%</span></td>
-<td class="n">0.7%<br><span class="note">行业 51.2%</span></td>
+<td class="n">0.0%<br><span class="note">行业 51.2%</span></td>
+<td class="n">0.0%<br><span class="note">行业 37.2%</span></td>
+<td class="n" style="color:#dc2626;font-weight:800;font-size:14px">56</td>
+<td><span class="bdg" style="background:#dc2626">需重点干预</span></td>
+<td class="n cmp1">59<br><span class="note">需重点干预</span></td>
+<td class="n"><b style="color:#dc2626">-2</b><br><span class="note">需重点干预 → 需重点干预</span></td>
+</tr></tbody></table><h4 class="ent-h">▍广州市耘睫商贸有限公司　主力账户 4 个 / 主体日均消耗 0.15 万（占该链路 13.0%）</h4><table class="ext"><thead><tr><th>账户ID</th><th>主体名称</th><th>日均消耗<br>(万元)</th><th>余额健康</th><th>单户在投<br>项目数</th><th>单户在投<br>创意数</th><th>单户日均上新<br>项目/广告</th><th>单户日均<br>上新创意</th><th>在投创意<br>重复度</th><th>新建创意<br>重复度</th><th>智能定向<br>开启率</th><th>本期<br>评分</th><th>分档</th><th class="cmp1-h">上期<br>评分</th><th class="cmp1-h">分值升降<br>/档位变化</th></tr></thead><tbody><tr>
+<td class="n"><b>91478901</b></td>
+<td class="ent">广州市耘睫商贸有限公司</td>
+<td class="n">0.04</td>
+<td class="n">✅ 充足<br><span class="note">余额 3.9万 / 日耗 432元</span></td>
+<td class="n">7<br><span class="note">行业户均 5.2</span></td>
+<td class="n">12<br><span class="note">行业户均 22</span></td>
+<td class="n">0.57<br><span class="note">行业主力 1.97</span></td>
+<td class="n">25<br><span class="note">行业主力 85</span></td>
+<td class="n">0.0%<br><span class="note">行业 41.8%</span></td>
+<td class="n">12.4%<br><span class="note">行业 51.2%</span></td>
+<td class="n">0.0%<br><span class="note">行业 37.2%</span></td>
+<td class="n" style="color:#dc2626;font-weight:800;font-size:14px">59</td>
+<td><span class="bdg" style="background:#dc2626">需重点干预</span></td>
+<td class="n cmp1">55<br><span class="note">需重点干预</span></td>
+<td class="n"><b style="color:#16a34a">+4</b><br><span class="note">需重点干预 → 需重点干预</span></td>
+</tr><tr>
+<td class="n"><b>87666021</b></td>
+<td class="ent">广州市耘睫商贸有限公司</td>
+<td class="n">0.03</td>
+<td class="n">✅ 充足<br><span class="note">余额 4.8万 / 日耗 39元</span></td>
+<td class="n">8<br><span class="note">行业户均 5.2</span></td>
+<td class="n">17<br><span class="note">行业户均 22</span></td>
+<td class="n">1.00<br><span class="note">行业主力 1.97</span></td>
+<td class="n">33<br><span class="note">行业主力 85</span></td>
+<td class="n">2.4%<br><span class="note">行业 41.8%</span></td>
+<td class="n">21.0%<br><span class="note">行业 51.2%</span></td>
+<td class="n">0.0%<br><span class="note">行业 37.2%</span></td>
+<td class="n" style="color:#d97706;font-weight:800;font-size:14px">62</td>
+<td><span class="bdg" style="background:#d97706">待改进</span></td>
+<td class="n cmp1">57<br><span class="note">需重点干预</span></td>
+<td class="n"><b style="color:#16a34a">+5</b><br><span class="note">需重点干预 → 待改进</span></td>
+</tr><tr>
+<td class="n"><b>85984664</b></td>
+<td class="ent">广州市耘睫商贸有限公司</td>
+<td class="n">0.03</td>
+<td class="n">✅ 充足<br><span class="note">余额 3.4万 / 日耗 119元</span></td>
+<td class="n">7<br><span class="note">行业户均 5.2</span></td>
+<td class="n">16<br><span class="note">行业户均 22</span></td>
+<td class="n">1.00<br><span class="note">行业主力 1.97</span></td>
+<td class="n">33<br><span class="note">行业主力 85</span></td>
+<td class="n">3.0%<br><span class="note">行业 41.8%</span></td>
+<td class="n">12.8%<br><span class="note">行业 51.2%</span></td>
+<td class="n">0.0%<br><span class="note">行业 37.2%</span></td>
+<td class="n" style="color:#d97706;font-weight:800;font-size:14px">62</td>
+<td><span class="bdg" style="background:#d97706">待改进</span></td>
+<td class="n cmp1">56<br><span class="note">需重点干预</span></td>
+<td class="n"><b style="color:#16a34a">+5</b><br><span class="note">需重点干预 → 待改进</span></td>
+</tr><tr>
+<td class="n"><b>85984668</b></td>
+<td class="ent">广州市耘睫商贸有限公司</td>
+<td class="n">0.02</td>
+<td class="n">✅ 充足<br><span class="note">余额 4.1万 / 日耗 62元</span></td>
+<td class="n">7<br><span class="note">行业户均 5.2</span></td>
+<td class="n">13<br><span class="note">行业户均 22</span></td>
+<td class="n">1.00<br><span class="note">行业主力 1.97</span></td>
+<td class="n">29<br><span class="note">行业主力 85</span></td>
+<td class="n">3.3%<br><span class="note">行业 41.8%</span></td>
+<td class="n">16.4%<br><span class="note">行业 51.2%</span></td>
+<td class="n">0.0%<br><span class="note">行业 37.2%</span></td>
+<td class="n" style="color:#d97706;font-weight:800;font-size:14px">61</td>
+<td><span class="bdg" style="background:#d97706">待改进</span></td>
+<td class="n cmp1">56<br><span class="note">需重点干预</span></td>
+<td class="n"><b style="color:#16a34a">+5</b><br><span class="note">需重点干预 → 待改进</span></td>
+</tr></tbody></table><h4 class="ent-h">▍广州市幂赡商贸有限公司　主力账户 1 个 / 主体日均消耗 0.11 万（占该链路 9.5%）</h4><table class="ext"><thead><tr><th>账户ID</th><th>主体名称</th><th>日均消耗<br>(万元)</th><th>余额健康</th><th>单户在投<br>项目数</th><th>单户在投<br>创意数</th><th>单户日均上新<br>项目/广告</th><th>单户日均<br>上新创意</th><th>在投创意<br>重复度</th><th>新建创意<br>重复度</th><th>智能定向<br>开启率</th><th>本期<br>评分</th><th>分档</th><th class="cmp1-h">上期<br>评分</th><th class="cmp1-h">分值升降<br>/档位变化</th></tr></thead><tbody><tr>
+<td class="n"><b>80975290</b></td>
+<td class="ent">广州市幂赡商贸有限公司</td>
+<td class="n">0.09</td>
+<td class="n">✅ 充足<br><span class="note">余额 2.0万 / 日耗 366元</span></td>
+<td class="n">5<br><span class="note">行业户均 5.2</span></td>
+<td class="n">11<br><span class="note">行业户均 22</span></td>
+<td class="n">2.86<br><span class="note">行业主力 1.97</span></td>
+<td class="n">43<br><span class="note">行业主力 85</span></td>
+<td class="n">0.0%<br><span class="note">行业 41.8%</span></td>
+<td class="n">0.3%<br><span class="note">行业 51.2%</span></td>
 <td class="n">100.0%<br><span class="note">行业 37.2%</span></td>
-<td class="n" style="color:#15803d;font-weight:800;font-size:14px">94</td>
+<td class="n" style="color:#15803d;font-weight:800;font-size:14px">92</td>
 <td><span class="bdg" style="background:#15803d">优秀</span></td>
-<td class="n cmp1">78<br><span class="note">良好</span></td>
-<td class="n"><b style="color:#16a34a">+16</b><br><span class="note">良好 → 优秀</span></td>
+<td class="n cmp1">61<br><span class="note">待改进</span></td>
+<td class="n"><b style="color:#16a34a">+31</b><br><span class="note">待改进 → 优秀</span></td>
 </tr></tbody></table></div></div></div>
-<div class="vd"><div class="vd-sec vd-good"><div class="vd-h"><span class="vd-ic">✅</span>优势</div><ul><li>3 条链路共 <b>30</b> 个主力账户全部在此逐账户列示，平均评分 <b>75.3</b> 分，最高 <b>100</b> 分。</li><li>CID 链路主力账户平均评分最高（86.0 分，账户级口径），其账户运营方法可作为输出模板。</li><li>30/30 个主力账户余额充足，无断投风险。</li><li>11 个账户评分较上期上升，改善面覆盖 36.7%。</li></ul></div><div class="vd-sec vd-bad"><div class="vd-h"><span class="vd-ic">⚠️</span>劣势</div><ul><li>小店直购 链路主力账户平均评分最低（69.2 分，账户级口径），该链路的低分账户值得优先复核。</li><li>共 <b>6</b> 个账户低于 60 分（「需重点干预」），占 20.0%；最低分仅 40 分。</li><li>5 个账户评分较上期下降，需排查基建 / 上新是否收缩。</li><li>14 个账户本期新进主力、上期非主力，表中标注「上期非主力」而不臆造分值。</li></ul></div><div class="vd-sec vd-act"><div class="vd-h"><span class="vd-ic">🎯</span>建议动作</div><ul><li>优先复核 小店直购 链路的低分账户，按「优势 / 劣势 / 建议动作」逐账户落地。</li><li>把高分账户（最高 100 分）的在投创意数、日均上新、智能定向开启率做成模板，跨链路复制。</li><li>按明细表的「分值升降 / 档位变化」列逐个追踪，下一周期目标：低分账户数减半、平均分提升 3~5 分。</li></ul></div></div><div class="note" style="margin-top:6px">口径提示：本表为<b>账户级评分</b>（单个账户 vs 行业主力账户均值）；模块一的「链路总体评分」为<b>链路级评分</b>（客户整体 vs 行业基准），两者基准与样本不同，排名不一致属正常，不构成结论冲突。</div>
-<div class="note">注：账户级「在投项目/广告数、在投创意数」为周期内去重值；「日均上新」按账户在该链路的消耗占比分摊；
+<div class="vd"><div class="vd-sec vd-good"><div class="vd-h"><span class="vd-ic">✅</span>优势</div><ul><li>3 条链路共 <b>68</b> 个主力账户按「消耗 TOP5 主体」拆分逐户列示，平均评分 <b>71.3</b> 分，最高 <b>100</b> 分。</li><li>CID 链路主力账户平均评分最高（79.6 分，账户级口径），其账户运营方法可作为输出模板。</li><li>小店直购 链路消耗最集中的主体为 <b>广州市麟鹿商贸有限公司</b>（日均 1.17 万，占该链路 34.1%，主力账户 4 个）。</li><li>32 个账户评分较上期上升，改善面覆盖 47.1%。</li></ul></div><div class="vd-sec vd-bad"><div class="vd-h"><span class="vd-ic">⚠️</span>劣势</div><ul><li>小店直购 链路主力账户平均评分最低（63.2 分，账户级口径），该链路的低分账户值得优先复核。</li><li>共 <b>18</b> 个账户低于 60 分（「需重点干预」），占 26.5%；最低分仅 22 分。</li><li>13 个账户评分较上期下降，需排查基建 / 上新是否收缩。</li><li>23 个账户本期新进主力、上期非主力，表中标注「上期非主力」而不臆造分值。</li></ul></div><div class="vd-sec vd-act"><div class="vd-h"><span class="vd-ic">🎯</span>建议动作</div><ul><li>优先复核 小店直购 链路的低分账户，按「优势 / 劣势 / 建议动作」逐账户落地。</li><li>同一主体下的多个主力账户可横向对比，优先把高分账户的创意复用度、日均上新与智能定向开启率做法复制到同主体其他账户。</li><li>按明细表的「分值升降 / 档位变化」列逐个追踪，下一周期目标：低分账户数减半、平均分提升 3~5 分。</li></ul></div></div><div class="note" style="margin-top:6px">口径提示：本表为<b>账户级评分</b>（单个账户 vs 行业主力账户均值）；模块一的「链路总体评分」为<b>链路级评分</b>（客户整体 vs 行业基准），两者基准与样本不同，排名不一致属正常，不构成结论冲突。</div>
+<div class="note">注：<b>主体名称</b>取数仓「客户主体名称」（`ops_advertiser_name`，对应客户中心的客户主体名称字段），
+按「账户 × 链路」匹配；<b>主体日均消耗</b>为该主体在该链路全部账户的消耗合计（含非主力账户），
+明细仅列该主体的<b>主力账户</b>（主力 = 该链路消耗降序累计覆盖 80% 的账户集合），
+故明细账户消耗合计可能小于主体总消耗，差额为非主力账户消耗；
+账户级「在投项目/广告数、在投创意数」为周期内去重值；「日均上新」按账户在该链路的消耗占比分摊；
 「<b>单户日均上新项目/广告</b>」列只取<b>单户日均新建对客项目/广告数</b>（`new_create_adv_op_aid` ÷ 周期天数），
 下方小字为行业主力账户对应户均值；该字段与模块三主表「单户每日上新项目广告数」（`new_ad_num` 新建广告数）为两个不同字段，本表不与后者混算；
 账户级「有效上新」维度评分<b>只取「单户日均新建对客项目/广告数」这一项</b>（与表内展示列一致），不再混入「新建广告数」；
