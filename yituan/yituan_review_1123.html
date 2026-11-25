@@ -139,11 +139,24 @@ details[open] summary::before{content:"▾ "}
 .fchain b{color:var(--blue-d)}
 .fchain .gap{color:var(--red);font-weight:800}
 @media (max-width:900px){.kpi-grid,.rooms{grid-template-columns:1fr}}
+.kpi-grid.k5{grid-template-columns:repeat(5,1fr)}
+@media (max-width:900px){.kpi-grid.k5{grid-template-columns:1fr}}
+
+.tcap{font-size:11px;color:#94A3B8;font-weight:600;margin:0 0 5px}
+table.mini.wide{min-width:100%}
+table.mini.wide th,table.mini.wide td{white-space:nowrap;padding:5px 7px}
+table.mini.wide th{font-size:10.5px}
+table.mini.wide td{font-size:11px}
+/* 宽表横向滚动时首列吸附，便于对行 */
+table.mini.wide th:first-child,table.mini.wide td:first-child{position:sticky;left:0;z-index:2;
+  background:#fff;box-shadow:1px 0 0 #E6EBF3}
+table.mini.wide th:first-child{background:#F4F7FD}
 </style></head><body>
 <div class="hero"><div class="wrap">
   <h1>蚁团美妆2025 · 竞价广告复盘（11.01-11.22）</h1>
   <div class="meta">复盘周期 <i>11.01-11.22</i>（22 天）　对比周期 <i>10.10-10.31</i>（22 天）　链路：<i>直播 + 小店直购 + CID</i>　对标：<i>标杆客户</i></div>
   <div class="tags">
+    <div class="tag" style="background:rgba(126,240,196,.2);border-color:rgba(126,240,196,.55);font-weight:800">表格版 · 完整数据表</div>
     <div class="tag">全链路总日均 <b>18.31</b>万　环比 <b class="g">▲129%</b></div>
     <div class="tag">直播 <b>3.90</b>万　<b class="g">▲76%</b></div>
     <div class="tag">小店直购 <b>13.29</b>万　<b class="g">▲283%</b></div>
@@ -153,11 +166,11 @@ details[open] summary::before{content:"▾ "}
 </div></div>
 <div class="wrap">
 <div class="sec">
-  <div class="sec-h"><span class="n">00</span><h2>一句话结论：小店放量 283% 撑起 129% 增长，但三条链路的「转化末端」都在掉队</h2><span class="hint">先看这三条，再看后面</span></div>
+  <div class="sec-h"><span class="n">00</span><h2>一句话结论：小店放量 283% 撑起 129% 增长，但 CID 转化崩了、三条链路 ROI 都还没到 1.7 考核线</h2><span class="hint">先看这三条，再看后面</span></div>
   <div class="take">
     本期全链路总日均 <b>18.31 万</b>（环比 <span class="good">+129%</span>），加权下单 ROI <b>1.66</b>（环比 <span class="good">+7%</span>）——量翻了 2.3 倍、效率还略有提升，靠的是<b>小店直购</b>从 3.47 万放到 13.29 万（<span class="good">+283%</span>，占全链路 73%）。
-    但增长的成色不均匀：<b>CID 掉了 52%</b>、ROI 1.41 是三条链路最低；<b>直播</b>虽然量涨 76%，创意条均消耗却只有 145 元（标杆 690 元）、4+m 重复广告占比 57%（标杆 7%）。
-    三条链路的共同短板都在<b>转化末端</b>：CID 下单率 0.49%（环比 <span class="warn">-70%</span>）、直播商品点击率 65.37%（标杆 102.25%）。
+    但增长的成色不均匀：<b>CID 掉了 52%</b>、ROI 1.41 是三条链路最低；<b>直播</b>虽然量涨 76%，创意条均消耗却只有 145 元（标杆 3382 元）、4+m 重复广告占比 57%（标杆 22%）。
+    三条链路的短板各不相同：CID 在<b>转化末端</b>（下单率 0.49%，环比 <span class="warn">-70%</span>）、直播在<b>进房率</b>（观看率 75.66% vs 标杆 88.39%，-14.4%）、小店在<b>创意供给</b>（有消耗创意 1134 条 vs 标杆 7118 条，-84%）。
   </div>
 
   <div class="kpi-grid" style="margin-bottom:14px">
@@ -169,7 +182,7 @@ details[open] summary::before{content:"▾ "}
     <div class="kpi" style="background:#FEF6F6;border-color:#F7D9D9">
       <div class="kpi-l">最大的风险</div>
       <div style="font-size:13.5px;font-weight:800;color:#9B1C1C;margin-top:6px;line-height:1.6">73% 的量压在 1 个商品组、1 间直播间上</div>
-      <div style="font-size:12.2px;color:#7C3B3B;margin-top:6px;line-height:1.65">小店 503 个相似商品聚成 <b>1 组</b>、贡献 100% 消耗；直播只有 <b>1 间</b>在跑（白云山草本抗皱精华油，3.90 万/日）。这组素材一旦衰减，全链路 73% 的量没有第二条腿。</div>
+      <div style="font-size:12.2px;color:#7C3B3B;margin-top:6px;line-height:1.65">小店 165 个相似商品聚成 <b>1 组</b>、贡献 100% 消耗；直播只有 <b>1 间</b>在跑（白云山草本抗皱精华油，3.90 万/日）。这组素材一旦衰减，全链路 73% 的量没有第二条腿。</div>
     </div>
     <div class="kpi" style="background:#FFFAF1;border-color:#F6E3BF">
       <div class="kpi-l">最硬的短板</div>
@@ -191,19 +204,20 @@ details[open] summary::before{content:"▾ "}
 
   <div class="card">
     <div class="card-h"><h3>四条依据</h3><span>按影响金额排序，是上面三卡的信息来源</span></div>
-        <div class="note green"><span class="ico">✓</span><span><b>小店直购</b>：日耗 13.29 万（+283%）、ROI 1.69（+8%），贡献全链路 73% 的量与 74% 的成交额；素材端 5s 完播 39.32%、CVR 9.10% 双双优于标杆——是现成的放大器，可以继续加预算。</span></div>
+        <div class="note green"><span class="ico">✓</span><span><b>小店直购</b>：日耗 13.29 万（+283%）、ROI 1.69（+8%），贡献全链路 73% 的量与 74% 的成交额；素材端 5s 完播 39.32%、CVR 9.10% 双双优于标杆——是现成的放大器；但 ROI 1.69 仍差考核线 1.7 一步（-0.6%），加预算要同步盯 ROI，不能只放不管。</span></div>
         <div class="note red"><span class="ico">!</span><span><b>CID 链路</b>：日耗 1.12 万（-52%）、ROI 1.41（-6%）、下单率 0.49%（-70%）、CVR 2.61%（标杆 7.53%，-65%）。点击率 3.92% 是三条链路最高，说明素材能把人拉进来，问题出在「点进来之后」——是本期最该先修的一段。</span></div>
-        <div class="note amber"><span class="ico">!</span><span><b>直播链路</b>：日耗 3.90 万（+76%）、ROI 1.62（+4%）；但账户 140 个（标杆 4 个）、项目&广告 1775 个（标杆 612 个），创意条均消耗却只有 145 元（标杆 690 元，-79%）；4+m 重复广告占比 57%（标杆 7%）——基建铺得过多、单条吃不饱，重复素材被系统过滤。</span></div>
+        <div class="note amber"><span class="ico">!</span><span><b>直播链路</b>：日耗 3.90 万（+76%）、ROI 1.62（+4%）；但账户 140 个（标杆 27 个）、项目&广告 1775 个（标杆 475 个），创意条均消耗却只有 145 元（标杆 3382 元，-96%）；4+m 重复广告占比 57%（标杆 22%）——基建铺得过多、单条吃不饱，重复素材被系统过滤。</span></div>
         <div class="note blue"><span class="ico">i</span><span>退款与店铺三率整体健康：直播 14 日退款 24.70%（大盘 27.70%）、小店 15.12%（17.20%）、CID 3.44%（3.54%）；直播主力店铺差评率 0.71%（大盘 6.79%）。风险集中在长尾小店铺（中封 50.00%/168 单、莜笙 13.33%/222 单），样本均 &lt; 300 单，按「小样本先观察」处理。</span></div>
   </div>
 </div>
 <div class="sec">
   <div class="sec-h"><span class="n">01</span><h2>成绩单：量翻 2.3 倍到 18.31 万/日，小店一条链路贡献 73%</h2><span class="hint">日均单位为万元</span></div>
-  <div class="kpi-grid" style="margin:12px 0 16px">
+  <div class="kpi-grid k5" style="margin:12px 0 16px">
     <div class="kpi"><div class="kpi-l">全链路总日均</div><div class="kpi-v">18.31<small>万</small></div><div class="kpi-d pos">环比 +129%</div></div>
     <div class="kpi"><div class="kpi-l">加权下单 ROI</div><div class="kpi-v">1.66</div><div class="kpi-d pos">环比 +7%</div></div>
-    <div class="kpi"><div class="kpi-l">小店消耗占比</div><div class="kpi-v">73<small>%</small></div><div class="kpi-d pos">上期 43%</div></div>
-    <div class="kpi"><div class="kpi-l">CID 消耗占比</div><div class="kpi-v">6<small>%</small></div><div class="kpi-d neg">上期 29%</div></div>
+    <div class="kpi"><div class="kpi-l">直播链路日均</div><div class="kpi-v">3.90<small>万</small></div><div class="kpi-d pos">环比 +76% · 占比 21%</div></div>
+    <div class="kpi"><div class="kpi-l">小店直购日均</div><div class="kpi-v">13.29<small>万</small></div><div class="kpi-d pos">环比 +283% · 占比 73%</div></div>
+    <div class="kpi"><div class="kpi-l">CID 链路日均</div><div class="kpi-v">1.12<small>万</small></div><div class="kpi-d neg">环比 -52% · 占比 6%</div></div>
   </div>
   <div class="card">
     <div class="card-h"><h3>1.1　分链路成绩单</h3><span>本周期 vs 上周期（10.10-10.31）</span></div>
@@ -216,7 +230,7 @@ details[open] summary::before{content:"▾ "}
         <tr><td><b>合计 / 加权</b></td><td class="num"><b>18.31</b></td><td class="num">100%</td><td class="num"><b style="color:#0B7A55">+129%</b></td><td class="num"><b>1.66</b></td><td class="num"><b style="color:#0B7A55">+7%</b></td><td class="num">—</td></tr>
       </tbody>
     </table></div>
-        <div class="note green"><span class="ico">✓</span><span>结构在往好的方向走：小店从 43% 提到 <b>73%</b>，成为绝对主力；加权 ROI 1.66（+7%）说明放量没有靠牺牲效率换来。三条链路 ROI 全部在 1.4 以上，没有出现「亏着放量」的情况。</span></div>
+        <div class="note green"><span class="ico">✓</span><span>结构在往好的方向走：小店从 43% 提到 <b>73%</b>，成为绝对主力；加权 ROI 1.66（+7%）说明放量没有靠牺牲效率换来。但对照客户考核线 ROI＞1.7，三条链路都还没达标：直播 1.62（缺口 -4.7%）、小店 1.69（-0.6%）、CID 1.41（-17.1%）——本期是「量起来了、效率没恶化」，还不是「效率达标」。</span></div>
         <div class="note red"><span class="ico">!</span><span>唯一掉队的是 <b>CID</b>：量从 2.33 万降到 1.12 万（-52%）、占比从 29% 掉到 6%、ROI 也从 1.50 降到 1.41（-6%）。它不是被小店挤掉的——小店与 CID 是两个独立链路，CID 是自身转化出了问题（下单率 -70%），需要单独修。</span></div>
         <div class="note blue"><span class="ico">i</span><span>计价率 0.8-1.2 为正常范围：小店 1.02 在范围内；直播 1.20 处于上限、CID 1.34 略高于正常范围，均属模型运行层面的正常波动。合计口径按消耗加权，加权 ROI = Σ(链路消耗×链路ROI) ÷ Σ链路消耗。</span></div>
   </div>
@@ -252,8 +266,8 @@ details[open] summary::before{content:"▾ "}
         <tr><td><b>汇总（链路）</b></td><td class="num"><b>3.90</b></td><td class="num"><b style="color:#0B7A55">+76%</b></td><td class="num"><b>1.62</b></td><td class="num"><b style="color:#0B7A55">+4%</b></td><td class="num">43</td><td class="num">1.58%</td><td class="num">1.20</td></tr>
       </tbody>
     </table></div>
-        <div class="note green"><span class="ico">✓</span><span>这一间的效率是往上的：ROI 1.62（+3%）、点击率 1.58%（+34%）、下单成本 43 元（-3%）——量涨 87% 的同时成本还在降，说明本期素材的「拉人能力」明显变强了（竞价 CPM 32 元，环比 +51%，出价 37 元基本没动）。</span></div>
-        <div class="note red"><span class="ico">!</span><span>要修的是<b>单点结构</b>而不是这一间的效率：① 链路 100% 押 1 间，建议从现有商品里拆出第二、第三间直播间（比如眼部护理、颈霜两条产品线各自开播），先把单间依赖降到 80% 以内；② 这一间的短板在转化末端——商品点击率 65.37%（标杆 102.25%，-36%），见 3.4 承接漏斗。</span></div>
+        <div class="note green"><span class="ico">✓</span><span>这一间的效率是往上的：ROI 1.62（+3%）、点击率 1.58%（+34%）、下单成本 43 元（-3%）——量涨 87% 的同时成本还在降，说明本期素材的「拉人能力」明显变强了（竞价 CPM 32 元，环比 +51%，出价 37 元基本没动）。但对照客户考核线 ROI＞1.7，直播 ROI 1.62 仍差 4.7%（标杆 1.99），属「环比改善、尚未达标」，不能据此判定可加预算。</span></div>
+        <div class="note red"><span class="ico">!</span><span>要修的是<b>单点结构</b>而不是这一间的效率：① 链路 100% 押 1 间，建议从现有商品里拆出第二、第三间直播间（比如眼部护理、颈霜两条产品线各自开播），先把单间依赖降到 80% 以内；② 这一间的短板在进房——直播观看率 75.66%（标杆 88.39%，-14.4%），见 3.4 承接漏斗。</span></div>
         <div class="note blue"><span class="ico">i</span><span>源报告 2.1 汇总行环比为 +76%，直播间行环比为 +87%，差异来自汇总口径含全部流量、单间口径为商品可归因部分；两行数据均按源报告原值引用，未做二次调整。</span></div>
   </div>
 </div>
@@ -261,143 +275,73 @@ details[open] summary::before{content:"▾ "}
 <div class="sec">
   <div class="sec-h"><span class="n">03</span><h2>vs 标杆：流量、基建、素材、承接逐段拆开看</h2><span class="hint">标杆客户 = 同期直播消耗 TOP1 直播间（已脱敏）</span></div>
   <div class="card">
-    <div class="card-h"><h3>3.1　流量结构</h3><span>消耗占比（%）· 客户 vs 标杆，上下两行对照</span></div>
-    <div class="stack-lab"><span>白云山草本抗皱精华油</span></div><div class="stack-bar"><i style="width:55.10%;background:#2B5CE6">54%</i><i style="width:2.04%;background:#7C5CF0"></i><i style="width:10.20%;background:#D97706">10%</i><i style="width:16.33%;background:#0E9F6E">16%</i><i style="width:13.27%;background:#5AA9F0">13%</i><i style="width:3.06%;background:#94A3B8"></i></div>
-    <div class="stack-lab"><span>标杆客户（同期）</span></div><div class="stack-bar"><i style="width:33.00%;background:#2B5CE6">33%</i><i style="width:3.00%;background:#7C5CF0"></i><i style="width:5.00%;background:#D97706"></i><i style="width:16.00%;background:#0E9F6E">16%</i><i style="width:43.00%;background:#5AA9F0">43%</i><i style="width:0.00%;background:#94A3B8"></i></div>
-<div class="legend"><span><em style="background:#2B5CE6"></em>微信视频号</span><span><em style="background:#7C5CF0"></em>微信朋友圈</span><span><em style="background:#D97706"></em>微信公众号</span><span><em style="background:#0E9F6E"></em>平台与内容广告</span><span><em style="background:#5AA9F0"></em>微信小程序</span><span><em style="background:#94A3B8"></em>移动联盟</span></div>
-        <div class="tbl-wrap"><table class="mini">
-      <thead><tr><th>版位</th><th class="num">客户占比</th><th class="num">标杆占比</th><th class="num">差距</th><th class="num">客户该版位ROI</th></tr></thead>
+    <div class="card-h"><h3>3.1　流量结构</h3><span>消耗占比（%）· 客户 vs 标杆 · 完整分布表</span></div>
+
+        <div class="tcap">流量分布对比 · 完整表（17 列，可横向滚动查看） · 机会判定＝该版位占比低于标杆 且 该版位 ROI 高于自身整体 ROI</div><div class="tbl-wrap"><table class="mini wide">
+      <thead><tr><th>客户简称</th><th>视频号名称</th><th class="num">整体日均消耗</th><th class="num">整体ROI</th><th class="num">视频号占比</th><th class="num">朋友圈占比</th><th class="num">公众号占比</th><th class="num">平台与内容占比</th><th class="num">小程序占比</th><th class="num">移动联盟占比</th><th class="num">视频号ROI</th><th class="num">朋友圈ROI</th><th class="num">公众号ROI</th><th class="num">平台与内容ROI</th><th class="num">小程序ROI</th><th class="num">移动联盟ROI</th><th>机会判定</th></tr></thead>
       <tbody>
-        <tr><td>微信视频号</td><td class="num">54%</td><td class="num">33%</td><td class="num"><b style="color:#0B7A55">+21%</b></td><td class="num">1.65</td></tr>
-        <tr><td>微信朋友圈</td><td class="num">2%</td><td class="num">3%</td><td class="num"><b style="color:#DC2626">-1%</b></td><td class="num">1.37</td></tr>
-        <tr><td>微信公众号</td><td class="num">10%</td><td class="num">5%</td><td class="num"><b style="color:#0B7A55">+5%</b></td><td class="num">1.66</td></tr>
-        <tr><td>平台与内容广告</td><td class="num">16%</td><td class="num">16%</td><td class="num">0%</td><td class="num">1.62</td></tr>
-        <tr><td>微信小程序</td><td class="num">13%</td><td class="num">43%</td><td class="num"><b style="color:#DC2626">-30%</b></td><td class="num">1.59</td></tr>
-        <tr><td>移动联盟</td><td class="num">3%</td><td class="num">0%</td><td class="num"><b style="color:#0B7A55">+3%</b></td><td class="num">1.66</td></tr>
+        <tr><td>标杆客户</td><td>标杆 TOP1 直播间</td><td class="num">—</td><td class="num">1.99</td><td class="num">22%</td><td class="num">1%</td><td class="num">2%</td><td class="num">4%</td><td class="num">72%</td><td class="num">0%</td><td class="num">1.94</td><td class="num">1.74</td><td class="num">2.41</td><td class="num">1.97</td><td class="num">1.99</td><td class="num">-</td><td>—</td></tr>
+        <tr><td>蚁团美妆2025</td><td>白云山草本抗皱精华油</td><td class="num">3.90</td><td class="num">1.62</td><td class="num">54%</td><td class="num">2%</td><td class="num">10%</td><td class="num">16%</td><td class="num">13%</td><td class="num">3%</td><td class="num">1.65</td><td class="num">1.37</td><td class="num">1.66</td><td class="num">1.62</td><td class="num">1.59</td><td class="num">1.66</td><td>无</td></tr>
+        <tr><td>对比</td><td>对比</td><td class="num">-</td><td class="num">-</td><td class="num">+32.6%</td><td class="num">+1.5%</td><td class="num">+8.6%</td><td class="num">+12.0%</td><td class="num">-59.1%</td><td class="num">+2.6%</td><td class="num">-</td><td class="num">-</td><td class="num">-</td><td class="num">-</td><td class="num">-</td><td class="num">-</td><td>—</td></tr>
       </tbody>
     </table></div>
-        <div class="note green"><span class="ico">✓</span><span>结构比标杆更分散：客户在<b>微信视频号 54%</b>（标杆 33%）、<b>平台与内容广告 16%</b>（标杆 16%）、<b>移动联盟 3%</b>（标杆 0%）上都有布局，没有把量压在单一版位上；且视频号 ROI <b>1.65</b>、公众号 <b>1.66</b>、移动联盟 <b>1.66</b> 都高于整体 1.62，说明多版位并行没有拖累效率。</span></div>
-        <div class="note red"><span class="ico">!</span><span>要修的是<b>微信小程序</b>：客户 13%、标杆 43%（低 30 个百分点），但该版位 ROI 1.59 <b>低于整体 1.62</b>，双条件只满足一条——不能直接判定为机会流量。动作：先在小程序上把转化追上（素材换成小程序落地更顺的短链路版本），ROI 站上 1.62 后再把占比从 13% 加到 25%。</span></div>
-        <div class="note amber"><span class="ico">!</span><span><b>微信朋友圈</b>是唯一「占比低于标杆且效率也低」的版位：2%（标杆 3%）、ROI <b>1.37</b>，是六个版位里最低的。动作：维持 2% 以内的观察量，不主动加投，把预算优先给视频号与公众号。</span></div>
-        <div class="note blue"><span class="ico">i</span><span>机会流量判定采用双条件：①客户该版位消耗占比低于标杆（有提升空间）②客户该版位 ROI 高于自身整体 ROI（转化能承接）。本期直播链路六个版位<b>没有同时满足两条的</b>，因此不给出「机会流量」结论，只给单条件缺口。</span></div>
-  </div>
 
+        <div class="note green"><span class="ico">✓</span><span>结构比标杆分散得多：客户在<b>微信视频号 54%</b>（标杆 22%）、<b>平台与内容广告 16%</b>（标杆 4%）、<b>微信公众号 10%</b>（标杆 2%）、<b>移动联盟 3%</b>（标杆 0%）都有布局；标杆把 <b>72%</b> 的量压在小程序上，客户只有 13%。多版位并行没有拖累效率——视频号 ROI <b>1.65</b>、公众号 <b>1.66</b>、移动联盟 <b>1.66</b> 都高于整体 1.62。</span></div>
+
+        <div class="note red"><span class="ico">!</span><span>差距最大的是<b>微信小程序</b>：客户 13%、标杆 72%（低 59 个百分点），但客户小程序 ROI <b>1.59 低于整体 1.62</b>，双条件只满足一条——不能直接判定为机会流量。动作：先把小程序上的转化追上（换小程序落地更顺的短链路素材），ROI 站上 1.62 后再把占比从 13% 往 25% 走。</span></div>
+
+        <div class="note amber"><span class="ico">!</span><span><b>微信朋友圈</b>是唯一「占比接近标杆但效率最差」的版位：2%（标杆 1%）、ROI <b>1.37</b>，六个版位里最低。动作：维持 2% 以内的观察量，不主动加投，预算优先给视频号与公众号。</span></div>
+
+        <div class="note blue"><span class="ico">i</span><span>机会流量判定采用双条件：①客户该版位消耗占比低于标杆（有提升空间）②客户该版位 ROI 高于自身整体 ROI（转化能承接）。本期直播链路六个版位<b>没有同时满足两条的</b>（唯一占比更低的小程序 ROI 也低于整体），因此只给单条件缺口，不给「机会流量」结论。</span></div>
+
+  </div>
   <div class="card">
     <div class="card-h"><h3>3.2　基建</h3><span>白云山草本抗皱精华油 vs 标杆（同链路）</span></div>
-    <div class="cmp-grid">
-          <div class="cmp">
-      <div class="cmp-title">账户数<em>个</em></div>
-      <div class="cmp-row">
-        <span class="cmp-tag me">白云山草本抗皱精华油</span>
-        <div class="track"><i class="fill me" style="width:100.0%"></i></div>
-        <span class="cmp-val">140</span>
-      </div>
-      <div class="cmp-row">
-        <span class="cmp-tag bm">标杆</span>
-        <div class="track"><i class="fill bm" style="width:2.9%"></i></div>
-        <span class="cmp-val dim">4</span>
-      </div>
-    </div>
-          <div class="cmp">
-      <div class="cmp-title">项目&广告数<em>个</em></div>
-      <div class="cmp-row">
-        <span class="cmp-tag me">白云山草本抗皱精华油</span>
-        <div class="track"><i class="fill me" style="width:100.0%"></i></div>
-        <span class="cmp-val">1775</span>
-      </div>
-      <div class="cmp-row">
-        <span class="cmp-tag bm">标杆</span>
-        <div class="track"><i class="fill bm" style="width:34.5%"></i></div>
-        <span class="cmp-val dim">612</span>
-      </div>
-    </div>
-          <div class="cmp">
-      <div class="cmp-title">创意指纹数<em>条</em></div>
-      <div class="cmp-row">
-        <span class="cmp-tag me">白云山草本抗皱精华油</span>
-        <div class="track"><i class="fill me" style="width:39.1%"></i></div>
-        <span class="cmp-val">5929</span>
-      </div>
-      <div class="cmp-row">
-        <span class="cmp-tag bm">标杆</span>
-        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
-        <span class="cmp-val dim">15167</span>
-      </div>
-    </div>
-          <div class="cmp">
-      <div class="cmp-title">创意指纹条均消耗<em>元</em></div>
-      <div class="cmp-row">
-        <span class="cmp-tag me">白云山草本抗皱精华油</span>
-        <div class="track"><i class="fill me" style="width:21.0%"></i></div>
-        <span class="cmp-val">145</span>
-      </div>
-      <div class="cmp-row">
-        <span class="cmp-tag bm">标杆</span>
-        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
-        <span class="cmp-val dim">690</span>
-      </div>
-    </div>
-          <div class="cmp">
-      <div class="cmp-title">创意重复度<em>%</em></div>
-      <div class="cmp-row">
-        <span class="cmp-tag me">白云山草本抗皱精华油</span>
-        <div class="track"><i class="fill me" style="width:85.9%"></i></div>
-        <span class="cmp-val">55</span>
-      </div>
-      <div class="cmp-row">
-        <span class="cmp-tag bm">标杆</span>
-        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
-        <span class="cmp-val dim">64</span>
-      </div>
-    </div>
-          <div class="cmp">
-      <div class="cmp-title">新广告占比<em>%</em></div>
-      <div class="cmp-row">
-        <span class="cmp-tag me">白云山草本抗皱精华油</span>
-        <div class="track"><i class="fill me" style="width:83.3%"></i></div>
-        <span class="cmp-val">15</span>
-      </div>
-      <div class="cmp-row">
-        <span class="cmp-tag bm">标杆</span>
-        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
-        <span class="cmp-val dim">18</span>
-      </div>
-    </div>
-    </div>
+    
     <div style="margin-top:16px">
-        <div class="tbl-wrap"><table class="mini">
-      <thead><tr><th>口径</th><th class="num">日均(万)</th><th class="num">账户数</th><th class="num">项目&广告数</th><th class="num">新广告占比</th><th class="num">创意指纹数</th><th class="num">条均消耗(元)</th><th class="num">4+m重复度</th></tr></thead>
+        <div class="tcap">基建指标对比 · 完整表（13 列，可横向滚动查看）</div><div class="tbl-wrap"><table class="mini wide">
+      <thead><tr><th>客户简称</th><th>视频号名称</th><th class="num">日均消耗</th><th class="num">账户数</th><th class="num">项目&广告数</th><th class="num">新广告占比</th><th class="num">创意指纹数</th><th class="num">创意指纹条均消耗</th><th class="num">4+m重复广告占比</th><th class="num">创意重复度</th><th class="num">开播天数</th><th class="num">直播单场时长</th><th class="num">平均每小时创意指纹条均消耗</th></tr></thead>
       <tbody>
-        <tr><td>白云山草本抗皱精华油</td><td class="num">3.90</td><td class="num">140</td><td class="num">1775</td><td class="num">15%</td><td class="num">5929</td><td class="num">145</td><td class="num"><b style="color:#DC2626">57%</b></td></tr>
-        <tr><td><b>标杆客户</b></td><td class="num">—</td><td class="num">4</td><td class="num">612</td><td class="num">18%</td><td class="num">15167</td><td class="num">690</td><td class="num"><b style="color:#0B7A55">7%</b></td></tr>
+        <tr><td>标杆客户</td><td>标杆 TOP1 直播间</td><td class="num">—</td><td class="num">27</td><td class="num">475</td><td class="num">31%</td><td class="num">1675</td><td class="num">3382</td><td class="num">22%</td><td class="num">75</td><td class="num">19</td><td class="num">457</td><td class="num">443.90</td></tr>
+        <tr><td>蚁团美妆2025</td><td>白云山草本抗皱精华油</td><td class="num">3.90</td><td class="num">140</td><td class="num">1775</td><td class="num">15%</td><td class="num">5929</td><td class="num">145</td><td class="num">57%</td><td class="num">55</td><td class="num">22</td><td class="num">916</td><td class="num">9.47</td></tr>
+        <tr><td>对比</td><td>对比</td><td class="num">-84.9%</td><td class="num">+418.5%</td><td class="num">+273.7%</td><td class="num">-52.0%</td><td class="num">+254.0%</td><td class="num">-95.7%</td><td class="num">+158.5%</td><td class="num">-26.9%</td><td class="num">+15.8%</td><td class="num">+100.3%</td><td class="num">-</td></tr>
       </tbody>
     </table></div>
     </div>
-        <div class="note green"><span class="ico">✓</span><span>账户与广告量完全不缺：账户 <b>140 个</b>（标杆 4 个）、项目&广告 <b>1775 个</b>（标杆 612 个），铺量能力是标杆的 3 倍以上；创意重复度 55% 也低于标杆 64%，单看重复度这一项是达标的。</span></div>
-        <div class="note red"><span class="ico">!</span><span>问题是<b>铺得过多、单条吃不饱</b>：创意指纹条均消耗只有 <b>145 元</b>（标杆 690 元，-79%），1775 个广告分 3.90 万/日，折算下来单个广告日均不到 25 元，系统没有足够样本跑出稳定模型。动作：① 先把 0 消耗与低消耗广告收敛 30%-40%，把预算集中到已跑出量的广告上，目标条均消耗提到 <b>300 元</b>；② 4+m 重复广告占比 <b>57%</b>（标杆 7%）是本卡最硬的一条——重复素材会被系统过滤、有效参竞素材数被压低，动作是把同素材的多条重复广告合并、每条广告配 6-10 条差异素材，目标压到 20% 以内。</span></div>
-        <div class="note blue"><span class="ico">i</span><span>4+M 重复广告占比为「在线广告」口径（链路级），数值越低越好（&lt;20% 为佳）；创意重复度为有消耗的创意重复度（TID 级别，&lt;40% 为及格线）。新广告占比 10-30% 为宜，客户 15% 在合理区间。</span></div>
+        <div class="note green"><span class="ico">✓</span><span>账户与广告量完全不缺：账户 <b>140 个</b>（标杆 27 个，+418%）、项目&广告 <b>1775 个</b>（标杆 475 个，+274%）；创意重复度 55% 也低于标杆 75%（-27%），单看重复度这一项是达标的。</span></div>
+
+        <div class="note red"><span class="ico">!</span><span>问题是<b>铺得过多、单条吃不饱</b>：创意指纹条均消耗只有 <b>145 元</b>（标杆 3382 元，-96%），1775 个广告分 3.90 万/日，单个广告日均不到 25 元；4+m 重复广告占比 <b>57%</b>（标杆 22%，+158%）是全卡最硬的一条——重复素材会被系统过滤、有效参竞素材数被压低。动作：① 按消耗把后 40% 低效广告收敛掉，把预算集中到已跑出量的广告，目标条均消耗提到 300 元以上；② 同素材的多条重复广告合并（素材迁入小店商品表达），4+m 压到 30% 以内；③ 新广告占比 15% 低于标杆 31%（-52%），补新品测试量。</span></div>
+
+        <div class="note blue"><span class="ico">i</span><span>4+m 重复广告占比 = 同一素材重复建广告的消耗占比，优良线 20% 以内、&lt;40% 为及格线（本卡为链路级口径）；新广告占比 10-30% 为宜，客户 15% 在合理区间下沿。创意指纹数 5929 条低于标杆 1675 条（+254%），但结合条均消耗看，客户是「多广告、少素材」，不是素材总量不足。</span></div>
+
   </div>
   <div class="card">
-    <div class="card-h"><h3>3.3　素材指标</h3><span>完播阶梯 + 点击率 + 素材时长 · 白云山草本抗皱精华油 vs 标杆</span></div>
-    <div class="kpi-grid" style="margin-bottom:14px">
-      <div class="kpi"><div class="kpi-l">5s 完播率</div><div class="kpi-v">28.99<small>%</small></div><div class="kpi-d neg">标杆 31.81%（-8.9%）</div></div>
-      <div class="kpi"><div class="kpi-l">10s 完播率</div><div class="kpi-v">15.53<small>%</small></div><div class="kpi-d neg">标杆 18.36%（-15.4%）</div></div>
-      <div class="kpi"><div class="kpi-l">素材 CVR</div><div class="kpi-v">11.54<small>%</small></div><div class="kpi-d neg">标杆 15.30%（-24.6%）</div></div>
-      <div class="kpi"><div class="kpi-l">平均素材时长</div><div class="kpi-v">127.8<small>秒</small></div><div class="kpi-d pos">标杆 97.0 秒</div></div>
+    <div class="card-h"><h3>3.3　素材指标</h3><span>主指标：3s完播 · 平均播放时长 · 点击率 · eco分 ｜ 白云山草本抗皱精华油 vs 标杆</span></div>
+    <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr)">
+      <div class="kpi"><div class="kpi-l">3s 完播率</div><div class="kpi-v">43.50<span class="kpi-s">%</span></div><div class="kpi-d neg">标杆 50.67%（-14.1%）</div></div>
+      <div class="kpi"><div class="kpi-l">平均播放时长</div><div class="kpi-v">7.20<span class="kpi-s">秒</span></div><div class="kpi-d neg">标杆 10.84 秒（-33.6%）</div></div>
+      <div class="kpi"><div class="kpi-l">素材点击率</div><div class="kpi-v">2.33<span class="kpi-s">%</span></div><div class="kpi-d neg">标杆 4.05%（-42.5%）</div></div>
+      <div class="kpi"><div class="kpi-l">eco 分</div><div class="kpi-v">2328</div><div class="kpi-d neg">标杆 2401（-3.1%）</div></div>
     </div>
-        <div class="tbl-wrap"><table class="mini">
-      <thead><tr><th>口径</th><th class="num">平均素材时长(秒)</th><th class="num">2s完播率</th><th class="num">5s完播率</th><th class="num">7s完播率</th><th class="num">10s完播率</th><th class="num">点击率</th><th class="num">CVR</th></tr></thead>
+    <div class="mini" style="font-size:12px;color:#64748B;font-weight:600;margin:14px 0 6px">完整素材指标明细（留存阶梯 · 素材时长 · eco 分）</div>
+    
+    <div style="margin-top:16px">
+        <div class="tcap">素材指标对比 · 完整表（16 列，可横向滚动查看）</div><div class="tbl-wrap"><table class="mini wide">
+      <thead><tr><th>客户简称</th><th>视频号名称</th><th class="num">日均消耗</th><th class="num">2s完播率</th><th class="num">3s完播率</th><th class="num">5s完播率</th><th class="num">7s完播率</th><th class="num">10s完播率</th><th class="num">平均播放时长</th><th class="num">平均有效播放进度</th><th class="num">点击率</th><th class="num">cvr</th><th class="num">CTCVR</th><th class="num">出价</th><th class="num">eco分</th><th class="num">平均素材时长</th></tr></thead>
       <tbody>
-        <tr><td>白云山草本抗皱精华油</td><td class="num">127.8</td><td class="num">56.84%</td><td class="num">28.99%</td><td class="num">20.82%</td><td class="num">15.53%</td><td class="num">2.33%</td><td class="num">11.54%</td></tr>
-        <tr><td><b>标杆客户</b></td><td class="num">97.0</td><td class="num">56.03%</td><td class="num">31.81%</td><td class="num">25.25%</td><td class="num">18.36%</td><td class="num">2.16%</td><td class="num">15.30%</td></tr>
-        <tr><td>对比</td><td class="num">—</td><td class="num"><b style="color:#0B7A55">+1.5%</b></td><td class="num"><b style="color:#DC2626">-8.9%</b></td><td class="num"><b style="color:#DC2626">-17.5%</b></td><td class="num"><b style="color:#DC2626">-15.4%</b></td><td class="num"><b style="color:#0B7A55">+8.1%</b></td><td class="num"><b style="color:#DC2626">-24.6%</b></td></tr>
+        <tr><td>标杆客户</td><td>标杆 TOP1 直播间</td><td class="num">—</td><td class="num">65.25%</td><td class="num">50.67%</td><td class="num">35.38%</td><td class="num">26.34%</td><td class="num">18.70%</td><td class="num">10.84</td><td class="num">10.22</td><td class="num">4.05%</td><td class="num">12.73%</td><td class="num">43.08%</td><td class="num">33</td><td class="num">2401</td><td class="num">106.07</td></tr>
+        <tr><td>蚁团美妆2025</td><td>白云山草本抗皱精华油</td><td class="num">2.11</td><td class="num">56.84%</td><td class="num">43.50%</td><td class="num">28.99%</td><td class="num">20.82%</td><td class="num">15.53%</td><td class="num">7.20</td><td class="num">5.63</td><td class="num">2.33%</td><td class="num">11.54%</td><td class="num">14.87%</td><td class="num">35</td><td class="num">2328</td><td class="num">127.79</td></tr>
+        <tr><td>对比</td><td>对比</td><td class="num">-62.0%</td><td class="num">-12.9%</td><td class="num">-14.1%</td><td class="num">-18.1%</td><td class="num">-21.0%</td><td class="num">-16.9%</td><td class="num">-33.6%</td><td class="num">-44.9%</td><td class="num">-42.5%</td><td class="num">-9.4%</td><td class="num">-65.5%</td><td class="num">+6.5%</td><td class="num">-3.1%</td><td class="num">-</td></tr>
       </tbody>
     </table></div>
-        <div class="note green"><span class="ico">✓</span><span>开头是达标的、时长也够：2s 完播率 <b>56.84%</b> 还略高于标杆 56.03%（+1.5%），点击率 <b>2.33%</b> 高于标杆 2.16%（+8.1%）——素材能把人拉住、也能把点击带出来；平均素材时长 <b>127.8 秒</b>，已远超美妆类目 60 秒以上的要求（标杆 97.0 秒）。</span></div>
-        <div class="note red"><span class="ico">!</span><span>断点在<b>中段留存到转化</b>：5s 完播 28.99%（标杆 31.81%，-8.9%）、7s 20.82%（-17.5%）、10s 15.53%（-15.4%），衰减比标杆更陡；最终 CVR 11.54% vs 标杆 15.30%（-24.6%）。动作：① 第 3-7 秒补「上脸 + 效果对比」镜头，把 7s 完播从 20.82% 拉到 25% 以上；② 127.8 秒的长素材把卖点前置——前 15 秒就要出现价格与利益点，否则长时长会稀释完播；③ 转化靠 3.4 漏斗的直播间接住，素材端先把 10s 完播补到 18% 以上。</span></div>
-        <div class="note blue"><span class="ico">i</span><span>本卡为素材口径（仅微信视频号版位），日均消耗 2.11 万，与 3.2 基建卡的 3.90 万（全版位）不同源，故两卡日均不可直接相加对比；平均素材时长按「平均播放时长 ÷ 平均有效播放进度」还原。</span></div>
-  </div>
+    </div>
+        <div class="note green"><span class="ico">✓</span><span>素材综合竞争力与标杆同档：eco 分 <b>2328</b>（标杆 2401，-3.1%），素材平均时长 <b>127.79 秒</b> 比标杆 106.07 秒更长——素材的「料」是够的，问题不在总量。</span></div>
 
+        <div class="note red"><span class="ico">!</span><span>前端两段是真缺口：3s 完播 <b>43.50%</b>（标杆 50.67%，-14.1%）、点击率 <b>2.33%</b>（标杆 4.05%，-42.5%）、平均播放 <b>7.20 秒</b>（标杆 10.84 秒，-33.6%）；留存阶梯 5s -18.1%、7s -21.0%、10s -16.9% 全部低于标杆。动作：① 前 3 秒改「痛点提问 + 产品特写」开场，3s 完播目标 50% 以上；② 点击率是最大缺口（-42.5%），首帧统一加利益点大字（拍一发二 / 到手 2 瓶）；③ 127.8 秒长素材要把卖点前置——前 15 秒必须出现价格与效果对比，否则长时长会稀释完播。</span></div>
+
+        <div class="note blue"><span class="ico">i</span><span>本卡为素材口径（仅微信视频号版位），日均消耗 2.11 万，与 3.2 基建卡的 3.90 万（全版位）不同源，两卡日均不可直接相加；素材平均时长按「平均播放时长 ÷ 平均有效播放进度」还原（7.20 ÷ 5.63%）。eco 分为视频号流量·有效曝光口径的素材均值。</span></div>
+
+  </div>
   <div class="card">
     <div class="card-h"><h3>3.3b　素材类型结构</h3><span>按创意形式拆分 · 客户 vs 大盘</span></div>
         <div class="tbl-wrap"><table class="mini">
@@ -414,38 +358,41 @@ details[open] summary::before{content:"▾ "}
         <div class="note blue"><span class="ico">i</span><span>实时画面仅直播链路存在（小店与 CID 不统计）；原生动态客户日均 0.00 万，属极小样本，不作效率评价。客户四类合计 3.89 万，与链路日均 3.90 万一致（四舍五入）。</span></div>
   </div>
   <div class="card">
-    <div class="card-h"><h3>3.4　承接漏斗</h3><span>广告点击 → 直播观看 → 商品点击 → 下单 · 客户 vs 标杆</span></div>
+    <div class="card-h"><h3>3.4　承接漏斗</h3><span>广告点击 → 直播观看 → 商品点击 → 下单 · 客户 vs 标杆 · 含下单单价</span></div>
     <div class="funnel">
       <div class="fstage">广告<br>点击</div>
       <div class="fstep">
-        <div class="fnm">直播观看<span class="fvd gap">-20%</span></div>
+        <div class="fnm">直播观看<span class="fvd gap">-14%</span></div>
         <div class="fformula">直播间观看 ÷ 广告点击</div>
-        <div class="fvals"><span class="fme">75.66%</span><span class="fbm">标杆 95.57%</span></div>
-      </div>
-      <div class="fstep gap">
-        <div class="fnm">商品点击<span class="fvd gap">-36%</span></div>
-        <div class="fformula">商品点击 ÷ 直播间观看</div>
-        <div class="fvals"><span class="fme">65.37%</span><span class="fbm">标杆 102.25%</span></div>
+        <div class="fvals"><span class="fme">75.66%</span><span class="fbm">标杆 88.39%</span></div>
       </div>
       <div class="fstep">
-        <div class="fnm">下单<span class="fvd ok">+48%</span></div>
+        <div class="fnm">商品点击<span class="fvd ok">+12%</span></div>
+        <div class="fformula">商品点击 ÷ 直播间观看</div>
+        <div class="fvals"><span class="fme">65.37%</span><span class="fbm">标杆 58.39%</span></div>
+      </div>
+      <div class="fstep">
+        <div class="fnm">下单<span class="fvd gap">-6%</span></div>
         <div class="fformula">直播间下单 ÷ 商品点击</div>
-        <div class="fvals"><span class="fme">23.32%</span><span class="fbm">标杆 15.80%</span></div>
+        <div class="fvals"><span class="fme">23.32%</span><span class="fbm">标杆 24.67%</span></div>
       </div>
     </div>
-    <div class="fchain">三段相乘 = 75.66% × 65.37% × 23.32% = <b>11.53%</b>，与 3.3 素材 CVR <b>11.54%</b> 一致（偏差 0.1%）。缺口最大的一段是 <span class="gap">商品点击 65.37%（标杆 102.25%，-36%）</span>，其次是直播观看 75.66%（-20%）；下单段反而是优势（+48%）。</div>
+    <div class="fchain">三段相乘 = 75.66% × 65.37% × 23.32% = <b>11.53%</b>，与 3.3 素材 CVR <b>11.54%</b> 一致（偏差 0.01pp）；标杆三段相乘 = 88.39% × 58.39% × 24.67% = <b>12.73%</b>，与其素材 CVR 12.73% 一致。缺口最大的一段是 <span class="gap">直播观看 75.66%（标杆 88.39%，-14.4%）</span>；商品点击反而是优势（+12.0%）；下单段 -5.5%。</div>
     <div style="margin-top:16px">
         <div class="tbl-wrap"><table class="mini">
-      <thead><tr><th>口径</th><th class="num">直播观看率</th><th class="num">商品点击率</th><th class="num">直播间下单率</th><th class="num">人均观看时长(秒)</th><th class="num">开播天数</th><th class="num">直播单场时长(分钟)</th></tr></thead>
+      <thead><tr><th>口径</th><th class="num">直播观看率</th><th class="num">商品点击率</th><th class="num">直播间下单率</th><th class="num">下单单价(元)</th><th class="num">人均观看时长(秒)</th><th class="num">开播天数</th><th class="num">直播单场时长(分钟)</th></tr></thead>
       <tbody>
-        <tr><td>白云山草本抗皱精华油</td><td class="num">75.66%</td><td class="num"><b style="color:#DC2626">65.37%</b></td><td class="num"><b style="color:#0B7A55">23.32%</b></td><td class="num">96</td><td class="num">21</td><td class="num">840</td></tr>
-        <tr><td><b>标杆客户</b></td><td class="num">95.57%</td><td class="num">102.25%</td><td class="num">15.80%</td><td class="num">120</td><td class="num">22</td><td class="num">1219</td></tr>
+        <tr><td>白云山草本抗皱精华油</td><td class="num"><b style="color:#DC2626">75.66%</b></td><td class="num"><b style="color:#0B7A55">65.37%</b></td><td class="num"><b style="color:#DC2626">23.32%</b></td><td class="num">70</td><td class="num">96</td><td class="num">21</td><td class="num">880</td></tr>
+        <tr><td><b>标杆客户</b></td><td class="num">88.39%</td><td class="num">58.39%</td><td class="num">24.67%</td><td class="num">70.51</td><td class="num">176</td><td class="num">19</td><td class="num">457</td></tr>
       </tbody>
     </table></div>
     </div>
-        <div class="note green"><span class="ico">✓</span><span>最后一环是全链路最强的：<b>直播间下单率 23.32%</b>（标杆 15.80%，+48%）——商品与价格的转化能力没问题，直播间话术也能把人推到最后一步。这一段不用动，动它反而会伤效率。</span></div>
-        <div class="note red"><span class="ico">!</span><span>要修的是<b>商品点击 65.37%</b>（标杆 102.25%，-36%）：人已经进了直播间，却没点商品——指向选品展示与讲解节奏。动作：① 商品挂载从 1 个扩到 3 个（主推 + 组合装 + 试用装），讲解按「痛点 30 秒 → 上脸演示 60 秒 → 价格与赠品 30 秒」循环；② 直播单场时长 840 分钟（标杆 1219 分钟，-31%），把单场拉长到 1000 分钟以上，给商品讲解更多轮次；③ 直播观看率 75.66%（标杆 95.57%，-20%）同步补开播封面与标题的利益点，把进房率提上来。</span></div>
-        <div class="note blue"><span class="ico">i</span><span>三个率均按「后一段 ÷ 前一段」现算，未使用源报告现成列；标杆商品点击率 102.25% &gt; 100%（同一用户多次点击）属大盘口径现象，照实呈现；标杆三段相乘 15.44% 与其素材 CVR 15.30% 相差 0.9%，客户侧相差 0.1%。</span></div>
+        <div class="note green"><span class="ico">✓</span><span>进房之后的转化比标杆强：<b>商品点击率 65.37%</b> 高于标杆 58.39%（+12.0%），说明选品展示与讲解节奏是有效的；下单单价 <b>70 元</b>与标杆 70.51 元基本同档，两边的 CVR 可直接对比、不需要做单价折算。</span></div>
+
+        <div class="note red"><span class="ico">!</span><span>真缺口在<b>进房</b>：直播观看率 <b>75.66%</b>（标杆 88.39%，-14.4%）、人均观看时长 96 秒（标杆 176 秒，-45.3%），三段相乘 CVR 11.53% vs 标杆 12.73%（-9.4%）；下单率 23.32% 也略低（-5.5%）。动作：① 封面与标题前置利益点、缩短开播冷启，观看率目标 85% 以上；② 单场时长 880 分钟已长于标杆 457 分钟（+92.4%），重点不是继续拉长，而是提高讲解轮次密度与整点机制；③ 下单率差距不大，靠限时优惠与凑单机制把绝对差 1.35 个百分点补回来。</span></div>
+
+        <div class="note blue"><span class="ico">i</span><span>三个率均按「后一段 ÷ 前一段」现算，未使用源报告现成列；标杆三段相乘 12.73% 与其素材 CVR 12.73% 一致、客户侧 11.53% 与 11.54% 差 0.01pp（舍入）。下单单价为直播间口径，两边同档（70 vs 70.51 元），故不做等比例换算。</span></div>
+
   </div>
   <div class="card">
     <div class="card-h"><h3>3.5　退款率（三窗口）</h3><span>下单后 24 小时 / 3 日 / 14 日 vs 大盘（直播链路）</span></div>
@@ -479,7 +426,7 @@ details[open] summary::before{content:"▾ "}
         <tr><td>中封美妆店</td><td class="num">168</td><td class="num">4.76%</td><td class="num">50.00%</td><td class="num">0.00%</td><td class="num">0.00%</td><td class="num">3.94%</td></tr>
       </tbody>
     </table></div>
-        <div class="note green"><span class="ico">✓</span><span>主力店铺是全链路最健康的一段：<b>鞠骦美妆店</b> 8962 单、差评率 <b>0.71%</b>（大盘 6.79%，-90%）、品退率 0.04%（大盘 0.18%）、CCR 1.05%（大盘 1.81%）——近四成单量压在这里，且质量指标全面优于大盘，是敢继续放量的底盘。智骊美妆店（1112 单）差评率 1.67%、CCR 1.60% 也在大盘之内。</span></div>
+        <div class="note green"><span class="ico">✓</span><span>主力店铺是全链路最健康的一段：<b>鞠骦美妆店</b> 8962 单、差评率 <b>0.71%</b>（大盘 6.79%，-90%）、品退率 0.04%（大盘 0.18%）、CCR 1.05%（大盘 1.81%）——近四成单量压在这里，且质量指标全面优于大盘，是质量底盘（要放量仍需链路 ROI 站上考核线 1.7）。智骊美妆店（1112 单）差评率 1.67%、CCR 1.60% 也在大盘之内。</span></div>
         <div class="note red"><span class="ico">!</span><span>要修的是<b>中等样本的两家店</b>：<b>钦芸美妆店</b>（3948 单）差评率 8.91%、CCR <b>3.37%</b>（大盘 1.81%，+86%）；<b>岑屿美妆店</b>（3250 单）差评率 9.69%、CCR 2.79%。这两家合计 7198 单、接近三成单量，已经不是噪声。动作：① 按差评原因拆一次（效果不达预期 / 包装破损 / 物流慢），把 Top1 原因对应到详情页与包装；② CCR 3% 以上的店铺加 30 分钟首响与 24 小时闭环；③ 目标把两家差评率压到 7% 以内。</span></div>
         <div class="note amber"><span class="ico">!</span><span>小样本提醒：中封（168 单，差评率 50.00%）、莜笙（222 单，13.33%）、穆玺（224 单，8.33%）、姜祁（629 单，8.57%）四家单量均偏低，三率波动大，按「先观察」处理，不升级为 P0；等单量到 1000 单以上再复核。</span></div>
   </div>
@@ -505,11 +452,9 @@ details[open] summary::before{content:"▾ "}
     <div class="card-h"><h3>3.6.1　潜客优投</h3><span>开启 vs 未开启的 ROI 对照</span></div>
         <div class="tbl-wrap"><table class="mini">
       <thead><tr><th>状态</th><th class="num">日均(万)</th><th class="num">消耗占比</th><th class="num">有消耗广告数</th><th class="num">广告数占比</th><th class="num">下单ROI</th><th class="num">计价率</th></tr></thead>
-      <tbody>
-        <tr><td>未开启</td><td class="num">3.64</td><td class="num">94%</td><td class="num">3674</td><td class="num">69%</td><td class="num">1.63</td><td class="num">1.20</td></tr>
-        <tr><td>未开启</td><td class="num">0.17</td><td class="num">4%</td><td class="num">1570</td><td class="num">29%</td><td class="num">1.44</td><td class="num">1.35</td></tr>
-        <tr><td>潜客优投</td><td class="num">0.09</td><td class="num">2%</td><td class="num">82</td><td class="num">2%</td><td class="num"><b style="color:#0B7A55">1.66</b></td><td class="num">1.10</td></tr>
-      </tbody>
+      <tbody><tr><td rowspan="2">未开启</td><td class="num">3.64</td><td class="num">94%</td><td class="num">3674</td><td class="num">69%</td><td class="num">1.63</td><td class="num">1.20</td></tr>
+        <tr><td class="num">0.17</td><td class="num">4%</td><td class="num">1570</td><td class="num">29%</td><td class="num">1.44</td><td class="num">1.35</td></tr>
+        <tr><td>潜客优投</td><td class="num">0.09</td><td class="num">2%</td><td class="num">82</td><td class="num">2%</td><td class="num"><b style="color:#0B7A55">1.66</b></td><td class="num">1.10</td></tr></tbody>
     </table></div>
         <div class="note green"><span class="ico">✓</span><span>已验证正向：潜客优投 ROI <b>1.66</b> 高于未开启的 1.63（+2%），计价率 1.10 也在正常范围内——人群加价换回了转化，是低成本的增量方向。</span></div>
         <div class="note red"><span class="ico">!</span><span>问题是<b>用得极少</b>：只占 2% 消耗（0.09 万/日）、82 个广告。头部商家已有 10-15% 消耗由潜客优投带来，大盘效果几乎 100% 正向。动作：先把占比从 2% 提到 8-10%（约 +0.25 万/日），从现有 ROI 最高的 3-5 个 3.0 项目里开潜客优投做小流量验证，跑 3-5 天 ROI 站上 1.66 再铺开。</span></div>
@@ -544,44 +489,38 @@ details[open] summary::before{content:"▾ "}
   </div>
 </div>
 </div>
+
 <div class="tabpanel" id="tab-shop" style="display:none">
 <div class="sec">
   <div class="sec-h"><span class="n">04</span><h2>小店直购：13.29 万/日、放量 283%，量效双升但只剩 1 个商品组</h2><span class="hint">链路日均 ≥ 0.1 万才展示，本链路已达标</span></div>
   <div class="take">小店直购本期 <b>13.29 万/日</b>（环比 <span class="good">+283%</span>）、下单 ROI <b>1.69</b>（环比 +8%），是全链路增长的主引擎（占 73%）。
-  503 个相似商品被聚拢成 <b>1 个商品组</b>，消耗 100% 集中在这一组；对比标杆同商品组，账户 652 vs 205（多 3 倍）、广告 1619 vs 906（+79%），但有消耗创意数只有 <b>1133.77 条</b> vs 标杆 7117.91 条（-84%）——量不是卡在账户与广告，是卡在创意供给。</div>
+  165 个相似商品被聚拢成 <b>1 个商品组</b>，消耗 100% 集中在这一组；对比标杆同商品组，账户 652 vs 205（多 3 倍）、广告 1619 vs 906（+79%），但有消耗创意数只有 <b>1133.77 条</b> vs 标杆 7117.91 条（-84%）——量不是卡在账户与广告，是卡在创意供给。</div>
 
   <div class="card">
     <div class="card-h"><h3>4.1　分商品数据情况</h3><span>相似品已聚拢 · 本周期 vs 上周期</span></div>
         <div class="tbl-wrap"><table class="mini">
       <thead><tr><th>口径</th><th>时间周期</th><th class="num">日均(万)</th><th class="num">点击率</th><th class="num">下单率</th><th class="num">下单ROI</th><th class="num">下单成本(元)</th><th class="num">计价率</th></tr></thead>
-      <tbody>
-        <tr><td>汇总</td><td>本周期</td><td class="num">10.70</td><td class="num">2.30%</td><td class="num">5.58%</td><td class="num">1.68</td><td class="num">42</td><td class="num">1.02</td></tr>
-        <tr><td>汇总</td><td>上周期</td><td class="num">3.69</td><td class="num">2.87%</td><td class="num">4.71%</td><td class="num">1.58</td><td class="num">44</td><td class="num">1.14</td></tr>
-        <tr><td>汇总</td><td>环比</td><td class="num"><b style="color:#0B7A55">+190%</b></td><td class="num"><b style="color:#DC2626">-20%</b></td><td class="num"><b style="color:#0B7A55">+19%</b></td><td class="num"><b style="color:#0B7A55">+7%</b></td><td class="num"><b style="color:#0B7A55">-5%</b></td><td class="num"><b style="color:#0B7A55">-11%</b></td></tr>
-        <tr><td>【贵妇素颜霜】抗皱系列 · 503品</td><td>本周期</td><td class="num">10.70</td><td class="num">2.30%</td><td class="num">6.75%</td><td class="num">1.68</td><td class="num">42</td><td class="num">1.03</td></tr>
-        <tr><td>【贵妇素颜霜】抗皱系列 · 503品</td><td>上周期</td><td class="num">0.72</td><td class="num">3.05%</td><td class="num">5.02%</td><td class="num">1.58</td><td class="num">44</td><td class="num">1.16</td></tr>
-        <tr><td>【贵妇素颜霜】抗皱系列 · 503品</td><td>环比</td><td class="num"><b style="color:#0B7A55">+1382%</b></td><td class="num"><b style="color:#DC2626">-24%</b></td><td class="num"><b style="color:#0B7A55">+34%</b></td><td class="num"><b style="color:#0B7A55">+7%</b></td><td class="num"><b style="color:#0B7A55">-5%</b></td><td class="num"><b style="color:#0B7A55">-11%</b></td></tr>
-      </tbody>
+      <tbody><tr><td rowspan="3">汇总</td><td>本周期</td><td class="num">10.70</td><td class="num">2.30%</td><td class="num">5.58%</td><td class="num">1.68</td><td class="num">42</td><td class="num">1.02</td></tr>
+        <tr><td>上周期</td><td class="num">3.69</td><td class="num">2.87%</td><td class="num">4.71%</td><td class="num">1.58</td><td class="num">44</td><td class="num">1.14</td></tr>
+        <tr><td>环比</td><td class="num"><b style="color:#0B7A55">+190%</b></td><td class="num"><b style="color:#DC2626">-20%</b></td><td class="num"><b style="color:#0B7A55">+19%</b></td><td class="num"><b style="color:#0B7A55">+7%</b></td><td class="num"><b style="color:#0B7A55">-5%</b></td><td class="num"><b style="color:#0B7A55">-11%</b></td></tr>
+        <tr><td rowspan="3">白云山抗皱眼霜系列 · 165品</td><td>本周期</td><td class="num">10.70</td><td class="num">2.30%</td><td class="num">6.75%</td><td class="num">1.68</td><td class="num">42</td><td class="num">1.03</td></tr>
+        <tr><td>上周期</td><td class="num">0.72</td><td class="num">3.05%</td><td class="num">5.02%</td><td class="num">1.58</td><td class="num">44</td><td class="num">1.16</td></tr>
+        <tr><td>环比</td><td class="num"><b style="color:#0B7A55">+1382%</b></td><td class="num"><b style="color:#DC2626">-24%</b></td><td class="num"><b style="color:#0B7A55">+34%</b></td><td class="num"><b style="color:#0B7A55">+7%</b></td><td class="num"><b style="color:#0B7A55">-5%</b></td><td class="num"><b style="color:#0B7A55">-11%</b></td></tr></tbody>
     </table></div>
-        <div class="note green"><span class="ico">✓</span><span>效率跟着量一起上来了：商品组下单率 <b>6.75%</b>（上周期 5.02%，+34%）、下单成本 42 元（上周期 44 元，-5%）、ROI 1.68（+7%）——商品组放量约 15 倍没有牺牲效率，这是本期最值钱的一条结论。</span></div>
-        <div class="note red"><span class="ico">!</span><span>两个要修的点：① <b>点击率 2.30% 低于上周期 3.05%</b>（-24%），素材前段的「吸引点击」能力被稀释了，扩量时新素材质量参差；② <b>503 个商品聚成 1 组</b>，单点依赖到极致。动作：把聚拢组按卖点拆成 3-4 个子组（抗皱紧致 / 保湿补水 / 组合装），各自独立配素材与出价，让每组都有自己的素材池，避免一组素材衰减就全盘归零。</span></div>
+        <div class="note green"><span class="ico">✓</span><span>效率跟着量一起上来了：商品组下单率 <b>6.75%</b>（上周期 5.02%，+34%）、下单成本 42 元（上周期 44 元，-5%）、ROI 1.68（+7%）——商品组放量约 15 倍没有牺牲效率，这是本期最值钱的一条结论；但对照考核线 ROI＞1.7，链路 1.69 仍差 0.6%，放量的同时必须盯住 ROI。</span></div>
+        <div class="note red"><span class="ico">!</span><span>两个要修的点：① <b>点击率 2.30% 低于上周期 3.05%</b>（-24%），素材前段的「吸引点击」能力被稀释了，扩量时新素材质量参差；② <b>165 个商品聚成 1 组</b>，单点依赖到极致。动作：把聚拢组按卖点拆成 3-4 个子组（抗皱紧致 / 保湿补水 / 组合装），各自独立配素材与出价，让每组都有自己的素材池，避免一组素材衰减就全盘归零。</span></div>
         <div class="note blue"><span class="ico">i</span><span>口径说明：1.2 小店链路整体日均 13.29 万，本表「汇总」为商品级可归因部分 10.70 万，差额 2.59 万/日（占 19.5%）为未归属到具体微信小店商品ID 的消耗（数仓商品ID 维度无归属），不纳入商品级拆分与统计；本报告所有商品级结论均基于可归因的 10.70 万/日。</span></div>
   </div>
 
   <div class="card">
-    <div class="card-h"><h3>4.2　流量结构</h3><span>消耗占比（%）· 客户 vs 标杆，上下两行对照</span></div>
-    <div class="stack-lab"><span>蚁团（小店直购）</span></div><div class="stack-bar"><i style="width:67.00%;background:#2B5CE6">67%</i><i style="width:1.00%;background:#7C5CF0"></i><i style="width:4.00%;background:#D97706"></i><i style="width:5.00%;background:#0E9F6E"></i><i style="width:23.00%;background:#5AA9F0">23%</i><i style="width:0.00%;background:#94A3B8"></i></div>
-    <div class="stack-lab"><span>标杆客户（同期）</span></div><div class="stack-bar"><i style="width:59.00%;background:#2B5CE6">59%</i><i style="width:6.00%;background:#7C5CF0"></i><i style="width:3.00%;background:#D97706"></i><i style="width:1.00%;background:#0E9F6E"></i><i style="width:30.00%;background:#5AA9F0">30%</i><i style="width:1.00%;background:#94A3B8"></i></div>
-<div class="legend"><span><em style="background:#2B5CE6"></em>微信视频号</span><span><em style="background:#7C5CF0"></em>微信朋友圈</span><span><em style="background:#D97706"></em>微信公众号</span><span><em style="background:#0E9F6E"></em>平台与内容广告</span><span><em style="background:#5AA9F0"></em>微信小程序</span><span><em style="background:#94A3B8"></em>移动联盟</span></div>
-        <div class="tbl-wrap"><table class="mini">
-      <thead><tr><th>版位</th><th class="num">客户占比</th><th class="num">标杆占比</th><th class="num">差距</th><th class="num">客户该版位ROI</th></tr></thead>
+    <div class="card-h"><h3>4.2　流量结构</h3><span>消耗占比（%）· 客户 vs 标杆 · 完整分布表</span></div>
+
+        <div class="tcap">流量分布对比 · 完整表（17 列，可横向滚动查看） · 机会判定＝该版位占比低于标杆 且 该版位 ROI 高于自身整体 ROI</div><div class="tbl-wrap"><table class="mini wide">
+      <thead><tr><th>客户简称</th><th>商品(聚拢组)</th><th class="num">整体日均消耗</th><th class="num">整体ROI</th><th class="num">视频号占比</th><th class="num">朋友圈占比</th><th class="num">公众号占比</th><th class="num">平台与内容占比</th><th class="num">小程序占比</th><th class="num">移动联盟占比</th><th class="num">视频号ROI</th><th class="num">朋友圈ROI</th><th class="num">公众号ROI</th><th class="num">平台与内容ROI</th><th class="num">小程序ROI</th><th class="num">移动联盟ROI</th><th>机会判定</th></tr></thead>
       <tbody>
-        <tr><td>微信视频号</td><td class="num">67%</td><td class="num">59%</td><td class="num"><b style="color:#0B7A55">+8%</b></td><td class="num">1.68</td></tr>
-        <tr><td>微信朋友圈</td><td class="num">1%</td><td class="num">6%</td><td class="num"><b style="color:#DC2626">-5%</b></td><td class="num">1.43</td></tr>
-        <tr><td>微信公众号</td><td class="num">4%</td><td class="num">3%</td><td class="num"><b style="color:#0B7A55">+1%</b></td><td class="num">1.64</td></tr>
-        <tr><td>平台与内容广告</td><td class="num">5%</td><td class="num">1%</td><td class="num"><b style="color:#0B7A55">+4%</b></td><td class="num">1.72</td></tr>
-        <tr><td>微信小程序</td><td class="num">23%</td><td class="num">30%</td><td class="num"><b style="color:#DC2626">-7%</b></td><td class="num"><b style="color:#0B7A55">1.69</b></td></tr>
-        <tr><td>移动联盟</td><td class="num">0%</td><td class="num">1%</td><td class="num"><b style="color:#DC2626">-1%</b></td><td class="num">0.52</td></tr>
+        <tr><td>标杆客户</td><td>标杆主推品</td><td class="num">—</td><td class="num">1.78</td><td class="num">59%</td><td class="num">6%</td><td class="num">3%</td><td class="num">1%</td><td class="num">30%</td><td class="num">1%</td><td class="num">1.77</td><td class="num">1.62</td><td class="num">1.82</td><td class="num">1.96</td><td class="num">1.81</td><td class="num">2.66</td><td>—</td></tr>
+        <tr><td>蚁团美妆2025</td><td>白云山抗皱眼霜系列 · 165品</td><td class="num">10.70</td><td class="num">1.68</td><td class="num">67%</td><td class="num">1%</td><td class="num">4%</td><td class="num">5%</td><td class="num">23%</td><td class="num">0%</td><td class="num">1.68</td><td class="num">1.43</td><td class="num">1.64</td><td class="num">1.72</td><td class="num">1.69</td><td class="num">0.52</td><td>机会流量：小程序</td></tr>
+        <tr><td>对比</td><td>对比</td><td class="num">-</td><td class="num">-</td><td class="num">+8.2%</td><td class="num">-4.9%</td><td class="num">+0.8%</td><td class="num">+4.0%</td><td class="num">-7.5%</td><td class="num">-0.7%</td><td class="num">-</td><td class="num">-</td><td class="num">-</td><td class="num">-</td><td class="num">-</td><td class="num">-</td><td>—</td></tr>
       </tbody>
     </table></div>
         <div class="note green"><span class="ico">✓</span><span>机会流量：<b>微信小程序</b>——占比 23% 低于标杆 30%（有 7 个百分点空间），该版位 ROI <b>1.69 高于小店整体 1.68</b>，双条件同时满足，转化能承接。动作：小程序占比从 23% 提到 30%，约 +0.9 万/日，优先复用当前跑得最好的小程序素材版本。</span></div>
@@ -591,98 +530,20 @@ details[open] summary::before{content:"▾ "}
 
   <div class="card">
     <div class="card-h"><h3>4.3　基建</h3><span>同一商品组 · 客户 vs 标杆</span></div>
-    <div class="cmp-grid">
-          <div class="cmp">
-      <div class="cmp-title">账户数<em>个</em></div>
-      <div class="cmp-row">
-        <span class="cmp-tag me">客户商品组</span>
-        <div class="track"><i class="fill me" style="width:100.0%"></i></div>
-        <span class="cmp-val">652</span>
-      </div>
-      <div class="cmp-row">
-        <span class="cmp-tag bm">标杆</span>
-        <div class="track"><i class="fill bm" style="width:31.4%"></i></div>
-        <span class="cmp-val dim">205</span>
-      </div>
-    </div>
-          <div class="cmp">
-      <div class="cmp-title">项目&广告数<em>个</em></div>
-      <div class="cmp-row">
-        <span class="cmp-tag me">客户商品组</span>
-        <div class="track"><i class="fill me" style="width:100.0%"></i></div>
-        <span class="cmp-val">1619</span>
-      </div>
-      <div class="cmp-row">
-        <span class="cmp-tag bm">标杆</span>
-        <div class="track"><i class="fill bm" style="width:56.0%"></i></div>
-        <span class="cmp-val dim">906</span>
-      </div>
-    </div>
-          <div class="cmp">
-      <div class="cmp-title">有消耗创意数<em>条</em></div>
-      <div class="cmp-row">
-        <span class="cmp-tag me">客户商品组</span>
-        <div class="track"><i class="fill me" style="width:15.9%"></i></div>
-        <span class="cmp-val">1133.77</span>
-      </div>
-      <div class="cmp-row">
-        <span class="cmp-tag bm">标杆</span>
-        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
-        <span class="cmp-val dim">7117.91</span>
-      </div>
-    </div>
-          <div class="cmp">
-      <div class="cmp-title">新广告占比<em>%</em></div>
-      <div class="cmp-row">
-        <span class="cmp-tag me">客户商品组</span>
-        <div class="track"><i class="fill me" style="width:53.8%"></i></div>
-        <span class="cmp-val">7</span>
-      </div>
-      <div class="cmp-row">
-        <span class="cmp-tag bm">标杆</span>
-        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
-        <span class="cmp-val dim">13</span>
-      </div>
-    </div>
-          <div class="cmp">
-      <div class="cmp-title">单创意消耗<em>元</em></div>
-      <div class="cmp-row">
-        <span class="cmp-tag me">客户商品组</span>
-        <div class="track"><i class="fill me" style="width:100.0%"></i></div>
-        <span class="cmp-val">94</span>
-      </div>
-      <div class="cmp-row">
-        <span class="cmp-tag bm">标杆</span>
-        <div class="track"><i class="fill bm" style="width:28.7%"></i></div>
-        <span class="cmp-val dim">27</span>
-      </div>
-    </div>
-          <div class="cmp">
-      <div class="cmp-title">创意重复度<em>%</em></div>
-      <div class="cmp-row">
-        <span class="cmp-tag me">客户商品组</span>
-        <div class="track"><i class="fill me" style="width:80.5%"></i></div>
-        <span class="cmp-val">33</span>
-      </div>
-      <div class="cmp-row">
-        <span class="cmp-tag bm">标杆</span>
-        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
-        <span class="cmp-val dim">41</span>
-      </div>
-    </div>
-    </div>
+    
     <div style="margin-top:16px">
-        <div class="tbl-wrap"><table class="mini">
-      <thead><tr><th>口径</th><th class="num">日均(万)</th><th class="num">账户数</th><th class="num">项目&广告数</th><th class="num">新广告占比</th><th class="num">有消耗创意数</th><th class="num">单创意消耗(元)</th><th class="num">创意重复度</th></tr></thead>
+        <div class="tcap">基建指标对比 · 完整表（10 列，可横向滚动查看） · 4+m重复广告占比为链路级口径（数仓不支持商品级交叉，不拆商品）</div><div class="tbl-wrap"><table class="mini wide">
+      <thead><tr><th>客户简称</th><th>商品(聚拢组)</th><th class="num">日均消耗</th><th class="num">账户数</th><th class="num">项目&广告数</th><th class="num">新广告占比</th><th class="num">有消耗创意数</th><th class="num">创意重复度</th><th class="num">单创意消耗(元)</th><th class="num">4+m重复广告占比<br>(链路级)</th></tr></thead>
       <tbody>
-        <tr><td>客户商品组</td><td class="num">10.70</td><td class="num">652</td><td class="num">1619</td><td class="num"><b style="color:#DC2626">7%</b></td><td class="num">1133.77</td><td class="num">94</td><td class="num"><b style="color:#0B7A55">33%</b></td></tr>
-        <tr><td><b>标杆客户</b></td><td class="num">—</td><td class="num">205</td><td class="num">906</td><td class="num">13%</td><td class="num">7117.91</td><td class="num">27</td><td class="num">41</td></tr>
+        <tr><td>标杆客户</td><td>标杆主推品</td><td class="num">—</td><td class="num">205</td><td class="num">906</td><td class="num">13%</td><td class="num">7117.91</td><td class="num">41</td><td class="num">27</td><td class="num">0.52%</td></tr>
+        <tr><td>蚁团美妆2025</td><td>白云山抗皱眼霜系列 · 165品</td><td class="num">10.70</td><td class="num">652</td><td class="num">1619</td><td class="num">7%</td><td class="num">1133.77</td><td class="num">33</td><td class="num">94</td><td class="num"><b style="color:#DC2626">49.76%</b></td></tr>
+        <tr><td>对比</td><td>对比</td><td class="num">-45.1%</td><td class="num">+218.0%</td><td class="num">+78.7%</td><td class="num">-47.8%</td><td class="num">-84.1%</td><td class="num">-19.2%</td><td class="num">-</td><td class="num"><b style="color:#DC2626">+9561%</b></td></tr>
       </tbody>
     </table></div>
     </div>
-        <div class="note green"><span class="ico">✓</span><span>账户与广告是过剩的、不是不足的：账户 <b>652 个</b>（标杆 205 个，+218%）、项目&广告 <b>1619 个</b>（标杆 906 个，+79%），创意重复度 33% 也优于标杆 41%（及格线 40% 以内）——重复素材这条不用再压。</span></div>
+        <div class="note green"><span class="ico">✓</span><span>账户与广告是过剩的、不是不足的：账户 <b>652 个</b>（标杆 205 个，+218%）、项目&广告 <b>1619 个</b>（标杆 906 个，+79%），创意重复度（TID 级）33% 也优于标杆 41%（及格线 40% 以内）——素材本身的重复度是达标的，问题不在素材同质化。</span></div>
         <div class="note red"><span class="ico">!</span><span>真正的缺口是<b>有消耗创意数</b>：1133.77 条 vs 标杆 7117.91 条（<b>-84%</b>），单创意消耗 94 元 vs 标杆 27 元（+248%）。翻成一句人话：日均只有 1134 条创意在花钱，标杆是 7118 条——素材池只有标杆的 16%，系统没有足够组合去试。动作：① 每条在投广告的素材补到 6-10 条，有消耗创意数目标 3000 条以上；② 新广告占比从 7% 提到 10-30%（现在低于合理区间下限）；③ 创意重复度已达标，扩素材时可以复用现有素材的不同剪辑版本，不必从零起量。</span></div>
-        <div class="note blue"><span class="ico">i</span><span>链路级口径（不拆商品，数仓不支持商品级交叉）：4+M 重复广告占比 <b>49.81%</b>、有消耗创意指纹数 4550 条、创意指纹条均消耗 530 元。4+M 重复度 49.81% 高于 20% 的优良线，是链路级的待修项。</span></div>
+        <div class="note blue"><span class="ico">i</span><span>4+m 重复广告占比为<b>链路级口径</b>（数仓不支持商品级交叉，不拆商品）：客户 <b>49.76%</b> vs 标杆 0.52%，高出约 <b>96 倍</b>；同口径下有消耗创意指纹数 4550 条、创意指纹条均消耗 530 元。优良线 20% 以内、&lt;40% 为及格线，客户 49.76% 已越过及格线——同素材重复建广告会被系统过滤，实际参竞的有效素材/广告数被压低，这是本卡除「有消耗创意数」之外的第二处硬缺口。动作：把同一素材的多条重复广告合并（素材迁入小店商品表达），目标 4+m 压到 20% 以内。</span></div>
   </div>
 
   <div class="card">
@@ -749,18 +610,16 @@ details[open] summary::before{content:"▾ "}
     <div class="card-h"><h3>4.7　产品能力</h3><span>智投类型 / 潜客优投 / 创意优投</span></div>
         <div class="tbl-wrap"><table class="mini">
       <thead><tr><th>智投类型</th><th>结算模式</th><th class="num">日均(万)</th><th class="num">消耗占比</th><th class="num">项目&广告数</th><th class="num">下单ROI</th><th class="num">计价率</th></tr></thead>
-      <tbody>
-        <tr><td>全域通</td><td>CPA</td><td class="num">7.53</td><td class="num">70%</td><td class="num">73</td><td class="num"><b style="color:#0B7A55">1.73</b></td><td class="num">0.96</td></tr>
+      <tbody><tr><td>全域通</td><td>CPA</td><td class="num">7.53</td><td class="num">70%</td><td class="num">73</td><td class="num"><b style="color:#0B7A55">1.73</b></td><td class="num">0.96</td></tr>
         <tr><td>3.0广告</td><td>oCPX</td><td class="num">1.84</td><td class="num">17%</td><td class="num">675</td><td class="num">1.51</td><td class="num">1.25</td></tr>
-        <tr><td>智投全店托管</td><td>CPA</td><td class="num">0.65</td><td class="num">6%</td><td class="num">73</td><td class="num"><b style="color:#0B7A55">1.71</b></td><td class="num">0.97</td></tr>
-        <tr><td>智投全店托管</td><td>oCPX</td><td class="num">0.48</td><td class="num">4%</td><td class="num">602</td><td class="num">1.53</td><td class="num">1.26</td></tr>
+        <tr><td rowspan="2">智投全店托管</td><td>CPA</td><td class="num">0.65</td><td class="num">6%</td><td class="num">73</td><td class="num"><b style="color:#0B7A55">1.71</b></td><td class="num">0.97</td></tr>
+        <tr><td>oCPX</td><td class="num">0.48</td><td class="num">4%</td><td class="num">602</td><td class="num">1.53</td><td class="num">1.26</td></tr>
         <tr><td>智投广告</td><td>oCPX</td><td class="num">0.21</td><td class="num">2%</td><td class="num">198</td><td class="num"><b style="color:#DC2626">1.08</b></td><td class="num"><b style="color:#DC2626">2.65</b></td></tr>
         <tr><td><b>大盘 3.0广告</b></td><td>oCPX</td><td class="num">—</td><td class="num">19%</td><td class="num">10507</td><td class="num">1.68</td><td class="num">1.13</td></tr>
         <tr><td><b>大盘 智投广告</b></td><td>oCPX</td><td class="num">—</td><td class="num">30%</td><td class="num">12540</td><td class="num">1.90</td><td class="num">1.07</td></tr>
-        <tr><td><b>大盘 智投全店托管</b></td><td>oCPX</td><td class="num">—</td><td class="num">4%</td><td class="num">1237</td><td class="num">2.56</td><td class="num">0.97</td></tr>
-        <tr><td><b>大盘 智投全店托管</b></td><td>CPA</td><td class="num">—</td><td class="num">9%</td><td class="num">860</td><td class="num">1.80</td><td class="num">0.97</td></tr>
-        <tr><td><b>大盘 全域通</b></td><td>CPA</td><td class="num">—</td><td class="num">38%</td><td class="num">9666</td><td class="num">2.19</td><td class="num">0.98</td></tr>
-      </tbody>
+        <tr><td rowspan="2"><b>大盘 智投全店托管</b></td><td>oCPX</td><td class="num">—</td><td class="num">4%</td><td class="num">1237</td><td class="num">2.56</td><td class="num">0.97</td></tr>
+        <tr><td>CPA</td><td class="num">—</td><td class="num">9%</td><td class="num">860</td><td class="num">1.80</td><td class="num">0.97</td></tr>
+        <tr><td><b>大盘 全域通</b></td><td>CPA</td><td class="num">—</td><td class="num">38%</td><td class="num">9666</td><td class="num">2.19</td><td class="num">0.98</td></tr></tbody>
     </table></div>
         <div class="tbl-wrap"><table class="mini">
       <thead><tr><th>能力</th><th>状态</th><th class="num">日均(万)</th><th class="num">消耗占比</th><th class="num">下单ROI</th><th>判断</th></tr></thead>
@@ -820,19 +679,14 @@ details[open] summary::before{content:"▾ "}
   </div>
 
   <div class="card">
-    <div class="card-h"><h3>5.2　流量结构</h3><span>消耗占比（%）· 客户 vs 标杆，上下两行对照</span></div>
-    <div class="stack-lab"><span>蚁团（CID）</span></div><div class="stack-bar"><i style="width:88.00%;background:#2B5CE6">88%</i><i style="width:0.00%;background:#7C5CF0"></i><i style="width:4.00%;background:#D97706"></i><i style="width:3.00%;background:#0E9F6E"></i><i style="width:4.00%;background:#5AA9F0"></i><i style="width:1.00%;background:#94A3B8"></i></div>
-    <div class="stack-lab"><span>标杆客户（同期）</span></div><div class="stack-bar"><i style="width:83.00%;background:#2B5CE6">83%</i><i style="width:0.00%;background:#7C5CF0"></i><i style="width:5.00%;background:#D97706"></i><i style="width:0.00%;background:#0E9F6E"></i><i style="width:12.00%;background:#5AA9F0">12%</i><i style="width:0.00%;background:#94A3B8"></i></div>
-<div class="legend"><span><em style="background:#2B5CE6"></em>微信视频号</span><span><em style="background:#7C5CF0"></em>微信朋友圈</span><span><em style="background:#D97706"></em>微信公众号</span><span><em style="background:#0E9F6E"></em>平台与内容广告</span><span><em style="background:#5AA9F0"></em>微信小程序</span><span><em style="background:#94A3B8"></em>移动联盟</span></div>
-        <div class="tbl-wrap"><table class="mini">
-      <thead><tr><th>版位</th><th class="num">客户占比</th><th class="num">标杆占比</th><th class="num">差距</th><th class="num">客户该版位ROI</th></tr></thead>
+    <div class="card-h"><h3>5.2　流量结构</h3><span>消耗占比（%）· 客户 vs 标杆 · 完整分布表</span></div>
+
+        <div class="tcap">流量分布对比 · 完整表（17 列，可横向滚动查看） · 机会判定＝该版位占比低于标杆 且 该版位 ROI 高于自身整体 ROI</div><div class="tbl-wrap"><table class="mini wide">
+      <thead><tr><th>客户简称</th><th>实际投放商品</th><th class="num">整体日均消耗</th><th class="num">整体ROI</th><th class="num">视频号占比</th><th class="num">朋友圈占比</th><th class="num">公众号占比</th><th class="num">平台与内容占比</th><th class="num">小程序占比</th><th class="num">移动联盟占比</th><th class="num">视频号ROI</th><th class="num">朋友圈ROI</th><th class="num">公众号ROI</th><th class="num">平台与内容ROI</th><th class="num">小程序ROI</th><th class="num">移动联盟ROI</th><th>机会判定</th></tr></thead>
       <tbody>
-        <tr><td>微信视频号</td><td class="num">88%</td><td class="num">83%</td><td class="num"><b style="color:#0B7A55">+5%</b></td><td class="num"><b style="color:#0B7A55">1.46</b></td></tr>
-        <tr><td>微信朋友圈</td><td class="num">0%</td><td class="num">0%</td><td class="num">0%</td><td class="num">1.28</td></tr>
-        <tr><td>微信公众号</td><td class="num">4%</td><td class="num">5%</td><td class="num"><b style="color:#DC2626">-1%</b></td><td class="num">1.13</td></tr>
-        <tr><td>平台与内容广告</td><td class="num">3%</td><td class="num">0%</td><td class="num"><b style="color:#0B7A55">+3%</b></td><td class="num">0.90</td></tr>
-        <tr><td>微信小程序</td><td class="num">4%</td><td class="num">12%</td><td class="num"><b style="color:#DC2626">-8%</b></td><td class="num">0.83</td></tr>
-        <tr><td>移动联盟</td><td class="num">1%</td><td class="num">0%</td><td class="num"><b style="color:#0B7A55">+1%</b></td><td class="num">1.56</td></tr>
+        <tr><td>标杆客户</td><td>标杆主推品</td><td class="num">—</td><td class="num">1.71</td><td class="num">83%</td><td class="num">0%</td><td class="num">5%</td><td class="num">0%</td><td class="num">12%</td><td class="num">0%</td><td class="num">1.70</td><td class="num">0.61</td><td class="num">1.70</td><td class="num">1.95</td><td class="num">1.79</td><td class="num">1.67</td><td>—</td></tr>
+        <tr><td>蚁团美妆2025</td><td>白云山/BAIYUNSHAN眼部抗皱紧致植萃精华油</td><td class="num">1.12</td><td class="num">1.41</td><td class="num">88%</td><td class="num">0%</td><td class="num">4%</td><td class="num">3%</td><td class="num">4%</td><td class="num">1%</td><td class="num">1.46</td><td class="num">1.28</td><td class="num">1.13</td><td class="num">0.90</td><td class="num">0.83</td><td class="num">1.56</td><td>无</td></tr>
+        <tr><td>对比</td><td>对比</td><td class="num">-</td><td class="num">-</td><td class="num">+5.0%</td><td class="num">+0.2%</td><td class="num">-0.7%</td><td class="num">+2.5%</td><td class="num">-8.7%</td><td class="num">+1.2%</td><td class="num">-</td><td class="num">-</td><td class="num">-</td><td class="num">-</td><td class="num">-</td><td class="num">-</td><td>—</td></tr>
       </tbody>
     </table></div>
         <div class="note green"><span class="ico">✓</span><span>主力版位是健康的：<b>微信视频号 88% 消耗、ROI 1.46</b> 高于整体 1.41，也是六个版位里唯一高于整体的——这条链路的核心转化能力集中在视频号上，守住它就行。</span></div>
@@ -842,92 +696,14 @@ details[open] summary::before{content:"▾ "}
 
   <div class="card">
     <div class="card-h"><h3>5.3　基建</h3><span>同一实际投放商品 · 客户 vs 标杆</span></div>
-    <div class="cmp-grid">
-          <div class="cmp">
-      <div class="cmp-title">账户数<em>个</em></div>
-      <div class="cmp-row">
-        <span class="cmp-tag me">客户商品组</span>
-        <div class="track"><i class="fill me" style="width:25.7%"></i></div>
-        <span class="cmp-val">116</span>
-      </div>
-      <div class="cmp-row">
-        <span class="cmp-tag bm">标杆</span>
-        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
-        <span class="cmp-val dim">452</span>
-      </div>
-    </div>
-          <div class="cmp">
-      <div class="cmp-title">项目&广告数<em>个</em></div>
-      <div class="cmp-row">
-        <span class="cmp-tag me">客户商品组</span>
-        <div class="track"><i class="fill me" style="width:54.0%"></i></div>
-        <span class="cmp-val">1352</span>
-      </div>
-      <div class="cmp-row">
-        <span class="cmp-tag bm">标杆</span>
-        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
-        <span class="cmp-val dim">2504</span>
-      </div>
-    </div>
-          <div class="cmp">
-      <div class="cmp-title">创意指纹数<em>条</em></div>
-      <div class="cmp-row">
-        <span class="cmp-tag me">客户商品组</span>
-        <div class="track"><i class="fill me" style="width:100.0%"></i></div>
-        <span class="cmp-val">4856</span>
-      </div>
-      <div class="cmp-row">
-        <span class="cmp-tag bm">标杆</span>
-        <div class="track"><i class="fill bm" style="width:59.4%"></i></div>
-        <span class="cmp-val dim">2883</span>
-      </div>
-    </div>
-          <div class="cmp">
-      <div class="cmp-title">创意指纹条均消耗<em>元</em></div>
-      <div class="cmp-row">
-        <span class="cmp-tag me">客户商品组</span>
-        <div class="track"><i class="fill me" style="width:6.4%"></i></div>
-        <span class="cmp-val">59</span>
-      </div>
-      <div class="cmp-row">
-        <span class="cmp-tag bm">标杆</span>
-        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
-        <span class="cmp-val dim">923</span>
-      </div>
-    </div>
-          <div class="cmp">
-      <div class="cmp-title">4+m重复度<em>%</em></div>
-      <div class="cmp-row">
-        <span class="cmp-tag me">客户商品组</span>
-        <div class="track"><i class="fill me" style="width:100.0%"></i></div>
-        <span class="cmp-val">35</span>
-      </div>
-      <div class="cmp-row">
-        <span class="cmp-tag bm">标杆</span>
-        <div class="track"><i class="fill bm" style="width:45.7%"></i></div>
-        <span class="cmp-val dim">16</span>
-      </div>
-    </div>
-          <div class="cmp">
-      <div class="cmp-title">创意重复度<em>%</em></div>
-      <div class="cmp-row">
-        <span class="cmp-tag me">客户商品组</span>
-        <div class="track"><i class="fill me" style="width:10.4%"></i></div>
-        <span class="cmp-val">5</span>
-      </div>
-      <div class="cmp-row">
-        <span class="cmp-tag bm">标杆</span>
-        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
-        <span class="cmp-val dim">48</span>
-      </div>
-    </div>
-    </div>
+    
     <div style="margin-top:16px">
-        <div class="tbl-wrap"><table class="mini">
-      <thead><tr><th>口径</th><th class="num">日均(万)</th><th class="num">账户数</th><th class="num">项目&广告数</th><th class="num">新广告占比</th><th class="num">创意指纹数</th><th class="num">条均消耗(元)</th><th class="num">4+m重复度</th></tr></thead>
+        <div class="tcap">基建指标对比 · 完整表（11 列，可横向滚动查看）</div><div class="tbl-wrap"><table class="mini wide">
+      <thead><tr><th>客户简称</th><th>实际投放商品</th><th class="num">日均消耗</th><th class="num">账户数</th><th class="num">项目&广告数</th><th class="num">新广告占比</th><th class="num">创意指纹数</th><th class="num">创意指纹条均消耗</th><th class="num">4+m重复广告占比</th><th class="num">创意重复度</th><th class="num">创意指纹条均消耗(次列)</th></tr></thead>
       <tbody>
-        <tr><td>客户商品组</td><td class="num">1.12</td><td class="num">116</td><td class="num">1352</td><td class="num">12%</td><td class="num">4856</td><td class="num"><b style="color:#DC2626">59</b></td><td class="num"><b style="color:#DC2626">35%</b></td></tr>
-        <tr><td><b>标杆客户</b></td><td class="num">—</td><td class="num">452</td><td class="num">2504</td><td class="num">19%</td><td class="num">2883</td><td class="num"><b style="color:#0B7A55">923</b></td><td class="num"><b style="color:#0B7A55">16%</b></td></tr>
+        <tr><td>标杆客户</td><td>标杆主推品</td><td class="num">—</td><td class="num">452</td><td class="num">2504</td><td class="num">19%</td><td class="num">2892</td><td class="num">920</td><td class="num">16%</td><td class="num">48</td><td class="num">42</td></tr>
+        <tr><td>蚁团美妆2025</td><td>白云山/BAIYUNSHAN眼部抗皱紧致植萃精华油</td><td class="num">1.12</td><td class="num">116</td><td class="num">1352</td><td class="num">12%</td><td class="num">4856</td><td class="num">59</td><td class="num">35%</td><td class="num">5</td><td class="num">2</td></tr>
+        <tr><td>对比</td><td>对比</td><td class="num">-90.7%</td><td class="num">-74.3%</td><td class="num">-46.0%</td><td class="num">-38.0%</td><td class="num">+67.9%</td><td class="num">-93.5%</td><td class="num">+117.6%</td><td class="num">-89.5%</td><td class="num">-</td></tr>
       </tbody>
     </table></div>
     </div>
@@ -984,11 +760,9 @@ details[open] summary::before{content:"▾ "}
     </table></div>
         <div class="tbl-wrap"><table class="mini">
       <thead><tr><th>能力</th><th>状态</th><th class="num">日均(万)</th><th class="num">消耗占比</th><th class="num">有消耗广告数</th><th class="num">下单ROI</th><th class="num">计价率</th></tr></thead>
-      <tbody>
-        <tr><td>一方跑量加强</td><td>未开启</td><td class="num">1.12</td><td class="num">100%</td><td class="num">1358</td><td class="num">1.41</td><td class="num">1.35</td></tr>
-        <tr><td>创意优投</td><td>已开启</td><td class="num">0.00</td><td class="num">19%</td><td class="num">—</td><td class="num">2.65</td><td class="num">0.74</td></tr>
-        <tr><td>创意优投</td><td>未开启</td><td class="num">0.00</td><td class="num">81%</td><td class="num">—</td><td class="num">1.53</td><td class="num">1.41</td></tr>
-      </tbody>
+      <tbody><tr><td>一方跑量加强</td><td>未开启</td><td class="num">1.12</td><td class="num">100%</td><td class="num">1358</td><td class="num">1.41</td><td class="num">1.35</td></tr>
+        <tr><td rowspan="2">创意优投</td><td>已开启</td><td class="num">0.00</td><td class="num">19%</td><td class="num">—</td><td class="num">2.65</td><td class="num">0.74</td></tr>
+        <tr><td>未开启</td><td class="num">0.00</td><td class="num">81%</td><td class="num">—</td><td class="num">1.53</td><td class="num">1.41</td></tr></tbody>
     </table></div>
         <div class="note green"><span class="ico">✓</span><span>创意优投已经开了（占项目数 19%），且开着的部分 ROI <b>2.65</b> 明显高于未开启的 1.53——方向验证过了，是这条链路现成的效率抓手。</span></div>
         <div class="note red"><span class="ico">!</span><span>两件事要做：① <b>一方跑量加强全量未开启</b>（100% 消耗、1358 个广告都没开），这是 CID 扩量的直接工具——先挑 2-3 个已稳定跑量的优质一方人群包开启，观察 3-5 天 ROI 守住 1.41 再铺开；② 创意优投从 19% 提到 40% 以上，把 ROI 1.53 的未开启部分迁进优投项目。</span></div>
@@ -1002,18 +776,16 @@ details[open] summary::before{content:"▾ "}
     <div class="card-h"><h3>6.1　优先级清单</h3><span>P0 本周内 / P1 两周内 / P2 本月内</span></div>
         <div class="tbl-wrap"><table class="mini">
       <thead><tr><th>优先级</th><th>动作</th><th>对象</th><th>量化目标</th></tr></thead>
-      <tbody>
-        <tr><td><span class="pri p0">P0</span></td><td>修 CID 转化末端：封面首帧加双钩子 + 落地页卖点对齐</td><td>CID 商品组（1.12 万/日）</td><td>下单率 0.49%→1.2%+；CVR 2.61%→4%+</td></tr>
-        <tr><td><span class="pri p0">P0</span></td><td>直播压 4+m 重复度：合并同素材重复广告，素材迁入小店商品表达</td><td>直播链路（4+m 57%）</td><td>4+m 57%→30% 以内；商品表达占比 2%→10%+</td></tr>
-        <tr><td><span class="pri p0">P0</span></td><td>停掉低效版位与低效类型</td><td>CID 小程序/平台与内容（ROI 0.83/0.90）；直播横版视频（13%→5%）；小店智投广告（计价率 2.65）</td><td>释放约 0.1-0.5 万/日，全部给视频号与竖版</td></tr>
-        <tr><td><span class="pri p1">P1</span></td><td>小店补创意供给：每条广告素材 6-10 条 + 提新广告占比</td><td>小店直购（1 个商品组）</td><td>有消耗创意 1134→3000 条；新广告占比 7%→15%</td></tr>
-        <tr><td><span class="pri p1">P1</span></td><td>直播收敛低效广告、提条均消耗</td><td>直播链路（1775 个广告）</td><td>广告收敛 30-40%；条均消耗 145→300 元</td></tr>
-        <tr><td><span class="pri p1">P1</span></td><td>小程序版位增投（唯一机会流量）</td><td>小店直购 微信小程序</td><td>占比 23%→30%，守住 ROI 1.69</td></tr>
-        <tr><td><span class="pri p1">P1</span></td><td>优投类能力起量验证</td><td>直播潜客优投（2%→8%）、创意优投（9%→30%）；小店两项从 0 起；CID 一方跑量加强先开 2-3 个人群包</td><td>每项先 500-1000 元/日跑 3-5 天</td></tr>
-        <tr><td><span class="pri p2">P2</span></td><td>商品组拆分与 DPA 收敛</td><td>小店 503 品聚成 1 组；CID 8 SPU / 9 DPA</td><td>小店拆 3-4 组；CID SPU→3-4 个、DPA→3 个以内</td></tr>
-        <tr><td><span class="pri p2">P2</span></td><td>CID 补账户与广告、收敛创意条数</td><td>CID 商品组</td><td>账户 116→200+；广告 1352→2000；创意 4856→1800 条</td></tr>
-        <tr><td><span class="pri p2">P2</span></td><td>直播拆第二、第三间直播间</td><td>直播链路（当前仅 1 间）</td><td>单间依赖 100%→80% 以内</td></tr>
-      </tbody>
+      <tbody><tr><td rowspan="3"><span class="pri p0">P0</span></td><td>修 CID 转化末端：封面首帧加双钩子 + 落地页卖点对齐</td><td>CID 商品组（1.12 万/日）</td><td>下单率 0.49%→1.2%+；CVR 2.61%→4%+</td></tr>
+        <tr><td>直播压 4+m 重复度：合并同素材重复广告，素材迁入小店商品表达</td><td>直播链路（4+m 57%）</td><td>4+m 57%→30% 以内；商品表达占比 2%→10%+</td></tr>
+        <tr><td>停掉低效版位与低效类型</td><td>CID 小程序/平台与内容（ROI 0.83/0.90）；直播横版视频（13%→5%）；小店智投广告（计价率 2.65）</td><td>释放约 0.1-0.5 万/日，全部给视频号与竖版</td></tr>
+        <tr><td rowspan="4"><span class="pri p1">P1</span></td><td>小店补创意供给：每条广告素材 6-10 条 + 提新广告占比</td><td>小店直购（1 个商品组）</td><td>有消耗创意 1134→3000 条；新广告占比 7%→15%</td></tr>
+        <tr><td>直播收敛低效广告、提条均消耗</td><td>直播链路（1775 个广告）</td><td>广告收敛 30-40%；条均消耗 145→300 元</td></tr>
+        <tr><td>小程序版位增投（唯一机会流量）</td><td>小店直购 微信小程序</td><td>占比 23%→30%，守住 ROI 1.69</td></tr>
+        <tr><td>优投类能力起量验证</td><td>直播潜客优投（2%→8%）、创意优投（9%→30%）；小店两项从 0 起；CID 一方跑量加强先开 2-3 个人群包</td><td>每项先 500-1000 元/日跑 3-5 天</td></tr>
+        <tr><td rowspan="3"><span class="pri p2">P2</span></td><td>商品组拆分与 DPA 收敛</td><td>小店 165 品聚成 1 组；CID 8 SPU / 9 DPA</td><td>小店拆 3-4 组；CID SPU→3-4 个、DPA→3 个以内</td></tr>
+        <tr><td>CID 补账户与广告、收敛创意条数</td><td>CID 商品组</td><td>账户 116→200+；广告 1352→2000；创意 4856→1800 条</td></tr>
+        <tr><td>直播拆第二、第三间直播间</td><td>直播链路（当前仅 1 间）</td><td>单间依赖 100%→80% 以内</td></tr></tbody>
     </table></div>
   </div>
   <div class="card">
@@ -1025,12 +797,12 @@ details[open] summary::before{content:"▾ "}
         1. 数据窗口：本周期 11.01-11.22（22 天）、对比周期 10.10-10.31（22 天）；所有「日均」= 窗口合计 ÷ 22。<br>
         2. 链路口径：直播 = 视频号推广；小店直购 = 商品推广下的「小店」子链路；CID = 商品推广下的「CID」子链路。三条链路互不重叠、不做跨链路合并；商品推广下的「直购」「其他」不在报告统计范围内。<br>
         3. 行级过滤：单一直播间 / 商品组日均消耗 ≤ 0.1 万元的，不展示也不计入统计。<br>
-        4. 商品聚拢：小店直购按微信小店商品做相似品聚拢（商品名相似度 ≥0.45 归并），503 个商品归为 1 组；CID 按商品名称相似聚拢，1 个商品组含 8 个 SPU、18 个 DPA 名称。组名取组内消耗最大商品名并做精简。<br>
+        4. 商品聚拢：小店直购按微信小店商品做相似品聚拢（商品名相似度 ≥0.45 归并），本期商品级可归因 165 个商品归为 1 组；CID 按商品名称相似聚拢，1 个商品组含 8 个 SPU、18 个 DPA 名称。组名取组内消耗最大商品名并做精简。<br>
         5. 小店商品级口径：小店链路整体日均 13.29 万，其中商品级可归因 10.70 万，差额 2.59 万/日（19.5%）为未归属到具体微信小店商品ID 的消耗，不纳入商品级拆分。<br>
         6. 退款窗口：下单后 1 小时 / 24 小时 / 3 日 / 14 日 / 30 日退款率 = 对应窗口内下单发起退款订单数 ÷ 下单次数；总下单次数 &lt; 100 单的口径不展示，&lt; 300 单按小样本处理、只作趋势参考。<br>
         7. 计价率：实际扣费 ÷ 出价，0.8-1.2 为正常范围，报告只陈述与正常范围的位置关系。<br>
         8. 机会流量：同时满足「客户该版位消耗占比低于标杆」与「客户该版位 ROI 高于自身整体 ROI」才判定为机会流量。<br>
-        9. 标杆口径：直播 / 小店 / CID 各自取同链路同期消耗 TOP1 客户（已脱敏为「标杆客户」），不做跨链路混用。<br>
+        9. 标杆口径（V5.27）：默认取<b>同链路且同属白牌组的 TOP1 客户</b>；若该 TOP1 当期该链路日均消耗低于复盘客户自身该链路日均的 <b>1.5 倍</b>，则扩大为同链路本土美妆组 TOP1。本期直播链路按客户指定取「龄萃法则」，小店 / CID 按默认规则解析（小店白牌 TOP1 消耗不足客户自身 1.5 倍 → 已扩大为本土美妆组 TOP1）。三条链路各自解析、不做跨链路混用。客户考核线 ROI＞1.7，全篇结论按此门槛判定，未达标不判为可放量。<br>
         10. 4+M 重复广告占比为在线广告口径，商品级数仓不支持交叉，取链路级值；创意重复度为有消耗的创意重复度（TID 级别）。本报告数字全部取自同一份原始复盘数据，未做二次估算；对比行统一用百分数表示。
       </div>
     </details>
