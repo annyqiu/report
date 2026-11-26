@@ -1,0 +1,552 @@
+<!DOCTYPE html><html lang="zh-CN"><head><script>(function(){window.__idata_artifact_error__=[];function _record(t){t=String(t==null?'unknown error':t).slice(0,5000);window.__idata_artifact_error__.push(t);try{window.parent&&window.parent.postMessage({type:'artifact-error',message:t.slice(0,500)},'*');}catch(_e){}}window.addEventListener('error',function(ev){var parts=[];if(ev.error&&(ev.error.stack||ev.error.message)){parts.push(String(ev.error.stack||ev.error.message));}else{parts.push(ev.message||'Unknown error');}if(ev.filename){parts.push('\n(at '+ev.filename+':'+(ev.lineno||'?')+':'+(ev.colno||'?')+')');}_record(parts.join('\n'));},true);window.addEventListener('unhandledrejection',function(ev){var r=ev.reason;_record((r&&(r.stack||r.message))||r||'Unhandled Promise rejection');});})();</script><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>卡唯朵 · 竞价广告复盘（11.12-11.22）</title>
+<style>
+:root{
+  --blue:#2B5CE6;--blue-d:#1B3FA8;--ink:#0F172A;--ink2:#334155;--muted:#64748B;
+  --line:#E6EBF3;--bg:#F4F6FA;--green:#0E9F6E;--red:#DC2626;--amber:#D97706;--violet:#7C5CF0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif;
+  font-size:14px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1200px;margin:0 auto;padding:0 26px}
+.hero{background:linear-gradient(135deg,#111C4E 0%,#2B5CE6 58%,#1B3FA8 100%);color:#fff;padding:40px 0 34px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-80px;top:-120px;width:420px;height:420px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.16),rgba(255,255,255,0) 68%)}
+.hero h1{font-size:29px;font-weight:800;letter-spacing:.4px;line-height:1.3}
+.hero .meta{margin-top:9px;font-size:13px;color:rgba(255,255,255,.78)}
+.hero .meta i{font-style:normal;color:#fff;font-weight:700}
+.hero .tags{margin-top:20px;display:flex;flex-wrap:wrap;gap:9px}
+.hero .tag{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:8px;
+  padding:8px 13px;font-size:12.5px;color:rgba(255,255,255,.92)}
+.hero .tag b{font-size:16px;font-weight:800;color:#fff;margin:0 3px;letter-spacing:.3px}
+.hero .tag b.g{color:#7EF0C4}
+.sec{margin-top:34px}
+.sec-h{display:flex;align-items:center;gap:11px;margin-bottom:6px}
+.sec-h .n{width:28px;height:28px;border-radius:9px;background:var(--blue);color:#fff;font-size:13px;font-weight:800;
+  display:flex;align-items:center;justify-content:center;flex:none}
+.sec-h h2{font-size:19px;font-weight:800;letter-spacing:.3px}
+.sec-h .hint{margin-left:auto;font-size:12px;color:var(--muted)}
+.take{background:linear-gradient(90deg,#EEF3FF,#F7F9FF 70%,#fff);border-left:4px solid var(--blue);
+  border-radius:0 10px 10px 0;padding:13px 18px;font-size:13.8px;color:#1E2A45;line-height:1.72;margin:12px 0 18px}
+.take b{color:var(--blue-d)}
+.take .warn{color:var(--red);font-weight:800}
+.take .good{color:var(--green);font-weight:800}
+.card{background:#fff;border-radius:14px;padding:22px 24px;margin-bottom:16px;
+  box-shadow:0 1px 2px rgba(16,24,40,.05),0 8px 24px -18px rgba(16,24,40,.28)}
+.card-h{display:flex;align-items:baseline;gap:10px;margin-bottom:14px}
+.card-h h3{font-size:15.5px;font-weight:800}
+.card-h span{font-size:12px;color:var(--muted)}
+.kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.kpi{background:#F8FAFF;border:1px solid #E7EDFA;border-radius:11px;padding:14px 15px}
+.kpi-l{font-size:12px;color:var(--muted);font-weight:600}
+.kpi-v{font-size:25px;font-weight:800;color:var(--blue-d);line-height:1.25;margin-top:3px;letter-spacing:.2px}
+.kpi-v small{font-size:12px;font-weight:600;color:var(--muted);margin-left:2px}
+.kpi-d{font-size:12px;font-weight:700;margin-top:5px}
+.kpi-d.pos{color:var(--green)} .kpi-d.neg{color:var(--red)}
+.kpi-s{color:var(--muted);font-weight:500;margin-left:6px}
+.cmp{margin-bottom:14px}
+.cmp:last-child{margin-bottom:0}
+.cmp-title{font-size:12.8px;font-weight:700;color:var(--ink2);margin-bottom:6px}
+.cmp-title em{font-style:normal;font-size:11.5px;color:var(--muted);font-weight:600;margin-left:8px}
+.cmp-row{display:flex;align-items:center;gap:9px;margin-bottom:5px}
+.cmp-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 30px;align-items:start}
+.cmp-grid .cmp{margin-bottom:0}
+.cmp-tag{font-size:10.5px;font-weight:800;color:var(--muted);width:28px;flex:none}
+.cmp-tag.me{color:var(--blue)}
+.track{flex:1;height:11px;background:#F1F4FA;border-radius:6px;overflow:hidden}
+.fill{display:block;height:100%;border-radius:6px}
+.fill.me{background:linear-gradient(90deg,#6E93F2,#2B5CE6)}
+.fill.bm{background:#D7DEEA}
+.stack{margin-top:4px}
+.stack-bar{display:flex;height:34px;border-radius:8px;overflow:hidden;border:1px solid #EFF2F8}
+.stack-bar i{display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:800;color:#fff;
+  border-right:2px solid #fff;white-space:nowrap;overflow:hidden}
+.stack-bar i:last-child{border-right:none}
+.stack-lab{font-size:12px;font-weight:700;color:var(--ink2);margin:14px 0 6px;display:flex;justify-content:space-between}
+.legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:11px;font-size:11.5px;color:var(--muted)}
+.legend span{display:flex;align-items:center;gap:5px}
+.legend em{width:9px;height:9px;border-radius:3px;display:inline-block}
+.note{display:flex;gap:10px;padding:12px 14px;border-radius:10px;font-size:12.8px;line-height:1.7;margin-top:14px}
+.note .ico{font-weight:900;flex:none}
+.note.red{background:#FEF4F4;border:1px solid #F9DADA;color:#8F1D1D}
+.note.green{background:#F1FBF6;border:1px solid #CDEEDD;color:#0B5E43}
+.note.blue{background:#F3F6FF;border:1px solid #DEE7FB;color:#1E3A8A}
+.note.amber{background:#FFFAF0;border:1px solid #F8E6C2;color:#7C4A03}
+.note b{font-weight:800}
+.rooms{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+.rooms.two{grid-template-columns:repeat(2,1fr)}
+.room{border:1px solid var(--line);border-radius:12px;padding:15px 16px;background:linear-gradient(180deg,#FBFCFE,#fff)}
+.room-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
+.room-h b{font-size:14px}
+.room-h .rk{font-size:10.5px;font-weight:800;color:#fff;background:#94A3B8;border-radius:5px;padding:1px 6px}
+.room-h .rk.t1{background:var(--blue)}
+.room-v{font-size:22px;font-weight:800;color:var(--ink)}
+.room-v small{font-size:11.5px;color:var(--muted);font-weight:600;margin-left:2px}
+.room-d{font-size:11.5px;font-weight:700;margin-top:2px}
+.room-d.pos{color:var(--green)} .room-d.neg{color:var(--red)}
+.room-m{margin-top:10px;padding-top:9px;border-top:1px dashed #E8EDF6;display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
+.room-m b{color:var(--ink);font-weight:800}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{background:#F4F7FD;color:#3B4A66;font-weight:800;font-size:11.8px;text-align:left;padding:9px 10px;border-bottom:1px solid #E1E8F4}
+td{padding:9px 10px;border-bottom:1px solid #F1F4F9;color:var(--ink2)}
+tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+td b{color:var(--ink);font-weight:800}
+.tbl-wrap{overflow-x:auto}
+table.mini th{padding:6px 8px;font-size:11px}
+table.mini td{padding:6px 8px;font-size:11.8px}
+.pill{font-size:11.5px;font-weight:800;border-radius:6px;padding:2px 8px;white-space:nowrap}
+.pill.g{color:#0B7A55;background:#E6F7F0}
+.pill.r{color:#9B1C1C;background:#FEF0F0}
+.pill.b{color:#1E40AF;background:#EEF3FF}
+.pill.n{color:#475569;background:#F1F5F9}
+.pri{font-size:11px;font-weight:800;border-radius:5px;padding:2px 7px;color:#fff}
+.pri.p0{background:#DC2626} .pri.p1{background:#D97706} .pri.p2{background:#64748B}
+details{margin-top:12px;border-top:1px dashed var(--line);padding-top:10px}
+summary{cursor:pointer;font-size:12.5px;font-weight:800;color:var(--blue-d);list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"▸ ";font-size:11px}
+details[open] summary::before{content:"▾ "}
+.footer{text-align:center;color:#94A3B8;font-size:11.5px;padding:34px 0 44px}
+.tabbar{display:flex;gap:12px;margin-top:34px}
+.tabbtn{flex:1;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:14px 20px;text-align:left;
+  font-size:15px;font-weight:800;color:var(--ink2);cursor:pointer;display:flex;flex-direction:column;gap:4px;
+  box-shadow:0 1px 2px rgba(16,24,40,.05);transition:border-color .15s,box-shadow .15s;font-family:inherit}
+.tabbtn em{font-style:normal;font-size:11.5px;font-weight:600;color:var(--muted)}
+.tabbtn:hover{border-color:#9DB4F0}
+.tabbtn.active{border-color:var(--blue);background:linear-gradient(135deg,#F0F4FF,#FFFFFF);color:var(--blue-d);
+  box-shadow:0 8px 22px -12px rgba(43,92,230,.5)}
+.tabbtn.active em{color:var(--blue)}
+.funnel{display:flex;align-items:stretch;gap:12px;margin:6px 0 2px}
+.fstage{flex:none;width:88px;background:#EEF3FE;border:1px solid #D9E3F8;border-radius:10px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 4px;
+  font-size:12px;font-weight:800;color:#1E3A8A;text-align:center;line-height:1.4;position:relative}
+.fstage:not(:last-child)::after{content:"▸";position:absolute;right:-15px;top:50%;transform:translateY(-50%);
+  color:#9DB4F0;font-size:13px;font-weight:900;z-index:1}
+.fstep{flex:1;min-width:0;background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 12px;overflow:hidden}
+.fstep .fnm{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:800;color:var(--ink2);white-space:nowrap}
+.fstep .fformula{font-size:10px;color:var(--muted);font-weight:600;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fstep .fvals{display:flex;align-items:baseline;gap:8px;margin-top:3px;white-space:nowrap}
+.fstep .fme{font-size:15.5px;font-weight:800;color:var(--blue-d)}
+.fstep .fbm{font-size:11px;color:var(--muted);font-weight:600}
+.fvd{margin-left:auto;font-size:10.5px;font-weight:800;border-radius:5px;padding:2px 8px;white-space:nowrap;flex:none}
+.fvd.ok{color:#0B7A55;background:#E6F7F0}
+.fvd.gap{color:#9B1C1C;background:#FEF0F0}
+.fstep.gap{border-color:#F2B8B8;background:#FFFBFB}
+.fchain{font-size:12px;color:var(--ink2);background:#F7F9FE;border:1px dashed #D5E0F5;border-radius:8px;
+  padding:9px 14px;margin-top:13px;font-weight:600;line-height:1.75}
+.fchain b{color:var(--blue-d)}
+.fchain .gap{color:var(--red);font-weight:800}
+@media (max-width:900px){.kpi-grid,.rooms{grid-template-columns:1fr}}
+
+/* ===== 流量结构 ROI 表：居中对齐，粉色底包裹数值 ===== */
+table.mini.flow th.num,table.mini.flow td.num{text-align:center}
+table.mini.flow td,table.mini.flow th{padding-left:6px;padding-right:6px}
+table.mini.flow th:first-child,table.mini.flow td:first-child{width:34%}
+table.mini.flow th.num{white-space:nowrap}
+
+/* ===== 对比/环比行底色 ===== */
+table.mini tr.cmp-tr>td{background:#F1F5FB}
+table.mini tr.cmp-tr>td:first-child{font-weight:800;color:#334155}
+/* ===== 差于标杆/大盘的关键指标：粉色底突出 ===== */
+table.mini td.bad{background:#FDE8F1 !important;color:#9D174D !important;font-weight:800}
+
+</style></head><body>
+<div class="hero"><div class="wrap">
+  <h1>卡唯朵 · 竞价广告复盘</h1>
+  <div class="meta">复盘周期 11.12-11.22（11 天） ｜ 对比 10.01-10.11（11 天） ｜ 链路：直播 ｜ 对标：标杆客户</div>
+  <div class="tags">
+    <span class="tag">直播日均 3.11 万 ▼83%</span>
+    <span class="tag">下单 ROI 1.59 ▼13%</span>
+    <span class="tag">点击率 5.13% ▲16%</span>
+    <span class="tag">14日退款 23% 优于大盘</span>
+  </div>
+</div></div>
+<div class="wrap">
+<div class="sec">
+  <div class="sec-h"><span class="n">00</span><h2>一句话结论</h2><span class="hint">先看这三条，再看后面</span></div>
+  <div class="take">本期直播日均 3.11 万（环比 -83%）、下单 ROI 1.59（-13%）——量级收缩是本期最大的变化，官方直播间从 18.46 万收缩到 2.88 万；扬姐-草本祛斑新起量（0.01 → 0.23 万）。效率端素材质量全面领先标杆（素材点击率高 30%、5s 完播率高 19%、素材 CVR 高 4%），退款与店铺售后全线优于大盘，<b>钱花了但花得更准了</b>；短板在<b>直播间下单段</b>（直播间下单率低于标杆 11%）与<b>基建单条效率</b>（条均消耗 250 元 vs 标杆 1368 元）。</div>
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="kpi-l">最大的成绩</div>
+      <div style="background:#F3FBF7;border:1px solid #CFEDDF;border-radius:10px;padding:12px 14px">
+        <div style="font-size:13.5px;font-weight:800;color:#0B6B4C;margin-top:6px;line-height:1.6">素材效率与售后双优</div>
+        <div style="font-size:12.2px;color:#3F6B5B;margin-top:6px;line-height:1.65">素材点击率高于标杆 30%、5s 完播高 19%；14 日退款率 23% vs 大盘 28%，三店铺差评率均低于大盘</div>
+      </div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">最大的风险</div>
+      <div style="background:#FEF6F6;border:1px solid #F7D9D9;border-radius:10px;padding:12px 14px">
+        <div style="font-size:13.5px;font-weight:800;color:#9B1C1C;margin-top:6px;line-height:1.6">消耗体量坍缩 8 成</div>
+        <div style="font-size:12.2px;color:#7C3B3B;margin-top:6px;line-height:1.65">日均 18.48 万 → 3.11 万（-83%），ROI 同步降至 1.59；下单成本 63 元（+16%）</div>
+      </div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">最硬的短板</div>
+      <div style="background:#FFFAF1;border:1px solid #F6E3BF;border-radius:10px;padding:12px 14px">
+        <div style="font-size:13.5px;font-weight:800;color:#8A5205;margin-top:6px;line-height:1.6">直播间下单段偏弱</div>
+        <div style="font-size:12.2px;color:#7A5A28;margin-top:6px;line-height:1.65">官方直播间下单率 24.48% vs 标杆 27.44%（-11%）；条均消耗 250 元 vs 标杆 1368 元（-82%）</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="padding:14px 18px">
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <span style="font-size:13px;font-weight:800;color:#334155">策略路径</span>
+      <span class="pill r">P0 补基建条均效率</span><span style="color:#94A3B8">→</span>
+      <span class="pill" style="background:#FFF7E8;color:#8A5205;border:1px solid #F6E3BF">P1 修下单承接</span><span style="color:#94A3B8">→</span>
+      <span class="pill n">P2 扬姐起量验证</span>
+    </div>
+  </div>
+  <div class="notes">
+        <div class="note green"><span class="ico">✓</span><span>退款与售后是本期最稳的底盘：14 日退款率 23% 低于大盘 5.14 个百分点、三店铺差评率 1.04%-3% 全部低于大盘 6.71%——放量不会先被退款吃掉；素材前端效率明显领先标杆（点击率 4.67% vs 3.58%、5s 完播 41% vs 34%），跑量素材的钩子资产现成。</span></div>
+        <div class="note red"><span class="ico">!</span><span>消耗收缩主要来自官方直播间（18.46 → 2.88 万、-84%，缺口 15.58 万/日）；扬姐新起量但 ROI 1.10 且计价率 1.41 略高于正常范围，需要边放量边盯成本。</span></div>
+        <div class="note amber"><span class="ico">!</span><span>官方 4+m 重复广告占比 14% 低于标杆 19%、创意重复度 42% 低于标杆 72%——重复素材这两项是达标的；但创意指纹条均消耗只有 250 元 vs 标杆 1368 元（-82%）、项目&广告数 256 vs 175，广告铺得比标杆多、单条吃得比标杆少，消耗天花板卡在这里。</span></div>
+        <div class="note blue"><span class="ico">i</span><span>口径：单链路客户，全部数据为直播链路口径（素材消耗基准 1.81 万/日为素材表口径）；计价率整体 1.22 略高于正常范围，仅陈述。</span></div>
+  </div>
+</div>
+<div class="sec">
+  <div class="sec-h"><span class="n">01</span><h2>成绩单</h2><span class="hint">本周期 vs 上周期</span></div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-l">日均消耗</div><div class="kpi-v">3.11<span class="kpi-s">万</span></div><div class="kpi-t">▼ 83%</div></div>
+    <div class="kpi"><div class="kpi-l">下单 ROI</div><div class="kpi-v">1.59</div><div class="kpi-t">▼ 13%</div></div>
+    <div class="kpi"><div class="kpi-l">点击率</div><div class="kpi-v">5.13<span class="kpi-s">%</span></div><div class="kpi-t">▲ 16%</div></div>
+    <div class="kpi"><div class="kpi-l">下单成本</div><div class="kpi-v">63<span class="kpi-s">元</span></div><div class="kpi-t">▲ 16%</div></div>
+    <div class="kpi"><div class="kpi-l">下单单价</div><div class="kpi-v">100<span class="kpi-s">元</span></div><div class="kpi-t">▲ 1%</div></div>
+    <div class="kpi"><div class="kpi-l">竞价 CPM</div><div class="kpi-v">296<span class="kpi-s">元</span></div><div class="kpi-t">▲ 7%</div></div>
+  </div>
+  <div class="card">
+    <div class="card-h"><h3>1.1　直播链路成绩单</h3><span>本周期 11 天 vs 上周期 11 天</span></div>
+        <div class="tbl-wrap"><table class="mini">
+      <thead><tr><th>指标</th><th class="num">本周期</th><th class="num">上周期</th><th class="num">环比</th></tr></thead>
+      <tbody><tr><td>日均消耗(万)</td><td class="num">3.11</td><td class="num">18.48</td><td class="num"><b style="color:#DC2626">-83%</b></td></tr><tr><td>点击率</td><td class="num"><b style="color:#0B7A55">5.13%</b></td><td class="num">4.41%</td><td class="num"><b style="color:#0B7A55">+16%</b></td></tr><tr><td>下单率</td><td class="num"><b style="color:#DC2626">9.15%</b></td><td class="num">11.55%</td><td class="num"><b style="color:#DC2626">-21%</b></td></tr><tr><td>下单ROI</td><td class="num">1.59</td><td class="num">1.83</td><td class="num"><b style="color:#DC2626">-13%</b></td></tr><tr><td>下单成本(元)</td><td class="num">63</td><td class="num">54</td><td class="num"><b style="color:#DC2626">+16%</b></td></tr><tr><td>下单单价(元)</td><td class="num">100</td><td class="num">99</td><td class="num">+1%</td></tr><tr><td>竞价CPM(元)</td><td class="num">296</td><td class="num">276</td><td class="num">+7%</td></tr><tr><td>计价率</td><td class="num">1.22</td><td class="num">1.12</td><td class="num">+10%</td></tr></tbody>
+    </table></div>
+    <div class="notes">
+          <div class="note green"><span class="ico">✓</span><span>点击率逆势 +16% 至 5.13%、素材时长 172.91 秒远超美妆 60 秒+ 的最佳区间——缩量没有牺牲素材质量，为重新放量保留了效率底座。</span></div>
+          <div class="note red"><span class="ico">!</span><span>量缩质稳但 ROI 仍降 13%：下单率 9.15%（-21%）说明点击之后的转化在流失，结合直播间下单率短板（见 3.4），转化链路是补量的前置动作。</span></div>
+    </div>
+  </div>
+</div>
+<div class="sec">
+  <div class="sec-h"><span class="n">02</span><h2>分直播间数据</h2><span class="hint">2 个直播间 · 合计日均 3.11 万</span></div>
+  <div class="take">两间直播间一缩一涨：官方收缩 84% 仍是绝对主力（占 93%）；扬姐-草本祛斑从 0.01 万起量到 0.23 万，但 ROI 1.10 尚在回本线附近、素材转化率明显偏弱，处于放量验证期。</div>
+  <div class="card">
+    <div class="card-h"><h3>2.1　直播间一览</h3><span>日均消耗 ≤0.1 万的直播间已过滤 · 各指标含环比</span></div>
+        <div class="tbl-wrap"><table class="mini"><thead><tr><th>直播间</th><th class="num">日均消耗(万)</th><th class="num">环比</th><th class="num">点击率</th><th class="num">点击率环比</th><th class="num">下单率</th><th class="num">下单率环比</th><th class="num">下单ROI</th><th class="num">ROI环比</th><th class="num">下单单价(元)</th><th class="num">单价环比</th><th class="num">出价(元)</th><th class="num">出价环比</th><th class="num">计价率</th></tr></thead><tbody><tr><td>卡唯朵官方</td><td class="num">2.88</td><td class="num"><b style="color:#DC2626">-84%</b></td><td class="num"><b style="color:#0B7A55">4.93%</b></td><td class="num"><b style="color:#0B7A55">+12%</b></td><td class="num">10.66%</td><td class="num"><b style="color:#DC2626">-8%</b></td><td class="num"><b style="color:#0B7A55">1.63</b></td><td class="num"><b style="color:#DC2626">-11%</b></td><td class="num">99</td><td class="num">+0%</td><td class="num">50</td><td class="num">+8%</td><td class="num">1.21</td></tr><tr><td>卡唯朵扬姐-草本祛斑</td><td class="num">0.23</td><td class="num"><b style="color:#0B7A55">+1943%</b></td><td class="num"><b style="color:#0B7A55">6.31%</b></td><td class="num"><b style="color:#0B7A55">+64%</b></td><td class="num">2.21%</td><td class="num"><b style="color:#0B7A55">+21%</b></td><td class="num">1.10</td><td class="num"><b style="color:#DC2626">-23%</b></td><td class="num">118</td><td class="num">-13%</td><td class="num">81</td><td class="num">+38%</td><td class="num">1.41</td></tr><tr><td><b>合计</b></td><td class="num"><b>3.11</b></td><td class="num"><b>-83%</b></td><td class="num"><b>5.13%</b></td><td class="num"><b style="color:#0B7A55">+16%</b></td><td class="num">9.15%</td><td class="num"><b style="color:#DC2626">-21%</b></td><td class="num"><b>1.59</b></td><td class="num"><b>-13%</b></td><td class="num">100</td><td class="num">+1%</td><td class="num">55</td><td class="num">+16%</td><td class="num">1.22</td></tr></tbody></table></div>
+    <div class="notes">
+          <div class="note green"><span class="ico">✓</span><span>官方 ROI 1.63 高于整体 1.59，素材点击率两间都高于上期——缩量期效率没有塌；扬姐点击率 6.31% 为两间最高，素材钩子已被验证，起量基础是好的。</span></div>
+          <div class="note red"><span class="ico">!</span><span>官方收缩 84%（缺口 15.58 万/日）是全局问题；扬姐环比 -84% 的起点是 0.01 万（+1943% 从极小基数起量），234 单属小样本，其退款率（18%）与 ROI 先观察，不急于加码。</span></div>
+          <div class="note blue"><span class="ico">i</span><span>直播间名称、数量逐字取自基础版报告；消耗占比 = 单间日均 ÷ 链路日均 3.11 万。</span></div>
+    </div>
+  </div>
+</div>
+<div class="sec">
+  <div class="sec-h"><span class="n">03</span><h2>vs 标杆：直播链路</h2><span class="hint">流量 / 基建 / 素材 / 漏斗 / 退款 / 产品能力</span></div>
+  <div class="card">
+    <div class="card-h"><h3>3.1　基建对比</h3><span>分直播间 vs 标杆 · 日均口径</span></div>
+    <div class="cmp-grid">
+          <div class="cmp">
+      <div class="cmp-title">项目&广告数<em>个</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">客户</span>
+        <div class="track"><i class="fill me" style="width:100.0%"></i></div>
+        <span class="cmp-val">256</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:68.4%"></i></div>
+        <span class="cmp-val dim">175</span>
+      </div>
+    </div>
+          <div class="cmp">
+      <div class="cmp-title">创意指纹数<em>条</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">客户</span>
+        <div class="track"><i class="fill me" style="width:100.0%"></i></div>
+        <span class="cmp-val">1268</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:64.9%"></i></div>
+        <span class="cmp-val dim">823</span>
+      </div>
+    </div>
+          <div class="cmp">
+      <div class="cmp-title">创意指纹条均消耗<em>元</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">客户</span>
+        <div class="track"><i class="fill me" style="width:18.3%"></i></div>
+        <span class="cmp-val">250</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
+        <span class="cmp-val dim">1368</span>
+      </div>
+    </div>
+          <div class="cmp">
+      <div class="cmp-title">4+m重复广告占比<em>%</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">客户</span>
+        <div class="track"><i class="fill me" style="width:73.7%"></i></div>
+        <span class="cmp-val">14%</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:100.0%"></i></div>
+        <span class="cmp-val dim">19%</span>
+      </div>
+    </div>
+    </div>
+        <div class="tbl-wrap"><table class="mini">
+      <thead><tr><th>直播间</th><th class="num">账户数</th><th class="num">项目&广告数</th><th class="num">新广告占比</th><th class="num">创意指纹数</th><th class="num">条均消耗(元)</th><th class="num">4+m重复占比</th><th class="num">单场时长(分)</th></tr></thead>
+      <tbody><tr><td>卡唯朵官方</td><td class="num bad">16</td><td class="num">256</td><td class="num bad">13%</td><td class="num">1268</td><td class="num bad"><b style="color:#DC2626">250</b></td><td class="num">14%</td><td class="num">1016</td></tr><tr><td>卡唯朵扬姐-草本祛斑</td><td class="num bad">6</td><td class="num bad">67</td><td class="num bad">11%</td><td class="num">271</td><td class="num bad"><b style="color:#DC2626">93</b></td><td class="num">9%</td><td class="num"><b style="color:#DC2626">554</b></td></tr><tr><td>标杆客户</td><td class="num">24</td><td class="num">175</td><td class="num">23%</td><td class="num">823</td><td class="num">1368</td><td class="num">19%</td><td class="num">457</td></tr></tbody>
+    </table></div>
+    <div class="notes">
+          <div class="note green"><span class="ico">✓</span><span>重复素材这一项是达标的：官方 <b>4+m 重复广告占比 14%</b> 低于标杆 19%（-27%）、创意重复度 42% 低于标杆 72%（-42%），不是本期的制约项；开播 11 天 vs 标杆 9 天（+22%）、单场 1016 分钟 vs 457 分钟，直播密度也够。账户 16 个 vs 标杆 24 个偏少，但在 2.88 万/日的量级下不是瓶颈。</span></div>
+
+          <div class="note red"><span class="ico">!</span><span>真正的缺口是<b>单条吃不饱</b>：官方创意指纹条均消耗 <b>250 元</b> vs 标杆 <b>1368 元</b>（-82%），项目&广告数 256 个 vs 标杆 175 个（+46%）——广告铺得比标杆多、每条分到的钱只有标杆的 18%。动作：① 按消耗把后 40% 低效广告收敛掉，把预算集中到已跑出量的广告，目标条均消耗 600 元以上；② 新广告占比 13% 低于标杆 23%（-42%），补新品测试量；③ 扬姐条均仅 93 元，起量期先把消耗集中到 TOP 素材。</span></div>
+
+          <div class="note amber"><span class="ico">!</span><span>单场时长不是问题：官方 1016 分钟、扬姐 554 分钟，都长于标杆 457 分钟（+122% / +21%）；扬姐开播 10 天（比官方少 1 天）——起量期要补的是开播天数与素材供给，不是时长。</span></div>
+
+    </div>
+  </div>
+</div>
+<div class="sec">
+  <div class="card">
+    <div class="card-h"><h3>3.2　流量结构</h3><span>分流量消耗占比（%）· 客户行在上、标杆行在下</span></div>
+    <div><div class="stack-lab"><span>卡唯朵官方</span></div><div class="stack-bar"><i style="width:63.00%;background:#2B5CE6">63%</i><i style="width:0.00%;background:#7C5CF0"></i><i style="width:5.00%;background:#D97706">5%</i><i style="width:19.00%;background:#0E9F6E">19%</i><i style="width:13.00%;background:#5AA9F0">13%</i><i style="width:0.00%;background:#94A3B8"></i></div></div><div><div class="stack-lab"><span>标杆客户</span></div><div class="stack-bar"><i style="width:20.00%;background:#2B5CE6">20%</i><i style="width:1.00%;background:#7C5CF0"></i><i style="width:2.00%;background:#D97706"></i><i style="width:3.00%;background:#0E9F6E"></i><i style="width:75.00%;background:#5AA9F0">75%</i><i style="width:0.00%;background:#94A3B8"></i></div></div>
+    <div><div class="stack-lab"><span>卡唯朵扬姐-草本祛斑</span></div><div class="stack-bar"><i style="width:85.00%;background:#2B5CE6">85%</i><i style="width:2.00%;background:#7C5CF0"></i><i style="width:3.00%;background:#D97706"></i><i style="width:1.00%;background:#0E9F6E"></i><i style="width:0.00%;background:#5AA9F0"></i><i style="width:0.00%;background:#94A3B8"></i></div></div><div><div class="stack-lab"><span>标杆客户</span></div><div class="stack-bar"><i style="width:20.00%;background:#2B5CE6">20%</i><i style="width:1.00%;background:#7C5CF0"></i><i style="width:2.00%;background:#D97706"></i><i style="width:3.00%;background:#0E9F6E"></i><i style="width:75.00%;background:#5AA9F0">75%</i><i style="width:0.00%;background:#94A3B8"></i></div></div>
+    <div class="legend">
+  <span><em style="background:#2B5CE6"></em>视频号</span><span><em style="background:#7C5CF0"></em>朋友圈</span>
+  <span><em style="background:#D97706"></em>公众号</span><span><em style="background:#0E9F6E"></em>平台与内容</span>
+  <span><em style="background:#5AA9F0"></em>小程序</span>
+</div>
+        <div class="tbl-wrap"><table class="mini flow">
+      <thead><tr><th>主体</th><th>版位</th><th class="num">客户ROI</th><th class="num">标杆ROI</th><th class="num">差距</th><th class="num">整体ROI</th><th>机会判定</th></tr></thead>
+      <tbody><tr><td rowspan="6">卡唯朵官方</td><td>微信视频号</td><td class="num bad">1.59</td><td class="num">2.14</td><td class="num"><b style="color:#DC2626">-0.55</b></td><td class="num" rowspan="6">1.63</td><td rowspan="6">机会流量</td></tr><tr><td>微信朋友圈</td><td class="num bad">1.16</td><td class="num">2.89</td><td class="num"><b style="color:#DC2626">-1.73</b></td></tr><tr><td>微信公众号</td><td class="num bad">1.83</td><td class="num">2.63</td><td class="num"><b style="color:#DC2626">-0.80</b></td></tr><tr><td>平台与内容广告</td><td class="num bad">1.66</td><td class="num">2.15</td><td class="num"><b style="color:#DC2626">-0.49</b></td></tr><tr><td>微信小程序</td><td class="num bad">1.72</td><td class="num">2.11</td><td class="num"><b style="color:#DC2626">-0.39</b></td></tr><tr><td>移动联盟</td><td class="num">—</td><td class="num">—</td><td class="num">—</td></tr><tr><td rowspan="6">卡唯朵扬姐-草本祛斑</td><td>微信视频号</td><td class="num bad">1.18</td><td class="num">2.14</td><td class="num"><b style="color:#DC2626">-0.96</b></td><td class="num" rowspan="6">1.10</td><td rowspan="6">暂不增投</td></tr><tr><td>微信朋友圈</td><td class="num bad">1.02</td><td class="num">2.89</td><td class="num"><b style="color:#DC2626">-1.87</b></td></tr><tr><td>微信公众号</td><td class="num bad">0.83</td><td class="num">2.63</td><td class="num"><b style="color:#DC2626">-1.80</b></td></tr><tr><td>平台与内容广告</td><td class="num">—</td><td class="num">2.15</td><td class="num">—</td></tr><tr><td>微信小程序</td><td class="num">—</td><td class="num">2.11</td><td class="num">—</td></tr><tr><td>移动联盟</td><td class="num">—</td><td class="num">—</td><td class="num">—</td></tr></tbody>
+    </table></div>
+    <div class="notes">
+          <div class="note green"><span class="ico">✓</span><span>官方的微信小程序版位满足机会流量双条件（占比 <b>13%</b> 远低于标杆 <b>75%</b>，且版位 ROI <b>1.72</b> 高于整体 ROI 1.63）——场景化流量用户意图明确，建议增投：加智投、3.0 智能版位或 3.0 版位单投基建。</span></div>
+
+          <div class="note red"><span class="ico">!</span><span>两间主投视频号 <b>63% / 85%</b>，均高于标杆的 <b>20%</b>——对单一版位依赖偏高，一旦该版位竞争加剧（CPM 已环比 +7%），消耗将受明显冲击。标杆的结构是「小程序 75% + 视频号 20%」，客户正好相反，小程序这条 13% 的路径是结构上最大的空白。扬姐视频号 ROI 1.18 略高于其整体 1.10，但占比 85% 远超标杆，版位结构先向官方的小程序路径看齐。</span></div>
+
+    </div>
+  </div>
+</div>
+<div class="sec">
+  <div class="card">
+    <div class="card-h"><h3>3.3　素材指标</h3><span>主指标：3s完播 · 平均播放时长 · 点击率 · eco分 ｜ 官方口径 vs 标杆</span></div>
+    <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr)">
+      <div class="kpi"><div class="kpi-l">官方 3s完播</div><div class="kpi-v">59<span class="kpi-s">%</span></div><div class="kpi-d pos">高于标杆 47.67%（+24%）</div></div>
+      <div class="kpi"><div class="kpi-l">官方 平均播放时长</div><div class="kpi-v">12.72<span class="kpi-s">秒</span></div><div class="kpi-d pos">标杆 10.09 秒（+26%）</div></div>
+      <div class="kpi"><div class="kpi-l">官方 素材点击率</div><div class="kpi-v">4.67<span class="kpi-s">%</span></div><div class="kpi-d pos">标杆 3.58%（+30%）</div></div>
+      <div class="kpi"><div class="kpi-l">官方 eco 分</div><div class="kpi-v">2388</div><div class="kpi-d pos">标杆 2378（0%）</div></div>
+    </div>
+    <div style="font-size:12px;color:#64748B;font-weight:600;margin:14px 0 6px">副指标（留存阶梯与素材时长，弱化展示）</div>
+    <div class="cmp-grid">
+          <div class="cmp">
+      <div class="cmp-title">5s完播率 · 官方<em>%</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">客户</span>
+        <div class="track"><i class="fill me" style="width:100.0%"></i></div>
+        <span class="cmp-val">41</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:83.9%"></i></div>
+        <span class="cmp-val dim">34</span>
+      </div>
+    </div>
+          <div class="cmp">
+      <div class="cmp-title">7s完播率 · 官方<em>%</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">客户</span>
+        <div class="track"><i class="fill me" style="width:100.0%"></i></div>
+        <span class="cmp-val">31</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:81.7%"></i></div>
+        <span class="cmp-val dim">26</span>
+      </div>
+    </div>
+          <div class="cmp">
+      <div class="cmp-title">10s完播率 · 官方<em>%</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">客户</span>
+        <div class="track"><i class="fill me" style="width:100.0%"></i></div>
+        <span class="cmp-val">23</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:76.8%"></i></div>
+        <span class="cmp-val dim">18</span>
+      </div>
+    </div>
+          <div class="cmp">
+      <div class="cmp-title">平均素材时长<em>秒</em></div>
+      <div class="cmp-row">
+        <span class="cmp-tag me">客户</span>
+        <div class="track"><i class="fill me" style="width:100.0%"></i></div>
+        <span class="cmp-val">173</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-tag bm">标杆</span>
+        <div class="track"><i class="fill bm" style="width:60.6%"></i></div>
+        <span class="cmp-val dim">105</span>
+      </div>
+    </div>
+    </div>
+    <div style="margin-top:16px">
+        <div class="tbl-wrap"><table class="mini">
+      <thead><tr><th>直播间</th><th class="num">3s完播</th><th class="num">5s完播</th><th class="num">7s完播</th><th class="num">10s完播</th><th class="num">素材平均时长(秒)</th></tr></thead>
+      <tbody><tr><td>卡唯朵官方</td><td class="num"><b style="color:#0B7A55">59%</b></td><td class="num"><b style="color:#0B7A55">41%</b></td><td class="num"><b style="color:#0B7A55">31%</b></td><td class="num"><b style="color:#0B7A55">23%</b></td><td class="num"><b style="color:#0B7A55">173</b></td></tr><tr class="cmp-tr"><td>vs 标杆</td><td class="num"><b style="color:#0B7A55">+23%</b></td><td class="num"><b style="color:#0B7A55">+21%</b></td><td class="num"><b style="color:#0B7A55">+19%</b></td><td class="num"><b style="color:#0B7A55">+28%</b></td><td class="num"><b style="color:#0B7A55">+65%</b></td></tr><tr><td>卡唯朵扬姐-草本祛斑</td><td class="num bad">42%</td><td class="num bad">30%</td><td class="num bad">24%</td><td class="num bad">17%</td><td class="num">120</td></tr><tr class="cmp-tr"><td>vs 标杆</td><td class="num"><b style="color:#DC2626">-12%</b></td><td class="num"><b style="color:#DC2626">-12%</b></td><td class="num"><b style="color:#DC2626">-8%</b></td><td class="num"><b style="color:#DC2626">-6%</b></td><td class="num"><b style="color:#0B7A55">+14%</b></td></tr><tr><td>标杆客户</td><td class="num">48%</td><td class="num">34%</td><td class="num">26%</td><td class="num">18%</td><td class="num">105</td></tr></tbody>
+    </table></div>
+    </div>
+    <div class="notes">
+          <div class="note green"><span class="ico">✓</span><span>官方素材前端与综合质量全面领先标杆：3s 完播 <b>59%</b>（标杆 48%，+24%）、点击率 <b>4.67%</b>（标杆 3.58%，+30%）、平均播放 12.72 秒（标杆 10.09 秒，+26%）、eco 分 2388 与标杆 2378 持平——缩量期沉淀的这套素材资产，是重新放量的第一资本。</span></div>
+
+          <div class="note red"><span class="ico">!</span><span>扬姐是「钩子强、转化弱」：素材点击率 5.03% 高于标杆 40.5%，但 3s 完播 42%（标杆 48%，-12%）、素材 CVR 仅 4.26%（标杆 13.50%，-69%）——点击拉得动、留不住也转不了，起量前先补前 3 秒与卖点说服力（承接见 3.4）。官方素材时长 172.91 秒长于标杆 104.74 秒，卖点需前移到前 15 秒，避免长时长稀释完播。</span></div>
+
+          <div class="note blue"><span class="ico">i</span><span>本卡为素材口径（仅微信视频号版位）：官方日均 1.81 万、扬姐 0.19 万，与链路日均 3.11 万不同源；素材平均时长按「平均播放时长 ÷ 平均有效播放进度」还原；eco 分为视频号流量·有效曝光口径的素材均值。</span></div>
+
+    </div>
+  </div>
+</div>
+<div class="sec">
+  <div class="card">
+    <div class="card-h"><h3>3.3b　素材类型结构</h3><span>四类创意形式 · 客户 vs 大盘</span></div>
+        <div class="tbl-wrap"><table class="mini">
+      <thead><tr><th>主体</th><th class="num">竖版占比</th><th class="num">竖版ROI</th><th class="num">横版广告数</th><th class="num">横版ROI</th><th class="num">实时画面广告数</th><th class="num">实时画面ROI</th></tr></thead>
+      <tbody><tr><td>大盘（直播链路）</td><td class="num">94%</td><td class="num">1.71</td><td class="num">/（占比2%）</td><td class="num">1.47</td><td class="num">/（占比4%）</td><td class="num"><b style="color:#0B7A55">2.09</b></td></tr><tr><td>卡唯朵官方</td><td class="num">100%</td><td class="num">1.63</td><td class="num">18</td><td class="num"><b style="color:#0B7A55">2.34</b></td><td class="num">4</td><td class="num">1.43</td></tr><tr><td>卡唯朵扬姐-草本祛斑</td><td class="num">100%</td><td class="num">1.10</td><td class="num">5</td><td class="num">0.00</td><td class="num">0</td><td class="num">—</td></tr></tbody>
+    </table></div>
+    <div class="notes">
+          <div class="note green"><span class="ico">✓</span><span>官方已在横版与实时画面上布了小样本基建（18 + 4 个广告，横版 ROI 2.34 高于大盘 1.47）——多元化路径已有起点，可给横版导一点量验证。</span></div>
+          <div class="note red"><span class="ico">!</span><span>两间消耗 100% 单押竖版视频：官方竖版 ROI 1.63 略低于大盘 1.71、扬姐 1.10 明显跑输（大盘 1.71）——单形式依赖叠加该形式效率不占优，建议补量素材混入横版（大盘 1.47）与实时画面（大盘 ROI 2.09、四类最高）做 A/B；扬姐横版 ROI 0.00 为 0 消耗小样本，不作评价。</span></div>
+    </div>
+  </div>
+</div>
+<div class="sec">
+  <div class="card">
+    <div class="card-h"><h3>3.4　承接漏斗</h3><span>广告点击 → 直播观看 → 商品点击 → 下单 · 官方 vs 标杆 · 含下单单价</span></div>
+    <div class="funnel">
+      <div class="fstage">广告<br>点击</div>
+      <div class="fstep">
+        <div class="fnm">直播观看<span class="fvd ok">+7%</span></div>
+        <div class="fformula">直播间观看 ÷ 广告点击</div>
+        <div class="fvals"><span class="fme">93.18%</span><span class="fbm">标杆 86.92%</span></div>
+      </div>
+      <div class="fstep">
+        <div class="fnm">商品点击<span class="fvd ok">+9%</span></div>
+        <div class="fformula">商品点击 ÷ 直播间观看</div>
+        <div class="fvals"><span class="fme">61.90%</span><span class="fbm">标杆 56.60%</span></div>
+      </div>
+      <div class="fstep gap">
+        <div class="fnm">下单<span class="fvd gap">-11%</span></div>
+        <div class="fformula">直播间下单 ÷ 商品点击</div>
+        <div class="fvals"><span class="fme">24.48%</span><span class="fbm">标杆 27.44%</span></div>
+      </div>
+    </div>
+    <div class="fchain">三段相乘 = 93.18% × 61.90% × 24.48% = <b>14.12%</b>，与 3.3 素材 CVR <b>14.10%</b> 一致（偏差 0.02pp）；标杆三段相乘 = 86.92% × 56.60% × 27.44% = <b>13.50%</b>，与其素材 CVR 13.50% 一致。官方前两段均优于标杆（观看 +7%、商品点击 +9%），<span class="gap">下单段 -11%</span> 是唯一缺口，也是 CVR 未能进一步拉开的原因。</div>
+    <div style="margin-top:16px">
+        <div class="tbl-wrap"><table class="mini">
+      <thead><tr><th>直播间</th><th class="num">直播观看率</th><th class="num">商品点击率</th><th class="num">直播间下单率</th><th class="num">下单率</th><th class="num">下单率环比</th><th class="num">下单单价(元)</th><th class="num">人均观看时长(秒)</th><th class="num">开播天数</th><th class="num">单场时长(分钟)</th></tr></thead>
+      <tbody><tr><td>卡唯朵官方</td><td class="num"><b style="color:#0B7A55">93%</b></td><td class="num"><b style="color:#0B7A55">62%</b></td><td class="num bad"><b style="color:#DC2626">24.48%</b></td><td class="num">14.10%</td><td class="num"><b style="color:#DC2626">-8%</b></td><td class="num">99</td><td class="num">103</td><td class="num">11</td><td class="num">1004</td></tr><tr class="cmp-tr"><td>vs 标杆</td><td class="num"><b style="color:#0B7A55">+7%</b></td><td class="num"><b style="color:#0B7A55">+9%</b></td><td class="num"><b style="color:#DC2626">-11%</b></td><td class="num"><b style="color:#0B7A55">+4%</b></td><td class="num">—</td><td class="num"><b style="color:#0B7A55">+40%</b></td><td class="num"><b style="color:#DC2626">-38%</b></td><td class="num">—</td><td class="num">—</td></tr><tr><td>卡唯朵扬姐-草本祛斑</td><td class="num">88%</td><td class="num bad"><b style="color:#DC2626">42%</b></td><td class="num bad"><b style="color:#DC2626">11.58%</b></td><td class="num bad">4.26%</td><td class="num">—</td><td class="num">118</td><td class="num">74</td><td class="num">10</td><td class="num">554</td></tr><tr class="cmp-tr"><td>vs 标杆</td><td class="num"><b style="color:#0B7A55">+1%</b></td><td class="num"><b style="color:#DC2626">-26%</b></td><td class="num"><b style="color:#DC2626">-58%</b></td><td class="num"><b style="color:#DC2626">-68%</b></td><td class="num">—</td><td class="num"><b style="color:#0B7A55">+67%</b></td><td class="num"><b style="color:#DC2626">-55%</b></td><td class="num">—</td><td class="num">—</td></tr><tr><td>标杆客户</td><td class="num">87%</td><td class="num">57%</td><td class="num">27.44%</td><td class="num">13.50%</td><td class="num">—</td><td class="num">70.55</td><td class="num">166</td><td class="num">9</td><td class="num">457</td></tr></tbody>
+    </table></div>
+    </div>
+    <div class="notes">
+          <div class="note green"><span class="ico">✓</span><span>官方前两段都比标杆强：直播观看率 <b>93%</b>（标杆 87%，+7%）、商品点击率 <b>62%</b>（标杆 57%，+9%）——进房与选品展示都没有问题。下单单价 99 元高于标杆 70.55 元，单价更高的直播间 CVR 天然偏低；把单价差异考虑进来后，官方的转化效率不弱于标杆（素材 CVR <b>14.10%</b> 高于标杆 <b>13.50%</b>），转化本身不是短板。</span></div>
+
+          <div class="note red"><span class="ico">!</span><span>唯一缺口在直播间下单段：官方 <b>24.48%</b> vs 标杆 <b>27.44%</b>（-11%），人均观看时长 103 秒 vs 标杆 166 秒（-38%）——人留得不够久，临门一脚被稀释。动作：① 主推品讲解做成「痛点 30 秒 → 上脸演示 60 秒 → 价格与赠品 30 秒」循环，缩短单轮时长、提高轮次密度（单场 1004 分钟已长于标杆 457 分钟，不用再拉长）；② 限时优惠与凑单机制把直播间下单率补到 26% 以上；③ 扬姐三段全弱（商品点击 41.92%、直播间下单率 11.58%），人货场按官方样板重做后再谈放量。</span></div>
+
+          <div class="note blue"><span class="ico">i</span><span>「下单率」= 直播观看率 × 商品点击率 × 直播间下单率 = 素材CVR（三段相乘的最终综合下单率），与「直播间下单率」（漏斗第三段）是两个不同字段；「下单率环比」为本期 vs 上期同窗口的 CVR 环比，直播间下单率不设环比。扬姐上期日均消耗仅 87 元属极小样本，CVR 环比不作评价（填 —）。三个率均按定义现算（直播间观看÷广告点击、商品点击÷直播间观看、直播间下单÷商品点击），官方三段相乘与素材 CVR 偏差 0.02pp。下单单价官方 99 元 / 扬姐 118 元 / 标杆 70.55 元，单价差异已计入结论判断（单价差异只在结论判断时考虑，报告内只展示原始数据）。</span></div>
+
+    </div>
+  </div>
+</div>
+<div class="sec">
+  <div class="card">
+    <div class="card-h"><h3>3.5　退款与店铺三率</h3><span>三窗口退款 vs 大盘 · 店铺售后指标</span></div>
+        <div class="tbl-wrap"><table class="mini">
+      <thead><tr><th>主体</th><th class="num">24h退款率</th><th class="num">3日退款率</th><th class="num">14日退款率</th><th class="num">30日退款率</th><th class="num">总下单次数</th></tr></thead>
+      <tbody><tr><td>大盘（直播）</td><td class="num">17%</td><td class="num">20%</td><td class="num">28%</td><td class="num">29%</td><td class="num">—</td></tr><tr><td>卡唯朵整体</td><td class="num"><b style="color:#0B7A55">15%</b></td><td class="num"><b style="color:#0B7A55">18%</b></td><td class="num"><b style="color:#0B7A55">23%</b></td><td class="num"><b style="color:#0B7A55">24%</b></td><td class="num"><b style="color:#0B7A55">5429</b></td></tr><tr><td>卡唯朵官方</td><td class="num"><b style="color:#0B7A55">15%</b></td><td class="num"><b style="color:#0B7A55">18%</b></td><td class="num"><b style="color:#0B7A55">23%</b></td><td class="num"><b style="color:#0B7A55">24%</b></td><td class="num">5195</td></tr><tr><td>卡唯朵扬姐-草本祛斑</td><td class="num"><b style="color:#0B7A55">15%</b></td><td class="num"><b style="color:#0B7A55">17%</b></td><td class="num"><b style="color:#0B7A55">18%</b></td><td class="num"><b style="color:#0B7A55">19%</b></td><td class="num">234</td></tr></tbody>
+    </table></div>
+    <div class="notes">
+          <div class="note green"><span class="ico">✓</span><span>整体样本 5429 单（充足，可强判定）：退款三窗口全部优于大盘（14 日 23% vs 28%，低 5.14 个百分点；24h 15% vs 17%）；官方 5195 单同口径全面优于大盘——本期缩量没有换来退款恶化，售后底盘稳，放量不会先被退款吃掉。</span></div>
+          <div class="note amber"><span class="ico">!</span><span>退款率环比全线走高（14 日 +31%）但主因是上期基数更低（18%）且上期样本是本期的 7 倍——量缩后退款水位回升到正常区间仍优于大盘；扬姐 234 单属小样本，其退款率（14 日 18%）先观察，不升级为动作。</span></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-h"><h3>店铺三率</h3><span>有效评论率 · 差评率 · 品退/纠纷/CCR vs 大盘</span></div>
+        <div class="tbl-wrap"><table class="mini">
+      <thead><tr><th>店铺</th><th class="num">下单次数</th><th class="num">有效评论率</th><th class="num">差评率</th><th class="num">品退率</th><th class="num">纠纷率</th><th class="num">14日CCR</th></tr></thead>
+      <tbody><tr><td>大盘均值</td><td class="num">—</td><td class="num">4.23%</td><td class="num">6.71%</td><td class="num">0.19%</td><td class="num">0.17%</td><td class="num">1.82%</td></tr><tr><td>卡唯朵康润本草护肤</td><td class="num">2325</td><td class="num">1.72%</td><td class="num"><b style="color:#0B7A55">2.50%</b></td><td class="num"><b style="color:#0B7A55">0.00%</b></td><td class="num"><b style="color:#0B7A55">0.08%</b></td><td class="num"><b style="color:#0B7A55">1.37%</b></td></tr><tr><td>卡唯朵一是二护肤</td><td class="num">1536</td><td class="num">3.19%</td><td class="num"><b style="color:#0B7A55">2.04%</b></td><td class="num"><b style="color:#0B7A55">0.10%</b></td><td class="num"><b style="color:#0B7A55">0.10%</b></td><td class="num"><b style="color:#0B7A55">1.44%</b></td></tr><tr><td>卡唯朵</td><td class="num">1413</td><td class="num"><b style="color:#0B7A55">6.79%</b></td><td class="num"><b style="color:#0B7A55">1.04%</b></td><td class="num">0.24%</td><td class="num"><b style="color:#0B7A55">0.14%</b></td><td class="num"><b style="color:#0B7A55">1.59%</b></td></tr></tbody>
+    </table></div>
+    <div class="notes">
+          <div class="note green"><span class="ico">✓</span><span>三店铺差评率 1.04%-3% 全部低于大盘 6.71%（最优 -85%），纠纷率与 CCR 也全部优于大盘——售后指标全线达标，是放量决策里可以直接排除的变量。</span></div>
+          <div class="note amber"><span class="ico">!</span><span>「卡唯朵」主店铺品退率 0.24% 略高于大盘 0.19%，结合其有效评论率 6.79% 为三店最高，说明该店评论最活跃、退货反馈也最集中——放量期每周盯一次品退走势即可。</span></div>
+    </div>
+  </div>
+</div>
+<div class="sec">
+  <div class="card">
+    <div class="card-h"><h3>3.6　产品能力</h3><span>按客户视角组织 · 消耗占比与使用效果</span></div>
+    <div class="card-sub">投放方式结构（直播链路）</div>
+        <div class="tbl-wrap"><table class="mini">
+      <thead><tr><th>投放方式</th><th class="num">消耗占比</th><th class="num">消耗占比环比</th><th class="num">下单ROI</th><th class="num">大盘占比</th><th class="num">大盘ROI</th></tr></thead>
+      <tbody><tr><td>3.0广告</td><td class="num"><b style="color:#0B7A55">70%</b></td><td class="num"><b style="color:#0B7A55">+671%</b></td><td class="num">1.65</td><td class="num">26%</td><td class="num">1.62</td></tr><tr><td>智投广告</td><td class="num">30%</td><td class="num"><b style="color:#DC2626">-68%</b></td><td class="num">1.59</td><td class="num"><b style="color:#0B7A55">33%</b></td><td class="num"><b style="color:#0B7A55">1.77</b></td></tr><tr><td>全域通</td><td class="num">0%</td><td class="num"><b style="color:#0B7A55">+3867%</b></td><td class="num"><b style="color:#0B7A55">1.59</b></td><td class="num">6%</td><td class="num"><b style="color:#0B7A55">2.25</b></td></tr></tbody>
+    </table></div>
+    <div class="card-sub">潜客优投（按直播间）</div>
+        <div class="tbl-wrap"><table class="mini">
+      <thead><tr><th>直播间</th><th class="num">开启消耗(万)</th><th class="num">开启ROI</th><th class="num">未开启ROI</th><th>使用效果</th></tr></thead>
+      <tbody><tr><td>卡唯朵官方</td><td class="num">0.52</td><td class="num">1.54</td><td class="num">1.71</td><td><b style="color:#DC2626">开启低于未开启</b></td></tr><tr><td>卡唯朵扬姐-草本祛斑</td><td class="num">0.09</td><td class="num"><b style="color:#0B7A55">1.23</b></td><td class="num"><b style="color:#DC2626">1.04</b></td><td><b style="color:#0B7A55">正向</b></td></tr></tbody>
+    </table></div>
+    <div class="card-sub">商品表达与创意优投</div>
+        <div class="tbl-wrap"><table class="mini">
+      <thead><tr><th>能力</th><th>对象</th><th class="num">关键数据</th><th>使用效果</th></tr></thead>
+      <tbody><tr><td rowspan="2">商品表达</td><td>官方 · 微信小店商品</td><td class="num">4+m 重复度 4% vs 视频号直播 18%，条均消耗 189 元 vs 248 元</td><td><b style="color:#0B7A55">正向</b></td></tr><tr><td>扬姐 · 微信小店商品</td><td class="num">4+m 重复度 1% vs 视频号直播 16%，条均消耗 68 元 vs 92 元</td><td><b style="color:#0B7A55">正向</b></td></tr><tr><td>创意优投</td><td>两间直播间</td><td class="num">均未开启（大盘使用率 35% 且效果显著正向）</td><td>未使用</td></tr></tbody>
+    </table></div>
+    <div class="notes">
+          <div class="note green"><span class="ico">✓</span><span>两个已验证的放大器：① 两间直播间的微信小店商品表达全部正向（4+m 重复度从 18% / 16% 降到 4% / 1%，条均消耗更低）——减少重复、提升有效基建数这条路在自己账户里已跑通，继续加码；② 扬姐潜客优投 ROI 1.23 vs 未开启 1.04，对高潜力人群分人群加价在起量期已见效，建议持续使用。</span></div>
+          <div class="note red"><span class="ico">!</span><span>两个动作：① 官方潜客优投开启后 ROI 1.54 低于未开启的 1.71——先调整出价系数（当前 1.10）而不是直接关停；② 两间创意优投均未开：对项目内 TOP3 素材加开创意优投，对 3.0 跑量素材增加智投项目并开启，可先降原始项目出价 3-5% 再建优投项目提价 5-10%。</span></div>
+          <div class="note blue"><span class="ico">i</span><span>官方智投广告占比 30% 低于大盘 33%、全域通仅 0.01 万/日（ROI 1.59 待放量后复核）；扬姐全域通 0.02 万/日、计价率 1.41 略高于正常范围，仅陈述。</span></div>
+    </div>
+  </div>
+</div>
+<div class="sec">
+  <div class="sec-h"><span class="n">05</span><h2>行动清单</h2><span class="hint">P0 / P1 / P2 一页纸</span></div>
+  <div class="card">
+    <div class="card-h"><h3>一页纸行动清单</h3><span>只给动作与口径，不设业绩目标</span></div>
+        <div class="tbl-wrap"><table class="mini">
+      <thead><tr><th class="num">优先级</th><th>动作</th><th>对象</th><th>怎么动</th><th>依据数字</th></tr></thead>
+      <tbody><tr><td class="num" rowspan="2"><b style="color:#DC2626">P0</b></td><td>降重复 + 集中消耗</td><td>卡唯朵官方（先动）</td><td>把消耗集中到已跑出量的广告上；补新素材把新广告占比从 13% 提到 20% 左右，把条均消耗从 250 元提到 600 元以上</td><td>条均消耗 250 元 vs 标杆 1368 元（-82%）；4+m 重复 14% 已优于标杆 19%</td></tr><tr><td>修下单承接段</td><td>官方直播间</td><td>优化直播间商品展示与讲解节奏（挂品顺序、主推品讲解时长、贴片）</td><td>直播间下单率 24.48% vs 标杆 27.44%（-11%），是三段相乘 CVR 缺口的主要来源</td></tr><tr><td class="num" rowspan="3">P1</td><td>小程序机会版位增投</td><td>官方直播间</td><td>小程序增投：加智投、3.0 智能版位或 3.0 版位单投基建</td><td>小程序占比 13% vs 标杆 75%，版位 ROI 1.72 > 整体 1.63</td></tr><tr><td>素材类型多元化</td><td>两间直播间</td><td>补量素材混入横版与实时画面做 A/B，官方横版小样本先行</td><td>竖版 100% 单押；官方横版 ROI 2.34；大盘实时画面 ROI 2.09 四类最高</td></tr><tr><td>优投开关补齐</td><td>官方（潜客调系数）、两间（创意优投）</td><td>官方潜客优投调出价系数而非关停；TOP3 素材加开创意优投；3.0 跑量素材建智投项目并开启</td><td>官方潜客 1.54 vs 未开启 1.71；大盘优投使用率 35% 且显著正向</td></tr><tr><td class="num" rowspan="2">P2</td><td>扬姐起量验证</td><td>卡唯朵扬姐-草本祛斑</td><td>单场时长补到 900 分钟以上、开播天数补齐；人货场按官方样板重做；放量节奏跟着素材供给走</td><td>0.01 → 0.23 万起量中；商品点击 41.92%、下单率 11.58%；条均 93 元</td></tr><tr><td>扬姐转正后开潜客</td><td>卡唯朵扬姐-草本祛斑</td><td>潜客优投已正向（ROI 1.23 vs 1.04），随起量节奏持续使用</td><td>扬姐潜客 0.09 万 ROI 1.23</td></tr></tbody>
+    </table></div>
+    <div class="notes">
+          <div class="note blue"><span class="ico">i</span><span>优先级主线：P0 补基建条均效率 + 修商品承接（放量前置）→ P1 版位结构与优投开关（结构优化）→ P2 扬姐起量验证（第二增长线）。退款与店铺售后全线优于大盘，不列入动作。</span></div>
+    </div>
+  </div>
+  <details>
+    <summary>口径附录</summary>
+    <div class="det-body">
+      <p>· 数据窗口：本周期 2026.11.12-11.22（11 天），对比周期 2026.10.01-10.11（11 天）；所有「日均」= 窗口合计 ÷ 11 天，取自基础版报告内文。</p>
+      <p>· 单链路客户（仅直播，本期小店/CID 无投放），加权 ROI 即直播链路 ROI 1.59；环比取基础版报告原值。</p>
+      <p>· 计价率为小数口径，0.8-1.2 为正常范围：整体 1.22 略高于正常范围、官方 1.21 在正常范围内、扬姐 1.41 高于正常范围，本报告仅陈述不评价。</p>
+      <p>· 承接漏斗三段 = 直播观看率×商品点击率×直播间下单率，与素材 CVR 偏差 ≤0.2 个百分点（硬校验通过）；下单单价官方 99 元、标杆 70.55 元，单价差异只在结论判断时做同单价折算，报告内一律展示原始数据。<br>· 标杆口径（V5.27）：默认取同链路且同属白牌组的 TOP1 客户，若其当期该链路日均消耗低于复盘客户自身 1.5 倍则扩大为同链路本土美妆组 TOP1；本期按客户指定，直播链路标杆为「龄萃法则」同链路 TOP1 直播间。卡唯朵未配置期望 ROI 门槛，结论以标杆 ROI 2.13 与自身环比为参照，不据此判定可放量。</p>
+      <p>· 退款三窗口为 24 小时 / 3 日 / 14 日（另附 30 日参考），大盘基准为当期直播链路口径；样本分级：整体 5429 单（充足）、官方 5195 单（充足）、扬姐 234 单（小样本先观察）。</p>
+      <p>· 素材类型占比按消耗口径；横版/实时画面日均消耗 0.00 万（小于 100 元/日）但有广告数，属小样本基建。</p>
+      <p>· 直播间清单：卡唯朵官方、卡唯朵扬姐-草本祛斑（2 间，逐字取自基础版报告）。</p>
+    </div>
+  </details>
+  <div class="footer">卡唯朵 · 竞价广告复盘（11.12-11.22） ｜ 数据窗口与口径见附录 ｜ 生成于 2026-11-23</div>
+</div>
+</div>
+<script>
+function showTab(id,btn){
+  document.querySelectorAll('.tabpanel').forEach(function(p){p.style.display='none'});
+  document.getElementById(id).style.display='block';
+  document.querySelectorAll('.tabbtn').forEach(function(b){b.classList.remove('active')});
+  btn.classList.add('active');
+}
+</script>
+<script>(function(){var _h=0,_t;function m(){var b=document.body;if(!b)return 0;return Math.max(b.scrollHeight,b.offsetHeight,Math.ceil(b.getBoundingClientRect().height))}function s(){var h=m();if(h>0&&h!==_h){_h=h;window.parent.postMessage({type:"iframe-resize",height:h},"*")}}function d(){clearTimeout(_t);_t=setTimeout(s,150)}if(document.readyState==="complete")s();else window.addEventListener("load",s);window.addEventListener("resize",d);if(typeof ResizeObserver!=="undefined"){var ro=new ResizeObserver(d);ro.observe(document.documentElement);if(document.body)ro.observe(document.body)}})();</script><div id="__idata_artifact_err_overlay__" style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);display:none;width:min(640px,calc(100vw - 48px));max-height:80vh;padding:24px 28px;background:#ffffff;border:1px solid #fca5a5;border-left:4px solid #ef4444;border-radius:12px;box-shadow:0 12px 32px rgba(0,0,0,0.12);z-index:2147483646;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei','Segoe UI',sans-serif;color:#7f1d1d;box-sizing:border-box;"><div style="display:flex;align-items:center;gap:10px;font-size:16px;font-weight:600;margin-bottom:14px;"><span style="display:inline-flex;width:24px;height:24px;align-items:center;justify-content:center;background:#ef4444;color:#fff;border-radius:50%;font-size:14px;font-weight:bold;flex-shrink:0;">!</span><span>图表渲染失败</span></div><pre id="__idata_artifact_err_msg__" style="margin:0;padding:14px 16px;background:#fef2f2;border-radius:8px;font-size:12px;line-height:1.65;white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;color:#7f1d1d;max-height:60vh;overflow:auto;"></pre><div style="margin-top:12px;font-size:11px;color:#9ca3af;line-height:1.5;"><span id="__idata_artifact_err_copy_inline__" style="color:#5867ed;cursor:pointer;text-decoration:underline;">复制错误</span><span style="margin-left:4px;">报告给大模型可自动修复该脚本</span></div><div style="margin-top:14px;display:flex;justify-content:flex-end;gap:8px;"><button id="__idata_artifact_err_copy_btn__" type="button" style="padding:6px 14px;font-size:12px;background:#fff;color:#5867ed;border:1px solid #5867ed;border-radius:6px;cursor:pointer;">复制错误</button><button id="__idata_artifact_err_ignore_btn__" type="button" style="padding:6px 14px;font-size:12px;background:#fff;color:#7f1d1d;border:1px solid #fca5a5;border-radius:6px;cursor:pointer;">忽略错误</button></div></div><script>(function(){var ov=document.getElementById('__idata_artifact_err_overlay__');var msg=document.getElementById('__idata_artifact_err_msg__');if(!ov||!msg)return;var shownSet={};var m=window.location.pathname.match(/\/artifacts_v2\/([^/]+)\/(.+)$/);var sessionId=m?m[1]:'';var artifactName=m?decodeURIComponent(m[2]):'';function _hash(s){var h=5381;for(var i=0;i<s.length;i++){h=((h<<5)+h+s.charCodeAt(i))|0;}return (h>>>0).toString(36);}function _ignoreKey(t){return 'adw:artifact:err-ignored:'+sessionId+':'+artifactName+':'+_hash(t);}function _show(t){if(!t||shownSet[t])return;shownSet[t]=1;try{if(localStorage.getItem(_ignoreKey(t))){return;}}catch(_e){}msg.textContent=String(t).slice(0,3000);ov.style.display='block';}var q=window.__idata_artifact_error__||[];for(var i=0;i<q.length;i++)_show(q[i]);window.addEventListener('error',function(ev){var parts=[];if(ev.error&&(ev.error.stack||ev.error.message)){parts.push(String(ev.error.stack||ev.error.message));}else{parts.push(ev.message||'Unknown error');}if(ev.filename){parts.push('\n(at '+ev.filename+':'+(ev.lineno||'?')+':'+(ev.colno||'?')+')');}_show(parts.join('\n'));});window.addEventListener('unhandledrejection',function(ev){var r=ev.reason;_show((r&&(r.stack||r.message))||r||'Unhandled Promise rejection');});function _copyError(){var txt=msg.textContent;if(!txt)return;if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(function(){},function(){_copyFallback(txt);});}else{_copyFallback(txt);}}function _copyFallback(txt){var ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(_e){}document.body.removeChild(ta);}function _ignoreError(){var txt=msg.textContent;try{localStorage.setItem(_ignoreKey(txt),'1');}catch(_e){}ov.style.display='none';}var copyInline=document.getElementById('__idata_artifact_err_copy_inline__');if(copyInline)copyInline.addEventListener('click',_copyError);var copyBtn=document.getElementById('__idata_artifact_err_copy_btn__');if(copyBtn){copyBtn.addEventListener('click',function(){_copyError();var orig=copyBtn.textContent;copyBtn.textContent='已复制';setTimeout(function(){copyBtn.textContent=orig;},1500);});}var ignoreBtn=document.getElementById('__idata_artifact_err_ignore_btn__');if(ignoreBtn)ignoreBtn.addEventListener('click',_ignoreError);})();</script><style id="__adata_wm_style__">.__adata_wm__{position:fixed;inset:0;pointer-events:none;z-index:2147483647;background-repeat:repeat;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='160'><text x='50%' y='50%' fill='rgba(0,0,0,0.08)' font-size='14' font-family='-apple-system,Segoe UI,sans-serif' text-anchor='middle' transform='rotate(-25 120 80)'>annyyguo</text></svg>")}</style><div class="__adata_wm__" aria-hidden="true"></div></body></html>
